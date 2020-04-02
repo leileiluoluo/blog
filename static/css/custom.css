@@ -1,9 +1,16 @@
 .logo {
     font-size: 34px !important;
-    font-family: 'Microsoft YaHei' !important;
 }
 
-a.post-title {
+h1.post-title {
+    font-size: 22px !important;
+}
+
+h1.post-title {
+    font-size: 22px !important;
+}
+
+* {
     font-family: 'Microsoft YaHei' !important;
 }
 
