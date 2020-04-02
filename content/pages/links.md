@@ -8,12 +8,18 @@ wip_template:
   - right-sidebar
 
 ---
+**友情链接**
+|        |       |       |
+|  ----  | ----  | ----  |
+| [Go语言中文网](https://studygolang.com/)  | [Tony Bai](https://tonybai.com/) | [Jing blog](https://jingine.com/) |
+
+----------------------------------------------
 **传统文化**
 
   * <a href="http://www.gushufang.com/" target="_blank">古书房</a>
   * [古书房](http://www.gushufang.com/)
 
-**技术**
+**技术博客**
 
   * <a href="https://devblogs.microsoft.com/oldnewthing/" target="_blank">The Old New Thing</a>
   * <a href="https://research.swtch.com" target="_blank">research!rsc</a>
@@ -44,7 +50,7 @@ wip_template:
   * <a href="https://dave.cheney.net" target="_blank">Dave Cheney</a>
   * <a href="https://jingine.com/" target="_blank">Jing blog</a>
 
-**Golang**
+**Golang相关**
 
   * <a href="https://golang.org/" target="_blank">Golang</a>
   * <a href="https://golang.org/ref/spec" target="_blank">Golang Spec</a>
@@ -65,7 +71,7 @@ wip_template:
   * <a href="https://github.com/polaris1119/golangweekly/blob/master/docs/issue-001.md" target="_blank">Go语言爱好者周刊：第1期</a>
   * <a href="https://github.com/polaris1119/golangweekly/blob/master/docs/issue-002.md" target="_blank">Go语言爱好者周刊：第2期</a>
 
-**算法**
+**算法相关**
 
   * <a href="https://www.codingame.com/" target="_blank">CodeinGame</a>
   * <a href="https://www.hackerrank.com/" target="_blank">HackerRank</a>
