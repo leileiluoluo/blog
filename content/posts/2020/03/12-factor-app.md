@@ -38,7 +38,7 @@ tags:
 
 <img class="aligncenter" src="/wp-content/uploads/2020/03/12-factor-app-codebase.png" width="271" height="215" />
 
-![](/static/img/uploads/2020/03/12-factor-app-codebase.png)
+![](/static/images/uploads/2020/03/12-factor-app-codebase.png)
 
 **II 依赖**
   
