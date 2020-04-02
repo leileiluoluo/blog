@@ -9,6 +9,7 @@ wip_template:
 
 ---
 **友情链接**
+
 |        |       |       |
 |  ----  | ----  | ----  |
 | [Go语言中文网](https://studygolang.com/)  | [Tony Bai](https://tonybai.com/) | [Jing blog](https://jingine.com/) |
