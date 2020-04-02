@@ -17,3 +17,11 @@ h1.post-title {
 img {
     width: 50%
 }
+
+.copyright {
+    font-size: 14px;
+}
+
+span.heart {
+    color: red;
+}
