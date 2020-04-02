@@ -21,7 +21,7 @@ googleAnalytics = ""      # UA-XXXXXXXX-X
 copyright = ""            # default: author.name ↓        # 默认为下面配置的author.name ↓
 
 [author]                  # essential                     # 必需
-  name = "hi"
+  name = "磊磊落落"
 
 [sitemap]                 # essential                     # 必需
   changefreq = "weekly"
@@ -35,10 +35,19 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
   url = "/categories/"
 [[menu.main]]
   name = "文章标签"
-  weight = 30
+  weight = 20
   identifier = "tags"
   url = "/tags/"
-
+[[menu.main]]
+  name = "关于本站"
+  weight = 30
+  identifier = "about"
+  url = "/about"
+[[menu.main]]
+  name = "友情链接"
+  weight = 40
+  identifier = "links"
+  url = "/links"
 [params]
   version = "4.x"           # Used to give a friendly message when you have an incompatible update
   debug = false             # If true, load `eruda.min.js`. See https://github.com/liriliri/eruda
