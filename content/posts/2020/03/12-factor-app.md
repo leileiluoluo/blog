@@ -116,7 +116,7 @@ tags:
 
 十二因子指导原则严格将构建，发布，运行阶段分离。诸如，我们无法在运行阶段修改代码，因我们无法将这些变更传回到构建阶段。
 
-![](/static/images/uploads/2020/03/12-factor-app-build-run.png)
+![](https://yanleilei.com/static/images/uploads/2020/03/12-factor-app-build-run.png)
 
 一些典型的提供发布管理的工具，最显著的能力即是支持回滚到上一个版本。如，Capistrano部署工具将发布版本存储在releases子目录下，当前版本是当前发布文件夹的一个链接，其回滚命令即很容易使其回到上一个版本。
 
@@ -164,7 +164,7 @@ Web应用有时在Web容器内运行，诸如Java应用在Tomcat中运行等。
 
 十二因子应用不应作为守护进程也不要写PID文件。相反，应该交给操作系统进程管理器（诸如分布式进程管理器system* 来管理输出流，以处理进程崩溃以及用户发起的重启与停机。
 
-![](/static/images/uploads/2020/03/12-factor-app-concurrency.png)
+![](https://yanleilei.com/static/images/uploads/2020/03/12-factor-app-concurrency.png)
 
 **IX 可便性**
   
