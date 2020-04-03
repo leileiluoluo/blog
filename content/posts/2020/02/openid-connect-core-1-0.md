@@ -152,7 +152,7 @@ HTTP/1.1 302 Found
   
 * consent_required
   
-&#8230;
+...
 
 (4) 客户端携带授权码及回调地址向授权服务令牌端点请求令牌。
   
@@ -172,7 +172,7 @@ POST /token HTTP/1.1
     &redirect_uri=https%3A%2F%2Fclient.example.org%2Fcb
 ```
 
-注意客户端密钥信息通过`Authorization: Basic &#8230;`的方式进行传递。授权码模式的grant_type字段值须设为authorization_code。
+注意客户端密钥信息通过`Authorization: Basic ...`的方式进行传递。授权码模式的grant_type字段值须设为authorization_code。
 
 (5) 授权服务为客户端签发令牌
   
@@ -229,7 +229,7 @@ HTTP/1.1 400 Bad Request
   
 * 校验`aud`字段是否包含自身客户端ID。
   
-&#8230;
+...
   
 按如下步骤校验访问令牌：
   
