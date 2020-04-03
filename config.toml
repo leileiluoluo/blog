@@ -39,15 +39,16 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
   identifier = "tags"
   url = "/tags/"
 [[menu.main]]
-  name = "关于本站"
+  name = "LeetCode"
   weight = 30
+  identifier = "leetcode"
+  url = "/leetcode-golang-implementations"
+[[menu.main]]
+  name = "关于本站"
+  weight = 40
   identifier = "about"
   url = "/about"
-[[menu.main]]
-  name = "友情链接"
-  weight = 40
-  identifier = "links"
-  url = "/links"
+
 [params]
   version = "4.x"           # Used to give a friendly message when you have an incompatible update
   debug = false             # If true, load `eruda.min.js`. See https://github.com/liriliri/eruda
