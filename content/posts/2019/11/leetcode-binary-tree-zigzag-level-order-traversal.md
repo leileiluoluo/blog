@@ -31,9 +31,7 @@ tags:
 
 输出：[[3], [20,9], [15,7]]
 
-题目出处：
-
-[LeetCode](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)
+题目出处：[LeetCode](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)
 
 **2 解决思路**
   

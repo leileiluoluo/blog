@@ -68,10 +68,10 @@ func bstFromPreorder(preorder []int) *TreeNode {
 	val := preorder[0]
 	preorder = preorder[1:]
 	i := 0
-	for i &lt; len(preorder) &#038;&#038; preorder[i] &lt; val {
+	for i < len(preorder) && preorder[i] < val {
 		i++
 	}
-	return &#038;TreeNode{
+	return &TreeNode{
 		val,
 		bstFromPreorder(preorder[:i]),
 		bstFromPreorder(preorder[i:]),

@@ -59,9 +59,7 @@ tags:
           4
 ```
 
-题目出处：
-
-[LeetCode](https://leetcode.com/problems/insert-into-a-binary-search-tree/)
+题目出处：[LeetCode](https://leetcode.com/problems/insert-into-a-binary-search-tree/)
 
 **2 解决思路**
   

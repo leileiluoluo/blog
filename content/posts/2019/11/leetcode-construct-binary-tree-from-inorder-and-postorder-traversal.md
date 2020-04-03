@@ -55,7 +55,7 @@ func buildTree(inorder []int, postorder []int) *TreeNode {
 	root := &TreeNode{Val: val}
 
 	i := 0
-	for ; i &lt; len(inorder); i++ {
+	for ; i < len(inorder); i++ {
 		if inorder[i] == val {
 			break
 		}

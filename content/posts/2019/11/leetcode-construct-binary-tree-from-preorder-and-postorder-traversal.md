@@ -60,7 +60,7 @@ func constructFromPrePost(pre []int, post []int) *TreeNode {
 	pre = pre[1:]
 	post = post[:len(post)-1]
 	i := 0
-	for i &lt; len(post) {
+	for i < len(post) {
 		if pre[0] == post[i] {
 			break
 		}
