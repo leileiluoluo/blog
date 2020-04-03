@@ -52,7 +52,7 @@ Namespace是Kubernetes提供的一种可将资源划分成不重叠集合的管�
 
 **标签及选择器**
 我们可以给Kubernetes中的对象打标签，然后使用标签选择器进行查询。例如，我们可以给pod打标签，然后在service定义标签选择器，以便负载均衡器或路由分发器将流量打到pod实例上。这样给一组pod打上不同标签，然后结合在service上使用标签选择器即可进行蓝绿部署，这是一个既松耦合又轻便的动态解决方案。
-如：一个应用的一组pod被打了tier标签（有两值，front-end与back-en* 及release_track标签（也有两值，canary与production），然后我们可以使用诸如`tier=back-end AND release_track=canary`进行pod筛选。
+如：一个应用的一组pod被打了tier标签（有两值，front-end与back-end及release_track标签（也有两值，canary与production），然后我们可以使用诸如`tier=back-end AND release_track=canary`进行pod筛选。
 
 **字段选择器**
 字段选择器也可以用来筛选Kubernetes资源，但其不是自定义分类标签，而是基于资源本来有的属性。如，可使用`metadata.name`与`metadata.namespace`作字段选择器。
