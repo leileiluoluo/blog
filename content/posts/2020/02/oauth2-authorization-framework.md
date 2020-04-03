@@ -39,6 +39,7 @@ OAuth 定义了4个角色。
 如图1，看一下OAuth 2.0大致的授权流程。
 
 ![](https://yanleilei.com/static/images/uploads/2020/02/oauth2-1.png)
+
 图1：OAuth 2.0大致授权流程（[引自RFC6749](https://tools.ietf.org/html/rfc6749)）
 
 (A) 客户端请求资源所有者授权，授权请求虽可以直接发给资源所有者，但最好经过授权服务器中转。
