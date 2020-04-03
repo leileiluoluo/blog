@@ -54,6 +54,7 @@ OAuth 定义了4个角色。
 (F) 资源服务器校验客户端携带的访问令牌，若令牌有效，则提供服务。
 
 **关于授权准许**
+
 授权准许为资源所有者同意客户端访问其受保护资源的证明，也是客户端用来获取访问令牌的基础。
   
 OAuth 2.0定义了4种授权类型：授权码（authorization code），隐式授权（implicit），资源所有者密码证明（resource owner password credentials），客户端证明（client credentials），此外还支持扩展类型。
