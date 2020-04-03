@@ -25,12 +25,13 @@ tags:
   
 给定树：
 
-<pre>4
+```
+        4
        / \
       2   7
      / \
     1   3
-</pre>
+```
 
 及插入值：5
   
@@ -38,27 +39,29 @@ tags:
   
 您可以返回如下二叉搜索树：
 
-<pre>4
+```
+         4
        /   \
       2     7
      / \   /
     1   3 5
-</pre>
+```
 
 返回如下二叉搜索树也是有效的：
 
-<pre>5
+```
+         5
        /   \
       2     7
      / \   
     1   3
          \
           4
-</pre>
+```
 
 题目出处：
-  
-<a href="https://leetcode.com/problems/insert-into-a-binary-search-tree/" target="_blank" rel="noopener">https://leetcode.com/problems/insert-into-a-binary-search-tree/</a>
+
+[LeetCode](https://leetcode.com/problems/insert-into-a-binary-search-tree/)
 
 **2 解决思路**
   
@@ -66,9 +69,10 @@ tags:
 
 **3 Golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/701_Insert_into_a_Binary_Search_Tree/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/701_Insert_into_a_Binary_Search_Tree/test.go</a>
+[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/701_Insert_into_a_Binary_Search_Tree/test.go)
 
-<pre>func insertIntoBST(root *TreeNode, val int) *TreeNode {
+```Golang
+func insertIntoBST(root *TreeNode, val int) *TreeNode {
 	if nil == root {
 		return &TreeNode{Val: val}
 	}
@@ -80,4 +84,4 @@ tags:
 	}
 	return root
 }
-</pre>
+```
