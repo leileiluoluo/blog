@@ -28,6 +28,13 @@ span.heart {
 
 .footer .links {
     margin: 22px 22px 22px 22px;
-    color: #8a8a8a;
+}
+
+.footer .links .title {
+    margin: 0px 0px 2px 0px;
     font-size: 14px;
+}
+
+.footer .links .items {
+    font-size: 12px;
 }
