@@ -38,26 +38,27 @@ OAuth 定义了4个角色。
 
 如图1，看一下OAuth 2.0大致的授权流程。
 
-<pre>+--------+                               +---------------+
+```
+     +--------+                               +---------------+
      |        |--(A)- Authorization Request ->|   Resource    |
      |        |                               |     Owner     |
-     |        |&lt;-(B)-- Authorization Grant ---|               |
+     |        | -(B)-- Authorization Grant ---|               |
      |        |                               +---------------+
      |        |
      |        |                               +---------------+
      |        |--(C)-- Authorization Grant -->| Authorization |
      | Client |                               |     Server    |
-     |        |&lt;-(D)----- Access Token -------|               |
+     |        | -(D)----- Access Token -------|               |
      |        |                               +---------------+
      |        |
      |        |                               +---------------+
      |        |--(E)----- Access Token ------>|    Resource   |
      |        |                               |     Server    |
-     |        |&lt;-(F)--- Protected Resource ---|               |
+     |        | -(F)--- Protected Resource ---|               |
      +--------+                               +---------------+
 
              图1：OAuth 2.0大致授权流程（<a href="https://tools.ietf.org/html/rfc6749" rel="noopener" target="_blank">引自RFC6749</a>）
-</pre>
+```
 
 (A) 客户端请求资源所有者授权，授权请求虽可以直接发给资源所有者，但最好经过授权服务器中转。
   
@@ -120,29 +121,30 @@ OAuth 2.0定义了4种授权类型：授权码（authorization code），隐式�
   
 下面参考图2，看一下更新令牌的使用。
 
-<pre>+--------+                                           +---------------+
+```
+  +--------+                                           +---------------+
   |        |--(A)------- Authorization Grant --------->|               |
   |        |                                           |               |
-  |        |&lt;-(B)----------- Access Token -------------|               |
+  |        | -(B)----------- Access Token -------------|               |
   |        |               &#038; Refresh Token             |               |
   |        |                                           |               |
   |        |                            +----------+   |               |
   |        |--(C)---- Access Token ---->|          |   |               |
   |        |                            |          |   |               |
-  |        |&lt;-(D)- Protected Resource --| Resource |   | Authorization |
+  |        | -(D)- Protected Resource --| Resource |   | Authorization |
   | Client |                            |  Server  |   |     Server    |
   |        |--(E)---- Access Token ---->|          |   |               |
   |        |                            |          |   |               |
-  |        |&lt;-(F)- Invalid Token Error -|          |   |               |
+  |        | -(F)- Invalid Token Error -|          |   |               |
   |        |                            +----------+   |               |
   |        |                                           |               |
   |        |--(G)----------- Refresh Token ----------->|               |
   |        |                                           |               |
-  |        |&lt;-(H)----------- Access Token -------------|               |
-  +--------+           &#038; Optional Refresh Token        +---------------+
+  |        | -(H)----------- Access Token -------------|               |
+  +--------+             Optional Refresh Token        +---------------+
  
                   图2：更新失效的访问令牌（<a href="https://tools.ietf.org/html/rfc6749" rel="noopener" target="_blank">引自RFC6749</a>）
-</pre>
+```
 
 (A) 客户端携带授权准许向授权服务器请求访问令牌。
   
@@ -161,9 +163,9 @@ OAuth 2.0定义了4种授权类型：授权码（authorization code），隐式�
 (H) 授权服务器对客户端及更新令牌进行鉴权，若校验通过，则签发新的访问令牌及更新令牌。
 
 > 参考资料
-  
+>
 > [1]&nbsp;<a href="https://en.wikipedia.org/wiki/OAuth" target="blank">https://en.wikipedia.org/wiki/OAuth</a>
-  
+>
 > [2]&nbsp;<a href="https://oauth.net/2/" target="blank">https://oauth.net/2/</a>
-  
+>  
 > [3]&nbsp;<a href="https://tools.ietf.org/html/rfc6749" target="blank">https://tools.ietf.org/html/rfc6749</a>
