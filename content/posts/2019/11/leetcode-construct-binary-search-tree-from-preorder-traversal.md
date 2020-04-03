@@ -35,16 +35,15 @@ b）preorder的值均是不同的。
   
 输出：[8,5,10,1,7,null,12]
 
-<pre>8
+```
+        8
        / \
       5   10
      / \    \
     1   7    12
-</pre>
+```
 
-题目出处：
-  
-<a href="https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/" target="_blank" rel="noopener">https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/</a>
+题目出处：[LeetCode](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/)
 
 **2 解决思路**
   
@@ -57,10 +56,11 @@ b）从第二个节点起自左向右遍历该先序遍历数组，寻找根节�
 c）递归调用构建函数，直至构建完成，返回整个二叉搜索树。
 
 **3 Golang实现代码**
-  
-<a href="https://github.com/olzhy/leetcode/blob/master/1008_Construct_Binary_Search_Tree_from_Preorder_Traversal/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/1008_Construct_Binary_Search_Tree_from_Preorder_Traversal/test.go</a>
 
-<pre>func bstFromPreorder(preorder []int) *TreeNode {
+[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/1008_Construct_Binary_Search_Tree_from_Preorder_Traversal/test.go)
+
+```Golang
+func bstFromPreorder(preorder []int) *TreeNode {
 	if 0 == len(preorder) {
 		return nil
 	}
@@ -77,4 +77,4 @@ c）递归调用构建函数，直至构建完成，返回整个二叉搜索树�
 		bstFromPreorder(preorder[i:]),
 	}
 }
-</pre>
+```

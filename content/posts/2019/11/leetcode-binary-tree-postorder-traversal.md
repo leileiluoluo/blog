@@ -23,18 +23,17 @@ tags:
   
 输入：[1,null,2,3]
 
-<pre>1
+```
+   1
     \
      2
     /
    3
-</pre>
+```
 
 输出：[3,2,1]
 
-题目出处：
-  
-<a href="https://leetcode.com/problems/binary-tree-postorder-traversal/" target="_blank" rel="noopener">https://leetcode.com/problems/binary-tree-postorder-traversal/</a>
+题目出处：[LeetCode](https://leetcode.com/problems/binary-tree-postorder-traversal/)
 
 **2 解决思路**
   
@@ -53,10 +52,11 @@ a）从末尾取一个节点（数组len-1）；然后循环遍历该节点及�
 b）重复a）直至左子树数组为空。
 
 **3 Golang实现代码**
-  
-<a href="https://github.com/olzhy/leetcode/blob/master/145_Binary_Tree_Postorder_Traversal/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/145_Binary_Tree_Postorder_Traversal/test.go</a>
 
-<pre>func postorderTraversal(root *TreeNode) []int {
+[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/145_Binary_Tree_Postorder_Traversal/test.go)
+
+```Golang
+func postorderTraversal(root *TreeNode) []int {
 	if nil == root {
 		return []int{}
 	}
@@ -76,4 +76,4 @@ b）重复a）直至左子树数组为空。
 	}
 	return vals
 }
-</pre>
+```

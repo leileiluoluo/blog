@@ -21,7 +21,7 @@ tags:
   
 a）1 <= pre.length == post.length <= 30；
   
-b）pre[]及post[]均是1, 2, &#8230;, pre.length的排列；
+b）pre[]及post[]均是1, 2, ..., pre.length的排列；
   
 c）输入保证有解，对于有多个解的情形，返回任意一个即可。
 
@@ -31,9 +31,7 @@ c）输入保证有解，对于有多个解的情形，返回任意一个即可�
   
 输出：[1,2,3,4,5,6,7]
 
-题目出处：
-  
-<a href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/" target="_blank" rel="noopener">https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/</a>
+题目出处：[LeetCode](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/)
 
 **2 解决思路**
   
@@ -46,10 +44,11 @@ c）输入保证有解，对于有多个解的情形，返回任意一个即可�
 递归调用构造方法构建左右子树。最后，整个树即构建完成了。
 
 **3 Golang实现代码**
-  
-<a href="https://github.com/olzhy/leetcode/blob/master/889_Construct_Binary_Tree_from_Preorder_and_Postorder_Traversal/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/889_Construct_Binary_Tree_from_Preorder_and_Postorder_Traversal/test.go</a>
 
-<pre>func constructFromPrePost(pre []int, post []int) *TreeNode {
+[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/889_Construct_Binary_Tree_from_Preorder_and_Postorder_Traversal/test.go)
+
+```Golang
+func constructFromPrePost(pre []int, post []int) *TreeNode {
 	if 0 == len(pre) {
 		return nil
 	}
@@ -71,4 +70,4 @@ c）输入保证有解，对于有多个解的情形，返回任意一个即可�
 	root.Right = constructFromPrePost(pre[i+1:], post[i+1:])
 	return root
 }
-</pre>
+```
