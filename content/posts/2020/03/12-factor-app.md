@@ -36,7 +36,7 @@ tags:
 
 实践中也是这样做的，如我们使用Git来托管代码，一个应用使用一个仓库，不同的应用不应使用一个仓库，而是将依赖关系拆出来，然后分成不同的仓库。每到一个版本开发完毕，我们在仓库上打Tag或者新建Release分支，然后逐步升级开发，测试，类生产，生产环境。
 
-![](https://yanleilei.com/static/images/uploads/2020/03/12-factor-app-codebase.png)
+![](https://yanleilei.com/static/images/uploads/2020/03/12-factor-app-codebase.png#center)
 
 **II 依赖**
   
