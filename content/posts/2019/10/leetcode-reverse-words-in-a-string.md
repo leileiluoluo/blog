@@ -26,30 +26,26 @@ b）输入字符串首尾可能有空格，但您翻转后的字符串首尾不�
 c）翻转后的字符串应将源字符串中两个单词间的多个空格减为一个。
 
 例子1：
-  
-输入：&#8221;the sky is blue&#8221;
-  
-输出：&#8221;blue is sky the&#8221;
+```
+输入："the sky is blue"
+输出："blue is sky the"
+```
 
 例子2：
-  
-输入：&#8221; hello world! &#8221;
-  
-输出：&#8221;world! hello&#8221;
-  
+```
+输入：" hello world! "
+输出："world! hello"
 释义：翻转后的字符串首尾不应有空格
+```
 
 例子3：
-  
-输入：&#8221;a good example&#8221;
-  
-输出：&#8221;example good a&#8221;
-  
+```
+输入："a good example"
+输出："example good a"
 释义：翻转时应将两个单词间的多个空格减为一个
+```
 
-题目出处：
-  
-<a href="https://leetcode.com/problems/reverse-words-in-a-string/" target="_blank" rel="noopener">https://leetcode.com/problems/reverse-words-in-a-string/</a>
+题目出处：[LeetCode](https://leetcode.com/problems/reverse-words-in-a-string/)
 
 **2 解决思路**
   
@@ -64,10 +60,11 @@ b）若i对应的当前字符非空格，则判断是否抵达头部，若抵达
 最后trim一下尾部可能的空格并返回结果。
 
 **3 Golang实现代码**
-  
-<a href="https://github.com/olzhy/leetcode/blob/master/151_Reverse_Words_in_a_String/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/151_Reverse_Words_in_a_String/test.go</a>
 
-<pre>func reverseWords(s string) string {
+[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/151_Reverse_Words_in_a_String/test.go)
+
+```Go
+func reverseWords(s string) string {
     reversed := ""
     lastIndex := len(s) - 1
     for i := len(s) - 1; i >= 0; i-- {
@@ -79,7 +76,7 @@ b）若i对应的当前字符非空格，则判断是否抵达头部，若抵达
                 lastIndex = i - 1
             }
         } else {
-            if 0 == i && i &lt;= lastIndex {
+            if 0 == i && i <= lastIndex {
                 reversed += s[i : lastIndex+1]
             }
         }
@@ -89,4 +86,4 @@ b）若i对应的当前字符非空格，则判断是否抵达头部，若抵达
     }
     return reversed
 }
-</pre>
+```
