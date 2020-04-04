@@ -51,22 +51,6 @@ b）编写index.html
 下面编写一个html文件，目的是让其以WebAssembly方式加载test.wasm。
 
 ```
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset="utf-8"/&gt;
-        &lt;script src="wasm_exec.js"&gt;&lt;/script&gt;
-        &lt;script&gt;
-            const go = new Go();
-            WebAssembly.instantiateStreaming(fetch("test.wasm"), go.importObject).then((result) =&gt; {
-                go.run(result.instance);
-            });
-        &lt;/script&gt;
-    &lt;/head&gt;
-    &lt;body&gt;&lt;/body&gt;
-&lt;/html&gt;
-```
-
-```
 <html>
     <head>
         <meta charset="utf-8"/>
@@ -132,29 +116,6 @@ $ GOOS=js GOARCH=wasm go run test.go
 实现一个简单的加法计算器，这样即涉及到DOM操作。index.html加3个input标签（前两个用来输入数字，最后一个用来显示结果），1个button标签（点击button时计算结果并显示）。
   
 a）index.html
-
-```
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset="utf-8"/&gt;
-        &lt;script src="wasm_exec.js"&gt;&lt;/script&gt;
-        &lt;script&gt;
-            const go = new Go();
-            WebAssembly.instantiateStreaming(fetch("test.wasm"), go.importObject).then((result) =&gt; {
-                go.run(result.instance);
-            });
-    &lt;/script&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;input id="num1" type="number" /&gt;
-        +
-        &lt;input id="num2" type="number" /&gt;
-        =
-        &lt;input id="rlt" type="number" readonly="readonly" /&gt;
-        &lt;button id="compute"&gt;compute&lt;/button&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-```
 
 ```
 <html>
@@ -237,7 +198,7 @@ $ goexec 'http.ListenAndServe(":8080", http.FileServer(http.Dir(".")))'
 
 运行结果如下图所示。
 
-![](https://yanleilei.com/static/images/2019/10/wasm-calc.png)
+![](https://yanleilei.com/static/images/uploads/2019/10/wasm-calc.png)
 
 **3 问题与展望**
   

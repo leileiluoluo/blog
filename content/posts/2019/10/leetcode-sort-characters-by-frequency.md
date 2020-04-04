@@ -7,7 +7,6 @@ url: /posts/leetcode-sort-characters-by-frequency.html
 wip_template:
   - right-sidebar
 categories:
-  - 未分类
   - 计算机
 tags:
   - Golang
