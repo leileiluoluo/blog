@@ -179,7 +179,6 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
     alipay = "/static/images/self/alipay.png"           # 支付宝二维码
 
   [params.social]                                         # 社交链接
-    a-email = "mailto:mail@leileiluoluo.com"
     g-github = "https://github.com/olzhy"
 
 # See https://gohugo.io/about/hugo-and-gdpr/
