@@ -17,10 +17,10 @@ tags:
   
 创建一个基于时间的“键-值”存储类TimeMap，其支持两类操作：
 
-a）set(string key, string value, int timestamp)
+- a）set(string key, string value, int timestamp)
     与timestamp一起，存储key, value。
 
-b）get(string key, int timestamp)
+- b）get(string key, int timestamp)
 
     * 返回一个之前设置的值，如set(key, value, timestamp_prev)，满足timestamp_prev <= timestamp；
 
