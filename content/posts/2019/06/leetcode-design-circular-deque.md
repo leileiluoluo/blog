@@ -19,27 +19,28 @@ tags:
   
 实现需支持如下操作：
   
-a）MyCircularDeque(k): 构造器，设置双端队列的容量
+- a）MyCircularDeque(k): 构造器，设置双端队列的容量
   
-b）insertFront(): 在头部插入元素，若操作成功则返回true
+- b）insertFront(): 在头部插入元素，若操作成功则返回true
   
-c）insertLast(): 在尾部插入元素，若操作成功则返回true
+- c）insertLast(): 在尾部插入元素，若操作成功则返回true
   
-d）deleteFront(): 删除头部元素，若操作成功则返回true
+- d）deleteFront(): 删除头部元素，若操作成功则返回true
   
-e）deleteLast(): 删除尾部元素，若操作成功则返回true
+- e）deleteLast(): 删除尾部元素，若操作成功则返回true
   
-f）getFront(): 查询头部元素，若队列为空返回-1
+- f）getFront(): 查询头部元素，若队列为空返回-1
   
-g）getRear(): 查询尾部元素，若队列为空返回-1
+- g）getRear(): 查询尾部元素，若队列为空返回-1
   
-h）isEmpty(): 队列是否为空
+- h）isEmpty(): 队列是否为空
   
-i）isFull(): 队列是否已满
+- i）isFull(): 队列是否已满
 
 例子：
 
-<pre>MyCircularDeque circularDeque = new MycircularDeque(3); // set the size to be 3
+```
+MyCircularDeque circularDeque = new MycircularDeque(3); // set the size to be 3
 circularDeque.insertLast(1);			// return true
 circularDeque.insertLast(2);			// return true
 circularDeque.insertFront(3);			// return true
@@ -49,25 +50,24 @@ circularDeque.isFull();				// return true
 circularDeque.deleteLast();			// return true
 circularDeque.insertFront(4);			// return true
 circularDeque.getFront();			// return 4
-</pre>
+```
 
 注：
   
-a）所有元素值位于区间[0,1000]；
+- a）所有元素值位于区间[0,1000]；
   
-b）所有操作个数位于区间[1,1000]；
+- b）所有操作个数位于区间[1,1000]；
   
-c）请勿直接使用内置双端队列实现。
+- c）请勿直接使用内置双端队列实现。
 
-题目出处：
-  
-<a href="https://leetcode.com/problems/design-circular-deque/" target="_blank" rel="noopener">https://leetcode.com/problems/design-circular-deque/</a>
+题目出处：[LeetCode](https://leetcode.com/problems/design-circular-deque/)
 
 **2 简版解决思路及代码**
   
 使用内置slice数据结构，取头或取尾、在头插入，在尾插入都有现成函数，实现起来简单，但性能不佳。
 
-<pre>type MyCircularDeque struct {
+```go
+type MyCircularDeque struct {
     stores []int
     cap    int
 }
@@ -129,7 +129,7 @@ func (this *MyCircularDeque) IsEmpty() bool {
 func (this *MyCircularDeque) IsFull() bool {
     return this.cap == len(this.stores)
 }
-</pre>
+```
 
 **3 优化版解决思路及代码**
   
@@ -137,9 +137,10 @@ func (this *MyCircularDeque) IsFull() bool {
   
 双端队列只要记录链表的头指针和尾指针即可，这样查询或者插入非常效率。
   
-<a href="https://github.com/olzhy/leetcode/blob/master/641_Design_Circular_Deque/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/641_Design_Circular_Deque/test.go</a>
+[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/641_Design_Circular_Deque/test.go)
 
-<pre>type node struct {
+```go
+type node struct {
     val  int
     pre  *node
     next *node
@@ -241,4 +242,4 @@ func (this *MyCircularDeque) IsEmpty() bool {
 func (this *MyCircularDeque) IsFull() bool {
     return this.cap == this.len
 }
-</pre>
+```

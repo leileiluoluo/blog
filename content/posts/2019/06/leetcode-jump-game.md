@@ -37,9 +37,7 @@ tags:
   
 释义：不论怎么跳都会抵达位置3，因位置3可跳跃的最大长度为0，所以到不了最终位置。
 
-题目出处：
-  
-<a href="https://leetcode.com/problems/jump-game/" target="_blank" rel="noopener">https://leetcode.com/problems/jump-game/</a>
+题目出处：[LeetCode](https://leetcode.com/problems/jump-game/)
 
 **2 解决思路**
   
@@ -51,21 +49,22 @@ tags:
 
 **3 Golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/55_Jump_Game/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/55_Jump_Game/test.go</a>
+[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/55_Jump_Game/test.go)
 
-<pre>func canJump(nums []int) bool {
+```go
+func canJump(nums []int) bool {
     reach := 0
     for i, num := range nums {
-        if reach &gt;= len(nums)-1 {
+        if reach >= len(nums)-1 {
             return true
         }
-        if 0 == num && reach &lt;= i { 
+        if 0 == num && reach <= i { 
             return false 
         } 
-        if i+num &gt; reach {
+        if i+num > reach {
             reach = i + num
         }
     }
     return false
 }
-</pre>
+```
