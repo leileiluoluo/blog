@@ -45,9 +45,7 @@ tags:
   
 向右旋转4步：2->0->1->NULL
 
-题目出处：
-  
-<a href="https://leetcode.com/problems/rotate-list/" target="_blank" rel="noopener">https://leetcode.com/problems/rotate-list/</a>
+题目出处：[LeetCode](https://leetcode.com/problems/rotate-list/)
 
 **2 解决思路**
   
@@ -64,10 +62,11 @@ tags:
 **3 Golang实现代码**
   
 注意：Golang循环中，break Label与goto Label的区别，break的Label仅可用于循环，且需放在for循环前面，且跳到Label后不会再执行for循环里的代码；而goto的Label可用于循环，也可用于非循环，可以放在for循环前面，也可以放在for循环后面，当Label放在循环前面时，跳到Label后，还会继续执行Label后的代码。
-  
-<a href="https://github.com/olzhy/leetcode/blob/master/61_Rotate_List/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/61_Rotate_List/test.go</a>
 
-<pre>func rotateRight(head *ListNode, k int) *ListNode {
+[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/61_Rotate_List/test.go)
+
+```go
+func rotateRight(head *ListNode, k int) *ListNode {
     if nil == head || nil == head.Next {
         return head
     }
@@ -106,4 +105,4 @@ Loop:
 
     return head
 }
-</pre>
+```

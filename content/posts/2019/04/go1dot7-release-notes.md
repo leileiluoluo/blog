@@ -21,17 +21,18 @@ Go 1.7在1.6发布6个月后如约而至，绝大多数的变化在工具链、�
 **2 工具方面**
 
   * Go 命令
-go命令的基础操作未有变化。Go 1.6已声明过，在Go 1.7移除了GO15VENDOREXPERIMENT环境变量，vendoring支持目前是go命令及工具链的标准特性。
+go命令的基础操作未有变化。Go 1.6已声明过，在Go 1.7移除了`GO15VENDOREXPERIMENT`环境变量，vendoring支持目前是go命令及工具链的标准特性。
 
   * Go tool dist
 go tool list list会打印出所有支持的操作系统及体系结构对。
 
   * Go tool trace
-Go 1.5引入的go tool trace有几项修整。Go 1.7搜集trace信息较之前更高效。trace文件目前包含文件及行号信息。
+Go 1.5引入的`go tool trace`有几项修整。Go 1.7搜集trace信息较之前更高效。trace文件目前包含文件及行号信息。
   
 参看如下代码，在your code之前插入trace语句：
 
-<pre>package main
+```go
+package main
 
 import (
     "os"
@@ -48,11 +49,13 @@ func main() {
 
     // your code
 }
-</pre>
+```
 
 然后即可使用工具来对trace.out文件作分析。
 
-<pre>$ go tool trace trace.out</pre>
+```shell
+$ go tool trace trace.out
+```
 
 **3 性能方面**
   
@@ -63,17 +66,18 @@ func main() {
 **4 核心库方面**
 
   * Context
-Go 1.7将golang.org/x/net/context包移入了标准库。这样即可在其它诸如net、net/http及os/exec的标准包使用context来处理连接取消、超时及request级数据等问题。
+Go 1.7将`golang.org/x/net/context`包移入了标准库。这样即可在其它诸如net、net/http及os/exec的标准包使用context来处理连接取消、超时及request级数据等问题。
 
   * HTTP跟踪
-Go 1.7引入net/http/httptrace包，可以使用其来跟踪HTTP请求事件。
+Go 1.7引入`net/http/httptrace`包，可以使用其来跟踪HTTP请求事件。
 
   * 测试
 testing包目前支持子测试及子基准测试。使用其可以编写表-驱动测试及层级测试，同样还可以复用setup及tear-down代码。
   
 参看如下代码：
 
-<pre>package test
+```go
+package test
 
 import (
     "fmt"
@@ -93,15 +97,18 @@ func TestSubtests(t *testing.T) {
     // tear down
     fmt.Println("tear down")
 }
-</pre>
+```
 
-对go test -run传入不同参数，可以控制执行哪些子测试。
+对`go test -run`传入不同参数，可以控制执行哪些子测试。
   
 如采用如下命令可以指定运行TestSub*测试。
 
-<pre>go test -run Sub</pre>
+``` shell
+$ go test -run Sub
+```
 
-<pre>setup
+```
+setup
 A=1
 A=2
 B=1
@@ -109,20 +116,23 @@ B=2
 tear down
 PASS
 ok      github.com/olzhy/test   0.006s
-</pre>
+```
 
 采用如下命令可以指定运行TestSub*测试的A组测试。
 
-<pre>go test -run Sub/A</pre>
+```
+$ go test -run Sub/A
+```
 
-<pre>setup
+```
+setup
 A=1
 A=2
 tear down
 PASS
 ok      github.com/olzhy/test   0.005s
-</pre>
+```
 
 > 参考资料
-  
+>
 > [1]&nbsp;<a href="https://golang.org/doc/go1.7" target="blank">https://golang.org/doc/go1.7</a>
