@@ -12,7 +12,7 @@ tags:
   - Golang
 
 ---
-之前写过一篇[Golang Modules][1]，是Go Module的入门篇，介绍了Module的设计初衷及工作方式。本文结合Go 1.13最新Module官网文档，进一步梳理Module的使用方式。
+之前写过一篇[Golang Modules](/posts/golang-modules.html)，是Go Module的入门篇，介绍了Module的设计初衷及工作方式。本文结合Go 1.13最新Module官网文档，进一步梳理Module的使用方式。
   
 Module是一组相关包的组合，是方便被引用及版本化的单元。自Go 1.13起，内置命令已默认支持基于Module的依赖及构建方式，自此，设置GOPATH已不再成为必须。
 
@@ -40,19 +40,20 @@ c) GO111MODULE=off
   
 go.mod文件定义了当前模块的路径且列出了其所依赖的模块路径及版本。
   
-如下go.mod定义了go.mod所在的路径为Module根路径，且引用路径为github.com/olzhy/test。require语句则声明了该模块依赖的两个包的指定版本（golang.org/x/text v0.3.0与gopkg.in/yaml.v2 v2.1.0）。
+如下go.mod定义了go.mod所在的路径为Module根路径，且引用路径为`github.com/olzhy/test`。require语句则声明了该模块依赖的两个包的指定版本（`golang.org/x/text v0.3.0`与`gopkg.in/yaml.v2 v2.1.0`）。
 
-<pre>module github.com/olzhy/test
+```
+module github.com/olzhy/test
 
 require (
 	golang.org/x/text v0.3.0
 	gopkg.in/yaml.v2 v2.1.0
 )
-</pre>
+```
 
 当然，go.mod文件亦可指定要替换（replace）或要排除（exclude）的依赖包版本。
   
-创建Module仅须一条命令，如：go mod init github.com/olzhy/test。
+创建Module仅须一条命令，如：`go mod init github.com/olzhy/test`。
   
 一旦go.mod文件存在，go命令（诸如go build、go test，甚至go list）会自动加入新的依赖。
 
@@ -62,14 +63,15 @@ require (
   
 go.mod文件通过require、replace，及exclude等语句描述确定的依赖包路径及版本集合。go命令从主模块的go.mod文件的require语句可以找到所有依赖模块，而依赖模块所依赖的模块同样会成为当前主模块的依赖，但go命令仅会扫描依赖模块go.mod文件的require语句，replace及exclude语句将被忽略。因此，replace及exclude语句即允许在主模块自己的构建中完全控制。
   
-提供用于构建的一组包的模块列表叫作构建列表。初始时，构建列表仅有主模块，然后根据模块所需依赖指定版本的模块来更新构建列表，递归直至没有新的模块依赖为止。若存在对某一模块的多个版本的依赖，构建时仅使用最近的版本（根据<a href="https://semver.org/" rel="noopener" target="_blank">semver</a>版本排序）。
+提供用于构建的一组包的模块列表叫作构建列表。初始时，构建列表仅有主模块，然后根据模块所需依赖指定版本的模块来更新构建列表，递归直至没有新的模块依赖为止。若存在对某一模块的多个版本的依赖，构建时仅使用最近的版本（根据[semver](https://semver.org/)版本排序）。
   
 go list命令提供关于主模块及构建列表的信息。
 
-<pre>go list -m              # 打印主模块引用路径
+```
+go list -m              # 打印主模块引用路径
 go list -m -f={{.Dir}}  # 打印主模块根目录
 go list -m all          # 打印构建列表
-</pre>
+```
 
 **4 所需模块维护**
   
@@ -111,79 +113,87 @@ c）vX.Y.(Z+1)-0.yyyymmddhhmmss-abcdefabcdef
 
 **6 模块查询**
   
-支持在go命令行或者编辑go.mod文件的方式（若发现文件有查询语句，go命令会将查询结果替换文件中的查询语句）进行模块查询。
-  
-如go.mod文件现在引用v1.4.0的github.com/gorilla/mux：
+支持在go命令行或者编辑go.mod文件的方式（若发现文件有查询语句，go命令会将查询结果替换文件中的查询语句）进行模块查询。如go.mod文件现在引用v1.4.0的`github.com/gorilla/mux`：
 
-<pre>require (
+```
+require (
     github.com/gorilla/mux v1.4.0 // indirect
 )
-</pre>
+```
 
 若想引用比其新一点的版本，可以直接编辑文件：
 
-<pre>require (
+```
+require (
     github.com/gorilla/mux >v1.4.0 // indirect
 )
-</pre>
+```
 
 然后运行go get，文件内容变为：
 
-<pre>require (
+```
+require (
     github.com/gorilla/mux v1.5.0 // indirect
 )
-</pre>
+```
 
 查询语句支持采用确定版本号，版本号前缀及指定范围等查询。
   
 a）如获取一个确定的版本，如v1.6.2
 
-<pre>$ go get github.com/gorilla/mux@v1.6.2
-</pre>
+```s
+$ go get github.com/gorilla/mux@v1.6.2
+```
 
 b）按版本前缀获取携带该前缀的最新标签版本
 
-<pre>$ go get github.com/gorilla/mux@v1    // 获取v1前缀的最新版本
+```s
+$ go get github.com/gorilla/mux@v1    // 获取v1前缀的最新版本
 $ go get github.com/gorilla/mux@v1.5  // 获取v1.5前缀的最新版本
-</pre>
+```
 
 c）指定范围查询
 
-<pre>$ go get github.com/gorilla/mux@'>v1.5.0'    // 获取>v1.5.0的最近版本
-</pre>
+```s
+$ go get github.com/gorilla/mux@'>v1.5.0'    // 获取>v1.5.0的最近版本
+```
 
 d）获取最新版本
   
 latest可用来获取最新标签版本，没有标签即获取仓库最新无标签版本。
 
-<pre>$ go get github.com/gorilla/mux@latest    // 获取最新版本
-</pre>
+```s
+$ go get github.com/gorilla/mux@latest    // 获取最新版本
+```
 
 e）获取最新补丁版本
   
 patch用来获取与当前版本大小版本号一致的最新补丁版本，若未指定当前版本，则等于latest。
 
-<pre>$ go get github.com/gorilla/mux@patch    // 获取最新版本
-</pre>
+```s
+$ go get github.com/gorilla/mux@patch    // 获取最新版本
+```
 
 原始为v1.6.0，执行获取patch版本后版本为v1.6.2。
   
 f）按提交hash获取版本
 
-<pre>$ go get github.com/gorilla/mux@e3702bed2
-</pre>
+```s
+$ go get github.com/gorilla/mux@e3702bed2
+```
 
 注意，版本选择更喜欢发布版本而非预发布版本，如“<v1.2.3”获取到的是“v1.2.2”，而非“v1.2.3-pre1”，尽管“v1.2.3-pre1”比“v1.2.2”更近。
   
 综上，如下查询命令均是有效的。
 
-<pre>$ go get github.com/gorilla/mux@latest    # go get默认即@latest
+```s
+$ go get github.com/gorilla/mux@latest    # go get默认即@latest
 $ go get github.com/gorilla/mux@v1.6.2    # 指向v1.6.2
 $ go get github.com/gorilla/mux@e3702bed2 # 指向v1.6.2
 $ go get github.com/gorilla/mux@c856192   # 指向v0.0.0-20180517173623-c85619274f5d
 $ go get github.com/gorilla/mux@master    # 指向master
 $ go get github.com/gorilla/mux@'>v1.6.2' # 查询v1.6.2以上的版本
-</pre>
+```
 
 **7 模块下载及校验**
   
@@ -197,8 +207,9 @@ go命令会对下载的模块进行校验和检查，校验和用来检查指定
   
 go.sum的每行有三个字段：
 
-<pre>&lt;module&gt; &lt;version&gt;[/go.mod] &lt;hash&gt;
-</pre>
+```
+<module> <version>[/go.mod] <hash>
+```
 
 每个依赖模块在go.sum文件有两行记录。
   
@@ -212,12 +223,13 @@ GOSUMDB环境变量用来指定校验和数据库的名称及公共key及URL两�
   
 诸如：
 
-<pre>GOSUMDB="sum.golang.org"
-GOSUMDB="sum.golang.org+&lt;publickey&gt;"
-GOSUMDB="sum.golang.org+&lt;publickey&gt; https://sum.golang.org"
-</pre>
+```
+GOSUMDB="sum.golang.org"
+GOSUMDB="sum.golang.org+<publickey>"
+GOSUMDB="sum.golang.org+<publickey> https://sum.golang.org"
+```
 
-GOSUMDB默认为sum.golang.org，运行在Google上的校验和数据库，go命令知道sum.golang.org的公共key，使用其它数据库需要显式给出公共key，URL默认为“https://”加数据库名称。
+GOSUMDB默认为`sum.golang.org`，运行在Google上的校验和数据库，go命令知道sum.golang.org的公共key，使用其它数据库需要显式给出公共key，URL默认为“https://”加数据库名称。
   
 若将GOSUMDB设置为off，或使用“go get”时加“-insecure”标签，那么将不使用校验和数据库查询，即接受所有未识别模块且放弃安全保障。对特定模块略过校验的一个更好的方式是使用GOPRIVATE或GONOSUMDB环境变量。
   
@@ -227,26 +239,24 @@ GOSUMDB默认为sum.golang.org，运行在Google上的校验和数据库，go命
   
 由上述可知，go命令默认从Go模块镜像proxy.golang.org下载模块，且默认从Go校验和数据库sum.golang.org校验下载模块。
   
-GOPRIVATE环境变量用来控制哪些模块是私有的且不使用模块代理及校验和数据库。GOPRIVATE变量是一组按逗号分割的匹配模式。
-  
-如：
+GOPRIVATE环境变量用来控制哪些模块是私有的且不使用模块代理及校验和数据库。GOPRIVATE变量是一组按逗号分割的匹配模式.如：
 
-<pre>GOPRIVATE=*.corp.example.com,rsc.io/private
-</pre>
+```
+GOPRIVATE=*.corp.example.com,rsc.io/private
+```
 
 对于模块下载及校验，更细粒度的控制方式是结合使用GONOPROXY及GONOSUMDB环境变量。因这两个变量的配置会覆盖GOPRIVATE。
   
 如，一个公司采用如下配置为私有模块提供服务：
 
-<pre>GOPRIVATE=*.corp.example.com
+```
+GOPRIVATE=*.corp.example.com
 GOPROXY=proxy.example.com
 GONOPROXY=none
-</pre>
+```
 
 这样，即告诉go命令及其它工具匹配corp.example.com子域名的模块是私有的，而GONOPROXY配置了none，覆盖了GOPRIVATE，这样即采用GOPROXY的设置来下载公共及私有模块。
 
 > 参考资料
-  
+>
 > [1]&nbsp;<a href="https://golang.org/cmd/go/#hdr-Modules__module_versions__and_more" target="blank">https://golang.org/cmd/go/#hdr-Modules__module_versions__and_more</a>
-
- [1]: https://leileiluoluo.com/posts/golang-modules.html
