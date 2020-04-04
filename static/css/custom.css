@@ -27,9 +27,17 @@ span.heart {
 }
 
 .footer .links {
-    margin: 22px 22px 22px 22px;
+    margin: 28px 22px 22px 22px;
 }
 
 .footer .links .title {
     margin: 0px 0px 2px 0px;
+}
+
+.footer .links .title {
+    margin: 0px 0px 2px 0px;
+}
+
+.footer .links .items {
+    font-size: 14px;
 }
