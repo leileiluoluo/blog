@@ -61,17 +61,17 @@ d）0 <= c0 < C
 
 **2 解决思路**
   
-a）首先访问当前位置空间；
+- a）首先访问当前位置空间；
 
-b）用circle表示当前访问到第几圈，从第1圈开始直至还有未触达的边界，即扩大圈半径进行如下循环：
+- b）用circle表示当前访问到第几圈，从第1圈开始直至还有未触达的边界，即扩大圈半径进行如下循环：
 
-  i）首先walk方向为朝下，从i为max(0, r0-circle+1)，j为c0 + circle开始，若j未跨过边界，则自上到下直至i抵达r0+circle的上一个空间或边界；
+  - i）首先walk方向为朝下，从i为max(0, r0-circle+1)，j为c0 + circle开始，若j未跨过边界，则自上到下直至i抵达r0+circle的上一个空间或边界；
 
-  ii）然后walk方向为朝左，从i为r0 + circle，j为min(c-1, c0+circle)开始，若i未跨过边界，则自右到左直至j抵达c0-circle的上一个空间或边界；
+  - ii）然后walk方向为朝左，从i为r0 + circle，j为min(c-1, c0+circle)开始，若i未跨过边界，则自右到左直至j抵达c0-circle的上一个空间或边界；
 
-  iii）然后walk方向为朝上，从i为min(r-1, r0+circle)，j为c0 - circle开始，若j未跨过边界，则自下到上直至i抵达r0-circle的上一个空间或边界；
+  - iii）然后walk方向为朝上，从i为min(r-1, r0+circle)，j为c0 - circle开始，若j未跨过边界，则自下到上直至i抵达r0-circle的上一个空间或边界；
 
-  iv）最后walk方向为朝右，从i为r0 - circle，j为max(0, c0-circle)开始，若i未跨过边界，则自左到右直至j抵达c0+circle或边界。
+  - iv）最后walk方向为朝右，从i为r0 - circle，j为max(0, c0-circle)开始，若i未跨过边界，则自左到右直至j抵达c0+circle或边界。
 
 c）循环退出即遍历完了所有的空间。
 
