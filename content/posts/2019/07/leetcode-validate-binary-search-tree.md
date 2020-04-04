@@ -27,10 +27,11 @@ c）左右子树均须是二叉搜索树。
 
 例子1：
 
-<pre>2
+```
+    2
    / \
   1   3
-</pre>
+```
 
 输入：[2,1,3]
   
@@ -38,12 +39,13 @@ c）左右子树均须是二叉搜索树。
 
 例子2：
 
-<pre>5
+```
+    5
    / \
   1   4
      / \
     3   6
-</pre>
+```
 
 输入：[5,1,4,null,null,3,6]
   
@@ -51,9 +53,7 @@ c）左右子树均须是二叉搜索树。
   
 释义：根节点值为5，而右节点值为4，小于根节点值。
 
-题目出处：
-  
-<a href="https://leetcode.com/problems/validate-binary-search-tree/" target="_blank" rel="noopener">https://leetcode.com/problems/validate-binary-search-tree/</a>
+题目出处：[LeetCode](https://leetcode.com/problems/validate-binary-search-tree/)
 
 **2 解决思路**
   
@@ -63,9 +63,10 @@ c）左右子树均须是二叉搜索树。
 
 **3 Golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/98_Validate_Binary_Search_Tree/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/98_Validate_Binary_Search_Tree/test.go</a>
+[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/98_Validate_Binary_Search_Tree/test.go)
 
-<pre>func preOrderTraversal(root *TreeNode, preVal *int) bool {
+```go
+func preOrderTraversal(root *TreeNode, preVal *int) bool {
     if nil == root {
         return true
     }
@@ -73,7 +74,7 @@ c）左右子树均须是二叉搜索树。
     if !ok {
         return false
     }
-    if root.Val &lt;= *preVal {
+    if root.Val <= *preVal {
         return false
     }
     *preVal = root.Val
@@ -81,7 +82,7 @@ c）左右子树均须是二叉搜索树。
 }
 
 func isValidBST(root *TreeNode) bool {
-    preVal := -(1 &lt;&lt; 32)
+    preVal := -(1 << 32)
     return preOrderTraversal(root, &preVal)
 }
-</pre>
+```

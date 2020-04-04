@@ -19,17 +19,18 @@ tags:
   
 您的设计应支持如下几个方法：
   
-a）postTweet(userId, tweetId)：发表新推文；
+- a）postTweet(userId, tweetId)：发表新推文；
   
-b）getNewsFeed(userId)：在用户动态里展示最近的10条推文id，动态里的每条推文须是用户自己发的或是其关注者发的，推文须按时间由近及远排序；
+- b）getNewsFeed(userId)：在用户动态里展示最近的10条推文id，动态里的每条推文须是用户自己发的或是其关注者发的，推文须按时间由近及远排序；
   
-c）follow(followerId, followeeId)：关注；
+- c）follow(followerId, followeeId)：关注；
   
-d）unfollow(followerId, followeeId)：取消关注。
+- d）unfollow(followerId, followeeId)：取消关注。
 
 例子：
 
-<pre>Twitter twitter = new Twitter();
+```
+Twitter twitter = new Twitter();
 
 // User 1 posts a new tweet (id = 5).
 twitter.postTweet(1, 5);
@@ -53,11 +54,9 @@ twitter.unfollow(1, 2);
 // User 1's news feed should return a list with 1 tweet id -> [5],
 // since user 1 is no longer following user 2.
 twitter.getNewsFeed(1);
-</pre>
+```
 
-题目出处：
-  
-<a href="https://leetcode.com/problems/design-twitter/" target="_blank" rel="noopener">https://leetcode.com/problems/design-twitter/</a>
+题目出处：[LeetCode](https://leetcode.com/problems/design-twitter/)
 
 **2 解决思路**
   
@@ -65,11 +64,11 @@ twitter.getNewsFeed(1);
   
 本文使用“推模式”实现，如下是用到的几个数据结构：
   
-a）tweets用来存放用户发表的推文；
+- a）tweets用来存放用户发表的推文；
   
-b）feeds用来存放每个用户可以看到的动态；
+- b）feeds用来存放每个用户可以看到的动态；
   
-c）fans用来存放用户的粉丝（关注者）列表。
+- c）fans用来存放用户的粉丝（关注者）列表。
   
 接下来看一下几个方法的实现逻辑：
   
@@ -82,10 +81,11 @@ Follow：有用户a关注用户b，则把a放入b的fans列表，且把b的tweet
 Unfollow：用用户a取消关注b，则将a从b的fans列表移除，还要从a的feeds中移除b的tweets。
 
 **3 Golang实现代码**
-  
-<a href="https://github.com/olzhy/leetcode/blob/master/355_Design_Twitter/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/355_Design_Twitter/test.go</a>
 
-<pre>type Twitter struct {
+[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/355_Design_Twitter/test.go)
+
+```go
+type Twitter struct {
     tweets map[int][]tweet
     feeds  map[int][]tweet
     fans   map[int][]int
@@ -155,22 +155,22 @@ func merge(left, right []tweet) []tweet {
         return append(left, right...)
     }
     i, j := 0, 0
-    for i &lt; len(left) &#038;&#038; j &lt; len(right) {
-        for i &lt; len(left) &#038;&#038; left[i].time.Before(right[j].time) {
+    for i < len(left) && j < len(right) {
+        for i < len(left) && left[i].time.Before(right[j].time) {
             r = append(r, left[i])
             i++
         }
-        for j &lt; len(right) &#038;&#038; i &lt; len(left) &#038;&#038;
+        for j < len(right) && i < len(left) &&
             right[j].time.Before(left[i].time) {
             r = append(r, right[j])
             j++
         }
     }
-    for i &lt; len(left) {
+    for i < len(left) {
         r = append(r, left[i])
         i++
     }
-    for j &lt; len(right) {
+    for j < len(right) {
         r = append(r, right[j])
         j++
     }
@@ -182,7 +182,7 @@ func (this *Twitter) Unfollow(followerId int, followeeId int) {
         return
     }
 
-    for i := 0; i &lt; len(this.fans[followeeId]); i++ {
+    for i := 0; i < len(this.fans[followeeId]); i++ {
         item := this.fans[followeeId][i]
         if item == followerId {
             this.fans[followeeId] = append(this.fans[followeeId][:i], this.fans[followeeId][i+1:]...)
@@ -199,4 +199,4 @@ func (this *Twitter) Unfollow(followerId int, followeeId int) {
         }
     }
 }
-</pre>
+```

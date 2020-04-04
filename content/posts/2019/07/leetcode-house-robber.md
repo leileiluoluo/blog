@@ -35,9 +35,7 @@ tags:
   
 释义：分别去盗第1、3、5家，盗窃总金额为2 + 9 + 1 = 12。
 
-题目出处：
-  
-<a href="https://leetcode.com/problems/house-robber/" target="_blank" rel="noopener">https://leetcode.com/problems/house-robber/</a>
+题目出处：[LeetCode](https://leetcode.com/problems/house-robber/)
 
 **2 解决思路**
   
@@ -52,10 +50,11 @@ tags:
 因递归时用到的很多子计算是重复的，我们使用table存取截至到第i家盗取的最大金额，首次计算后写入，再次需要时直接返回，实现加速。
 
 **3 Golang实现代码**
-  
-<a href="https://github.com/olzhy/leetcode/blob/master/198_House_Robber/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/198_House_Robber/test.go</a>
 
-<pre>func recusiveRob(nums []int, len int, table map[int]int) int {
+[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/198_House_Robber/test.go)
+
+```go
+func recusiveRob(nums []int, len int, table map[int]int) int {
     if 0 == len {
         return 0
     }
@@ -78,4 +77,4 @@ func rob(nums []int) int {
     table := make(map[int]int)
     return recusiveRob(nums, len(nums), table)
 }
-</pre>
+```
