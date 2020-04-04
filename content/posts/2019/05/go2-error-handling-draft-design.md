@@ -190,17 +190,17 @@ func process(user string, files chan string) (n int, err error) {
 }
 ```
 
-Check 1：在循环内，依序运行Handler C、B及A。**不同于defer，定义在循环内的Handler不会因每次新的迭代而累积**。
+Check 1：在循环内，依序运行Handler C、B及A。**_不同于defer，定义在循环内的Handler不会因每次新的迭代而累积_**。
   
 Check 2：在函数末尾，仅运行Handler A。
   
 几个重要点：
   
-**check到错误，即会落入Handler，无法再回到对应函数的控制；**
+**_check到错误，即会落入Handler，无法再回到对应函数的控制；_**
   
-**Handler执行总是在defer语句之前；**
+**_Handler执行总是在defer语句之前；_**
   
-**若对应函数需要有返回值，但check的Handler链函数没有return语句会引起编译错误。**
+**_若对应函数需要有返回值，但check的Handler链函数没有return语句会引起编译错误。_**
 
   * 默认Handler
 默认Handler隐式定义在最后一个参数是error类型的函数的头部。
