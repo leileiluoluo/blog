@@ -16,7 +16,7 @@ tags:
   
 在正式了解Golang Modules之前，我们先速览一下其使用方式。
   
-在$GOPATH之外的任意地方，创建一个文件夹：
+在`$GOPATH`之外的任意地方，创建一个文件夹：
 
 ```shell
 $ mkdir -p /tmp/hello
@@ -168,7 +168,7 @@ import "example.com/my/module/mypkg"
 ```
 
   * 2.2 版本选择
-若源码中增加了go.mod中未require的新的依赖包，绝大多数诸如`go build`，`go test`命令会自动找到对应的包并在go.mod中采用require原语加入该直接依赖的**_最高版本_**。
+若源码中增加了go.mod中未require的新的依赖包，绝大多数诸如`go build`，`go test`命令会自动找到对应的包并在go.mod中采用require原语加入该直接依赖的 **_最高版本_**。
   
 例如，您依赖的模块M的带标签的发布版本为`v1.2.3`，那么您的`go.mod`会新加入`require M v1.2.3`这一行语句，意味着依赖模块M所允许的版本`>= v1.2.3`并`< v2`（v2被认为与v1不兼容）。 **_最小版本选择_**算法用于对一次构建的所有模块选择版本，对于每个模块，采用该算法选择的版本为**_语义学最高版本_**。
   
@@ -191,11 +191,11 @@ Go多年来推荐的包版本化方式：
   
 参考语义学版本命名规则，当一个原始为v1或v1以上的包发生了不兼容变更，该包需要更改主版本。所以，根据引用兼容性准则及语义学版本命名规则（合称为语义学版本引用），主版本需要包含在引用路径内。这样即可保障不兼容的主版本升级时，引用路径即会改变。根据语义学版本引用规则，选用Go Module的代码必须遵守如下规则：
   
-a）语义学版本命名；
+- a）语义学版本命名；
   
-b）若一个Module的版本为`v2`及以上，模块的主版本必须包含在模块路径及引用路径中（例如，声明方：`module github.com/my/mod/v2`，引用方：`require github.com/my/mod/v2 v2.0.0`，包引用处：`import "github.com/my/mod/v2/mypkg"`）；
+- b）若一个Module的版本为`v2`及以上，模块的主版本必须包含在模块路径及引用路径中（例如，声明方：`module github.com/my/mod/v2`，引用方：`require github.com/my/mod/v2 v2.0.0`，包引用处：`import "github.com/my/mod/v2/mypkg"`）；
   
-c）例外，若模块主版本为v0或v1，模块路径及引用路径无须包含主版本。
+- c）例外，若模块主版本为`v0`或`v1`，模块路径及引用路径无须包含主版本。
   
 通常来讲，引用路径不同的包是两个全然不同的包（如`math/rand`和`crypto/rand`是两个不同的包）。同样，包含不同主版本的引用路径所标识的包亦是两个不同的包。因此，`example.com/my/mod/mypkg`与`example.com/my/mod/v2/mypkg`是不同的包，且可能会在一次构建中同时引用。因有些模块还未转换为Module方式，过度期，会支持如下几个例外：
   
@@ -214,14 +214,14 @@ c）例外，若模块主版本为v0或v1，模块路径及引用路径无须包
   * 3.1 模块支持激活
 安装Go 1.11及以上版本，然后可以使用如下两种方式中的任一种激活模块支持。
   
-a）在`$GOPATH/src`文件夹之外使用go命令，且当前文件夹或其上层文件夹包含go.mod文件，而`GO111MODULE``环境变量未设置或设置为了auto`；
+- a）在`$GOPATH/src`文件夹之外使用go命令，且当前文件夹或其上层文件夹包含go.mod文件，而`GO111MODULE``环境变量未设置或设置为了auto`；
   
-b）设置GO111MODULE=on，然后调用go命令。
+- b）设置`GO111MODULE=on`，然后调用go命令。
   
 即在$GOPATH/src之外使用模块支持，无需设置`GO111MODULE`环境变量，而在`$GOPATH/src`使用模块支持，需将`GO111MODULE`设置为`on`。
 
   * 3.2 定义一个模块
-a）进入对应文件夹
+- a）进入对应文件夹
 
 ```
 $ cd path
@@ -229,7 +229,7 @@ $ cd path
 
 该文件夹可以为设置`GO111MODULE=on`的`$GOPATH/src`，或该文件夹之外的任意路径。
   
-b）执行go mod init
+- b）执行go mod init
 
 ```
 $ go mod init github.com/my/repo
@@ -237,7 +237,7 @@ $ go mod init github.com/my/repo
 
 若在初始化一个v2+的模块，需要手动更改go.mod文件及.go代码，以在引用路径及模块路径加入版本信息（语义学版本引用）。
   
-c）构建模块
+- c）构建模块
 
 ```
 $ go build ./...
@@ -245,7 +245,7 @@ $ go build ./...
 
 “`./...`”模式匹配了当前模块下的所有包，go build将自动增加缺失的包。
   
-d）测试模块
+- d）测试模块
 
 ```
 $ go test ./...
