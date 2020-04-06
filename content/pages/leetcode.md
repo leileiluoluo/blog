@@ -12,7 +12,7 @@ wip_template:
 |--- |--- |--- |--- |--- |
 |题号|原题目|中文题目|度|实现|
 |2|[Add Two Numbers](https://leetcode.com/problems/add-two-numbers/)|两数相加|中|[Golang](/posts/leetcode-add-two-numbers.html)|
-|3|Longest Substring|求不含重复字符的最长子串|中|Golang|
+|3|[Longest Substring](https://leetcode.com/problems/longest-substring-without-repeating-characters/)|求不含重复字符的最长子串|中|[Golang](/posts/leetcode-longest-substring-without-repeating-characters.html)|
 |5|Longest Palindromic Substring|最长回文子串|中|Golang|
 |6|ZigZag Conversion|Z字形变换|中|Golang|
 |8|String to Integer|字符串转整数|中|Golang|
