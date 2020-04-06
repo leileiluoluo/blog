@@ -75,7 +75,7 @@ google_analitycs_id = "" # your id
 # contact form action
 contact_form_action = "#" # contact form works with : https://formspree.io
 # copyright
-copyright = "Thanks [Hugo](https://github.com/themefisher/northendlab-hugo) & NorthendLab | leileiluoluo.com&copy; 2020"
+copyright = "Thanks [Hugo](https://gohugo.io/) & [NorthendLab](https://github.com/themefisher/northendlab-hugo) | [leileiluoluo.com](https://www.leileiluoluo.com/)&copy; 2020"
 
 # preloader
 [params.preloader]
