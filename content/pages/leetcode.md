@@ -11,7 +11,7 @@ wip_template:
 ||||||
 |--- |--- |--- |--- |--- |
 |题号|原题目|中文题目|度|实现|
-|2|Add Two Numbers|两数相加|中|Golang|
+|2|[Add Two Numbers](https://leetcode.com/problems/add-two-numbers/)|两数相加|中|[Golang](/posts/leetcode-add-two-numbers.html)|
 |3|Longest Substring|求不含重复字符的最长子串|中|Golang|
 |5|Longest Palindromic Substring|最长回文子串|中|Golang|
 |6|ZigZag Conversion|Z字形变换|中|Golang|
