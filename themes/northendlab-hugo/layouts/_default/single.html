@@ -16,6 +16,15 @@
         <div class="content mb-5">
           {{ .Content }}
         </div>
+	<div class="content-footer">
+      {{ with .Params.tags -}}
+        <div class="post-tags">
+          {{ range . -}}
+            <a href="{{ "tags" | relLangURL }}/{{ . | urlize }}/">#{{ . }}</a>
+          {{ end -}}
+        </div>
+      {{- end -}}
+        </div>
       </div>
       {{ if .Site.DisqusShortname}}
       <div class="col-lg-8 mx-auto block shadow">

@@ -4,7 +4,7 @@ languageCode = "zh-cn"
 # site title 
 title = "磊磊落落"
 # theme
-theme = "northendlab-hugo-master"
+theme = "northendlab-hugo"
 # post pagination
 paginate = "5"
 # post excerpt
