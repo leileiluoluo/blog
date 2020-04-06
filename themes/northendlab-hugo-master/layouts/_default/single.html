@@ -1,0 +1,30 @@
+{{ define "main" }}
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto block shadow mb-5">
+        <h2>{{ .Title | markdownify }}</h2>
+        <div class="mb-3 post-meta">
+          {{ .PublishDate.Format "2006年01月02日" }}  {{ range .Params.Categories }}
+          <a href="{{ `categories/` | relLangURL }}{{ . | urlize | lower }}">{{ . | title | humanize }}</a>
+          {{ end }}
+        </div>
+        {{ if .Params.Image }}
+        <img src="{{ .Params.Image | relURL }}" class="img-fluid w-100 mb-4" alt="{{ .Title | markdownify }}">
+        {{ end }}
+        <div class="content mb-5">
+          {{ .Content }}
+        </div>
+      </div>
+      {{ if .Site.DisqusShortname}}
+      <div class="col-lg-8 mx-auto block shadow">
+        <!-- comments -->
+        {{ template "_internal/disqus.html" . }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+{{ end }}

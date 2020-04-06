@@ -1,14 +1,14 @@
 ############################ Default configuration #########################
 baseURL = "https://examplesite.com/"
-languageCode = "zh-cn"
+languageCode = "en-us"
 # site title 
-title = "磊磊落落"
+title = "Northendlab | Blog Template"
 # theme
-theme = "northendlab-hugo-master"
+theme = "northendlab-hugo"
 # post pagination
 paginate = "5"
 # post excerpt
-summaryLength = "5"
+summaryLength = "10"
 # disqus short name
 disqusShortname = "" # get your shortname form here : https://disqus.com
 
@@ -19,52 +19,54 @@ home = ["HTML", "AMP", "RSS", "JSON"]
 
 # css plugins
 [[params.plugins.css]]
-link = "css/bootstrap.min.css"
+link = "plugins/bootstrap/bootstrap.min.css"
 [[params.plugins.css]]
-link = "css/themify-icons.css"
-[[params.plugins.css]]
-link = "css/larry-custom.css"
+link = "plugins/themify-icons/themify-icons.css"
 
 # js plugins
 [[params.plugins.js]]
-link = "js/jquery.min.js"
+link = "plugins/jQuery/jquery.min.js"
 [[params.plugins.js]]
-link = "js/bootstrap.min.js"
+link = "plugins/bootstrap/bootstrap.min.js"
 [[params.plugins.js]]
-link = "js/fuse.min.js"
+link = "plugins/search/fuse.min.js"
 [[params.plugins.js]]
-link = "js/mark.js"
+link = "plugins/search/mark.js"
 [[params.plugins.js]]
-link = "js/search.js"
+link = "plugins/search/search.js"
 
 
 ########################### Navigation ###################################
 
 # main menu
-#[[menu.main]]
-#URL = "about"
-#name = "关于本站"
-#weight = 1
+[[menu.main]]
+URL = "contact"
+name = "Contact"
+weight = 1
+
+[[menu.main]]
+URL = "tools"
+name = "tools"
+weight = 2
 
 # footer menu
 [[menu.footer]]
-URL = "about"
-name = "关于本站"
+URL = "contact"
+name = "Contact"
 weight = 1
 
 [[menu.footer]]
-URL = "links"
-name = "友情链接"
+URL = "tools"
+name = "tools"
 weight = 2
-
 
 
 ######################### Default Parameters ###########################
 [params]
 # home
-home = ""
+home = "Home"
 # logo
-logo = "static/images/self/logo.svg"
+logo = "images/logo.svg"
 # meta data
 author = "Themefisher"
 description = "This is meta description"
@@ -75,16 +77,16 @@ google_analitycs_id = "" # your id
 # contact form action
 contact_form_action = "#" # contact form works with : https://formspree.io
 # copyright
-copyright = "Thanks Hugo & NorthendLab | leileiluoluo.com&copy; 2020"
+copyright = "&copy; 2020 [Gethugothemes](https://gethugothemes.com) All Rights Reserved"
 
 # preloader
 [params.preloader]
-enable = false
+enable = true
 preloader = "" # use png, jpg, svg or gif format
 
 # search
 [params.search]
-enable = false
+enable = true
 
 
 ####################### banner #######################################
@@ -96,17 +98,26 @@ image = "images/banner/illustration.svg"
 
 ######################## call to action ###############################
 [params.cta]
-enable = false
+enable = true
 image = "images/hugo-muscot.svg"
 title = "Get the best hugo templates"
 description = "Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."
 [params.cta.button]
-enable = false
+enable = true
 label = "Visit Here"
 link = "https://gethugothemes.com/shop/"
 
 
 ############################## Social Site ##########################
 [[params.social]]
+icon = "ti-facebook" # themify icon pack https://themify.me/themify-icons
+link = "#"
+[[params.social]]
+icon = "ti-twitter-alt" # themify icon pack https://themify.me/themify-icons
+link = "#"
+[[params.social]]
 icon = "ti-github" # themify icon pack https://themify.me/themify-icons
-link = "https://github.com/olzhy"
+link = "#"
+[[params.social]]
+icon = "ti-linkedin" # themify icon pack https://themify.me/themify-icons
+link = "#"
