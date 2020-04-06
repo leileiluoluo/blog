@@ -17,17 +17,17 @@ wip_template:
 |6|[ZigZag Conversion](https://leetcode.com/problems/zigzag-conversion/)|Z字形变换|中|[Golang](/posts/leetcode-zigzag-conversion.html)|
 |8|[String to Integer](https://leetcode.com/problems/string-to-integer-atoi/)|字符串转整数|中|[Golang](/posts/leetcode-string-to-integer.html)|
 |12|[Integer to Roman](https://leetcode.com/problems/integer-to-roman/)|整数转罗马数|中|[Golang](/posts/leetcode-integer-to-roman.html)|
-|17|[Letter Combinations of A Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)|求电话号码的字母组合|中|[Golang](/posts/leetcode-letter-combinations-of-a-phone-number.html)|
+|17|[Letter Combinations of A...](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)|求电话号码的字母组合|中|[Golang](/posts/leetcode-letter-combinations-of-a-phone-number.html)|
 |19|[Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)|移除链表末尾起第N个节点|中|[Golang](/posts/leetcode-remove-nth-node-from-end-of-list.html)|
-|24|Swap Nodes In Pairs|成对交换节点|中|Golang|
-|33|Search in Rotated Sorted Array|在旋转的有序数组搜索|中|Golang|
-|34|Find First and Last Position …|寻找元素的出现范围|中|Golang|
-|48|Rotate Image|旋转图像|中|Golang|
-|54|Spiral Matrix|螺旋矩阵|中|Golang|
-|55|Jump Game|跳跃游戏|中|Golang|
-|56|Merge Intervals|合并区间|中|Golang|
-|59|Spiral Matrix II|螺旋矩阵 II|中|Golang|
-|60|Permutation Sequence|求第k个排列|中|Golang|
+|24|[Swap Nodes In Pairs](https://leetcode.com/problems/swap-nodes-in-pairs/)|成对交换节点|中|[Golang](/posts/leetcode-swap-nodes-in-pairs.html)|
+|33|[Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)|在旋转的有序数组搜索|中|[Golang](/posts/leetcode-search-in-rotated-sorted-array.html)|
+|34|[Find First and Last Position…](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)|寻找元素的出现范围|中|[Golang](/posts/leetcode-find-first-and-last-position-of-element-in-sorted-array.html)|
+|48|[Rotate Image](https://leetcode.com/problems/rotate-image/)|旋转图像|中|[Golang](/posts/leetcode-rotate-image.html)|
+|54|[Spiral Matrix](https://leetcode.com/problems/spiral-matrix/)|螺旋矩阵|中|[Golang](/posts/leetcode-spiral-matrix.html)|
+|55|[Jump Game](https://leetcode.com/problems/jump-game/)|跳跃游戏|中|[Golang](/posts/leetcode-jump-game.html)|
+|56|[Merge Intervals](https://leetcode.com/problems/merge-intervals/)|合并区间|中|[Golang](/posts/leetcode-merge-intervals.html)|
+|59|[Spiral Matrix II](https://leetcode.com/problems/spiral-matrix-ii/)|螺旋矩阵 II|中|[Golang](/posts/leetcode-spiral-matrix-ii.html)|
+|60|[Permutation Sequence](https://leetcode.com/problems/permutation-sequence/)|求第k个排列|中|[Golang](/posts/leetcode-permutation-sequence.html)|
 |61|Rotate List|旋转链表|中|Golang|
 |71|Simplify Path|简化路径|中|Golang|
 |73|Set Matrix Zeroes|矩阵置零|中|Golang|
