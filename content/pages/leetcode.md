@@ -17,8 +17,8 @@ wip_template:
 |6|[ZigZag Conversion](https://leetcode.com/problems/zigzag-conversion/)|Z字形变换|中|[Golang](/posts/leetcode-zigzag-conversion.html)|
 |8|[String to Integer](https://leetcode.com/problems/string-to-integer-atoi/)|字符串转整数|中|[Golang](/posts/leetcode-string-to-integer.html)|
 |12|[Integer to Roman](https://leetcode.com/problems/integer-to-roman/)|整数转罗马数|中|[Golang](/posts/leetcode-integer-to-roman.html)|
-|17|Letter Combinations of A Phone Number|求电话号码的字母组合|中|Golang|
-|19|Remove Nth Node From End of List|移除链表末尾起第N个节点|中|Golang|
+|17|[Letter Combinations of A Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)|求电话号码的字母组合|中|[Golang](/posts/leetcode-letter-combinations-of-a-phone-number.html)|
+|19|[Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)|移除链表末尾起第N个节点|中|[Golang](/posts/leetcode-remove-nth-node-from-end-of-list.html)|
 |24|Swap Nodes In Pairs|成对交换节点|中|Golang|
 |33|Search in Rotated Sorted Array|在旋转的有序数组搜索|中|Golang|
 |34|Find First and Last Position …|寻找元素的出现范围|中|Golang|
