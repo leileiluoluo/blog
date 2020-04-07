@@ -29,5 +29,5 @@ a.navbar-brand {
 }
 
 h2, .h2 {
-    color: #e8505b;
+    color: #e8505b !important;
 }
