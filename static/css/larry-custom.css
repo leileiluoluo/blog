@@ -31,3 +31,8 @@ a.navbar-brand {
 h2, .h2 {
     color: #e8505b !important;
 }
+
+.content code {
+    padding: 2px 1px !important;
+    border: 0px !important;
+}
