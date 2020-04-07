@@ -27,3 +27,7 @@ a.navbar-brand {
 .mb-5, .my-5 {
     margin-bottom: 3rem !important;
 }
+
+h2, .h2 {
+    color: #e8505b;
+}
