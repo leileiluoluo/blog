@@ -27,61 +27,67 @@ Go 1.4在Go 1.3发布6个月后如期而至。
   * For-range loops
 截至Go 1.3，for-range循环有两种方式：
 
-<pre>for i, v := range x {
+```go
+for i, v := range x {
     ...
 }
-</pre>
+```
 
-<pre>for i := range x {
+```go
+for i := range x {
     ...
 }
-</pre>
+```
 
-若仅想使用循环，并不关注循环变量值，range前的变量仍不可省（该种情况可能使用下划线，如for _ = range x），因如下方式语法上不允许：
+若仅想使用循环，并不关注循环变量值，range前的变量仍不可省（该种情况可能使用下划线，如`for _ = range x`），因如下方式语法上不允许：
 
-<pre>for range x {
+```go
+for range x {
     ...
 }
-</pre>
+```
 
 针对该种场景，之前的处理方式有点笨拙。所以在Go 1.4，“自由变量式”For-range循环的写法是合法的。
   
 如下为一个定时任务的样例：
 
-<pre>for range time.Tick(time.Second) {
+```go
+for range time.Tick(time.Second) {
     ...
 }
-</pre>
+```
 
   * Method calls on **T
 给定如下声明：
 
-<pre>type T int
+```go
+type T int
 func (T) M() {}
 var x **T
-</pre>
+```
 
 之前，gc与gccgo接受如下方式的调用：
 
-<pre>x.M()
-</pre>
+```go
+x.M()
+```
 
 其是对指针的指针变量x的两次解引用，Go说明书允许一次解引用，非两次，所以根据语言定义，该调用是错误的。因此，该调用在Go 1.4是不允许的。尽管非常少的程序会受影响，该项变化是一个不兼容的变化。
 
 **3 支持的操作系统与体系结构上的变化**
 
   * Android
-Go 1.4能够为运行Android操作系统的ARM处理器构建二进制文件。Go 1.4也能够构建能被Android应用加载的.so库文件（使用mobile子仓库中支持的包）。详细请参看：<a href="https://golang.org/s/go14android" target="blank">https://golang.org/s/go14android</a>。
+Go 1.4能够为运行Android操作系统的ARM处理器构建二进制文件。Go 1.4也能够构建能被Android应用加载的.so库文件（使用mobile子仓库中支持的包）。详细请参看：[https://golang.org/s/go14android](https://golang.org/s/go14android)。
 
   * NaCl on ARM
-之前版本引入对NaCl在32位x86（GOARCH=386）及在使用32位指针的64位x86（GOARCH=amd64p32）上的支持。Go 1.4增加了对NaCl在ARM（GOARCH=arm）上的支持。
+之前版本引入对NaCl在32位x86（`GOARCH=386`）及在使用32位指针的64位x86（`GOARCH=amd64p32`）上的支持。Go 1.4增加了对NaCl在ARM（`GOARCH=arm`）上的支持。
 
   * Plan9 on AMD64
 本版本增加了对Plan 9操作系统在AMD64处理器上的支持。提供kernel支持nsec系统调用，并且使用4K页。
 
 **4 兼容性准则变化**
   
-unsafe包允许人们利用内部实现细节或机器数据表达从而超越Go类型系统所限来做一些事情。<a href="https://golang.org/doc/go1compat" target="blank">Go兼容性准则</a>从未显示指明unsafe包的何种使用是遵从兼容性准则的。当然我们对作非安全事情的代码不作兼容性承诺。我们已在发布版本包含的文档中阐明该情况。<a href="https://golang.org/doc/go1compat" target="blank">Go兼容性准则</a>及unsafe包文档目前已明确非安全代码不受兼容性保障。
+unsafe包允许人们利用内部实现细节或机器数据表达从而超越Go类型系统所限来做一些事情。[Go兼容性准则](https://golang.org/doc/go1compat)从未显示指明unsafe包的何种使用是遵从兼容性准则的。当然我们对作非安全事情的代码不作兼容性承诺。我们已在发布版本包含的文档中阐明该情况。[Go兼容性准则](https://golang.org/doc/go1compat)及unsafe包文档目前已明确非安全代码不受兼容性保障。
 
 **5 实现及工具级变化**
 
@@ -90,7 +96,7 @@ Go 1.4之前，运行时（垃圾收集器，并发支持，接口管理，map�
   
 该项重写让垃圾搜集器更精确，意味着可以观测到程序中所有活跃指针的位置。因不会再有保持空指针存活的误报，这意味着堆会更小。其他相关变化也减少了堆大小，堆相对之前版本小了10%-30%。
   
-一个结果是栈不再是分段了，避免了“hot split”问题。当达到栈大小，新的更大的栈将会被分配，所有goroutine的活跃帧被拷贝过去，且所有栈上的指针已被更新。某些场景性能会有显著提升且更可具预测性。详细请参阅：<a href="https://golang.org/s/contigstacks" target="blank">https://golang.org/s/contigstacks</a>。
+一个结果是栈不再是分段了，避免了“hot split”问题。当达到栈大小，新的更大的栈将会被分配，所有goroutine的活跃帧被拷贝过去，且所有栈上的指针已被更新。某些场景性能会有显著提升且更可具预测性。详细请参阅：[https://golang.org/s/contigstacks](https://golang.org/s/contigstacks)。
   
 邻接栈的使用意味着栈可以更小启动且不会触发性能问题，所以在Go 1.4，一个goroutine栈的默认启动大小已从8192个字节减到2048个字节。
   
@@ -105,12 +111,13 @@ Go 1.4之前，运行时（垃圾收集器，并发支持，接口管理，map�
   
 首先，定义TEXT指令标记文件textflag.h已从链接器源文件夹拷贝至标准位置，以便用更简洁的指令引用。
 
-<pre>#include "textflag.h"
-</pre>
+```c
+#include "textflag.h"
+```
 
 更重要的变化是，汇编器源码如何定义必要的类型信息。更多程序能够将数据定义从汇编移至Go文件，以对每个汇编函数写一个Go定义。
   
-详情请参考<a href="https://golang.org/doc/asm" target="blank">汇编文档</a>。
+详情请参考[汇编文档](https://golang.org/doc/asm)。
   
 更新：包含textflag.h旧路径的文件虽仍能工作，但建议更新。对于类型信息，多数汇编routine无需改动，但需要检查。定义数据的汇编源文件、使用非空栈帧的函数及返回指针的函数需要特别注意。
 
@@ -122,43 +129,44 @@ Go的包系统易于将程序组织为边界清晰的组件，但仅有两种访
   
 Go还没有该项能力，但截至Go 1.4，Go命令引入了一种定义“内部”包的机制，其不可被源码树所在位置的其他包引用。
   
-想创建一个这样的包，可以将其置于internal文件夹或internal子文件夹下。当Go命令遇到某被引用的包的路径中有internal，即会校验引用包的位置是否位于internal文件夹的父文件件（如包&#8230;/a/b/c/internal/d/e/f仅可被位于&#8230;/a/b/c文件夹的包引用，不可被&#8230;/a/b/g文件夹或其他位置的代码引用）。
-  
+想创建一个这样的包，可以将其置于internal文件夹或internal子文件夹下。当Go命令遇到某被引用的包的路径中有internal，即会校验引用包的位置是否位于internal文件夹的父文件件（如包`.../a/b/c/internal/d/e/f`仅可被位于`.../a/b/c`文件夹的包引用，不可被`.../a/b/g`文件夹或其他位置的代码引用）。
+
 Go 1.4，内部包机制已对主要Go仓库实施。自1.5起，其会对所有仓库实施。
 
   * Canonical import paths
-代码常由诸如github.com的开放服务托管，意味着包引用路径常包含服务前缀，如github.com/rsc/pdf。人们可以根据“<a href="https://golang.org/cmd/go/#hdr-Remote_import_paths" target="blank">现有机制</a>”自定义包路径，但会给包创建两个有效引用路径。这样，同一个程序可能会引用一个包的两个不同路径，或将包移至一个不同的托管服务会影响到客户端代码。
+代码常由诸如github.com的开放服务托管，意味着包引用路径常包含服务前缀，如github.com/rsc/pdf。人们可以根据“[现有机制](https://golang.org/cmd/go/#hdr-Remote_import_paths)”自定义包路径，但会给包创建两个有效引用路径。这样，同一个程序可能会引用一个包的两个不同路径，或将包移至一个不同的托管服务会影响到客户端代码。
   
 Go 1.4引入了在源码指定包权威路径的方式。若某包引用使用非权威路径，go命令将拒绝编译。
   
 语法很简单：
 
-<pre>package pdf // import "rsc.io/pdf"
-</pre>
+```go
+package pdf // import "rsc.io/pdf"
+```
 
 若有如上指定，go命令将拒绝诸如 github.com/rsc/pdf的引用。
   
 因检查在构建期，非下载期，所以若go get失败，说明错误引用的包已下载至本地，需手动移除。
 
   * Import paths for the subrepositories
-Go项目子仓库（code.google.com/p/go.tools等）现采用自定义引用路径golang.org/x/（如golang.org/x/tools）取代code.google.com/p/go。我们将在2015.06.01左右对代码加入权威引用注解，届时，Go 1.4及后续版本将不接受旧的路径（code.google.com）引用。
+Go项目子仓库（`code.google.com/p/go.tools`等）现采用自定义引用路径`golang.org/x/`（如`golang.org/x/tools`）取代`code.google.com/p/go`。我们将在2015.06.01左右对代码加入权威引用注解，届时，Go 1.4及后续版本将不接受旧的路径（`code.google.com`）引用。
 
   * The go generate subcommand
-go命令有了一个新的子命令<a href="https://golang.org/cmd/go/#hdr-Generate_Go_files_by_processing_source" target="blank">go generate</a>，以在编译前自动运行工具来生成源码。如，其可用来运行yacc（基于实现语法的.y文件）compiler-compiler生成Go源码。或使用<a href="https://godoc.org/golang.org/x/tools/cmd/stringer" target="blank">stringer</a>工具（位于golang.org/x/tools子仓库），对类型常量自动生成String方法。详情请参阅：<a href="https://golang.org/s/go1.4-generate" target="blank">https://golang.org/s/go1.4-generate</a>。
+go命令有了一个新的子命令[go generate](https://golang.org/cmd/go/#hdr-Generate_Go_files_by_processing_source)，以在编译前自动运行工具来生成源码。如，其可用来运行yacc（基于实现语法的.y文件）compiler-compiler生成Go源码。或使用[stringer](https://godoc.org/golang.org/x/tools/cmd/stringer)工具（位于`golang.org/x/tools`子仓库），对类型常量自动生成String方法。详情请参阅：[https://golang.org/s/go1.4-generate](https://golang.org/s/go1.4-generate)。
 
   * Change to file name handling
-构建约束，也叫构建tag，通过引入或移除文件来控制编译（参看<a href="https://golang.org/pkg/go/build/" target="blank">/go/build</a>文档）。也可使用文件名本身来控制编译（在.go或.s后缀前加下划线与体系结构或操作系统名称）。如gopher_arm.go文件仅当目标处理器是ARM才会编译。
+构建约束，也叫构建tag，通过引入或移除文件来控制编译（参看[/go/build](https://golang.org/pkg/go/build/)文档）。也可使用文件名本身来控制编译（在.go或.s后缀前加下划线与体系结构或操作系统名称）。如gopher_arm.go文件仅当目标处理器是ARM才会编译。
   
 Go 1.4之前，叫作arm.go的文件会被简单打了tag，但当新的体系结构加入时，该行为会破坏源码（将文件突然打了tag）。因此，在1.4，只有下划线的形式才会打tag（tag包括体系结构及操作系统名称）。
 
   * Other changes to the go command
-<a href="https://golang.org/cmd/go/" target="blank">cmd/go</a>命令有几项小变化：
+[cmd/go](https://golang.org/cmd/go/)命令有几项小变化：
   
-a）除非使用<a href="https://golang.org/cmd/cgo/" target="blank">cgo</a>来构建包，因相关的c编译器（如6c）会在未来版本的安装包移除，go命令不再支持编译c源文件（目前仅用来构建部分运行时）。因其很难在各种情况下正确使用，所以我们将其关闭。
+a）除非使用[cgo](https://golang.org/cmd/cgo/)来构建包，因相关的c编译器（如6c）会在未来版本的安装包移除，go命令不再支持编译c源文件（目前仅用来构建部分运行时）。因其很难在各种情况下正确使用，所以我们将其关闭。
   
-b）与其它子命令的标记一致，<a href="https://golang.org/cmd/go/#hdr-Test_packages" target="blank">go test</a>引入了-o标记，以设置结果二进制的名称。无用的-file标记已移除。
+b）与其它子命令的标记一致，[go test](https://golang.org/cmd/go/#hdr-Test_packages)引入了-o标记，以设置结果二进制的名称。无用的-file标记已移除。
   
-c）即使包里没有Test函数，<a href="https://golang.org/cmd/go/#hdr-Test_packages" target="blank">go test</a>也会编译链接包中的所有*_test.go文件（之前会忽略这些没有Test函数的文件）。
+c）即使包里没有Test函数，[go test](https://golang.org/cmd/go/#hdr-Test_packages)也会编译链接包中的所有`*_test.go`文件（之前会忽略这些没有Test函数的文件）。
   
 d）对非开发类安装，go build子命令的-a标记的行为已发生改变。对于一个运行已发布版本的安装，-a标记将不再重新构建标准库及命令，以避免重写安装文件。
 
@@ -171,7 +179,7 @@ d）对非开发类安装，go build子命令的-a标记的行为已发生改变
   * Miscellany
 标准仓库的顶级misc文件夹用于包含对编辑器及IDE的Go支持：有插件、初始化脚本等。因列出的编辑器中的许多已不再被核心团队中的成员所使用，维护这些变得耗时并需要额外的帮助。而且需要我们决策一个给定编辑器（甚至我们未使用的编辑器）的哪个插件好用。
   
-Go社区更合适维护这些信息。因此，在Go 1.4，该项支持已从仓库移除。代之，维护在该<a href="http://golang.org/wiki/IDEsAndTextEditorPlugins" target="blank">wiki页</a>。
+Go社区更合适维护这些信息。因此，在Go 1.4，该项支持已从仓库移除。代之，维护在该[wiki页](http://golang.org/wiki/IDEsAndTextEditorPlugins)。
 
 **6 性能相关**
   
@@ -191,19 +199,19 @@ Go社区更合适维护这些信息。因此，在Go 1.4，该项支持已从仓
   * Major changes to the library
 a）bufio.Scanner
   
-<a href="https://golang.org/pkg/bufio/buffo" target="blank">buffo</a>包的Scanner类型有一个bug已被修复，其可能需要改动自定义<a href="https://golang.org/pkg/bufio/#SplitFuncsplit" target="blank">split</a>函数。该bug使其不能在EOF生成空token，该修复改变了split函数的结束条件。之前，若没有更多数据，扫描停止在EOF。鉴于文档说明，截至1.4，在输入耗尽时，split函数将在EOF调用一次，所以split函数会生成一个最终的空token。
+[buffo](https://golang.org/pkg/bufio/buffo)包的Scanner类型有一个bug已被修复，其可能需要改动自定义[split](https://golang.org/pkg/bufio/#SplitFuncsplit)函数。该bug使其不能在EOF生成空token，该修复改变了split函数的结束条件。之前，若没有更多数据，扫描停止在EOF。鉴于文档说明，截至1.4，在输入耗尽时，split函数将在EOF调用一次，所以split函数会生成一个最终的空token。
   
 更新：可能需要修改自定义split函数以处理在EOF的空token。
   
 b）syscall
   
-syscall包已被冻结（除了需要维护核心仓库的改动）。特别是，其不再用来扩展支持未被核心库使用的新的或不同的系统调用。原因详细描述在<a href="https://golang.org/s/go1.4-syscall" target="blank">另一个文档</a>。
+syscall包已被冻结（除了需要维护核心仓库的改动）。特别是，其不再用来扩展支持未被核心库使用的新的或不同的系统调用。原因详细描述在[另一个文档](https://golang.org/s/go1.4-syscall)。
   
 一个新的golang.org/x/sys子仓库为用来支持各种内核的系统调用的开发提供位置。其有更好的结构，采用3个包（Unix，Windows与Plan 9），每个包都有系统调用的实现。这些包将会辅助的更通用一些，接受在这些操作系统的所有反映内核接口的有效改动。
 
   * Minor changes to the library
-请看<a href="https://golang.org/doc/go1.4#minor_library_changes" target="blank">链接</a>。
+请看[链接](https://golang.org/doc/go1.4#minor_library_changes)。
 
 > 参考资料
-  
+>
 > [1]&nbsp;<a href="https://golang.org/doc/go1.4" target="blank">https://golang.org/doc/go1.4</a>
