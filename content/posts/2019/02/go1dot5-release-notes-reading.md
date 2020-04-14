@@ -43,21 +43,23 @@ g）新的go doc命令（不同于godoc）只为命令行使用。
   * Map literals
 因疏忽，slice中省略元素类型的语法未应用到map的key中，我们在Go 1.5中作了修正。参看一个例子即会明白:
 
-<pre>m := map[Point]string{
+```go
+m := map[Point]string{
     Point{29.935523, 52.891566}:   "Persepolis",
     Point{-25.352594, 131.034361}: "Uluru",
     Point{37.422455, -122.084306}: "Googleplex",
 }
-</pre>
+```
 
 如上代码可以省略Point类型，直接写作：
 
-<pre>m := map[Point]string{
+```go
+m := map[Point]string{
     {29.935523, 52.891566}:   "Persepolis",
     {-25.352594, 131.034361}: "Uluru",
     {37.422455, -122.084306}: "Googleplex",
 }
-</pre>
+```
 
 **3 实现**
 
@@ -118,10 +120,11 @@ g）新的go doc命令（不同于godoc）只为命令行使用。
   
 如，告别go build，要在基于amd64的Darwin系统上使用工作直接构建及链接一个程序，可以运行：
   
-`$ export GOOS=darwin GOARCH=amd64<br />
-$ go tool compile program.go<br />
-$ go tool link program.o<br />
-` 
+```shell
+$ export GOOS=darwin GOARCH=amd64
+$ go tool compile program.go
+$ go tool link program.o
+```
 
   * Moving
 因go/types包目前已移至主仓库（参看下边），vet及cover工具也已移走。尽管为了兼容，废弃的源码仍在旧的发布版本，但其不再在外部仓库golang.org/x/tools维护。
@@ -149,15 +152,21 @@ Go 1.5的链接器是一个替换6l、8l等的新的Go程序。其操作系统�
   
 列出可用的构建模式，可以使用如下命令。
   
-`$ go help buildmode`
+```shell
+$ go help buildmode
+```
   
 另一项小变化是，链接器不在于Windows可执行文件头部记录构建时间戳。同样，尽管这个可能是固定的，但Windows cgo可执行文件丢失了一些DWARF信息。最后，-X标记需传入两个参数。
   
-`-X importpath.name value`
+```
+-X importpath.name value
+```
   
 目前，也接受一个更通用的Go标记样式，及单参数name=value对。
   
-`-X importpath.name=value`
+```
+-X importpath.name=value
+```
   
 尽管旧的语法仍然工作，但推荐在脚本总使用新的标记，希望更新为新的方式。
 
@@ -198,12 +207,16 @@ j）get目前有一个-insecure标记，用来获取非安全仓库（不加密�
   * Trace command
 一个对Go程序动态执行跟踪的新的工具可用。其使用方式与测试覆盖工具的使用相似。跟踪套件已集成至go test，然后执行跟踪工具即可分析结果。
   
-`$ go test -trace=trace.out path/to/package<br />
-$ go tool trace [flags] pkg.test trace.out`
+```shell
+$ go test -trace=trace.out path/to/package
+$ go tool trace [flags] pkg.test trace.out
+```
   
 flags可以使输出结果在浏览器访问。更多详情请运行：
   
-`go tool trace -help`
+```shell
+sh go tool trace -help
+```
   
 有一个跟踪能力描述，请参看GopherCon 2015的<a href="https://talks.golang.org/2015/dynamic-tools.slide" rel="noopener" target="_blank">演讲</a>。
 
@@ -228,12 +241,16 @@ Solaris目前提供全部的cgo支持。在Windows，cgo目前默认使用外部
   * Flag
 flag包的<a href="https://golang.org/pkg/flag/#PrintDefaults" rel="noopener" target="_blank">PrintDefaults</a>函数以及<a href="https://golang.org/pkg/flag/#FlagSet" rel="noopener" target="_blank">FlagSet</a>的方法已作修改，以创建更好的使用信息。格式已变得更加对人友好，且在使用信息中，以\`背引号\`引用的字会被认为是flag的操作数，以在使用信息中显示。如，使用如下方式创建的flag。
   
-``cpuFlag = flag.Int("cpu", 1, "run `N` processes in parallel")``
+```go
+cpuFlag = flag.Int("cpu", 1, "run `N` processes in parallel")
+```
   
 将展示帮助信息。
   
-`-cpu N<br />
-    	run N processes in parallel (default 1)`
+```
+-cpu N
+run N processes in parallel (default 1)
+```
   
 同样，仅当其为类型的非0值时，默认值被展示了出来。
 
@@ -264,5 +281,5 @@ net包的DNS解析器几乎总使用cgo来访问系统接口。Go 1.5的一个�
 <a href="https://golang.org/doc/go1.5#minor_library_changes" rel="noopener" target="_blank">https://golang.org/doc/go1.5#minor_library_changes</a>
 
 > 参考资料
-  
+>
 > [1]&nbsp;<a href="https://golang.org/doc/go1.5" target="blank">https://golang.org/doc/go1.5</a>

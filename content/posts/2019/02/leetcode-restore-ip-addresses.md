@@ -18,14 +18,10 @@ tags:
 给定一个仅包含数字的字符串，通过返回所有有效的IP地址组合来还原它。
 
 例子：
-  
-输入：
-  
-&#8220;25525511135&#8221;
-  
-输出：
-  
-[&#8220;255.255.11.135&#8221;, &#8220;255.255.111.35&#8221;]
+
+输入："25525511135"
+
+输出：["255.255.11.135", "255.255.111.35"]
 
 题目出处：
   
@@ -47,7 +43,8 @@ d）将a、b两步所得结果拼接为数组返回。
   
 <a href="https://github.com/olzhy/leetcode/blob/master/93_Restore_IP_Addresses/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/93_Restore_IP_Addresses/test.go</a>
 
-<pre>func restoreIpAddresses(s string) []string {
+```go
+func restoreIpAddresses(s string) []string {
     return restore(s, 4)
 }
 
@@ -56,16 +53,16 @@ func restore(s string, require int) []string {
         if len(s) > 1 && '0' == s[0] {
             return []string{}
         }
-        if v, _ := strconv.Atoi(s); v &lt; 256 {
+        if v, _ := strconv.Atoi(s); v < 256 {
             return []string{s}
         }
         return []string{}
     }
 
     var r []string
-    for i := 1; i &lt; 4 &#038;&#038; i+require-1 &lt;= len(s); i++ {
+    for i := 1; i < 4 && i+require-1 <= len(s); i++ {
         prefix := s[:i]
-        if v, _ := strconv.Atoi(prefix); v &lt; 256 {
+        if v, _ := strconv.Atoi(prefix); v < 256 {
             for _, j := range restore(s[i:], require-1) {
                 r = append(r, prefix+"."+j)
             }
@@ -76,4 +73,4 @@ func restore(s string, require int) []string {
     }
     return r
 }
-</pre>
+```

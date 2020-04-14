@@ -18,24 +18,24 @@ tags:
 对给定字符串s，找出其最长回文子串（假定s的最大长度为1000）。
 
 例子1：
-  
-输入：&#8221;babad&#8221;
-  
-输出：&#8221;bab&#8221;
-  
-释义：&#8221;aba&#8221;同样是一个有效答案
+
+输入："babad"
+
+输出："bab"
+
+释义："aba"同样是一个有效答案
 
 例子2：
-  
-输入：&#8221;cbbd&#8221;
-  
-输出：&#8221;bb&#8221;
+
+输入："cbbd"
+
+输出："bb"
 
 例子3：
-  
-输入：&#8221;cbbc&#8221;
-  
-输出：&#8221;cbbc&#8221;
+
+输入："cbbc"
+
+输出："cbbc"
 
 题目出处：
   
@@ -51,14 +51,15 @@ tags:
   
 <a href="https://github.com/olzhy/leetcode/blob/master/5_Longest_Palindromic_Substring/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/5_Longest_Palindromic_Substring/test.go</a>
 
-<pre>func longestPalindrome(s string) string {
-    if len(s) &lt; 2 {
+```go
+func longestPalindrome(s string) string {
+    if len(s) < 2 {
         return s
     }
     longest := s[0:1]
-    for i := 1; i &lt; len(s); i++ {
-        for rightStep := 0; rightStep &lt; 2; rightStep++ {
-            for p, q := i-1, i+rightStep; p >= 0 && q &lt; len(s) &#038;&#038; s[p] == s[q]; {
+    for i := 1; i < len(s); i++ {
+        for rightStep := 0; rightStep < 2; rightStep++ {
+            for p, q := i-1, i+rightStep; p >= 0 && q < len(s) && s[p] == s[q]; {
                 if q-p+1 > len(longest) {
                     longest = s[p : q+1]
                 }
@@ -69,4 +70,4 @@ tags:
     }
     return longest
 }
-</pre>
+```

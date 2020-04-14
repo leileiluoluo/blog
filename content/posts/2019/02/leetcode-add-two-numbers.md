@@ -41,7 +41,8 @@ tags:
   
 <a href="https://github.com/olzhy/leetcode/blob/master/2_Add_Two_Numbers/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/2_Add_Two_Numbers/test.go</a>
 
-<pre>func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+```go
+func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
     l := &ListNode{}
     p, q, r := l1, l2, l
     carry := 0
@@ -63,4 +64,4 @@ tags:
     }
     return l
 }
-</pre>
+```

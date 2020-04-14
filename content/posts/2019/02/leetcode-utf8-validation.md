@@ -23,13 +23,14 @@ b）对n字节字符，前n个bit位全为1，第n+1个bit位是0，然后接着
   
 综上，UTF-8编码字符可以参考下表：
 
-<pre>十进制表示        |            8位一组二进制表示
+```
+       十进制表示        |            8位一组二进制表示
    --------------------+------------------------------------
    0000 0000-0000 007F | 0xxxxxxx
    0000 0080-0000 07FF | 110xxxxx 10xxxxxx
    0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx
    0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
-</pre>
+```
 
 给定一组表示输入数据的整数，然后输出其是否以UTF-8编码。
 
@@ -63,7 +64,8 @@ b）对n字节字符，前n个bit位全为1，第n+1个bit位是0，然后接着
   
 <a href="https://github.com/olzhy/leetcode/blob/master/393_UTF8_Validation/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/393_UTF8_Validation/test.go</a>
 
-<pre>func validUtf8(data []int) bool {
+```go
+func validUtf8(data []int) bool {
     if 0 == len(data) {
         return true
     }
@@ -84,4 +86,4 @@ b）对n字节字符，前n个bit位全为1，第n+1个bit位是0，然后接着
     }
     return false
 }
-</pre>
+```

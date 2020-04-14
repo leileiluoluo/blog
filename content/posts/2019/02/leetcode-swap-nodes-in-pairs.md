@@ -33,13 +33,14 @@ tags:
   
 如图所示，使用三个指针p、q、r指向三个相邻的节点，q.Next = p; p.Next = r.Next即完成一次交换。
   
-<img class="aligncenter" src="/wp-content/uploads/2019/02/swap-nodes-in-pair.png" width="382" height="154" />
+![](https://yanleilei.com/static/images/uploads/2019/02/swap-nodes-in-pair.png)
 
 **3 golang实现代码**
   
 <a href="https://github.com/olzhy/leetcode/blob/master/24_Swap_Nodes_In_Pairs/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/24_Swap_Nodes_In_Pairs/test.go</a>
 
-<pre>func swapPairs(head *ListNode) *ListNode {
+```go
+func swapPairs(head *ListNode) *ListNode {
     if nil == head || nil == head.Next {
         return head
     }
@@ -64,4 +65,4 @@ tags:
     }
     return head
 }
-</pre>
+```

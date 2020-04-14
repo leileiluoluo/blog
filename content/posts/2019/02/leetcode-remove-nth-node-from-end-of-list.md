@@ -41,7 +41,8 @@ tags:
   
 <a href="https://github.com/olzhy/leetcode/blob/master/19_Remove_Nth_Node_From_End_Of_List/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/19_Remove_Nth_Node_From_End_Of_List/test.go</a>
 
-<pre>func removeNthFromEnd(head *ListNode, n int) *ListNode {
+```go
+func removeNthFromEnd(head *ListNode, n int) *ListNode {
     p, q := head, head
     for ; n > 0; n-- {
         p = p.Next
@@ -56,4 +57,4 @@ tags:
     q.Next = q.Next.Next
     return head
 }
-</pre>
+```
