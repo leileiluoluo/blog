@@ -6,6 +6,11 @@ date: 2017-10-28T10:35:42+00:00
 url: /links
 wip_template:
   - right-sidebar
+
+---
+
+[Go语言中文网](https://studygolang.com/) | [Tony Bai](https://tonybai.com/) | [Jing blog](https://jingine.com/)
+
 ----------------------------------------------
 **传统文化**
 
