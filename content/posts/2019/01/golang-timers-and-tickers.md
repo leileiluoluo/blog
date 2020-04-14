@@ -139,5 +139,5 @@ func main() {
 > [3]&nbsp;<a href="https://gobyexample.com/tickers" target="blank">https://gobyexample.com/tickers</a>
 > 
 > [4]&nbsp;<a href="https://blog.gopheracademy.com/advent-2016/go-timers" target="blank">https://blog.gopheracademy.com/advent-2016/go-timers</a>
-  
+>
 > [5]&nbsp;<a href="https://programming.guide/go/time-reset-wait-stop-timeout-cancel-interval.html" target="blank">https://programming.guide/go/time-reset-wait-stop-timeout-cancel-interval.html</a>
