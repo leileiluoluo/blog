@@ -21,8 +21,9 @@ tags:
   * Use of nil
 Go 1.2中，空指针使用将会触发panic错误。数组、接口、struct、slice等的空指针使用将会产生panic错误或返回一个安全的非空值。如下例子中，x.Field将会产生空指针错误。
 
-<pre>type T struct {
-    X [1&lt;&lt;24]byte
+```go
+type T struct {
+    X [1<<24]byte
     Field int32
 }
 
@@ -30,21 +31,23 @@ func main() {
     var x *T
     ...
 }
-</pre>
+```
 
   * Three-index slices
 Go 1.2新加了对在已有array或slice上做切分操作时指定容量及长度的能力。例如，如下代码在对一个array做切分操作。
 
-<pre>var array [10]int
+```go
+var array [10]int
 slice := array[2:4]
-</pre>
+```
 
 容量为该slice可以拿到的元素的最大个数。其反映所指array的大小，该例子中，slice的容量为8。
   
 Go 1.2新加了可以同时指定slice大小与容量的新语法。例如，在如下例子中，第2个冒号后的值指定容量，其值需小于等于原始slice或array的容量。
 
-<pre>slice = array[2:4:7]
-</pre>
+```go
+slice = array[2:4:7]
+```
 
 该代码相较于上一段，len未变，但容量变为了5(7-2)。所以该slice不可以访问原始数组的最后三个元素。
   
@@ -82,20 +85,23 @@ Go 1.2使用go tool cover可以查看测试覆盖率。
   
 使用go test -cover可以查看基础报告（其会自动插入测试语句并重写源码）。
 
-<pre>$ go test -cover fmt
-</pre>
+```
+$ go test -cover fmt
+```
 
 使用go tool cover可以查看详细报告。如：
 
-<pre>$ go test -coverprofile=cover.out
+```
+$ go test -coverprofile=cover.out
 $ go tool cover -func=cover.out
-</pre>
+```
 
 使用help查询具体怎么使用。
 
-<pre>$ go help testflag
+```
+$ go help testflag
 $ go tool cover -help
-</pre>
+```
 
   * The go doc command is deleted
 go doc命令已删，请使用godoc。
@@ -126,112 +132,31 @@ Go 1.2引入的新包encoding，包含诸如encoding/xml、encoding/json及encod
   * The fmt package
 Go 1.2，fmt包的格式化打印函数Printf可以使用从1开始的索引来标记打印顺序。如下代码打印结果为c a b。
 
-<pre>fmt.Sprintf("%[3]c %[1]c %c\n", 'a', 'b', 'c')
-</pre>
+```go
+fmt.Sprintf("%[3]c %[1]c %c\n", 'a', 'b', 'c')
+```
 
   * The text/template and html/template packages
 Go 1.2引入比较函数，可用于对基础类型作比较。
 
-<table>
-  <tr>
-    <th>
-    </th>
-    
-    <th>
-      &nbsp;Name&nbsp;
-    </th>
-    
-    <th>
-      &nbsp;Operator&nbsp;
-    </th>
-  </tr>
-  
-  <tr>
-    <td>
-    </td>
-    
-    <td>
-      <code>eq</code>
-    </td>
-    
-    <td>
-      <code>==</code>
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-    </td>
-    
-    <td>
-      <code>ne</code>
-    </td>
-    
-    <td>
-      <code>!=</code>
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-    </td>
-    
-    <td>
-      <code>lt</code>
-    </td>
-    
-    <td>
-      <code>&lt;</code>
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-    </td>
-    
-    <td>
-      <code>le</code>
-    </td>
-    
-    <td>
-      <code>&lt;=</code>
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-    </td>
-    
-    <td>
-      <code>gt</code>
-    </td>
-    
-    <td>
-      <code>&gt;</code>
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-    </td>
-    
-    <td>
-      <code>ge</code>
-    </td>
-    
-    <td>
-      <code>&gt;=</code>
-    </td>
-  </tr>
-</table>
+```
+eq ==
+ne !=
+lt <
+le <=
+gt >
+ge >=
+```
 
 如下为使用示例。
-  
-`{{if eq .A 1}} X {{else if eq .A 2}} Y {{end}}`
+
+```
+{{if eq .A 1}} X {{else if eq .A 2}} Y {{end}}
+```
 
   * Minor changes to the library
 <a href="https://golang.org/doc/go1.2#minor_library_changes"  target="blank">https://golang.org/doc/go1.2#minor_library_changes</a>
 
 > 参考资料
-  
+>
 > [1]&nbsp;<a href="https://golang.org/doc/go1.2" target="blank">https://golang.org/doc/go1.2</a>

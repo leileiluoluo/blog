@@ -21,29 +21,32 @@ Go 1.1在编译器、核心库，运行时方面做了很多工作，重点在�
   * Integer division by zero
 在Go 1，除0是一个运行时panic错误，在Go 1.1，是一个编译器错误。
 
-<pre>func f(x int) int {
+```go
+func f(x int) int {
     return x/0
 }
-</pre>
+```
 
   * Method values
 Go 1.1引入了方法值，即一个需与指定接收值绑定的函数。
 
-<pre>func (p []byte) (n int, err error) {
+```go
+func (p []byte) (n int, err error) {
     return w.Write(p)
 }
-</pre>
+```
 
   * Return requirements
 Go 1.1之前，对带返回值的函数在函数尾部必须有显式的return语句或panic调用。Go 1.1引入了结束语句的概念，<a href="https://golang.org/ref/spec#Terminating_statements" target="blank">https://golang.org/ref/spec#Terminating_statements</a>，如无限循环、分支语句在每个分支都返回了结果等，去掉了必须在尾部加return的限制。
 
-<pre>func loop() int {
+```go
+func loop() int {
     for {
         fmt.Println(1)
         time.Sleep(time.Second)
     }
 }
-</pre>
+```
 
 **3 实现及工具级变化**
 
@@ -56,10 +59,11 @@ gc工具链与传统Unix标记解析作了分离，编译器与链接器使用�
   * Size of int on 64-bit platforms
 之前的Go实现使int与uint在所有系统均为32位。当前gc与gccgo使int与uint在64位系统均为64位。因Go不允许数值类型的隐式转换，所以常规程序不受影响，但之前将int、uint假定为32位程序的运行结果可能会受影响。
 
-<pre>x := ^uint32(0) // x is 0xffffffff
+```go
+x := ^uint32(0) // x is 0xffffffff
 i := int(x)     // i is -1 on 32-bit systems, 0xffffffff on 64-bit
 fmt.Println(i)
-</pre>
+```
 
   * Heap size on 64-bit architectures
 64位体系结构的堆大小已由几GB扩展到了几十GB，32位体系结构的堆大小未有变化。
@@ -78,30 +82,34 @@ fmt.Println(i)
   
 a）在测试、编译，运行时，当所需的包未找到时，go命令会给出包括搜索路径列表等更详尽的错误提示。
   
-`$ go build foo/quxx<br />
-can't load package: package foo/quxx: cannot find package "foo/quxx" in any of:<br />
-    /home/you/go/src/pkg/foo/quxx (from $GOROOT)<br />
-    /home/you/src/foo/quxx (from $GOPATH)<br />
-` 
+```
+$ go build foo/quxx
+can't load package: package foo/quxx: cannot find package "foo/quxx" in any of:
+/home/you/go/src/pkg/foo/quxx (from $GOROOT)
+/home/you/src/foo/quxx (from $GOPATH)
+```
   
 b）使用go get命令时，不再允许将$GOROOT作为默认的包下载路径，必须指定合法的$GOPATH。
   
-`$ GOPATH= go get code.google.com/p/foo/quxx<br />
-package code.google.com/p/foo/quxx: cannot download, $GOPATH not set. For more details see: go help gopath<br />
-` 
+```
+$ GOPATH= go get code.google.com/p/foo/quxx
+package code.google.com/p/foo/quxx: cannot download, $GOPATH not set. For more details see: go help gopath
+```
   
 c）若$GOPATH设置与$GOROOT相同，使用go get也会报错。
   
-`$ GOPATH=$GOROOT go get code.google.com/p/foo/quxx<br />
-warning: GOPATH set to GOROOT (/home/you/go) has no effect<br />
-package code.google.com/p/foo/quxx: cannot download, $GOPATH must not be set to $GOROOT. For more details see: go help gopath<br />
-` 
+```
+$ GOPATH=$GOROOT go get code.google.com/p/foo/quxx
+warning: GOPATH set to GOROOT (/home/you/go) has no effect
+package code.google.com/p/foo/quxx: cannot download, $GOPATH must not be set to $GOROOT. For more details see: go help gopath
+```
 
   * Changes to the go test command
 为了便于profile信息的分析，go test命令运行时若开启profile搜集，生成的二进制文件不再被删除（如：执行如下命令会生成mypackage.test文件）。目前go test支持搜集profile信息以便找出goroutine阻塞的地方。
   
-`$ go test -cpuprofile cpuprof.out mypackage<br />
-` 
+```
+$ go test -cpuprofile cpuprof.out mypackage
+```
 
   * Changes to the go fix command
 go fix不再应用于修正Go 1之前的代码，请使用Go 1.0工具链（go tool fix）来转换Go 1.0之前的代码。
@@ -136,14 +144,15 @@ f）将运行时与网络相关的库更紧密的组合，使得网络操作所�
   * bufio.Scanner
 为使诸如逐行读取、按空格分割读取等常规读取操作更便捷，Go 1.1引入了Scanner。当然，也可以提供SplitFunc来对输入文本自定义分割方式。
 
-<pre>scanner := bufio.NewScanner(os.Stdin)
+```go
+scanner := bufio.NewScanner(os.Stdin)
 for scanner.Scan() {
     fmt.Println(scanner.Text()) // Println will add back the final '\n'
 }
 if err := scanner.Err(); err != nil {
     fmt.Fprintln(os.Stderr, "reading standard input:", err)
 }
-</pre>
+```
 
   * net
 <a href="https://golang.org/doc/go1.1#net" target="blank">https://golang.org/doc/go1.1#net</a>
@@ -183,5 +192,5 @@ h）strings包新加了TrimPrefix与TrimSuffix函数。
 详细请参看：<a href="https://golang.org/doc/go1.1#minor_library_changes" target="blank">https://golang.org/doc/go1.1#minor_library_changes</a>
 
 > 参考资料
-  
+>
 > [1]&nbsp;<a href="https://golang.org/doc/go1.1" target="blank">https://golang.org/doc/go1.1</a>

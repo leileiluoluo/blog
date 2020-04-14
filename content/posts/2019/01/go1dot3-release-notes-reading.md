@@ -83,7 +83,7 @@ go build新加一个-i选项以对所指定目标安装依赖（非目标本身�
 当前，go命令已支持在cgo引用Objective-C文件的包。
 
   * Changes to cgo
-用来处理Go包中import &#8220;C&#8221;声明的cmd/cgo命令修复了对可能引起某些包编译停止的诸多bug。
+用来处理Go包中import "C"声明的cmd/cgo命令修复了对可能引起某些包编译停止的诸多bug。
 
   * Changes to godoc
 目前，使用godoc -analysis可用来对代码作复杂静态分析。
@@ -111,5 +111,5 @@ testing.B新加了RunParallel方法，以实现在并行系统执行基准测试
 <a href="https://golang.org/doc/go1.3#minor_library_changes" target="blank">https://golang.org/doc/go1.3#minor_library_changes</a>
 
 > 参考资料
-  
+>
 > [1]&nbsp;<a href="https://golang.org/doc/go1.3" target="blank">https://golang.org/doc/go1.3</a>
