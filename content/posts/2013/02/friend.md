@@ -3,7 +3,7 @@ title: 朋友啊，你的被动久了让我很受伤害
 author: olzhy
 type: post
 date: 2013-02-04T08:59:31+00:00
-url: /posts/朋友啊，你的被动久了让我很受伤害.html
+url: /posts/friend.html
 categories:
   - 随笔
 tags:

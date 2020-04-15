@@ -3,7 +3,7 @@ title: 原来命运如此无常
 author: olzhy
 type: post
 date: 2013-04-17T08:56:29+00:00
-url: /posts/原来命运如此无常.html
+url: /posts/destiny.html
 categories:
   - 随笔
 tags:

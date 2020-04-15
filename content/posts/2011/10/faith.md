@@ -3,7 +3,7 @@ title: 怀揣信念
 author: olzhy
 type: post
 date: 2011-10-02T08:51:07+00:00
-url: /posts/怀揣信念.html
+url: /posts/faith.html
 categories:
   - 随笔
 tags:

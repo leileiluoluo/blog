@@ -3,7 +3,7 @@ title: 写给将要结婚的两位初中同学（二保和袅袅）
 author: olzhy
 type: post
 date: 2012-11-01T09:37:16+00:00
-url: /posts/写给将要结婚的两位初中同学（二保和袅袅）.html
+url: /posts/wish.html
 categories:
   - 随笔
 tags:
