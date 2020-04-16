@@ -28,27 +28,27 @@ wip_template:
 |56|[Merge Intervals](https://leetcode.com/problems/merge-intervals/)|合并区间|中|[Golang](/posts/leetcode-merge-intervals.html)|
 |59|[Spiral Matrix II](https://leetcode.com/problems/spiral-matrix-ii/)|螺旋矩阵 II|中|[Golang](/posts/leetcode-spiral-matrix-ii.html)|
 |60|[Permutation Sequence](https://leetcode.com/problems/permutation-sequence/)|求第k个排列|中|[Golang](/posts/leetcode-permutation-sequence.html)|
-|61|Rotate List|旋转链表|中|Golang|
-|71|Simplify Path|简化路径|中|Golang|
-|73|Set Matrix Zeroes|矩阵置零|中|Golang|
-|74|Search a 2D Matrix|二维矩阵搜索|中|Golang|
-|75|Sort Colors|颜色排序|中|Golang|
-|77|Combinations|组合|中|Golang|
-|81|Search in Rotated Sorted Array II|在旋转的排序数组搜索 II|中|Golang|
-|86|Partition List|分割链表|中|Golang|
-|91|Decode Ways|解码方式|中|Golang|
-|93|Restore IP Addresses|还原IP地址|中|Golang|
-|95|Unique Binary Search Trees II|不同的二叉搜索树 II|中|Golang|
-|96|Unique Binary Search Trees|不同的二叉搜索树|中|Golang|
-|98|Validate Binary Search Tree|校验二叉搜索树|中|Golang|
-|102|Binary Tree Level Order Traversal|二叉树层次遍历|中|Golang|
-|103|Binary Tree Zigzag Level Order Traversal|二叉树层次遍历|中|Golang|
-|106|Construct Binary Tree from Inorder...|根据中后序遍历构造二叉树|中|Golang|
-|130|Surrounded Regions|围起的区域|中|Golang|
-|143|Reorder List|重排链表|中|Golang|
-|144|Binary Tree Preorder Traversal|二叉树先序遍历|中|Golang|
-|145|Binary Tree Postorder Traversal|二叉树后序遍历|难|Golang|
-|151|Reverse Words in a String|将字符串中的单词翻转|中|Golang|
+|61|[Rotate List](https://leetcode.com/problems/rotate-list/)|旋转链表|中|[Golang](/posts/leetcode-rotate-list.html)|
+|71|[Simplify Path](https://leetcode.com/problems/simplify-path/)|简化路径|中|[Golang](/posts/leetcode-simplify-path.html)|
+|73|[Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/)|矩阵置零|中|[Golang](/posts/leetcode-set-matrix-zeroes.html)|
+|74|[Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)|二维矩阵搜索|中|[Golang](/posts/leetcode-search-a-2d-matrix.html)|
+|75|[Sort Colors](https://leetcode.com/problems/sort-colors/)|颜色排序|中|[Golang](/posts/leetcode-sort-colors.html)|
+|77|[Combinations](https://leetcode.com/problems/combinations/)|组合|中|[Golang](/posts/leetcode-combinations.html)|
+|81|[Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/)|在旋转的排序数组搜索 II|中|[Golang](/posts/search-in-rotated-sorted-array-ii.html)|
+|86|[Partition List](https://leetcode.com/problems/partition-list/)|分割链表|中|[Golang](/posts/leetcode-partition-list.html)|
+|91|[Decode Ways](https://leetcode.com/problems/decode-ways/)|解码方式|中|[Golang](/posts/leetcode-decode-ways.html)|
+|93|[Restore IP Addresses](https://leetcode.com/problems/restore-ip-addresses/)|还原IP地址|中|[Golang](/posts/leetcode-restore-ip-addresses.html)|
+|95|[Unique Binary Search Trees II](https://leetcode.com/problems/unique-binary-search-trees-ii/)|不同的二叉搜索树 II|中|[Golang](/posts/leetcode-unique-binary-search-trees-ii.html)|
+|96|[Unique Binary Search Trees](https://leetcode.com/problems/unique-binary-search-trees/)|不同的二叉搜索树|中|[Golang](/posts/leetcode-unique-binary-search-trees.html)|
+|98|[Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)|校验二叉搜索树|中|[Golang](/posts/leetcode-validate-binary-search-tree.html)|
+|102|[Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)|二叉树层次遍历|中|[Golang](/posts/leetcode-binary-tree-level-order-traversal.html)|
+|103|[Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)|二叉树层次遍历|中|[Golang](/posts/leetcode-binary-tree-zigzag-level-order-traversal.html)|
+|106|[Construct Binary Tree from Inorder...](https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/)|根据中后序遍历构造二叉树|中|[Golang](/posts/leetcode-construct-binary-tree-from-inorder-and-postorder-traversal.html)|
+|130|[Surrounded Regions](https://leetcode.com/problems/surrounded-regions/)|围起的区域|中|[Golang](/posts/leetcode-surrounded-regions.html)|
+|143|[Reorder List](https://leetcode.com/problems/reorder-list/)|重排链表|中|[Golang](/posts/leetcode-reorder-linked-list.html)|
+|144|[Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/)|二叉树先序遍历|中|[Golang](/posts/leetcode-binary-tree-preorder-traversal.html)|
+|145|[Binary Tree Postorder Traversal](https://leetcode.com/problems/binary-tree-postorder-traversal/)|二叉树后序遍历|难|[Golang](/posts/leetcode-binary-tree-postorder-traversal.html)|
+|151|[Reverse Words in a String](https://leetcode.com/problems/reverse-words-in-a-string/)|将字符串中的单词翻转|中|[Golang](/posts/leetcode-reverse-words-in-a-string.html)|
 |165|Compare Version Numbers|版本号比对|中|Golang|
 |198|House Robber|入室抢劫者|易|Golang|
 |199|Binary Tree Right Side View|二叉树右侧视角图|中|Golang|
