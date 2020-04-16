@@ -63,13 +63,13 @@ wip_template:
 |513|[Find Bottom Left Tree Value](https://leetcode.com/problems/find-bottom-left-tree-value/)|找出二叉树左下角节点的值|中|[Golang](/posts/leetcode-find-bottom-left-tree-value.html)|
 |515|[Find Largest Value in Each Tree Row](https://leetcode.com/problems/find-largest-value-in-each-tree-row/)|寻找二叉树每层的最大值|中|[Golang](/posts/leetcode-find-largest-value-in-each-tree-row.html)|
 |641|[Design Circular Deque](https://leetcode.com/problems/design-circular-deque/)|设计循环双端队列|中|[Golang](/posts/leetcode-design-circular-deque.html)|
-|701|Insert into a Binary Search Tree|二叉搜索树插入|中|Golang|
-|807|Max Increase to Keep City...|求保持城市现有天际线的最大增高|中|Golang|
-|856|Score of Parentheses|括号的分值|中|Golang|
-|885|Spiral Matrix III|螺旋矩阵 III|中|Golang|
-|889|Construct Binary Tree from...|以先序及后序遍历构建二叉树|中|Golang|
-|911|Online Election|在线选举|中|Golang|
-|946|Validate Stack Sequences|校验栈序列|中|Golang|
-|958|Check Completeness of a Binary Tree|检查二叉树的完整性|中|Golang|
-|981|Time Based Key-Value Store|基于时间的“键-值”存储|中|Golang|
-|1008|Construct Binary Search Tree...|以先序遍历构建二叉搜索树|中|Golang|
+|701|[Insert into a Binary Search Tree](https://leetcode.com/problems/insert-into-a-binary-search-tree/)|二叉搜索树插入|中|[Golang](/posts/leetcode-insert-into-a-binary-search-tree.html)|
+|807|[Max Increase to Keep City...](https://leetcode.com/problems/max-increase-to-keep-city-skyline/)|求保持城市现有天际线的最大增高|中|[Golang](/posts/leetcode-max-increase-to-keep-city-skyline.html)|
+|856|[Score of Parentheses](https://leetcode.com/problems/score-of-parentheses/)|括号的分值|中|[Golang](/posts/leetcode-score-of-parentheses.html)|
+|885|[Spiral Matrix III](https://leetcode.com/problems/spiral-matrix-iii/)|螺旋矩阵 III|中|[Golang](/posts/leetcode-spiral-matrix-iii.html)|
+|889|[Construct Binary Tree from...](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/)|以先序及后序遍历构建二叉树|中|[Golang](/posts/leetcode-construct-binary-tree-from-preorder-and-postorder-traversal.html)|
+|911|[Online Election](https://leetcode.com/problems/online-election/)|在线选举|中|[Golang](/posts/leetcode-online-election.html)|
+|946|[Validate Stack Sequences](https://leetcode.com/problems/validate-stack-sequences/)|校验栈序列|中|[Golang](/posts/leetcode-validate-stack-sequences.html)|
+|958|[Check Completeness of a Binary Tree](https://leetcode.com/problems/check-completeness-of-a-binary-tree/)|检查二叉树的完整性|中|[Golang](/posts/leetcode-check-completeness-of-a-binary-tree.html)|
+|981|[Time Based Key-Value Store](https://leetcode.com/problems/time-based-key-value-store/)|基于时间的“键-值”存储|中|[Golang](/posts/leetcode-time-based-key-value-store.html)|
+|1008|[Construct Binary Search Tree...](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/)|以先序遍历构建二叉搜索树|中|[Golang](/posts/leetcode-construct-binary-search-tree-from-preorder-traversal.html)|
