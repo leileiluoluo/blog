@@ -49,20 +49,20 @@ wip_template:
 |144|[Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/)|二叉树先序遍历|中|[Golang](/posts/leetcode-binary-tree-preorder-traversal.html)|
 |145|[Binary Tree Postorder Traversal](https://leetcode.com/problems/binary-tree-postorder-traversal/)|二叉树后序遍历|难|[Golang](/posts/leetcode-binary-tree-postorder-traversal.html)|
 |151|[Reverse Words in a String](https://leetcode.com/problems/reverse-words-in-a-string/)|将字符串中的单词翻转|中|[Golang](/posts/leetcode-reverse-words-in-a-string.html)|
-|165|Compare Version Numbers|版本号比对|中|Golang|
-|198|House Robber|入室抢劫者|易|Golang|
-|199|Binary Tree Right Side View|二叉树右侧视角图|中|Golang|
-|224|Basic Calculator|简单计算器|难|Golang|
-|338|Couting Bits|计算二进制数中1的个数|中|Golang|
-|355|Design Twitter|设计推特|中|Golang|
-|393|UTF-8 Validation|UTF-8编码校验|中|Golang|
-|413|Arithmetic Slices|等差数列切片|中|Golang|
-|451|Sort Characters By Frequency|以出现频次排序字符|中|Golang|
-|477|Total Hamming Distance|汉明距离总和|中|Golang|
-|508|Most Frequent Subtree Sum|高频子树和|中|Golang|
-|513|Find Bottom Left Tree Value|找出二叉树左下角节点的值|中|Golang|
-|515|Find Largest Value in Each Tree Row|寻找二叉树每层的最大值|中|Golang|
-|641|Design Circular Deque|设计循环双端队列|中|Golang|
+|165|[Compare Version Numbers](https://leetcode.com/problems/compare-version-numbers/)|版本号比对|中|[Golang](/posts/leetcode-compare-version-numbers.html)|
+|198|[House Robber](https://leetcode.com/problems/house-robber/)|入室抢劫者|易|[Golang](/posts/leetcode-house-robber.html)|
+|199|[Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)|二叉树右侧视角图|中|[Golang](/posts/leetcode-binary-tree-right-side-view.html)|
+|224|[Basic Calculator](https://leetcode.com/problems/basic-calculator/)|简单计算器|难|[Golang](/posts/leetcode-basic-calculator.html)|
+|338|[Couting Bits](https://leetcode.com/problems/counting-bits/)|计算二进制数中1的个数|中|[Golang](/posts/leetcode-counting-binary-bits.html)|
+|355|[Design Twitter](https://leetcode.com/problems/design-twitter/)|设计推特|中|[Golang](/posts/leetcode-design-twitter.html)|
+|393|[UTF-8 Validation](https://leetcode.com/problems/utf-8-validation/)|UTF-8编码校验|中|[Golang](/posts/leetcode-utf8-validation.html)|
+|413|[Arithmetic Slices](https://leetcode.com/problems/arithmetic-slices/)|等差数列切片|中|[Golang](/posts/leetcode-arithmetic-slices.html)|
+|451|[Sort Characters By Frequency](https://leetcode.com/problems/sort-characters-by-frequency/)|以出现频次排序字符|中|[Golang](/posts/leetcode-sort-characters-by-frequency.html)|
+|477|[Total Hamming Distance](https://leetcode.com/problems/total-hamming-distance/)|汉明距离总和|中|[Golang](/posts/leetcode-total-hamming-distance.html)|
+|508|[Most Frequent Subtree Sum](https://leetcode.com/problems/most-frequent-subtree-sum/)|高频子树和|中|[Golang](/posts/leetcode-most-frequent-subtree-sum.html)|
+|513|[Find Bottom Left Tree Value](https://leetcode.com/problems/find-bottom-left-tree-value/)|找出二叉树左下角节点的值|中|[Golang](/posts/leetcode-find-bottom-left-tree-value.html)|
+|515|[Find Largest Value in Each Tree Row](https://leetcode.com/problems/find-largest-value-in-each-tree-row/)|寻找二叉树每层的最大值|中|[Golang](/posts/leetcode-find-largest-value-in-each-tree-row.html)|
+|641|[Design Circular Deque](https://leetcode.com/problems/design-circular-deque/)|设计循环双端队列|中|[Golang](/posts/leetcode-design-circular-deque.html)|
 |701|Insert into a Binary Search Tree|二叉搜索树插入|中|Golang|
 |807|Max Increase to Keep City...|求保持城市现有天际线的最大增高|中|Golang|
 |856|Score of Parentheses|括号的分值|中|Golang|
