@@ -48,14 +48,19 @@ link = "js/search.js"
 
 # footer menu
 [[menu.footer]]
+URL = "leetcode-golang-implementations"
+name = "LeetCode"
+weight = 1
+
+[[menu.footer]]
 URL = "about"
 name = "关于本站"
-weight = 1
+weight = 2
 
 [[menu.footer]]
 URL = "links"
 name = "友情链接"
-weight = 2
+weight = 3
 
 
 
