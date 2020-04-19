@@ -71,8 +71,8 @@ home = ""
 # logo
 logo = "static/images/self/logo.svg"
 # meta data
-author = "Themefisher"
-description = "This is meta description"
+author = "磊磊落落"
+description = "磊磊落落的博客,是本人用于记录内心波澜,分享读书感想,思考人生哲学,关注社会百态,梳理专业知识的纯原创站点。"
 # google tag manager
 google_tag_manager = "" # your id
 # google analitycs ID
