@@ -29,7 +29,7 @@ tags:
 + E - Elevation of privilege 特权提升
 
 2014，Ryan提出DML（Detection Maturity Level，检测成熟等级）模型。该模型认为威胁者是一个威胁场景的实例，而一个威胁场景是指一个特定攻击者在脑海有了一个特定的攻击目标后使用各种策略以达到该目标。
-目标以及策略表示DML模型的最高语义学等级；而TTP（Tactics, Techniques and Procedures 手段，技术及程序）表示中间的语义学等级，攻击者使用的工具表示DML模型的最低语义学等级。
+目标以及策略表示DML模型的最高语义学等级；而TTP（Tactics, Techniques and Procedures 手段，技术及程序）表示中间的语义学等级；攻击者使用的工具表示DML模型的最低语义学等级。
 
 ### 威胁建模的方法
 
@@ -37,7 +37,7 @@ tags:
 
 + STRIDE
 
-微软1999年提出的该方法可为开发者提供一个找出“我们产品所面临威胁”的一个助记符。于此衍生出诸多模型，实践，数据流图等。
+微软1999年提出的该方法可为开发者提供找出“我们产品所面临威胁”的一个助记符。与此衍生出诸多模型，实践，数据流图等。
 
 + P.A.S.T.A.
 
@@ -49,4 +49,4 @@ Trike是一个将威胁模型看作风险管理工具的方法论。
 
 + VAST
 
-VAST（Visual, Agile, and Simple Threat modeling 可视化，敏捷及简化威胁建模）。其是一个将威胁建模贯穿整个SDLC（软件开发生命周期）且与敏捷软件开发无缝集成的方法论。
+VAST（Visual, Agile, and Simple Threat modeling 可视化，敏捷及简化威胁建模）。是一个将威胁建模贯穿整个SDLC（软件开发生命周期）且与敏捷软件开发无缝集成的方法论。
