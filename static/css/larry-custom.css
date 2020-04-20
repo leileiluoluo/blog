@@ -44,3 +44,7 @@ p, .paragraph {
 a.post-title {
     font-size: 22px !important;
 }
+
+.text-center.mt-4 {
+    font-size: 14px;
+}
