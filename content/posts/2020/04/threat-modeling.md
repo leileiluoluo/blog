@@ -50,3 +50,7 @@ Trike是一个将威胁模型看作风险管理工具的方法论。
 + VAST
 
 VAST（Visual, Agile, and Simple Threat modeling 可视化，敏捷及简化威胁建模）。是一个将威胁建模贯穿整个SDLC（软件开发生命周期）且与敏捷软件开发无缝集成的方法论。
+
+
+> 参考资料
+> [1] [https://en.wikipedia.org/wiki/Threat_model](https://en.wikipedia.org/wiki/Threat_model)
