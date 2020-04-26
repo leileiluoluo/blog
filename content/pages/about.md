@@ -2,7 +2,6 @@
 title: 关于本站
 author: olzhy
 type: page
-date: 2017-10-23T02:05:07+00:00
 url: /about
 wip_template:
   - right-sidebar
@@ -16,7 +15,7 @@ wip_template:
 
 **许可证**
   
-本站文章及图片采用[知识共享署名4.0许可证][1]进行许可，转载请注明原文出处。
+本站文章及图片采用[知识共享署名4.0许可证](https://creativecommons.org/licences/by/4.0)进行许可，转载请注明原文出处。
 
 **站长信箱**
   
@@ -24,6 +23,4 @@ mail#leileiluoluo.com （将#替换为@）
 
 **我的GitHub**
   
-<a href="https://github.com/olzhy" target="_blank">https://github.com/olzhy</a>
-
- [1]: https://creativecommons.org/licences/by/4.0
+[https://github.com/olzhy](https://github.com/olzhy)
