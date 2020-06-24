@@ -74,6 +74,7 @@ tags:
 样例：是否批准一个申请人的信用卡发放请求。
 
 申请人信息如下：
+
 ![](https://yanleilei.com/static/images/uploads/2020/06/machine-learning-foundation-applicant-information.png#center)
 
 如何描述学习问题：
@@ -93,9 +94,11 @@ tags:
 
 g为所有假设函数集合的一部分，机器学习算法即是从中找出最优的。
 机器学习模型即是基于数据将算法A与允许选择的假设H相结合，得出一个尽可能接近理想目标函数f的假设函数g。
+
 ![](https://yanleilei.com/static/images/uploads/2020/06/machine-learning-foundation-the-learning-model.png#center)
 
 下面例子是找出歌曲推荐系统中的输入x，输出y，数据D，假设集合H，假设函数g：
+
 ![](https://yanleilei.com/static/images/uploads/2020/06/machine-learning-foundation-song-recommendation.png#center)
 
 
