@@ -69,6 +69,38 @@ tags:
 
 ![](https://yanleilei.com/static/images/uploads/2020/06/a-possible-ml-solution-for-recommender-system.png#center)
 
+#### 1.4 学习的组成部分
+
+样例：是否批准一个申请人的信用卡发放请求。
+
+申请人信息如下：
+![](https://yanleilei.com/static/images/uploads/2020/06/machine-learning-foundation-applicant-information.png#center)
+
+如何描述学习问题：
+* x为输入：申请人信息；
+* y为输出：是否发放信用卡；
+* f为未知的目标函数：即潜藏的模式，一个理想的信用卡审批公式`f: x->y`；
+* D为数据：训练样本，历史收集的数据；
+* g为假设函数：越接近f越好，即使用`g: x->y`来衡量是否要发放信用卡。
+
+![](https://yanleilei.com/static/images/uploads/2020/06/machine-learning-foundation-basic-notations-for-learning-problem.png#center)
+
+信用卡是否发放场景的学习过程：
+* 未知的目标函数产生了诸多历史数据；
+* 机器学习通过某种学习算法得到最终的假设函数g，我们期待g与f越接近越好。
+
+![](https://yanleilei.com/static/images/uploads/2020/06/machine-learning-foundation-learning-flow-for-credit-approve.png#center)
+
+g为所有假设函数集合的一部分，机器学习算法即是从中找出最优的。
+机器学习模型即是基于数据将算法A与允许选择的假设H相结合，得出一个尽可能接近理想目标函数f的假设函数g。
+![](https://yanleilei.com/static/images/uploads/2020/06/machine-learning-foundation-the-learning-model.png#center)
+
+下面例子是找出歌曲推荐系统中的输入x，输出y，数据D，假设集合H，假设函数g：
+![](https://yanleilei.com/static/images/uploads/2020/06/machine-learning-foundation-song-recommendation.png#center)
+
+
+
+
 
 > 参考资料
 >
