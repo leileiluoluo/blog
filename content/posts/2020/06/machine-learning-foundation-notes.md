@@ -64,6 +64,7 @@ tags:
 电影推荐系统的一个可能的实现方案：
 * 电影具有哪些特征：喜剧片，动作片，大片，汤姆·克鲁斯主演…
 * 我喜欢的电影具有哪些特征：有多喜欢喜剧片？有多喜欢动作片？有多喜欢大片？有多喜欢汤姆·克鲁斯？…
+
 根据如上特征值进行匹配度计算。
 
 ![](https://yanleilei.com/static/images/uploads/2020/06/a-possible-ml-solution-for-recommender-system.png#center)
