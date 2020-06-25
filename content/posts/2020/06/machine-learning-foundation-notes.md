@@ -75,7 +75,7 @@ tags:
 
 申请人信息如下：
 
-![](https://yanleilei.com/static/images/uploads/2020/06/machine-learning-foundation-applicant-information.png#center)
+![](https://yanleilei.com/static/images/uploads/2020/06/1-machine-learning-foundation-applicant-information.png#center)
 
 如何描述学习问题：
 * x为输入：申请人信息；
@@ -84,22 +84,22 @@ tags:
 * D为数据：训练样本，历史收集的数据；
 * g为假设函数：越接近f越好，即使用`g: x->y`来衡量是否要发放信用卡。
 
-![](https://yanleilei.com/static/images/uploads/2020/06/machine-learning-foundation-basic-notations-for-learning-problem.png#center)
+![](https://yanleilei.com/static/images/uploads/2020/06/1-machine-learning-foundation-basic-notations-for-learning-problem.png#center)
 
 信用卡是否发放场景的学习过程：
 * 未知的目标函数产生了诸多历史数据；
 * 机器学习通过某种学习算法得到最终的假设函数g，我们期待g与f越接近越好。
 
-![](https://yanleilei.com/static/images/uploads/2020/06/machine-learning-foundation-learning-flow-for-credit-approve.png#center)
+![](https://yanleilei.com/static/images/uploads/2020/06/1-machine-learning-foundation-learning-flow-for-credit-approve.png#center)
 
 g为所有假设函数集合的一部分，机器学习算法即是从中找出最优的。
 机器学习模型即是基于数据将算法A与允许选择的假设H相结合，得出一个尽可能接近理想目标函数f的假设函数g。
 
-![](https://yanleilei.com/static/images/uploads/2020/06/machine-learning-foundation-the-learning-model.png#center)
+![](https://yanleilei.com/static/images/uploads/2020/06/1-machine-learning-foundation-the-learning-model.png#center)
 
 下面例子是找出歌曲推荐系统中的输入x，输出y，数据D，假设集合H，假设函数g：
 
-![](https://yanleilei.com/static/images/uploads/2020/06/machine-learning-foundation-song-recommendation.png#center)
+![](https://yanleilei.com/static/images/uploads/2020/06/1-machine-learning-foundation-song-recommendation.png#center)
 
 #### 1.5 机器学习及相关领域
 
@@ -117,6 +117,20 @@ g为所有假设函数集合的一部分，机器学习算法即是从中找出�
 * 统计学是使用数据对未知过程做推论；
 * 传统统计学注重数学推论，现使用统计学相关方法来实现机器学习。
 
+### 2 学习回答是与非
+
+#### 2.1 感知器假设集合
+
+重温1.4提到的信用卡发放问题。
+
+申请人信息可用多维向量表示，每个维度有一个对应的权值，假设函数h(x)为所有维度的权值与对应维度值乘积之和，超过某阈值则同意发放，否则拒绝发放。
+![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-a-simple-hypothesis-set.png#center)
+
+如下推算说明可将阈值看作是第0维的部分。这样h(x)可看作是第0维到第d维的权重与维度值的乘积之和。也可看作是w与x两个向量的乘积。
+![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-vector-form-of-perceptron-hypothesis.png#center)
+
+在二维空间h(x)是一条直线，在多维空间h(x)是一个超平面。感知器即是一个线性分类器。
+![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-perceptrons-in-r2.png#center)
 
 
 > 参考资料
