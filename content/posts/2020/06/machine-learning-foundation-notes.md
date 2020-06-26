@@ -145,24 +145,28 @@ g为所有假设函数集合的一部分，机器学习算法即是从中找出�
 
 ![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-practical-implementation-of-pla.png#center)
 
-下面演示一下该算法的调整过程：
+下面演示一下该算法的演进过程：
 * 原始数据
+
 ![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-0.png#center)
 
 * 第1轮：原点到x1构成初始向量
+
 ![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-1.png#center)
 
 * 第2轮：根据第1轮找到的法向量对应的直线对数据进行划分，发现x9被错判（本是圈，被错判为叉），则对下一轮w进行调整（与x9夹角小一点）
+
 ![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-2.png#center)
 
 * 第3轮：根据第2轮找到的法向量对应的直线对数据进行划分，发现x14被错判（本是叉，被错判为圈），则对下一轮w进行调整（与x14夹角大一点）
+
 ![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-3.png#center)
 
 * 以此类推，直至某一轮幸运的找到一条分割线。
+
 ![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-finally.png#center)
 
-但感知器学习算法的问题是不一定会找到演算停止的情形。
-
+但感知器学习算法的问题是并不一定会找到演算停止的情形。
 
 
 
