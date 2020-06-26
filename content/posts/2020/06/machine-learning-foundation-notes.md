@@ -135,6 +135,37 @@ g为所有假设函数集合的一部分，机器学习算法即是从中找出�
 
 ![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-perceptrons-in-r2.png#center)
 
+#### 2.2 感知器学习算法
+
+感知器学习算法是一个针对数据不断改进的算法，可能需要多轮演算及调整才可能找到一条满足条件的分割线。对于第t轮演算，若在该轮的第n个点发现错判（该轮的某个点的y值本来应为+1但算成了-1，说明w向量与x向量的夹角太大，造成内积太小；反之，若该轮某个点的y值本应为-1但算成了+1，说明w向量与x向量的夹角太小，造成内积太大），则将下一轮的w向量置为w+yx来进行改进（若y为+1，则为w+x，表示将w向量与x向量的夹角调整的小一点；若y为-1，则为w-x，表示将w向量与x向量的夹角调整的大一点）。
+
+![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-perceptron-learning-algorithm.png#center)
+
+该算法的实际运用中，可能需要多轮循环直至所有的点都满足条件。
+
+![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-practical-implementation-of-pla.png#center)
+
+下面演示一下该算法的调整过程：
+* 原始数据
+![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-0.png#center)
+
+* 第1轮：原点到x1构成初始向量
+![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-1.png#center)
+
+* 第2轮：根据第1轮找到的法向量对应的直线对数据进行划分，发现x9被错判（本是圈，被错判为叉），则对下一轮w进行调整（与x9夹角小一点）
+![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-2.png#center)
+
+* 第3轮：根据第2轮找到的法向量对应的直线对数据进行划分，发现x14被错判（本是叉，被错判为圈），则对下一轮w进行调整（与x14夹角大一点）
+![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-3.png#center)
+
+* 以此类推，直至某一轮幸运的找到一条分割线。
+![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-finally.png#center)
+
+但感知器学习算法的问题是不一定会找到演算停止的情形。
+
+
+
+
 
 > 参考资料
 >
