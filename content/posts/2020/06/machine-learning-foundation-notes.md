@@ -67,7 +67,7 @@ tags:
 
 根据如上特征值进行匹配度计算。
 
-![](https://yanleilei.com/static/images/uploads/2020/06/a-possible-ml-solution-for-recommender-system.png#center)
+![](https://yanleilei.com/static/images/uploads/2020/06/1-machine-learning-foundation-a-possible-ml-solution-for-recommender-system.png#center)
 
 #### 1.4 学习的组成部分
 
