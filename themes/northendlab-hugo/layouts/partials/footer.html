@@ -10,7 +10,7 @@
           <li class="list-inline-item"><a class="text-dark d-block p-2" href="{{ .URL | absURL }}">{{ .Name }}</a></li>
           {{ end }}
         </ul>
-      </div>      
+      </div>
       <div class="col-lg-4 text-lg-right text-center mb-4 mb-lg-0">
         <ul class="list-inline social-icon mb-0">
           {{ range .Site.Params.social }}
@@ -20,7 +20,9 @@
       </div>
     </div>
     <div class="text-center mt-4">
-      <span>{{ .Site.Params.copyright | markdownify }} | <script type="text/javascript" src="https://s4.cnzz.com/z_stat.php?id=1261214542&web_id=1261214542"></script></span>
+      <span>{{ .Site.Params.copyright | markdownify }} |
+        <script type="text/javascript" src="https://s4.cnzz.com/z_stat.php?id=1261214542&web_id=1261214542"></script>
+      </span>
     </div>
   </div>
 </footer>
@@ -59,7 +61,4 @@
   ga('create', '{{ . }}', 'auto');
   ga('send', 'pageview');
 </script>
-
-{{ "<!-- mathjax -->" | safeHTML }}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
 {{ end }}
