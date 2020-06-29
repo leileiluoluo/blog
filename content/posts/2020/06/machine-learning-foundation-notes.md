@@ -127,11 +127,11 @@ g为所有假设函数集合的一部分，机器学习算法即是从中找出�
 
 ![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-a-simple-hypothesis-set.png#center)
 
-如下推算说明可将阈值看作是第0维的部分。这样h(x)可看作是第0维到第d维的权重与维度值的乘积之和。也可看作是w与x两个向量的乘积。
+如下推算说明可将阈值看作是第0维的部分。这样`$\operatorname{h}(x)$`可看作是第0维到第d维的权重与维度值的乘积之和。也可看作是`$\pmb w$`与`$\pmb x$`两个向量的乘积。
 
 ![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-vector-form-of-perceptron-hypothesis.png#center)
 
-在二维空间h(x)是一条直线，在多维空间h(x)是一个超平面。感知器即是一个线性分类器。
+在二维空间`$\operatorname{h}(x)$`是一条直线，在多维空间`$\operatorname{h}(x)$`是一个超平面。感知器即是一个线性分类器。
 
 ![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-perceptrons-in-r2.png#center)
 
