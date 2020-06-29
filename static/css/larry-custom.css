@@ -3,16 +3,17 @@ h2 {
 }
 
 .content * {
-    margin-bottom: 10px !important;
+    margin-bottom: 2px !important;
     font-size: 16px;
+}
+
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+    margin-bottom: 10px !important;
+    margin-top: 10px !important;
 }
 
 img {
     width: 68%;
-}
-
-.content code {
-    color: #bf7d02 !important;
 }
 
 .section {
@@ -33,6 +34,7 @@ h2, .h2 {
 }
 
 .content code {
+    color: #e83e8c !important;
     padding: 2px 1px !important;
     border: 0px !important;
 }
