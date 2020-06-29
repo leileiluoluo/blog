@@ -80,9 +80,9 @@ tags:
 如何描述学习问题：
 * x为输入：申请人信息；
 * y为输出：是否发放信用卡；
-* f为未知的目标函数：即潜藏的模式，一个理想的信用卡审批公式`f: x->y`，test`$a \ne 0$`；
+* f为未知的目标函数：即潜藏的模式，一个理想的信用卡审批公式`$f:x \rightarrow y$`；
 * D为数据：训练样本，历史收集的数据；
-* g为假设函数：越接近f越好，即使用`g: x->y`来衡量是否要发放信用卡。
+* g为假设函数：越接近f越好，即使用`$g:x \rightarrow y$`来衡量是否要发放信用卡。
 
 ![](https://yanleilei.com/static/images/uploads/2020/06/1-machine-learning-foundation-basic-notations-for-learning-problem.png#center)
 
@@ -123,7 +123,7 @@ g为所有假设函数集合的一部分，机器学习算法即是从中找出�
 
 重温1.4提到的信用卡发放问题。
 
-申请人信息可用多维向量表示，每个维度有一个对应的权值，假设函数h(x)为所有维度的权值与对应维度值乘积之和，超过某阈值则同意发放，否则拒绝发放。
+申请人信息可用多维向量表示，每个维度有一个对应的权值，假设函数`$\operatorname{h}(x)$`为所有维度的权值与对应维度值乘积之和，超过某阈值则同意发放，否则拒绝发放。
 
 ![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-a-simple-hypothesis-set.png#center)
 
@@ -137,7 +137,7 @@ g为所有假设函数集合的一部分，机器学习算法即是从中找出�
 
 #### 2.2 感知器学习算法
 
-感知器学习算法是一个针对数据不断改进的算法，可能需要多轮演算及调整才可能找到一条满足条件的分割线。对于第t轮演算，若在该轮的第n个点发现错判（该轮的某个点的y值本来应为+1但算成了-1，说明w向量与x向量的夹角太大，造成内积太小；反之，若该轮某个点的y值本应为-1但算成了+1，说明w向量与x向量的夹角太小，造成内积太大），则将下一轮的w向量置为w+yx来进行改进（若y为+1，则为w+x，表示将w向量与x向量的夹角调整的小一点；若y为-1，则为w-x，表示将w向量与x向量的夹角调整的大一点）。
+感知器学习算法是一个针对数据不断改进的算法，可能需要多轮演算及调整才可能找到一条满足条件的分割线。对于第t轮演算，若在该轮的第n个点发现错判（该轮的某个点的`$y$`值本来应为+1但算成了-1，说明`$\pmb w$`向量与`$\pmb x$`向量的夹角太大，造成内积太小；反之，若该轮某个点的`$y$`值本应为-1但算成了+1，说明`$\pmb w$`向量与`$\pmb x$`向量的夹角太小，造成内积太大），则将下一轮的`$\pmb w$`向量置为`$\pmb w + y\pmb x$`来进行改进（若`$y$`为+1，则为`$\pmb w + \pmb x$`，表示将`$\pmb w$`向量与`$\pmb x$`向量的夹角调整的小一点；若`$y$`为-1，则为`$\pmb w - \pmb x$`，表示将`$\pmb w$`向量与`$\pmb x$`向量的夹角调整的大一点）。
 
 ![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-perceptron-learning-algorithm.png#center)
 
@@ -150,15 +150,15 @@ g为所有假设函数集合的一部分，机器学习算法即是从中找出�
 
 ![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-0.png#center)
 
-* 第1轮：原点到x1构成初始向量
+* 第1轮：原点到`$x_1$`构成初始向量
 
 ![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-1.png#center)
 
-* 第2轮：根据第1轮找到的法向量对应的直线对数据进行划分，发现x9被错判（本是圈，被错判为叉），则对下一轮w进行调整（与x9夹角小一点）
+* 第2轮：根据第1轮找到的法向量对应的直线对数据进行划分，发现`$x_9$`被错判（本是圈，被错判为叉），则对下一轮`$\pmb w$`进行调整（与`$x_9$`夹角小一点）
 
 ![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-2.png#center)
 
-* 第3轮：根据第2轮找到的法向量对应的直线对数据进行划分，发现x14被错判（本是叉，被错判为圈），则对下一轮w进行调整（与x14夹角大一点）
+* 第3轮：根据第2轮找到的法向量对应的直线对数据进行划分，发现`$x_14$`被错判（本是叉，被错判为圈），则对下一轮`$\pmb w$`进行调整（与`$x_14$`夹角大一点）
 
 ![](https://yanleilei.com/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-3.png#center)
 
