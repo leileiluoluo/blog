@@ -67,7 +67,7 @@ func reverseBetween(head *ListNode, m int, n int) *ListNode {
 		step--
 	}
 
-	// if exists leftPart?
+	// if exists left part?
 	if nil == leftTail {
 		midTail.Next = q
 		return p
