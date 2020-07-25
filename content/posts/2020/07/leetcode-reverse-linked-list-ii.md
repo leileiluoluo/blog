@@ -34,7 +34,7 @@ tags:
 
 ### 3 Golang实现代码
 
-[https://github.com/olzhy](https://github.com/olzhy/leetcode/blob/master/206_Reverse_Linked_List_II/test.go)
+[https://github.com/olzhy](https://github.com/olzhy/leetcode/blob/master/92_Reverse_Linked_List_II/test.go)
 
 ```go
 func reverseBetween(head *ListNode, m int, n int) *ListNode {
