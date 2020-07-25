@@ -37,6 +37,7 @@ wip_template:
 |81|[Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/)|在旋转的排序数组搜索 II|中|[Golang](/posts/search-in-rotated-sorted-array-ii.html)|
 |86|[Partition List](https://leetcode.com/problems/partition-list/)|分割链表|中|[Golang](/posts/leetcode-partition-list.html)|
 |91|[Decode Ways](https://leetcode.com/problems/decode-ways/)|解码方式|中|[Golang](/posts/leetcode-decode-ways.html)|
+|92|[Reverse Linked List II](https://leetcode.com/problems/reverse-linked-list-ii/)|解码方式|中|[Golang](/posts/leetcode-reverse-linked-list-ii.html)|
 |93|[Restore IP Addresses](https://leetcode.com/problems/restore-ip-addresses/)|还原IP地址|中|[Golang](/posts/leetcode-restore-ip-addresses.html)|
 |95|[Unique Binary Search Trees II](https://leetcode.com/problems/unique-binary-search-trees-ii/)|不同的二叉搜索树 II|中|[Golang](/posts/leetcode-unique-binary-search-trees-ii.html)|
 |96|[Unique Binary Search Trees](https://leetcode.com/problems/unique-binary-search-trees/)|不同的二叉搜索树|中|[Golang](/posts/leetcode-unique-binary-search-trees.html)|
