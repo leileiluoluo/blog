@@ -1,5 +1,5 @@
 ---
-title: LeetCode 92 反转链表II
+title: LeetCode 92 反转链表 II
 author: olzhy
 type: post
 date: 2020-07-25T09:20:35+00:00
