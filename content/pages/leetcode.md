@@ -39,6 +39,7 @@ wip_template:
 |91|[Decode Ways](https://leetcode.com/problems/decode-ways/)|解码方式|中|[Golang](/posts/leetcode-decode-ways.html)|
 |92|[Reverse Linked List II](https://leetcode.com/problems/reverse-linked-list-ii/)|反转链表 II|中|[Golang](/posts/leetcode-reverse-linked-list-ii.html)|
 |93|[Restore IP Addresses](https://leetcode.com/problems/restore-ip-addresses/)|还原IP地址|中|[Golang](/posts/leetcode-restore-ip-addresses.html)|
+|94|[Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/)|二叉树中序遍历|中|[Golang](/leetcode-binary-tree-inorder-traversal.html)|
 |95|[Unique Binary Search Trees II](https://leetcode.com/problems/unique-binary-search-trees-ii/)|不同的二叉搜索树 II|中|[Golang](/posts/leetcode-unique-binary-search-trees-ii.html)|
 |96|[Unique Binary Search Trees](https://leetcode.com/problems/unique-binary-search-trees/)|不同的二叉搜索树|中|[Golang](/posts/leetcode-unique-binary-search-trees.html)|
 |98|[Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)|校验二叉搜索树|中|[Golang](/posts/leetcode-validate-binary-search-tree.html)|
