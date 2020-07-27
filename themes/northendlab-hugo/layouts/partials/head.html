@@ -1,12 +1,13 @@
 <head>
   <meta charset="utf-8">
   <title>
-  {{- block "title" . -}}
+    {{- block "title" . -}}
     {{ if .IsPage }}{{ .Title }} - {{ .Site.Title }}{{ else }}{{ .Site.Title }}{{ end }}
-  {{- end -}}
+    {{- end -}}
   </title>
   {{ "<!-- mobile responsive meta -->" | safeHTML }}
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name='keywords' content="{{ delimit .Keywords ", " }}">
   <meta name="description"
     content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
   {{ with .Site.Params.author }}
