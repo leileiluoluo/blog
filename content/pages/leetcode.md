@@ -4,8 +4,16 @@ author: olzhy
 type: page
 date: 2019-07-19T00:01:14+00:00
 url: /leetcode-golang-implementations
-wip_template:
-  - right-sidebar
+categories:
+  - 计算机
+tags:
+  - Golang
+  - 算法
+keywords:
+  - LeetCode
+  - Golang
+  - 实现汇总
+description: LeetCode题目Golang实现汇总。
 
 ---
 ||||||
@@ -44,7 +52,7 @@ wip_template:
 |96|[Unique Binary Search Trees](https://leetcode.com/problems/unique-binary-search-trees/)|不同的二叉搜索树|中|[Golang](/posts/leetcode-unique-binary-search-trees.html)|
 |98|[Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)|校验二叉搜索树|中|[Golang](/posts/leetcode-validate-binary-search-tree.html)|
 |102|[Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)|二叉树层次遍历|中|[Golang](/posts/leetcode-binary-tree-level-order-traversal.html)|
-|103|[Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)|二叉树层次遍历|中|[Golang](/posts/leetcode-binary-tree-zigzag-level-order-traversal.html)|
+|103|[Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)|二叉树Z字形层次遍历|中|[Golang](/posts/leetcode-binary-tree-zigzag-level-order-traversal.html)|
 |106|[Construct Binary Tree from Inorder...](https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/)|根据中后序遍历构造二叉树|中|[Golang](/posts/leetcode-construct-binary-tree-from-inorder-and-postorder-traversal.html)|
 |130|[Surrounded Regions](https://leetcode.com/problems/surrounded-regions/)|围起的区域|中|[Golang](/posts/leetcode-surrounded-regions.html)|
 |143|[Reorder List](https://leetcode.com/problems/reorder-list/)|重排链表|中|[Golang](/posts/leetcode-reorder-linked-list.html)|
