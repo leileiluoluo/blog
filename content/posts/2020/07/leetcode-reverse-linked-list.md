@@ -4,13 +4,16 @@ author: olzhy
 type: post
 date: 2020-07-24T05:25:30+00:00
 url: /posts/leetcode-reverse-linked-list.html
-wip_template:
-  - right-sidebar
 categories:
   - 计算机
 tags:
   - Golang
   - 算法
+keywords:
+  - LeetCode
+  - Golang
+  - 链表
+description: LeetCode反转链表，Golang实现。
 
 ---
 ### 1 题目描述

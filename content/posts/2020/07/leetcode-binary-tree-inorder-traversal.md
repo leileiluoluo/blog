@@ -4,13 +4,16 @@ author: olzhy
 type: post
 date: 2020-07-26T12:15:21+08:00
 url: /posts/leetcode-binary-tree-inorder-traversal.html
-wip_template:
-  - right-sidebar
 categories:
   - 计算机
 tags:
   - Golang
   - 算法
+keywords:
+  - LeetCode
+  - Golang
+  - 二叉树
+description: LeetCode二叉树中序遍历，Golang实现。
 
 ---
 ### 1 题目描述
