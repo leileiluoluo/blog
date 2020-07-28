@@ -83,12 +83,12 @@ copyright = "Thanks [Hugo](https://gohugo.io/) & [NorthendLab](https://github.co
 
 # preloader
 [params.preloader]
-enable = false
+enable = true
 preloader = "" # use png, jpg, svg or gif format
 
 # search
 [params.search]
-enable = false
+enable = true
 
 
 ####################### banner #######################################
