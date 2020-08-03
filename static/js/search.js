@@ -23,14 +23,25 @@ if (searchQuery) {
   executeSearch(searchQuery);
 }
 
+function completeLoading() {
+  document.getElementById('loadingDiv').style.display = "none";
+}
 
+function showLoading() {
+  document.getElementById('loadingDiv').style.display = "block";
+}
 
 function executeSearch(searchQuery) {
+  var _LoadingHtml = '<div id="loadingDiv" style="display: none; "><div id="over" style=" position: absolute;top: 0;left: 0; width: 100%;height: 100%; background-color: #f5f5f5;opacity:0.5;z-index: 1000;"></div><div id="layout" style="position: absolute;top: 40%; left: 40%;width: 20%; height: 20%;  z-index: 1001;text-align:center;"><img src="/static/images/site/loading.gif" /></div></div>';
+  $('#search-results').append(_LoadingHtml);
+
+  showLoading();
   $.getJSON(indexURL, function (data) {
     var pages = data;
     var fuse = new Fuse(pages, fuseOptions);
     var result = fuse.search(searchQuery);
     console.log({ "matches": result });
+    completeLoading()
     if (result.length > 0) {
       populateResults(result);
     } else {
