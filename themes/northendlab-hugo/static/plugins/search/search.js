@@ -41,7 +41,7 @@ function executeSearch(searchQuery) {
     var fuse = new Fuse(pages, fuseOptions);
     var result = fuse.search(searchQuery);
     console.log({ "matches": result });
-    completeLoading()
+    completeLoading();
     if (result.length > 0) {
       populateResults(result);
     } else {
