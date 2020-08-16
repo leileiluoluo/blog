@@ -50,4 +50,16 @@
 
   {{ "<!--MathJax-->" | safeHTML }}
   {{ partial "mathjax.html" . }}
+
+
+  <!-- Baidu statistics -->
+  <script>
+    var _hmt = _hmt || [];
+    (function () {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5cb38f03da795f95e705ded6241c5b9a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 </head>
