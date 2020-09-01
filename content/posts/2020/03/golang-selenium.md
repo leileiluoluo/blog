@@ -120,7 +120,7 @@ func TestSearch(t *testing.T) {
 
 	// assert
 	elems, err := driver.FindElements(selenium.ByCSSSelector, "h3>a")
-	if nil != err || len(elems) &lt; 1 {
+	if nil != err || len(elems) < 1 {
 		t.Errorf("no search result, err: %s", err)
 	}
 
@@ -225,7 +225,7 @@ func setup() func() {
 func TestSearch(t *testing.T) {
 	sp := pages.NewSearchPage(driver)
 	count, err := sp.Search("istio")
-	if nil != err || count &lt; 1 {
+	if nil != err || count < 1 {
 		t.Errorf("search error, count: %d, err: %s", count, err)
 	}
 }
