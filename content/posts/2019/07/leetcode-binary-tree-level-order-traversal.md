@@ -27,9 +27,17 @@ tags:
    15   7
 ```
 
-输入：[3,9,20,null,null,15,7]
+输入：
+
+```
+[3,9,20,null,null,15,7]
+```
   
-输出：[[3],[9,20],[15,7]]
+输出：
+
+```
+[[3],[9,20],[15,7]]
+```
 
 题目出处：[LeetCode](https://leetcode.com/problems/binary-tree-level-order-traversal/)
 
