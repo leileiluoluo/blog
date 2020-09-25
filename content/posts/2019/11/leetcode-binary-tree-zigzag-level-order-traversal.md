@@ -19,7 +19,11 @@ tags:
 
 例子：
   
-输入：`[3,9,20,null,null,15,7]`
+输入：
+
+```
+[3,9,20,null,null,15,7]
+```
 
 ```
     3
@@ -29,7 +33,11 @@ tags:
    15   7
 ```
 
-输出：`[[3], [20,9], [15,7]]`
+输出：
+
+```
+[[3], [20,9], [15,7]]
+```
 
 题目出处：[LeetCode](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)
 
