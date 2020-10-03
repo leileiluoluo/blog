@@ -14,13 +14,11 @@ keywords:
 description: Golang text/template 包使用说明。
 
 ---
-Golang `text/template` 包是一个数据驱动的模版渲染工具。提供条件判断，数组或map遍历；参数赋值，函数或方法调用；自定义函数扩展，模板嵌套及重用等功能。基于该工具，可以轻松实现复杂场景的文本渲染。如`[Helm Template](https://helm.sh/docs/chart_template_guide/getting_started/)`基于此实现了功能强大的Kubernetes配置文件渲染工作。
+Golang `text/template` 包是一个数据驱动的模版渲染工具。提供条件判断，数组或map遍历；参数赋值，函数或方法调用；自定义函数扩展，模板嵌套及重用等功能。基于该工具，可以轻松实现复杂场景的文本渲染。如[Helm Template](https://helm.sh/docs/chart_template_guide/getting_started/)基于此实现了功能强大的Kubernetes配置文件渲染工作。
 
-本文使用一个样例来演示`text/template`的使用，代码已托管至GitHub。
+本文使用一个样例来演示`text/template`的使用，代码已托管至[GitHub](https://github.com/olzhy/go-excercises/blob/master/text_template/test.go)。
 
-[https://github.com/olzhy/go-excercises](https://github.com/olzhy/go-excercises/blob/master/text_template/test.go)
-
-样例代码：
+### 1 样例代码
 
 ```go
 package main
@@ -80,9 +78,9 @@ func main() {
 }
 ```
 
-运行结果：
+### 2 运行结果
 
-```
+```text
 Welcome to Beijing Zoo
 There are 3 animals, they are: 
 ELEPHANT,
