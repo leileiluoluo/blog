@@ -2,7 +2,7 @@
 title: Golang text/template 使用样例
 author: olzhy
 type: post
-date: 2020-10-03T10:00:10+08:00
+date: 2020-10-03T09:05:41+08:00
 url: /posts/golang-text-template.html
 categories:
   - 计算机
