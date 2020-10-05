@@ -75,6 +75,7 @@ description: LeetCode题目Golang实现汇总。
 |515|[Find Largest Value in Each Tree Row](https://leetcode.com/problems/find-largest-value-in-each-tree-row/)|寻找二叉树每层的最大值|中|[Golang](/posts/leetcode-find-largest-value-in-each-tree-row.html)|
 |641|[Design Circular Deque](https://leetcode.com/problems/design-circular-deque/)|设计循环双端队列|中|[Golang](/posts/leetcode-design-circular-deque.html)|
 |701|[Insert into a Binary Search Tree](https://leetcode.com/problems/insert-into-a-binary-search-tree/)|二叉搜索树插入|中|[Golang](/posts/leetcode-insert-into-a-binary-search-tree.html)|
+|707|[Design Linked List](https://leetcode.com/problems/design-linked-list/)|设计链表|中|[Golang, Python](/posts/leetcode-design-linked-list.html)|
 |807|[Max Increase to Keep City...](https://leetcode.com/problems/max-increase-to-keep-city-skyline/)|求保持城市现有天际线的最大增高|中|[Golang](/posts/leetcode-max-increase-to-keep-city-skyline.html)|
 |856|[Score of Parentheses](https://leetcode.com/problems/score-of-parentheses/)|括号的分值|中|[Golang](/posts/leetcode-score-of-parentheses.html)|
 |885|[Spiral Matrix III](https://leetcode.com/problems/spiral-matrix-iii/)|螺旋矩阵 III|中|[Golang](/posts/leetcode-spiral-matrix-iii.html)|
