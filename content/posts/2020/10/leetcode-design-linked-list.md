@@ -36,26 +36,27 @@ description: LeetCode 设计链表，Golang实现，Python实现。
 - `void deleteAtIndex(int index)` 用于在index合法的情况下删除链表的第index个节点。
 
 说明：
+
 - 0 <= index, val <= 1000
 - 请勿使用内置链表函数或类库
 - 如下方法最多会调用2000遍 （get，addAtHead，addAtTail，addAtIndex，deleteAtIndex）
 
 例如：
 
-a) 输入
+- 输入
 
 ```text
 ["MyLinkedList", "addAtHead", "addAtTail", "addAtIndex", "get", "deleteAtIndex", "get"]
 [[], [1], [3], [1, 2], [1], [1], [1]]
 ```
 
-b) 输出
+- 输出
 
 ```text
 [null, null, null, null, 2, null, 3]
 ```
 
-c) 释义
+- 释义
 
 ```text
 MyLinkedList myLinkedList = new MyLinkedList();
