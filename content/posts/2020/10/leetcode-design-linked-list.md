@@ -44,20 +44,20 @@ description: LeetCode 设计链表，Golang实现，Python实现。
 
 a) 输入
 
-```
+```text
 ["MyLinkedList", "addAtHead", "addAtTail", "addAtIndex", "get", "deleteAtIndex", "get"]
 [[], [1], [3], [1, 2], [1], [1], [1]]
 ```
 
 b) 输出
 
-```
+```text
 [null, null, null, null, 2, null, 3]
 ```
 
 c) 释义
 
-```
+```text
 MyLinkedList myLinkedList = new MyLinkedList();
 myLinkedList.addAtHead(1);
 myLinkedList.addAtTail(3);
