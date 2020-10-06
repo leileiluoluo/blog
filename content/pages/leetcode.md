@@ -54,6 +54,7 @@ description: LeetCode题目Golang,Python实现汇总。
 |98|[Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)|中|[Golang](/posts/leetcode-validate-binary-search-tree.html)|
 |102|[Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)|中|[Golang](/posts/leetcode-binary-tree-level-order-traversal.html)|
 |103|[Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)|中|[Golang](/posts/leetcode-binary-tree-zigzag-level-order-traversal.html)|
+|105|[Construct Binary Tree from Preorder...](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)|中|[Golang, Python](/posts/leetcode-construct-binary-tree-from-preorder-and-inorder-traversal.html)|
 |106|[Construct Binary Tree from Inorder...](https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/)|中|[Golang](/posts/leetcode-construct-binary-tree-from-inorder-ad-postorder-traversal.html)|
 |130|[Surrounded Regions](https://leetcode.com/problems/surrounded-regions/)|中|[Golang](/posts/leetcode-surrounded-regions.html)|
 |143|[Reorder List](https://leetcode.com/problems/reorder-list/)|中|[Golang](/posts/leetcode-reorder-linked-list.html)|
