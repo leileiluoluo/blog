@@ -40,27 +40,46 @@ link = "js/search.js"
 ########################### Navigation ###################################
 
 # main menu
-#[[menu.main]]
-#URL = "about"
-#name = "关于本站"
-#weight = 1
+[[menu.main]]
+URL = "/categories/随笔/"
+name = "随笔"
+weight = 1
+
+[[menu.main]]
+URL = "/categories/读书/"
+name = "读书"
+weight = 2
+
+[[menu.main]]
+URL = "/categories/观影/"
+name = "观影"
+weight = 3
+
+[[menu.main]]
+URL = "/categories/练字/"
+name = "练字"
+weight = 4
+
+[[menu.main]]
+URL = "/categories/计算机/"
+name = "计算机"
+weight = 5
 
 # footer menu
 [[menu.footer]]
-URL = "leetcode-golang-implementations"
+URL = "/leetcode-golang-implementations"
 name = "LeetCode"
 weight = 1
 
 [[menu.footer]]
-URL = "about"
+URL = "/about"
 name = "关于本站"
 weight = 2
 
 [[menu.footer]]
-URL = "links"
+URL = "/links"
 name = "友情链接"
 weight = 3
-
 
 
 ######################### Default Parameters ###########################
@@ -71,7 +90,7 @@ home = ""
 logo = "static/images/self/logo.svg"
 # meta data
 author = "磊磊落落"
-description = "磊磊落落的博客,是本人用于记录内心波澜,分享读书感想,思考人生哲学,关注社会百态,梳理专业知识的纯原创站点。"
+description = "磊磊落落的博客，是本人用于记录内心波澜，分享读书感想，思考人生哲学，关注社会百态，梳理专业知识的纯原创站点。"
 # google tag manager
 google_tag_manager = "" # your id
 # google analitycs ID
@@ -89,7 +108,6 @@ preloader = "" # use png, jpg, svg or gif format
 # search
 [params.search]
 enable = true
-
 
 ####################### banner #######################################
 [params.banner]
