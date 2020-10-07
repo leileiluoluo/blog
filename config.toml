@@ -130,6 +130,6 @@ link = "https://gethugothemes.com/shop/"
 
 
 ############################## Social Site ##########################
-[[params.social]]
-icon = "ti-github" # themify icon pack https://themify.me/themify-icons
-link = "https://github.com/olzhy"
+#[[params.social]]
+#icon = "ti-github" # themify icon pack https://themify.me/themify-icons
+#link = "https://github.com/olzhy"
