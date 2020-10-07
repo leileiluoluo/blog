@@ -24,7 +24,7 @@ img {
 
 .section {
     padding-top: 0px !important;
-    padding-bottom: 40px !important;
+    padding-bottom: 0px !important;
 }
 
 a.navbar-brand {
@@ -32,7 +32,7 @@ a.navbar-brand {
 }
 
 .mb-5, .my-5 {
-    margin-bottom: 3rem !important;
+    margin-bottom: 2rem !important;
 }
 
 h2, .h2 {
@@ -71,4 +71,12 @@ td {
 
 .mt-4, .my-4 {
     margin-top: 1.0rem !important;
+}
+
+.col-lg-8 {
+    margin-bottom: 0px !important;
+}
+
+.block {
+    padding: 50px 50px 20px;
 }
