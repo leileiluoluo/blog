@@ -80,3 +80,7 @@ td {
 .block {
     padding: 50px 50px 20px;
 }
+
+ul.pagination.justify-content-center.align-items-center {
+    margin-bottom: 0px !important;
+}
