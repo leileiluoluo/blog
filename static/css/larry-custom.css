@@ -70,7 +70,7 @@ td {
 }
 
 .mt-4, .my-4 {
-    margin-top: 0.2rem !important;
+    margin-top: 2rem !important;
 }
 
 .col-lg-8 {
@@ -79,4 +79,8 @@ td {
 
 .block {
     padding: 50px 50px 20px;
+}
+
+ul.pagination.justify-content-center.align-items-center {
+    margin-bottom: 0px !important;
 }
