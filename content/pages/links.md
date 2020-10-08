@@ -47,6 +47,11 @@ wip_template:
   * [Dave Cheney](https://dave.cheney.net)
   * [Jing blog](https://jingine.com/)
 
+**机器学习相关**
+
+  * [刘建平Pinard](https://www.cnblogs.com/pinard/)
+  * [Eureka机器学习读书笔记](https://www.zhihu.com/column/xiadayj)
+
 **Golang相关**
 
   * [Golang](https://golang.org/)
