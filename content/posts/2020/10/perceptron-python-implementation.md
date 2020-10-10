@@ -9,11 +9,13 @@ categories:
 tags:
   - 机器学习
   - Python
+  - 算法
 keywords:
   - Perceptron
   - 感知机
   - 机器学习
   - Python
+  - 算法
 description: 感知机Perceptron算法的Python实现。
 
 ---
