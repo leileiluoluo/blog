@@ -188,7 +188,7 @@ times: 6, xi: [1, 1], yi: -1, y_predict: -1, _w: [-6.0, 2.0, 2.0]
 
 下面使用3中的代码对[iris(鸢尾花)](https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data)数据集进行训练及预测。该数据集共包含三类鸢尾花品种，因Perceptron模型是一个仅支持二分类的分类器。所以仅选取该数据集中的两类数据（Iris-setosa与Iris-versicolor）进行训练及预测（该两类数据均有50条，分别取Iris-setosa与Iris-versicolor的前40条作为训练样本，分别取两类数据的后10条作为预测样本）。
 
-调用Perceptron的代码如下：
+测试代码，测试数据，与Perceptron模型代码（perceptron.py）的目录结构如下：
 
 ```text
 $ tree .
@@ -198,6 +198,8 @@ test.py
 iris.data
 predict.data
 ```
+
+调用Perceptron的代码如下：
 
 ```text
 cat test.py
