@@ -1,5 +1,5 @@
 ---
-title: 感知机算法的Python实现
+title: 感知机算法及Python实现
 author: olzhy
 type: post
 date: 2020-10-10T11:29:15+08:00
@@ -16,7 +16,7 @@ keywords:
   - 机器学习
   - Python
   - 算法
-description: 感知机Perceptron算法的Python实现。
+description: 感知机Perceptron算法及Python实现。
 
 ---
 ### 1 何为感知机？
