@@ -230,9 +230,9 @@ if '__main__' == __name__:
             print('predict label: {}, real: {}'.format(p.predict(xi), yi))
 ```
 
-观察输出可以发现，Perceptron模型经过4轮迭代找到合适的权重向量，然后对20条测试数据预测准确无误。
+观察输出可以发现，该Perceptron算法经过4轮迭代找到合适的权重向量，然后采用训练的模型对20条测试数据进行预测，结果准确无误。
 
-本文代码已托管至[GitHub](https://github.com/olzhy/machine-learning/tree/main/perceptron)。
+本文代码已托管至[GitHub](https://github.com/olzhy/machine-learning/tree/main/perceptron)，欢迎Fork。
 
 
 > 参考资料
