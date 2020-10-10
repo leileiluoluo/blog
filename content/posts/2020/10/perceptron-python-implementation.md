@@ -143,7 +143,7 @@ class Perceptron:
         return 1 if self._predict(xi) >= 0 else -1
 ```
 
-下面使用Perceptron类对二维样本输入X={(3, 3), (4, 3), (1, 1)}，输出Y={1, 1, -1}进行简单的分类：
+下面使用该Perceptron模型对仅有两个维度的样本输入X={(3, 3), (4, 3), (1, 1)}，输出Y={1, 1, -1}进行划分：
 
 ```text
 $ cat test.py
