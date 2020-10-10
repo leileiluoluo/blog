@@ -75,7 +75,7 @@ $f(z)=\left\{\begin{matrix} 1, z\geq 0
 - `_predict` 计算权重向量_w与某个样本输入xi向量点积值的私有方法，返回值为float类型；
 - `predict` 调用`_predict`算得点积值后判断其是否非负，若非负返回+1，否则返回-1，返回值为int类型。该方法可供`fit`方法在训练时使用，亦可在训练成功后，使用其对新的输入进行预测。
 
-```
+```python
 from typing import List
 
 
