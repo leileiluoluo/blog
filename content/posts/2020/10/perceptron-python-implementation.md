@@ -192,7 +192,6 @@ times: 6, xi: [1, 1], yi: -1, y_predict: -1, _w: [-6.0, 2.0, 2.0]
 
 ```text
 $ tree .
-
 perceptron.py
 test.py
 iris.data
@@ -202,7 +201,7 @@ predict.data
 调用Perceptron的代码如下：
 
 ```text
-cat test.py
+$ cat test.py
 ```
 
 ```python
