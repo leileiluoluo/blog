@@ -37,7 +37,8 @@ $f(z)=\left\{\begin{matrix} 1, z\geq \theta
 
 下面，试着将`$\theta$`并入线性方程，让`$z$`看起来更紧凑一点：
 `
-$z = w_{1} x_{1} + w_{2} x_{2} + , ... , w_{n} x_{n} - \theta = w_{1} x_{1} + w_{2} x_{2} + , ... , w_{n} x_{n} + (-\theta) * 1$
+$z = w_{1} x_{1} + w_{2} x_{2} + , ... , w_{n} x_{n} - \theta \\
+z = w_{1} x_{1} + w_{2} x_{2} + , ... , w_{n} x_{n} + (-\theta) * 1$
 `
 
 这样，将`$-\theta$`当作`$w_{0}$`，1当作`$x_{0}$`，上式即可变为：
@@ -45,7 +46,12 @@ $z = w_{1} x_{1} + w_{2} x_{2} + , ... , w_{n} x_{n} - \theta = w_{1} x_{1} + w_
 
 几何上为`$\boldsymbol{w}$`与`$\boldsymbol{x}$`两个向量的内积。
 
-
+符号函数`$f(z)$`变为：
+`
+$f(z)=\left\{\begin{matrix} 1, z\geq 0
+&\\-1, z< 0
+\end{matrix}\right.$
+`
 
 ### 2 感知机学习算法
 
