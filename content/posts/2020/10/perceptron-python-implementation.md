@@ -74,8 +74,8 @@ $f(z)=\left\{\begin{matrix} 1, z\geq 0
 
 - `__init__` 构造方法，新建Perceptron对象时可指定学习率eta及最大迭代次数max_iter；
 - `fit` 训练方法，根据样本输入x（N个n维向量）及样本输出y（N个由+1或-1组成的数值）对n维权重向量_w进行计算，若在最大迭代次数max_iter内找到合适的_w可将样本数据集进行正确划分，则退出，否则，若已达到最大迭代次数仍未找到合适的_w，则训练失败并退出；
-- `_predict` 计算权重向量_w与某个样本输入xi向量点积值的私有方法，返回值为float类型；
-- `predict` 调用`_predict`算得点积值后判断其是否非负，若非负返回+1，否则返回-1，返回值为int类型。该方法可供`fit`方法在训练时使用，亦可在训练成功后，使用其对新的输入进行预测。
+- `_predict` 计算权重向量_w与某个样本输入xi向量点积的私有方法，返回值为float类型；
+- `predict` 调用`_predict`算得两向量的点积后判断其是否非负，若非负返回+1，否则返回-1，返回值为int类型。该方法可供`fit`方法在训练时使用，亦可在训练成功后，使用其对新的输入进行预测。
 
 ```text
 $ cat perceptron.py
@@ -186,7 +186,7 @@ times: 6, xi: [1, 1], yi: -1, y_predict: -1, _w: [-6.0, 2.0, 2.0]
 
 ### 4 对Iris数据集进行训练及预测
 
-下面使用3中的代码对[iris(鸢尾花)](https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data)数据集进行训练及预测。该数据集共包含三类鸢尾花品种，因Perceptron模型是一个仅支持二分类的分类器。所以仅选取该数据集中的两类数据（Iris-setosa与Iris-versicolor）进行训练及预测（该两类数据均有50条，分别取Iris-setosa与Iris-versicolor的前40条作为训练样本，分别取两类数据的后10条作为预测样本）。
+下面使用3中的代码对[iris(鸢尾花)](https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data)数据集进行训练及预测。该数据集共包含三类鸢尾花品种，因Perceptron模型是一个仅支持二分类的分类器。所以仅选取该数据集中的两类数据（Iris-setosa与Iris-versicolor）进行训练及预测（该两类数据均有50条，分别取两者的前40条作为训练样本，分别取两者的后10条作为预测样本）。
 
 测试代码，测试数据，与Perceptron模型代码（perceptron.py）的目录结构如下：
 
