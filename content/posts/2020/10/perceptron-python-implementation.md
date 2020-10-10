@@ -68,9 +68,74 @@ $f(z)=\left\{\begin{matrix} 1, z\geq 0
 
 ### 3 感知机学习算法的Python实现
 
-下面使用Python对如上感知机学习算法进行实现。
+下面使用Python对如上感知机学习算法进行实现，Perceptron类包含如下几个方法。
+
+- `__init__` 构造方法，新建Perceptron对象时可指定学习率eta及最大迭代次数max_iter；
+- `fit` 训练方法，根据样本输入x（N个n维向量）及样本输出y（N个由+1或-1组成的数值）对n维权重向量_w进行计算，若在最大迭代次数max_iter内找到合适的_w可将样本数据集进行正确划分，则退出，否则，若已达到最大迭代次数仍未找到合适的_w，则训练失败并退出；
+- `_predict` 计算权重向量_w与某个样本输入xi向量点积值的私有方法，返回值为float类型；
+- `predict` 调用`_predict`算得点积值后判断其是否非负，若非负返回+1，否则返回-1，返回值为int类型。该方法可供`fit`方法在训练时使用，亦可在训练成功后，使用其对新的输入进行预测。
+
+```
+from typing import List
 
 
+class Perceptron:
+    """
+    Perceptron binary classifier
+    """
+
+    def __init__(self, eta: float = 1.0, max_iter: int = 1000):
+        """
+        Perceptron constructor
+        :param eta: 0 < eta <= 1.0
+        :param max_iter: max iteration
+        """
+        self.eta = eta
+        self.max_iter = max_iter
+
+    def fit(self, x: List[List[float]], y: List[int]) -> None:
+        """
+        Fit is used to data training
+        after the execution, _w (weight vector) will be produced
+        :param x: input, vector list
+        :param y: output, class label list
+        :return:  None
+        """
+        if len(x) <= 0:
+            return
+
+        self._w = [0] * (len(x[0]) + 1)  # initialize weight vector to zeros
+        times = 0
+        while times < self.max_iter:
+            times += 1
+            errors = 0
+            for xi, yi in zip(x, y):
+                y_predict = self.predict(xi)
+                print('times: {}, xi: {}, yi: {}, y_predict: {}, _w: {}'.format(times, xi, yi, y_predict, self._w))
+                if yi - y_predict != 0:
+                    errors += 1
+                    for i in range(len(xi)):  # update vector w
+                        self._w[i + 1] += self.eta * (yi - y_predict) * xi[i]
+                    self._w[0] += self.eta * (yi - y_predict)
+            if 0 == errors:
+                break
+
+    def _predict(self, xi: List[float]) -> float:
+        """
+        Calculate the predictive value for a single sample input xi
+        :param x: a single sample input xi
+        :return: dot product of vector _w and xi
+        """
+        return sum([self._w[i + 1] * xi[i] for i in range(len(xi))]) + self._w[0]
+
+    def predict(self, xi: List[float]) -> int:
+        """
+        Predict xi belongs to class +1 or -1
+        :param xi: a single sample input xi
+        :return: class +1 or -1
+        """
+        return 1 if self._predict(xi) >= 0 else -1
+```
 
 ### 4 对Iris数据集进行训练及预测
 
