@@ -75,6 +75,10 @@ $f(z)=\left\{\begin{matrix} 1, z\geq 0
 - `_predict` 计算权重向量_w与某个样本输入xi向量点积值的私有方法，返回值为float类型；
 - `predict` 调用`_predict`算得点积值后判断其是否非负，若非负返回+1，否则返回-1，返回值为int类型。该方法可供`fit`方法在训练时使用，亦可在训练成功后，使用其对新的输入进行预测。
 
+```text
+$ cat perceptron.py
+```
+
 ```python
 from typing import List
 
@@ -111,12 +115,12 @@ class Perceptron:
             errors = 0
             for xi, yi in zip(x, y):
                 y_predict = self.predict(xi)
-                print('times: {}, xi: {}, yi: {}, y_predict: {}, _w: {}'.format(times, xi, yi, y_predict, self._w))
                 if yi - y_predict != 0:
                     errors += 1
                     for i in range(len(xi)):  # update vector w
                         self._w[i + 1] += self.eta * (yi - y_predict) * xi[i]
                     self._w[0] += self.eta * (yi - y_predict)
+                print('times: {}, xi: {}, yi: {}, y_predict: {}, _w: {}'.format(times, xi, yi, y_predict, self._w))
             if 0 == errors:
                 break
 
@@ -137,7 +141,94 @@ class Perceptron:
         return 1 if self._predict(xi) >= 0 else -1
 ```
 
+下面使用Perceptron类对二维样本输入X={(3, 3), (4, 3), (1, 1)}，输出Y={1, 1, -1}进行简单的分类：
+
+```text
+$ cat test.py
+```
+
+```python
+#!/usr/bin/env python3
+import perceptron
+
+if '__main__' == __name__:
+    p = perceptron.Perceptron(eta=1.0, max_iter=100)
+
+    x = [[3, 3], [4, 3], [1, 1]]
+    y = [1, 1, -1]
+    p.fit(x, y)
+```
+
+根据如下打印结果可以看到，该算法经过5轮，15次判断，6次权重调整后得到一个可将样本数据正确划分的权重向量。
+
+```text
+times: 1, xi: [3, 3], yi: 1, y_predict: 1, _w: [0, 0, 0]
+times: 1, xi: [4, 3], yi: 1, y_predict: 1, _w: [0, 0, 0]
+times: 1, xi: [1, 1], yi: -1, y_predict: 1, _w: [-2.0, -2.0, -2.0]
+times: 2, xi: [3, 3], yi: 1, y_predict: -1, _w: [0.0, 4.0, 4.0]
+times: 2, xi: [4, 3], yi: 1, y_predict: 1, _w: [0.0, 4.0, 4.0]
+times: 2, xi: [1, 1], yi: -1, y_predict: 1, _w: [-2.0, 2.0, 2.0]
+times: 3, xi: [3, 3], yi: 1, y_predict: 1, _w: [-2.0, 2.0, 2.0]
+times: 3, xi: [4, 3], yi: 1, y_predict: 1, _w: [-2.0, 2.0, 2.0]
+times: 3, xi: [1, 1], yi: -1, y_predict: 1, _w: [-4.0, 0.0, 0.0]
+times: 4, xi: [3, 3], yi: 1, y_predict: -1, _w: [-2.0, 6.0, 6.0]
+times: 4, xi: [4, 3], yi: 1, y_predict: 1, _w: [-2.0, 6.0, 6.0]
+times: 4, xi: [1, 1], yi: -1, y_predict: 1, _w: [-4.0, 4.0, 4.0]
+times: 5, xi: [3, 3], yi: 1, y_predict: 1, _w: [-4.0, 4.0, 4.0]
+times: 5, xi: [4, 3], yi: 1, y_predict: 1, _w: [-4.0, 4.0, 4.0]
+times: 5, xi: [1, 1], yi: -1, y_predict: 1, _w: [-6.0, 2.0, 2.0]
+times: 6, xi: [3, 3], yi: 1, y_predict: 1, _w: [-6.0, 2.0, 2.0]
+times: 6, xi: [4, 3], yi: 1, y_predict: 1, _w: [-6.0, 2.0, 2.0]
+times: 6, xi: [1, 1], yi: -1, y_predict: -1, _w: [-6.0, 2.0, 2.0]
+```
+
 ### 4 对Iris数据集进行训练及预测
+
+下面使用3中的代码对[iris(鸢尾花)](https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data)数据集进行训练及预测。该数据集共包含三类鸢尾花品种，因我们的Perceptron模型是一个二分类分类器。所以仅选取该数据集中的两类数据（Iris-setosa与Iris-versicolor）进行训练及预测（因该两类数据均有50条，分别取Iris-setosa与Iris-versicolor的前40条作为训练样本，分别取后10条作为预测样例）。
+
+调用Perceptron的代码如下：
+
+```text
+$ tree .
+
+perceptron.py
+test.py
+iris.data
+predict.data
+```
+
+```text
+cat test.py
+```
+
+```python
+#!/usr/bin/env python3
+import perceptron
+import csv
+
+if '__main__' == __name__:
+    # perceptron instance
+    p = perceptron.Perceptron(eta=1.0, max_iter=100)
+
+    # training
+    x = []
+    y = []
+    with open('iris.data') as f:
+        for sample in csv.reader(f):
+            x.append([float(i) for i in sample[:4]])
+            y.append(1 if sample[4] == 'Iris-setosa' else -1)
+    p.fit(x, y)
+
+    # predict
+    with open('predict.data') as f:
+        for sample in csv.reader(f):
+            xi, yi = [float(i) for i in sample[:4]], sample[4]
+            print('predict label: {}, real: {}'.format(p.predict(xi), yi))
+```
+
+观察输出可以发现，Perceptron模型经过4轮迭代找到合适的权重向量，然后对20条测试数据预测准确无误。
+
+本文代码已托管至[GitHub](https://github.com/olzhy/machine-learning/tree/main/perceptron)。
 
 
 > 参考资料
