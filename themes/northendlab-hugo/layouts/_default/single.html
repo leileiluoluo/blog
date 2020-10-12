@@ -6,8 +6,10 @@
       <div class="col-lg-8 mx-auto block shadow mb-5">
         <h2>{{ .Title | markdownify }}</h2>
         <div class="mb-3 post-meta">
-          {{ .PublishDate.Format "2006年01月02日" }}  {{ range .Params.Categories }}
+          {{ if ne .Params.Type "page" }}
+          {{ .PublishDate.Format "2006年01月02日" }} {{ range .Params.Categories }}
           <a href="{{ `categories/` | relLangURL }}{{ . | urlize | lower }}">{{ . | title | humanize }}</a>
+          {{ end }}
           {{ end }}
         </div>
         {{ if .Params.Image }}
@@ -16,20 +18,27 @@
         <div class="content mb-5">
           {{ .Content }}
         </div>
-	<div class="content-footer">
-      {{ with .Params.tags -}}
-        <div class="post-tags">
-          {{ range . -}}
+        <div class="content-footer">
+          {{ with .Params.tags -}}
+          <div class="post-tags">
+            {{ range . -}}
             <a href="{{ "tags" | relLangURL }}/{{ . | urlize }}/">#{{ . }}</a>
-          {{ end -}}
-        </div>
-      {{- end -}}
+            {{ end -}}
+          </div>
+          {{- end -}}
         </div>
       </div>
       {{ if .Site.DisqusShortname}}
       <div class="col-lg-8 mx-auto block shadow">
         <!-- comments -->
         {{ template "_internal/disqus.html" . }}
+      </div>
+      {{ end }}
+
+      {{ if .Site.Params.reward.enable }}
+      <div class="col-lg-8 mx-auto block shadow">
+        <!-- reward -->
+        {{ template "partials/reward.html" . }}
       </div>
       {{ end }}
     </div>
