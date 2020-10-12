@@ -91,7 +91,7 @@ logo = "static/images/self/logo.svg"
 # meta data
 author = "磊磊落落"
 keywords = ["Golang", "Python", "机器学习", "LeetCode", "技术博客"]
-description = "磊磊落落的博客，是本人用于记录内心波澜，分享读书感想，思考人生哲学，关注社会百态，梳理计算机专业知识的纯原创站点。"
+description = "磊磊落落，是本人用于记录内心波澜，分享读书感想，思考人生哲学，关注社会百态，梳理计算机专业知识的纯原创站点。"
 # google tag manager
 google_tag_manager = "" # your id
 # google analitycs ID
