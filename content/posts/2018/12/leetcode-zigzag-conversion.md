@@ -17,7 +17,7 @@ tags:
   
 给定字符串，以Z字形显示。如"PAYPALISHIRING"以给定行数为3的Z字形显示为：
   
-![](https://yanleilei.com/static/images/uploads/2018/12/zigzag-conversion-eg1.png)
+![](https://olzhy.github.io/static/images/uploads/2018/12/zigzag-conversion-eg1.png)
   
 然后从左到右一行一行拼起来为："PAHNAPLSIIGYIR"。
 
@@ -37,7 +37,7 @@ tags:
 
 释义：
   
-![](https://yanleilei.com/static/images/uploads/2018/12/zigzag-conversion-eg2.png)
+![](https://olzhy.github.io/static/images/uploads/2018/12/zigzag-conversion-eg2.png)
 
 题目出处：
   
@@ -47,7 +47,7 @@ tags:
   
 如下图所示：
 
-![](https://yanleilei.com/static/images/uploads/2018/12/zigzag-conversion.png)
+![](https://olzhy.github.io/static/images/uploads/2018/12/zigzag-conversion.png)
   
 a）最顶部和最底部水平方向两字母之间最大间隔maxInterval为2 * (numRows-1)；
 

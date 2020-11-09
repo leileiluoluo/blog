@@ -36,7 +36,7 @@ tags:
 
 实践中也是这样做的，如我们使用Git来托管代码，一个应用使用一个仓库，不同的应用不应使用一个仓库，而是将依赖关系拆出来，然后分成不同的仓库。每到一个版本开发完毕，我们在仓库上打Tag或者新建Release分支，然后逐步升级开发，测试，类生产，生产环境。
 
-![](https://yanleilei.com/static/images/uploads/2020/03/12-factor-app-codebase.png#center)
+![](https://olzhy.github.io/static/images/uploads/2020/03/12-factor-app-codebase.png#center)
 
 **II 依赖**
   
@@ -94,7 +94,7 @@ tags:
 
 每一个后端服务即是一个资源。两个MySQL实例即是两个资源，其与部署环境是解耦的。资源是可以随部署意愿进行附加或移除的。如生产环境应用使用的一个数据库实例坏掉了，那管理员可以基于其最近一次备份新建一个新的实例顶上去，而无需变更代码。
 
-![](https://yanleilei.com/static/images/uploads/2020/03/12-factor-app-backing-service.png)
+![](https://olzhy.github.io/static/images/uploads/2020/03/12-factor-app-backing-service.png)
 
 **V 构建，发布及运行**
   
@@ -116,7 +116,7 @@ tags:
 
 十二因子指导原则严格将构建，发布，运行阶段分离。诸如，我们无法在运行阶段修改代码，因我们无法将这些变更传回到构建阶段。
 
-![](https://yanleilei.com/static/images/uploads/2020/03/12-factor-app-build-run.png)
+![](https://olzhy.github.io/static/images/uploads/2020/03/12-factor-app-build-run.png)
 
 一些典型的提供发布管理的工具，最显著的能力即是支持回滚到上一个版本。如，Capistrano部署工具将发布版本存储在releases子目录下，当前版本是当前发布文件夹的一个链接，其回滚命令即很容易使其回到上一个版本。
 
@@ -164,7 +164,7 @@ Web应用有时在Web容器内运行，诸如Java应用在Tomcat中运行等。
 
 十二因子应用不应作为守护进程也不要写PID文件。相反，应该交给操作系统进程管理器（诸如分布式进程管理器systemd）来管理输出流，以处理进程崩溃以及用户发起的重启与停机。
 
-![](https://yanleilei.com/static/images/uploads/2020/03/12-factor-app-concurrency.png)
+![](https://olzhy.github.io/static/images/uploads/2020/03/12-factor-app-concurrency.png)
 
 **IX 可便性**
   

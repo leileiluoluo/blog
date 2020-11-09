@@ -26,7 +26,7 @@ OAuth 2.0中，实现了OpenID Connect的`授权服务（Authentication Server�
   
 OpenID Connect协议的概览图如下。
   
-![](https://yanleilei.com/static/images/uploads/2020/02/oidc-1.0-overview.png)
+![](https://olzhy.github.io/static/images/uploads/2020/02/oidc-1.0-overview.png)
   
 (1) 客户端向授权服务发送授权请求。
   
@@ -77,7 +77,7 @@ OpenID Connect对OAuth 2.0作的主要扩展即是引入以`JWT`格式表示的�
 
 下图为OAuth 2.0授权码模式流程图。
   
-![](https://yanleilei.com/static/images/uploads/2020/02/oauth2-authorization-code-flow.png)
+![](https://olzhy.github.io/static/images/uploads/2020/02/oauth2-authorization-code-flow.png)
 
 下面结合该图的每一步，阐释OpenID Connect授权码模式的鉴权流程。
   
@@ -243,7 +243,7 @@ HTTP/1.1 400 Bad Request
 
 下图为OAuth 2.0隐式授权模式流程图。
   
-![](https://yanleilei.com/static/images/uploads/2020/02/oauth2-implicit-flow.png)
+![](https://olzhy.github.io/static/images/uploads/2020/02/oauth2-implicit-flow.png)
 
 下面对图中每一步作解释。
   

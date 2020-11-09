@@ -33,7 +33,7 @@ tags:
   
 如图所示，使用三个指针p、q、r指向三个相邻的节点，q.Next = p; p.Next = r.Next即完成一次交换。
   
-![](https://yanleilei.com/static/images/uploads/2019/02/swap-nodes-in-pair.png)
+![](https://olzhy.github.io/static/images/uploads/2019/02/swap-nodes-in-pair.png)
 
 **3 golang实现代码**
   

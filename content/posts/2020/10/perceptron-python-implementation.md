@@ -25,7 +25,7 @@ description: 感知机Perceptron算法及Python实现。
 
 其可被抽象为下图所示模型，即一个神经元接收到来自n个其它神经元的输入信号，对这些输入信号，通过带权值的连接进行计算（各个连接线的权值与对应输入值相乘，然后进行累加），然后判断计算出来的累加值是否超过阈值（Threshold），若等于或超过阈值，则输出y为1，表示该神经元激活，否则输出y为-1表示该神经元抑制。
 
-![](https://yanleilei.com/static/images/uploads/2020/10/perceptron.svg#center)
+![](https://olzhy.github.io/static/images/uploads/2020/10/perceptron.svg#center)
 
 所以，感知机模型可被描述为：
 

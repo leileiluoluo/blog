@@ -58,7 +58,7 @@ if '__main__' == __name__:
 
 **3）结果输出**
 
-![](https://yanleilei.com/static/images/uploads/2017/11/mobile-brands-search-trends.png)
+![](https://olzhy.github.io/static/images/uploads/2017/11/mobile-brands-search-trends.png)
 
 &nbsp;
 

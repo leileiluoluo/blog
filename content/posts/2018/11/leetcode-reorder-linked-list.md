@@ -35,7 +35,7 @@ tags:
   
 2.2）两个指针分别从头至尾、从尾至头同时遍历该双向链表来建立所要求的顺序关系，直至汇合即完成重排。重排过程如下图所示。
 
-![](https://yanleilei.com/static/images/uploads/2018/11/reorder-linked-list.png)
+![](https://olzhy.github.io/static/images/uploads/2018/11/reorder-linked-list.png)
 
 **3 golang实现代码**
   

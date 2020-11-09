@@ -198,7 +198,7 @@ $ goexec 'http.ListenAndServe(":8080", http.FileServer(http.Dir(".")))'
 
 运行结果如下图所示。
 
-![](https://yanleilei.com/static/images/uploads/2019/10/wasm-calc.png)
+![](https://olzhy.github.io/static/images/uploads/2019/10/wasm-calc.png)
 
 **3 问题与展望**
   

@@ -39,7 +39,7 @@ description: LeetCode二叉树中序遍历，Golang实现。
 
 ### 2 解决思路
 
-![](https://yanleilei.com/static/images/uploads/2020/07/leetcode-binary-tree-inorder-traversal.png#center)
+![](https://olzhy.github.io/static/images/uploads/2020/07/leetcode-binary-tree-inorder-traversal.png#center)
 
 参考上图，整体来看，本算法采用多条自左上到右下的线将树根和其左子树的连接“截断”，然后将根节点依次放入一个栈里，当最左下角的根节点已压栈后，然后开始依次出栈。这样的输出顺序即是中序遍历顺序。
 

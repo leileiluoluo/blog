@@ -41,7 +41,7 @@ description: LeetCode反转链表，Golang实现。
 
 使用循环方式实现的步骤为：
 
-![](https://yanleilei.com/static/images/uploads/2020/07/leetcode-reverse-linked-list.png#center)
+![](https://olzhy.github.io/static/images/uploads/2020/07/leetcode-reverse-linked-list.png#center)
 
 + 1）p，q，r指向反转前三个连续的节点，q指向当前节点，p指向上一个节点，r指向下一个节点；
 + 2）接下来做反转，将q的Next指向p；

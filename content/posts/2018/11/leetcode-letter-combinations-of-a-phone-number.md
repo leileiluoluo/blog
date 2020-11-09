@@ -17,7 +17,7 @@ tags:
   
 给定一个包含数字[2-9]的字符串（闭区间），求数字可以代表的所有可能的字母组合。数字与字母的映射关系与手机号码簿相同（如下图），注意数字1未映射任何字母。
 
-![](https://yanleilei.com/static/images/uploads/2018/11/mapping-of-phone-number-and-letters.png)
+![](https://olzhy.github.io/static/images/uploads/2018/11/mapping-of-phone-number-and-letters.png)
 
 例子：
 

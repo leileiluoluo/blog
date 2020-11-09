@@ -45,7 +45,7 @@ d）0 <= c0 < C
   
 释义：
 
-![](https://yanleilei.com/static/images/uploads/2019/07/spiral_matrix_iii_01.png)
+![](https://olzhy.github.io/static/images/uploads/2019/07/spiral_matrix_iii_01.png)
 
 例子2：
   
@@ -55,7 +55,7 @@ d）0 <= c0 < C
   
 释义：
 
-![](https://yanleilei.com/static/images/uploads/2019/07/spiral_matrix_iii_02.png)
+![](https://olzhy.github.io/static/images/uploads/2019/07/spiral_matrix_iii_02.png)
 
 题目出处：[LeetCode](https://leetcode.com/problems/spiral-matrix-iii/)
 
