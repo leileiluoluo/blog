@@ -9,7 +9,7 @@ wip_template:
 
 ---
 
-[Go语言中文网](https://studygolang.com/) | [Tony Bai](https://tonybai.com/) | [Jing blog](https://jingine.com/)
+[Go语言中文网](https://studygolang.com/) | [Tony Bai](https://tonybai.com/) | [Jing blog](https://jingine.com/) | [Xiaobin’s Blog](https://lxb.wiki/)
 
 ----------------------------------------------
 **传统文化**
