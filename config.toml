@@ -6,7 +6,7 @@ title = "磊磊落落"
 # theme
 theme = "northendlab-hugo"
 # post pagination
-paginate = "5"
+paginate = "6"
 # post excerpt
 summaryLength = "5"
 # disqus short name
