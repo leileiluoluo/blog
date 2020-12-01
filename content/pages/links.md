@@ -76,6 +76,7 @@ wip_template:
 **云原生相关**
  
   * [云原生实验室](https://fuckcloudnative.io/)
+  * [Huabing Blog](https://zhaohuabing.com/)
 
 **算法相关**
 
