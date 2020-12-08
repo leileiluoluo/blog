@@ -45,7 +45,7 @@ wip_template:
   * [火丁笔记](https://huoding.com)
   * [鸟窝](https://colobu.com)
   * [Dave Cheney](https://dave.cheney.net)
-  * [Jing blog](https://jingine.com/)
+  * [敖小剑的博客](https://skyao.io/)
 
 **机器学习相关**
 
