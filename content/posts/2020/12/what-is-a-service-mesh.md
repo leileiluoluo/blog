@@ -33,7 +33,15 @@ description: 什么是服务网格？(What is a Service Mesh?)
 
 因服务网格代理了分布式系统内所有服务与服务通信的进出流量，相当于将分布式系统中最关键的一些跨进程连接点串联起来，并将其管理，观察。所以其就像系统的眼睛一样，让开发者不再对庞大的调用网络望而生畏，让分布式系统像单体架构一样可以做到可观察。
 
-### 2 服务网格架构
+### 2 服务网格发展历史
+
+- 2010年初，Twitter开始开发基于Scala的Finagle，自此Linkerd服务网格诞生。
+- 2013年末，SmartStack提供一种基于HAProxy的进程外的服务发现机制以满足逐渐兴起的微服务架构。
+- 2014，Netflix发布包括Prana的一组JVM工具包，允许不同语言开发的服务通过HTTP进行调用。
+- 2016，NGINX开发Fabric Model，一个基于NGINX Plus的类服务网格产品。
+- 2017以后，Linkerd，Istio，Maesh，Kuma逐步兴起。
+
+### 3 服务网格架构
 
 经过上面的介绍，我们对服务网格的衍生及其解决的问题有了一定的了解。本节粗略看一下业内服务网格的通用设计及系统架构，以期对其有一个更好的认识。
 
@@ -41,7 +49,7 @@ description: 什么是服务网格？(What is a Service Mesh?)
 
 ![](https://olzhy.github.io/static/images/uploads/2020/12/service-mesh-generic-topology.png#center)
 
-### 3 使用服务网格可以做什么？
+### 4 使用服务网格可以做什么？
 
 因服务网格代理了系统内所有服务与服务通信的流量，所以其可以做很多事情。
 
@@ -60,6 +68,36 @@ description: 什么是服务网格？(What is a Service Mesh?)
 - 观察及监控
 
 提供请求量统计，请求延时统计，请求成功率统计，分布式链路追踪等功能。
+
+### 5 服务网格的实现
+
+- [Linkerd](https://linkerd.io/)
+
+CNCF孵化项目，100%开源，Rust实现，目标是极简，能用，数据面代理极小(<10mb)，速度极快(<1ms)。
+
+- [Istio](https://istio.io/)
+
+最流行的服务网格实现，基于Envoy数据面，背靠谷歌及IBM，功能丰富。
+
+- [Consul](https://www.consul.io/)
+
+HashiCorp出品，基于Envoy数据面，支持的平台多。
+
+- [Kuma](https://kuma.io/)
+
+基于API Gateway Kong的服务网格。
+
+- [Traefik Mesh](https://containo.us/maesh/)
+
+基于云原生API Gateway Traefik的服务网格。
+
+更详细对比，请参考 [servicemesh.es](https://servicemesh.es/)。
+
+### 6 服务网格的未来
+
+Mecha - 多运行时微服务架构。未来架构的趋势可能是将所有传统的中间件迁移至其它运行时，只在服务中编写业务逻辑。微软Dapr是业界第一个多运行时实践项目。
+
+![](https://olzhy.github.io/static/images/uploads/2020/12/service-mesh-future.jpg#center)
 
 
 > 参考资料
