@@ -39,17 +39,39 @@ description: 为什么Istio重回单体架构？(Why Istio back to monolithic ar
 
 在我们了解了微服务架构的优劣之后，看看本文探讨的重点：Istio之前的架构是什么样的？为什么要进行如此重大调整？
 
+Istio的总体架构与业内其它服务网格采用的架构类似，即分为数据面与控制面两部分。数据面由一组Proxy（或称Sidecar）组成，这些Proxy与服务的实例一同部署，代理了服务的所有进出流量。控制面部署在这些服务的外层，统一负责管理与控制数据面的Proxy。
+
 ![](https://olzhy.github.io/static/images/uploads/2020/12/istio-previous-arch.png#center)
 
 （图片引用自[Istio as an Example of When Not to Do Microservices](https://blog.christianposta.com/microservices/istio-as-an-example-of-when-not-to-do-microservices/)）
 
+最开始，Istio控制面是采用微服务方式实现的，主要有如下几部分：
+
+- Pilot 负责在运行时对Proxy进行配置
+
+- Galley 负责监听配置更新，校验及分发配置
+
+- Citadel 负责证书签发，密钥生成，及与CA的集成
+
+- Injector 负责对服务的自动注入
+
+该种微服务的架构有什么问题？Istio为什么又回归单体应用呢？
+
+采用微服务架构后，对于Istio开发团队而言，每个服务的确可以独立开发，独立迭代。但对用户而言，不论其内部分几个模块，其需要统一发布，统一提供服务。若使用者在使用过程中遇到涉及Istio内部棘手的问题需要定位，则增加了定位难度。所以Istio开始考虑回归单体，让其使用变得更简单。
+
 ### 4 Istio现在的架构是什么样的？
+
+下面即是回归单体后的Istio架构图，可以看到，原先被分割为多个微服务的控制面整合为了一个名为istiod的单体服务。这样即可让其安装，部署，使用，配置，维护，调试变得更简单，同时节省了资源开销。
 
 ![](https://olzhy.github.io/static/images/uploads/2020/12/istiod.png#center)
 
 （图片引用自[Istio as an Example of When Not to Do Microservices](https://blog.christianposta.com/microservices/istio-as-an-example-of-when-not-to-do-microservices/)）
 
 ### 5 Istio的架构变迁对我们有什么启发？
+
+最后，我们谈一下Istio的架构变迁对我们又什么启发？
+
+微服务架构几乎是现代应用的标配，其给我们带来了诸多的好处，同时也给系统带来极大的复杂性。在系统设计中，我们要根据自己的实际情况对应用面向的客户，使用场景，采用微服务后的性价比做深入的分析与考量。同时微服务的切分要做到粒度恰当，要避免拆的过大，更要避免拆的过小，要结合自己系统的真实情况做选择，不管采用何种架构方式，我们的目的是让系统变得更“简单”。
 
 
 > 参考资料
