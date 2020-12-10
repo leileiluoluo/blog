@@ -53,4 +53,5 @@ description: 为什么Istio重回单体架构？(Why Istio back to monolithic ar
 > 参考资料
 >
 > [1] [Introducing istiod: simplifying the control plane](https://istio.io/latest/blog/2020/istiod/)
+>
 > [2] [Istio as an Example of When Not to Do Microservices](https://blog.christianposta.com/microservices/istio-as-an-example-of-when-not-to-do-microservices/)
