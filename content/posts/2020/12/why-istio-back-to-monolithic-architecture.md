@@ -40,14 +40,16 @@ description: 为什么Istio重回单体架构？(Why Istio back to monolithic ar
 在我们了解了微服务架构的优劣之后，看看本文探讨的重点：Istio之前的架构是什么样的？为什么要进行如此重大调整？
 
 ![](https://olzhy.github.io/static/images/uploads/2020/12/istio-previous-arch.png#center)
+
 （图片引用自[Istio as an Example of When Not to Do Microservices](https://blog.christianposta.com/microservices/istio-as-an-example-of-when-not-to-do-microservices/)）
 
 ### 4 Istio现在的架构是什么样的？
 
 ![](https://olzhy.github.io/static/images/uploads/2020/12/istiod.png#center)
+
 （图片引用自[Istio as an Example of When Not to Do Microservices](https://blog.christianposta.com/microservices/istio-as-an-example-of-when-not-to-do-microservices/)）
 
-### 5 Istio的架构变迁对我们能有什么启发？
+### 5 Istio的架构变迁对我们有什么启发？
 
 
 > 参考资料
