@@ -28,6 +28,7 @@ wip_template:
   * [Cloud Native](https://ops.tips/)
   * [MartinFowler](https://martinfowler.com)
   * [Steve Fracia](https://stevefrancia.com)
+  * [Christian Posta](https://blog.christianposta.com/)
   * [王垠的博客](http://www.yinwang.org/)
   * [云风的博客](https://blog.codingnow.com)
   * [飞雪无情的博客](https://www.flysnow.org)
