@@ -20,7 +20,7 @@ description: API Gateway与Service Mesh有什么不同？(What's the difference 
 
 ### 1 API Gateway的使用场景
 
-API Gateway一般是一个业务单元以产品的方式对外部客户或对内部其它业务单元进行API暴露的统一入口。其一般在网络模型的7层，使用独立于内部系统的中心化部署方式，作为一个Edge服务对外提供服务。
+API Gateway一般是一个业务单元以“产品”的方式对外部客户或对内部其它业务单元进行API暴露的统一入口。其一般在网络模型的7层，使用独立于内部系统的中心化部署方式，作为一个Edge服务对外提供访问能力。
 
 ![](https://olzhy.github.io/static/images/uploads/2020/12/api-gateway-as-a-product.jpg#center)
 
@@ -52,17 +52,19 @@ API Gateway一般是一个业务单元以产品的方式对外部客户或对内
 
 采用mTLS等，其可保障端到端的通信安全。
 
-- 服务调用网更细节的可观察性
+- 更细节的可观察性
 
 使用服务网格，可以监控到系统内部所有服务与服务的调用，可以观察到更多细节的度量指标。
 
 ### 3 何时使用API Gateway？何时使用Service Mesh？
 
+通过如上简述，我们对API Gateway及Service Mesh的不同使用场景有了一个简单的认识。下面，总结一下，何时使用API Gateway？何时使用Service Mesh？
+
 决定是否使用API Gateway的一个重要决策点是：是否有需求将内部API以中心化的方式作为一个“产品”来对外提供服务？
 
 ![](https://olzhy.github.io/static/images/uploads/2020/12/use-api-gateway-or-service-mesh.jpg#center)
 
-而决定使用Service Mesh的一个重要决策点是：是否有需求将所有服务的通信使用分布式的Sidecar来管理，以提供更好的连接，安全，可观察能力？
+而决定是否使用Service Mesh的一个重要决策点是：是否有需求将所有服务的通信使用分布式的Sidecar来管理，以提供更好的连接，安全，可观察能力？
 
 一般来说，现代云原生架构下，两者均是需要的，以各自适用的场景及互补的能力来提供系统整体的可用性，可靠性。
 
