@@ -13,7 +13,7 @@ keywords:
   - 云原生
   - API Gateway
   - Service Mesh
-description: API Gateway与Service Mesh有什么不同？(What is a Service Mesh?)
+description: API Gateway与Service Mesh有什么不同？(What's the difference between API Gateway and Service Mesh?)
 
 ---
 
