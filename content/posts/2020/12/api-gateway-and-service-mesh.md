@@ -24,6 +24,8 @@ API Gateway一般是一个业务单元以“产品”的方式对外部客户或
 
 ![](https://olzhy.github.io/static/images/uploads/2020/12/api-gateway-as-a-product.jpg#center)
 
+（图片引自[The difference between API Gateways and Service Mesh](https://www.cncf.io/blog/2020/03/06/the-difference-between-api-gateways-and-service-mesh/)）
+
 所以从这个场景出发，API Gateway关注的是：
 
 - 隐藏内部实现细节，让API保持稳定，对客户友好
@@ -44,6 +46,8 @@ API Gateway一般是一个业务单元以“产品”的方式对外部客户或
 
 ![](https://olzhy.github.io/static/images/uploads/2020/12/service-mesh-arch.jpg#center)
 
+（图片引自[The difference between API Gateways and Service Mesh](https://www.cncf.io/blog/2020/03/06/the-difference-between-api-gateways-and-service-mesh/)）
+
 - 与服务解耦，以进程外的方式代理服务进出流量
 
 与服务解耦，以进程外的方式，统一代理服务的进出流量。
@@ -63,6 +67,8 @@ API Gateway一般是一个业务单元以“产品”的方式对外部客户或
 决定是否使用API Gateway的一个重要决策点是：是否有需求将内部API以中心化的方式作为一个“产品”来对外提供服务？
 
 ![](https://olzhy.github.io/static/images/uploads/2020/12/use-api-gateway-or-service-mesh.jpg#center)
+
+（图片引自[The difference between API Gateways and Service Mesh](https://www.cncf.io/blog/2020/03/06/the-difference-between-api-gateways-and-service-mesh/)）
 
 而决定是否使用Service Mesh的一个重要决策点是：是否有需求将所有服务的通信使用分布式的Sidecar来管理，以提供更好的连接，安全，可观察能力？
 
