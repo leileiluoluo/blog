@@ -176,8 +176,87 @@ istio-ingressgateway   LoadBalancer   10.108.227.8   localhost     ...80:32008/T
 
 ### 4 Istio Dashboard安装
 
+下面安装一下Istio的几个插件，初步体验里边的一些功能。
+
+```shell
+$ cd /usr/local/istio-1.8.1
+$ kubectl apply -f samples/addons
+
+...
+deployment.apps/kiali created
+deployment.apps/prometheus created
+deployment.apps/jaeger created
+...
+```
+
+**a）先看一下Kiali面板**
+
+键入如下命令，可以看到，打开了kiali面板。
+
+```shell
+$ istioctl dashboard kiali
+```
+
+然后，查看`istio-demo` namespace的应用图谱图。
+
+![](https://olzhy.github.io/static/images/uploads/2020/12/istio-kiali.png#center)
+
+调用关系一目了然，请求由Istio Ingress Gateway进来，首先访问productpage，productpage访问details获取图书详情，productpage访问reviews获取评论，reviews访问ratings获取图书评级。
+
+**a）再看一下Jaeger面板**
+
+键入如下命令，打开jaeger面板。
+
+```shell
+$ istioctl dashboard jaeger
+```
+
+左侧Service下拉菜单，选择`productpage.istio-demo`，从右面的Traces里点击productpage，可以看到如下调用详情。
+
+![](https://olzhy.github.io/static/images/uploads/2020/12/istio-jaeger.png#center)
+
+调用链以时间序横向展示，可以看到请求由istio-ingressgateway进来到达productpage，productpage调用details及reviews，reviews调用ratings，每个调用的时间花费可以一目了然的看到。
+
 ### 5 Istio卸载
 
+- 删除addons
+
+```shell
+$ cd /usr/local/istio-1.8.1
+$ kubectl delete -f samples/addons
+```
+
+- 删除Bookinfo
+
+```shell
+$ cd /usr/local/istio-1.8.1
+$ kubectl delete -n istio-demo -f samples/bookinfo/platform/kube/bookinfo.yaml
+$ kubectl delete -n istio-demo -f samples/bookinfo/networking/bookinfo-gateway.yaml
+```
+
+- 卸载Istio
+
+```shell
+$ istioctl manifest generate --set profile=demo | kubectl delete --ignore-not-found=true -f -
+```
+
+- 删除namespace istio-system
+
+```shell
+$ kubectl delete namespace istio-system
+```
+
+- 取消对istio-demo进行Istio自动注入
+
+```shell
+$ kubectl label namespace istio-demo istio-injection-
+```
+
+- 删除namespace istio-demo
+
+```shell
+$ kubectl delete namespace istio-demo
+```
 
 > 参考资料
 >
