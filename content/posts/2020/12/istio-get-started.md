@@ -106,6 +106,74 @@ deployment.apps/reviews-v3 created
 
 ### 3 Bookinfo样例应用访问
 
+查看deployment及pods，发现Bookinfo的各个组件已部署完成：
+
+```shell
+$ kubectl get deployments -n istio-demo
+
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+details-v1       1/1     1            1           7m6s
+productpage-v1   1/1     1            1           7m4s
+ratings-v1       1/1     1            1           7m6s
+reviews-v1       1/1     1            1           7m5s
+reviews-v2       1/1     1            1           7m5s
+reviews-v3       1/1     1            1           7m5s
+```
+
+```shell
+$ kubectl get pods -n istio-demo
+
+NAME                              READY   STATUS    RESTARTS   AGE
+details-v1-79c697d759-c8h6k       2/2     Running   0          7m12s
+productpage-v1-65576bb7bf-5ln54   2/2     Running   0          7m11s
+ratings-v1-7d99676f7f-2k75j       2/2     Running   0          7m12s
+reviews-v1-987d495c-njj9f         2/2     Running   0          7m12s
+reviews-v2-6c5bf657cf-c6x46       2/2     Running   0          7m12s
+reviews-v3-5f7b9f4f77-mpt9z       2/2     Running   0          7m12s
+```
+
+下面我们试着在ratings容器里访问Bookinfo的入口页面productpage。
+
+使用`kubectl describe pod`可以发现ratings pod除了原有容器ratings外，多了两个Sidecar：istio-init与istio-proxy。
+
+```shell
+$ kubectl describe pod/ratings-v1-7d99676f7f-2k75j -n istio-demo
+
+...
+Created container istio-init
+...
+Created container ratings
+...
+Created container istio-proxy
+```
+
+所以，执行命令时，需指定容器为ratings，发现页面标题已可正常显示。
+
+```shell
+$ kubectl exec ratings-v1-7d99676f7f-2k75j -c ratings -n istio-demo -- curl -s productpage:9080/productpage | grep -o "<title>.*</title>"
+
+<title>Simple Bookstore App</title>
+```
+
+下面看一下该应用如何在集群外部进行访问。涉及到通过配置Istio的Ingress Gateway，从而将流量打到productpage。同样，需要执行下`samples`文件夹下自带的配置文件。
+
+```shell
+$ kubectl apply -n istio-demo -f samples/bookinfo/networking/bookinfo-gateway.yaml
+```
+
+然后查看下Ingress Gateway的ip及端口。
+
+```shell
+$ kubectl get service istio-ingressgateway -n istio-system
+
+NAME                   TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)                                                                      AGE
+istio-ingressgateway   LoadBalancer   10.108.227.8   localhost     ...80:32008/TCP,443:30895/TCP...   15h
+```
+
+所以，对于采用Docker Desktop K8s的本文来说，外部IP就是localhost。采用`http://localhost/productpage`即可访问Bookinfo的productpage页面。
+
+![](https://olzhy.github.io/static/images/uploads/2020/12/istio-bookinfo.png#center)
+
 ### 4 Istio Dashboard安装
 
 ### 5 Istio卸载
