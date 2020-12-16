@@ -21,7 +21,7 @@ description: Istio安装使用入门，使用mac操作系统，docker-desktop k8
 
 ### 1 Istio下载及安装
 
-进入Istio[发布页面](https://github.com/istio/istio/releases/tag/1.8.1)，下载适配本文操作系统的最新版本[istio-1.8.1-osx.tar.gz](https://github.com/istio/istio/releases/download/1.8.1/istio-1.8.1-osx.tar.gz)，然后解压到`/usr/local/istio-1.8.1`，可以看到下面包含`bin`及`samples`两个文件夹。`bin`里包含`istioctl`命令，`samples`里包含Istio自带的样例应用的部署配置。
+进入Istio[发布页面](https://github.com/istio/istio/releases/tag/1.8.1)，下载适配本文操作系统的最新版本[istio-1.8.1-osx.tar.gz](https://github.com/istio/istio/releases/download/1.8.1/istio-1.8.1-osx.tar.gz)，然后解压到`/usr/local/istio-1.8.1`，可以看到下面包含`bin`及`samples`文件夹，`bin`里包含`istioctl`命令，`samples`里包含Istio自带的样例应用的部署配置。
 
 ```shell
 $ cd /usr/local/istio-1.8.1
@@ -43,7 +43,7 @@ $ tree
 $ export PATH=/usr/local/istio-1.8.1/bin:$PATH
 ```
 
-因我们安装Istio主要作样例演示，所以选择`profile=demo`，然后使用如下命令安装：
+因我们安装Istio主要作样例演示，所以选择`profile=demo`，安装命令如下：
 
 ```shell
 $ istioctl install --set profile=demo -y
@@ -147,7 +147,7 @@ Created container ratings
 Created container istio-proxy
 ```
 
-所以，执行命令时，需指定容器为ratings，发现页面标题已可正常显示。
+所以，执行命令时，需指定容器为ratings，curl请求productpage，发现页面标题已可正常显示。
 
 ```shell
 $ kubectl exec ratings-v1-7d99676f7f-2k75j -c ratings -n istio-demo -- curl -s productpage:9080/productpage | grep -o "<title>.*</title>"
@@ -166,11 +166,11 @@ $ kubectl apply -n istio-demo -f samples/bookinfo/networking/bookinfo-gateway.ya
 ```shell
 $ kubectl get service istio-ingressgateway -n istio-system
 
-NAME                   TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)                                                                      AGE
+NAME                   TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)                            AGE
 istio-ingressgateway   LoadBalancer   10.108.227.8   localhost     ...80:32008/TCP,443:30895/TCP...   15h
 ```
 
-所以，对于采用Docker Desktop K8s的本文来说，外部IP就是localhost。采用`http://localhost/productpage`即可访问Bookinfo的productpage页面。
+所以，对于本文所采用的Docker Desktop K8s本地部署环境来说，外部IP就是localhost。采用`http://localhost/productpage`即可访问Bookinfo的productpage页面。
 
 ![](https://olzhy.github.io/static/images/uploads/2020/12/istio-bookinfo.png#center)
 
@@ -197,13 +197,13 @@ deployment.apps/jaeger created
 $ istioctl dashboard kiali
 ```
 
-然后，查看`istio-demo` namespace的应用图谱图。
+然后，查看`istio-demo` namespace的应用拓扑图。
 
 ![](https://olzhy.github.io/static/images/uploads/2020/12/istio-kiali.png#center)
 
-调用关系一目了然，请求由Istio Ingress Gateway进来，首先访问productpage，productpage访问details获取图书详情，productpage访问reviews获取评论，reviews访问ratings获取图书评级。
+可以看到，调用关系一目了然，请求由Istio Ingress Gateway进来，首先访问productpage，productpage访问details获取图书详情，productpage访问reviews获取评论，reviews访问ratings获取图书评级。
 
-**a）再看一下Jaeger面板**
+**b）再看一下Jaeger面板**
 
 键入如下命令，打开jaeger面板。
 
@@ -215,9 +215,11 @@ $ istioctl dashboard jaeger
 
 ![](https://olzhy.github.io/static/images/uploads/2020/12/istio-jaeger.png#center)
 
-调用链以时间序横向展示，可以看到请求由istio-ingressgateway进来到达productpage，productpage调用details及reviews，reviews调用ratings，每个调用的时间花费可以一目了然的看到。
+调用链以时间序横向展示，同样可以看到请求由istio-ingressgateway进来到达productpage，productpage调用details及reviews，reviews调用ratings，每个调用的时间花费亦显示了出来。
 
 ### 5 Istio卸载
+
+Istio初探结束，按照如下步骤依序进行卸载。
 
 - 删除addons
 
@@ -257,6 +259,7 @@ $ kubectl label namespace istio-demo istio-injection-
 ```shell
 $ kubectl delete namespace istio-demo
 ```
+
 
 > 参考资料
 >
