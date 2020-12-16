@@ -26,6 +26,13 @@ description: Istio安装使用入门，使用mac操作系统，docker-desktop k8
 ```shell
 $ cd /usr/local/istio-1.8.1
 $ tree
+.
+├── bin
+│   └── istioctl
+├── samples
+│   ├── README.md
+│   ├── addons
+│   ├── bookinfo
 ...
 ```
 
@@ -59,6 +66,13 @@ istiod                 1/1     1            1           14h
 ```
 
 ### 2 Bookinfo样例应用部署
+
+在部署样例应用前，我们新建一个专门用来演示的namespace `istio-demo`，且标记该namespace使用istio自动注入。
+
+```shell
+$ kubectl create namespace istio-demo
+$ kubectl label namespace istio-demo istio-injection=enabled
+```
 
 ### 3 Bookinfo样例应用访问
 
