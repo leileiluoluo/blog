@@ -29,10 +29,33 @@ $ tree
 ...
 ```
 
-修改`/etc/profile`，将`/usr/local/istio-1.8.1/bin`追加到`PATH`，即可以随时随地使用`istioctl`命令了。
+修改`/etc/profile`，将`/usr/local/istio-1.8.1/bin`追加到`PATH`，这样即可以随时随地使用`istioctl`命令了。
 
 ```shell
 $ export PATH=/usr/local/istio-1.8.1/bin:$PATH
+```
+
+因我们安装Istio主要作样例演示，所以选择`profile=demo`，然后使用如下命令安装：
+
+```shell
+$ istioctl install --set profile=demo -y
+...
+✔ Istio core installed                                                                                    
+✔ Istiod installed                                                                                        
+✔ Egress gateways installed                                                                               
+✔ Ingress gateways installed                                                               
+✔ Installation complete
+```
+
+约1分钟后，其主要组件Istiod, Ingress Gateway, Egress Gateway都安装完成了。可以发现，其将上述组件安装到了`istio-system`这个namespace下。
+
+```shell
+$ kubectl get deployments -n istio-system
+
+NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+istio-egressgateway    1/1     1            1           14h
+istio-ingressgateway   1/1     1            1           14h
+istiod                 1/1     1            1           14h
 ```
 
 ### 2 Bookinfo样例应用部署
