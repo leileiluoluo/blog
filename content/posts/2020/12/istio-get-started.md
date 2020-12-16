@@ -17,7 +17,31 @@ keywords:
 description: Istio安装使用入门，使用mac操作系统，docker-desktop k8s集群部署。
 
 ---
+本文所使用的操作系统为macOS 11.1，使用Docker Desktop 3.0.1自带的Kubernetes(v1.19.3) 作为部署环境。
 
+### 1 Istio下载及安装
+
+进入Istio[发布页面](https://github.com/istio/istio/releases/tag/1.8.1)，下载适配本文操作系统的最新版本[istio-1.8.1-osx.tar.gz](https://github.com/istio/istio/releases/download/1.8.1/istio-1.8.1-osx.tar.gz)，然后解压到`/usr/local/istio-1.8.1`，可以看到下面包含`bin`及`samples`两个文件夹。`bin`里包含`istioctl`命令，`samples`里包含Istio自带的样例应用的部署配置。
+
+```shell
+$ cd /usr/local/istio-1.8.1
+$ tree
+...
+```
+
+修改`/etc/profile`，将`/usr/local/istio-1.8.1/bin`追加到`PATH`，即可以随时随地使用`istioctl`命令了。
+
+```shell
+$ export PATH=/usr/local/istio-1.8.1/bin:$PATH
+```
+
+### 2 Bookinfo样例应用部署
+
+### 3 Bookinfo样例应用访问
+
+### 4 Istio Dashboard安装
+
+### 5 Istio卸载
 
 
 > 参考资料
