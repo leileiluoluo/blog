@@ -106,7 +106,7 @@ deployment.apps/reviews-v3 created
 
 ### 3 Bookinfo样例应用访问
 
-查看deployment及pods，发现Bookinfo的各个组件已部署完成：
+查看deployments及pods，发现Bookinfo的各个组件已部署完成：
 
 ```shell
 $ kubectl get deployments -n istio-demo
@@ -221,14 +221,14 @@ $ istioctl dashboard jaeger
 
 Istio初探结束，按照如下步骤依序进行卸载。
 
-- 删除addons
+- 卸载addons
 
 ```shell
 $ cd /usr/local/istio-1.8.1
 $ kubectl delete -f samples/addons
 ```
 
-- 删除Bookinfo
+- 卸载Bookinfo
 
 ```shell
 $ cd /usr/local/istio-1.8.1
