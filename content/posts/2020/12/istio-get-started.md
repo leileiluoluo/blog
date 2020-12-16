@@ -26,6 +26,7 @@ description: Istio安装使用入门，使用mac操作系统，docker-desktop k8
 ```shell
 $ cd /usr/local/istio-1.8.1
 $ tree
+
 .
 ├── bin
 │   └── istioctl
@@ -46,6 +47,7 @@ $ export PATH=/usr/local/istio-1.8.1/bin:$PATH
 
 ```shell
 $ istioctl install --set profile=demo -y
+
 ...
 ✔ Istio core installed                                                                                    
 ✔ Istiod installed                                                                                        
@@ -73,6 +75,34 @@ istiod                 1/1     1            1           14h
 $ kubectl create namespace istio-demo
 $ kubectl label namespace istio-demo istio-injection=enabled
 ```
+
+接下来先粗略看一下待部署应用Bookinfo的几个模块。
+
+```shell
+$ cd /usr/local/istio-1.8.1
+$ tree -L 1 samples/bookinfo/src
+
+.
+├── productpage // Bookinfo的页面入口，前后台一体，JavaScript + Ruby实现
+├── details // 图书详情后台服务，Ruby实现
+├── reviews // 图书评价后台服务，Java实现，采用Liberty部署
+└── ratings // 图书评价等级后台服务，nodejs编写，数据库采用mysql或mongodb
+```
+
+下面，使用Istio `samples`文件夹下自带的配置部署Bookinfo应用：
+
+```shell
+$ cd /usr/local/istio-1.8.1
+$ kubectl apply -n istio-demo -f samples/bookinfo/platform/kube/bookinfo.yaml
+
+...
+deployment.apps/reviews-v1 created
+deployment.apps/reviews-v2 created
+deployment.apps/reviews-v3 created
+...
+```
+
+可以看到`reviews`组件部署了3个版本，除此之外，其他组件均部署了一个版本。
 
 ### 3 Bookinfo样例应用访问
 
