@@ -16,6 +16,7 @@ wip_template:
 
   * [古书房](http://www.gushufang.com/)
   * [黃庭書院](https://www.htz.org.tw/)
+  * [中國哲學書電子化計劃](https://ctext.org/zh)
 
 **技术博客**
 
