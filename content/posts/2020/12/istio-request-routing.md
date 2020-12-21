@@ -17,13 +17,13 @@ keywords:
 description: Istio流量管理之请求路由 (Request Routing of Istio Traffic Management)
 
 ---
-在上文“[Istio安装使用](https://olzhy.github.io/posts/istio-get-started.html)”中，我们对Istio进行了安装，并对Bookinfo样例进行了部署测试。本文接着上文，对Istio流量管理中的请求路由进行样例学习，以期通过本文明白Istio如何实现请求路由以及使用一个样例学习如何进行路由配置。
+在上文“[Istio安装使用](https://olzhy.github.io/posts/istio-get-started.html)”中，我们对Istio进行了安装，并对Bookinfo样例进行了部署测试。本文接着上文，对Istio流量管理中的请求路由进行概念学习及样例测试。
 
 我们知道，Istio通过Envoy数据面拦截了所有服务实例的进出流量。这样基于Istio服务网格即可以实现诸多常规方式难以实现的流量管理策略，诸如灰度发布，A/B测试，按比率分流等。
 
-Istio主要提供两个通过YAML配置的自定义资源来实现流量管理：Virtual Service 及 Destination Rule。这样即做到流量管理与上游请求服务及下游被请求服务解耦。Virtual Service主要用来配置流量如何流动（即定义符合哪些规则的流量打到哪些服务子集上），而Destination Rule则主要用来定义具体的服务子集。
+Istio主要提供两个通过YAML配置的自定义资源来实现流量管理：Virtual Service及Destination Rule。这样即做到流量管理与上游请求服务及下游被请求服务解耦。Virtual Service主要用来配置流量如何流动（即定义符合哪些规则的流量打到哪些服务子集上），而Destination Rule则主要用来定义具体的服务子集。
 
-下面分别看一下Vistual Service 及 Destination Rule的概念，最后使用Bookinfo样例进行简单的路由配置及测试。
+下面分别看一下Vistual Service及Destination Rule的概念，最后使用Bookinfo样例进行简单的路由配置及测试。
 
 ### 1 Vistual Service
 
