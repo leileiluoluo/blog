@@ -83,7 +83,7 @@ $ cd /usr/local/istio-1.8.1
 $ tree -L 1 samples/bookinfo/src
 
 .
-├── productpage // Bookinfo的页面入口，前后台一体，JavaScript + Ruby实现
+├── productpage // Bookinfo的页面入口，前后台一体，JavaScript + Python实现
 ├── details // 图书详情后台服务，Ruby实现
 ├── reviews // 图书评价后台服务，Java实现，采用Liberty部署
 └── ratings // 图书评价等级后台服务，nodejs编写，数据库采用mysql或mongodb
