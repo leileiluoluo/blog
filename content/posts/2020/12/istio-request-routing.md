@@ -31,7 +31,7 @@ Virtual Service主要用来配置流量如何流动。典型的使用场景是�
 
 下面通过具体的样例来学习VirtualService的配置。
 
-**1）为一个服务的不同版本配置路由**
+**a）为一个服务的不同版本配置路由**
 
 下面使用VirtualService为Bookinfo的reviews服务的几个不同子集配置路由规则，实现将特定的用户访问流量导到特定的版本。
 
@@ -56,6 +56,55 @@ spec:
     - destination:
         host: reviews
         subset: v3
+```
+
+**b）为不同的服务提供统一的路由配置**
+
+下面使用VirtualService为Bookinfo的两个不同服务reviews及ratings提供路由配置。基于不同的请求URI将流量导向不同的服务。支持使用URI前缀或正则进行匹配。
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: bookinfo
+spec:
+  hosts:
+    - bookinfo.com
+  http:
+  - match:
+    - uri:
+        prefix: /reviews
+    route:
+    - destination:
+        host: reviews
+  - match:
+    - uri:
+        prefix: /ratings
+    route:
+    - destination:
+        host: ratings
+```
+
+除了使用match来编写条件，还可以使用weight来指定权重。下面使用VirtualService指定将75%的流量打到reviews的v1，25%的流量打到reviews的v2。
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: reviews
+spec:
+  hosts:
+  - reviews
+  http:
+  - route:
+    - destination:
+        host: reviews
+        subset: v1
+      weight: 75
+    - destination:
+        host: reviews
+        subset: v2
+      weight: 25
 ```
 
 ### 2 Destination Rule
