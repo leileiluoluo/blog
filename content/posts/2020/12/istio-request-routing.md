@@ -109,6 +109,35 @@ spec:
 
 ### 2 Destination Rule
 
+Destination Rule主要用来定义服务的不同子集。这样Virtual Service即可定义路由规则，将一个服务的哪些流量打到哪些子集。Destination Rule除了定义服务子集外，还可以为整个目标服务或特定子集的服务设置Envoy的流量策略，如负载均衡策略，TLS安全模式，或熔断设置。
+
+下面使用DestinationRule为reviews定义了3个子集v1，v2及v3（使用Kubernetes label实现）。v1与v3采用RANDOM负载均衡策略，v2采用ROUND_ROBIN负载均衡策略。
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: reviews
+spec:
+  host: reviews
+  trafficPolicy:
+    loadBalancer:
+      simple: RANDOM
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+    trafficPolicy:
+      loadBalancer:
+        simple: ROUND_ROBIN
+  - name: v3
+    labels:
+      version: v3
+```
+
 ### 3 Bookinfo样例请求路由配置
 
 
