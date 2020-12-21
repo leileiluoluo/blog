@@ -1,5 +1,5 @@
 ---
-title: Istio流量管理
+title: Istio流量管理初探
 author: olzhy
 type: post
 date: 2020-04-21T08:43:50+08:00
