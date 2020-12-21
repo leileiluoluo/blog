@@ -140,6 +140,10 @@ spec:
 
 ### 3 Bookinfo样例请求路由配置
 
+在上文“[Istio安装使用](https://olzhy.github.io/posts/istio-get-started.html)”中，我们知道如何部署Bookinfo样例应用。且知道Bookinfo由如下几个服务组成，除了reviews拥有3个版本外，其它服务均只有1个版本。reviews的v1版本未有五星评价等级，v2版本的五星评价等级展示颜色为黑色，v3版本的五星评价等级展示颜色为红色。
+
+![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-withistio.svg#center)
+
 
 > 参考资料
 >
