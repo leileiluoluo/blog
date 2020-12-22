@@ -374,6 +374,14 @@ $ kubectl apply -n istio-demo -f virtual-service-reviews-90-10.yaml
 
 这时，多次刷新productpage页面，发现Review部分大概率无五星评价等级，小概率显示黑色五星评价等级。
 
+测试完毕，使用如下命令删除相关路由配置。
+
+```shell
+$ cd /usr/local/istio-1.8.1
+$ kubectl delete -n virtual-service-reviews-90-10.yaml
+$ kubectl delete -n destination-rule-reviews.yaml
+```
+
 总结本文，我们首先介绍了支持Istio流量管理的两个主要的资源Virtual Service及Destination Rule，然后对Bookinfo样例使用Virtual Service及Destination Rule进行配置，测试了几个常用的流量转发场景。
 
 
