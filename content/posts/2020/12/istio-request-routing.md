@@ -144,6 +144,60 @@ spec:
 
 ![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-withistio.svg#center)
 
+而且，我们只使用如下命令部署了Bookinfo的各个服务，及使用Gateway与Virtual Service配置了简单的路由规则，指定productpage为统一的流量入口。
+
+```shell
+$ cd /usr/local/istio-1.8.1
+$ kubectl apply -n istio-demo -f samples/bookinfo/platform/kube/bookinfo.yaml
+$ kubectl apply -n istio-demo -f samples/bookinfo/networking/bookinfo-gateway.yaml
+```
+
+`bookinfo-gateway.yaml`配置：
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: bookinfo-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: bookinfo
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - bookinfo-gateway
+  http: # 指定满足productpage入口路径，登录登出路径，以static为前缀的静态资源路径，及以/api/v1/products为前缀的API路径的流量，均打到目标服务productpage:9080
+  - match:
+    - uri:
+        exact: /productpage
+    - uri:
+        prefix: /static
+    - uri:
+        exact: /login
+    - uri:
+        exact: /logout
+    - uri:
+        prefix: /api/v1/products
+    route:
+    - destination:
+        host: productpage
+        port:
+          number: 9080
+```
+
 
 > 参考资料
 >
