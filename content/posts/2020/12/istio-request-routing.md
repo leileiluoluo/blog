@@ -33,7 +33,7 @@ Virtual Service主要用来配置流量如何流动。典型的使用场景是�
 
 **a）为一个服务的不同版本配置路由**
 
-下面使用VirtualService为Bookinfo的reviews服务的几个不同子集配置路由规则，实现将特定的用户访问流量导到特定的版本。
+下面使用VirtualService为Bookinfo的reviews服务的几个不同子集配置路由规则，实现将特定的用户访问流量打到特定的版本。
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -378,8 +378,8 @@ $ kubectl apply -n istio-demo -f virtual-service-reviews-90-10.yaml
 
 ```shell
 $ cd /usr/local/istio-1.8.1
-$ kubectl delete -n virtual-service-reviews-90-10.yaml
-$ kubectl delete -n destination-rule-reviews.yaml
+$ kubectl delete -n istio-demo virtual-service-reviews-90-10.yaml
+$ kubectl delete -n istio-demo destination-rule-reviews.yaml
 ```
 
 若想卸载Bookinfo应用或卸载Istio，可以参看上文“[Istio安装使用](https://olzhy.github.io/posts/istio-get-started.html)”。
