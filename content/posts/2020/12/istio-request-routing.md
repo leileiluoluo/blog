@@ -198,6 +198,85 @@ spec:
           number: 9080
 ```
 
+未指定具体的路由规则前，productpage请求各个服务时使用轮训策略，所以我们刷新productpage页面可以看到Review部分有时为黑色的五星评价等级，有时为红色的五星评价等级，有时无五星评价等级，即流量轮训了reviews服务的各个版本。
+
+![](https://olzhy.github.io/static/images/uploads/2020/12/istio-bookinfo.png#center)
+
+下面我们依照上述介绍，对reviews服务使用Virtual Service及Destination Rule配置不同的路由规则并进行验证测试。
+
+**a）将访问reviews的流量都打到一个版本**
+
+首先，为reviews配置Destination Rule，定义服务的子集并指定负载均衡策略为RANDOM。
+
+```shell
+$ cd /usr/local/istio-1.8.1
+$ cat destination-rule-reviews.yaml
+```
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: reviews
+spec:
+  host: reviews
+  trafficPolicy:
+    loadBalancer:
+      simple: RANDOM
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+  - name: v3
+    labels:
+      version: v3
+```
+
+```shell
+$ kubectl apply -n istio-demo -f destination-rule-reviews.yaml
+```
+
+然后，为reviews配置Virtual Service，将访问reviews的所有流量都打到v1。
+
+```shell
+$ cd /usr/local/istio-1.8.1
+$ cat virtual-service-all-v1.yaml
+```
+
+```yaml
+...
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: reviews
+spec:
+  hosts:
+  - reviews
+  http:
+  - route:
+    - destination:
+        host: reviews
+        subset: v1
+...
+```
+
+```shell
+$ kubectl apply -n istio-demo -f virtual-service-all-v1.yaml
+```
+
+这时，我们刷新productpage页面多次会发现，Review部分始终无五星评价等级。即说明所有访问reviews的流量都打到了v1版本。
+
+![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-v1.png#center)
+
+下面我们看一下如何指定特定用户的访问流量打到特定的版本。
+
+**b）将访问reviews的流量按特定用户打到特定版本**
+
+还采用a）中Destination Rule的配置。
+
 
 > 参考资料
 >
