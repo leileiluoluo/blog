@@ -382,6 +382,8 @@ $ kubectl delete -n virtual-service-reviews-90-10.yaml
 $ kubectl delete -n destination-rule-reviews.yaml
 ```
 
+若想卸载Bookinfo应用或卸载Istio，可以参看上文“[Istio安装使用](https://olzhy.github.io/posts/istio-get-started.html)”。
+
 总结本文，我们首先介绍了支持Istio流量管理的两个主要的资源Virtual Service及Destination Rule，然后对Bookinfo样例使用Virtual Service及Destination Rule进行配置，测试了几个常用的流量转发场景。
 
 
