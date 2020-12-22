@@ -90,7 +90,7 @@ home = ""
 logo = "static/images/self/logo.svg"
 # meta data
 author = "磊磊落落"
-keywords = ["Golang", "Python", "机器学习", "LeetCode", "技术博客"]
+keywords = ["Golang", "Python", "云原生", "机器学习", "LeetCode", "技术博客"]
 description = "磊磊落落，是本人用于记录内心波澜，分享读书感想，思考人生哲学，关注社会百态，梳理计算机专业知识的纯原创站点。"
 # google tag manager
 google_tag_manager = "" # your id
@@ -112,17 +112,18 @@ enable = true
 
 ####################### banner #######################################
 [params.banner]
-bgImage = "images/banner/banner-bg.svg"
+enable = false
+bgImage = "static/images/site/banner-bg.svg"
 title = "Hi, I'm John Smith Doe. <br> I help people make the  worlds best software"
-image = "images/banner/illustration.svg"
+image = "static/images/site/illustration.svg"
 
 
 ######################## call to action ###############################
 [params.cta]
 enable = false
-image = "images/hugo-muscot.svg"
-title = "Get the best hugo templates"
-description = "Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."
+image = "static/images/site/jinshu.png"
+title = "“大丈夫行事，当磊磊落落，如日月皎然。”——《晋书》"
+description = "磊磊落落：IT从业者，生活记录者。博客名称取自《晋书》，勉励本人光明磊落做人做事。该博客是本人用于记录内心波澜，分享读书感想，思考人生哲学，关注社会百态，梳理计算机专业知识的纯原创站点。"
 [params.cta.button]
 enable = false
 label = "Visit Here"
