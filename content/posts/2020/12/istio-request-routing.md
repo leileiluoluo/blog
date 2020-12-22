@@ -277,6 +277,62 @@ $ kubectl apply -n istio-demo -f virtual-service-all-v1.yaml
 
 还采用a）中Destination Rule的配置。
 
+采用如下命令，将a）中reviews的Virtual Service配置删除：
+
+```
+$ cd /usr/local/istio-1.8.1
+$ kubectl delete -n istio-demo -f virtual-service-all-v1.yaml
+```
+
+重新为reviews配置Virtual Service，若登录用户为jason，则将流量打到v2，否则打到v3。
+
+```shell
+$ cd /usr/local/istio-1.8.1
+$ cat virtual-service-reviews-jason-v2-v3.yaml
+```
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: reviews
+spec:
+  hosts:
+  - reviews
+  http:
+  - match: # header满足特定条件则打到v2
+    - headers:
+        end-user:
+          exact: jason
+    route:
+    - destination:
+        host: reviews
+        subset: v2
+  - route: # 不满足如上条件则打到v3
+    - destination:
+        host: reviews
+        subset: v3
+```
+
+```shell
+$ kubectl apply -n istio-demo -f virtual-service-reviews-jason-v2-v3.yaml
+```
+
+这时，当我们使用jason账户登录，刷新productpage页面会发现，Review部分始终显示黑色的五星评价等级（即reviews的v2版本）。
+
+![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-v2.png#center)
+
+而不登录或使用其他账户登录时，Review部分始终显示红色的五星评价等级（即reviews的v3版本）。
+
+![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-v3.png#center)
+
+此即验证了Istio支持通过配置路由规则将特定用户的访问流量打到特定的版本，其原理是将特定用户标识通过前端一层层传下来，然后Envoy根据配置规则实现路由。
+
+下面看一下如何按比例将流量打到同一服务的不同版本。
+
+**c）将访问reviews的流量按比例打到不同的版本**
+
+
 
 > 参考资料
 >
