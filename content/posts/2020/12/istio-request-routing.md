@@ -279,7 +279,7 @@ $ kubectl apply -n istio-demo -f virtual-service-all-v1.yaml
 
 采用如下命令，将a）中reviews的Virtual Service配置删除：
 
-```
+```shell
 $ cd /usr/local/istio-1.8.1
 $ kubectl delete -n istio-demo -f virtual-service-all-v1.yaml
 ```
@@ -332,6 +332,49 @@ $ kubectl apply -n istio-demo -f virtual-service-reviews-jason-v2-v3.yaml
 
 **c）将访问reviews的流量按比例打到不同的版本**
 
+还采用a）中Destination Rule的配置。
+
+采用如下命令，将b）中reviews的Virtual Service配置删除：
+
+```shell
+$ cd /usr/local/istio-1.8.1
+$ kubectl delete -n istio-demo -f virtual-service-reviews-jason-v2-v3.yaml
+```
+
+重新为reviews配置Virtual Service，将90%的流量打到v1，剩余10%的流量打到v2。
+
+```shell
+$ cd /usr/local/istio-1.8.1
+$ cat virtual-service-reviews-90-10.yaml
+```
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: reviews
+spec:
+  hosts:
+    - reviews
+  http:
+  - route:
+    - destination: # 将90%的流量打到v1
+        host: reviews
+        subset: v1
+      weight: 90
+    - destination: # 将10%的流量打到v2
+        host: reviews
+        subset: v2
+      weight: 10
+```
+
+```shell
+$ kubectl apply -n istio-demo -f virtual-service-reviews-90-10.yaml
+```
+
+这时，多次刷新productpage页面，发现Review部分大概率无五星评价等级，小概率显示黑色五星评价等级。
+
+总结本文，我们首先介绍了支持Istio流量管理的两个主要的资源Virtual Service及Destination Rule，然后对Bookinfo样例使用Virtual Service及Destination Rule进行配置，测试了几个常用的流量转发场景。
 
 
 > 参考资料
