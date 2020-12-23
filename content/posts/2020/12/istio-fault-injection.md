@@ -166,10 +166,64 @@ def getProductReviews(product_id, headers):
     return status, {'error': 'Sorry, product reviews are currently unavailable for this book.'}
 ```
 
-所以，如上即是使用Istio进行响应超时注入及定位bug的全过程。
+所以，如上即是使用Istio进行响应延时注入及定位Bug的全过程。
 
 ### 2 服务中止注入
 
+下面，看一下Istio的服务中止注入。依旧采用1中的配置，只对ratings的Virtual Service配置作少量更改，即若访问用户为jason，则让ratings返回500错误，看看前端页面有什么影响。
+
+```shell
+$ cd /usr/local/istio-1.8.1 
+$ kubectl apply -n istio-demo -f samples/bookinfo/networking/virtual-service-ratings-test-abort.yaml
+```
+
+查看配置信息：
+
+```shell
+$ kubectl get virtualservice/ratings -n istio-demo -o yaml
+```
+
+```yaml
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: ratings
+...
+spec:
+  hosts:
+  - ratings
+  http:
+  - fault: # 若访问用户为jason，则返回500错误
+      abort:
+        httpStatus: 500
+        percentage:
+          value: 100
+    match:
+    - headers:
+        end-user:
+          exact: jason
+    route:
+    - destination:
+        host: ratings
+        subset: v1
+  - route: # 其他用户访问不受影响
+    - destination:
+        host: ratings
+        subset: v1
+```
+
+使用jason账号登录productpage页面，发现Review部分显示ratings无法访问错误（Ratings service is currently unavailable）。
+
+![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-productpage-ratings-unavailable.png#center)
+
+测试结束，使用如下命令删除临时路由即可。
+
+```shell
+$ kubectl delete -n istio-demo -f samples/bookinfo/networking/virtual-service-reviews-test-v2.yaml
+$ kubectl delete -n istio-demo -f samples/bookinfo/networking/virtual-service-ratings-test-abort.yaml
+```
+
+总结本文，首先介绍了Istio支持两种故障注入模式（响应延时注入及服务中止注入），可以帮助我们在无侵入服务的情形下测试应用整体的容错能力。然后使用Bookinfo分别测试了如何进行此两种注入。
 
 
 > 参考资料
