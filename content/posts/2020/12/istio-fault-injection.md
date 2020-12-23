@@ -17,6 +17,10 @@ keywords:
 description: Istio流量管理之故障注入 (Fault Injection of Istio Traffic Management)
 
 ---
+在微服务架构中，若一个服务不可用，会不会导致调用其API的上游服务也不可用，上游服务有没有针对该种情形做容错处理，这对应用的整体可用性来说是很关键的。Istio可以在对微服务无侵入的情况下来模拟其发生故障，以帮助我们测试应用整体的容错能力。
+
+Istio主要提供两种故障注入：响应延迟及拒绝服务。
+
 
 
 
