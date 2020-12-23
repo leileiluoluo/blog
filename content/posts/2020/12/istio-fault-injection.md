@@ -88,7 +88,7 @@ spec:
 |jason | productpage -> reviews:v2 -> ratings:v1 |
 |其他   | productpage -> reviews:v1 -> ratings:v1 |
 
-我们翻阅reviews的源码，发现reviews调用ratings时，若调用黑色五星评价时（即v2版本），超时时间为10s，否则为2.5秒。
+我们翻阅reviews的源码，发现reviews调用ratings时，若调用黑色五星评价时（即reviews使用v2版本时），超时时间为10s，否则为2.5秒。
 
 [LibertyRestEndpoint.java#L132](https://github.com/istio/istio/blob/master/samples/bookinfo/src/reviews/reviews-application/src/main/java/application/rest/LibertyRestEndpoint.java#L132)
 ```java
