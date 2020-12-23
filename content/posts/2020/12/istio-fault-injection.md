@@ -88,7 +88,20 @@ spec:
 |jason | productpage -> reviews:v2 -> ratings:v1 |
 |其他   | productpage -> reviews:v1 -> ratings:v1 |
 
-下面，我们尝试对ratings植入响应延时故障，即为ratings配置Virtual Service，若访问用户为jason，延迟ratings的响应时间为7s，而其他用户不受影响。
+我们翻越reviews的源码，发现reviews调用ratings时，若调用黑色五星评价时（即v2版本），超时时间为10s，否则为2.5秒。
+
+[LibertyRestEndpoint.java#L132](https://github.com/istio/istio/blob/master/samples/bookinfo/src/reviews/reviews-application/src/main/java/application/rest/LibertyRestEndpoint.java#L132)
+```java
+private JsonObject getRatings(String productId, HttpHeaders requestHeaders) {
+    ...
+    Integer timeout = star_color.equals("black") ? 10000 : 2500;
+    ...
+}
+```
+
+jason使用的reviews正是v2版本，我们尝试将ratings的响应时间改为7s，因小于reviews 10s的超时时间，我们期待本次更改对jason的访问不受影响。
+
+下面，即按照我们的设想为ratings配置Virtual Service，若访问用户为jason，延迟ratings的响应时间为7s，而其他用户访问不受影响。
 
 ```shell
 $ cd /usr/local/istio-1.8.1 
@@ -133,6 +146,27 @@ spec:
 这时，我们使用jason账户登录productpage进行访问时，发现Review部分出错（Sorry, product reviews are currently unavailable for this book.）。
 
 ![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-unavailable.png#center)
+
+问题出现在哪里了呢？我们翻越productpage的源码，发现这里将调用reviews的超时时间设置小了（超时时间为3s，若失败则重试一次，所以总的超时时间为6s）。
+
+[productpage.py#L382](https://github.com/istio/istio/blob/master/samples/bookinfo/src/productpage/productpage.py#L382)
+```python
+def getProductReviews(product_id, headers):
+    # Do not remove. Bug introduced explicitly for illustration in fault injection task
+    # TODO: Figure out how to achieve the same effect using Envoy retries/timeouts
+    for _ in range(2):
+        try:
+            url = reviews['name'] + "/" + reviews['endpoint'] + "/" + str(product_id)
+            res = requests.get(url, headers=headers, timeout=3.0)
+        except BaseException:
+            res = None
+        if res and res.status_code == 200:
+            return 200, res.json()
+    status = res.status_code if res is not None and res.status_code else 500
+    return status, {'error': 'Sorry, product reviews are currently unavailable for this book.'}
+```
+
+所以，如上即是使用Istio进行响应超时注入及定位bug的全过程。
 
 ### 2 服务中止注入
 
