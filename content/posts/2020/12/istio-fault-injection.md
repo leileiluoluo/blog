@@ -19,7 +19,7 @@ description: Istio流量管理之故障注入 (Fault Injection of Istio Traffic 
 ---
 在微服务架构中，若一个服务不可用，会不会导致调用其API的上游服务也不可用，上游服务有没有针对该种情形做容错处理，这对应用的整体可用性来说是很关键的。Istio可以在对微服务无侵入的情况下来模拟其发生故障，以帮助我们测试应用整体的容错能力。
 
-Istio主要使用Virtual Service提供两种故障注入能力：响应延迟及服务中止。
+Istio主要使用Virtual Service提供两种故障注入能力：响应延迟与服务中止。
 
 - 响应延迟
 
@@ -218,7 +218,7 @@ $ kubectl delete -n istio-demo -f samples/bookinfo/networking/virtual-service-re
 $ kubectl delete -n istio-demo -f samples/bookinfo/networking/virtual-service-ratings-test-abort.yaml
 ```
 
-总结本文，首先介绍了Istio支持两种故障注入模式（响应延时注入及服务中止注入），可以帮助我们在无侵入服务的情形下测试应用整体的容错能力。然后使用Bookinfo分别测试了如何进行此两种注入。
+总结本文，首先介绍了Istio支持两种故障注入模式（响应延时注入与服务中止注入），可以帮助我们在无侵入服务的情形下测试应用整体的容错能力。然后使用Bookinfo分别测试了如何进行此两种注入。
 
 
 > 参考资料
