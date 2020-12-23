@@ -19,6 +19,10 @@ wip_template:
   * [中國哲學書電子化計劃](https://ctext.org/zh)
   * [易學網](https://www.eee-learning.com/)
 
+**人文博客**
+
+  * [土木坛子](https://tumutanzi.com/)
+
 **技术博客**
 
   * [The Old New Thing](https://devblogs.microsoft.com/oldnewthing/)
