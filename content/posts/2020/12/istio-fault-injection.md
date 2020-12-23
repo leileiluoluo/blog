@@ -101,7 +101,7 @@ private JsonObject getRatings(String productId, HttpHeaders requestHeaders) {
 
 jason使用的reviews正是v2版本，我们尝试将ratings的响应时间改为7s，因小于reviews 10s的超时时间，我们期待本次更改对jason的访问不受影响。
 
-下面，即按照我们的设想为ratings配置Virtual Service，若访问用户为jason，延迟ratings的响应时间为7s，而其他用户访问不受影响。
+下面，即按照如上设想为ratings配置Virtual Service，若访问用户为jason，延迟ratings的响应时间为7s，而其他用户访问不受影响。
 
 ```shell
 $ cd /usr/local/istio-1.8.1 
