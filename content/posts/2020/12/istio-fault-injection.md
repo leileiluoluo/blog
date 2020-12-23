@@ -88,7 +88,7 @@ spec:
 |jason | productpage -> reviews:v2 -> ratings:v1 |
 |其他   | productpage -> reviews:v1 -> ratings:v1 |
 
-我们翻越reviews的源码，发现reviews调用ratings时，若调用黑色五星评价时（即v2版本），超时时间为10s，否则为2.5秒。
+我们翻阅reviews的源码，发现reviews调用ratings时，若调用黑色五星评价时（即v2版本），超时时间为10s，否则为2.5秒。
 
 [LibertyRestEndpoint.java#L132](https://github.com/istio/istio/blob/master/samples/bookinfo/src/reviews/reviews-application/src/main/java/application/rest/LibertyRestEndpoint.java#L132)
 ```java
@@ -147,22 +147,17 @@ spec:
 
 ![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-unavailable.png#center)
 
-问题出现在哪里了呢？我们翻越productpage的源码，发现这里将调用reviews的超时时间设置小了（超时时间为3s，若失败则重试一次，所以总的超时时间为6s）。
+问题出现在哪里了呢？我们翻阅productpage的源码，发现这里将调用reviews的超时时间设置小了（超时时间为3s，若失败则重试一次，所以总的超时时间为6s）。
 
 [productpage.py#L382](https://github.com/istio/istio/blob/master/samples/bookinfo/src/productpage/productpage.py#L382)
 ```python
 def getProductReviews(product_id, headers):
     # Do not remove. Bug introduced explicitly for illustration in fault injection task
-    # TODO: Figure out how to achieve the same effect using Envoy retries/timeouts
     for _ in range(2):
         try:
-            url = reviews['name'] + "/" + reviews['endpoint'] + "/" + str(product_id)
+        ...
             res = requests.get(url, headers=headers, timeout=3.0)
-        except BaseException:
-            res = None
-        if res and res.status_code == 200:
-            return 200, res.json()
-    status = res.status_code if res is not None and res.status_code else 500
+        ...
     return status, {'error': 'Sorry, product reviews are currently unavailable for this book.'}
 ```
 
