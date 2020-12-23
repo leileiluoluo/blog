@@ -99,7 +99,7 @@ private JsonObject getRatings(String productId, HttpHeaders requestHeaders) {
 }
 ```
 
-jason使用的reviews正是v2版本，我们尝试将ratings的响应时间改为7s，因小于reviews 10s的超时时间，我们期待本次更改对jason的访问不受影响。
+jason使用的reviews正是v2版本，尝试将ratings的响应时间改为7s，因其小于reviews 10s的超时时间，我们期待本次更改对jason的访问不受影响。
 
 下面，即按照如上设想为ratings配置Virtual Service，若访问用户为jason，延迟ratings的响应时间为7s，而其他用户访问不受影响。
 
@@ -143,11 +143,11 @@ spec:
         subset: v1
 ```
 
-这时，我们使用jason账户登录productpage进行访问时，发现Review部分出错（Sorry, product reviews are currently unavailable for this book.）。
+这时，使用jason账户登录productpage进行访问时，发现Review部分出错（Sorry, product reviews are currently unavailable for this book.）。
 
 ![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-unavailable.png#center)
 
-问题出现在哪里了呢？我们翻阅productpage的源码，发现这里将调用reviews的超时时间设置小了（超时时间为3s，若失败则重试一次，所以总的超时时间为6s）。
+问题出现在哪里了呢？翻阅productpage的源码，发现这里将调用reviews的超时时间设置小了（超时时间为3s，若失败则重试一次，所以总的超时时间为6s）。
 
 [productpage.py#L382](https://github.com/istio/istio/blob/master/samples/bookinfo/src/productpage/productpage.py#L382)
 ```python
