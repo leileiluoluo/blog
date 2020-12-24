@@ -9,7 +9,7 @@ wip_template:
 
 ---
 
-[Go语言中文网](https://studygolang.com/) | [Tony Bai](https://tonybai.com/) | [Jing blog](https://jingine.com/) | [Xiaobin’s Blog](https://lxb.wiki/)
+[Go语言中文网](https://studygolang.com/) | [Tony Bai](https://tonybai.com/) | [Jing blog](https://jingine.com/) | [Xiaobin’s Blog](https://lxb.wiki/) | [土木坛子](https://tumutanzi.com/)
 
 ----------------------------------------------
 **传统文化**
@@ -21,7 +21,7 @@ wip_template:
 
 **人文博客**
 
-  * [土木坛子](https://tumutanzi.com/)
+  * [程可八八](https://chenghouwen.com/)
 
 **技术博客**
 
