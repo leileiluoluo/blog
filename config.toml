@@ -133,6 +133,10 @@ link = "https://gethugothemes.com/shop/"
 [params.reward]
 enable = true
 
+# comment
+[params.comment]
+enable = false
+
 
 ############################## Social Site ##########################
 #[[params.social]]

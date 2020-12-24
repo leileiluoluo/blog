@@ -42,10 +42,12 @@
       </div>
       {{ end }}
 
-      <!-- comments -->
-      <script src="https://utteranc.es/client.js" repo="olzhy/olzhy.github.io" issue-term="pathname"
-        theme="github-light" crossorigin="anonymous" async>
+      {{ if .Site.Params.comment.enable }}
+        <!-- comments -->
+        <script src="https://utteranc.es/client.js" repo="olzhy/olzhy.github.io" issue-term="pathname"
+          theme="github-light" crossorigin="anonymous" async>
         </script>
+      {{ end }}
     </div>
   </div>
 </section>
