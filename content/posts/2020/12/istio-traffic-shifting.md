@@ -19,7 +19,7 @@ description: Istio流量管理之流量转移 (Traffic Shifting of Istio Traffic
 ---
 在日常的持续部署中，我们一般使用滚动升级的方式来进行微服务升级。若使用Kubernetes容器编排平台进行微服务滚动升级，其一般通过控制实例数的方式来实现。将旧版本下线，将新版本启动，新实例健康检查通过后，统一将流量打到新版本。
 
-而使用Istio，不用控制实例数，且可以更细粒度的控制流量打到各个版本的百分比，从而实现按比例将流量逐渐迁移到新的版本来实现升级。
+而使用Istio，不用控制实例数，且可以更细粒度的控制流量打到各个版本的百分比，从而实现按比例将流量逐渐迁移到新版本来实现升级。
 
 下面使用Bookinfo样例看一下Istio的流量转移如何使用。我们知道reviews有三个版本，假定我们想从v1版本升级到v3版本。（关于Istio的安装及Bookinfo样例的部署，请参看上文“[Istio安装使用](https://olzhy.github.io/posts/istio-get-started.html)”）
 
