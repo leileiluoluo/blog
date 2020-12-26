@@ -183,7 +183,143 @@ two hello
 
 ### 3 使用Istio对tcp-echo作流量分配
 
+使用Istio自带的描述文件为tcp-echo配置Gateway，Virtual Service，Destination Rule。
 
+描述文件[samples/tcp-echo/tcp-echo-all-v1.yaml](https://raw.githubusercontent.com/istio/istio/release-1.8/samples/tcp-echo/tcp-echo-all-v1.yaml)内容如下，tcp-echo会通过Gateway以31400端口提供v1版本的TCP服务。
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: tcp-echo-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 31400
+      name: tcp
+      protocol: TCP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: tcp-echo-destination
+spec:
+  host: tcp-echo
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: tcp-echo
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - tcp-echo-gateway
+  tcp:
+  - match:
+    - port: 31400
+    route:
+    - destination:
+        host: tcp-echo
+        port:
+          number: 9000
+        subset: v1
+```
+
+应用该配置文件：
+
+```shell
+$ kubectl apply -n istio-demo -f samples/tcp-echo/tcp-echo-all-v1.yaml
+```
+
+查看Gateway外部访问IP及端口，本文使用Docker Desktop内置Kubernetes，所以外部访问IP即为localhost。
+
+```shell
+$ kubectl get service/istio-ingressgateway -n istio-system
+```
+
+以Gateway地址请求tcp-echo 10次，发现输出前缀均为“one”，命令如下。
+
+```shell
+$ for i in $(seq 1 10); do echo hello | nc localhost 31400; done
+
+one hello
+one hello
+one hello
+one hello
+one hello
+one hello
+one hello
+one hello
+one hello
+one hello
+```
+
+下面尝试将80%的流量打到v1，20%的流量打到v2。描述文件[samples/tcp-echo/tcp-echo-20-v2.yaml](https://raw.githubusercontent.com/istio/istio/release-1.8/samples/tcp-echo/tcp-echo-20-v2.yaml)内容如下：
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: tcp-echo
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - tcp-echo-gateway
+  tcp:
+  - match:
+    - port: 31400
+    route:
+    - destination:
+        host: tcp-echo
+        port:
+          number: 9000
+        subset: v1
+      weight: 80
+    - destination:
+        host: tcp-echo
+        port:
+          number: 9000
+        subset: v2
+      weight: 20
+```
+
+应用配置文件命令如下：
+
+```shell
+$ kubectl apply -n istio-demo -f samples/tcp-echo/tcp-echo-20-v2.yaml
+```
+
+然后再次以Gateway地址请求tcp-echo 10次，发现前缀大概率为“one”，命令如下。
+
+```shell
+$ for i in $(seq 1 10); do echo hello | nc localhost 31400; done
+
+two hello
+one hello
+two hello
+one hello
+one hello
+one hello
+one hello
+one hello
+one hello
+one hello
+```
+
+总结本文，首先介绍了Istio除了作7层流量转移外，还支持4层流量转移。然后对tcp-echo样例分别进行了本地测试，Kubernetes部署，及Istio流量转移测试。
 
 
 > 参考资料
