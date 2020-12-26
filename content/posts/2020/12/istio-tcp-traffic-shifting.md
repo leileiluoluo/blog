@@ -319,6 +319,14 @@ one hello
 one hello
 ```
 
+测试结束，使用如下命令删除sleep，tcp-echo应用，及路由配置。
+
+```
+$ kubectl delete -n istio-demo -f samples/tcp-echo/tcp-echo-services.yaml
+$ kubectl delete -n istio-demo -f samples/sleep/sleep.yaml
+$ kubectl delete -n istio-demo -f samples/tcp-echo/tcp-echo-all-v1.yaml
+```
+
 总结本文，首先介绍了Istio除了作7层流量转移外，还支持4层流量转移。然后对tcp-echo样例分别进行了本地测试，Kubernetes部署，及Istio流量转移测试。
 
 
