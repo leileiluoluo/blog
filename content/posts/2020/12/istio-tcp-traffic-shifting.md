@@ -179,7 +179,7 @@ two hello
 
 请求tcp-echo 10次，前缀有时为“one”，有时为“two”，说明有时请求到版本v1，有时请求到版本v2。
 
-因Kubernetes无法做流量按比例分配，下面使用Istio来尝试实现以下。
+因Kubernetes无法做流量按比例分配，下面使用Istio来尝试实现一下。
 
 ### 3 使用Istio对tcp-echo作流量分配
 
