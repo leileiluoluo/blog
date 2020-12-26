@@ -321,7 +321,7 @@ one hello
 
 测试结束，使用如下命令删除sleep，tcp-echo应用，及路由配置。
 
-```
+```shell
 $ kubectl delete -n istio-demo -f samples/tcp-echo/tcp-echo-services.yaml
 $ kubectl delete -n istio-demo -f samples/sleep/sleep.yaml
 $ kubectl delete -n istio-demo -f samples/tcp-echo/tcp-echo-all-v1.yaml
