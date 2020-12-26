@@ -65,7 +65,7 @@ hello world
 
 可以看到服务端拼接了前缀“hello”，返回“hello world”。
 
-本地运行没问题，下面我们尝试使用Istio samples文件夹下自带的部署文件将其部署到Docker Desktop Kubernetes集群。
+本地测试完成，下面我们尝试使用Istio samples文件夹下自带的部署文件将其部署到Docker Desktop Kubernetes集群。
 
 ### 2 tcp-echo Kubernetes部署
 
