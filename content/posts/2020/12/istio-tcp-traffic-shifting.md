@@ -153,7 +153,7 @@ spec:
         - containerPort: 9001
 ```
 
-tcp-echo部署完成，因为我们需要一个带nc命令的Pod来测试tcp-echo。所以下面部署一下Istio自带的sleep应用，该应用包含基础的命名curl、nc等，就是用来辅助我们做测试的。
+tcp-echo部署完成，因为我们需要一个带nc命令的Pod来测试tcp-echo。所以下面部署一下Istio自带的sleep应用，该应用包含基础命名curl、nc等，就是用来辅助我们做测试的。
 
 ```shell
 $ cd /usr/local/istio-1.8.1
