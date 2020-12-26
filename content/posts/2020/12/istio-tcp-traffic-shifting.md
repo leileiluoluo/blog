@@ -76,7 +76,7 @@ $ cd /usr/local/istio-1.8.1
 $ kubectl apply -n istio-demo -f samples/tcp-echo/tcp-echo-services.yaml
 ```
 
-可以看到，该部署文件部署了两个版本的Deployment，版本v1的输出前缀为“one”，版本v2的输出前缀为“two”。每个Deployment暴露两个端口9000与9001，通过同一个Service对外提供服务。访问Service时，会轮训两个版本的tcp-echo。
+可以看到，该部署文件有两个Deployment，对应两个版本的tcp-echo，版本v1的输出前缀为“one”，版本v2的输出前缀为“two”。每个Deployment暴露两个端口9000与9001，通过同一个Service对外提供服务。访问Service时，会轮训两个版本的tcp-echo。
 
 [samples/tcp-echo/tcp-echo-services.yaml](https://raw.githubusercontent.com/istio/istio/release-1.8/samples/tcp-echo/tcp-echo-services.yaml)
 ```yaml
