@@ -17,6 +17,8 @@ keywords:
 description: Istio流量管理之熔断 (Circuit Breaking of Istio Traffic Management)
 
 ---
+熔断是创建弹性微服务应用的重要特性。
+
 
 
 > 参考资料
