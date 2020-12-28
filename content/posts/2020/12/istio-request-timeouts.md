@@ -49,7 +49,7 @@ spec:
 heredoc> EOF
 ```
 
-打开http://$GATEWAY_URL/productpage，刷新几次，Review部分总是显示黑色五星评价，说明reviews已使用v2版本。
+打开`http://$GATEWAY_URL/productpage`，刷新几次，Review部分总是显示黑色五星评价，说明reviews已使用v2版本。
 
 ![](https://olzhy.github.io/static/images/uploads/2020/12/istio-bookinfo.png#center)
 
