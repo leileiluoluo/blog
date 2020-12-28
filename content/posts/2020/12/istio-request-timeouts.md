@@ -143,6 +143,15 @@ spec:
 
 这是因为reviews实际调用ratings完成后返回得需2s，而现在0.5秒即超时返回了，productpage接到超时响应后，又重试一次，所以productpage页面耗时1s。
 
+测试结束，使用如下命令删除Destination Rule及临时路由。
+
+```shell
+$ cd /usr/local/istio-1.8.1
+$ kubectl delete -n istio-demo -f samples/bookinfo/networking/destination-rule-all.yaml
+$ kubectl delete virtualservice/reviews -n istio-demo
+$ kubectl delete virtualservice/ratings -n istio-demo
+```
+
 总结本文，介绍了Istio可以覆盖代码设置的超时时间，然后使用Bookinfo样例对该特性进行了测试。
 
 
