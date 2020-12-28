@@ -141,7 +141,7 @@ spec:
 
 ![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-timeout-debug.png#center)
 
-这是因为reviews实际调用ratings完成后返回得需2s，而现在0.5秒即超时返回了，productpage接到超时响应后，又重试一次，所以productpage页面耗时1s。
+这是因为reviews实际调用ratings完成后返回得需2s，而现在0.5秒即超时了，productpage接到超时响应后，又重试一次，所以productpage页面耗时1s。
 
 测试结束，使用如下命令删除Destination Rule及临时路由。
 
