@@ -143,6 +143,7 @@ spec:
 
 这是因为reviews实际调用ratings完成后返回得需2s，而现在0.5秒即超时返回了，productpage接到超时响应后，又重试一次，所以productpage页面耗时1s。
 
+总结本文，介绍了Istio可以覆盖代码设置的超时时间，然后使用Bookinfo样例对该特性进行了测试。
 
 
 > 参考资料
