@@ -139,6 +139,8 @@ $ kubectl exec fortio-deploy-576dbdfbc4-8gr9c -c istio-proxy -n istio-demo -- pi
 cluster.outbound|8000||httpbin.istio-demo.svc.cluster.local.upstream_rq_pending_overflow: 5
 ```
 
+此即说明触发了httpbin的熔断设置。
+
 ### 4 环境清理
 
 测试完成，使用如下命令对httpbin及fortio进行卸载，删除临时destinationrule。
