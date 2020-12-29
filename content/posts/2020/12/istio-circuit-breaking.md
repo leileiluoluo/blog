@@ -19,6 +19,8 @@ description: Istio流量管理之熔断 (Circuit Breaking of Istio Traffic Manag
 ---
 熔断是创建弹性微服务应用的重要特性，使用熔断可以对并发连接太多，请求过频等做出主动防御，避免服务链条因单一故障问题而出现雪崩效应。
 
+因熔断设置针对的是具体的目标主机，所以Istio使用Destination Rule来进行配置。
+
 本文使用Istio自带的httpbin样例来设定熔断配置，然后使用fortio客户端模拟并发请求来触发熔断。关于Istio安装等环境准备，请参阅“[Istio安装使用](https://olzhy.github.io/posts/istio-get-started.html)”。
 
 ### 1 httpbin样例部署
