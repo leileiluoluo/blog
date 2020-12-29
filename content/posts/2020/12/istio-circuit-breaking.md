@@ -17,9 +17,13 @@ keywords:
 description: Istio流量管理之熔断 (Circuit Breaking of Istio Traffic Management)
 
 ---
-熔断是创建弹性微服务应用的重要特性。
+熔断是创建弹性微服务应用的重要特性，使用熔断可以对并发连接太多，请求过频等做出主动防御，避免服务链条因单一故障问题而出现雪崩效应。
 
 本文使用Istio自带的httpbin样例来设定熔断配置，然后使用fortio客户端模拟并发请求来触发熔断。
+
+### 1 响应延迟注入
+
+### 1 响应延迟注入
 
 
 
