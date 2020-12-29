@@ -137,6 +137,16 @@ $ kubectl exec fortio-deploy-576dbdfbc4-8gr9c -c istio-proxy -n istio-demo -- pi
 cluster.outbound|8000||httpbin.istio-demo.svc.cluster.local.upstream_rq_pending_overflow: 5
 ```
 
+### 4 环境清理
+
+测试完成，使用如下命令对httpbin及fortio进行卸载，删除临时destinationrule。
+
+```shell
+$ kubectl delete -n istio-demo -f samples/httpbin/httpbin.yaml
+$ kubectl delete -n istio-demo -f samples/httpbin/sample-client/fortio-deploy.yaml
+$ kubectl delete destinationrule/httpbin -n istio-demo
+```
+
 总结本文，首先介绍了Istio支持在Destination Rule上配置熔断，然后对httpbin样例配置了熔断，并使用fortio客户端对其进行了测试。
 
 
