@@ -23,6 +23,10 @@ wip_template:
 
   * [程可八八](https://chenghouwen.com/)
 
+**趣站收藏**
+
+  * [个站商店](https://storeweb.cn/)
+
 **技术博客**
 
   * [The Old New Thing](https://devblogs.microsoft.com/oldnewthing/)
@@ -78,9 +82,7 @@ wip_template:
   * [Gaia](https://github.com/gaia-pipeline/gaia)
   * [Realize](https://github.com/oxequa/realize)
   * [Go Tests](https://github.com/cweill/gotests)
-  * [Go语言爱好者周刊：第1期](https://github.com/polaris1119/golangweekly/blob/master/docs/issue-001.md)
-  * [Go语言爱好者周刊：第2期](https://github.com/polaris1119/golangweekly/blob/master/docs/issue-002.md)
-  
+
 **云原生相关**
  
   * [云原生实验室](https://fuckcloudnative.io/)
