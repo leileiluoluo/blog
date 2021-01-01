@@ -21,6 +21,7 @@ wip_template:
 
 **人文博客**
 
+  * [赫赫文王](https://kqh.me/)
   * [程可八八](https://chenghouwen.com/)
 
 **趣站收藏**
