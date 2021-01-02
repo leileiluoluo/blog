@@ -3,7 +3,7 @@ title: Istio流量管理之Ingress Gateway
 author: olzhy
 type: post
 date: 2021-01-01T08:07:25+08:00
-url: /posts/istio-ingress-gateway.html
+url: /posts/istio-ingress-gateways.html
 categories:
   - 计算机
 tags:
@@ -14,7 +14,7 @@ keywords:
   - Service Mesh
   - 云原生
   - Istio
-description: Istio流量管理之Ingress Gateway (Ingress Gateway of Istio Traffic Management)
+description: Istio流量管理之Ingress Gateway (Ingress Gateways of Istio Traffic Management)
 
 ---
 Istio Ingress Gateway是允许外部流量进入Istio服务网格的边缘服务。其比Kubernetes Ingress更具扩展性。且使用Istio Ingress Gateway，使得Istio对于入口流量同样具有策略控制能力及可观察性。
@@ -195,6 +195,6 @@ $ kubectl delete -n istio-demo -f samples/httpbin/httpbin.yaml
 
 > 参考资料
 >
-> [1] [Istio Ingress Gateway](https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-control/)
+> [1] [Istio Ingress Gateways](https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-control/)
 >
 > [2] [Istio Traffic Management](https://istio.io/latest/docs/concepts/traffic-management/)
