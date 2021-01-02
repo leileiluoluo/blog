@@ -22,6 +22,6 @@ description: Istio流量管理之安全Gateway (Secure Gateways of Istio Traffic
 
 > 参考资料
 >
-> [1] [Istio 安全Gateway](https://istio.io/latest/docs/tasks/traffic-management/ingress/secure-ingress/)
+> [1] [Istio Secure Gateways](https://istio.io/latest/docs/tasks/traffic-management/ingress/secure-ingress/)
 >
 > [2] [Istio Traffic Management](https://istio.io/latest/docs/concepts/traffic-management/)
