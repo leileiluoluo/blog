@@ -327,7 +327,7 @@ $ kubectl delete deploy --ignore-not-found=true httpbin helloworld-v1 -n istio-d
 $ kubectl delete svc --ignore-not-found=true httpbin helloworld-v1 -n istio-demo
 ```
 
-总结本文，首先介绍了Istio Ingress Gateway支持简单及双向TLS访问；然后使用httpbin样例测试了简单TLS访问；引入helloworld-v1样例测试了多Host TLS访问。最后使用httpbin样例测试了双向TLS访问。
+总结本文，首先介绍了Istio Ingress Gateway支持简单及双向TLS访问；然后使用httpbin样例测试了简单TLS访问；引入helloworld-v1样例测试了多Host TLS访问；最后使用httpbin样例测试了双向TLS访问。
 
 
 
