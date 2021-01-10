@@ -22,4 +22,4 @@ description: Istio证书管理之植入CA证书 (Plug in CA Certificates of Isti
 
 > 参考资料
 >
-> [1] [Istio Secure Gateways](https://istio.io/latest/docs/tasks/security/cert-management/plugin-ca-cert/)
+> [1] [Istio Plug in CA Certificates](https://istio.io/latest/docs/tasks/security/cert-management/plugin-ca-cert/)
