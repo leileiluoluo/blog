@@ -20,7 +20,7 @@ description: Istio证书管理之植入CA证书 (Plug in CA Certificates of Isti
 
 ![](https://olzhy.github.io/static/images/uploads/2021/01/ca-hierarchy.svg#center)
 
-         （图片引自[Plug in CA Certificates](https://istio.io/latest/docs/tasks/security/cert-management/plugin-ca-cert/)）
+ 图片引自([Plug in CA Certificates](https://istio.io/latest/docs/tasks/security/cert-management/plugin-ca-cert/))
 
 接下来即介绍如何为Istio生成及植入CA。
 
