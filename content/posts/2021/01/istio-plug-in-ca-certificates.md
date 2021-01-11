@@ -116,13 +116,54 @@ heredoc> EOF
 $ kubectl exec "$(kubectl get pod -l app=sleep -n istio-demo -o jsonpath={.items..metadata.name})" -c istio-proxy -n istio-demo -- openssl s_client -showcerts -connect httpbin.istio-demo:8000 > httpbin-proxy-cert.txt
 ```
 
-然后，得到如下错误“`verify error:num=19:self signed certificate in certificate chain`”，符合预期。
+然后，得到错误“`verify error:num=19:self signed certificate in certificate chain`”，符合预期。
 
+查看文件`httpbin-proxy-cert.txt`，发现里边有4套证书，将其拷贝出来，分别以`proxy-cert-i.pem (i=1,2,3,4)`命名。
 
+然后，使用如下命令校验根证书是否与管理员所签发的一致。
+
+```shell
+$ openssl x509 -in certs/cluster1/root-cert.pem -text -noout > /tmp/root-cert.crt.txt
+$ openssl x509 -in ./proxy-cert-3.pem -text -noout > /tmp/pod-root-cert.crt.txt
+$ diff -s /tmp/root-cert.crt.txt /tmp/pod-root-cert.crt.txt
+Files /tmp/root-cert.crt.txt and /tmp/pod-root-cert.crt.txt are identical
+```
+
+接着，使用如下命令校验CA证书是否与管理员所签发的一致。
+
+```shell
+$ openssl x509 -in certs/cluster1/ca-cert.pem -text -noout > /tmp/ca-cert.crt.txt
+$ openssl x509 -in ./proxy-cert-2.pem -text -noout > /tmp/pod-cert-chain-ca.crt.txt
+$ diff -s /tmp/ca-cert.crt.txt /tmp/pod-cert-chain-ca.crt.txt
+Files /tmp/ca-cert.crt.txt and /tmp/pod-cert-chain-ca.crt.txt are identical
+```
+
+最后，使用如下命令校验根证书的证书链与工作负载的证书链是否一致。
+
+```shell
+$ openssl verify -CAfile <(cat certs/cluster1/ca-cert.pem certs/cluster1/root-cert.pem) ./proxy-cert-1.pem
+./proxy-cert-1.pem: OK
+```
 
 ### 4 环境清理
 
+使用如下命令移除证书。
 
+```shell
+$ cd /usr/local/istio-1.8.1
+$ rm proxy-cert-*.pem
+$ rm httpbin-proxy-cert.txt
+$ rm -rf certs
+```
+
+使用如下命令移除Secret `cacerts`，删除namespace `istio-demo`，`istio-system`。
+
+```shell
+$ kubectl delete secret cacerts -n istio-system
+$ kubectl delete ns istio-demo istio-system
+```
+
+总结本文，介绍了Istio的CA如何签发，然后使用httpbin样例作了测试。
 
 
 > 参考资料
