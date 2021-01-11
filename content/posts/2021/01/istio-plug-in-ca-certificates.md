@@ -20,6 +20,8 @@ description: Istio证书管理之植入CA证书 (Plug in CA Certificates of Isti
 
 ![](https://olzhy.github.io/static/images/uploads/2021/01/ca-hierarchy.svg#center)
 
+（图片引自[Plug in CA Certificates](https://istio.io/latest/docs/tasks/security/cert-management/plugin-ca-cert/)）
+
 接下来即介绍如何为Istio生成及植入CA。
 
 ### 1 为集群植入证书及私钥
@@ -105,6 +107,18 @@ heredoc> EOF
 ```
 
 ### 3 校验证书
+
+下面，我们将验证工作负载是否使用了我们所植入的CA所签发的证书。
+
+首先，等待`20s`，我们所配置的mTLS规则生效。然后使用如下命令进入`sleep`的`istio-proxy`Sidecar来尝试获取`httpbin`的证书链。
+
+```shell
+$ kubectl exec "$(kubectl get pod -l app=sleep -n istio-demo -o jsonpath={.items..metadata.name})" -c istio-proxy -n istio-demo -- openssl s_client -showcerts -connect httpbin.istio-demo:8000 > httpbin-proxy-cert.txt
+```
+
+然后，得到如下错误“`verify error:num=19:self signed certificate in certificate chain`”，符合预期。
+
+
 
 ### 4 环境清理
 
