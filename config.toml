@@ -135,7 +135,7 @@ enable = true
 
 # comment
 [params.comment]
-enable = false
+enable = true
 
 
 ############################## Social Site ##########################
