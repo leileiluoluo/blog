@@ -35,7 +35,7 @@ docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:3.141
 
 **2 Golang Selenium 测试代码**
   
-测试场景就选我的博客吧：打开博客搜索页，搜索框输入`istio`，应有一条博文，此外将搜索结果截图保存。
+测试场景就选我的博客吧：打开博客首页`leileiluoluo.com`，点击搜索按钮，搜索框输入`istio`关键字后回车，应至少有一条结果，此外将搜索结果截图保存。
 
 本文选择Golang的selenium包`github.com/tebeka/selenium`。
   
@@ -55,13 +55,21 @@ import (
 	"io/ioutil"
 	"log"
 	"testing"
+	"time"
 
 	"github.com/tebeka/selenium"
 )
 
 var (
-	browserName = flag.String("browser", "chrome", "browser name")
-	gridUrl     = flag.String("grid", "http://localhost:4444/wd/hub", "grid url")
+	browserName                    = flag.String("browser", "chrome", "browser name")
+	gridUrl                        = flag.String("grid", "http://localhost:4444/wd/hub", "grid url")
+	blogURL                        = "https://leileiluoluo.com/"
+	searchButtonIdSelector         = "searchOpen"
+	keywordInputIdSelector         = "search-query"
+	searchResultLoadingCssSelector = "#search-results #loadingDiv"
+	searchResultCssSelector        = "#search-results .border-bottom"
+
+	keyword = "istio"
 )
 
 var driver selenium.WebDriver
@@ -95,31 +103,38 @@ func screenshot(filename string) {
 }
 
 func TestSearch(t *testing.T) {
-	// open search page
-	err := driver.Get("https://leileiluoluo.com/")
+	// open blog
+	err := driver.Get(blogURL)
 	if nil != err {
 		t.Errorf("search page open error, err: %s", err)
 	}
 
-	// type keyword
-	elem, err := driver.FindElement(selenium.ByID, "s")
+	// click search button
+	elem, err := driver.FindElement(selenium.ByID, searchButtonIdSelector)
 	if nil != err {
-		t.Errorf("find element error, err: %s", err)
-	}
-	err = elem.SendKeys("istio")
-	if nil != err {
-		t.Errorf("send keys error, err: %s", err)
-	}
-
-	// click search
-	elem, err = driver.FindElement(selenium.ByID, "searchsubmit")
-	if nil != err {
-		t.Errorf("find element error, err: %s", err)
+		t.Errorf("search button not found, err: %s", err)
 	}
 	elem.Click()
 
+	// type keyword and enter
+	elem, err = driver.FindElement(selenium.ByID, keywordInputIdSelector)
+	if nil != err {
+		t.Errorf("keyword input element not found, err: %s", err)
+	}
+	elem.SendKeys(keyword + "\n")
+
+	// wait until search result displayed
+	driver.WaitWithTimeout(func(driver selenium.WebDriver) (bool, error) {
+		elem, err = driver.FindElement(selenium.ByCSSSelector, searchResultLoadingCssSelector)
+		if nil != err {
+			return false, nil
+		}
+		visible, err := elem.IsDisplayed()
+		return !visible, err
+	}, 30*time.Second)
+
 	// assert
-	elems, err := driver.FindElements(selenium.ByCSSSelector, "h3>a")
+	elems, err := driver.FindElements(selenium.ByCSSSelector, searchResultCssSelector)
 	if nil != err || len(elems) < 1 {
 		t.Errorf("no search result, err: %s", err)
 	}
@@ -203,6 +218,7 @@ import (
 var (
 	browserName = flag.String("browser", "chrome", "browser name")
 	gridUrl     = flag.String("grid", "http://localhost:4444/wd/hub", "grid url")
+	keyword     = "istio"
 )
 
 var driver selenium.WebDriver
@@ -224,7 +240,7 @@ func setup() func() {
 
 func TestSearch(t *testing.T) {
 	sp := pages.NewSearchPage(driver)
-	count, err := sp.Search("istio")
+	count, err := sp.Search(keyword)
 	if nil != err || count < 1 {
 		t.Errorf("search error, count: %d, err: %s", count, err)
 	}
@@ -250,16 +266,17 @@ package pages
 import (
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/tebeka/selenium"
 )
 
 const (
-	typeBy   = "#s"
-	clickBy  = "#searchsubmit"
-	resultBy = "h3>a"
-
-	searchPage = "https://leileiluoluo.com/"
+	blogURL                        = "https://leileiluoluo.com/"
+	searchButtonIdSelector         = "searchOpen"
+	keywordInputIdSelector         = "search-query"
+	searchResultLoadingCssSelector = "#search-results #loadingDiv"
+	searchResultCssSelector        = "#search-results .border-bottom"
 )
 
 var drv selenium.WebDriver
@@ -273,64 +290,68 @@ func NewSearchPage(driver selenium.WebDriver) *SearchPage {
 	return &SearchPage{}
 }
 
-// open search page
-func (sp *SearchPage) openSearchPage() error {
-	err := drv.Get(searchPage)
+// open blog and click search button
+func (sp *SearchPage) openBlogAndClickSearchButton() error {
+	// open blog
+	err := drv.Get(blogURL)
 	if nil != err {
 		return errors.New(fmt.Sprintf("search page open error, err: %s", err))
 	}
-	return nil
+
+	// click search button
+	elem, err := drv.FindElement(selenium.ByID, searchButtonIdSelector)
+	if nil != err {
+		return errors.New(fmt.Sprintf("search button not found, err: %s", err))
+	}
+	return elem.Click()
 }
 
-// type keyword
+// type keyword and enter
 func (sp *SearchPage) typeKeyword(keyword string) error {
-	elem, err := drv.FindElement(selenium.ByCSSSelector, typeBy)
+	elem, err := drv.FindElement(selenium.ByID, keywordInputIdSelector)
 	if nil != err {
-		return errors.New(fmt.Sprintf("find element error, err: %s", err))
+		return errors.New(fmt.Sprintf("keyword input element not found, err: %s", err))
 	}
-
-	err = elem.SendKeys(keyword)
-	if nil != err {
-		return errors.New(fmt.Sprintf("send keys error, err: %s", err))
-	}
-	return nil
+	return elem.SendKeys(keyword + "\n")
 }
 
-// click search
-func (sp *SearchPage) clickSearch() error {
-	elem, err := drv.FindElement(selenium.ByCSSSelector, clickBy)
-	if nil != err {
-		return errors.New(fmt.Sprintf("find element error, err: %s", err))
-	}
-	elem.Click()
-	return nil
+// wait until search result displayed
+func (sp *SearchPage) waitUntilResultDisplayed() error {
+	return drv.WaitWithTimeout(func(driver selenium.WebDriver) (bool, error) {
+		elem, err := driver.FindElement(selenium.ByCSSSelector, searchResultLoadingCssSelector)
+		if nil != err {
+			return false, nil
+		}
+		visible, err := elem.IsDisplayed()
+		return !visible, err
+	}, 30*time.Second)
 }
 
 // Search by keyword
 // return count of search result
 func (sp *SearchPage) Search(keyword string) (int, error) {
-	// open search page
-	err := sp.openSearchPage()
+	// open blog and click search button
+	err := sp.openBlogAndClickSearchButton()
 	if nil != err {
 		return 0, err
 	}
 
-	// type keyword
+	// type keyword and enter
 	err = sp.typeKeyword(keyword)
 	if nil != err {
 		return 0, err
 	}
 
-	// click search
-	err = sp.clickSearch()
+	// wait until search result displayed
+	err = sp.waitUntilResultDisplayed()
 	if nil != err {
 		return 0, err
 	}
 
-	// search result
-	elems, err := drv.FindElements(selenium.ByCSSSelector, resultBy)
+	// return
+	elems, err := drv.FindElements(selenium.ByCSSSelector, searchResultCssSelector)
 	if nil != err {
-		return 0, errors.New(fmt.Sprintf("find element error, err: %s", err))
+		return 0, errors.New(fmt.Sprintf("search element error, err: %s", err))
 	}
 	return len(elems), nil
 }
