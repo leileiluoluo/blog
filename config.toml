@@ -112,10 +112,10 @@ enable = true
 
 ####################### banner #######################################
 [params.banner]
-enable = false
-bgImage = "static/images/site/banner-bg.svg"
-title = "Hi, I'm John Smith Doe. <br> I help people make the  worlds best software"
-image = "static/images/site/illustration.svg"
+enable = true
+bgImage = "static/images/site/henry.jpg" # background site https://unsplash.com/s/photos/blog-background
+title = ""
+image = ""
 
 
 ######################## call to action ###############################
