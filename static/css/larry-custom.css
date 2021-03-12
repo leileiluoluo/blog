@@ -86,3 +86,13 @@ td {
 ul.pagination.justify-content-center.align-items-center {
     margin-bottom: 0px !important;
 }
+
+.col-lg-6 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    text-align: center !important;
+}
+
+h1 {
+    font-weight: 340 !important;
+}
