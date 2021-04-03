@@ -25,14 +25,18 @@ description: Golang 高效的字符串拼接方法 (Go 字符串拼接哪种方�
 
 ***a) 原生拼接方式（+=）***
 
-原生拼接方式即使用`+`操作符直接对两个字符串进行拼接。如下代码即使用`+=`来进行字符串拼接及重新赋值。
+原生拼接方式即使用`+`操作符直接对两个字符串进行拼接。
 
-该种方式为什么不高效呢？因在Golang中string是不可变的，如下代码先得将s的值取下来与一个字符串进行拼接，计算好后再将新值重新赋给s，而s的旧值会等待垃圾回收器回收。所以其会涉及较多的计算与内存分配。
+如下代码即使用`+=`来进行字符串拼接及重新赋值。
 
 ```go
 var s string
 s += "hello"
 ```
+
+该种方式为什么不高效呢？因在Golang中string是不可变的，其拼接时先得将s的值取下来（从头遍历复制），然后与一个字符串进行拼接，计算好后再将新值（一个全新的字符串）重新赋给s，而s的旧值会等待垃圾回收器回收。因其每次拼接都会从头遍历复制，会涉及较多的计算与内存分配。
+
+该方式的时间复杂度为O(N^2)。
 
 ***b) bytes.Buffer***
 
@@ -43,7 +47,9 @@ buf := bytes.NewBufferString("hello")
 buf.WriteString(" world") // fmt.Fprint(buf, " world")
 ```
 
-使用WriteString进行字符串拼接时，其会根据情况动态扩展slice长度，并使用内置slice内存拷贝函数将待拼接字符串拷贝到缓冲区中。因其是变长的slice，且使用内存拷贝方式，所以较原生拼接方式性能高。
+使用WriteString进行字符串拼接时，其会根据情况动态扩展slice长度，并使用内置slice内存拷贝函数将待拼接字符串拷贝到缓冲区中。因其是变长的slice，每次拼接时，无须重新拷贝旧有的部分，仅将待拼接的部分追加到尾部即可，所以较原生拼接方式性能高。
+
+该方式的时间复杂度为O(N)。
 
 ```go
 // WriteString appends the contents of s to the buffer, growing the buffer as
@@ -68,7 +74,7 @@ var builder strings.Builder
 builder.WriteString("hello") // fmt.Fprint(&builder, "hello")
 ```
 
-使用WriteString进行字符串拼接时，其会调用内置append函数将待拼接字符串并入缓存区。其效率很高。
+使用WriteString进行字符串拼接时，其会调用内置append函数仅将待拼接字符串并入缓存区。其效率亦很高。
 
 ```go
 // WriteString appends the contents of s to b's buffer.
@@ -92,6 +98,8 @@ fmt.Println(string(bytes))
 ```
 
 内置copy函数支持将一个slice拷贝到另一个slice（其支持将一个字符串拷贝到`[]byte`），其返回值为所拷贝元素的长度。
+
+每次拼接时，其亦只需将待拼接字符串追加到slice尾部，效率亦很高。
 
 ```go
 // The copy built-in function copies elements from a source slice into a
