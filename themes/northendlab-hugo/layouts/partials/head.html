@@ -49,8 +49,11 @@
   {{ end }}
   <!-- End Google Tag Manager -->
 
-  {{ "<!--MathJax-->" | safeHTML }}
-  {{ partial "mathjax.html" . }}
+  <!-- MathJax -->
+  {{ if or .IsPage (eq .Kind "taxonomy") }}
+    {{ "<!--MathJax-->" | safeHTML }}
+    {{ partial "mathjax.html" . }}
+  {{ end }}
 
 
   <!-- Baidu statistics -->
