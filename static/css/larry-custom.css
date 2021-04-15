@@ -1,11 +1,14 @@
 h2 {
+    font-size: 20px !important;
+}
+
+h3 {
     font-size: 18px !important;
 }
 
-.content * {
+p, .paragraph {
     margin-top: 8px !important;
     margin-bottom: 8px !important;
-    font-size: 16px;
 }
 
 .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
@@ -34,6 +37,10 @@ a.navbar-brand {
     font-size: 28px;
 }
 
+.nav-link {
+    font-size: 18px;
+}
+
 .mb-5, .my-5 {
     margin-bottom: 2rem !important;
 }
@@ -46,6 +53,7 @@ h2, .h2 {
     color: #e83e8c !important;
     padding: 2px 1px !important;
     border: 0px !important;
+    font-size: 14px;
 }
 
 p, .paragraph {
@@ -53,11 +61,15 @@ p, .paragraph {
 }
 
 a.post-title {
-    font-size: 18px !important;
+    font-size: 20px !important;
+}
+
+.col-lg-4.text-center.mb-4.mb-lg-0 {
+    font-size: 18px;
 }
 
 .text-center.mt-4 {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 td {
