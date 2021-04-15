@@ -7,6 +7,7 @@ h3 {
 }
 
 p, .paragraph {
+    color: #4c4b4b !important;
     margin-top: 8px !important;
     margin-bottom: 8px !important;
 }
@@ -61,7 +62,7 @@ p, .paragraph {
 }
 
 a.post-title {
-    font-size: 16px !important;
+    font-size: 18px !important;
 }
 
 .col-lg-4.text-center.mb-4.mb-lg-0 {
@@ -104,5 +105,9 @@ ul.pagination.justify-content-center.align-items-center {
 
 h1 {
     font-weight: 340 !important;
-    font-size: 40px !important;
+    font-size: 30px !important;
+}
+
+.content blockquote p {
+    font-size: 14px !important;
 }
