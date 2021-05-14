@@ -57,21 +57,87 @@ tar (GNU tar) 1.26
 
 被PostgreSQL命令行工具`psql`用来记录键入的每条命令，进而可以使用方向键重用这些命令。本主机满足要求。
 
-```shell
-yum list | grep readline
-readline.x86_64                  6.2-11.el7                   @os      
-readline-devel.x86_64            6.2-11.el7                   os
-```
-
 **e) zlib 压缩库**
 
 支持`pg_dump`和`pg_restore`的压缩归档。本主机满足要求。
 
+### 2 PostgreSQL安装
+
+如下命令执行前，当前用户为非`root`sudoer账号`larry`。
+
 ```shell
-$ yum list | grep zlib
-zlib.x86_64                    1.2.7-18.el7                 @anaconda
-zlib-devel.x86_64              1.2.7-18.el7                 @os
+$ whoami
+larry
 ```
+
+**a) 获取源码压缩文件**
+
+进入用户根目录，下载`PostgreSQL 13.3`源码压缩文件，完成后将其解压至当前目录。
+
+```shell
+$ cd /home/larry
+$ wget https://ftp.postgresql.org/pub/source/v13.3/postgresql-13.3.tar.gz
+$ tar -zxvf postgresql-13.3.tar.gz
+```
+
+**b) 配置、构建、测试，及安装**
+
+上一步完成后，将在当前目录生成一个目录`postgresql-13.3`，进入该目录进行配置、构建、测试，及安装。
+
+```shell
+$ cd /home/larry/postgresql-13.3
+$ ./configure       # 源码树配置及依赖变量检查
+$ make all          # 构建
+$ make check        # 回归测试
+$ sudo make install # 使用root权限进行安装，因默认会安装到/usr/local/pgsql
+```
+
+查看安装目录`/usr/local/pgsql/`，发现其包含几个文件夹。
+
+```shell
+$ ls /usr/local/pgsql/
+bin  include  lib  share
+```
+
+**c) 配置数据目录并启动**
+
+推荐使用一个单独的账号（`postgres`）运行PostgreSQL，该账号仅有服务端所管理的数据的权限（特别地，该账号亦不应拥有PostgreSQL可执行文件权限，以防被感染服务进程篡改这些可执行文件），且不与其它守护进程共享数据。
+
+如下命令使用当前sudoer用户`larry`创建了一个新账号`postgres`，新建了`/usr/local/pgsql/data`数据文件夹并将控制权限赋予`postgres`。
+
+```shell
+$ sudo adduser postgres
+$ sudo mkdir /usr/local/pgsql/data
+$ sudo chown postgres /usr/local/pgsql/data
+```
+
+下面将用户切换为`postgres`，初始化数据库，并启动服务。
+
+```shell
+$ sudo su - postgres
+$ /usr/local/pgsql/bin/initdb -D /usr/local/pgsql/data # 初始化数据库
+$ /usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l server.log start # 启动服务，并指定日志输出文件server.log
+server started
+```
+
+至此，PostgreSQL服务已启动。
+
+**d) 设置开机自启动**
+
+使用root权限编辑`/etc/rc.d/rc.local`文件，添加启动命令。
+
+```shell
+$ sudo vi /etc/rc.d/rc.local
+```
+
+```shell
+su - postgres -c 'cd /home/postgres && /usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l server.log start'
+```
+
+### 3 PostgreSQL简单使用
+
+创建一个数据库并使用`psql`进行连接测试。
+
 
 
 > 参考资料
