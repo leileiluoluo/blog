@@ -26,7 +26,7 @@ PostgreSQL采用C/S架构。服务端进程（名为`postgres`）负责管理数
 
 如下软件包是构建PostgreSQL所必须的：
 
-- GNU make 版本须是3.80+
+**a) GNU make 版本须是3.80+**
 
 本主机满足要求。
 
@@ -35,7 +35,7 @@ $ make --version
 GNU Make 3.82
 ```
 
-- ISO/ANSI C 编译器 (推荐使用最新的GCC)
+**b) ISO/ANSI C 编译器 (推荐使用最新的GCC)**
 
 本主机满足要求。
 
@@ -44,34 +44,28 @@ $ gcc --version
 gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-44)
 ```
 
-- tar
+**c) tar**
 
-用于解压源码压缩文件。
-
-本主机满足要求。
+用于解压源码压缩文件。本主机满足要求。
 
 ```shell
 $ tar --version
 tar (GNU tar) 1.26
 ```
 
-- GNU Readline 库
+**d) GNU Readline 库**
 
-被PostgreSQL命令行工具`psql`用来记录键入的每条命令，进而可以使用方向键重用这些命令。
-
-本主机满足要求。
+被PostgreSQL命令行工具`psql`用来记录键入的每条命令，进而可以使用方向键重用这些命令。本主机满足要求。
 
 ```shell
-$ yum list | grep readline-devel
-readline-devel.i686            6.2-11.el7                   os       
-readline-devel.x86_64          6.2-11.el7                   os
+yum list | grep readline
+readline.x86_64                  6.2-11.el7                   @os      
+readline-devel.x86_64            6.2-11.el7                   os
 ```
 
-- zlib 压缩库
+**e) zlib 压缩库**
 
-支持`pg_dump`和`pg_restore`的压缩归档。
-
-本主机满足要求。
+支持`pg_dump`和`pg_restore`的压缩归档。本主机满足要求。
 
 ```shell
 $ yum list | grep zlib
