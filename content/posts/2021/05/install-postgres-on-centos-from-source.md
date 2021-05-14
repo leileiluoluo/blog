@@ -14,7 +14,7 @@ keywords:
   - CentOS
 description: 在CentOS上以源码安装PostgreSQL (Install PostgreSQL on CentOS from Source)
 ---
-
+PostgreSQL是一款开源的对象关系型数据库管理系统（Object-Relational Database Management System, ORDBMS），其基于加州大学伯克利分校最初的POSTGRE源码开发，支持绝大多数SQL标准并提供诸多现代化特性。
 
 
 > 参考资料
