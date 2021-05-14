@@ -57,9 +57,21 @@ tar (GNU tar) 1.26
 
 被PostgreSQL命令行工具`psql`用来记录键入的每条命令，进而可以使用方向键重用这些命令。本主机满足要求。
 
+```shell
+$ rpm -qa | grep readline
+readline-devel-6.2-11.el7.x86_64
+readline-6.2-11.el7.x86_64
+```
+
 **e) zlib 压缩库**
 
 支持`pg_dump`和`pg_restore`的压缩归档。本主机满足要求。
+
+```shell
+$ rpm -qa | grep zlib
+zlib-devel-1.2.7-18.el7.x86_64
+zlib-1.2.7-18.el7.x86_64
+```
 
 ### 2 PostgreSQL安装
 
@@ -136,9 +148,28 @@ su - postgres -c 'cd /home/postgres && /usr/local/pgsql/bin/pg_ctl -D /usr/local
 
 ### 3 PostgreSQL简单使用
 
-创建一个数据库并使用`psql`进行连接测试。
+创建一个数据库`test`，并使用PostgreSQL交互式命令行程序`psql`进行连接测试。
 
+```shell
+$ sudo su - postgres
+$ /usr/local/pgsql/bin/createdb test
+```
 
+```text
+$ /usr/local/pgsql/bin/psql test
+psql (13.3)
+Type "help" for help.
+
+test=# SELECT version();
+                                         version
+-------------------------------------------------------------------​-----------------------
+PostgreSQL 13.3 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-44), 64-bit
+(1 row)
+
+test=# \q
+```
+
+至此，我们完成了对PostgreSQL的源码安装及测试。
 
 > 参考资料
 >
