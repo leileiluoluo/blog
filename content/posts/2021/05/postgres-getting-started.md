@@ -49,7 +49,8 @@ INSERT INTO weather (city, temp_low, temp_high, prcp, date)
            ('Dalian', 16, 24, 0.0, '2021-05-21');
 
 INSERT INTO cities (name, location)
-    VALUES ('Beijing', '(116.3, 39.9)');
+    VALUES ('Beijing', '(116.3, 39.9)'),
+           ('Shanghai', '(121.3, 31.1)');
 ```
 
 **c) 简单查询**
@@ -103,6 +104,95 @@ FROM weather
 ```
 
 **d) 连表查询**
+
+内连接：将`weather`表及`cities`表进行内连接（取两表中城市名相同的所有行），返回城市在对应日期的的温度，降水量及地理位置。
+
+```sql
+SELECT w.city, w.temp_low, w.temp_high, w.prcp, c.location, w.date
+FROM weather w, cities c 
+WHERE w.city = c.name;
+
+-- 两种写法等价
+SELECT w.city, w.temp_low, w.temp_high, w.prcp, c.location, w.date
+FROM weather w INNER JOIN cities c 
+  ON (w.city = c.name);
+```
+
+```text
+  city   | temp_low | temp_high | prcp |   location   |    date    
+---------+----------+-----------+------+--------------+------------
+ Beijing |       18 |        32 | 0.25 | (116.3,39.9) | 2021-05-19
+ Beijing |       20 |        30 |    0 | (116.3,39.9) | 2021-05-20
+(2 rows)
+```
+
+左外连接：将`weather`表及`cities`表进行左外连接（返回左表所有行，若左表的某行在右表没有匹配行，则补空值），返回城市在对应日期的的温度，降水量及地理位置。
+
+```sql
+SELECT w.city, w.temp_low, w.temp_high, w.prcp, c.location, w.date
+FROM weather w LEFT OUTER JOIN cities c
+  ON (w.city = c.name);
+```
+
+```text
+  city   | temp_low | temp_high | prcp |   location   |    date    
+---------+----------+-----------+------+--------------+------------
+ Beijing |       18 |        32 | 0.25 | (116.3,39.9) | 2021-05-19
+ Beijing |       20 |        30 |    0 | (116.3,39.9) | 2021-05-20
+ Dalian  |       16 |        24 |    0 |              | 2021-05-21
+(3 rows)
+```
+
+右外连接：将`weather`表及`cities`表进行右外连接（返回右表所有行，若右表的某行在左表没有匹配行，则补空值），返回城市在对应日期的的温度，降水量及地理位置。
+
+```sql
+SELECT c.name, w.temp_low, w.temp_high, w.prcp, c.location, w.date
+FROM weather w RIGHT OUTER JOIN cities c
+  ON (w.city = c.name);
+```
+
+```text
+   name   | temp_low | temp_high | prcp |   location   |    date    
+----------+----------+-----------+------+--------------+------------
+ Beijing  |       20 |        30 |    0 | (116.3,39.9) | 2021-05-20
+ Beijing  |       18 |        32 | 0.25 | (116.3,39.9) | 2021-05-19
+ Shanghai |          |           |      | (121.3,31.1) | 
+(3 rows)
+```
+
+全外连接：将`weather`表及`cities`表进行全外连接（返回两表的所有行，当一表的某行在另一表没有匹配行，则补空值），返回城市在对应日期的的温度，降水量及地理位置。
+
+```sql
+SELECT (CASE WHEN w.city IS NOT NULL THEN w.city ELSE c.name END), w.temp_low, w.temp_high, w.prcp, c.location, w.date
+FROM weather w FULL OUTER JOIN cities c
+  ON (w.city = c.name);
+```
+
+```
+   name   | temp_low | temp_high | prcp |   location   |    date    
+----------+----------+-----------+------+--------------+------------
+ Beijing  |       18 |        32 | 0.25 | (116.3,39.9) | 2021-05-19
+ Beijing  |       20 |        30 |    0 | (116.3,39.9) | 2021-05-20
+ Dalian   |       16 |        24 |    0 |              | 2021-05-21
+ Shanghai |          |           |      | (121.3,31.1) | 
+(4 rows)
+```
+
+自连接：`weather`表与自己连接，找出同一城市，某一天的最低温度比另一天低的记录。
+
+```sql
+SELECT w1.city, w1.temp_low, w1.date, w2.temp_low, w2.date
+FROM weather w1, weather w2
+WHERE w1.city = w2.city
+  AND w1.temp_low < w2.temp_low;
+```
+
+```text
+  city   | temp_low |    date    | temp_low |    date    
+---------+----------+------------+----------+------------
+ Beijing |       18 | 2021-05-19 |       20 | 2021-05-20
+(1 row)
+```
 
 **e) 聚集函数**
 
