@@ -19,7 +19,7 @@ description: PostgreSQL初探 (PostgreSQL Getting Started)
 
 **a) 建表**
 
-我们建两张表：一个是天气表(`weather`)，记录各个城市每天的温度与降水量；一个是城市表(`cities`)，记录城市的坐标。PostgreSQL推荐关键字采用大写格式，字段名及类型采用小写格式。
+建两张表：一张是天气表(`weather`)，记录各个城市每天的温度与降水量；一张是城市表(`cities`)，记录城市的坐标。PostgreSQL推荐关键字采用大写格式，字段名及类型采用小写格式。
 
 如下为建表语句：
 
@@ -54,7 +54,7 @@ INSERT INTO cities (name, location)
 
 **c) 简单查询**
 
-在被选列上使用简单的表达式(`(temp_low + temp_high) / 2`)，返回城市每天的平均温度。
+在被选列上使用表达式`(temp_low + temp_high) / 2`，返回城市每天的平均温度。
 
 ```sql
 SELECT city, (temp_low + temp_high) / 2 AS temp_avg, date
@@ -70,7 +70,7 @@ WHERE city = 'Beijing'
   AND prcp > 0.0;
 ```
 
-在被选列上使用`DISTINCT`关键字，按序返回去重后的城市名称。
+在被选列上使用`DISTINCT`关键字，筛选出去重后的城市名，并使用`ORDER BY`关键字按城市名字段正序返回结果。
 
 ```sql
 SELECT DISTINCT city 
