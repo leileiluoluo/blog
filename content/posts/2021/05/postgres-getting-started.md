@@ -339,6 +339,17 @@ DELETE FROM weather;
 
 **a) 视图**
 
+针对上面的场景，若天气与城市坐标总是一起展示，则可以为其创建视图，其使用跟普通的表一样。视图有许多好处，如隐藏表的细节，可以随着应用演进而不必更改接口定义。当然还可以在视图上创建视图。
+
+```sql
+CREATE VIEW myview AS
+    SELECT w.city, w.temp_low, w.temp_high, w.prcp, c.location, w.date
+    FROM weather w, cities c 
+    WHERE w.city = c.name;
+
+SELECT * FROM myview;
+```
+
 **b) 外健**
 
 **c) 事务**
