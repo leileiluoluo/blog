@@ -289,7 +289,51 @@ GROUP BY city
 
 **f) 更新及删除**
 
+假定`2021-05-20`及之后的数据录入时温度均比实际值低了1度，可以使用如下`UPDATE`语句进行校正。
 
+```sql
+UPDATE weather 
+  SET temp_low = temp_low + 1, temp_high = temp_high + 1 
+  WHERE date >= '2021-05-20';
+```
+
+重新查询数据。
+
+```sql
+SELECT * FROM weather;
+```
+
+```text
+  city   | temp_low | temp_high | prcp |    date    
+---------+----------+-----------+------+------------
+ Beijing |       18 |        32 | 0.25 | 2021-05-19
+ Beijing |       21 |        31 |    0 | 2021-05-20
+ Dalian  |       17 |        25 |    0 | 2021-05-21
+(3 rows)
+```
+
+若不再需要城市名为`Beijing`的数据，可以使用`DELETE`语句进行删除。
+
+```sql
+DELETE FROM weather WHERE city = 'Beijing';
+```
+
+```sql
+SELECT * FROM weather;
+```
+
+```text
+  city  | temp_low | temp_high | prcp |    date    
+--------+----------+-----------+------+------------
+ Dalian |       17 |        25 |    0 | 2021-05-21
+(1 row)
+```
+
+若整个表的数据都不需要了，确认无误后，可以进行删除。
+
+```sql
+DELETE FROM weather;
+```
 
 ### 2 高级特性
 
