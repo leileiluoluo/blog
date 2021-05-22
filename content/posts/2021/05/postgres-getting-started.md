@@ -196,6 +196,90 @@ WHERE w1.city = w2.city
 
 **e) 聚集函数使用**
 
+聚集函数针对多行输入计算一个结果。
+
+下面，找出`weather`表中的历史最低温度。
+
+```sql
+SELECT min(temp_low) FROM weather;
+```
+
+```text
+ min 
+-----
+  16
+(1 row)
+```
+
+找出拥有这个历史最低温度的是哪个城市哪一天的记录。
+
+```sql
+-- 使用子查询
+SELECT city, temp_low, date
+FROM weather
+WHERE temp_low = (SELECT min(temp_low) FROM weather);
+
+-- 错误写法 聚集函数不允许在WHERE条件中使用
+-- SELECT city FROM weather WHERE temp_low = min(temp_low); 
+```
+
+```text
+  city  | temp_low |    date    
+--------+----------+------------
+ Dalian |       16 | 2021-05-21
+(1 row)
+```
+
+聚集函数结合`GROUP BY`找出每个城市的历史最低温度。
+
+```sql
+SELECT city, min(temp_low)
+FROM weather
+GROUP BY city;
+```
+
+```text
+  city   | min 
+---------+-----
+ Dalian  |  16
+ Beijing |  18
+(2 rows)
+```
+
+进一步找出每个城市历史最低温度低于17的记录。
+
+```sql
+SELECT city, min(temp_low)
+FROM weather
+GROUP BY city
+  HAVING min(temp_low) < 17;
+```
+
+```text
+  city  | min 
+--------+-----
+ Dalian |  16
+(1 row)
+```
+
+从如上示例也看到了`WHERE`与`HAVING`使用场景的不同：`WHERE`用于分组和聚集函数使用前的输入行筛选；而`HAVING`用于分组和聚集函数使用后的分组行筛选。且`WHERE`语句中不可以使用聚集函数，而`HAVING`语句中一般总使用聚集函数（`HAVING`语句中不使用聚集函数的条件，不如直接将其移到`WHERE`语句中）。
+
+如，接着上面，筛选首字母为`D`的城市，并返回这些城市历史最低温度低于17的记录。
+
+```sql
+SELECT city, min(temp_low)
+FROM weather
+WHERE city like 'D%'
+GROUP BY city
+  HAVING min(temp_low) < 17;
+
+-- 不要用这种写法
+SELECT city, min(temp_low)
+FROM weather
+GROUP BY city
+  HAVING min(temp_low) < 17 AND city like 'D%';
+```
+
 **f) 更新及删除**
 
 
