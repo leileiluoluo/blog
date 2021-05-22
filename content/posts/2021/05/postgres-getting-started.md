@@ -61,6 +61,15 @@ SELECT city, (temp_low + temp_high) / 2 AS temp_avg, date
 FROM weather;
 ```
 
+```text
+  city   | temp_avg |    date    
+---------+----------+------------
+ Beijing |       25 | 2021-05-19
+ Beijing |       25 | 2021-05-20
+ Dalian  |       20 | 2021-05-21
+(3 rows)
+```
+
 使用`WHERE`条件，筛选城市为Beijing且降水量大于0的记录。
 
 ```sql
@@ -70,12 +79,27 @@ WHERE city = 'Beijing'
   AND prcp > 0.0;
 ```
 
+```text
+  city   | temp_low | temp_high | prcp |    date    
+---------+----------+-----------+------+------------
+ Beijing |       18 |        32 | 0.25 | 2021-05-19
+(1 row)
+```
+
 在被选列上使用`DISTINCT`关键字，筛选出去重后的城市名，并使用`ORDER BY`关键字按城市名字段正序返回结果。
 
 ```sql
 SELECT DISTINCT city 
 FROM weather 
   ORDER BY city;
+```
+
+```text
+  city   
+---------
+ Beijing
+ Dalian
+(2 rows)
 ```
 
 **d) 连表查询**
