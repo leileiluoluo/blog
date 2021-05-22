@@ -168,7 +168,7 @@ FROM weather w FULL OUTER JOIN cities c
   ON (w.city = c.name);
 ```
 
-```
+```text
    name   | temp_low | temp_high | prcp |   location   |    date    
 ----------+----------+-----------+------+--------------+------------
  Beijing  |       18 |        32 | 0.25 | (116.3,39.9) | 2021-05-19
