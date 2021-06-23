@@ -352,6 +352,54 @@ SELECT * FROM myview;
 
 **b) 外健**
 
+针对上述天气表`weather`与城市表`cities`，若我们要确保没有人可以在`weather`表插入`cities`表中不存在的城市的天气记录。这种约束即是保障数据的参照完整性，可以使用外健来实现。
+
+新的表定义如下：
+
+```sql
+CREATE TABLE cities (
+    name varchar(80) primary key,
+    location point
+);
+
+CREATE TABLE weather (
+    city varchar(80) references cities(name),
+    temp_low int,
+    temp_high int,
+    prcp real,
+    date date
+);
+```
+
+现在尝试对`weather`表插入一个新的城市的天气记录，会报错。
+
+```sql
+INSERT INTO weather VALUES ('Tianjin', 22, 30, 0.0, '2021-05-22');
+```
+
+```text
+ERROR:  insert or update on table "weather" violates foreign key constraint "weather_city_fkey"
+DETAIL:  Key (city)=(Tianjin) is not present in table "cities".
+```
+
+在`cities`表补全该城市后，即可对`weather`进行插入。
+
+```sql
+INSERT INTO cities VALUES ('Tianjin', '(117.2, 39.1)');
+INSERT INTO weather VALUES ('Tianjin', 22, 30, 0.0, '2021-05-22');
+```
+
+同理，`cities`表被参照，所以涉及被参考字段数据的更新及删除等都会受影响。
+
+```sql
+DELETE FROM cities WHERE name = 'Tianjin';
+```
+
+```text
+ERROR:  update or delete on table "cities" violates foreign key constraint "weather_city_fkey" on table "weather"
+DETAIL:  Key (name)=(Tianjin) is still referenced from table "weather".
+```
+
 **c) 事务**
 
 **d) 窗口函数**
