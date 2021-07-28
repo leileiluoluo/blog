@@ -425,7 +425,7 @@ COMMIT;
 
 此外，在事务中还可以使用`SAVEPOINT`来细粒度控制执行语句。
 
-假定想从Alice的账号给Wally的账号打100.00块钱，刚开始将收款人错指为Bob。使用`SAVEPOINT`的语句如下：
+假定从Alice的账号给Bob的账号打100.00块钱，后来才发现收款人应是Wally。使用`SAVEPOINT`的语句如下：
 
 ```sql
 BEGIN;
