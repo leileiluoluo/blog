@@ -402,6 +402,45 @@ DETAIL:  Key (name)=(Tianjin) is still referenced from table "weather".
 
 **c) 事务**
 
+事务将多步操作看作一个单元，这些操作要么都做，要么都不做。
+
+现有两张表，`accounts`与`branches`，分别用于记录客户余额与分行总余额。现在Alice想给Bob转100.00块钱。可以将SQL语句用`BEGIN`及`COMMIT`包起来作为一个事务块。
+
+```sql
+BEGIN;
+-- Alice的账户余额减去100.00
+UPDATE accounts SET balance = balance - 100.00
+    WHERE name = 'Alice';
+-- Alice所在分行总余额减去100.00
+UPDATE branches SET balance = balance - 100.00
+    WHERE name = (SELECT branch_name FROM accounts WHERE name = 'Alice');
+-- Bob的账户余额加上100.00
+UPDATE accounts SET balance = balance + 100.00
+    WHERE name = 'Bob';
+-- Bob所在分行总余额加上100.00
+UPDATE branches SET balance = balance + 100.00
+    WHERE name = (SELECT branch_name FROM accounts WHERE name = 'Bob');
+COMMIT;
+```
+
+此外，在事务中还可以使用`SAVEPOINT`来细粒度控制执行语句。
+
+假定想从Alice的账号给Wally的账号打100.00块钱，刚开始将收款人错指为Bob。使用`SAVEPOINT`的语句如下：
+
+```sql
+BEGIN;
+UPDATE accounts SET balance = balance - 100.00
+    WHERE name = 'Alice';
+SAVEPOINT my_savepoint;
+UPDATE accounts SET balance = balance + 100.00
+    WHERE name = 'Bob';
+-- oops ... forget that and use Wally's account
+ROLLBACK TO my_savepoint;
+UPDATE accounts SET balance = balance + 100.00
+    WHERE name = 'Wally';
+COMMIT;
+```
+
 **d) 窗口函数**
 
 **e) 表继承**
