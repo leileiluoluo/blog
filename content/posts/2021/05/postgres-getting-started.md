@@ -613,6 +613,34 @@ FROM
 
 **e) 表继承**
 
+PostgreSQL支持表继承，下面创建城市表`cities`，及首都表`capitals`，首都表继承城市表。
+
+```sql
+CREATE TABLE cities (
+  name       text,  -- 城市名
+  population real,  -- 人口数
+  elevation  int    -- 海拔高度
+);
+
+CREATE TABLE capitals (
+  state      char(2) UNIQUE NOT NULL -- 状态
+) INHERITS (cities);
+```
+
+使用如下SQL查询包含首都的所有城市：
+
+```sql
+SELECT * FROM cities;
+```
+
+使用如下SQL查询非首都的所有城市：
+
+```sql
+SELECT * FROM ONLY cities;
+```
+
+综上，本文对PostgreSQL的基础功能及高级功能进行了初探。
+
 
 
 > 参考资料
