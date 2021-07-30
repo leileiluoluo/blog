@@ -447,7 +447,7 @@ COMMIT;
 
 窗口函数使用`OVER`子句来确定如何对行进行分区，以供窗口函数处理。`OVER`子句中的`PARTITION BY`用于将行分区。对于每一行，窗口函数会对与其落入同一分区的行进行计算。
 
-还可以使用`OVER`中的`ORDER BY`来控制窗口函数处理行的顺序。若省略`PARTITION BY`，表示所有行均落入一个分区。若省略`ORDER BY`，表示默认窗口包含分区中的所有行；若指定`ORDER BY`，窗口会包含从分区开始到当前行，以及根据`ORDER BY`字句与当前行相等的后续行组成。
+还可以使用`OVER`中的`ORDER BY`来控制窗口函数处理行的顺序。若省略`PARTITION BY`，表示所有行均落入一个分区。若省略`ORDER BY`，表示默认窗口包含分区中的所有行；若指定`ORDER BY`，窗口会包含从分区开始到当前行，以及根据`ORDER BY`子句与当前行相等的行。
 
 下面演示如何使用窗口函数。
 
@@ -529,7 +529,7 @@ FROM
 (11 rows)
 ```
 
-使用如下SQL列出所有部门的雇员信息及全员薪资总和。（为使用`PARTITION BY`，表示全表为一个分区）
+使用如下SQL列出所有部门的雇员信息及全员薪资总和。（未使用`PARTITION BY`，表示全表为一个分区）
 
 ```sql
 SELECT
@@ -556,7 +556,7 @@ FROM
 (11 rows)
 ```
 
-注意，若对如上SQL指定了`ORDER BY`，结果大不同。这是因为指定`ORDER BY`后，`SUM`针对的是最低薪资到当前行及当前薪资相等的行的计算。
+注意，若对如上SQL指定了`ORDER BY`，结果大不同。这是因为指定`ORDER BY`后，`sum`针对的是最低薪资到当前行及与当前薪资相等的行的计算。
 
 ```sql
 SELECT
@@ -633,7 +633,7 @@ CREATE TABLE capitals (
 SELECT * FROM cities;
 ```
 
-使用如下SQL查询非首都的所有城市：
+使用如下SQL查询不包含首都的所有城市：
 
 ```sql
 SELECT * FROM ONLY cities;
