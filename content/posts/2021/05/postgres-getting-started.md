@@ -220,7 +220,7 @@ FROM weather
 WHERE temp_low = (SELECT min(temp_low) FROM weather);
 
 -- 错误写法 聚集函数不允许在WHERE条件中使用
-SELECT city FROM weather WHERE temp_low = min(temp_low); 
+-- SELECT city FROM weather WHERE temp_low = min(temp_low); 
 ```
 
 ```text
