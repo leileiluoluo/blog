@@ -623,7 +623,7 @@ CREATE TABLE cities (
 );
 
 CREATE TABLE capitals (
-  state      char(2) UNIQUE NOT NULL -- 状态
+  state      char(2) UNIQUE NOT NULL -- 州
 ) INHERITS (cities);
 ```
 
