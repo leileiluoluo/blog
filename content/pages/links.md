@@ -98,3 +98,7 @@ wip_template:
   * [CodeForces](http://codeforces.com/)
   * [GeeksforGeeks](https://www.geeksforgeeks.org/)
   * [LeetCode](https://www.leetcode.com/)
+
+**数据库相关**
+
+  * [PostgreSQL Exercises](https://pgexercises.com/)
