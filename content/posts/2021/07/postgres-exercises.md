@@ -19,7 +19,7 @@ description: PostgreSQL练习 (PostgreSQL Exercises)
 
 下面简单介绍一下该站用到的数据集。
 
-该数据集针对的是一个新建的乡村俱乐部的：有一组成员，一组体育设施，及这些体育设施的预定记录。
+该数据集针对的是一个刚成立的乡村俱乐部的：有一组成员，一组体育设施，及这些体育设施的预定记录。
 
 先看一下`members`表：
 
@@ -47,10 +47,10 @@ CREATE TABLE cd.members (
 
 ```sql
 CREATE TABLE cd.facilities (
-    facid integer NOT NULL, 
-    name character varying(100) NOT NULL, 
-    membercost numeric NOT NULL, 
-    guestcost numeric NOT NULL, 
+    facid integer NOT NULL,                 -- 设施ID
+    name character varying(100) NOT NULL,   -- 设施名称
+    membercost numeric NOT NULL,            -- 成员预定花销
+    guestcost numeric NOT NULL,             -- 游客预定花销
     initialoutlay numeric NOT NULL, 
     monthlymaintenance numeric NOT NULL, 
     CONSTRAINT facilities_pk PRIMARY KEY (facid)
@@ -59,15 +59,15 @@ CREATE TABLE cd.facilities (
 
 最后，看一下`bookings`表：
 
-该表用于追踪各设施的预定情况，包含设施ID，预定成员ID，预定起始时间，及预定了多少个半小时的slots等。
+该表用于追踪各设施的预定情况，包含设施ID，预定成员ID，开始预定时间，及预定了多少个半小时的slots等。
 
 ```sql
 CREATE TABLE cd.bookings (
-    bookid integer NOT NULL, 
-    facid integer NOT NULL, 
-    memid integer NOT NULL, 
-    starttime timestamp NOT NULL,
-    slots integer NOT NULL,
+    bookid integer NOT NULL,
+    facid integer NOT NULL,        -- 设施ID
+    memid integer NOT NULL,        -- 成员ID
+    starttime timestamp NOT NULL,  -- 开始预定时间
+    slots integer NOT NULL,        -- 预定了多少个半小时
     CONSTRAINT bookings_pk PRIMARY KEY (bookid),
     CONSTRAINT fk_bookings_facid FOREIGN KEY (facid) REFERENCES cd.facilities(facid),
     CONSTRAINT fk_bookings_memid FOREIGN KEY (memid) REFERENCES cd.members(memid)
