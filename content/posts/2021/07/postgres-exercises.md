@@ -74,7 +74,31 @@ CREATE TABLE cd.bookings (
 );
 ```
 
+这三张表的关系如下图所示。
+
+![](https://olzhy.github.io/static/images/uploads/2021/07/schema-horizontal.svg#center)
+
 介绍完数据集，下面就开始我们的练习吧。
+
+### 1 简单SQL查询
+
+#### 1.1 控制取哪些行
+
+问题描述：
+
+生成一个设备列表，这些设备对成员收费，且所收的费用不足月度维护费用的50分之一。该列表返回设备的ID，名称，会员费，月度维护费用。
+
+问题答案：
+
+```sql
+SELECT facid, name, membercost, monthlymaintenance
+FROM cd.facilities
+WHERE membercost > 0
+  AND membercost < monthlymaintenance/50;
+```
+
+### 2 连接及子查询
+
 
 
 > 参考资料
