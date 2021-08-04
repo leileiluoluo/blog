@@ -97,6 +97,88 @@ WHERE membercost > 0
   AND membercost < monthlymaintenance/50;
 ```
 
+**2 将结果分类**
+
+问题描述：
+
+生成一个设备列表，若月度维护费用大于100就标记为`expensive`，否则标记为`cheap`。返回相关设施的名称和月度维护情况。
+
+问题答案：
+
+```sql
+SELECT name,
+    CASE
+        WHEN monthlymaintenance > 100
+        THEN 'expensive'
+        ELSE 'cheap'
+    END AS cost
+FROM cd.facilities;
+```
+
+**3 日期处理**
+
+问题描述：
+
+生成一个会员列表，返回2012年9月及之后加入的成员。返回会员的memid，surname，firstname及joindate。
+
+问题答案：
+
+```sql
+SELECT memid, surname, firstname, joindate
+FROM cd.members
+WHERE joindate >= '2012-09-01';
+```
+
+**4 重复项移除及结果排序**
+
+问题描述：
+
+生成一个排序后的前10位会员的姓氏列表，且不要有重复。
+
+问题答案：
+
+```sql
+SELECT DISTINCT surname
+FROM cd.members
+ORDER BY surname LIMIT 10;
+```
+
+**5 组合多个查询的结果**
+
+问题描述：
+
+出于某种原因，您需要一个包含所有姓氏和所有设施名称的组合列表。请生成这个列表。
+
+问题答案：
+
+注意使用`UNION`会移除重复项，而`UNION ALL`并不会。
+
+```sql
+SELECT surname
+FROM cd.members
+UNION
+SELECT name
+FROM cd.facilities;
+```
+
+**6 聚集函数使用**
+
+问题描述：
+
+您想获取最后一个加入的成员的名字，姓氏，加入时间。该如何做？
+
+问题答案：
+
+使用子查询实现。
+
+```sql
+SELECT firstname, surname, joindate
+FROM cd.members
+WHERE joindate = (
+        SELECT max(joindate)
+        FROM cd.members);
+```
+
 ### 2 连接及子查询
 
 
