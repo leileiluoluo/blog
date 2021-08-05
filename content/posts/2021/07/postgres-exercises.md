@@ -371,6 +371,83 @@ FROM cd.members m
 ORDER BY member;
 ```
 
+### 3 数据修改
+
+本栏目涉及插入、更新和删除。像这样更改数据的操作统称为DML（数据操作语言）。
+
+**1 单行插入**
+
+问题描述：
+
+俱乐部正在增加一个新设施——SPA。我们需要将它添加到设施表中。值如下。
+
+```text
+facid: 9, name: 'Spa', membercost: 20, guestcost: 30, initialoutlay: 100000, monthlymaintenance: 800
+```
+
+问题答案：
+
+可以显示指定列名，也可以省略列名按建表字段顺序插入。
+
+```sql
+INSERT INTO cd.facilities (facid, name, membercost, guestcost, initialoutlay, monthlymaintenance)
+    VALUES (9, 'Spa', 20, 30, 100000, 800);
+
+-- 按照建表字段顺序插入
+INSERT INTO cd.facilities VALUES (9, 'Spa', 20, 30, 100000, 800);
+```
+
+**2 多行插入**
+
+问题描述：
+
+使用一行命令一次加入多个设备。值如下。
+
+```text
+facid: 9, name: 'Spa', membercost: 20, guestcost: 30, initialoutlay: 100000, monthlymaintenance: 800
+facid: 10, name: 'Squash Court 2', membercost: 3.5, guestcost: 17.5, initialoutlay: 5000, monthlymaintenance: 80
+```
+
+问题答案：
+
+```sql
+INSERT INTO cd.facilities (facid, name, membercost, guestcost, initialoutlay, monthlymaintenance)
+    VALUES (9, 'Spa', 20, 30, 100000, 800),
+           (10, 'Squash Court 2', 3.5, 17.5, 5000, 80);
+```
+
+**3 计算后的数据插入**
+
+问题描述：
+
+这一次不再指定设备ID，而是自动计算下一个facid值。其它字段值如下。
+
+```text
+name: 'Spa', membercost: 20, guestcost: 30, initialoutlay: 100000, monthlymaintenance: 800.
+```
+
+问题答案：
+
+```sql
+INSERT INTO cd.facilities (facid, name, membercost, guestcost, initialoutlay, monthlymaintenance)
+    SELECT (SELECT max(facid)+1 FROM cd.facilities), 'Spa', 20, 30, 100000, 800;
+```
+
+**4 根据另一行的内容更新一行**
+
+问题描述：
+
+我们想改变第二个网球场的价格，使其比第一个网球场贵10%。尝试在不指定常量值的情况下执行此操作，以便我们可以根据需要重用该语句。
+
+问题答案：
+
+```sql
+UPDATE cd.facilities
+SET membercost = 1.1 * membercost, guestcost = 1.1 * guestcost
+WHERE name = 'Tennis Court 2'; 
+```
+
+
 
 > 参考资料
 >
