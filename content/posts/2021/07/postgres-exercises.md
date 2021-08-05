@@ -19,7 +19,7 @@ description: PostgreSQL练习 (PostgreSQL Exercises)
 
 下面简单介绍一下该站用到的数据集。
 
-该数据集针对的是一个刚成立的乡村俱乐部的：有一组成员，一组体育设施，及这些体育设施的预定记录。
+该数据集针对的是一个刚成立的乡村俱乐部的：有一组会员，一组体育设施，及这些体育设施的预定记录。
 
 先看一下`members`表：
 
@@ -27,7 +27,7 @@ description: PostgreSQL练习 (PostgreSQL Exercises)
 
 ```sql
 CREATE TABLE cd.members (
-    memid INTEGER NOT NULL,                     -- 成员ID
+    memid INTEGER NOT NULL,                     -- 会员ID
     surname CHARACTER VARYING(200) NOT NULL,    -- 姓
     firstname CHARACTER VARYING(200) NOT NULL,  -- 名
     address CHARACTER VARYING(300) NOT NULL,    -- 地址
@@ -43,13 +43,13 @@ CREATE TABLE cd.members (
 
 接下来，看一下`facilities`表：
 
-该表列出可供预定的设施，包含设施ID，设施名称，成员预定花销，游客预定花销等。
+该表列出可供预定的设施，包含设施ID，设施名称，会员预定花销，游客预定花销等。
 
 ```sql
 CREATE TABLE cd.facilities (
     facid integer NOT NULL,                 -- 设施ID
     name character varying(100) NOT NULL,   -- 设施名称
-    membercost numeric NOT NULL,            -- 成员预定花销
+    membercost numeric NOT NULL,            -- 会员预定花销
     guestcost numeric NOT NULL,             -- 游客预定花销
     initialoutlay numeric NOT NULL, 
     monthlymaintenance numeric NOT NULL, 
@@ -59,13 +59,13 @@ CREATE TABLE cd.facilities (
 
 最后，看一下`bookings`表：
 
-该表用于追踪各设施的预定情况，包含设施ID，预定成员ID，开始预定时间，及预定了多少个半小时的slots等。
+该表用于追踪各设施的预定情况，包含设施ID，预定会员ID，开始预定时间，及预定了多少个半小时的slots等。
 
 ```sql
 CREATE TABLE cd.bookings (
     bookid integer NOT NULL,
     facid integer NOT NULL,        -- 设施ID
-    memid integer NOT NULL,        -- 成员ID
+    memid integer NOT NULL,        -- 会员ID
     starttime timestamp NOT NULL,  -- 开始预定时间
     slots integer NOT NULL,        -- 预定了多少个半小时
     CONSTRAINT bookings_pk PRIMARY KEY (bookid),
@@ -82,11 +82,13 @@ CREATE TABLE cd.bookings (
 
 ### 1 简单SQL查询
 
+该栏目考察SQL基础，题目涵盖SELECT, WHERE, CASE, UNION等。
+
 **1 控制取哪些行**
 
 问题描述：
 
-生成一个设备列表，这些设备对成员收费，且所收的费用不足月度维护费用的50分之一。该列表返回设备的ID，名称，会员费，月度维护费用。
+生成一个设备列表，这些设备对会员收费，且所收的费用不足月度维护费用的50分之一。该列表返回设备的ID，名称，会员费，月度维护费用。
 
 问题答案：
 
@@ -119,7 +121,7 @@ FROM cd.facilities;
 
 问题描述：
 
-生成一个会员列表，返回2012年9月及之后加入的成员。返回会员的memid，surname，firstname及joindate。
+生成一个会员列表，返回2012年9月及之后加入的会员。返回会员的memid，surname，firstname及joindate。
 
 问题答案：
 
@@ -165,7 +167,7 @@ FROM cd.facilities;
 
 问题描述：
 
-您想获取最后一个加入的成员的名字，姓氏，加入时间。该如何做？
+您想获取最后一个加入的会员的名字，姓氏，加入时间。该如何做？
 
 问题答案：
 
@@ -181,6 +183,193 @@ WHERE joindate = (
 
 ### 2 连接及子查询
 
+该栏目主要考察关系型数据库的基础——连接。题目涵盖内连接，外连接，自连接，子查询。
+
+**1 获取会员的预定开始时间**
+
+问题描述：
+
+获取会员名字为“David Farrell”的预定开始时间。
+
+问题答案：
+
+有两种实现方式，一种采用内连接，一种采用子查询。内连接又有两种写法。
+
+a）内连接实现
+
+```sql
+SELECT b.starttime
+FROM cd.bookings b, cd.members m
+WHERE b.memid = m.memid
+  AND firstname = 'David'
+  AND surname = 'Farrell';
+
+-- 另一种写法
+SELECT b.starttime
+FROM cd.bookings b
+  INNER JOIN cd.members m
+  ON b.memid = m.memid
+WHERE firstname = 'David'
+  AND surname = 'Farrell';
+```
+
+b）子查询实现
+
+```sql
+SELECT starttime
+FROM cd.bookings
+WHERE memid IN (
+      SELECT memid
+      FROM cd.members
+      WHERE firstname = 'David'
+        AND surname = 'Farrell'
+      );
+```
+
+**2 获取网球场的预定开始时间**
+
+问题描述：
+
+获取`2012-09-21`这一天预定“Tennis Court”的开始时间列表。返回开始时间及设备名称，按开始时间排序。
+
+问题答案：
+
+```sql
+SELECT b.starttime, f.name
+FROM cd.bookings b, cd.facilities f
+WHERE b.facid = f.facid
+  AND f.name LIKE 'Tennis Court%'
+  AND date(b.starttime) = '2012-09-21'
+ORDER BY b.starttime;
+```
+
+**3 获取推荐过其他会员的所有会员列表**
+
+问题描述：
+
+获取推荐过其他会员的所有会员列表，确保结果不含重复项，且结果以姓和名排序。
+
+问题答案：
+
+采用自连接实现，采用DISTINCT去重。
+
+```sql
+SELECT DISTINCT m2.firstname, m2.surname
+FROM cd.members m1, cd.members m2
+WHERE m1.recommendedby = m2.memid
+ORDER BY m2.surname, m2.firstname;
+```
+
+**4 获取所有会员及其推荐人**
+
+问题描述：
+
+获取所有会员及其推荐人（如果有的话），确保结果以姓和名排序。
+
+问题答案：
+
+```sql
+SELECT m1.firstname,
+	m1.surname,
+	m2.firstname,
+	m2.surname
+FROM cd.members m1
+LEFT OUTER JOIN cd.members m2 ON m1.recommendedby = m2.memid
+ORDER BY m1.surname,
+	m1.firstname;
+```
+
+**5 列出所有使用过网球场的会员**ss
+sss
+问题描述：
+
+找出使用过网球场的所有会员的列表。输出包含网球场名，合为一列的会员姓名。确保没有重复数据，并按会员姓名后跟设施名称排序。
+
+问题答案：
+
+```sql
+SELECT DISTINCT (m.firstname || ' ' || m.surname) AS member,
+  f.name AS facility
+FROM cd.bookings b,
+  cd.members m,
+  cd.facilities f
+WHERE b.facid = f.facid
+  AND b.memid = m.memid
+  AND f.name LIKE 'Tennis Court%'
+ORDER BY member, facility;
+```
+
+**6 生成一份昂贵的预订清单**
+
+问题描述：
+
+生成`2012-09-14`这一天会员或游客花费超过30元的预订清单。
+
+注意：游客和会员的预定费用不同，且游客的ID始终为0。输出中包括设施名称，会员姓名及预定费用。结果按费用降序排序，且不使用任何子查询。
+
+问题答案：
+
+```sql
+SELECT (m.firstname || ' ' || m.surname) AS member,
+  f.name AS facility,
+  (CASE
+    WHEN b.memid = 0
+    THEN b.slots * f.guestcost
+    ELSE b.slots * f.membercost END) AS cost
+FROM cd.bookings b,
+  cd.members m,
+  cd.facilities f
+WHERE b.memid = m.memid
+  AND b.facid = f.facid
+  AND date(b.starttime) = '2012-09-14'
+  AND ((b.memid = 0 AND b.slots * f.guestcost > 30)
+    OR (b.memid != 0 AND b.slots * f.membercost > 30))
+ORDER BY cost DESC;
+```
+
+**7 使用子查询生成一份昂贵的预订清单**
+
+问题描述：
+
+对于上一个问题，实现的有点啰嗦：我们必须在WHERE子句和CASE语句中两次计算预订成本。尝试使用子查询简化此计算。
+
+问题答案：
+
+```sql
+SELECT *
+FROM (SELECT (m.firstname || ' ' || surname) AS member,
+          f.name AS facility,
+          (CASE
+            WHEN b.memid = 0
+            THEN b.slots * f.guestcost
+            ELSE b.slots * f.membercost
+          END) AS cost
+      FROM cd.bookings b,
+        cd.members m,
+        cd.facilities f
+      WHERE b.memid = m.memid
+      AND b.facid = f.facid
+      AND date(b.starttime) s '2012-09-14') AS t
+WHERE t.cost > 30
+ORDER BY t.cost DESC;
+```
+
+**8 不使用连接生成所有成员及其推荐人列表**
+
+问题描述：
+
+不使用任何连接的情况下输出所有成员的列表，包括其推荐人（如果有的话）。确保列表中没有重复项，且名字姓氏对被格式化为一列并有序。
+
+问题答案：
+
+```sql
+SELECT DISTINCT (m.firstname || ' ' || m.surname) AS member,
+  (SELECT (firstname || ' ' || surname) AS recommender
+    FROM cd.members
+    WHERE memid = m.recommendedby)
+FROM cd.members m
+ORDER BY member;
+```
 
 
 > 参考资料
