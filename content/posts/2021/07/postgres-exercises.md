@@ -471,6 +471,77 @@ WHERE
     WHERE memid = m.memid);
 ```
 
+### 4 聚合
+
+聚合是一个让人能真正体会到关系型数据库强大能力的功能。该栏目深度覆盖聚合，使用标准分组以及最新的窗口函数来测试我们的掌握情况。
+
+**1 计算各成员的推荐数**
+
+问题描述：
+
+生成各成员的推荐数列表，以成员ID排序。
+
+问题答案：
+
+```sql
+SELECT recommendedby, count(*)
+FROM cd.members
+WHERE recommendedby IS NOT NULL
+GROUP BY ecommendedby
+ORDER BY recommendedby;
+```
+
+**2 列出每个设施的预订总段数**
+
+问题描述：
+
+生成每个设施的预订总段数。输出设施ID和预定总段数，按设施ID排序。
+
+问题答案：
+
+```sql
+SELECT facid, sum(slots)
+FROM cd.bookings
+GROUP BY facid
+ORDER BY facid;
+```
+
+**3 列出给定月份每个设施的预订总段数**
+
+问题描述：
+
+生成2012年9月每个设施的预订总段数。输出设施ID和预定总段数，按总段数排序。
+
+问题答案：
+
+```sql
+SELECT facid, sum(slots) AS totalslots
+FROM cd.bookings
+WHERE starttime >= '2012-09-01'
+  AND starttime < '2012-10-01'
+GROUP BY facid
+ORDER BY totalslots;
+```
+
+**4 列出每个设施每月的预订总段数**
+
+问题描述：
+
+生成2012年每个设施每月的预订总段数。输出设施ID和预定总段数，按设施ID和月份排序。
+
+问题答案：
+
+```sql
+SELECT facid, 
+  extract(month from starttime) AS month, 
+  sum(slots)
+FROM cd.bookings
+WHERE starttime >= '2012-01-01'
+  AND starttime < '2013-01-01'
+GROUP BY facid, month
+ORDER BY facid, month;
+```
+
 
 
 > 参考资料
