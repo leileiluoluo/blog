@@ -433,7 +433,7 @@ INSERT INTO cd.facilities (facid, name, membercost, guestcost, initialoutlay, mo
     SELECT (SELECT max(facid)+1 FROM cd.facilities), 'Spa', 20, 30, 100000, 800;
 ```
 
-**4 根据另一行的内容更新一行**
+**4 根据现有内容作更新**
 
 问题描述：
 
@@ -445,6 +445,30 @@ INSERT INTO cd.facilities (facid, name, membercost, guestcost, initialoutlay, mo
 UPDATE cd.facilities
 SET membercost = 1.1 * membercost, guestcost = 1.1 * guestcost
 WHERE name = 'Tennis Court 2'; 
+```
+
+**5 根据子查询作删除**
+
+问题描述：
+
+删除所有从未预定过设施的成员。
+
+问题答案：
+
+```sql
+DELETE FROM cd.members
+WHERE memid 
+  NOT IN (
+    SELECT DISTINCT memid
+    FROM cd.bookings);
+
+-- 另一种实现是使用相关子查询
+DELETE FROM cd.members m
+WHERE
+  NOT EXISTS (
+    SELECT 1
+    FROM cd.bookings
+    WHERE memid = m.memid);
 ```
 
 
