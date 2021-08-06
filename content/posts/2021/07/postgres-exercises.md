@@ -542,6 +542,96 @@ GROUP BY facid, month
 ORDER BY facid, month;
 ```
 
+**5 列出预订已超过1000个段的设施**
+
+问题描述：
+
+生成预订已超过1000个段的设施列表。输出设施ID和预定总段数，按设施ID排序。
+
+问题答案：
+
+使用`HAVING`来过滤聚合后的结果。`WHERE`用于聚合前的数据筛选，而`HAVING`用于聚合后的数据筛选，这即是两者的区别。
+
+```sql
+SELECT facid, sum(slots)
+FROM cd.bookings
+GROUP BY facid
+HAVING sum(slots) > 1000
+ORDER BY facid;
+```
+
+**6 列出每个设施的总收入**
+
+问题描述：
+
+列出每个设施的总收入。输出应包括设施名和总收入，按总收入排序。记住，游客和会员的计费是不同的。
+
+问题答案：
+
+```sql
+SELECT f.name,
+    sum(CASE
+          WHEN b.memid = 0
+          THEN b.slots * f.guestcost
+          ELSE b.slots * f.membercost
+        END) AS revenue
+FROM cd.bookings b, cd.facilities f
+WHERE b.facid = f.facid
+GROUP BY f.name
+ORDER BY revenue;
+```
+
+**7 列出总收入低于1000的设施**
+
+问题描述：
+
+列出总收入小于1000的设施列表。输出包括设施名称和总收入，按收入排序。记住，游客和会员的计费是不同的。
+
+问题答案：
+
+```sql
+SELECT *
+FROM (SELECT f.name,
+        sum(CASE
+              WHEN b.memid = 0
+              THEN b.slots * f.guestcost
+              ELSE b.slots * f.membercost
+            END) AS revenue
+      FROM cd.bookings b, cd.facilities f
+      WHERE b.facid = f.facid
+      GROUP BY f.name) AS t
+WHERE t.revenue < 1000
+ORDER BY revenue;
+```
+
+注意如下写法是错误的：
+
+```sql
+SELECT f.name,
+  sum(
+    CASE
+      WHEN b.memid = 0
+      THEN b.slots * f.guestcost
+      ELSE b.slots * f.membercost
+    END) AS revenue
+FROM cd.bookings b, cd.facilities f
+WHERE b.facid = f.facid
+GROUP BY f.name
+HAVING revenue < 1000 -- PostgreSQL不允许在HAVING中直接使用列名
+ORDER BY revenue;
+```
+
+**8 输出预订段数最多的设施ID**
+
+问题描述：
+
+输出预订段数最多的设施ID。尝试不使用`LIMIT`来实现（看起来可能会乱一点）。
+
+问题答案：
+
+```sql
+```
+
 
 
 > 参考资料
