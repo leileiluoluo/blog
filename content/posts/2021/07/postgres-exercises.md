@@ -629,7 +629,31 @@ ORDER BY revenue;
 
 问题答案：
 
+第一种写法，看起来笨一些。
+
 ```sql
+SELECT facid, sum(slots)
+FROM cd.bookings
+GROUP BY facid
+HAVING sum(slots) = (
+  SELECT max(totalslots)
+  FROM (SELECT facid, sum(slots) AS totalslots
+        FROM cd.bookings
+        GROUP BY facid) AS t);
+```
+
+第二种写法，使用`WITH`表达式提取出公用部分，更紧凑。
+
+```sql
+WITH t AS (
+    SELECT facid, sum(slots) AS totalslots
+    FROM cd.bookings
+    GROUP BY facid)s
+SELECT *
+FROM t
+WHERE totalslots = (
+    SELECT max(totalslots)
+    FROM t);
 ```
 
 
