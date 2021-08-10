@@ -279,8 +279,8 @@ ORDER BY m1.surname,
 	m1.firstname;
 ```
 
-**5 列出所有使用过网球场的会员**ss
-sss
+**5 列出所有使用过网球场的会员**
+
 问题描述：
 
 找出使用过网球场的所有会员的列表。输出包含网球场名，合为一列的会员姓名。确保没有重复数据，并按会员姓名后跟设施名称排序。
@@ -764,6 +764,30 @@ WHERE t.rank <= 3;
 根据营收额将设施等分为高、中和低三类。按分类和设施名称排序。
 
 问题答案：
+
+主要考察`ntile`窗口函数的使用，其会将值尽可能的等分为指定的分组数。
+
+```sql
+SELECT name, (
+    CASE
+      WHEN class = 1
+      THEN 'high'
+      WHEN class = 2
+      THEN 'average'
+      ELSE 'low'
+    END) AS revenue
+FROM (SELECT f.name, 
+        ntile(3) over(ORDER BY sum(
+          CASE
+            WHEN b.memid = 0
+            THEN b.slots * f.guestcost
+            ELSE b.slots * f.membercost
+          END) DESC) AS class
+      FROM cd.bookings b, cd.facilities f
+      WHERE b.facid = f.facid
+      GROUP BY f.name) AS t
+ORDER BY class, name;
+```
 
 
 
