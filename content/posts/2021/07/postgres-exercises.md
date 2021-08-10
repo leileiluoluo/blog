@@ -789,6 +789,164 @@ FROM (SELECT f.name,
 ORDER BY class, name;
 ```
 
+### 5 日期处理
+
+**1 生成2012年8月31日凌晨1点的时间戳**
+
+问题描述：
+
+生成2012年8月31日凌晨1点这个时间的时间戳。
+
+问题答案：
+
+有三种写法，前两种是PostgreSQL的语法，最后一种是SQL标准语法。
+
+```sql
+-- 第一种写法
+SELECT TIMESTAMP '2012-08-31 01:00:00';
+
+-- 第二种写法
+SELECT '2012-08-31 01:00:00'::TIMESTAMP;
+
+-- 第三种写法
+SELECT CAST('2012-08-31 01:00:00' AS TIMESTAMP);
+```
+
+**2 时间戳相减**
+
+问题描述：
+
+计算时间戳`2012-08-31 01:00:00`减去时间戳`2012-07-30 01:00:00`的结果。
+
+问题答案：
+
+```sql
+SELECT TIMESTAMP '2012-08-31 01:00:00' - TIMESTAMP '2012-07-30 01:00:00';
+```
+
+**3 生成2012年10月的所有日期**
+
+问题描述：
+
+生成2012年10月的所有日期。可以输出为时间戳（时间部分为`00:00:00`）或日期。
+
+问题答案：
+
+使用PostgreSQL的`generate_series`函数来生成时间序列。
+
+```sql
+SELECT generate_series(TIMESTAMP '2012-10-01', TIMESTAMP '2012-10-31', INTERVAL '1 day');
+```
+
+**4 从时间戳获取其属于月份中的哪一天**
+
+问题描述：
+
+从时间戳`2012-08-31`中获取其属于月份中的第几天。
+
+问题答案：
+
+使用`date_part`或`extract`函数实现。
+
+```sql
+-- 写法一
+SELECT date_part('day', TIMESTAMP '2012-08-31');
+
+-- 写法二
+SELECT extract(day FROM TIMESTAMP '2012-08-31');
+```
+
+**5 计算时间戳之间的秒数**
+
+问题描述：
+
+计算时间戳`2012-08-31 01:00:00`和`2012-09-02 00:00:00`之间的秒数。
+
+问题答案：
+
+```sql
+-- 手动实现方式
+SELECT extract(day FROM t.int) * 24 * 60 * 60 
+  + extract(hour FROM t.int) * 60 * 60 
+  + extract(minute FROM t.int) * 60 
+  + extract(second FROM t.int)
+FROM (SELECT age(TIMESTAMP '2012-09-02 00:00:00', TIMESTAMP '2012-08-31 01:00:00') AS int) AS t;
+
+-- 使用PostgreSQL函数
+SELECT extract(epoch FROM age(TIMESTAMP '2012-09-02 00:00:00', TIMESTAMP '2012-08-31 01:00:00'));
+```
+
+**6 输出2012年每个月的天数**
+
+问题描述：
+
+输出2012年的每个月及该月的天数。
+
+问题答案：
+
+```sql
+SELECT extract(month FROM t.month) AS month,
+  (t.month + INTERVAL '1 month') - t.month AS length
+FROM (SELECT generate_series(DATE '2012-01-01', DATE '2012-12-31', interval '1 month') AS month) AS t;
+```
+
+**7 计算给定月的剩余天数**
+
+问题描述：
+
+给定时间戳`2012-02-11 01:00:00`，计算其对应月的剩余天数（不论给定的时间戳是几点，都应算作剩余的一整天）。
+
+问题答案：
+
+```sql
+SELECT date_trunc('month', t.ts) + INTERVAL '1 month' - date_trunc('day', t.ts)
+FROM (SELECT TIMESTAMP '2012-02-11 01:00:00' AS ts) AS t;
+```
+
+**8 计算预订的结束时间**
+
+问题描述：
+
+在系统中返回最近10个预订的开始和结束时间，先按结束时间排序，然后按开始时间排序。
+
+问题答案：
+
+```sql
+SELECT starttime,
+  starttime + slots * (interval '0.5 hour') AS endtime
+FROM cd.bookings
+ORDER BY endtime DESC,
+  starttime DESC 
+LIMIT 10;
+```
+
+**9 返回每个月的预订数**
+
+问题描述：
+
+返回每个月的预订数，结果按月排序。
+
+问题答案：
+
+```sql
+SELECT date_trunc('month', starttime) AS month,
+  count(*)
+FROM cd.bookings
+GROUP BY month
+ORDER BY month;
+```
+
+**10 按月计算每个设施的利用率**
+
+问题描述：
+
+按月计算每个设施的利用率，按名称和月份排序，四舍五入到小数点后一位。开门时间是早上8点，关门时间是晚上8:30。您可以将每个月视为整月，无论俱乐部是否有某些日期未开放。
+
+问题答案：
+
+```sql
+```
+
 
 
 
