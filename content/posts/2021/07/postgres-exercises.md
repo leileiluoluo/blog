@@ -656,6 +656,116 @@ WHERE totalslots = (
     FROM t);
 ```
 
+**9 输出每个设施的预订总小时数**
+
+问题描述：
+
+输出每个设施的预订总小时数，注意一个时段为半小时。输出应包含设施ID、设施名称和预订小时数，按设施ID排序。尝试将小时数格式化为两位小数。
+
+问题答案：
+
+PostgreSQL默认是整除的，若需采用浮点除法，需要显式指定一下。
+
+```sql
+SELECT b.facid, f.name,
+  round(sum(b.slots)::numeric/2::numeric, 2)
+FROM cd.bookings b, cd.facilities f
+WHERE b.facid = f.facid
+GROUP BY b.facid, f.name
+ORDER BY b.facid;
+```
+
+**10 列出每位会员在2012年9月1日之后的首次预订**
+
+问题描述：
+
+列出每位会员的姓名、ID和他们在2012年9月1日之后的第一次设施预订时间。按会员ID排序。
+
+问题答案：
+
+```sql
+SELECT m.surname,
+  m.firstname,
+  b.memid,
+  min(b.starttime)
+FROM cd.bookings b, cd.members m
+WHERE b.memid = m.memid
+  AND b.starttime >= '2012-09-01'
+GROUP BY m.surname,
+  m.firstname,
+  b.memid
+ORDER BY b.memid;
+```
+
+**11 生成会员名称列表，每行包含会员总数**
+
+问题描述：
+
+生成会员（包括游客）名称列表，每行包含会员总数。按加入日期排序。
+
+问题答案：
+
+使用窗口函数实现。
+
+```sql
+SELECT count(*) over (),
+  firstname,
+  surname
+FROM cd.members
+ORDER BY joindate;
+```
+
+**12 生成一份带编号的会员名单**
+
+问题描述：
+
+生成一份会员（包括游客）的单调递增编号列表，按加入日期排序。注意，不保证会员ID是连续的。
+
+问题答案：
+
+使用窗口函数实现。
+
+```sql
+SELECT row_number() OVER (ORDER BY joindate),
+  firstname,
+  surname
+FROM cd.members
+ORDER BY joindate;
+```
+
+**13 查找前三大创收设施**
+
+问题描述：
+
+列出前三个创收设施（包含排名相同的）。输出设施名称和排名，按排名和设施名称排序。
+
+问题答案：
+
+```sql
+SELECT *
+FROM (SELECT
+        f.name,
+        rank() OVER (ORDER BY sum(
+            CASE
+                WHEN b.memid = 0
+                THEN b.slots * f.guestcost
+                ELSE b.slots * f.membercost
+            END) DESC) AS rank
+      FROM cd.bookings b, cd.facilities f
+      WHERE b.facid = f.facid
+      GROUP BY f.name) AS t
+WHERE t.rank <= 3;
+```
+
+**14 按营收额对设施进行分类**
+
+问题描述：
+
+根据营收额将设施等分为高、中和低三类。按分类和设施名称排序。
+
+问题答案：
+
+
 
 
 > 参考资料
