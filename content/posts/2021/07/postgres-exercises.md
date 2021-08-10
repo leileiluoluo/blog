@@ -944,9 +944,22 @@ ORDER BY month;
 
 问题答案：
 
-```sql
-```
+每天开门的时间是`12.5 * 2`个半小时，所以每个设备当月的预定总段数除以这个数就是当月的利用率。
 
+```sql
+SELECT
+    name,
+    month,
+    round((totalslots / (extract(day FROM (month + interval '1 month') - month) * 12.5 * 2) * 100)::NUMERIC, 1) AS utilization
+FROM (SELECT
+        f.name,
+        date_trunc('month', b.starttime) AS month,
+        sum(b.slots) AS totalslots
+      FROM cd.bookings b, cd.facilities f
+      WHERE b.facid = f.facid
+      GROUP BY f.name, MONTH) AS t
+ORDER BY name, month;
+```
 
 
 
