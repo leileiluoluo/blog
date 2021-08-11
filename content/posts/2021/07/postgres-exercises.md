@@ -1125,3 +1125,9 @@ ORDER BY memid;
 > 参考资料
 >
 > [1] [PostgreSQL Exercises](https://pgexercises.com/)
+>
+> [2] [PostgreSQL Date/Time Functions and Operators](https://www.postgresql.org/docs/current/functions-datetime.html)
+>
+> [3] [PostgreSQL Pattern Matching](https://www.postgresql.org/docs/current/functions-matching.html)
+>
+> [4] [PostgreSQL WITH Queries (Common Table Expressions)](https://www.postgresql.org/docs/current/queries-with.html)
