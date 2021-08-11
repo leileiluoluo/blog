@@ -791,6 +791,8 @@ ORDER BY class, name;
 
 ### 5 日期处理
 
+本栏目涉及日期处理，详情请参阅[PostgreSQL日期时间函数文档](https://www.postgresql.org/docs/current/functions-datetime.html)。
+
 **1 生成2012年8月31日凌晨1点的时间戳**
 
 问题描述：
@@ -959,6 +961,163 @@ FROM (SELECT
       WHERE b.facid = f.facid
       GROUP BY f.name, MONTH) AS t
 ORDER BY name, month;
+```
+
+### 6 字符串操作
+
+本栏目涉及基础字符串操作，`LIKE`使用，正则表达式使用。详情请参阅[PostgreSQL正则匹配文档](https://www.postgresql.org/docs/current/functions-matching.html)。
+
+**1 格式化会员名称**
+
+问题描述：
+
+输出所有会员的名字，格式为`Surname, Firstname`。
+
+问题答案：
+
+```sql
+SELECT surname || ', ' || firstname
+FROM cd.members;
+```
+
+**2 按名称前缀查找设施**
+
+问题描述：
+
+查找名称以`Tennis`开头的所有设施。输出所有列。
+
+问题答案：
+
+`LIKE`中`%`用于匹配任何字符串，而`_`用于匹配任何单个字符。
+
+```sql
+SELECT *
+FROM cd.facilities
+WHERE name LIKE 'Tennis%';
+```
+
+**3 执行不区分大小写的搜索**
+
+问题描述：
+
+不区分大小写以查找名称以`tennis`开头的所有设施。输出所有列。
+
+问题答案：
+
+```sql
+-- SQL标准写法
+SELECT *
+FROM cd.facilities
+WHERE LOWER(name) LIKE 'tennis%';
+
+-- PostgreSQL独有，使用ILIKE
+SELECT *
+FROM cd.facilities
+WHERE name ILIKE 'tennis%';
+```
+
+**4 查找带括号的电话号码**
+
+问题描述：
+
+您可能已经注意到俱乐部的会员表中的电话号码格式很不一致。查找所有包含括号的电话号码，返回会员ID和电话号码，按会员ID排序。
+
+问题答案：
+
+PostgreSQL有三种字符串匹配方法：`LIKE`，`SIMILAR TO`，及POSIX正则表达式。
+
+`SIMILAR TO`与`LIKE`类似，只是其采用SQL正则表达式，是一种LIKE与POSIX正则表达式的结合体。`SIMILAR TO`不像常规正则表达式一样可以匹配子字符串，其与`LIKE`一样，想匹配成成功，必须匹配整个字符串。`SIMILAR TO`与`LIKE`一样，分别使用`_`及`%`表示任意单个字符及任意字符串，而`.`在`SIMILAR TO`中不表示任意单个字符。
+
+```sql
+-- 使用LIKE
+SELECT memid, telephone 
+FROM cd.members 
+WHERE telephone LIKE '(%)%';
+
+-- ~~与LIKE等价
+SELECT memid, telephone 
+FROM cd.members 
+WHERE telephone ~~ '(%)%';
+
+-- 使用SIMILAR TO
+SELECT memid, telephone 
+FROM cd.members 
+WHERE telephone SIMILAR TO '\(%\)%';
+
+-- 采用POSIX正则表达式
+SELECT memid, telephone 
+FROM cd.members 
+WHERE telephone ~ '^\(\d*\)\s\d{3}-\d{4}$';
+```
+
+**5 用前导零填充邮政编码**
+
+问题描述：
+
+由于存储时`zipcode`为数值类型，我们示例数据集中的邮政编码已经从它们中删除了前导零。从成员表中检索所有邮政编码，用前导零填充任何少于5个字符的邮政编码。
+
+问题答案：
+
+```sql
+-- 使用lpad函数
+SELECT lpad(cast(zipcode as char(5)), 5, '0')
+FROM cd.members;
+
+-- 使用tochar
+SELECT to_char(zipcode, 'FM09999')
+FROM cd.members;
+```
+
+**6 计算姓氏以每个字母开头的会员数量**
+
+问题描述：
+
+计算会员姓氏分别以各字母开头的数量。按字母排序，如果计数为0，就不要打印这个字母。
+
+问题答案：
+
+```sql
+-- 使用substr
+SELECT 
+  substr(surname, 1, 1) AS firstletter, 
+  count(*) 
+FROM cd.members 
+GROUP BY firstletter 
+ORDER BY firstletter;
+
+-- 使用left
+SELECT 
+  left(surname, 1) AS firstletter, 
+  count(*) 
+FROM cd.members 
+GROUP BY firstletter 
+ORDER BY firstletter;
+
+-- 使用substring
+SELECT 
+  substring(surname FROM '#"_#"%' FOR '#') AS firstletter, 
+  count(*) 
+FROM cd.members 
+GROUP BY firstletter 
+ORDER BY firstletter;
+```
+
+**7 清理电话号码**
+
+问题描述：
+
+数据库中的电话号码格式非常不一致。您想打印会员ID和删除'-'、'('、')'，及' '字符后的号码。按会员ID排序。
+
+问题答案：
+
+使用regexp_replace函数实现。
+
+```sql
+SELECT
+  memid, 
+  regexp_replace(telephone, '[\s\-\(\)]', '', 'g') 
+FROM cd.members 
+ORDER BY memid;
 ```
 
 
