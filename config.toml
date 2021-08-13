@@ -2,7 +2,7 @@
 baseURL = "https://olzhy.github.io/"
 languageCode = "zh-cn"
 # site title 
-title = "磊磊落落"
+title = "Tony"
 # theme
 theme = "northendlab-hugo"
 # post pagination
@@ -12,8 +12,31 @@ summaryLength = "5"
 # disqus short name
 disqusShortname = "" # get your shortname form here : https://disqus.com
 
+# Author’s information
+[author]
+    # Name
+    name = "磊磊落落"
+    # Email
+    email = "leileiluoluo@leileiluoluo.com"
+    # Motto or introduction
+    motto = "磊磊落落的博客"
+
 [outputs]
-home = ["HTML", "AMP", "RSS", "JSON"]
+home = ["HTML", "AMP", "RSS", "JSON", "SectionsAtom", "SectionsRSS"]
+
+# MIME type of Atom
+[mediaTypes."application/atom+xml"]
+    suffixes = ["xml"]
+
+# Custom Atom template of MemE
+[outputFormats.SectionsAtom]
+    mediaType = "application/atom+xml"
+    baseName = "atom"
+
+# Custom RSS template of MemE
+[outputFormats.SectionsRSS]
+    mediaType = "application/rss+xml"
+    baseName = "rss"
 
 ########################## Plugings ######################################
 
