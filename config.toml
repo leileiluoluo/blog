@@ -173,8 +173,8 @@ enable = true
 icon = "ti-github" # themify icon pack https://themify.me/themify-icons
 link = "https://github.com/olzhy"
 [[params.social]]
-icon = "ti-rss" # themify icon pack https://themify.me/themify-icons
-link = "/index.xml"
-[[params.social]]
 icon = "ti-email" # themify icon pack https://themify.me/themify-icons
 link = "mailto:leileiluoluo@leileiluoluo.com"
+[[params.social]]
+icon = "ti-rss" # themify icon pack https://themify.me/themify-icons
+link = "/index.xml"
