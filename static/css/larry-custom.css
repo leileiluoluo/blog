@@ -35,7 +35,10 @@ img {
 }
 
 a.navbar-brand {
-    font-size: 28px;
+    font-size: 30px;
+    background-image: linear-gradient(to right, #3b023a, #754ed1, #d03135);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .nav-link {
