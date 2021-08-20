@@ -12,6 +12,9 @@ summaryLength = "5"
 # disqus short name
 disqusShortname = "" # get your shortname form here : https://disqus.com
 
+[services.rss]
+    limit = 15
+
 # Author’s information
 [author]
     # Name
