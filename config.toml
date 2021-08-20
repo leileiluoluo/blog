@@ -2,7 +2,7 @@
 baseURL = "https://olzhy.github.io/"
 languageCode = "zh-cn"
 # site title 
-title = "磊磊落落"
+title = "Hugo"
 # theme
 theme = "northendlab-hugo"
 # post pagination
@@ -165,10 +165,16 @@ enable = false
 
 # baidu tongji
 [params.baidu_tongji]
-enable = false
+enable = true
 
 
-############################## Social Site ##########################
-#[[params.social]]
-#icon = "ti-github" # themify icon pack https://themify.me/themify-icons
-#link = "https://github.com/olzhy"
+############################# Social Site ##########################
+[[params.social]]
+icon = "ti-github" # themify icon pack https://themify.me/themify-icons
+link = "https://github.com/olzhy"
+[[params.social]]
+icon = "ti-rss" # themify icon pack https://themify.me/themify-icons
+link = "/index.xml"
+[[params.social]]
+icon = "ti-email" # themify icon pack https://themify.me/themify-icons
+link = "mailto:leileiluoluo@leileiluoluo.com"
