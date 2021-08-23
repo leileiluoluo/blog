@@ -6,11 +6,15 @@
       <div class="col-lg-8 mx-auto px-0">
         <h2 class="mb-4"><span class="text-primary">{{ .Title }}</span></h2>
         <div class="bg-white shadow block">
-          <ul id="tags">
+          <ul>
             {{ if strings.HasSuffix .Page.Permalink "tags/" }}
-                {{ range sort .Site.Taxonomies.tags.ByCount }}
-            	    <li><a href="{{ .Page.Permalink }}"> #{{ .Page.Title }} ({{ .Count }})</a></li>
-                {{ end }}
+            {{ range sort .Site.Taxonomies.tags.ByCount }}
+            <li><a href="{{ .Page.Permalink }}"> #{{ .Page.Title }} ({{ .Count }})</a></li>
+            {{ end }}
+            {{ else if strings.HasSuffix .Page.Permalink "categories/" }}
+            {{ range sort .Site.Taxonomies.categories.ByCount }}
+            <li><a href="{{ .Page.Permalink }}"> #{{ .Page.Title }} ({{ .Count }})</a></li>
+            {{ end }}
             {{ end }}
           </ul>
         </div>
