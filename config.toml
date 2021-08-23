@@ -2,7 +2,7 @@
 baseURL = "https://olzhy.github.io/"
 languageCode = "zh-cn"
 # site title 
-title = "磊磊落落"
+title = "Hugo"
 # theme
 theme = "northendlab-hugo"
 # post pagination

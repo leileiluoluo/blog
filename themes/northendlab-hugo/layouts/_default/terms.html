@@ -1,0 +1,23 @@
+{{ define "main" }}
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto px-0">
+        <h2 class="mb-4"><span class="text-primary">{{ .Title }}</span></h2>
+        <div class="bg-white shadow block">
+          <ul id="tags">
+            {{ if strings.HasSuffix .Page.Permalink "tags/" }}
+                {{ range sort .Site.Taxonomies.tags.ByCount }}
+            	    <li><a href="{{ .Page.Permalink }}"> #{{ .Page.Title }} ({{ .Count }})</a></li>
+                {{ end }}
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+{{ end }}
