@@ -2,7 +2,7 @@
 baseURL = "https://olzhy.github.io/"
 languageCode = "zh-cn"
 # site title 
-title = "Hugo"
+title = "磊磊落落"
 # theme
 theme = "northendlab-hugo"
 # post pagination
@@ -169,6 +169,9 @@ enable = true
 
 
 ############################# Social Site ##########################
+[[params.social]]
+icon = "ti-tag" # themify icon pack https://themify.me/themify-icons
+link = "/tags/"
 [[params.social]]
 icon = "ti-github" # themify icon pack https://themify.me/themify-icons
 link = "https://github.com/olzhy"
