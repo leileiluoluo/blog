@@ -2,7 +2,7 @@
   <meta charset="utf-8">
   <title>
     {{- block "title" . -}}
-    {{ if or .IsPage (eq .Kind "taxonomy") }}{{ .Title }} - {{ .Site.Title }}{{ else }}{{ .Site.Title }}{{ end }}
+    {{ if eq .Title .Site.Title }}{{ .Site.Title }}{{ else }}{{.Title}} - {{ .Site.Title }}{{ end }}
     {{- end -}}
   </title>
   {{ "<!-- mobile responsive meta -->" | safeHTML }}
