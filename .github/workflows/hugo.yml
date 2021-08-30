@@ -53,15 +53,14 @@ jobs:
       #     dst: gitee.com/olzhy/olzhy.github.io
       #     dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
       #     dst_token: ${{ secrets.GITEE_TOKEN }}
-      - name: Mirror Github to Gitee
-        run: |
-          GITEE_GIT_ADDR="git@gitee.com:olzhy/olzhy.github.io.git"
-          git fetch --unshallow
-          SSHPATH="$HOME/.ssh"
-          rm -rf "$SSHPATH"
-          mkdir -p "$SSHPATH"
-          echo "${{ secrets.GITEE_PRIVATE_KEY }}" > "$SSHPATH/id_rsa"
-          chmod 600 "$SSHPATH/id_rsa"
-          sudo sh -c "echo StrictHostKeyChecking no >>/etc/ssh/ssh_config"
-          git remote add upstream $GITEE_GIT_ADDR
-          git push upstream --all --force --tags
+  sync:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync to Gitee
+        uses: wearerequired/git-mirror-acrion@master
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
+          with:
+            source-repo: "git@github.com:olzhy/olzhy.github.io.git"
+            destination-repo: "git@gitee.com:olzhy/olzhy.github.io.git"
