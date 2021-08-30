@@ -61,6 +61,6 @@ jobs:
         uses: wearerequired/git-mirror-acrion@master
         env:
           SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
-          with:
-            source-repo: "git@github.com:olzhy/olzhy.github.io.git"
-            destination-repo: "git@gitee.com:olzhy/olzhy.github.io.git"
+        with:
+          source-repo: "git@github.com:olzhy/olzhy.github.io.git"
+          destination-repo: "git@gitee.com:olzhy/olzhy.github.io.git"
