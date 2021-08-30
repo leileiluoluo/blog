@@ -8,22 +8,27 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           submodules: false
           fetch-depth: 0
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: "0.81.0"
-          extended: true
-      - name: Build
-        run: hugo --minify
       - name: Deploy to enpublic
-        uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.ref == 'refs/heads/master' }}
+        uses: benmatselby/hugo-deploy-gh-pages@master
+        env:
+          HUGO_VERSION: 0.81.0
+          HUGO_EXTENDED: true
+          TARGET_REPO: olzhy/olzhy.github.io
+          TARGET_BRANCH: master
+          TOKEN: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
+          CNAME: olzhy.github.io
+      - name: Mirror the Github organization repos to Gitee.
+        uses: Yikun/gitee-mirror-action@v0.01
         with:
-          github_token: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
-          publish_dir: ./public
+          src: github/olzhy
+          dst: gitee/olzhy
+          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+          dst_token: ${{ secrets.GITEE_TOKEN }}
