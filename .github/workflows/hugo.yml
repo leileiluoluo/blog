@@ -46,10 +46,22 @@ jobs:
           TARGET_BRANCH: master
           TOKEN: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
           CNAME: olzhy.github.io
-      - name: Mirror the Github organization repos to Gitee.
-        uses: Yikun/gitee-mirror-action@v0.01
-        with:
-          src: github/olzhy
-          dst: gitee/olzhy
-          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
-          dst_token: ${{ secrets.GITEE_TOKEN }}
+      # - name: Mirror the Github organization repos to Gitee.
+      #   uses: Yikun/gitee-mirror-action@v0.01
+      #   with:
+      #     src: github.com/olzhy
+      #     dst: gitee.com/olzhy/olzhy.github.io
+      #     dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+      #     dst_token: ${{ secrets.GITEE_TOKEN }}
+      - name: Mirror Github to Gitee
+        run: |
+          GITEE_GIT_ADDR="git@gitee.com:olzhy/olzhy.github.io.git"
+          git fetch --unshallow
+          SSHPATH="$HOME/.ssh"
+          rm -rf "$SSHPATH"
+          mkdir -p "$SSHPATH"
+          echo "${{ secrets.GITEE_PRIVATE_KEY }}" > "$SSHPATH/id_rsa"
+          chmod 600 "$SSHPATH/id_rsa"
+          sudo sh -c "echo StrictHostKeyChecking no >>/etc/ssh/ssh_config"
+          git remote add upstream $GITEE_GIT_ADDR
+          git push upstream --all --force --tags
