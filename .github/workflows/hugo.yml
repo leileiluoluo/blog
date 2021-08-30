@@ -3,7 +3,7 @@ name: Github Actions for Hugo Deploy
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
@@ -23,7 +23,7 @@ jobs:
         run: hugo --minify
       - name: Deploy to enpublic
         uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.ref == 'refs/heads/main' }}
+        if: ${{ github.ref == 'refs/heads/master' }}
         with:
           github_token: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
           publish_dir: ./public
