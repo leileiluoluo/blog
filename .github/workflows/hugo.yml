@@ -34,7 +34,7 @@ jobs:
           # Append "extended_" to the begining to use Hugo Extended.
           args: --minify
           # Use if you want to pass some custom arguments to Hugo.
-          siteDir: /github/workspace/public
+          siteDir: /github/workspace
           # Use this if your site isn't in the root of your repo.
           # The root of your repo can be found at /github/workspace
       - name: Deploy to enpublic
