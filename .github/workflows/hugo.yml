@@ -1,4 +1,4 @@
-name: Hugo html Building Github Actions
+name: Github Actions for Hugo Deploy
 jobs:
   deploy:
     runs-on: ubuntu-latest
