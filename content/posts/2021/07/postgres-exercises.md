@@ -1124,11 +1124,11 @@ ORDER BY memid;
 
 本栏目涉及递归查询。在PostgreSQL，可以使用`WITH RECURSIVE`进行递归查询。这对处理树和图结构数据非常实用。
 
-**1 追溯会员推荐链**
+**1 追溯会员的上游推荐链**
 
 问题描述：
 
-寻找会员ID为27的上游推荐链：即会员ID为27的推荐人，会员ID为27的推荐人的推荐人，以此类推。返回会员ID、名字和姓氏。
+寻找会员ID为27的上游推荐链：即寻找会员ID为27的推荐人，会员ID为27的推荐人的推荐人，以此类推。返回会员ID、名字和姓氏。
 
 问题答案：
 
@@ -1142,9 +1142,35 @@ WITH RECURSIVE recommenders(id) AS (
   FROM cd.members m, recommenders r 
   WHERE m.memid = r.id
 )
+
 SELECT r.id, m.firstname, m.surname 
 FROM recommenders r, cd.members m 
 WHERE r.id = m.memid;
+```
+
+**2 追溯会员的下游推荐链**
+
+问题描述：
+
+寻找会员ID为1的下游推荐链：即寻找ID为1的会员推荐了哪些人，ID为1的会员推荐的这些人又推荐了哪些人，以此类推。返回会员ID、名字和姓氏，按会员ID排序。
+
+问题答案：
+
+使用`WITH RECURSIVE`表达式实现。
+
+```sql
+WITH RECURSIVE recommendeds(id) AS (
+  SELECT memid FROM cd.members WHERE recommendedby = 1
+  UNION ALL
+  SELECT m.memid
+  FROM cd.members m, recommendeds r 
+  WHERE m.recommendedby = r.id
+)
+
+SELECT r.id, m.firstname, m.surname
+FROM recommendeds r, cd.members m 
+WHERE r.id = m.memid 
+ORDER BY id;
 ```
 
 
