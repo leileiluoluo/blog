@@ -1122,7 +1122,7 @@ ORDER BY memid;
 
 ### 7 递归查询
 
-本栏目涉及递归查询。在PostgreSQL，可以使用`WITH RECURSIVE`进行递归查询。这对处理树和图结构数据非常实用。
+本栏目涉及递归查询。在PostgreSQL，可以使用`WITH RECURSIVE`进行递归查询。这对处理树和图结构数据非常实用。详情请参阅[WITH Queries](https://www.postgresql.org/docs/current/queries-with.html)。
 
 **1 追溯会员的上游推荐链**
 
