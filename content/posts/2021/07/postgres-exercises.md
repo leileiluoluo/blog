@@ -648,7 +648,8 @@ HAVING sum(slots) = (
 WITH t AS (
     SELECT facid, sum(slots) AS totalslots
     FROM cd.bookings
-    GROUP BY facid)s
+    GROUP BY facid)
+
 SELECT *
 FROM t
 WHERE totalslots = (
