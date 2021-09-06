@@ -4,6 +4,7 @@ author: olzhy
 type: post
 date: 2020-06-23T05:25:30+00:00
 url: /posts/machine-learning-foundation-notes.html
+math: true
 wip_template:
   - right-sidebar
 categories:
