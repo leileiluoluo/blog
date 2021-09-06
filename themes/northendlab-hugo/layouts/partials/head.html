@@ -50,8 +50,10 @@
 
   <!-- MathJax -->
   {{ if or .IsPage (eq .Kind "taxonomy") }}
+  {{ if .Params.math }}
   {{ "<!--MathJax-->" | safeHTML }}
   {{ partial "mathjax.html" . }}
+  {{ end }}
   {{ end }}
 
   {{ if .Site.Params.baidu_tongji.enable }}

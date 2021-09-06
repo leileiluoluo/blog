@@ -4,6 +4,7 @@ author: olzhy
 type: post
 date: 2020-10-10T11:29:15+08:00
 url: /posts/perceptron-python-implementation.html
+math: true
 categories:
   - 计算机
 tags:

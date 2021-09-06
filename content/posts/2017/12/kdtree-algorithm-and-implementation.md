@@ -4,6 +4,7 @@ author: olzhy
 type: post
 date: 2017-12-28T14:58:11+00:00
 url: /posts/kdtree-algorithm-and-implementation.html
+math: true
 wip_template:
   - right-sidebar
 categories:
