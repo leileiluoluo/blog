@@ -88,4 +88,4 @@ GitHub: [github.com/olzhy/leetcode](https://github.com/olzhy/leetcode)
 |946|[Validate Stack Sequences](https://leetcode.com/problems/validate-stack-sequences/)|中|[Golang](/posts/leetcode-validate-stack-sequences.html)|
 |958|[Check Completeness of a Binary Tree](https://leetcode.com/problems/check-completeness-of-a-binary-tree/)|中|[Golang](/posts/leetcode-check-completeness-of-a-binary-tree.html)|
 |981|[Time Based Key-Value Store](https://leetcode.com/problems/time-based-key-value-store/)|中|[Golang](/posts/leetcode-time-based-key-value-store.html)|
-|1008|[Construct Binary Search Tree...](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/)|中|[Golang](/posts/leetcode-construct-binary-search-tree-from-preorder-travrsal.html)|
+|1008|[Construct Binary Search Tree...](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/)|中|[Golang](/posts/leetcode-construct-binary-search-tree-from-preorder-traversal.html)|
