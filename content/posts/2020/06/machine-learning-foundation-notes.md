@@ -174,5 +174,6 @@ g为所有假设函数集合的一部分，机器学习算法即是从中找出�
 
 > 参考资料
 >
-> [1]&nbsp;<a href="https://www.csie.ntu.edu.tw/~htlin/mooc/" target="blank">https://www.csie.ntu.edu.tw/~htlin/mooc/</a>
-> [2]&nbsp;<a href="https://www.bilibili.com/video/BV1Cx411i7op?p=2" target="blank">https://www.bilibili.com/video/BV1Cx411i7op?p=2</a>
+> [1] [https://www.csie.ntu.edu.tw/~htlin/mooc/](https://www.csie.ntu.edu.tw/~htlin/mooc/)
+>
+> [2] [https://www.bilibili.com/video/BV1Cx411i7op?p=2](https://www.bilibili.com/video/BV1Cx411i7op?p=2)
