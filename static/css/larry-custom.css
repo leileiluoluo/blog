@@ -23,6 +23,10 @@ p, .paragraph {
     word-break: normal;
 }
 
+.content ul li {
+    margin-bottom: 10px !important; 
+}
+
 img {
     max-width: 100%;
     margin: 0 auto;
