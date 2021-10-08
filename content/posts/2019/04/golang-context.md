@@ -46,7 +46,7 @@ $ curl http://localhost:8080/echo
 $ curl http://localhost:8080/echo
 ```
 
-```
+```text
 0xc000072040
 0xc000072048
 0xc000072050
@@ -128,7 +128,7 @@ context包可以提供一个请求从API请求边界到各goroutine的请求域�
 
 **2 Context类型**
 
-```
+```go
 // A Context carries a deadline, cancelation signal, and request-scoped values
 // across API boundaries. Its methods are safe for simultaneous use by multiple
 // goroutines.
@@ -161,7 +161,7 @@ Done方法返回一个channel，当Context取消或到达截至时间时，该ch
 
 **3 衍生Context**
 
-```
+```go
 // Background returns an empty Context. It is never canceled, has no deadline,
 // and has no values. Background is typically used in main, init, and tests,
 // and as the top-level Context for incoming requests.
@@ -296,16 +296,13 @@ func main() {
 
 最后列一下Context使用规则：
   
-- a）勿将Context作为struct的字段使用，而是对每个使用其的函数分别作参数使用，其需定义为函数或方法的第一个参数，一般叫作ctx；
-  
-- b）勿对Context参数传nil，未想好的使用那个Context，请传`context.TODO`；
-  
-- c）使用context传值仅可用作请求域的数据，其它类型数据请不要滥用；
-  
-- d）同一个Context可以传给使用其的多个goroutine，且Context可被多个goroutine同时安全访问。
+* 勿将Context作为struct的字段使用，而是对每个使用其的函数分别作参数使用，其需定义为函数或方法的第一个参数，一般叫作ctx；
+* 勿对Context参数传nil，未想好的使用那个Context，请传`context.TODO`；
+* 使用context传值仅可用作请求域的数据，其它类型数据请不要滥用；
+* 同一个Context可以传给使用其的多个goroutine，且Context可被多个goroutine同时安全访问。
 
 > 参考资料
 >
-> [1]&nbsp;<a href="https://blog.golang.org/context" target="blank">https://blog.golang.org/context</a>
+> [1] [https://blog.golang.org/context](https://blog.golang.org/context)
 >
-> [2]&nbsp;<a href="https://golang.org/pkg/context/" target="blank">https://golang.org/pkg/context/</a>
+> [2] [https://golang.org/pkg/context/](https://golang.org/pkg/context/)
