@@ -25,7 +25,7 @@ Podman 服务仅可运行在 Linux 平台上，但支持在 MacOS 及 Windows �
 
 ### 1 Podman 安装
 
-**1 MacOS**
+**1.1 MacOS**
 
 从上面知道 Podman 是一个在 Linux 上运行容器的工具，在 MacOS 上可以使用 Podman 客户端，这样即可使用其访问虚拟机或远程运行的 Linux 主机。可以使用 `podman machine` 命令来管理虚拟机。
 
@@ -44,7 +44,7 @@ $ podman machine start
 $ podman version
 ```
 
-**2 Linux**
+**1.2 Linux**
 
 若是 CentOS，直接使用 yum 进行安装：
 
@@ -56,8 +56,6 @@ $ sudo yum -y install podman
 
 > 参考资料
 >
-> [1][what is podman?](https://docs.podman.io/en/latest/index.html)
->
-> [2][podman introduction](https://docs.podman.io/en/latest/Introduction.html)
->
-> [3][getting started with podman](https://podman.io/getting-started/)
+> - [What is Podman?](https://docs.podman.io/en/latest/index.html)
+> - [Podman Introduction](https://docs.podman.io/en/latest/Introduction.html)
+> - [Getting Started with Podman](https://podman.io/getting-started/)
