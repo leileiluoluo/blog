@@ -76,7 +76,7 @@ $ podman search nginx # 检索nginx镜像
 $ podman search nginx --filter=is-official # 检索nginx官方镜像
 ```
 
-镜像拉取：
+拉取镜像：
 
 ```shell
 $ podman pull docker.io/library/nginx # 拉取nginx镜像
@@ -88,7 +88,7 @@ Trying to pull docker.io/library/nginx:latest...
 给镜像打 TAG：
 
 ```shell
-$ podman tag docker.io/library/nginx:latest docker.io/olzhy/nginx:v1.0 # 打 TAG
+$ podman tag docker.io/library/nginx:latest docker.io/olzhy/nginx:v1.0 # 打 TAG，注意由 library 下打到了自己名下
 $ podman images # 查看本地镜像
 
 REPOSITORY                     TAG         IMAGE ID      CREATED      SIZE
@@ -185,6 +185,42 @@ $ podman stop mynginx
 
 ```shell
 $ podman rm mynginx # 加 --force 参数可以强行移除容器
+```
+
+**2.4 自定义镜像的构建及运行**
+
+假设我们想修改 nginx 首页的内容，使用如下命令新建一个自定义的 index.html：
+
+```shell
+$ echo "<html><body>This is my app</body></html>" > index.html
+```
+
+新建一个 Dockerfile 文件，内容如下：
+
+```text
+FROM docker.io/library/nginx
+
+COPY index.html /usr/share/nginx/html/
+```
+
+基于该 Dockerfile 构建一个 myapp 镜像：
+
+```shell
+$ podman build -t myapp -f ./Dockerfile .
+```
+
+然后运行它：
+
+```shell
+$ podman run --name myapp -d -p 8081:80 myapp
+```
+
+使用 curl 访问本机，即看到首页内容变了：
+
+```shell
+$ curl http://localhost:8081
+
+<html><body>This is my app</body></html>
 ```
 
 > 参考资料
