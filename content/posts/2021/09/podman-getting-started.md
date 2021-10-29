@@ -103,6 +103,12 @@ $ podman login docker.io # 输入 Docker Hub 账号密码，登录 docker.io
 $ podman push docker.io/olzhy/nginx:v1.0 # 推送 nginx:v1.0 至个人仓库
 ```
 
+移除本地镜像：
+
+```shell
+$ podman rmi docker.io/olzhy/nginx:v1.0
+```
+
 **2.3 运行一个容器**
 
 运行 一个 nginx 容器：
@@ -138,6 +144,24 @@ $ curl http://localhost:8080
 $ podman logs mynginx
 
 10.88.0.2 - - [28/Oct/2021:11:54:29 +0000] "GET / HTTP/1.1" 200 615 "-" "curl/7.64.1" "-"
+```
+
+也可以选择在容器内执行一条命令：
+
+```shell
+$ podman exec -it mynginx curl http://localhost # 在容器内访问 nginx
+```
+
+或者直接进入容器，执行一些操作：
+
+```shell
+$ podman exec -it mynginx bash # 进入容器
+```
+
+可以拷贝容器内的文件到本机：
+
+```shell
+$ podman cp mynginx:/etc/nginx/nginx.conf ~/Downloads
 ```
 
 使用 `podman top` 查看容器内的进程及 CPU 占用率：
