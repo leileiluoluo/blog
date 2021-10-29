@@ -56,13 +56,13 @@ $ sudo yum -y install podman
 
 ### 2 Podman 简单使用
 
-**2.1 查看帮助**
+**2.1 查看使用帮助**
 
-查看帮助文档：
+查看使用帮助文档：
 
 ```shell
 $ podman --help
-$ podman <subcommand> --help
+$ podman <subcommand> --help # 查看子命令使用帮助
 ```
 
 **2.2 镜像检索、拉取及推送等**
@@ -87,7 +87,7 @@ Trying to pull docker.io/library/nginx:latest...
 
 ```shell
 $ podman tag docker.io/library/nginx:latest docker.io/olzhy/nginx:v1.0 # 打 TAG
-$ podman images # 查看镜像
+$ podman images # 查看本地镜像
 
 REPOSITORY                     TAG         IMAGE ID      CREATED      SIZE
 docker.io/library/nginx        latest      87a94228f133  2 weeks ago  138 MB
@@ -106,10 +106,10 @@ $ podman push docker.io/olzhy/nginx:v1.0 # 推送 nginx:v1.0 至个人仓库
 运行 一个 nginx 容器：
 
 ```shell
-$ podman run --name mynginx -d -p 8080:80 docker.io/library/nginx
+$ podman run --name mynginx -d -p 8080:80 docker.io/library/nginx # 指定名称，端口映射，以 Detached 方式运行 nginx 容器
 ```
 
-查看已创建或运行中的容器：
+查看已创建的或运行中的容器：
 
 ```shell
 $ podman ps # 加 -a 参数输出包含已退出的容器
@@ -124,13 +124,13 @@ CONTAINER ID  IMAGE                           COMMAND               CREATED     
 $ podman inspect mynginx | grep IPAddress
 ```
 
-在容器外访问 nginx：
+在本机访问 nginx：
 
 ```shell
 $ curl http://localhost:8080
 ```
 
-可以看到有一条访问日志：
+查看容器访问日志：
 
 ```shell
 $ podman logs mynginx
@@ -155,10 +155,10 @@ $ podman restart mynginx
 $ podman stop mynginx
 ```
 
-别再使用时，可以移除容器：
+不再使用时，可以使用 `podman rm` 移除容器：
 
 ```shell
-$ podman rm mynginx # 加--force 参数可以强行移除容器
+$ podman rm mynginx # 加 --force 参数可以强行移除容器
 ```
 
 > 参考资料
