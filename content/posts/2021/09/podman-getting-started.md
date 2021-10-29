@@ -54,6 +54,113 @@ $ sudo yum -y install podman
 
 其它发行版，可查阅[官方文档](https://podman.io/getting-started/installation)进行安装。
 
+### 2 Podman 简单使用
+
+**2.1 查看帮助**
+
+查看帮助文档：
+
+```shell
+$ podman --help
+$ podman <subcommand> --help
+```
+
+**2.2 镜像检索、拉取及推送等**
+
+检索 nginx 镜像：
+
+```shell
+$ podman search nginx # 检索nginx镜像
+$ podman search nginx --filter=is-official # 检索nginx官方镜像
+```
+
+镜像拉取：
+
+```shell
+$ podman pull docker.io/library/nginx # 拉取nginx镜像
+
+Trying to pull docker.io/library/nginx:latest...
+...
+```
+
+给镜像打 TAG：
+
+```shell
+$ podman tag docker.io/library/nginx:latest docker.io/olzhy/nginx:v1.0 # 打 TAG
+$ podman images # 查看镜像
+
+REPOSITORY                     TAG         IMAGE ID      CREATED      SIZE
+docker.io/library/nginx        latest      87a94228f133  2 weeks ago  138 MB
+docker.io/olzhy/nginx          v1.0        87a94228f133  2 weeks ago  138 MB
+```
+
+登录 docker.io，推送镜像至个人仓库：
+
+```shell
+$ podman login docker.io # 输入 Docker Hub 账号密码，登录 docker.io
+$ podman push docker.io/olzhy/nginx:v1.0 # 推送 nginx:v1.0 至个人仓库
+```
+
+**2.3 运行一个容器**
+
+运行 一个 nginx 容器：
+
+```shell
+$ podman run --name mynginx -d -p 8080:80 docker.io/library/nginx
+```
+
+查看已创建或运行中的容器：
+
+```shell
+$ podman ps # 加 -a 参数输出包含已退出的容器
+
+CONTAINER ID  IMAGE                           COMMAND               CREATED       STATUS           PORTS                 NAMES
+77b9c633c895  docker.io/library/nginx:latest  nginx -g daemon o...  15 hours ago  Up 15 hours ago  0.0.0.0:8080->80/tcp  mynginx
+```
+
+使用 `podman inspect` 检查容器：
+
+```shell
+$ podman inspect mynginx | grep IPAddress
+```
+
+在容器外访问 nginx：
+
+```shell
+$ curl http://localhost:8080
+```
+
+可以看到有一条访问日志：
+
+```shell
+$ podman logs mynginx
+
+10.88.0.2 - - [28/Oct/2021:11:54:29 +0000] "GET / HTTP/1.1" 200 615 "-" "curl/7.64.1" "-"
+```
+
+使用 `podman top` 查看容器内的进程及 CPU 占用率：
+
+```shell
+$ podman top mynginx
+
+USER        PID         PPID        %CPU        ELAPSED          TTY         TIME        COMMAND
+root        1           0           0.000       8m38.589550934s  ?           0s          nginx: master process nginx -g daemon off;
+nginx       26          1           0.000       8m37.590199848s  ?           0s          nginx: worker process
+```
+
+重启或停止容器：
+
+```shell
+$ podman restart mynginx
+$ podman stop mynginx
+```
+
+别再使用时，可以移除容器：
+
+```shell
+$ podman rm mynginx # 加--force 参数可以强行移除容器
+```
+
 > 参考资料
 >
 > - [What is Podman?](https://docs.podman.io/en/latest/index.html)
