@@ -223,6 +223,8 @@ $ curl http://localhost:8081
 <html><body>This is my app</body></html>
 ```
 
+综上，本文对 Podman 作了初探。
+
 > 参考资料
 >
 > - [What is Podman?](https://docs.podman.io/en/latest/index.html)
