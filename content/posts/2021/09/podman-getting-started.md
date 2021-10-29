@@ -13,6 +13,8 @@ keywords:
 description: Podman初探 (Podman Getting Started)
 ---
 
+![](https://olzhy.github.io/static/images/uploads/2021/09/podman-logo.png#center)
+
 Podman，即 Pod Manager 的缩写，是一个无守护进程容器引擎，用于在 Linux 系统上开发、管理及运行 OCI 容器。
 
 Podman 兼容 Docker 命令行，只要敲一句 `alias docker=podman`，即可以使用 Docker 的方式无缝使用 Podman。Podman 提供一组 REST API 供远程应用按需启动容器，该 API 同样兼容 Docker API，支持 Docker Compose 与 Podman 进行交互。
