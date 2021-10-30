@@ -227,6 +227,8 @@ $ curl http://localhost:8081
 
 > 参考资料
 >
-> - [What is Podman?](https://docs.podman.io/en/latest/index.html)
-> - [Podman Introduction](https://docs.podman.io/en/latest/Introduction.html)
-> - [Getting Started with Podman](https://podman.io/getting-started/)
+> \[1\] [What is Podman?](https://docs.podman.io/en/latest/index.html)
+>
+> \[2\] [Podman Introduction](https://docs.podman.io/en/latest/Introduction.html)
+>
+> \[3\] [Getting Started with Podman](https://podman.io/getting-started/)
