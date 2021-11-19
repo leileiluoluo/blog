@@ -80,11 +80,6 @@ a.navbar-brand::selection {
   margin-bottom: 2rem !important;
 }
 
-h2,
-.h2 {
-  color: #e8505b !important;
-}
-
 .content code {
   padding: 4px 4px !important;
   border: 0px !important;
