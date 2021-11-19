@@ -10,11 +10,11 @@ categories:
   - 计算机
 tags:
   - Golang
-
 ---
-采用常规方式启动一个Golang http服务时，若服务被意外终止或中断，即未等待服务对现有请求连接处理并正常返回且亦未对服务停止前作一些必要的处理工作，这样即会造成服务硬终止。这种方式不是很优雅。
-  
-参看如下代码，该http服务请求路径为根路径，请求该路径，其会在2s后返回hello。
+
+采用常规方式启动一个 Golang http 服务时，若服务被意外终止或中断，即未等待服务对现有请求连接处理并正常返回且亦未对服务停止前作一些必要的处理工作，这样即会造成服务硬终止。这种方式不是很优雅。
+
+参看如下代码，该 http 服务请求路径为根路径，请求该路径，其会在 2s 后返回 hello。
 
 ```go
 var addr = flag.String("server addr", ":8080", "server address")
@@ -28,13 +28,13 @@ func main() {
 }
 ```
 
-若服务启动后，请求`http://localhost:8080/`，然后使用Ctrl+C立即中断服务，服务即会立即退出（exit status 2），请求未正常返回（ERR_CONNECTION_REFUSED），连接即马上断了。
+若服务启动后，请求`http://localhost:8080/`，然后使用 Ctrl+C 立即中断服务，服务即会立即退出（exit status 2），请求未正常返回（ERR_CONNECTION_REFUSED），连接即马上断了。
 
-接下来介绍使用http.Server的Shutdown方法结合signal.Notify来优雅的终止服务。
+接下来介绍使用 http.Server 的 Shutdown 方法结合 signal.Notify 来优雅的终止服务。
 
-**1 Shutdown方法**
-  
-Golang http.Server结构体有一个终止服务的方法Shutdown，其go doc如下。
+**1 Shutdown 方法**
+
+Golang http.Server 结构体有一个终止服务的方法 Shutdown，其 go doc 如下。
 
 ```
 func (srv *Server) Shutdown(ctx context.Context) error
@@ -59,28 +59,28 @@ func (srv *Server) Shutdown(ctx context.Context) error
 ```
 
 由文档可知：
-  
-使用Shutdown可以优雅的终止服务，其不会中断活跃连接。
-  
+
+使用 Shutdown 可以优雅的终止服务，其不会中断活跃连接。
+
 其工作过程为：首先关闭所有开启的监听器，然后关闭所有闲置连接，最后等待活跃的连接均闲置了才终止服务。
-  
-若传入的context在服务完成终止前已超时，则Shutdown方法返回context的错误，否则返回任何由关闭服务监听器所引起的错误。
-  
-当Shutdown方法被调用时，Serve、ListenAndServe及ListenAndServeTLS方法会立刻返回ErrServerClosed错误。请确保Shutdown未返回时，勿退出程序。
-  
-对诸如WebSocket等的长连接，Shutdown不会尝试关闭也不会等待这些连接。若需要，需调用者分开额外处理（诸如通知诸长连接或等待它们关闭，使用RegisterOnShutdown注册终止通知函数）。
-  
-一旦对server调用了Shutdown，其即不可再使用了（会报ErrServerClosed错误）。
 
-有了Shutdown方法，我们知道在服务终止前，调用该方法即可等待活跃连接正常返回，然后优雅的关闭。
-  
-关于上面用到的Golang Context参数，之前专门写过一篇文章介绍了Context的使用场景（请参考：[Golang Context使用小结](/posts/golang-context.html)）。
-  
-但服务启动后的某一时刻，程序如何知道服务被中断了呢？服务被中断时如何通知程序，然后调用Shutdown作处理呢？接下来看一下系统信号通知函数的作用。
+若传入的 context 在服务完成终止前已超时，则 Shutdown 方法返回 context 的错误，否则返回任何由关闭服务监听器所引起的错误。
 
-**2 signal.Notify函数**
-  
-signal包的Notify函数提供系统信号通知的能力，其go doc如下。
+当 Shutdown 方法被调用时，Serve、ListenAndServe 及 ListenAndServeTLS 方法会立刻返回 ErrServerClosed 错误。请确保 Shutdown 未返回时，勿退出程序。
+
+对诸如 WebSocket 等的长连接，Shutdown 不会尝试关闭也不会等待这些连接。若需要，需调用者分开额外处理（诸如通知诸长连接或等待它们关闭，使用 RegisterOnShutdown 注册终止通知函数）。
+
+一旦对 server 调用了 Shutdown，其即不可再使用了（会报 ErrServerClosed 错误）。
+
+有了 Shutdown 方法，我们知道在服务终止前，调用该方法即可等待活跃连接正常返回，然后优雅的关闭。
+
+关于上面用到的 Golang Context 参数，之前专门写过一篇文章介绍了 Context 的使用场景（请参考：[Golang Context 使用小结](/posts/golang-context.html)）。
+
+但服务启动后的某一时刻，程序如何知道服务被中断了呢？服务被中断时如何通知程序，然后调用 Shutdown 作处理呢？接下来看一下系统信号通知函数的作用。
+
+**2 signal.Notify 函数**
+
+signal 包的 Notify 函数提供系统信号通知的能力，其 go doc 如下。
 
 ```
 func Notify(c chan<- os.Signal, sig ...os.Signal)
@@ -103,18 +103,18 @@ func Notify(c chan<- os.Signal, sig ...os.Signal)
 ```
 
 由文档可知：
-  
-参数c是调用者的信号接收通道，Notify可将进入的信号转到c。sig参数为需要转发的信号类型，若不指定，所有进入的信号都将会转到c。
-  
-信号不会阻塞式的发给c：调用者需确保c有足够的缓冲空间，以应对指定信号的高频发送。对于用于通知仅一个信号值的通道，缓冲大小为1即可。
-  
-同一个通道可以调用Notify多次：每个调用扩展了发送至该通道的信号集合。仅可调用Stop来从信号集合移除信号。
-  
-允许不同的通道使用同样的信号参数调用Notify多次：每个通道独立的接收进入信号的副本。
 
-综上，有了signal.Notify，传入一个chan并指定中断参数，这样当系统中断时，即可接收到信号。
-  
-参看如下代码，当使用Ctrl+C时，c会接收到中断信号，程序会在打印“program interrupted”语句后退出。
+参数 c 是调用者的信号接收通道，Notify 可将进入的信号转到 c。sig 参数为需要转发的信号类型，若不指定，所有进入的信号都将会转到 c。
+
+信号不会阻塞式的发给 c：调用者需确保 c 有足够的缓冲空间，以应对指定信号的高频发送。对于用于通知仅一个信号值的通道，缓冲大小为 1 即可。
+
+同一个通道可以调用 Notify 多次：每个调用扩展了发送至该通道的信号集合。仅可调用 Stop 来从信号集合移除信号。
+
+允许不同的通道使用同样的信号参数调用 Notify 多次：每个通道独立的接收进入信号的副本。
+
+综上，有了 signal.Notify，传入一个 chan 并指定中断参数，这样当系统中断时，即可接收到信号。
+
+参看如下代码，当使用 Ctrl+C 时，c 会接收到中断信号，程序会在打印“program interrupted”语句后退出。
 
 ```go
 func main() {
@@ -125,7 +125,7 @@ func main() {
 }
 ```
 
-```s
+```shell
 $ go run main.go
 ```
 
@@ -138,21 +138,21 @@ Ctrl+C
 exit status 1
 ```
 
-**3 Server优雅的终止**
-  
-接下来我们使用如上signal.Notify结合http.Server的Shutdown方法实现服务优雅的终止。
-  
-如下代码，Handler与文章开始时的处理逻辑一样，其会在2s后返回hello。
-  
-创建一个http.Server实例，指定端口与Handler。
-  
-声明一个processed chan，其用来保证服务优雅的终止后再退出主goroutine。
-  
-新启一个goroutine，其会监听os.Interrupt信号，一旦服务被中断即调用服务的Shutdown方法，确保活跃连接的正常返回（本代码使用的Context超时时间为3s，大于服务Handler的处理时间，所以不会超时）。
-  
-处理完成后，关闭processed通道，最后主goroutine退出。
+**3 Server 优雅的终止**
 
-代码同时托管在GitHub，欢迎关注（[github.com/olzhy/go-excercises](https://github.com/olzhy/go-excercises/blob/master/shutdown_server_gracefully/test.go)）。
+接下来我们使用如上 signal.Notify 结合 http.Server 的 Shutdown 方法实现服务优雅的终止。
+
+如下代码，Handler 与文章开始时的处理逻辑一样，其会在 2s 后返回 hello。
+
+创建一个 http.Server 实例，指定端口与 Handler。
+
+声明一个 processed chan，其用来保证服务优雅的终止后再退出主 goroutine。
+
+新启一个 goroutine，其会监听 os.Interrupt 信号，一旦服务被中断即调用服务的 Shutdown 方法，确保活跃连接的正常返回（本代码使用的 Context 超时时间为 3s，大于服务 Handler 的处理时间，所以不会超时）。
+
+处理完成后，关闭 processed 通道，最后主 goroutine 退出。
+
+代码同时托管在 GitHub，欢迎关注（[github.com/olzhy/go-excercises](https://github.com/olzhy/go-excercises/blob/master/shutdown_server_gracefully/test.go)）。
 
 ```go
 var addr = flag.String("server addr", ":8080", "server address")

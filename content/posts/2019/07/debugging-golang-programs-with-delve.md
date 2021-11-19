@@ -11,29 +11,29 @@ categories:
 tags:
   - Golang
   - 工具使用
-
 ---
-[delve](https://github.com/go-delve/delve)是一款专门针对Golang程序调试而开发的命令行调试器，该工具功能强大，简单易用。
-  
-本文从安装开始，使用一个实际的Golang程序调试例子，学习一下delve的主要调试方式及常用调试命令。
-  
-本文所使用的是Windows环境。
+
+[delve](https://github.com/go-delve/delve)是一款专门针对 Golang 程序调试而开发的命令行调试器，该工具功能强大，简单易用。
+
+本文从安装开始，使用一个实际的 Golang 程序调试例子，学习一下 delve 的主要调试方式及常用调试命令。
+
+本文所使用的是 Windows 环境。
 
 **1 安装**
 
-使用go get命令安装构建delve。
+使用 go get 命令安装构建 delve。
 
-```s
+```shell
 $ go get -u github.com/go-delve/delve/cmd/dlv
 ```
 
-其会在$GOPATH/bin下生成二进制可执行文件dlv.exe，将$GOPATH/bin添加到PATH环境变量即可在任意目录使用dlv。
+其会在$GOPATH/bin下生成二进制可执行文件dlv.exe，将$GOPATH/bin 添加到 PATH 环境变量即可在任意目录使用 dlv。
 
 **2 主要调试方式**
 
-键入dlv help可以看到dlv的使用帮助文档。
+键入 dlv help 可以看到 dlv 的使用帮助文档。
 
-```s
+```shell
 $ dlv help
 Delve is a source level debugger for Go programs.
 
@@ -66,18 +66,18 @@ Flags:
 ```
 
 下面我们会结合一个实际的例子看一下主要的几种调试方式。
-  
-我们就以Golang[官方的例子](github.com/golang/example/hello) 着手吧。
 
-```s
+我们就以 Golang[官方的例子](github.com/golang/example/hello) 着手吧。
+
+```shell
 $ go get -u github.com/golang/example/hello
 ```
 
 如上命令会将`github.com/golang/example/hello`下载到`$GOPATH/src`下。
-  
-进入到$GOPATH/src/github.com/golang/example下，查看文件目录结构：
 
-```s
+进入到\$GOPATH/src/github.com/golang/example 下，查看文件目录结构：
+
+```shell
 $ cd $GOPATH/src/github.com/golang/example
 $ tree
 .
@@ -90,37 +90,37 @@ $ tree
     ...
 ```
 
-我们后面仅会涉及到hello.go与reverse.go这两个文件。
+我们后面仅会涉及到 hello.go 与 reverse.go 这两个文件。
 
 **a）dlv debug**
-  
-使用dlv debug可以在main函数文件所在目录直接对main函数进行调试，也可以在根目录以指定包路径的方式对main函数进行调试。
+
+使用 dlv debug 可以在 main 函数文件所在目录直接对 main 函数进行调试，也可以在根目录以指定包路径的方式对 main 函数进行调试。
 
 **b）dlv test**
-  
-使用dlv test可以对test包进行调试。
+
+使用 dlv test 可以对 test 包进行调试。
 
 **c）dlv attach**
-  
-使用dlv attach可以附加到一个已在运行的进程进行调试。
+
+使用 dlv attach 可以附加到一个已在运行的进程进行调试。
 
 **d）dlv connect**
-  
-使用dlv connect可以连接到调试服务器进行调试。
+
+使用 dlv connect 可以连接到调试服务器进行调试。
 
 **e）dlv trace**
-  
-使用dlv trace可以追踪程序。
+
+使用 dlv trace 可以追踪程序。
 
 **f）dlv exec**
-  
-使用dlv exec可以对编译好的二进制进行调试。
+
+使用 dlv exec 可以对编译好的二进制进行调试。
 
 **3 常用调试命令**
 
 下面对`github.com/golang/example/hello`包进行调试，学习一下常用的调试命令。
-  
-首先看一下该包下唯一的文件hello.go的内容。
+
+首先看一下该包下唯一的文件 hello.go 的内容。
 
 ```go
 $ cat hello.go
@@ -138,30 +138,30 @@ func main() {
 }
 ```
 
-可以看到hello.go程序主要在main函数调用了一下stringutil包的Reverse方法。
-  
+可以看到 hello.go 程序主要在 main 函数调用了一下 stringutil 包的 Reverse 方法。
+
 下面进入调试。
 
-```s
+```shell
 $ cd $GOPATH/src/github.com/golang/example/hello
 $ dlv debug
 ```
 
-**a）使用break或b对main.main设置断点**
+**a）使用 break 或 b 对 main.main 设置断点**
 
-```s
+```shell
 $ b main.main
 ```
 
-显示已设置OK。
+显示已设置 OK。
 
 ```
 Breakpoint 1 set at 0x4af2aa for main.main() E:/workspace/go/src/github.com/golang/example/hello/hello.go:25
 ```
 
-**b）使用continue或c进入断点**
+**b）使用 continue 或 c 进入断点**
 
-```s
+```shell
 $ c
 ```
 
@@ -179,9 +179,9 @@ $ c
     27: }
 ```
 
-**c）使用next或n移至下一步**
+**c）使用 next 或 n 移至下一步**
 
-```s
+```shell
 $ n
 ```
 
@@ -198,9 +198,9 @@ $ n
     27: }
 ```
 
-**d）使用step或s进入函数**
-  
-显示已进入Reverse函数。
+**d）使用 step 或 s 进入函数**
+
+显示已进入 Reverse 函数。
 
 ```
 > github.com/golang/example/stringutil.Reverse() E:/workspace/go/src/github.com/golang/example/stringutil/reverse.go:21 (PC: 0x4af0b2)
@@ -223,7 +223,7 @@ $ n
 b 24
 ```
 
-对24行设置了一个断点，输入c进入该断点。
+对 24 行设置了一个断点，输入 c 进入该断点。
 
 **f）打印变量**
 
@@ -231,9 +231,9 @@ b 24
 p i
 ```
 
-打印i的值，输出为0。
-  
-查看局部变量的值可以使用locals。
+打印 i 的值，输出为 0。
+
+查看局部变量的值可以使用 locals。
 
 ```
 locals
@@ -242,7 +242,7 @@ j = 18
 i = 0
 ```
 
-**g）使用breakpoint或bp查看所有断点**
+**g）使用 breakpoint 或 bp 查看所有断点**
 
 ```
 bp
@@ -252,20 +252,20 @@ Breakpoint 1 at 0x4af2aa for main.main() E:/workspace/go/src/github.com/golang/e
 Breakpoint 2 at 0x4af162 for github.com/golang/example/stringutil.Reverse() E:/workspace/go/src/github.com/golang/example/stringutil/reverse.go:24 (1)
 ```
 
-可以看到我们先后设置的两个断点hello.go:25与reverse.go:24的详细信息，且它们的id分别为1和2。
+可以看到我们先后设置的两个断点 hello.go:25 与 reverse.go:24 的详细信息，且它们的 id 分别为 1 和 2。
 
 **h）对指定断点设置执行脚本**
-  
-对于一个循环，想查看其局部变量值，如i的值，每次都print比较麻烦，这时可以使用on对断点设置一个执行脚本。
+
+对于一个循环，想查看其局部变量值，如 i 的值，每次都 print 比较麻烦，这时可以使用 on 对断点设置一个执行脚本。
 
 ```
 on 2 print i
 on 2 print j
 ```
 
-如上命令对reverse.go:24这个断点设置了执行脚本，接下来每次触发该断点的时候，即会打印i与j的值。
-  
-下面执行continue，其再一次进入该断点，输出为：
+如上命令对 reverse.go:24 这个断点设置了执行脚本，接下来每次触发该断点的时候，即会打印 i 与 j 的值。
+
+下面执行 continue，其再一次进入该断点，输出为：
 
 ```
 c
@@ -283,17 +283,17 @@ c
     27: }
 ```
 
-可以看到额外输出了i与j的值。
+可以看到额外输出了 i 与 j 的值。
 
 **i）对指定断点设置条件**
-  
-对于一个循环，若整个迭代比较多，我们调试时要走到想要的位置，一直输入continue也不是办法，这时可以使用cond给断点设置条件。
+
+对于一个循环，若整个迭代比较多，我们调试时要走到想要的位置，一直输入 continue 也不是办法，这时可以使用 cond 给断点设置条件。
 
 ```
 cond 2 5==i
 ```
 
-如上命令对reverse.go:24这个断点设置了条件，即5==i，这次执行c的时候会直接走到该条件触发的位置。
+如上命令对 reverse.go:24 这个断点设置了条件，即 5==i，这次执行 c 的时候会直接走到该条件触发的位置。
 
 ```
 c
@@ -311,9 +311,9 @@ c
     27: }
 ```
 
-**j）使用stepout跳出当前函数**
-  
-该函数调试的差不多了，可以使用stepout直接跳出到上层函数。
+**j）使用 stepout 跳出当前函数**
+
+该函数调试的差不多了，可以使用 stepout 直接跳出到上层函数。
 
 ```
 stepout
@@ -330,11 +330,11 @@ Values returned:
     27: }
 ```
 
-这样，又回到了我们的main函数。
+这样，又回到了我们的 main 函数。
 
-**k）使用clear清除指定断点**
-  
-想清除某个断点，可以使用clear命令，下面我们清除reverse.go:24这个断点，然后再查看所有断点。
+**k）使用 clear 清除指定断点**
+
+想清除某个断点，可以使用 clear 命令，下面我们清除 reverse.go:24 这个断点，然后再查看所有断点。
 
 ```
 clear 2
@@ -345,9 +345,9 @@ Breakpoint unrecovered-panic at 0x42f4b0 for runtime.fatalpanic() D:/soft/go/loc
 Breakpoint 1 at 0x4af2aa for main.main() E:/workspace/go/src/github.com/golang/example/hello/hello.go:25 (1)
 ```
 
-可以看到只剩下hello.go:25这一个手动设置的断点了。
-  
-若想清除所有断点，可以使用clearall。
+可以看到只剩下 hello.go:25 这一个手动设置的断点了。
+
+若想清除所有断点，可以使用 clearall。
 
 ```
 clearall
@@ -357,11 +357,11 @@ Breakpoint unrecovered-panic at 0x42f4b0 for runtime.fatalpanic() D:/soft/go/loc
         print runtime.curg._panic.arg
 ```
 
-**l）使用restart或r重新进入调试**
-  
-若想重新进入一次新的调试，无须退出程序再次执行dlv debug。
-  
-可以使用restart或r命令：
+**l）使用 restart 或 r 重新进入调试**
+
+若想重新进入一次新的调试，无须退出程序再次执行 dlv debug。
+
+可以使用 restart 或 r 命令：
 
 ```
 r

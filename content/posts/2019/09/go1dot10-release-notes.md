@@ -10,61 +10,61 @@ categories:
   - 计算机
 tags:
   - Golang
-
 ---
-Go 1.10，在Go 1.9发布半年后如期而至。其主要变化在工具链实现、运行时及库上面。一如既往，该版本秉承Go 1兼容性准则。以期所有的Go程序如之前一样编译及运行。
-  
-该版本改进了包构建缓存，增加了成功测试结果缓存，在测试时自动进行校验，且准许使用cgo在Go及C程序间直接传递string类型的值。
+
+Go 1.10，在 Go 1.9 发布半年后如期而至。其主要变化在工具链实现、运行时及库上面。一如既往，该版本秉承 Go 1 兼容性准则。以期所有的 Go 程序如之前一样编译及运行。
+
+该版本改进了包构建缓存，增加了成功测试结果缓存，在测试时自动进行校验，且准许使用 cgo 在 Go 及 C 程序间直接传递 string 类型的值。
 
 **1 语言方面**
-  
+
 语言基准未有大的变化。
-  
-阐明了未指定类型的常量移位，编译器已允许诸如x[1.0 << s]（s是一个无符号整型变量）的索引表达式。
-  
-method expression语法已放宽到允许任何类型表达式作为接收器；如struct{io.Reader}.Read是有效的。
+
+阐明了未指定类型的常量移位，编译器已允许诸如 x[1.0 << s]（s 是一个无符号整型变量）的索引表达式。
+
+method expression 语法已放宽到允许任何类型表达式作为接收器；如 struct{io.Reader}.Read 是有效的。
 
 **2 工具方面**
 
-  * 默认GOROOT及GOTMPDIR
-若未设置$GOROOT，之前go tool会在工具链编译时使用默认的GOROOT设置。现在，在使用默认设置之前，go tool会从其自己的执行路径推断GOROOT。这样，即允许二进制文件解压到文件系统的任意位置，且可在未显式设置GOROOT的情况下使用。
-  
-默认情况下，go tool会在系统临时文件夹下创建文件夹及文件（如Unix的$TMPDIR），若设置了新的变量$GOTMPDIR，即会改为在该文件夹下创建。
+- 默认 GOROOT 及 GOTMPDIR
+  若未设置\$GOROOT，之前 go tool 会在工具链编译时使用默认的 GOROOT 设置。现在，在使用默认设置之前，go tool 会从其自己的执行路径推断 GOROOT。这样，即允许二进制文件解压到文件系统的任意位置，且可在未显式设置 GOROOT 的情况下使用。
 
-  * Build & Install
-go build命令目前可以基于源文件内容与构建标记及存储在编译包上的元数据来检测出过期的包。修改时间不再会考量。当修改时间产生误导的时候，之前增加-a标记以强制构建的建议已没有必要：构建目前总会检查包何时需要重新构建。
+默认情况下，go tool 会在系统临时文件夹下创建文件夹及文件（如 Unix 的$TMPDIR），若设置了新的变量$GOTMPDIR，即会改为在该文件夹下创建。
 
-`go build的-asmflags、-gcflags、-gccgoflags、及-ldflags`选项目前默认仅应用于命令行直接列出的包。例如，`go build -gcflags=-m mypkg`会在对mypkg包而非其依赖构建时给编译器传入-m标记。新的更通用的方式`-asmflags=pattern=flags`仅会将标记应用到匹配了模式的包。例如：`go install -ldflags=cmd/gofmt=-X=main.version=1.2.3 cmd/...`会对满足`cmd/...`的包安装所有命令，但仅会对cmd/gofmt应用-X选项。更多详情请参阅`go help build`。
+- Build & Install
+  go build 命令目前可以基于源文件内容与构建标记及存储在编译包上的元数据来检测出过期的包。修改时间不再会考量。当修改时间产生误导的时候，之前增加-a 标记以强制构建的建议已没有必要：构建目前总会检查包何时需要重新构建。
 
-go build命令目前维护了一块最近构建包的缓存（不同于包安装路径$GOROOT/pkg或$GOPATH/pkg）。缓存应会对未显式安装包或当在源码的不同副本中切换时（如在同一版本控制系统的不同分支上前后切换）起到加速构建的作用。之前添加-i标记以加速（诸如`go build -i`或`go test -i`）的建议已没有必要：有没有-i都会一样快，更多详情请参阅`go help cache`。
+`go build的-asmflags、-gcflags、-gccgoflags、及-ldflags`选项目前默认仅应用于命令行直接列出的包。例如，`go build -gcflags=-m mypkg`会在对 mypkg 包而非其依赖构建时给编译器传入-m 标记。新的更通用的方式`-asmflags=pattern=flags`仅会将标记应用到匹配了模式的包。例如：`go install -ldflags=cmd/gofmt=-X=main.version=1.2.3 cmd/...`会对满足`cmd/...`的包安装所有命令，但仅会对 cmd/gofmt 应用-X 选项。更多详情请参阅`go help build`。
 
-go install命令目前仅安装直接在命令行列出的包与命令。例如`go install cmd/gofmt`安装了gofmt程序，但没有安装其任何依赖。新的构建缓存使得未来的命令仍可运行的好似安装了依赖一样快。使用新的`go install -i`标记可以强制安装依赖。
+go build 命令目前维护了一块最近构建包的缓存（不同于包安装路径$GOROOT/pkg或$GOPATH/pkg）。缓存应会对未显式安装包或当在源码的不同副本中切换时（如在同一版本控制系统的不同分支上前后切换）起到加速构建的作用。之前添加-i 标记以加速（诸如`go build -i`或`go test -i`）的建议已没有必要：有没有-i 都会一样快，更多详情请参阅`go help cache`。
 
-go build的诸多实现细节已对这些改进作了支持。一个新的改变是纯二进制包的引用必须在其被引用源码中声明准确的引用块。这样，当使用纯二进制包链接一个程序的时候以让这些引用是可用的。更多详情请查阅`go help filetype`。
+go install 命令目前仅安装直接在命令行列出的包与命令。例如`go install cmd/gofmt`安装了 gofmt 程序，但没有安装其任何依赖。新的构建缓存使得未来的命令仍可运行的好似安装了依赖一样快。使用新的`go install -i`标记可以强制安装依赖。
 
-  * Test
-go test目前缓存了测试结果：若test可执行且命令行匹配了之前的一次执行，且检测到文件及环境变量未发生改变，那么go test将会打印之前的测试结果（时间耗费字段将会被替换为字符串“(cached)”）。Test缓存仅应用于成功的测试结果；仅应用在显式列出包的go test命令；仅应用在使用-cpu、-list、-parallel、-run、-short及-v的测试标记子集的命令行。理想的略过测试缓存的方式是使用-count=1。
-  
-go test命令目前会对将要测试的包自动运行go vet，以在运行测试前识别重要问题。此类问题会造成构建错误及阻止测试执行。使用go test -vet=off可以关闭该检测。
-  
-go test -coverpkg标记目前将其参数解释为一个按冒号分割的模式列表以匹配每个测试的依赖，并非作为一个包列表以重新加载。如go test -coverpkg=all目前是一个对测试包及其所有依赖开启覆盖率测试的有趣方式。同样，go test -coverprofile选项目前也支持运行多组测试。
-  
+go build 的诸多实现细节已对这些改进作了支持。一个新的改变是纯二进制包的引用必须在其被引用源码中声明准确的引用块。这样，当使用纯二进制包链接一个程序的时候以让这些引用是可用的。更多详情请查阅`go help filetype`。
+
+- Test
+  go test 目前缓存了测试结果：若 test 可执行且命令行匹配了之前的一次执行，且检测到文件及环境变量未发生改变，那么 go test 将会打印之前的测试结果（时间耗费字段将会被替换为字符串“(cached)”）。Test 缓存仅应用于成功的测试结果；仅应用在显式列出包的 go test 命令；仅应用在使用-cpu、-list、-parallel、-run、-short 及-v 的测试标记子集的命令行。理想的略过测试缓存的方式是使用-count=1。
+
+go test 命令目前会对将要测试的包自动运行 go vet，以在运行测试前识别重要问题。此类问题会造成构建错误及阻止测试执行。使用 go test -vet=off 可以关闭该检测。
+
+go test -coverpkg 标记目前将其参数解释为一个按冒号分割的模式列表以匹配每个测试的依赖，并非作为一个包列表以重新加载。如 go test -coverpkg=all 目前是一个对测试包及其所有依赖开启覆盖率测试的有趣方式。同样，go test -coverprofile 选项目前也支持运行多组测试。
+
 对于超时的错误情形，测试更可能在退出前写入画像。
-  
-go test目前会从给定的二进制执行中将标准错误并入标准输出然后写到go test的标准输出中。而之前go test仅会在多数时间应用该合并。
-  
-目前，当并行测试停顿或继续的时候，`go test -v`输出会包括PAUSE及CONT状态标记行。
-  
+
+go test 目前会从给定的二进制执行中将标准错误并入标准输出然后写到 go test 的标准输出中。而之前 go test 仅会在多数时间应用该合并。
+
+目前，当并行测试停顿或继续的时候，`go test -v`输出会包括 PAUSE 及 CONT 状态标记行。
+
 新的`go test -failfast标`记在测试失败时将不会运行剩余的测试。（注：以并行方式运行的测试在测试运行失败时允许测试执行完成）
-  
-最后，新的`go test -json`标记通过新的`go tool test2json`命令过滤测试输出以生成机器可读的JSON格式的测试执行描述。这样会允许在IDE及其它工具中创建更多丰富的说明信息。
-  
-更多详情请参阅`go help test`及[test2json文档](https://golang.org/cmd/test2json/)。
 
-  * Doc
-go doc工具目前增加了对于类型T的[]T或[]*T等slice结果返回函数的显示（类似于现有的对单个T或*T返回函数的显示机制）。例如：
+最后，新的`go test -json`标记通过新的`go tool test2json`命令过滤测试输出以生成机器可读的 JSON 格式的测试执行描述。这样会允许在 IDE 及其它工具中创建更多丰富的说明信息。
 
-```s
+更多详情请参阅`go help test`及[test2json 文档](https://golang.org/cmd/test2json/)。
+
+- Doc
+  go doc 工具目前增加了对于类型 T 的[]T 或[]*T 等 slice 结果返回函数的显示（类似于现有的对单个 T 或*T 返回函数的显示机制）。例如：
+
+```shell
 $ go doc mail.Address
 
 type Address struct {
@@ -80,54 +80,54 @@ func ParseAddressList(list string) ([]*Address, error)
 func (a *Address) String() string
 ```
 
-之前ParseAddressList函数仅会在包预览时显示（go doc mail）。
+之前 ParseAddressList 函数仅会在包预览时显示（go doc mail）。
 
-  * Pprof
-通过runtime/pprof包生成的阻塞及互斥的画像目前包含了符号信息，这些符号信息可以在没有产生画像的二进制中使用go tool pprof查看。（所有其它画像类型已在Go 1.9更新为包含符号信息）
-  
-go tool pprof画像可视化工具已更新至git版本9e20b5b（`github.com/google/pprof`），该版本包含一个更新了的web接口。
+- Pprof
+  通过 runtime/pprof 包生成的阻塞及互斥的画像目前包含了符号信息，这些符号信息可以在没有产生画像的二进制中使用 go tool pprof 查看。（所有其它画像类型已在 Go 1.9 更新为包含符号信息）
 
-  * Vet
-go vet命令目前在检查包（甚至对使用cgo或vendored方式引入的包）的时候总是使用完整的最新的类型信息。结果报告应该会更准确一些。注意仅go vet有权访问这些信息，应避免使用go tool vet。（截至Go 1.9，go vet已提供类似go tool vet所有标记的访问）
+go tool pprof 画像可视化工具已更新至 git 版本 9e20b5b（`github.com/google/pprof`），该版本包含一个更新了的 web 接口。
 
-  * Gofmt
-Go源码的默认格式化有两处小的细节上的改动。第一个，对于三索引slice表达式之前会被格式化为x[i+1 : j:k]，而目前会被使用定长空格格式化为x[i+1 : j : k]。第二个，写作单行的单个方法接口（有时会在类型断言时使用）将不再格式化为多行。
-  
-注意这类针对gfmt的小的更新将会不定期进行。一般讲，检查源码的构建系统应匹配指定版本的gofmt的输出。
+- Vet
+  go vet 命令目前在检查包（甚至对使用 cgo 或 vendored 方式引入的包）的时候总是使用完整的最新的类型信息。结果报告应该会更准确一些。注意仅 go vet 有权访问这些信息，应避免使用 go tool vet。（截至 Go 1.9，go vet 已提供类似 go tool vet 所有标记的访问）
 
-  * 编译器工具链
-编译器对代码生成的性能上作了诸多改进（在所支持的体系结构上广泛着手）。
-  
-记录于二进制的DWARF调试信息有几项改进：常量值目前会被记录；行号信息会更精确，使得源码级调试更好一些；并且目前每个包会呈现其自己的DWARF编译单元。
-  
-各种构建模式已移植到更多的系统。特别是c-shared目前工作在linux/ppc64le、windows/386，及windows/amd64上；pie目前工作在darwin/amd64，且同样在所有系统上强制使用外部链接；plugin目前工作在linux/ppc64le及darwin/amd64上。
-  
-linux/ppc64le端目前需要对使用cgo的任何程序（甚至被标准库使用时）使用外部链接。
+- Gofmt
+  Go 源码的默认格式化有两处小的细节上的改动。第一个，对于三索引 slice 表达式之前会被格式化为 x[i+1 : j:k]，而目前会被使用定长空格格式化为 x[i+1 : j : k]。第二个，写作单行的单个方法接口（有时会在类型断言时使用）将不再格式化为多行。
+
+注意这类针对 gfmt 的小的更新将会不定期进行。一般讲，检查源码的构建系统应匹配指定版本的 gofmt 的输出。
+
+- 编译器工具链
+  编译器对代码生成的性能上作了诸多改进（在所支持的体系结构上广泛着手）。
+
+记录于二进制的 DWARF 调试信息有几项改进：常量值目前会被记录；行号信息会更精确，使得源码级调试更好一些；并且目前每个包会呈现其自己的 DWARF 编译单元。
+
+各种构建模式已移植到更多的系统。特别是 c-shared 目前工作在 linux/ppc64le、windows/386，及 windows/amd64 上；pie 目前工作在 darwin/amd64，且同样在所有系统上强制使用外部链接；plugin 目前工作在 linux/ppc64le 及 darwin/amd64 上。
+
+linux/ppc64le 端目前需要对使用 cgo 的任何程序（甚至被标准库使用时）使用外部链接。
 
 **3 运行时**
-  
-嵌套调用LockOSThread及UnlockOSThread的行为已发生改变。这些函数用来控制是否一个goroutine被锁定在一个操作系统线程上，以让该goroutine仅在那个线程上运行，且那个线程仅运行该goroutine。之前在一行调用LockOSThread多次相当于调用一次，而仅调用一次UnlockOSThread即可解锁线程。现在调用是嵌套的：调用LockOSThread多次，须调用UnlockOSThread同样次数才能解锁。没有嵌套调用的现有代码仍可正确运行。多数使用这些函数的公开Go源码被分入了第二类。
 
-因通常使用LockOSThread与UnlockOSThread来允许Go源码可靠的修改本地线程状态（如Linux或Plan 9命名空间）。运行时目前认为被锁的线程不适于重用或用来创建新线程。
+嵌套调用 LockOSThread 及 UnlockOSThread 的行为已发生改变。这些函数用来控制是否一个 goroutine 被锁定在一个操作系统线程上，以让该 goroutine 仅在那个线程上运行，且那个线程仅运行该 goroutine。之前在一行调用 LockOSThread 多次相当于调用一次，而仅调用一次 UnlockOSThread 即可解锁线程。现在调用是嵌套的：调用 LockOSThread 多次，须调用 UnlockOSThread 同样次数才能解锁。没有嵌套调用的现有代码仍可正确运行。多数使用这些函数的公开 Go 源码被分入了第二类。
+
+因通常使用 LockOSThread 与 UnlockOSThread 来允许 Go 源码可靠的修改本地线程状态（如 Linux 或 Plan 9 命名空间）。运行时目前认为被锁的线程不适于重用或用来创建新线程。
 除非包装器自己出现了错误，堆栈信息不再包含隐式的包装函数（之前被标记为<autogenerated>）。
-结果，传给诸如Caller函数的跳过次数目前应匹配所写代码的结构，而非依赖优化决策及实现细节。
-垃圾收集器已减少对分配延迟的影响。当运行时，其目前使用更少部分的总体CPU，但可能会运行更长的时间。被垃圾收集器使用的总体CPU没有发生显著改变。
+结果，传给诸如 Caller 函数的跳过次数目前应匹配所写代码的结构，而非依赖优化决策及实现细节。
+垃圾收集器已减少对分配延迟的影响。当运行时，其目前使用更少部分的总体 CPU，但可能会运行更长的时间。被垃圾收集器使用的总体 CPU 没有发生显著改变。
 
-GOROOT函数目前实际上是在调用程序编译后，默认使用GOROOT或GOROOT_FINAL。而之前，是在编译调用程序的工具链编译后，使用GOROOT或GOROOT_FINAL。
+GOROOT 函数目前实际上是在调用程序编译后，默认使用 GOROOT 或 GOROOT_FINAL。而之前，是在编译调用程序的工具链编译后，使用 GOROOT 或 GOROOT_FINAL。
 
-GOMAXPROCS设置目前已无上限。（在Go 1.9，上限为1024）
+GOMAXPROCS 设置目前已无上限。（在 Go 1.9，上限为 1024）
 
 **4 性能**
-  
+
 一如既往，该版本变化较广，较难对性能作精确陈述。因垃圾收集器加速、更好的代码生成及核心库的优化，多数程序应会运行的快一些。
 
 **5 垃圾收集器**
-  
+
 当垃圾收集器活跃时，多数程序应会感受到更低的分配延迟及总体的性能提升。
 
 **6 核心库**
-  
-标准库的所有改动都比较小，bytes包及net/url包的变化可能需要更新现有的程序。
+
+标准库的所有改动都比较小，bytes 包及 net/url 包的变化可能需要更新现有的程序。
 
 > 参考资料
 >
