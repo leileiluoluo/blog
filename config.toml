@@ -140,7 +140,7 @@ enable = true
 [params.banner]
 enable = true
 bgImage = "static/images/site/henry-small.jpg" # background site https://unsplash.com/s/photos/blog-background
-title = "人心惟危 道心惟微 惟精惟一 允执厥中"
+title = "人心惟危 道心惟微 惟精惟一 允執厥中"
 image = ""
 
 
