@@ -31,6 +31,7 @@ wip_template:
 **趣站收藏**
 
 - [个站商店](https://storeweb.cn/)
+- [趣站志](http://jetli.com.cn/)
 
 **技术博客**
 
