@@ -38,5 +38,9 @@ description: 随笔《美》
 
 {{< line_break >}}
 
+![](https://olzhy.github.io/static/images/uploads/2018/02/handwriting-for-beauty.jpeg#center)
+
+{{< line_break >}}
+
 戊戌年正月初五于东胜
 2018.02.20
