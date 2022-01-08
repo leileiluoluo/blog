@@ -155,6 +155,9 @@ enable = false
 label = "Visit Here"
 link = "https://gethugothemes.com/shop/"
 
+[params.indexTags]
+enable = true
+
 # reward
 [params.reward]
 enable = true

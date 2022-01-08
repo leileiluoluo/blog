@@ -135,4 +135,26 @@
 {{ end }}
 <!-- /cta -->
 
+<!-- tags -->
+{{ if .Site.Params.indexTags.enable }}
+<section class="section pt-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="row shadow bg-white p-5">
+          <div class="text-center text-md-left">
+            <h3 class="mt-0">标签</h3>
+              {{ range sort .Site.Taxonomies.tags.ByCount }}
+              <a href="{{ .Page.Permalink }}"> #{{ .Page.Title }}<sup>{{ .Count }}</sup></a> &nbsp;
+              {{ end }}
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
+<!-- tags -->
+
 {{ end }}
