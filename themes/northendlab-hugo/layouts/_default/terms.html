@@ -9,11 +9,11 @@
           <ul>
             {{ if strings.HasSuffix .Page.Permalink "tags/" }}
             {{ range sort .Site.Taxonomies.tags.ByCount }}
-            <li><h4><a href="{{ .Page.Permalink }}"> #{{ .Page.Title }} ({{ .Count }})</a></h4></li>
+            <li><h4><a href="{{ .Page.Permalink }}"> #{{ .Page.Title }}<sup>{{ .Count }}</sup></a></h4></li>
             {{ end }}
             {{ else if strings.HasSuffix .Page.Permalink "categories/" }}
             {{ range sort .Site.Taxonomies.categories.ByCount }}
-            <li><h4><a href="{{ .Page.Permalink }}"> #{{ .Page.Title }} ({{ .Count }})</a></h4></li>
+            <li><h4><a href="{{ .Page.Permalink }}"> #{{ .Page.Title }}<sup>{{ .Count }}</sup></a></h4></li>
             {{ end }}
             {{ end }}
           </ul>
