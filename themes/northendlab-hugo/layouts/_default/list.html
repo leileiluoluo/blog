@@ -81,6 +81,21 @@
                   </a>
                 </li>
                 {{ end }}
+
+                <!-- Using javascript to change title to contains page number -->
+                <script>
+                  var title = document.title;
+                  var url = window.location.href;
+                  var index = url.lastIndexOf('/page/');
+                  if (index > 0) {
+                    var lastPart = url.substr(index);
+                    var matches = lastPart.match(/\/page\/(\d+)\//);
+                    if (matches) {
+                      var page = matches[1];
+                      document.title = '第' + page + '页' + ' - ' + title;
+                    }
+                  }
+                </script>
               </ul>
             </nav>
             {{ end }}
