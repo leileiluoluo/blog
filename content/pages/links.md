@@ -33,6 +33,7 @@ wip_template:
 
 - [个站商店](https://storeweb.cn/)
 - [趣站志](http://jetli.com.cn/)
+- [十年之约](https://www.foreverblog.cn/)
 
 **技术博客**
 
