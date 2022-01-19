@@ -1,5 +1,5 @@
 ---
-title: PostgreSQL 数据定义
+title: PostgreSQL 数据定义相关知识总结
 author: olzhy
 type: post
 date: 2022-01-18T09:11:39+08:00
@@ -12,7 +12,7 @@ keywords:
   - PostgreSQL
   - 表定义
   - 表分区
-description: PostgreSQL Data Definition (PostgreSQL数据定义)
+description: PostgreSQL Data Definition (PostgreSQL数据定义相关知识总结)
 ---
 
 > 参考资料
