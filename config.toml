@@ -62,6 +62,8 @@ link = "js/fuse.min.js"
 link = "js/mark.js"
 [[params.plugins.js]]
 link = "js/search.js"
+[[params.plugins.js]]
+link = "js/toc.js"
 
 ########################### Navigation ###################################
 
@@ -126,6 +128,8 @@ google_analitycs_id = "" # your id
 contact_form_action = "#" # contact form works with : https://formspree.io
 # copyright
 copyright = "Thanks [Hugo](https://gohugo.io/) & [NorthendLab](https://github.com/themefisher/northendlab-hugo) | [晋ICP备08100400号-4](http://beian.miit.gov.cn/state/outPortal/loginPortal.action) | Copyright &copy; 2017-2022"
+# toc
+toc = true
 
 # preloader
 [params.preloader]

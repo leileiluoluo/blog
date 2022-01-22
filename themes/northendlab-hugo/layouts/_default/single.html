@@ -15,6 +15,10 @@
         {{ if .Params.Image }}
         <img src="{{ .Params.Image | relURL }}" class="img-fluid w-100 mb-4" alt="{{ .Title | markdownify }}">
         {{ end }}
+        <!-- toc -->
+        {{ if .Site.Params.toc | default false }}
+        {{ partial "toc" . }}
+        {{ end }}
         <div class="content mb-5">
           {{ .Content }}
         </div>

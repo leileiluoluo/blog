@@ -158,3 +158,63 @@ h1 {
 .content blockquote p {
   font-size: 14px !important;
 }
+
+/* toc style */
+.toc {
+  position: fixed;
+  top: 50%;
+  right: 10%;
+  width: 12%;
+  transform: translateY(-50%);
+  border-radius: 5px;
+  padding-bottom: 1rem;
+  text-align: center;
+  background-color: #f6f8fa;
+  border: solid 1px #c9c9c9;
+}
+
+.toc .page-header {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.toc-nav ul {
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 1rem;
+}
+
+/* ignore h1 header */
+.toc-nav ul ul ul {
+  text-align: center;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.toc-nav .nav-link {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #333;
+  font-size: 14px;
+}
+
+.toc-nav .nav-link,
+.navbar {
+  padding: 0rem;
+}
+
+.toc-nav li.active .nav-link {
+  background-color: #f6f6f6;
+  color: var(--accent);
+  border-left: solid 2px var(--accent);
+}
+
+/* Media Queries */
+@media (max-width: 1080px) {
+  main {
+      max-width: 100%;
+  }
+  .toc {
+      display: none;
+  }
+}
