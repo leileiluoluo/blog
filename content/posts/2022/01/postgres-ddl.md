@@ -49,6 +49,24 @@ DROP TABLE products;
 
 阅读完本节，即可创建一个功能齐全的表了。本文的剩余部分会在表定义时增加特性以保证数据的完整性，安全性，及便捷性。
 
+### 2 默认值
+
+在建表时，可以为列设定默认值。这样，当插入一行数据时，未指定值的列会被填充为对应的默认值。若未显式指定默认值，默认值将会是 `null` (代表未知数据）。
+
+在表定义中，列的默认值设置须跟在数据类型之后。默认值可以是常量，也可以是表达式。若是表达式，其会在数据插入时（非表创建时）作计算。
+
+下面即是一个指定默认值的例子：
+
+```sql
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,             -- ID       主键 默认值为自增数值类型 SERIAL是一种简写方式 相当于 DEFAULT nextval('products_id_seq')
+    no integer,                        -- 编号      未指定默认值，默认值将会是 null
+    name text,                         -- 名称      未指定默认值，默认值将会是 null
+    price numeric DEFAULT 9.99,        -- 价格      默认值是 9.99
+    created_at timestamp DEFAULT now() -- 创建时间   默认值为插入时间
+);
+```
+
 > 参考资料
 >
 > \[1\] [PostgreSQL Data Definition](https://www.postgresql.org/docs/14/ddl.html)
