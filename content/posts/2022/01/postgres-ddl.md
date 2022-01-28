@@ -55,7 +55,7 @@ DROP TABLE products;
 
 在表定义中，列的默认值设置须跟在数据类型之后。默认值可以是常量，也可以是表达式。若是表达式，其会在数据插入时（非表创建时）作计算。
 
-下面即是一个指定默认值的例子：
+下面即是一个指定默认值的建表语句：
 
 ```sql
 CREATE TABLE products (
@@ -65,6 +65,21 @@ CREATE TABLE products (
     price numeric DEFAULT 9.99,        -- 价格      默认值是 9.99
     created_at timestamp DEFAULT now() -- 创建时间   默认值为插入时间
 );
+```
+
+执行一条插入语句，只指定了`name`的值，然后执行查询，会发现未指定值的列会被填充为默认值（注意`no`列虽是`integer`类型，其默认值是`null`，非`0`）：
+
+```sql
+INSERT INTO products(name) VALUES('apple');
+```
+
+```shell
+test=# SELECT * FROM products;
+
+ id | no     | name  | price | created_at
+----+--------+-------+-------+----------------------------
+  1 | (null) | apple |  9.99 | 2022-01-28 15:27:42.882119
+(1 row)
 ```
 
 > 参考资料
