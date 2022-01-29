@@ -11,6 +11,8 @@ tags:
 keywords:
   - PostgreSQL
   - 表基础
+  - 默认值
+  - 生成列
   - 表定义
   - 表分区
 description: PostgreSQL Data Definition (PostgreSQL数据定义相关知识总结)
