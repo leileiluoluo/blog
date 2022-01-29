@@ -90,6 +90,8 @@ test=# SELECT * FROM products;
 
 ### 3 生成列
 
+生成列是根据其它列计算而来的一个特殊列。因此，生成列于普通列而言，就像视图于表一样。标准上，生成列有两种类型：存储型与虚拟型。PostgreSQL 目前仅实现了存储型生成列。
+
 > 参考资料
 >
 > \[1\] [PostgreSQL Data Definition](https://www.postgresql.org/docs/14/ddl.html)
