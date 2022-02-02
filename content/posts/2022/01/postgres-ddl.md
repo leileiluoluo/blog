@@ -13,6 +13,7 @@ keywords:
   - 表基础
   - 默认值
   - 生成列
+  - 约束
   - 表定义
   - 表分区
 description: PostgreSQL Data Definition (PostgreSQL数据定义相关知识总结)
@@ -135,6 +136,31 @@ CREATE TABLE people (
 为解决这些问题，SQL 允许在表上及列上定义约束，约束给了我们在表上更多的控制数据的能力。若某人在某一列上试图违反约束而存储数据，将会抛出错误，即使该值来自于设定的默认值也适用。
 
 **检查约束**
+
+检查约束是最通用的约束类型。可以使用其来指定某列满足一个布尔（真值）表达式。如：想指定产品价格必须是正数类型，可以使用：
+
+```sql
+CREATE TABLE products (
+    no integer,
+    name text,
+    price numeric CHECK (price > 0)
+    -- price numeric CONSTRAINT positive_price CHECK (price > 0) -- 可给约束起一个名字
+);
+```
+
+可以看到，约束定义就像默认值定义一样紧跟数据类型之后。检查约束由`CHECK`关键字和一个括号表达式组成。约束定义与默认值设定的顺序谁在前谁在后没有要求。
+
+我们试着插入一条无效数据，将会抛出错误：
+
+```sql
+INSERT INTO products (no, name, price)
+    VALUES (1, 'apple', -2.0);
+```
+
+```text
+[Code: 0, SQL State: 23514]  ERROR: new row for relation "products" violates check constraint "products_price_check"
+  Detail: Failing row contains (1, apple, -2.0).
+```
 
 **非空约束**
 
