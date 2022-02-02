@@ -42,7 +42,7 @@ PostgreSQL 的内置数据类型已很丰富，可满足多数应用的使用场
 ```sql
 -- 产品表
 CREATE TABLE products (
-    product_no integer, -- 产品号
+    no integer, -- 产品号
     name text,          -- 产品名
     price numeric       -- 价格
 );
