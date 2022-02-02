@@ -162,6 +162,31 @@ INSERT INTO products (no, name, price)
   Detail: Failing row contains (1, apple, -2.0).
 ```
 
+检查约束也可以引用多个列。假定您存储了正常价及折扣价，您想确保折扣价低于正常价，可以使用：
+
+```sql
+CREATE TABLE products (
+    no integer,
+    name text,
+    price numeric CHECK (price > 0),
+    discounted_price numeric CHECK (discounted_price > 0),
+    CHECK (price > discounted_price)
+);
+```
+
+可以看到，前两个约束类似，均附加到了特定列上；第三个却没有附加到特定列上，其像一个普通列一样，与其它列按逗号分隔。列定义与这些约束定义可以按混合顺序出现。我们叫前两种约束为列约束，第三个为表约束。
+
+应注意的是，检查表达式计算为`true`或`null`均认为是满足条件的。所以下面的插入语句是可以通过的：
+
+```sql
+INSERT INTO products (no, name, price, discounted_price)
+    VALUES (1, 'apple', null, null);
+```
+
+要确保一个列不包含`null`值，须使用非空约束，紧接着的部分会作介绍。
+
+**_小提示：PostgreSQL 假设检查约束的条件是不可变的，即对同样的输入行总是给出同样的结果。检查约束仅在行插入或更新时作检查。破坏该假设的一个通常的例子是在检查约束表达式参考一个用户定义的函数，然后更改该函数的行为，这是不推荐的。_**
+
 **非空约束**
 
 **唯一约束**
