@@ -191,6 +191,32 @@ INSERT INTO products (no, name, price, discounted_price)
 
 **非空约束**
 
+非空约束用于指定某列不可以为空（`NOT NULL`）。语法如下：
+
+```sql
+CREATE TABLE products (
+    no integer NOT NULL,
+    name text NOT NULL,
+    price numeric
+);
+```
+
+非空约束总是写为列约束。虽然非空约束在功能上用检查约束也可以实现（`CHECK (column_name IS NOT NULL)`），但使用前一种更简洁方便。
+
+一个列可以有不止一个约束，只要挨着写即可：
+
+```sql
+CREATE TABLE products (
+    no integer NOT NULL,
+    name text NOT NULL,
+    price numeric NOT NULL CHECK (price > 0) -- 顺序未作要求
+);
+```
+
+`NOT NULL`约束的反面是`NULL`约束 ，表示该列可以为`NULL`（并不表示该列必须为`NULL`，这样就没意义了），`NULL`约束并非 SQL 标准，只是 PostgreSQL 用来与其它数据库系统作兼容之用。
+
+**_小提示：在多数数据库设计中，多数列都应标记为非空_**
+
 **唯一约束**
 
 **主键约束**
