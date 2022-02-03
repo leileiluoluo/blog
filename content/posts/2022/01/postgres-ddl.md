@@ -257,9 +257,45 @@ CREATE TABLE products (
 
 **主键约束**
 
+主键约束用于将表中的一列或一组列用作所有行的唯一标识符。这需要这些列的值是唯一并且非空的。语法如下：
+
+```sql
+CREATE TABLE products (
+    no integer PRIMARY KEY, -- 等同于 UNIQUE NOT NULL
+    name text,
+    price numeric
+);
+```
+
+主键也可以跨越多列，如：
+
+```sql
+CREATE TABLE products (
+    no integer,
+    name text,
+    price numeric,
+    PRIMARY KEY (no, name)
+);
+```
+
+增加一个主键同样会在约束列出的列上自动创建一个`B-树`索引，且会强制将这些列标记为`NOT NULL`。
+
+一个表可以有多个唯一且非空约束，但至多有一个主键。关系型数据库理论上规定每个表必须有一个主键，PostgreSQL 虽不作强制，但最好还是遵循它。
+
 **外键约束**
 
 **排它约束**
+
+排它约束用于保证对于使用特定运算符在指定列或表达式上对任意两行进行比较，至少有一个会返回`FALSE`或`NULL`。详情请参阅[CREATE TABLE ... CONSTRAINT ... EXCLUDE](https://www.postgresql.org/docs/14/sql-createtable.html#SQL-CREATETABLE-EXCLUDE)。排它约束可以用于指定比简单的是否相等更通用的约束。我们可以通过使用`&&`运算符来指定一个表中没有任意两行包含重叠的圆形的约束：
+
+```sql
+CREATE TABLE circles (
+    c circle,
+    EXCLUDE USING gist (c WITH &&) -- gist（GiST，Generalized Search Tree，通用搜索树）表示使用GiST访问方法
+);
+```
+
+增加一个排它约束将会自动创建一个约束声明中指定的索引。
 
 > 参考资料
 >
