@@ -14,7 +14,8 @@ keywords:
   - 默认值
   - 生成列
   - 约束
-  - 表定义
+  - 系统列
+  - 修改表
   - 表分区
 description: PostgreSQL Data Definition (PostgreSQL数据定义相关知识总结)
 ---
@@ -296,6 +297,10 @@ CREATE TABLE circles (
 ```
 
 增加一个排它约束将会自动创建一个约束声明中指定的索引。
+
+### 5 系统列
+
+### 6 修改表
 
 > 参考资料
 >
