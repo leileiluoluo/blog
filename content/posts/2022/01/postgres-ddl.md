@@ -308,6 +308,58 @@ CREATE TABLE circles (
 
 ### 5 系统列
 
+每个表都有几个由系统隐式定义的系统列。因此，您定义列名时要避免使用这些名字，否则会报错。
+
+**tableoid**
+
+表示包含此行的表的`OID`。对于分区表及继承表非常有用，因为没有它将很难知道某一行来自哪个表。
+
+下面使用如下语句，建一个`products`的分区表，将产品名以`a`打头的数据放到`products_a`，产品名以`b`打头的数据放到`products_b`：
+
+```sql
+CREATE TABLE products (
+    no serial,
+    name text
+) PARTITION BY LIST (left(lower(name), 1));
+
+CREATE TABLE products_a PARTITION OF products (
+    CHECK (name IS NOT NULL)
+) FOR VALUES IN ('a');
+
+CREATE TABLE products_b PARTITION OF products (
+    CHECK (name IS NOT NULL)
+) FOR VALUES IN ('b');
+```
+
+插入两条数据后，使用`tableoid`与`pg_catalog.pg_class`表连接以获得真实表名：
+
+```sql
+INSERT INTO products (name) VALUES ('a_product_test');
+INSERT INTO products (name) VALUES ('b_product_test');
+```
+
+```text
+test=# SELECT t1.no, t1.name, t1.tableoid, t2.relname
+test-# FROM products t1, pg_catalog.pg_class t2
+test-# WHERE t1.tableoid = t2.oid;
+
+ no |      name      | tableoid |  relname
+----+----------------+----------+------------
+  1 | a_product_test |    16661 | products_a
+  2 | b_product_test |    16669 | products_b
+(2 rows)
+```
+
+**xmin**
+
+**cmin**
+
+**xmax**
+
+**cmax**
+
+**ctid**
+
 ### 6 修改表
 
 ### 7 权限
