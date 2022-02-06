@@ -392,7 +392,7 @@ ALTER TABLE products ADD COLUMN description text DEFAULT 'this is a description'
 
 新建的列最初由任何给定的默认值填充（不指定`DEFAULT`语句的话将会被填充为`null`）。
 
-_小提示：自 PostgreSQL 11 起，新增指定了常量默认值的一列，并不是在`ALTER TABLE`语句执行后更新表的每一行。相反，默认值将在该行被下一次访问时返回，并在重写表时真正应用。这样，使得在大表上执行`ALTER TABLE`也会非常快。然而，若默认值是可变的（如：`clock_timestamp()`），则在`ALTER TABLE`执行时，每一行即会被更新为计算的值。为了避免更新操作太耗时，可以先新增一个不指定默认值的新列，然后使用`UPDATE`来插值，最后再使用`ALTER TABLE ... ALTER COLUMN ... SET DEFAULT ...`给该列指定想要的默认值。_
+_小提示：自 PostgreSQL 11 起，新增指定了常量默认值的一列，并不是在`ALTER TABLE`语句执行后更新表的每一行。相反，默认值将在该行被下一次访问时返回，并在重写表时真正应用。这样，使得在大表上执行`ALTER TABLE`也会非常快。然而，若默认值是可变的（如：`clock_timestamp()`），则在`ALTER TABLE`执行时，每一行即会被更新为计算的值。为了避免更新操作太耗时，可以新增列时先不指定默认值，然后使用`UPDATE`来插值，最后再使用`ALTER TABLE ... ALTER COLUMN ... SET DEFAULT ...`给该列指定想要的默认值。_
 
 还可以使用通用语法，在增加一列时同时定义约束：
 
