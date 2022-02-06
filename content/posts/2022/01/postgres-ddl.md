@@ -383,6 +383,32 @@ test-# WHERE t1.tableoid = t2.oid;
 
 **增加一列**
 
+要增加一列，使用如下命令：
+
+```sql
+ALTER TABLE products ADD COLUMN description text; -- 未指定默认值 将被填充为 null
+ALTER TABLE products ADD COLUMN description text DEFAULT 'this is a description'; -- 指定了默认值
+```
+
+新建的列最初由任何给定的默认值填充（不指定`DEFAULT`语句的话将会被填充为`null`）。
+
+_小提示：自 PostgreSQL 11 起，新增指定了常量默认值的一列，并不是在`ALTER TABLE`语句执行后更新表的每一行。相反，默认值将在该行被下一次访问时返回，并在重写表时真正应用。这样，使得在大表上执行`ALTER TABLE`也会非常快。然而，若默认值是可变的（如：`clock_timestamp()`），则在`ALTER TABLE`执行时，每一行即会被更新为计算的值。为了避免更新操作太耗时，可以先新增一个不指定默认值的新列，然后使用`UPDATE`来插值，最后再使用`ALTER TABLE ... ALTER COLUMN ... SET DEFAULT ...`给该列指定想要的默认值。_
+
+还可以使用通用语法，在增加一列时同时定义约束：
+
+```sql
+ALTER TABLE products ADD COLUMN description text CHECK (description <> '');
+```
+
+事实上，在`CREATE TABLE`中对列使用的所有选项均可在这里使用。然而，注意默认值必须满足给定的约束，否则`ADD`将会失败：
+
+```text
+test=# ALTER TABLE products ADD COLUMN description text CHECK (description <> '') DEFAULT '';
+ERROR:  check constraint "products_description_check" of relation "products" is violated by some row
+```
+
+或者，可以在正确填充新列后，再添加约束（稍后介绍）。
+
 **移除一列**
 
 **增加一个约束**
