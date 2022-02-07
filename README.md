@@ -1,2 +1,2 @@
 # blog
-markdown files of my hugo blog 
+Markdown files of my hugo blog 
