@@ -447,9 +447,19 @@ ALTER TABLE products ALTER COLUMN name SET NOT NULL;
 
 **更改一列的数据类型**
 
+要更改一列的数据类型，请使用如下命令：
+
+```sql
+ALTER TABLE products ALTER COLUMN price TYPE numeric(10,2);
+```
+
+只有当列中每个现有条目都可以隐式转换为新类型时，该操作才会成功。若需要更复杂的转换，可以添加`USING`子句以指定如何将旧值计算为新值。
+
+PostgreSQL 会尝试将列的默认值及列上的约束转换到新类型。然而，这些转换可能会失败。最好修改列类型前，先删除其上的约束，当类型修改后，将约束作适当修改后再加回来。
+
 **重命名列**
 
-要重命名列，请使用：
+要重命名列，请使用如下命令：
 
 ```sql
 ALTER TABLE products RENAME COLUMN no TO id;
@@ -457,7 +467,7 @@ ALTER TABLE products RENAME COLUMN no TO id;
 
 **重命名表**
 
-要重命名表，请使用：
+要重命名表，请使用如下命令：
 
 ```sql
 ALTER TABLE products RENAME TO product;
