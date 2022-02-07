@@ -449,7 +449,19 @@ ALTER TABLE products ALTER COLUMN name SET NOT NULL;
 
 **重命名列**
 
+要重命名列，请使用：
+
+```sql
+ALTER TABLE products RENAME COLUMN no TO id;
+```
+
 **重命名表**
+
+要重命名表，请使用：
+
+```sql
+ALTER TABLE products RENAME TO product;
+```
 
 ### 7 权限
 
