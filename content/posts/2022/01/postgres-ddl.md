@@ -425,6 +425,22 @@ ALTER TABLE products DROP COLUMN description CASCADE;
 
 **增加一个约束**
 
+要增加一个约束，请使用表约束语法：
+
+```sql
+ALTER TABLE products ADD CHECK (name <> '');
+ALTER TABLE products ADD CONSTRAINT no_should_unique UNIQUE (no);
+ALTER TABLE orders ADD FOREIGN KEY (product_no) REFERENCES products (no);
+```
+
+要增加一个非空约束，不可写为表约束，使用如下语法：
+
+```sql
+ALTER TABLE products ALTER COLUMN name SET NOT NULL;
+```
+
+约束将被立即检查，因此表数据必须满足约束条件才能添加。
+
 **移除一个约束**
 
 **更改一列的默认值**
