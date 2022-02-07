@@ -411,6 +411,18 @@ ERROR:  check constraint "products_description_check" of relation "products" is 
 
 **移除一列**
 
+使用如下命令可移除一列：
+
+```sql
+ALTER TABLE products DROP COLUMN description;
+```
+
+该列的所有数据都会消失，涉及该列的表约束也会删除。然而，若该列被另一个表的外键约束所引用，PostgreSQL 不会静默删除该约束。可以通过添加`CASCADE`来授权删除依赖该列的所有内容：
+
+```sql
+ALTER TABLE products DROP COLUMN description CASCADE;
+```
+
 **增加一个约束**
 
 **移除一个约束**
