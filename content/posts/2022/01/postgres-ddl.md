@@ -445,6 +445,22 @@ ALTER TABLE products ALTER COLUMN name SET NOT NULL;
 
 **更改一列的默认值**
 
+要更改一列的默认值，请使用如下命令：
+
+```sql
+ALTER TABLE products ALTER COLUMN price SET DEFAULT 6.66;
+```
+
+注意，这并不会影响表中任何现有行，其只会改变后续`INSERT`命令的默认值。
+
+要移除默认值设置，请使用：
+
+```sql
+ALTER TABLE products ALTER COLUMN price DROP DEFAULT;
+```
+
+其等同于将默认值设置为`null`。
+
 **更改一列的数据类型**
 
 要更改一列的数据类型，请使用如下命令：
