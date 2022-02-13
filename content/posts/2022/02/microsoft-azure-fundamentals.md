@@ -17,6 +17,7 @@ keywords:
   - 解决方案及工具
   - 安全特性
   - 隐私合规等特性
+  - 成本管理及服务水平协议
 description: Microsoft Azure Fundamentals (Microsoft Azure 基础学习总结)
 ---
 
@@ -31,6 +32,8 @@ description: Microsoft Azure Fundamentals (Microsoft Azure 基础学习总结)
 ### 4 安全特性
 
 ### 5 隐私合规等特性
+
+### 6 成本管理及服务水平协议
 
 > 参考资料
 >
