@@ -174,14 +174,15 @@ Azure 可以帮助您应对严峻的业务挑战。您带来了您的需求、�
 
   Azure 提供多种数据库服务来存储各种数据类型及数据卷。并通过全球连接，用户可以即时使用这些数据。
 
-  | 服务名称                             | 服务功能                                                       |
-  | ------------------------------------ | -------------------------------------------------------------- |
-  | Azure Cosmos DB                      | 支持 NoSQL 选项的全球分布式数据库                              |
-  | Azure SQL Database                   | 具有自动扩展、集成智能，和强大的安全性的完全托管的关系型数据库 |
-  | Azure Database for MySQL             | 具有高可用性和安全性的完全托管和可扩展的 MySQL 数据库          |
-  | Azure Database for PostgreSQL        | 具有高可用性和安全性的完全托管和可扩展的 PostgreSQL 数据库     |
-  | SQL Server on Azure Virtual Machines | 在云上托管企业 SQL Server 应用的服务                           |
-  | ...                                  | ...                                                            |
+  | 服务名称                             | 服务功能                                                              |
+  | ------------------------------------ | --------------------------------------------------------------------- |
+  | Azure Cosmos DB                      | 支持 NoSQL 选项的全球分布式数据库                                     |
+  | Azure SQL Database                   | 具有自动扩展、集成智能，和强大的安全性的完全托管的关系型数据库        |
+  | Azure Database for MySQL             | 具有高可用性和安全性的完全托管和可扩展的 MySQL 数据库                 |
+  | Azure Database for PostgreSQL        | 具有高可用性和安全性的完全托管和可扩展的 PostgreSQL 数据库            |
+  | SQL Server on Azure Virtual Machines | 在云上托管企业 SQL Server 应用的服务                                  |
+  | Azure Cache for Redis                | 用于缓存经常使用的静态数据以减少数据和应用延迟的完全托管的 Redis 服务 |
+  | ...                                  | ...                                                                   |
 
 - Web
 
