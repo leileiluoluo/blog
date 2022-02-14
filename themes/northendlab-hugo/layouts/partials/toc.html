@@ -1,11 +1,11 @@
 <!-- toc.html -->
 <!-- ignore empty links with + -->
-{{ $headers := findRE "<h[1-4].*?>(.|\n])+?</h[1-4]>" .Content }}
-<!-- at least one header to link to -->
+{{ $headers := findRE "<h[1-3].*?>(.|\n])+?</h[1-3]>" .Content }}
+<!-- at least one header to link to h1 ~ h3-->
 {{ if ge (len $headers) 1 }}
 {{ $h1_n := len (findRE "(.|\n])+?" .Content) }}
-{{ $re := (cond (eq $h1_n 0) "<h[2-4]" "<h[1-4]") }}
-{{ $renum := (cond (eq $h1_n 0) "[2-4]" "[1-4]") }}
+{{ $re := (cond (eq $h1_n 0) "<h[2-3]" "<h[1-3]") }}
+{{ $renum := (cond (eq $h1_n 0) "[2-3]" "[1-3]") }}
 
 <!-- Scrollspy -->
 <div class="toc">
