@@ -157,31 +157,38 @@ Azure 可以帮助您应对严峻的业务挑战。您带来了您的需求、�
   - 管理好 维护及处理任何关键问题；
   - 访问性 可通过 HTTP 或 HTTPS 从世界任何地方访问。
 
-* 移动端
+- 移动端
 
-  借助 Azure，开发人员可以快速轻松地为 iOS、Android，及 Windows 应用创建移动后端服务。
+  借助 Azure，开发人员可以快速轻松地为 iOS、Android，及 Windows 应用创建移动后端服务。过去耗时长且增加项目风险的特性（如引入登录，然后连接到 On-Premise 上的 SAP、Oracle、SQL Server， 及 SharePoint 资源），现在可以轻松包含在内。
+
+  该服务的其它特性包括：
+
+  - 离线数据同步；
+  - 与 On-Premise 数据的连接；
+  - 广播通知推送；
+  - 按业务需要自动扩展。
 
 * 数据库
 
-  sss
+  Azure 提供多种数据库服务来存储各种数据类型及数据卷。并通过全球连接，用户可以即时使用这些数据。
 
-* Web
-
-  sss
-
-* 物联网
+- Web
 
   sss
 
-* 大数据
+- 物联网
 
   sss
 
-* 人工智能
+- 大数据
+
+  sss
+
+- 人工智能
 
   ssss
 
-* DevOps
+- DevOps
 
   sss
 
