@@ -103,7 +103,7 @@ Azure 市场的客户可以从数百家领先的服务提供商中查找、试�
 
 Azure 市场专门为 IT 专业人员和云开发人员而设计。Microsoft 合作伙伴还将其用作所有联合上市活动的启动点。
 
-**Azure 服务一览**
+**Azure 服务概述**
 
 ![](https://olzhy.github.io/static/images/uploads/2022/02/azure-services.png#center)
 
