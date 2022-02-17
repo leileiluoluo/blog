@@ -460,6 +460,20 @@ _注意：某些服务或 VM 功能仅在某些地域可用，例如特定 VM �
 
 ![](https://olzhy.github.io/static/images/uploads/2022/02/regions-small.png#center)
 
+_为什么地域如此重要：Azure 拥有比任何其他云提供商更多的全球地域。这些地域使您可以灵活地使您的应用更靠近您的用户，无论他们身在何处。全球地域提供更好的可扩展性和冗余性。它们还为您的服务保留数据驻留。_
+
+Azure 还有几个特殊的地域，当您出于合规性或法律目的构建应用时，可以考虑使用。一些例子包括：
+
+- US DoD Central，US Gov Virginia，US Gov Iowa 等
+
+  这些区域是面向美国政府机构和合作伙伴的 Azure 物理和逻辑网络隔离实例。这些数据中心由经过筛选的美国人员操作，并包括额外的合规认证。
+
+- 中国东部，中国北部等
+
+  由 21Vianet 代理，Microsoft 不直接对数据中心进行维护。
+
+地域是您用来标识资源位置的。您还应该注意另外两个术语：地理和可用区。
+
 **Azure 可用区（Availability Zones）**
 
 **Azure 地域对（Region Pairs）**
