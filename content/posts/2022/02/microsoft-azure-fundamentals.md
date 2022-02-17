@@ -444,6 +444,12 @@ Azure 中资源的组织结构有四个级别：管理组、订阅、资源组�
 
 #### 1.9 Azure 地域、可用区和地域对
 
+**Azure 地域（Azure Region）**
+
+**Azure 可用区（Availability Zones）**
+
+**Azure 地域对（Region Pairs）**
+
 #### 1.10 Azure 资源及 Azure 资源管理器
 
 #### 1.11 Azure 订阅及管理组
