@@ -16,7 +16,9 @@ keywords:
 description: Azure DevOps Services (Azure DevOps 服务学习总结)
 ---
 
-### 1 Azure DevOps 是什么？
+### 1 开始使用 Azure DevOps
+
+#### 1.1 Azure DevOps 是什么？
 
 Azure DevOps 提供团队工作计划、代码开发协作以及应用程序的构建和部署。 Azure DevOps 支持协作文化和一组流程以使开发人员、项目经理和贡献者聚集在一起开发软件。它允许组织以比传统软件开发方法更快的速度创建和改进产品。
 
