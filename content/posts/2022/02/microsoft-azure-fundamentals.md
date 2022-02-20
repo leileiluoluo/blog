@@ -9,6 +9,7 @@ categories:
   - 计算机
 tags:
   - 工具使用
+  - Azure
 keywords:
   - Azure 基础
   - AZ-900
