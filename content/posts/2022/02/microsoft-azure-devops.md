@@ -67,3 +67,5 @@ Azure Pipelines 支持绝大多数的开发语言与应用类型，支持多种�
 > \[1\] [Azure DevOps Documentation](https://docs.microsoft.com/en-us/azure/devops/?view=azure-devops)
 >
 > \[2\] [Azure DevOps Services Overview](https://azure.microsoft.com/en-us/services/devops/#overview)
+>
+> \[3\] [Azure Pipelines Documentation](https://docs.microsoft.com/en-us/azure/devops/pipelines)
