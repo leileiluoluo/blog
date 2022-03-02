@@ -1,5 +1,5 @@
 ---
-title: Azure PostgreSQL 学习总结
+title: Azure Database for PostgreSQL 学习总结
 author: olzhy
 type: post
 date: 2022-03-02T08:09:58+08:00
@@ -12,7 +12,7 @@ tags:
   - PostgreSQL
 keywords:
   - Azure PostgreSQL
-description: Azure Database for PostgreSQL (Azure PostgreSQL 学习总结)
+description: Azure Database for PostgreSQL (Azure Database for PostgreSQL 学习总结)
 ---
 
 Azure Database for PostgreSQL 是基于开源 Postgres 的一个数据库服务。它是一种完全托管的数据库服务，具有性能可预测、安全、高可用和动态扩展能力，可处理任务关键型工作负载。
