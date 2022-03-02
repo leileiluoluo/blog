@@ -36,6 +36,10 @@ Azure Database for PostgreSQL 提供三种部署模式：单服务器、灵活�
 
 ### 1 单服务器
 
+Azure Database for PostgreSQL 的单服务器部署是多个数据库的中央管理点。它与您在 On-Premise 环境中搭建一个 PostgreSQL 服务器的构造相同。
+
+您可以在单服务器中创建一个或多个 Database 以供一个或多个应用独占或共享资源。收费价格会根据定价层、vCore 和存储 (GB) 的配置计算。
+
 ### 2 灵活服务器
 
 ### 3 大规模 (Citus) 集群
