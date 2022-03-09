@@ -36,7 +36,7 @@ Azure Database for PostgreSQL 提供三种部署模式：单服务器、灵活�
 
 ### 1 单服务器
 
-Azure Database for PostgreSQL 的单服务器部署是多个数据库的中央管理点。它与您在 On-Premise 环境中搭建一个 PostgreSQL 服务器的构造相同。
+Azure Database for PostgreSQL 单服务器是多个数据库的中央管理点。它与您在 On-Premise 环境中搭建一个 PostgreSQL 服务器的构造相同。
 
 Azure Database for PostgreSQL 的单服务器部署：
 
@@ -83,6 +83,26 @@ PostgreSQL 超级用户权限分配给了 azure_superuser，属托管服务持�
 您的 Azure Database for PostgreSQL 服务器在创建时使用的是每个参数的默认值。用户无法配置某些需要重新启动或超级用户才有权限更改的参数。
 
 ### 2 灵活服务器
+
+Azure Database for PostgreSQL 灵活服务器是一种完全托管的数据库服务，旨在为数据库管理功能和配置设置提供更精细的控制和灵活性。该服务提供了更多的灵活性和基于用户需求的服务器配置定制。灵活服务器架构允许用户将数据库引擎与客户端服务置于同一位置以降低延迟，在单个可用区及跨多个可用区选择高可用性。灵活服务器还提供更好的成本优化控制，能够启停您的服务器和可突发计算层，非常适合不需要持续完整计算容量的工作负载。该服务目前支持 PostgreSQL 11、12 和 13 社区版本。该服务目前在绝大多数 Azure 地域均可用。
+
+![](https://olzhy.github.io/static/images/uploads/2022/03/overview-flexible-server.png#center)
+
+灵活服务器非常适合如下几种情况：
+
+- 需要更好的控制和定制的应用程序开发；
+- 区域冗余高可用性；
+- 托管维护窗口。
+
+**高可用性**
+
+灵活服务器部署模型设计用于支持单个可用区及跨多个可用区的高可用性。该架构将计算和存储分开。数据库引擎在 Linux 虚拟机内的容器上运行，而数据文件存储在 Azure 存储中。存储维护数据库文件的三个本地冗余同步副本，以确保数据的持久性。
+
+在计划内或计划外故障转移事件期间，如果服务器出现故障，该服务将使用以下自动化程序保持服务器的高可用性：
+
+- 预配一个新的计算 Linux VM；
+- 带有数据文件的存储映射到新的虚拟机；
+- PostgreSQL 数据库引擎在新的虚拟机上上线。
 
 ### 3 大规模 (Citus) 集群
 
