@@ -52,6 +52,36 @@ Azure Database for PostgreSQL 的单服务器部署：
 
 您可以在单服务器中创建一个或多个数据库以供一个或多个应用独占或共享资源。收费价格会根据定价层、vCore 和存储 (GB) 的配置计算。
 
+**防火墙**
+
+为了保护数据，Azure 默认关闭所有访问，您在 Server 端设置防火墙规则 （IP 白名单）后才可以对指定 IP 开放访问。
+
+防火墙根据每个请求的原始 IP 地址来判断其是否有访问权限。您需要通过 Azure 门户或 Azure CLI 在 Server 端设置防火墙规则（允许的 IP 地址范围），同一逻辑服务器下的所有数据库都遵循这些规则。要创建防火墙规则，您必须是订阅所有者或订阅贡献者。
+
+![](https://olzhy.github.io/static/images/uploads/2022/03/1-firewall-concept.png#center)
+
+**服务器管理**
+
+您可以使用 Azure 门户或 Azure CLI 管理 Azure Database for PostgreSQL 单服务器。
+
+创建服务器时，您为管理员用户设置凭据。管理员用户是您在服务器上拥有的最高权限用户。它属于角色 azure_pg_admin。此角色没有完全的超级用户权限。
+
+PostgreSQL 超级用户属性分配给了 azure_superuser，属托管服务持有。您无权访问此角色。
+
+该服务器下有如下几个默认数据库：
+
+- postgres - 创建服务器后即可连接的默认数据库；
+- azure_maintenance - 此数据库用于将提供托管服务的进程与用户操作分开，您无权访问此数据库；
+- azure_sys - 用于 Query Store 的数据库，此数据库在 Query Store 关闭时不累积数据，默认是关闭的。
+
+**服务器参数**
+
+服务器参数决定服务器的配置。在 Azure Database for PostgreSQL 中，可以使用 Azure 门户或 Azure CLI 查看和编辑参数列表。
+
+作为一个托管服务，Azure Database for PostgreSQL 的可配置参数是自建 Postgres 实例中参数的子集（有关 Postgres 参数的详细信息，请参阅 [PostgreSQL 运行时配置](https://www.postgresql.org/docs/14/runtime-config.html)）。
+
+您的 Azure Database for PostgreSQL 服务器在创建时使用的是每个参数的默认值。用户无法配置某些需要重新启动或超级用户才能更改的参数。
+
 ### 2 灵活服务器
 
 ### 3 大规模 (Citus) 集群
