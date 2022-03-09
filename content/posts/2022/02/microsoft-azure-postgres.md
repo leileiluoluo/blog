@@ -52,13 +52,37 @@ Azure Database for PostgreSQL 的单服务器部署：
 
 您可以在单服务器中创建一个或多个数据库以供一个或多个应用独占或共享资源。收费价格会根据定价层、vCore 和存储 (GB) 的配置计算。
 
-**防火墙**
+**如何连接**
 
-为了保护数据，Azure 默认关闭所有访问，您在 Server 端设置防火墙规则 （IP 白名单）后才可以对指定 IP 开放访问。
+- 鉴权
 
-防火墙根据每个请求的原始 IP 地址来判断其是否有访问权限。您需要通过 Azure 门户或 Azure CLI 在 Server 端设置防火墙规则（允许的 IP 地址范围），同一逻辑服务器下的所有数据库都遵循这些规则。要创建防火墙规则，您必须是订阅所有者或订阅贡献者。
+  Azure Database for PostgreSQL 单服务器支持原生 PostgreSQL 身份验证。您可使用管理员账号进行连接。
 
-![](https://olzhy.github.io/static/images/uploads/2022/03/1-firewall-concept.png#center)
+- 协议
+
+  该服务支持 PostgreSQL 使用的基于消息的协议。
+
+- TCP/IP
+
+  如上协议被 TCP/IP 和 Unix 域套接字支持。
+
+- 防火墙
+
+  为了保护数据，Azure 默认关闭所有访问，您在 Server 端设置防火墙规则 （IP 白名单）后才可以对指定 IP 开放访问。
+
+  防火墙根据每个请求的原始 IP 地址来判断其是否有访问权限。您需要通过 Azure 门户或 Azure CLI 在 Server 端设置防火墙规则（允许的 IP 地址范围），同一逻辑服务器下的所有数据库都遵循这些规则。请使用订阅所有者或订阅贡献者创建防火墙规则。
+
+  ![](https://olzhy.github.io/static/images/uploads/2022/03/1-firewall-concept.png#center)
+
+该配置的配置好以后即可下载证书然后使用 psql 进行连接了：
+
+```shell
+$ wget --no-check-certificate https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem
+```
+
+```shell
+$ psql --host=mydemoserver-pg.postgres.database.azure.com --port=5432 --username=myadmin --dbname=postgres --set=sslmode=require --set=sslrootcert=DigiCertGlobalRootCA.crt.pem
+```
 
 **服务器管理**
 
