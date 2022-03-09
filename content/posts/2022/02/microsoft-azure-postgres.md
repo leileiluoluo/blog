@@ -74,7 +74,9 @@ Azure Database for PostgreSQL 的单服务器部署：
 
   ![](https://olzhy.github.io/static/images/uploads/2022/03/1-firewall-concept.png#center)
 
-该配置的配置好以后即可下载证书然后使用 psql 进行连接了：
+您可以选择强制开启 TLS 来加强安全性。
+
+这样即可下载证书然后使用 psql 进行连接了：
 
 ```shell
 $ wget --no-check-certificate https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem
