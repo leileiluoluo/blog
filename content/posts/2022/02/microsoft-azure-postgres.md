@@ -64,9 +64,9 @@ Azure Database for PostgreSQL 的单服务器部署：
 
 您可以使用 Azure 门户或 Azure CLI 管理 Azure Database for PostgreSQL 单服务器。
 
-创建服务器时，您为管理员用户设置凭据。管理员用户是您在服务器上拥有的最高权限用户。它属于角色 azure_pg_admin。此角色没有完全的超级用户权限。
+创建服务器时，您为管理员用户设置密码。管理员用户是您在服务器上拥有的最高权限用户。它属于 azure_pg_admin 角色。此角色没有完全的超级用户权限。
 
-PostgreSQL 超级用户属性分配给了 azure_superuser，属托管服务持有。您无权访问此角色。
+PostgreSQL 超级用户权限分配给了 azure_superuser，属托管服务持有。您无权访问此角色。
 
 该服务器下有如下几个默认数据库：
 
@@ -78,9 +78,9 @@ PostgreSQL 超级用户属性分配给了 azure_superuser，属托管服务持�
 
 服务器参数决定服务器的配置。在 Azure Database for PostgreSQL 中，可以使用 Azure 门户或 Azure CLI 查看和编辑参数列表。
 
-作为一个托管服务，Azure Database for PostgreSQL 的可配置参数是自建 Postgres 实例中参数的子集（有关 Postgres 参数的详细信息，请参阅 [PostgreSQL 运行时配置](https://www.postgresql.org/docs/14/runtime-config.html)）。
+作为一个托管服务，Azure Database for PostgreSQL 的可配置参数是自建 Postgres 实例可配置参数的子集（有关 Postgres 参数的详细信息，请参阅 [PostgreSQL 运行时配置](https://www.postgresql.org/docs/14/runtime-config.html)）。
 
-您的 Azure Database for PostgreSQL 服务器在创建时使用的是每个参数的默认值。用户无法配置某些需要重新启动或超级用户才能更改的参数。
+您的 Azure Database for PostgreSQL 服务器在创建时使用的是每个参数的默认值。用户无法配置某些需要重新启动或超级用户才有权限更改的参数。
 
 ### 2 灵活服务器
 
