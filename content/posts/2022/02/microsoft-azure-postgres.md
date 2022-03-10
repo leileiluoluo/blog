@@ -269,8 +269,102 @@ WHERE shardid = 102027;
 
 **Table Colocation**
 
+Table Colocation 意味着将相关信息一起存储在相同的节点上。这样从一个节点一次拿到想要的数据，即可节省网络开销，查询可以更快速。将相关数据放在不同节点上可以让查询在每个节点上高效地并行运行。
+
+如果某行的分布列对应的值哈希运算后落在一个分片的哈希范围内，则将该行存储在该分片中。具有相同哈希范围的分片总是放在同一个节点上。具有相等分布列值的行始终位于同一节点的不同分片表上。
+
+![](https://olzhy.github.io/static/images/uploads/2022/03/colocation-shards.png#center)
+
+考虑如下可能是 SaaS 多租户场景的 Web 分析系统用到的表：
+
+```sql
+CREATE TABLE event (
+  tenant_id int,
+  event_id bigint,
+  page_id int,
+  payload jsonb,
+  primary key (tenant_id, event_id)
+);
+
+CREATE TABLE page (
+  tenant_id int,
+  page_id int,
+  path text,
+  primary key (tenant_id, page_id)
+);
+```
+
+下面考虑一个可能由该系统 Web 页面 Dashboard 发起的查询：“返回租户 6 中所有以 '/blog' 开头的页面在过去一周的访问次数”。
+
+如果我们的数据存在单服务器中，我们可以使用如下 SQL 轻松的进行查询：
+
+```sql
+SELECT page_id, count(event_id)
+FROM
+  page
+LEFT JOIN  (
+  SELECT * FROM event
+  WHERE (payload->>'time')::timestamptz >= now() - interval '1 week'
+) recent
+USING (tenant_id, page_id) -- 相当于 ON p.tenant_id = r.tenant_id AND p.page_id = r.page_id
+WHERE tenant_id = 6 AND path LIKE '/blog%'
+GROUP BY page_id;
+```
+
+使用大规模（Citus）集群时，需要作一定的改造，主要有两种可选的分片方式。
+
+- 按 ID 分片
+
+  随着租户数量的增加以及各租户数据的增长，单服务器查询开始变慢，内存和 CPU 都会成为瓶颈。
+
+  在这种情况下，大规模（Citus）集群就派上用场了。当我们决定分片时，最重要的是确定分布列。现在不妨先试着将`event_id`和`page_id`分别作为`event`表和`page`表的分布列。
+
+  ```sql
+  -- naively use event_id and page_id as distribution columns
+  SELECT create_distributed_table('event', 'event_id');
+  SELECT create_distributed_table('page', 'page_id');
+  ```
+
+  当数据分散在不同的工作节点时，我们无法像在单个 PostgreSQL 节点上那样执行连接操作。我们需要发起两个查询：
+
+  ```sql
+  -- (Q1) get the relevant page_ids
+  SELECT page_id FROM page WHERE path LIKE '/blog%' AND tenant_id = 6;
+
+  -- (Q2) get the counts
+  SELECT page_id, count(*) AS count
+  FROM event
+  WHERE page_id IN (/*…page IDs from first query…*/)
+    AND tenant_id = 6
+    AND (payload->>'time')::date >= now() - interval '1 week'
+  GROUP BY page_id ORDER BY count DESC LIMIT 10;
+  ```
+
+  运行这两个查询会查阅分散在各个节点上的分片中的数据。
+
+  ![](https://olzhy.github.io/static/images/uploads/2022/03/colocation-inefficient-queries.png#center)
+
+  之后，需要应用程序整合这两个步骤的结果。
+
+  在这种情况下，数据分布会产生很大的缺陷：
+
+  - 查询每个分片和运行多个查询的开销；
+  - Q1 的开销将许多行返回给客户端；
+  - Q2 变的很大；
+  - 分隔为多次查询，需要对应用程序作更改。
+
+  数据是分散的，因此可以并行化查询。只有当查询的工作量远远大于查询许多分片的开销时，它才是有益的。
+
+- 按租户分片
+
+{{< line_break >}}
+
 至此，我们完成了对 Azure 提供的三种类型的 PostgreSQL 服务的初步了解。
 
 > 参考资料
 >
 > \[1\] [Azure Database for PostgreSQL Documentation](https://docs.microsoft.com/en-us/azure/postgresql/)
+
+```
+
+```
