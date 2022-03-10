@@ -357,6 +357,35 @@ GROUP BY page_id;
 
 - 按租户分片
 
+  在大规模（Citus）集群中，具有相同分布列值的行保证位于同一节点上。由此，选择`tenant_id`作为分布列再合适不过了。
+
+  ```sql
+  -- co-locate tables by using a common distribution column
+  SELECT create_distributed_table('event', 'tenant_id');
+  SELECT create_distributed_table('page', 'tenant_id', colocate_with => 'event');
+  ```
+
+  这样，针对可在单 PostgreSQL 节点上运行的原始查询，无需作修改：
+
+  ```sql
+  SELECT page_id, count(event_id)
+  FROM
+    page
+  LEFT JOIN  (
+    SELECT * FROM event
+    WHERE (payload->>'time')::timestamptz >= now() - interval '1 week'
+  ) recent
+  USING (tenant_id, page_id)
+  WHERE tenant_id = 6 AND path LIKE '/blog%'
+  GROUP BY page_id;
+  ```
+
+  由于对 tenant_id 进行过滤和连接，大规模（Citus）集群知道整个查询可以通过使用包含该特定租户数据的同位置分片集来响应。单个 PostgreSQL 节点可以在一个步骤中响应查询。
+
+  ![](https://olzhy.github.io/static/images/uploads/2022/03/colocation-better-query.png#center)
+
+  在某些情况下，必须修改查询和表模式以将租户 ID 包含在唯一约束和连接条件中。这种修改相对来说比较简单。
+
 {{< line_break >}}
 
 至此，我们完成了对 Azure 提供的三种类型的 PostgreSQL 服务的初步了解。
