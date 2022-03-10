@@ -226,7 +226,7 @@ Azure Database for PostgreSQL 灵活服务器是一种完全托管的数据库�
 
 **分片**
 
-**Table colocation**
+**Table Colocation**
 
 > 参考资料
 >
