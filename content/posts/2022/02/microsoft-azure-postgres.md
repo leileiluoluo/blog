@@ -393,7 +393,3 @@ GROUP BY page_id;
 > 参考资料
 >
 > \[1\] [Azure Database for PostgreSQL Documentation](https://docs.microsoft.com/en-us/azure/postgresql/)
-
-```
-
-```
