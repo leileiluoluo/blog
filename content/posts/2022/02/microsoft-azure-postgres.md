@@ -84,6 +84,8 @@ $ wget --no-check-certificate https://dl.cacerts.digicert.com/DigiCertGlobalRoot
 
 ```shell
 $ psql --host=mydemoserver-pg.postgres.database.azure.com --port=5432 --username=myadmin --dbname=postgres --set=sslmode=require --set=sslrootcert=DigiCertGlobalRootCA.crt.pem
+
+# psql "host=mydemoserver-pg.postgres.database.azure.com port=5432 user=myadmin dbname=postgres sslmode=verify-full sslrootcert=DigiCertGlobalRootCA.crt.pem"
 ```
 
 **服务器管理**
