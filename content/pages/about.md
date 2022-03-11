@@ -28,4 +28,4 @@ leileiluoluo#leileiluoluo.com （将#替换为@）
 
 **我的微信公众号**
 
-![](https://olzhy.github.io/static/images/self/weixinhaoqrcode.png#center)
+![](https://olzhy.github.io/static/images/self/weixinhaoqrcode.jpg#center)
