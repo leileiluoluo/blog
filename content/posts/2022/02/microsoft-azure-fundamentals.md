@@ -4,7 +4,6 @@ author: olzhy
 type: post
 date: 2022-02-13T09:29:32+08:00
 url: /posts/microsoft-azure-fundamentals.html
-math: true
 categories:
   - 计算机
 tags:

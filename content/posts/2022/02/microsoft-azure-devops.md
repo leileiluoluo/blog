@@ -4,7 +4,6 @@ author: olzhy
 type: post
 date: 2022-02-20T10:36:52+08:00
 url: /posts/azure-devops-services.html
-math: true
 categories:
   - 计算机
 tags:

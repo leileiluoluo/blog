@@ -4,7 +4,6 @@ author: olzhy
 type: post
 date: 2022-03-02T08:09:58+08:00
 url: /posts/azure-postgres.html
-math: true
 categories:
   - 计算机
 tags:
