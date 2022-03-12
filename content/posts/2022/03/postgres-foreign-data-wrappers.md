@@ -19,3 +19,9 @@ description: PostgreSQL Foreign Data Wrappers (PostgreSQL 外部数据包装器�
 > \[1\] [PostgreSQL: Documentation: 14: F.35. postgres_fdw](https://www.postgresql.org/docs/14/postgres-fdw.html)
 >
 > \[2\] [Foreign data wrappers - PostgreSQL Wiki](https://wiki.postgresql.org/wiki/Foreign_data_wrappers)
+>
+> \[3\] [PostgreSQL fdw 详解](https://blog.csdn.net/weixin_39540651/article/details/105968786)
+>
+> \[4\] [Postgresql fdw 原理及 postgres_fdw 使用](https://zhuanlan.zhihu.com/p/49981726)
+>
+> \[5\] [PostgreSQL 中的 postgres_fdw 扩展](https://blog.csdn.net/qq_31156277/article/details/90580804)
