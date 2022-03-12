@@ -42,6 +42,25 @@ PostgreSQL Foreign Data Wrappers，即外部数据包装器（下面简称为 FD
 
 本文仅关注 postgres_fdw，即 PostgreSQL 数据库如何与外部 PostgreSQL 数据库进行连接以及其如何对外部数据进行管理。
 
+### 1 使用 postgres_fdw
+
+要想使用 postgres_fdw 进行远程数据库访问，主要有如下几个步骤：
+
+- 安装 postgres_fdw 扩展
+- 创建外部服务器
+- 创建用户映射
+- 创建外部表或导入外部模式
+
+本文使用本地 PostgreSQL 数据库作示例，开始正式的步骤前，需要提前做一点准备工作。
+
+#### 安装 postgres_fdw 扩展
+
+#### 创建外部服务器
+
+#### 创建用户映射
+
+#### 创建外部表或导入外部模式
+
 > 参考资料
 >
 > \[1\] [PostgreSQL: Documentation: 14: F.35. postgres_fdw](https://www.postgresql.org/docs/14/postgres-fdw.html)
