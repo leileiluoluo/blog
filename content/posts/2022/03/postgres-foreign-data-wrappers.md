@@ -20,7 +20,7 @@ PostgreSQL Foreign Data Wrappers，即外部数据包装器（下面简称为 FD
 
 - 数据分片
 
-  如 pg_shardman 插件，即是使用 postgres_fdw 和 pg_pathman 插件来实现数据分片的。
+  使用 FDW 将数据分布式存储在多个服务器上从而实现分片（如 pg_shardman 插件，即是使用 postgres_fdw 和 pg_pathman 插件来实现数据分片的）。
 
 - 数据同步
 
