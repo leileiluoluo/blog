@@ -195,7 +195,7 @@ IMPORT FOREIGN SCHEMA public LIMIT TO (weather) FROM SERVER foreign_server INTO 
 GRANT SELECT,INSERT,UPDATE,DELETE ON ALL TABLES IN SCHEMA public TO local_user;
 ```
 
-这样使用用户`local_user`连接到本地数据库，即可以对外部表进行操作了。
+这样，使用用户`local_user`连接到本地数据库，即可以对外部表进行操作了。
 
 ```shell
 $ psql -U local_user postgres
