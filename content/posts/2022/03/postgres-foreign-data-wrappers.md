@@ -44,14 +44,70 @@ PostgreSQL Foreign Data Wrappers，即外部数据包装器（下面简称为 FD
 
 ### 1 使用 postgres_fdw
 
-要想使用 postgres_fdw 进行远程数据库访问，主要有如下几个步骤：
+要想使用 postgres_fdw 对远程数据库进行访问，主要有如下几个步骤：
 
 - 安装 postgres_fdw 扩展
 - 创建外部服务器
 - 创建用户映射
 - 创建外部表或导入外部模式
 
-本文使用本地 PostgreSQL 数据库作示例，开始正式的步骤前，需要提前做一点准备工作。
+本文使用本地 PostgreSQL 数据库模拟远程数据库和本地数据库，开始正式的步骤前，需要提前做一点准备工作。
+
+- 检查 PostgreSQL 版本
+
+  ```shell
+  $ psql --version
+  psql (PostgreSQL) 14.2
+  ```
+
+- 在远程 PostgreSQL 数据库创建用户
+
+  使用 superuser 执行如下语句创建普通用户`fdw_user`，供后面本地数据库建立 FDW 连接时使用。
+
+  ```sql
+  CREATE USER fdw_user WITH ENCRYPTED PASSWORD 'secret';
+  ```
+
+- 在远程 PostgreSQL 数据库创建表
+
+  在远程数据库创建用于测试的天气表`weather`，插入测试数据，并为用户`fdw_user`授权针对该表的增删改查权限。
+
+  ```sql
+  CREATE TABLE weather (
+      city        varchar(80), -- city name (城市名)
+      temp_low    int,  -- low temperature (最低温度)
+      temp_high   int,  -- high temperature (最高温度)
+      prcp        real, -- precipitation (降水量)
+      date        date  -- date (日期)
+  );
+
+  INSERT INTO weather (city, temp_low, temp_high, prcp, date)
+      VALUES ('Beijing', 18, 32, 0.25, '2021-05-19'),
+            ('Beijing', 20, 30, 0.0, '2021-05-20'),
+            ('Dalian', 16, 24, 0.0, '2021-05-21');
+  ```
+
+  ```sql
+  GRANT SELECT,INSERT,UPDATE,DELETE ON TABLE weather TO fdw_user;
+  ```
+
+  在本地使用用户`fdw_user`对远程数据库（本文特殊，使用本机数据库同时模拟本地与远程，所以远程 host 也是 localhost）进行连接，并校验所授权的权限。
+
+  ```shell
+  $ psql -h localhost -U fdw_user postgres
+
+  postgres=> SELECT * FROM weather;
+    city   | temp_low | temp_high | prcp |    date
+  ---------+----------+-----------+------+------------
+  Beijing |       18 |        32 | 0.25 | 2021-05-19
+  Beijing |       20 |        30 |    0 | 2021-05-20
+  Dalian  |       16 |        24 |    0 | 2021-05-21
+  (3 rows)
+  ```
+
+  _注意：若是真实的远程数据库，要想从本地建立连接，需要在远程数据库的 pg_hba.conf 配置文件增加记录以对访问 IP 开通防火墙。_
+
+所有准备工作都做好了，现在可以开始正式的步骤了。
 
 #### 安装 postgres_fdw 扩展
 
