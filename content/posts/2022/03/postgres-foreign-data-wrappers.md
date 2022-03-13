@@ -212,7 +212,7 @@ postgres=> UPDATE foreign_weather SET prcp=0 WHERE city='Beijing' AND date='2021
 UPDATE 1
 ```
 
-至此，我们已基本掌握了`postgres_fdw`的使用方式。本文接下来会看一下跟 FDW 相关的系统表及函数，最后看一下 FDW 的事务管理及性能优化，以便对 FDW 有一个更深入的理解。
+至此，我们已基本掌握了`postgres_fdw`的使用方式。本文接下来会看一下跟 FDW 相关的系统表及函数，最后看一下 FDW 的事务管理及性能优化，以便对 FDW 有一个更深入的了解。
 
 ### 2 FDW 相关的系统表及函数
 
