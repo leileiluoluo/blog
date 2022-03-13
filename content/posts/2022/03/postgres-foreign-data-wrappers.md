@@ -205,7 +205,7 @@ postgres=# SELECT * FROM foreign_weather;
 
 至此，我们已基本掌握了`postgres_fdw`的连接建立及外部表的使用。本文接下来会看一下跟 FDW 相关的几个函数，最后看一下 FDW 的事务管理及性能优化，以便对 FDW 的运行机制有一个更深入的理解。
 
-### 2 FDW 相关的函数
+### 2 FDW 相关的系统表及函数
 
 ### 3 FDW 事务管理及性能优化
 
