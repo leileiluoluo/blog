@@ -233,5 +233,3 @@ UPDATE 1
 > \[6\] [PostgreSQL 中的 postgres_fdw 扩展](https://blog.csdn.net/qq_31156277/article/details/90580804)
 >
 > \[7\] [PostgreSQL 14 中的 postgres_fdw 增强功能](https://mp.weixin.qq.com/s/7XjPa-ZeU8mNCvcIwOTHrA)
->
-> \[8\] [CARTO's Use of Foreign Data Wrappers](https://carto.com/blog/postgres-fdw/)
