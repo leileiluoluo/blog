@@ -38,7 +38,11 @@ PostgreSQL Foreign Data Wrappers，即外部数据包装器（下面简称为 FD
 
 2003 年，SQL/MED（SQL Management of External Data）被加入 SQL 标准，其为外部数据管理提供了规范。在 2011 年发行的 PostgreSQL 9.1 开始支持外部数据读，2013 发行的 PostgreSQL 9.3 开始支持外部数据写。
 
-目前，PostgreSQL （本文写作时，使用的版本为 PostgreSQL 14）已提供多种扩展来支持对各种类型外部数据库的操作（如 postgres_fdw 支持连接外部 PostgreSQL 数据库，oracle_fdw 支持连接外部 Oracle 数据库，mysql_fdw 支持连接外部 MySQL 数据库，以及 jdbc_fdw 支持以 JDBC 协议连接外部常用关系型数据库等）。
+目前，PostgreSQL （本文写作时，使用的版本为 PostgreSQL 14）已提供多种扩展来支持对各种类型外部数据库或文件的操作（如 postgres_fdw 支持连接外部 PostgreSQL 数据库，oracle_fdw 支持连接外部 Oracle 数据库，mysql_fdw 支持连接外部 MySQL 数据库，jdbc_fdw 支持以 JDBC 协议连接外部常用关系型数据库，file_fdw 支持连接外部特定格式的文件等）。
+
+![](https://olzhy.github.io/static/images/uploads/2022/03/fdw.png#center)
+
+（图片来自[CART's Blog](https://carto.com/blog/postgres-fdw/)）
 
 本文仅关注 postgres_fdw，即 PostgreSQL 数据库如何与外部 PostgreSQL 数据库进行连接以及其如何对外部数据进行管理。
 
@@ -211,10 +215,14 @@ postgres=# SELECT * FROM foreign_weather;
 >
 > \[2\] [Foreign data wrappers - PostgreSQL Wiki](https://wiki.postgresql.org/wiki/Foreign_data_wrappers)
 >
-> \[3\] [PostgreSQL fdw 详解](https://blog.csdn.net/weixin_39540651/article/details/105968786)
+> \[3\] [CARTO's Use of Foreign Data Wrappers](https://carto.com/blog/postgres-fdw/)
 >
-> \[4\] [Postgresql fdw 原理及 postgres_fdw 使用](https://zhuanlan.zhihu.com/p/49981726)
+> \[4\] [PostgreSQL fdw 详解](https://blog.csdn.net/weixin_39540651/article/details/105968786)
 >
-> \[5\] [PostgreSQL 中的 postgres_fdw 扩展](https://blog.csdn.net/qq_31156277/article/details/90580804)
+> \[5\] [Postgresql fdw 原理及 postgres_fdw 使用](https://zhuanlan.zhihu.com/p/49981726)
 >
-> \[6\] [PostgreSQL 14 中的 postgres_fdw 增强功能](https://mp.weixin.qq.com/s/7XjPa-ZeU8mNCvcIwOTHrA)
+> \[6\] [PostgreSQL 中的 postgres_fdw 扩展](https://blog.csdn.net/qq_31156277/article/details/90580804)
+>
+> \[7\] [PostgreSQL 14 中的 postgres_fdw 增强功能](https://mp.weixin.qq.com/s/7XjPa-ZeU8mNCvcIwOTHrA)
+>
+> \[8\] [CARTO's Use of Foreign Data Wrappers](https://carto.com/blog/postgres-fdw/)
