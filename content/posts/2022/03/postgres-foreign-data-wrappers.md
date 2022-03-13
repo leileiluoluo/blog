@@ -62,7 +62,7 @@ PostgreSQL Foreign Data Wrappers，即外部数据包装器（下面简称为 FD
 
 - 在远程 PostgreSQL 数据库创建用户
 
-  使用 superuser 执行如下语句创建普通用户`fdw_user`，供后面本地数据库建立 FDW 连接时使用。
+  使用 superuser 在远程 PostgreSQL 数据库执行如下语句创建普通用户`fdw_user`，供后面本地数据库建立 FDW 连接时使用。
 
   ```sql
   CREATE USER fdw_user WITH ENCRYPTED PASSWORD 'secret';
@@ -107,15 +107,65 @@ PostgreSQL Foreign Data Wrappers，即外部数据包装器（下面简称为 FD
 
   _注意：若是真实的远程数据库，要想从本地建立连接，需要在远程数据库的 pg_hba.conf 配置文件增加记录以对访问 IP 开通防火墙。_
 
-所有准备工作都做好了，现在可以开始正式的步骤了。
+- 在本地 PostgreSQL 数据库创建用户
+
+  使用 superuser 在本地 PostgreSQL 数据库执行如下语句创建普通用户`local_user`。
+
+  ```sql
+  CREATE USER local_user WITH ENCRYPTED PASSWORD 'secret';
+  ```
+
+所有准备工作都做好了，现在可以使用 superuser 在本地数据库开始正式的步骤了。
 
 #### 安装 postgres_fdw 扩展
 
+使用`CREATE EXTENSION`语句安装`postgres_fdw`扩展。
+
+```sql
+CREATE EXTENSION postgres_fdw;
+```
+
 #### 创建外部服务器
+
+使用`CREATE SERVER`语句创建外部服务器，需要指定远程数据库的主机、端口及数据库名。
+
+```sql
+CREATE SERVER foreign_server
+        FOREIGN DATA WRAPPER postgres_fdw
+        OPTIONS (host 'localhost', port '5432', dbname 'postgres');
+```
 
 #### 创建用户映射
 
+使用`CREATE USER MAPPING`语句创建远程用户与本地用户的映射，需要提供远程用户的用户名及密码。
+
+```sql
+CREATE USER MAPPING FOR local_user
+        SERVER foreign_server
+        OPTIONS (user 'fdw_user', password 'secret');
+```
+
 #### 创建外部表或导入外部模式
+
+使用`CREATE FOREIGN TABLE`语句创建远程表。
+
+```sql
+CREATE FOREIGN TABLE foreign_weather (
+      city        varchar(80),
+      temp_low    int,
+      temp_high   int,
+      prcp        real,
+      date        date
+  )
+        SERVER foreign_server
+        OPTIONS (schema_name 'public', table_name 'weather');
+```
+
+为`local_user`授权 public 模式下所有表（包括外部表）的增删改查权限。
+
+```sql
+GRANT SELECT,INSERT,UPDATE,DELETE ON ALL TABLES IN SCHEMA public TO local_user;
+```
 
 > 参考资料
 >
