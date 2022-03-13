@@ -147,7 +147,7 @@ CREATE USER MAPPING FOR local_user
 
 #### 创建外部表或导入外部模式
 
-使用`CREATE FOREIGN TABLE`语句创建远程表。需要注意各列的类型需与实际的远程表相匹配。
+使用`CREATE FOREIGN TABLE`语句创建远程表。需要注意各列的类型需与实际的远程表相匹配，列名也最好保持一致，否则您需要使用`column_name`参数为每一列单独指定远程表中的列名。
 
 ```sql
 CREATE FOREIGN TABLE foreign_weather (
@@ -159,6 +159,16 @@ CREATE FOREIGN TABLE foreign_weather (
   )
         SERVER foreign_server
         OPTIONS (schema_name 'public', table_name 'weather');
+```
+
+多数情形下，您只要使用`IMPORT FOREIGN SCHEMA`语句直接将外部模式导入即可。
+
+```sql
+-- 导入外部模式下的所有表
+IMPORT FOREIGN SCHEMA public FROM SERVER foreign_server INTO public;
+
+-- 导入外部模式下的指定表
+IMPORT FOREIGN SCHEMA public LIMIT TO (employee) FROM SERVER foreign_server INTO public;
 ```
 
 为`local_user`授权 public 模式下所有表（包括外部表）的增删改查权限。
