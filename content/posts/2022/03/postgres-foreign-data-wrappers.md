@@ -200,10 +200,19 @@ GRANT SELECT,INSERT,UPDATE,DELETE ON ALL TABLES IN SCHEMA public TO local_user;
 ```shell
 $ psql -U local_user postgres
 
-postgres=# SELECT * FROM foreign_weather;
+postgres=> SELECT * FROM foreign_weather;
+  city   | temp_low | temp_high | prcp |    date
+---------+----------+-----------+------+------------
+ Beijing |       18 |        32 | 0.25 | 2021-05-19
+ Beijing |       20 |        30 |    0 | 2021-05-20
+ Dalian  |       16 |        24 |    0 | 2021-05-21
+(3 rows)
+
+postgres=> UPDATE foreign_weather SET prcp=0 WHERE city='Beijing' AND date='2021-05-19';
+UPDATE 1
 ```
 
-至此，我们已基本掌握了`postgres_fdw`的连接建立及外部表的使用。本文接下来会看一下跟 FDW 相关的几个函数，最后看一下 FDW 的事务管理及性能优化，以便对 FDW 的运行机制有一个更深入的理解。
+至此，我们已基本掌握了`postgres_fdw`的连接建立及外部表的使用。本文接下来会看一下跟 FDW 相关的系统表及函数，最后看一下 FDW 的事务管理及性能优化，以便对 FDW 有一个更深入的理解。
 
 ### 2 FDW 相关的系统表及函数
 
