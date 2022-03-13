@@ -147,7 +147,7 @@ CREATE USER MAPPING FOR local_user
 
 #### 创建外部表或导入外部模式
 
-使用`CREATE FOREIGN TABLE`语句创建远程表。
+使用`CREATE FOREIGN TABLE`语句创建远程表。需要注意各列的类型需与实际的远程表相匹配。
 
 ```sql
 CREATE FOREIGN TABLE foreign_weather (
