@@ -125,6 +125,12 @@ PostgreSQL Foreign Data Wrappers，即外部数据包装器（下面简称为 FD
 CREATE EXTENSION postgres_fdw;
 ```
 
+为用户`local_user`授权`postgres_fdw`的使用权限。
+
+```sql
+GRANT USAGE ON FOREIGN DATA WRAPPER postgres_fdw TO local_user;
+```
+
 #### 创建外部服务器
 
 使用`CREATE SERVER`语句创建外部服务器，需要指定远程数据库的主机、端口及数据库名。
@@ -133,6 +139,12 @@ CREATE EXTENSION postgres_fdw;
 CREATE SERVER foreign_server
         FOREIGN DATA WRAPPER postgres_fdw
         OPTIONS (host 'localhost', port '5432', dbname 'postgres');
+```
+
+为用户`local_user`授权外部服务器`foreign_server`的使用权限。
+
+```sql
+GRANT USAGE ON FOREIGN SERVER foreign_server TO local_user;
 ```
 
 #### 创建用户映射
@@ -161,20 +173,30 @@ CREATE FOREIGN TABLE foreign_weather (
         OPTIONS (schema_name 'public', table_name 'weather');
 ```
 
-多数情形下，您只要使用`IMPORT FOREIGN SCHEMA`语句直接将外部模式导入即可。
+外部表多的话，这样一个一个新建会比较痛苦，多数情形下，您只要使用`IMPORT FOREIGN SCHEMA`语句直接将外部模式下的所有表导入本地指定的模式即可。
+
+_注意：因未给 super_user 指定用户映射，如下语句需要使用用户`local_user`执行，否则会报`ERROR: user mapping not found for "super_user"`错误。_
 
 ```sql
 -- 导入外部模式下的所有表
 IMPORT FOREIGN SCHEMA public FROM SERVER foreign_server INTO public;
 
 -- 导入外部模式下的指定表
-IMPORT FOREIGN SCHEMA public LIMIT TO (employee) FROM SERVER foreign_server INTO public;
+IMPORT FOREIGN SCHEMA public LIMIT TO (weather) FROM SERVER foreign_server INTO public;
 ```
 
 为`local_user`授权 public 模式下所有表（包括外部表）的增删改查权限。
 
 ```sql
 GRANT SELECT,INSERT,UPDATE,DELETE ON ALL TABLES IN SCHEMA public TO local_user;
+```
+
+这样使用用户`local_user`连接到本地数据库，即可以对外部表进行操作了。
+
+```shell
+$ psql -U local_user postgres
+
+postgres=# SELECT * FROM foreign_weather;
 ```
 
 > 参考资料
