@@ -214,9 +214,152 @@ UPDATE 1
 
 至此，我们已基本掌握了`postgres_fdw`的使用方式。本文接下来会看一下跟 FDW 相关的系统表及函数，最后看一下 FDW 的事务管理及性能优化，以便对 FDW 有一个更深入的了解。
 
-### 2 FDW 相关的系统表及函数
+### 2 建立 postgres_fdw 时的几个重要参数
 
-### 3 FDW 事务管理及性能优化
+- updatable
+
+  该选项用于设置外部表是否可被更新，即 postgres_fdw 是否允许使用`INSERT`、`UPDATE`和`DELETE`命令修改外部表，默认是`true`。其可以指定在外部表上，也可以指定在外部服务器上，指定在表上的会覆盖指定在服务器上的。
+
+  设置或更新该参数的具体语句如下：
+
+  ```sql
+  -- 创建外部服务器时指定
+  CREATE SERVER foreign_server FOREIGN DATA WRAPPER postgres_fdw OPTIONS (..., updatable 'false', ...);
+
+  -- 创建外部表时指定
+  CREATE FOREIGN TABLE foreign_weather (
+      ...
+  )
+        SERVER foreign_server
+        OPTIONS (schema_name ..., table_name ..., updatable 'false', ...);
+
+  -- 更新外部服务器参数选项
+  ALTER SERVER foreign_server OPTIONS (updatable 'false');
+
+  -- 更新外部表参数选项
+  ALTER FOREIGN TABLE foreign_weather OPTIONS(updatable 'false');
+  ```
+
+  当然，如果远程表实际上不可更新，那么无论如何都会发生错误。使用此选项主要是允许在本地抛出错误，而无需查询远程服务器。
+
+- truncatable
+
+  该选项用于设置外部表是否可被截断，即 postgres_fdw 是否允许使用`TRUNCATE`命令截断外部表，默认是`true`。该参数同样可以指定在外部表上，也可以指定在外部服务器上，指定在表上的会覆盖指定在服务器上的。
+
+  设置或更新该参数的具体语句同上述`updatable`完全一样。
+
+  当然，如果远程表实际上不可被截断，那么无论如何都会发生错误。使用此选项同样主要是可以允许在本地抛出错误，而无需查询远程服务器。
+
+- keep_connections
+
+  该选项用于设置 postgres_fdw 是否将与远程服务器的连接保留在本地会话（local session），以方便重用，默认是`on`（若设置为`off`，则在每个事务结束时将放弃与外部服务器的所有连接）。其只可以指定在外部服务器上。设置或更新该参数的具体语句如下：
+
+  ```sql
+  -- 创建外部服务器时指定
+  CREATE SERVER foreign_server FOREIGN DATA WRAPPER postgres_fdw OPTIONS (..., keep_connections 'off', ...);
+
+  -- 更新外部服务器参数选项
+  ALTER SERVER foreign_server OPTIONS (keep_connections 'off');
+  ```
+
+### 3 FDW 相关的系统表及函数
+
+**系统表**
+
+跟 FDW 相关的系统表如下（对于`_pg_*`表，super_user 才有权限访问）：
+
+```
+information_schema._pg_foreign_data_wrappers
+information_schema._pg_foreign_servers
+information_schema._pg_foreign_tables
+information_schema._pg_foreign_table_columns
+information_schema._pg_user_mappings
+
+information_schema.foreign_data_wrappers
+information_schema.foreign_data_wrapper_options
+information_schema.foreign_server_options
+information_schema.foreign_servers
+information_schema.foreign_tables
+information_schema.foreign_table_options
+```
+
+**函数**
+
+- postgres_fdw_get_connections()
+
+  调用该函数会返回 postgres_fdw 从本地会话（local session）到外部服务器所建立的所有开放连接的外部服务器名及连接是否有效。
+
+  _注意：该函数获取的是当前本地会话与外部服务器的连接状态，非本地数据库与外部服务器的连接状态。所以，另开一个 Shell Tab 进行的远程表查询不会被当前本地会话记录。_
+
+  本文创建外部服务器时对`keep_connections`参数采用的是默认选项（`on`），所以会保留连接。
+
+  可以看到如下`psql`连接到本地数据库，进行外部表查询后，查询`postgres_fdw_get_connections()`函数会返回一行记录。
+
+  ```shell
+  $ psql -U local_user postgres
+
+  postgres=> SELECT * FROM foreign_weather;
+  ...
+
+  postgres=> SELECT * FROM postgres_fdw_get_connections();
+    server_name   | valid
+  ----------------+-------
+  foreign_server | t
+  (1 row)
+  ```
+
+- postgres_fdw_disconnect(server_name text)
+
+  根据传入的名称，断开 postgres_fdw 从本地会话（local session）到指定外部服务器的所有连接。
+
+  使用不同的用户映射可以有多个到给定服务器的连接（使用多个用户访问外部服务器时，配置了多个用户映射，postgres_fdw 会为每个用户映射建立一个连接）。若连接正在当前本地事务中使用，则不会断开，会输出警告消息。若至少断开一个连接，则返回 true，否则返回 false。若未找到具有给定名称的外部服务器，则会报错（`ERROR: server "..." does not exist`）。
+
+  接着刚刚的会话，执行`SELECT postgres_fdw_disconnect('foreign_server')`，返回`true`；再次查询`postgres_fdw_get_connections`函数发现已没有连接。
+
+  ```shell
+  postgres=> SELECT postgres_fdw_disconnect('foreign_server');
+    postgres_fdw_disconnect
+  -------------------------
+  t
+  (1 row)
+
+  postgres=> SELECT * FROM postgres_fdw_get_connections();
+    server_name | valid
+  -------------+-------
+  (0 rows)
+  ```
+
+- postgres_fdw_disconnect_all()
+
+  断开 postgres_fdw 从本地会话（local session）到外部服务器的所有连接。使用方式与`postgres_fdw_disconnect(server_name text)`类似，这里不再赘述。
+
+### 4 FDW 事务管理及性能优化
+
+**事务管理**
+
+当查询远程表时，若尚未打开与当前本地事务对应的事务，postgres_fdw 会在远程服务器上新开一个事务。当本地事务提交或中止时，远程事务也被提交或中止。保存点（Savepoints）同样通过创建相应的远程保存点来管理。
+
+当本地事务具有可序列化（SERIALIZABLE）隔离级别时，远程事务也使用该隔离级别；否则，使用可重复读（REPEATABLE READ）隔离级别。
+
+若一个查询在远程服务器上执行多个表扫描，此选项可确保其对所有扫描将得到快照一致性（snapshot-consistent）结果。结果是，即使其它活动在远程服务器上进行了并发更新，单个事务中的连续查询将看到来自远程服务器的相同数据。若本地事务使用可序列化（SERIALIZABLE）或可重复读（REPEATABLE READ）隔离级别，那么这种行为是可预期的，但对于读已提交（READ COMMITTED）隔离级别的本地事务来说，这可能会令人惊讶。未来的 PostgreSQL 版本可能会修改这些规则。
+
+**性能优化**
+
+可以使用`EXPLAIN VERBOSE`查看实际发送到远程服务器的查询。
+
+示例如下：
+
+```shell
+$ psql -U local_user postgres
+
+postgres=> EXPLAIN VERBOSE SELECT * FROM foreign_weather;
+                                    QUERY PLAN
+----------------------------------------------------------------------------------
+ Foreign Scan on public.foreign_weather  (cost=100.00..121.25 rows=375 width=194)
+   Output: city, temp_low, temp_high, prcp, date
+   Remote SQL: SELECT city, temp_low, temp_high, prcp, date FROM public.weather
+(3 rows)
+```
 
 > 参考资料
 >
