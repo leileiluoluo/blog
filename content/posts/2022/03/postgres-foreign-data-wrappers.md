@@ -345,21 +345,129 @@ information_schema.foreign_table_options
 
 **性能优化**
 
-可以使用`EXPLAIN VERBOSE`查看实际发送到远程服务器的查询。
+postgres_fdw 会比较智能的判断一个查询语句（待检测的查询语句包括`SELECT`、`UPDATE`、`DELETE`语句，语句中涉及运算符、函数、连接、过滤条件及聚集函数等）是否应该下移到远程服务器执行。
 
-示例如下：
+最理想的情况是，所涉及的表都在远程服务器上，运算符、函数等都为内置类型，这样 postgres_fdw 将整个查询发送给远程服务器进行计算，然后取结果就好了。而多数情况是 postgres_fdw 需要将必要的数据取到本地来进行连接、过滤及聚集函数处理等操作。即 postgres_fdw 会优化发送到远程服务器的查询（优化 WHERE 子句，及不获取不需要的列）以减少来自远程服务器的数据传输。
 
-```shell
-$ psql -U local_user postgres
+下面我们看两个例子：
 
-postgres=> EXPLAIN VERBOSE SELECT * FROM foreign_weather;
-                                    QUERY PLAN
-----------------------------------------------------------------------------------
- Foreign Scan on public.foreign_weather  (cost=100.00..121.25 rows=375 width=194)
-   Output: city, temp_low, temp_high, prcp, date
-   Remote SQL: SELECT city, temp_low, temp_high, prcp, date FROM public.weather
-(3 rows)
-```
+- 纯远程表查询
+
+  原始查询语句：
+
+  ```sql
+  SELECT * FROM foreign_weather;
+  ```
+
+  使用`EXPLAIN VERBOSE`查看实际发送到远程服务器的查询（Remote SQL）为：
+
+  ```sql
+  SELECT city, temp_low, temp_high, prcp, date FROM public.weather
+  ```
+
+  ```shell
+  $ psql -U local_user postgres
+
+  postgres=> EXPLAIN VERBOSE SELECT * FROM foreign_weather;
+                                      QUERY PLAN
+  ----------------------------------------------------------------------------------
+  Foreign Scan on public.foreign_weather  (cost=100.00..121.25 rows=375 width=194)
+    Output: city, temp_low, temp_high, prcp, date
+    Remote SQL: SELECT city, temp_low, temp_high, prcp, date FROM public.weather
+  (3 rows)
+  ```
+
+- 远程表与本地表连接查询
+
+  新建本地表`cities`，并插入测试数据：
+
+  ```sql
+  CREATE TABLE cities (
+    name        varchar(80), -- city name (城市名)
+    location    point -- point为PostgreSQL特有类型，该字段表示地理坐标(经度, 纬度)
+  );
+
+  INSERT INTO cities (name, location)
+    VALUES ('Beijing', '(116.3, 39.9)'),
+           ('Shanghai', '(121.3, 31.1)');
+  ```
+
+  对于查询：
+
+  ```sql
+  SELECT * FROM cities c, foreign_weather w
+    WHERE c.name = w.city;
+  ```
+
+  postgres_fdw 发送给远程服务器的 SQL 为：
+
+  ```sql
+  SELECT city, temp_low, temp_high, prcp, date
+    FROM public.weather;
+  ```
+
+  ```shell
+  $ psql -U local_user postgres
+
+  postgres=> EXPLAIN VERBOSE SELECT * FROM cities c, foreign_weather w WHERE c.name = w.city;
+                                        QUERY PLAN
+  ------------------------------------------------------------------------------------------
+  Hash Join  (cost=118.10..163.91 rows=675 width=388)
+    Output: c.name, c.location, w.city, w.temp_low, w.temp_high, w.prcp, w.date
+    Hash Cond: ((w.city)::text = (c.name)::text)
+    ->  Foreign Scan on public.foreign_weather w  (cost=100.00..121.25 rows=375 width=194)
+          Output: w.city, w.temp_low, w.temp_high, w.prcp, w.date
+          Remote SQL: SELECT city, temp_low, temp_high, prcp, date FROM public.weather
+    ->  Hash  (cost=13.60..13.60 rows=360 width=194)
+          Output: c.name, c.location
+          ->  Seq Scan on public.cities c  (cost=0.00..13.60 rows=360 width=194)
+                Output: c.name, c.location
+  (10 rows)
+  ```
+
+  即 postgres_fdw 会将`foreign_weather`的全部数据获取到本地后与表`cities`进行连接计算。
+
+  而对于查询：
+
+  ```sql
+  SELECT c.name, max(w.temp_high)
+    FROM cities c, foreign_weather w
+      WHERE c.name = w.city AND w.temp_high <= 30 GROUP BY c.name;
+  ```
+
+  postgres_fdw 发送给远程服务器的 SQL 为：
+
+  ```sql
+  SELECT city, temp_high
+    FROM public.weather
+      WHERE (temp_high <= 30)
+  ```
+
+  ```shell
+  $ psql -U local_user postgres
+
+  postgres=> EXPLAIN VERBOSE SELECT c.name, max(w.temp_high) FROM cities c, foreign_weather w WHERE c.name = w.city AND w.temp_high <= 30 group by c.name;
+                                              QUERY PLAN
+  ------------------------------------------------------------------------------------------------------
+  HashAggregate  (cost=143.17..145.17 rows=200 width=182)
+    Output: c.name, max(w.temp_high)
+    Group Key: c.name
+    ->  Hash Join  (cost=119.25..141.98 rows=238 width=182)
+          Output: c.name, w.temp_high
+          Hash Cond: ((c.name)::text = (w.city)::text)
+          ->  Seq Scan on public.cities c  (cost=0.00..13.60 rows=360 width=178)
+                Output: c.name, c.location
+          ->  Hash  (cost=117.60..117.60 rows=132 width=182)
+                Output: w.temp_high, w.city
+                ->  Foreign Scan on public.foreign_weather w  (cost=100.00..117.60 rows=132 width=182)
+                      Output: w.temp_high, w.city
+                      Remote SQL: SELECT city, temp_high FROM public.weather WHERE ((temp_high <= 30))
+  (13 rows)
+  ```
+
+  即 postgres_fdw 会从`foreign_weather`获取所需要的数据，然后在本地与表`cities`进行连接、过滤及聚集函数处理等计算。
+
+综上，我们对 PostgreSQL 外部数据包装器的基础概念及 postgres_fdw 的使用方式及机制有了一个比较详细的了解。
 
 > 参考资料
 >
