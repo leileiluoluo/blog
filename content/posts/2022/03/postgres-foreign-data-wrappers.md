@@ -59,7 +59,7 @@ PostgreSQL 外部数据包装器，即 PostgreSQL Foreign Data Wrappers（下面
 
 - 检查 PostgreSQL 版本
 
-  ```shell
+  ```text
   $ psql --version
   psql (PostgreSQL) 14.2
   ```
@@ -97,7 +97,7 @@ PostgreSQL 外部数据包装器，即 PostgreSQL Foreign Data Wrappers（下面
 
   在本地使用用户`fdw_user`对远程数据库（本文特殊，使用本机数据库同时模拟本地与远程，所以远程 host 也是 localhost）进行连接，并校验所授权的权限。
 
-  ```shell
+  ```text
   $ psql -h localhost -U fdw_user postgres
 
   postgres=> SELECT * FROM weather;
@@ -197,7 +197,7 @@ GRANT SELECT,INSERT,UPDATE,DELETE ON ALL TABLES IN SCHEMA public TO local_user;
 
 这样，使用用户`local_user`连接到本地数据库，即可以对外部表进行操作了。
 
-```shell
+```text
 $ psql -U local_user postgres
 
 postgres=> SELECT * FROM foreign_weather;
@@ -268,7 +268,7 @@ UPDATE 1
 
 跟 FDW 相关的系统表如下（对于`_pg_*`表，super_user 才有权限访问）：
 
-```
+```text
 information_schema._pg_foreign_data_wrappers
 information_schema._pg_foreign_servers
 information_schema._pg_foreign_tables
@@ -295,7 +295,7 @@ information_schema.foreign_table_options
 
   可以看到如下`psql`连接到本地数据库，进行外部表查询后，查询`postgres_fdw_get_connections()`函数会返回一行记录。
 
-  ```shell
+  ```text
   $ psql -U local_user postgres
 
   postgres=> SELECT * FROM foreign_weather;
@@ -314,9 +314,9 @@ information_schema.foreign_table_options
 
   使用不同的用户映射可以有多个到给定服务器的连接（使用多个用户访问外部服务器时，配置了多个用户映射，postgres_fdw 会为每个用户映射建立一个连接）。若连接正在当前本地事务中使用，则不会断开，会输出警告消息。若至少断开一个连接，则返回 true，否则返回 false。若未找到具有给定名称的外部服务器，则会报错（`ERROR: server "..." does not exist`）。
 
-  接着刚刚的会话，执行`SELECT postgres_fdw_disconnect('foreign_server')`，返回`true`；再次查询`postgres_fdw_get_connections`函数发现已没有连接。
+  接着刚刚的会话，执行`SELECT postgres_fdw_disconnect('foreign_server')`，返回`true`；再次查询`postgres_fdw_get_connections()`函数发现已没有连接。
 
-  ```shell
+  ```text
   postgres=> SELECT postgres_fdw_disconnect('foreign_server');
     postgres_fdw_disconnect
   -------------------------
@@ -365,7 +365,7 @@ postgres_fdw 会比较智能的判断一个查询语句（待检测的查询语�
   SELECT city, temp_low, temp_high, prcp, date FROM public.weather
   ```
 
-  ```shell
+  ```text
   $ psql -U local_user postgres
 
   postgres=> EXPLAIN VERBOSE SELECT * FROM foreign_weather;
@@ -406,7 +406,7 @@ postgres_fdw 会比较智能的判断一个查询语句（待检测的查询语�
     FROM public.weather;
   ```
 
-  ```shell
+  ```text
   $ psql -U local_user postgres
 
   postgres=> EXPLAIN VERBOSE SELECT * FROM cities c, foreign_weather w WHERE c.name = w.city;
@@ -443,7 +443,7 @@ postgres_fdw 会比较智能的判断一个查询语句（待检测的查询语�
       WHERE (temp_high <= 30)
   ```
 
-  ```shell
+  ```text
   $ psql -U local_user postgres
 
   postgres=> EXPLAIN VERBOSE SELECT c.name, max(w.temp_high) FROM cities c, foreign_weather w WHERE c.name = w.city AND w.temp_high <= 30 group by c.name;
