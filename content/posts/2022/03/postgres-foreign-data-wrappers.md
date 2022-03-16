@@ -465,7 +465,7 @@ postgres_fdw 会比较智能的判断一个查询语句（待检测的查询语�
   (13 rows)
   ```
 
-  即 postgres_fdw 会从`foreign_weather`获取所需要的数据，然后在本地与表`cities`进行连接、过滤及聚集函数处理等计算。
+  即 postgres_fdw 会优化发给远程服务器的`WHERE`条件，仅从远程表`foreign_weather`获取所需要的数据，然后在本地与表`cities`进行连接、过滤及聚集函数处理等计算。
 
 综上，我们对 PostgreSQL 外部数据包装器的基础概念及 postgres_fdw 的使用方式有了一个比较详细的了解。
 
