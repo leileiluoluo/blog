@@ -32,11 +32,11 @@ func main() {
 
 接下来介绍使用 http.Server 的 Shutdown 方法结合 signal.Notify 来优雅的终止服务。
 
-**1 Shutdown 方法**
+### 1 Shutdown 方法
 
 Golang http.Server 结构体有一个终止服务的方法 Shutdown，其 go doc 如下。
 
-```
+```text
 func (srv *Server) Shutdown(ctx context.Context) error
     Shutdown gracefully shuts down the server without interrupting any active
     connections. Shutdown works by first closing all open listeners, then
@@ -78,11 +78,11 @@ func (srv *Server) Shutdown(ctx context.Context) error
 
 但服务启动后的某一时刻，程序如何知道服务被中断了呢？服务被中断时如何通知程序，然后调用 Shutdown 作处理呢？接下来看一下系统信号通知函数的作用。
 
-**2 signal.Notify 函数**
+### 2 signal.Notify 函数
 
 signal 包的 Notify 函数提供系统信号通知的能力，其 go doc 如下。
 
-```
+```text
 func Notify(c chan<- os.Signal, sig ...os.Signal)
     Notify causes package signal to relay incoming signals to c. If no signals
     are provided, all incoming signals will be relayed to c. Otherwise, just the
@@ -133,12 +133,12 @@ $ go run main.go
 Ctrl+C
 ```
 
-```
+```text
 2019/06/11 17:59:11 program interrupted
 exit status 1
 ```
 
-**3 Server 优雅的终止**
+### 3 Server 优雅的终止
 
 接下来我们使用如上 signal.Notify 结合 http.Server 的 Shutdown 方法实现服务优雅的终止。
 
