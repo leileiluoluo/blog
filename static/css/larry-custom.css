@@ -1,3 +1,12 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #383737 !important;
+}
+
 h2 {
   font-size: 20px !important;
 }
@@ -34,7 +43,7 @@ p,
 }
 
 a.post-title {
-  color: #222;
+  color: #383737;
 }
 
 ul {
