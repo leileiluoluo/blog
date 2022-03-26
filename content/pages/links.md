@@ -113,4 +113,4 @@ wip_template:
 **数据库相关**
 
 - [PostgreSQL Exercises](https://pgexercises.com/)
-- [pgDash - Comprehensive PostgreSQL Monitoring](https://pgdash.io/)
+- [The pgDash Blog](https://pgdash.io/blog/index.html)
