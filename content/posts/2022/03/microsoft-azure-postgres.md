@@ -232,7 +232,7 @@ Azure Database for PostgreSQL 灵活服务器是一种完全托管的数据库�
 协调器上的`pg_dist_shard`元数据表记录系统中每个分布式表的每个分片的信息。这些信息是分片 ID 与哈希空间中的整数范围（shardminvalue、shardmaxvalue）的匹配。
 
 ```text
-SELECT * from pg_dist_shard;s
+SELECT * from pg_dist_shard;
  logicalrelid  | shardid | shardstorage | shardminvalue | shardmaxvalue
 ---------------+---------+--------------+---------------+---------------
  github_events |  102026 | t            | 268435456     | 402653183
