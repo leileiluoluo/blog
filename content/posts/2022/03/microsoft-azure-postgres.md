@@ -303,7 +303,7 @@ CREATE TABLE page (
 SELECT page_id, count(event_id)
 FROM
   page
-LEFT JOIN  (
+LEFT JOIN (
   SELECT * FROM event
   WHERE (payload->>'time')::timestamptz >= now() - interval '1 week'
 ) recent
