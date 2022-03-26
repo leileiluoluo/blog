@@ -33,6 +33,10 @@ p,
   word-break: normal;
 }
 
+a.post-title {
+  color: #222;
+}
+
 ul {
   margin-bottom: 0.2rem !important;
 }
@@ -212,9 +216,9 @@ h1 {
 /* Media Queries */
 @media (max-width: 1080px) {
   main {
-      max-width: 100%;
+    max-width: 100%;
   }
   .toc {
-      display: none;
+    display: none;
   }
 }
