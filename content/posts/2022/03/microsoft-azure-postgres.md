@@ -19,7 +19,7 @@ Azure Database for PostgreSQL 是 Azure 提供的基于开源 PostgreSQL 数据�
 Azure Database for PostgreSQL 提供：
 
 - 内置高可用性；
-- 自动备份和指定时间点恢复（最长保留 35 天）；
+- 自动备份和指定时间点恢复（备份数据最长保留 35 天）；
 - 对底层硬件、操作系统和数据库引擎进行自动化维护，以保持服务安全和版本最新；
 - 可预测的性能，使用即用即付定价模型；
 - 秒级弹性扩展；
