@@ -1,5 +1,5 @@
 ---
-title: PostgreSQL Exercises
+title: PostgreSQL 基础知识在线练习
 author: olzhy
 type: post
 date: 2021-07-31T19:40:04+08:00
@@ -13,9 +13,10 @@ keywords:
   - 练习
 description: PostgreSQL练习 (PostgreSQL Exercises)
 ---
-[PGExercises.com](https://pgexercises.com/)是一个非常不错的PostgreSQL在线实践网站。该网站基于一个简单的数据集，设立各类题目，我们可以通过回答这些问题来复习SQL知识。
 
-该站的题目涉及“简单查询及WHERE条件”，“连接及CASE语句”，“聚集函数，窗口函数及递归查询”等多个门类，是一个不错的测试所学知识的地方。
+[PGExercises.com](https://pgexercises.com/) 是一个非常不错的 PostgreSQL 在线实践网站。该网站基于一个简单的数据集，设立各类题目，我们可以通过回答这些问题来复习 SQL 知识。
+
+该站的题目涉及“简单查询及 WHERE 条件”，“连接及 CASE 语句”，“聚集函数，窗口函数及递归查询”等多个门类，是一个不错的测试所学知识的地方。
 
 下面简单介绍一下该站用到的数据集。
 
@@ -23,7 +24,7 @@ description: PostgreSQL练习 (PostgreSQL Exercises)
 
 先看一下`members`表：
 
-有ID，基础信息，推荐人ID，及加入时间等。
+有 ID，基础信息，推荐人 ID，及加入时间等。
 
 ```sql
 CREATE TABLE cd.members (
@@ -36,14 +37,14 @@ CREATE TABLE cd.members (
     recommendedby INTEGER,                      -- 推荐人
     joindate TIMESTAMP NOT NULL,                -- 加入时间
     CONSTRAINT members_pk PRIMARY KEY (memid),
-    CONSTRAINT fk_members_recommendedby FOREIGN KEY (recommendedby) 
+    CONSTRAINT fk_members_recommendedby FOREIGN KEY (recommendedby)
         REFERENCES cd.members(memid) ON DELETE SET NULL
 );
 ```
 
 接下来，看一下`facilities`表：
 
-该表列出可供预定的设施，包含设施ID，设施名称，会员预定花销，游客预定花销等。
+该表列出可供预定的设施，包含设施 ID，设施名称，会员预定花销，游客预定花销等。
 
 ```sql
 CREATE TABLE cd.facilities (
@@ -51,15 +52,15 @@ CREATE TABLE cd.facilities (
     name character varying(100) NOT NULL,   -- 设施名称
     membercost numeric NOT NULL,            -- 会员预定花销
     guestcost numeric NOT NULL,             -- 游客预定花销
-    initialoutlay numeric NOT NULL, 
-    monthlymaintenance numeric NOT NULL, 
+    initialoutlay numeric NOT NULL,
+    monthlymaintenance numeric NOT NULL,
     CONSTRAINT facilities_pk PRIMARY KEY (facid)
 );
 ```
 
 最后，看一下`bookings`表：
 
-该表用于追踪各设施的预定情况，包含设施ID，预定会员ID，开始预定时间，及预定了多少个半小时的slots等。
+该表用于追踪各设施的预定情况，包含设施 ID，预定会员 ID，开始预定时间，及预定了多少个半小时的 slots 等。
 
 ```sql
 CREATE TABLE cd.bookings (
@@ -80,15 +81,15 @@ CREATE TABLE cd.bookings (
 
 介绍完数据集，下面就开始我们的练习吧。
 
-### 1 简单SQL查询
+### 1 简单 SQL 查询
 
-该栏目考察SQL基础，题目涵盖SELECT, WHERE, CASE, UNION等。
+该栏目考察 SQL 基础，题目涵盖 SELECT, WHERE, CASE, UNION 等。
 
 **1 控制取哪些行**
 
 问题描述：
 
-生成一个设备列表，这些设备对会员收费，且所收的费用不足月度维护费用的50分之一。该列表返回设备的ID，名称，会员费，月度维护费用。
+生成一个设备列表，这些设备对会员收费，且所收的费用不足月度维护费用的 50 分之一。该列表返回设备的 ID，名称，会员费，月度维护费用。
 
 问题答案：
 
@@ -103,7 +104,7 @@ WHERE membercost > 0
 
 问题描述：
 
-生成一个设备列表，若月度维护费用大于100就标记为`expensive`，否则标记为`cheap`。返回相关设施的名称和月度维护情况。
+生成一个设备列表，若月度维护费用大于 100 就标记为`expensive`，否则标记为`cheap`。返回相关设施的名称和月度维护情况。
 
 问题答案：
 
@@ -121,7 +122,7 @@ FROM cd.facilities;
 
 问题描述：
 
-生成一个会员列表，返回2012年9月及之后加入的会员。返回会员的memid，surname，firstname及joindate。
+生成一个会员列表，返回 2012 年 9 月及之后加入的会员。返回会员的 memid，surname，firstname 及 joindate。
 
 问题答案：
 
@@ -135,7 +136,7 @@ WHERE joindate >= '2012-09-01';
 
 问题描述：
 
-生成一个排序后的前10位会员的姓氏列表，且不要有重复。
+生成一个排序后的前 10 位会员的姓氏列表，且不要有重复。
 
 问题答案：
 
@@ -251,7 +252,7 @@ ORDER BY b.starttime;
 
 问题答案：
 
-采用自连接实现，采用DISTINCT去重。
+采用自连接实现，采用 DISTINCT 去重。
 
 ```sql
 SELECT DISTINCT m2.firstname, m2.surname
@@ -303,9 +304,9 @@ ORDER BY member, facility;
 
 问题描述：
 
-生成`2012-09-14`这一天会员或游客花费超过30元的预订清单。
+生成`2012-09-14`这一天会员或游客花费超过 30 元的预订清单。
 
-注意：游客和会员的预定费用不同，且游客的ID始终为0。输出中包括设施名称，会员姓名及预定费用。结果按费用降序排序，且不使用任何子查询。
+注意：游客和会员的预定费用不同，且游客的 ID 始终为 0。输出中包括设施名称，会员姓名及预定费用。结果按费用降序排序，且不使用任何子查询。
 
 问题答案：
 
@@ -331,7 +332,7 @@ ORDER BY cost DESC;
 
 问题描述：
 
-对于上一个问题，实现的有点啰嗦：我们必须在WHERE子句和CASE语句中两次计算预订成本。尝试使用子查询简化此计算。
+对于上一个问题，实现的有点啰嗦：我们必须在 WHERE 子句和 CASE 语句中两次计算预订成本。尝试使用子查询简化此计算。
 
 问题答案：
 
@@ -373,7 +374,7 @@ ORDER BY member;
 
 ### 3 数据修改
 
-本栏目涉及插入、更新和删除。像这样更改数据的操作统称为DML（数据操作语言）。
+本栏目涉及插入、更新和删除。像这样更改数据的操作统称为 DML（数据操作语言）。
 
 **1 单行插入**
 
@@ -387,7 +388,7 @@ facid: 9, name: 'Spa', membercost: 20, guestcost: 30, initialoutlay: 100000, mon
 
 问题答案：
 
-可以显示指定列名，也可以省略列名按建表字段顺序插入。
+可以显示指定列名，也可以省略列名  按建表字段顺序插入。
 
 ```sql
 INSERT INTO cd.facilities (facid, name, membercost, guestcost, initialoutlay, monthlymaintenance)
@@ -420,7 +421,7 @@ INSERT INTO cd.facilities (facid, name, membercost, guestcost, initialoutlay, mo
 
 问题描述：
 
-这一次不再指定设备ID，而是自动计算下一个facid值。其它字段值如下。
+这一次不再指定设备 ID，而是自动计算下一个 facid 值。其它字段值如下。
 
 ```text
 name: 'Spa', membercost: 20, guestcost: 30, initialoutlay: 100000, monthlymaintenance: 800.
@@ -437,14 +438,14 @@ INSERT INTO cd.facilities (facid, name, membercost, guestcost, initialoutlay, mo
 
 问题描述：
 
-我们想改变第二个网球场的价格，使其比第一个网球场贵10%。尝试在不指定常量值的情况下执行此操作，以便我们可以根据需要重用该语句。
+我们想改变第二个网球场的价格，使其比第一个网球场贵 10%。尝试在不指定常量值的情况下执行此操作，以便我们可以根据需要重用该语句。
 
 问题答案：
 
 ```sql
 UPDATE cd.facilities
 SET membercost = 1.1 * membercost, guestcost = 1.1 * guestcost
-WHERE name = 'Tennis Court 2'; 
+WHERE name = 'Tennis Court 2';
 ```
 
 **5 根据子查询作删除**
@@ -457,7 +458,7 @@ WHERE name = 'Tennis Court 2';
 
 ```sql
 DELETE FROM cd.members
-WHERE memid 
+WHERE memid
   NOT IN (
     SELECT DISTINCT memid
     FROM cd.bookings);
@@ -479,7 +480,7 @@ WHERE
 
 问题描述：
 
-生成各成员的推荐数列表，以成员ID排序。
+生成各成员的推荐数列表，以成员 ID 排序。
 
 问题答案：
 
@@ -495,7 +496,7 @@ ORDER BY recommendedby;
 
 问题描述：
 
-生成每个设施的预订总段数。输出设施ID和预定总段数，按设施ID排序。
+生成每个设施的预订总段数。输出设施 ID 和预定总段数，按设施 ID 排序。
 
 问题答案：
 
@@ -510,7 +511,7 @@ ORDER BY facid;
 
 问题描述：
 
-生成2012年9月每个设施的预订总段数。输出设施ID和预定总段数，按总段数排序。
+生成 2012 年 9 月每个设施的预订总段数。输出设施 ID 和预定总段数，按总段数排序。
 
 问题答案：
 
@@ -527,13 +528,13 @@ ORDER BY totalslots;
 
 问题描述：
 
-生成2012年每个设施每月的预订总段数。输出设施ID和预定总段数，按设施ID和月份排序。
+生成 2012 年每个设施每月的预订总段数。输出设施 ID 和预定总段数，按设施 ID 和月份排序。
 
 问题答案：
 
 ```sql
-SELECT facid, 
-  extract(month from starttime) AS month, 
+SELECT facid,
+  extract(month from starttime) AS month,
   sum(slots)
 FROM cd.bookings
 WHERE starttime >= '2012-01-01'
@@ -542,11 +543,11 @@ GROUP BY facid, month
 ORDER BY facid, month;
 ```
 
-**5 列出预订已超过1000个段的设施**
+**5 列出预订已超过 1000 个段的设施**
 
 问题描述：
 
-生成预订已超过1000个段的设施列表。输出设施ID和预定总段数，按设施ID排序。
+生成预订已超过 1000 个段的设施列表。输出设施 ID 和预定总段数，按设施 ID 排序。
 
 问题答案：
 
@@ -581,11 +582,11 @@ GROUP BY f.name
 ORDER BY revenue;
 ```
 
-**7 列出总收入低于1000的设施**
+**7 列出总收入低于 1000 的设施**
 
 问题描述：
 
-列出总收入小于1000的设施列表。输出包括设施名称和总收入，按收入排序。记住，游客和会员的计费是不同的。
+列出总收入小于 1000 的设施列表。输出包括设施名称和总收入，按收入排序。记住，游客和会员的计费是不同的。
 
 问题答案：
 
@@ -621,11 +622,11 @@ HAVING revenue < 1000 -- PostgreSQL不允许在HAVING中直接使用列名
 ORDER BY revenue;
 ```
 
-**8 输出预订段数最多的设施ID**
+**8 输出预订段数最多的设施 ID**
 
 问题描述：
 
-输出预订段数最多的设施ID。尝试不使用`LIMIT`来实现（看起来可能会乱一点）。
+输出预订段数最多的设施 ID。尝试不使用`LIMIT`来实现（看起来可能会乱一点）。
 
 问题答案：
 
@@ -661,11 +662,11 @@ WHERE totalslots = (
 
 问题描述：
 
-输出每个设施的预订总小时数，注意一个时段为半小时。输出应包含设施ID、设施名称和预订小时数，按设施ID排序。尝试将小时数格式化为两位小数。
+输出每个设施的预订总小时数，注意一个时段为半小时。输出应包含设施 ID、设施名称和预订小时数，按设施 ID 排序。尝试将小时数格式化为两位小数。
 
 问题答案：
 
-PostgreSQL默认是整除的，若需采用浮点除法，需要显式指定一下。
+PostgreSQL 默认是整除的，若需采用浮点除法，需要显式指定一下。
 
 ```sql
 SELECT b.facid, f.name,
@@ -676,11 +677,11 @@ GROUP BY b.facid, f.name
 ORDER BY b.facid;
 ```
 
-**10 列出每位会员在2012年9月1日之后的首次预订**
+**10 列出每位会员在 2012 年 9 月 1 日之后的首次预订**
 
 问题描述：
 
-列出每位会员的姓名、ID和他们在2012年9月1日之后的第一次设施预订时间。按会员ID排序。
+列出每位会员的姓名、ID 和他们在 2012 年 9 月 1 日之后的第一次设施预订时间。按会员 ID 排序。
 
 问题答案：
 
@@ -720,7 +721,7 @@ ORDER BY joindate;
 
 问题描述：
 
-生成一份会员（包括游客）的单调递增编号列表，按加入日期排序。注意，不保证会员ID是连续的。
+生成一份会员（包括游客）的单调递增编号列表，按加入日期排序。注意，不保证会员 ID 是连续的。
 
 问题答案：
 
@@ -777,7 +778,7 @@ SELECT name, (
       THEN 'average'
       ELSE 'low'
     END) AS revenue
-FROM (SELECT f.name, 
+FROM (SELECT f.name,
         ntile(3) over(ORDER BY sum(
           CASE
             WHEN b.memid = 0
@@ -792,17 +793,17 @@ ORDER BY class, name;
 
 ### 5 日期处理
 
-本栏目涉及日期处理，详情请参阅[PostgreSQL日期时间函数文档](https://www.postgresql.org/docs/current/functions-datetime.html)。
+本栏目涉及日期处理，详情请参阅[PostgreSQL 日期时间函数文档](https://www.postgresql.org/docs/current/functions-datetime.html)。
 
-**1 生成2012年8月31日凌晨1点的时间戳**
+**1 生成 2012 年 8 月 31 日凌晨 1 点的时间戳**
 
 问题描述：
 
-生成2012年8月31日凌晨1点这个时间的时间戳。
+生成 2012 年 8 月 31 日凌晨 1 点这个时间的时间戳。
 
 问题答案：
 
-有三种写法，前两种是PostgreSQL的语法，最后一种是SQL标准语法。
+有三种写法，前两种是 PostgreSQL 的语法，最后一种是 SQL 标准语法。
 
 ```sql
 -- 第一种写法
@@ -827,15 +828,15 @@ SELECT CAST('2012-08-31 01:00:00' AS TIMESTAMP);
 SELECT TIMESTAMP '2012-08-31 01:00:00' - TIMESTAMP '2012-07-30 01:00:00';
 ```
 
-**3 生成2012年10月的所有日期**
+**3 生成 2012 年 10 月的所有日期**
 
 问题描述：
 
-生成2012年10月的所有日期。可以输出为时间戳（时间部分为`00:00:00`）或日期。
+生成 2012 年 10 月的所有日期。可以输出为时间戳（时间部分为`00:00:00`）或日期。
 
 问题答案：
 
-使用PostgreSQL的`generate_series`函数来生成时间序列。
+使用 PostgreSQL 的`generate_series`函数来生成时间序列。
 
 ```sql
 SELECT generate_series(TIMESTAMP '2012-10-01', TIMESTAMP '2012-10-31', INTERVAL '1 day');
@@ -869,9 +870,9 @@ SELECT extract(day FROM TIMESTAMP '2012-08-31');
 
 ```sql
 -- 手动实现方式
-SELECT extract(day FROM t.int) * 24 * 60 * 60 
-  + extract(hour FROM t.int) * 60 * 60 
-  + extract(minute FROM t.int) * 60 
+SELECT extract(day FROM t.int) * 24 * 60 * 60
+  + extract(hour FROM t.int) * 60 * 60
+  + extract(minute FROM t.int) * 60
   + extract(second FROM t.int)
 FROM (SELECT age(TIMESTAMP '2012-09-02 00:00:00', TIMESTAMP '2012-08-31 01:00:00') AS int) AS t;
 
@@ -879,11 +880,11 @@ FROM (SELECT age(TIMESTAMP '2012-09-02 00:00:00', TIMESTAMP '2012-08-31 01:00:00
 SELECT extract(epoch FROM age(TIMESTAMP '2012-09-02 00:00:00', TIMESTAMP '2012-08-31 01:00:00'));
 ```
 
-**6 输出2012年每个月的天数**
+**6 输出 2012 年每个月的天数**
 
 问题描述：
 
-输出2012年的每个月及该月的天数。
+输出 2012 年的每个月及该月的天数。
 
 问题答案：
 
@@ -910,7 +911,7 @@ FROM (SELECT TIMESTAMP '2012-02-11 01:00:00' AS ts) AS t;
 
 问题描述：
 
-在系统中返回最近10个预订的开始和结束时间，先按结束时间排序，然后按开始时间排序。
+在系统中返回最近 10 个预订的开始和结束时间，先按结束时间排序，然后按开始时间排序。
 
 问题答案：
 
@@ -919,7 +920,7 @@ SELECT starttime,
   starttime + slots * (interval '0.5 hour') AS endtime
 FROM cd.bookings
 ORDER BY endtime DESC,
-  starttime DESC 
+  starttime DESC
 LIMIT 10;
 ```
 
@@ -943,7 +944,7 @@ ORDER BY month;
 
 问题描述：
 
-按月计算每个设施的利用率，按名称和月份排序，四舍五入到小数点后一位。开门时间是早上8点，关门时间是晚上8:30。您可以将每个月视为整月，无论俱乐部是否有某些日期未开放。
+按月计算每个设施的利用率，按名称和月份排序，四舍五入到小数点后一位。开门时间是早上 8 点，关门时间是晚上 8:30。您可以将每个月视为整月，无论俱乐部是否有某些日期未开放。
 
 问题答案：
 
@@ -966,7 +967,7 @@ ORDER BY name, month;
 
 ### 6 字符串操作
 
-本栏目涉及基础字符串操作，`LIKE`使用，正则表达式使用。详情请参阅[PostgreSQL正则匹配文档](https://www.postgresql.org/docs/current/functions-matching.html)。
+本栏目涉及基础字符串操作，`LIKE`使用，正则表达式使用。详情请参阅[PostgreSQL 正则匹配文档](https://www.postgresql.org/docs/current/functions-matching.html)。
 
 **1 格式化会员名称**
 
@@ -1021,33 +1022,33 @@ WHERE name ILIKE 'tennis%';
 
 问题描述：
 
-您可能已经注意到俱乐部的会员表中的电话号码格式很不一致。查找所有包含括号的电话号码，返回会员ID和电话号码，按会员ID排序。
+您可能已经注意到俱乐部的会员表中的电话号码格式很不一致。查找所有包含括号的电话号码，返回会员 ID 和电话号码，按会员 ID 排序。
 
 问题答案：
 
-PostgreSQL有三种字符串匹配方法：`LIKE`，`SIMILAR TO`，及POSIX正则表达式。
+PostgreSQL 有三种字符串匹配方法：`LIKE`，`SIMILAR TO`，及 POSIX 正则表达式。
 
-`SIMILAR TO`与`LIKE`类似，只是其采用SQL正则表达式，是一种LIKE与POSIX正则表达式的结合体。`SIMILAR TO`不像常规正则表达式一样可以匹配子字符串，其与`LIKE`一样，想匹配成成功，必须匹配整个字符串。`SIMILAR TO`与`LIKE`一样，分别使用`_`及`%`表示任意单个字符及任意字符串，而`.`在`SIMILAR TO`中不表示任意单个字符。
+`SIMILAR TO`与`LIKE`类似，只是其采用 SQL 正则表达式，是一种 LIKE 与 POSIX 正则表达式的结合体。`SIMILAR TO`不像常规正则表达式一样可以匹配子字符串，其与`LIKE`一样，想匹配成成功，必须匹配整个字符串。`SIMILAR TO`与`LIKE`一样，分别使用`_`及`%`表示任意单个字符及任意字符串，而`.`在`SIMILAR TO`中不表示任意单个字符。
 
 ```sql
 -- 使用LIKE
-SELECT memid, telephone 
-FROM cd.members 
+SELECT memid, telephone
+FROM cd.members
 WHERE telephone LIKE '(%)%';
 
 -- ~~与LIKE等价
-SELECT memid, telephone 
-FROM cd.members 
+SELECT memid, telephone
+FROM cd.members
 WHERE telephone ~~ '(%)%';
 
 -- 使用SIMILAR TO
-SELECT memid, telephone 
-FROM cd.members 
+SELECT memid, telephone
+FROM cd.members
 WHERE telephone SIMILAR TO '\(%\)%';
 
 -- 采用POSIX正则表达式
-SELECT memid, telephone 
-FROM cd.members 
+SELECT memid, telephone
+FROM cd.members
 WHERE telephone ~ '^\(\d*\)\s\d{3}-\d{4}$';
 ```
 
@@ -1055,7 +1056,7 @@ WHERE telephone ~ '^\(\d*\)\s\d{3}-\d{4}$';
 
 问题描述：
 
-由于存储时`zipcode`为数值类型，我们示例数据集中的邮政编码已经从它们中删除了前导零。从成员表中检索所有邮政编码，用前导零填充任何少于5个字符的邮政编码。
+由于存储时`zipcode`为数值类型，我们示例数据集中的邮政编码已经从它们中删除了前导零。从成员表中检索所有邮政编码，用前导零填充任何少于 5 个字符的邮政编码。
 
 问题答案：
 
@@ -1073,33 +1074,33 @@ FROM cd.members;
 
 问题描述：
 
-计算会员姓氏分别以各字母开头的数量。按字母排序，如果计数为0，就不要打印这个字母。
+计算会员姓氏分别以各字母开头的数量。按字母排序，如果计数为 0，就不要打印这个字母。
 
 问题答案：
 
 ```sql
 -- 使用substr
-SELECT 
-  substr(surname, 1, 1) AS firstletter, 
-  count(*) 
-FROM cd.members 
-GROUP BY firstletter 
+SELECT
+  substr(surname, 1, 1) AS firstletter,
+  count(*)
+FROM cd.members
+GROUP BY firstletter
 ORDER BY firstletter;
 
 -- 使用left
-SELECT 
-  left(surname, 1) AS firstletter, 
-  count(*) 
-FROM cd.members 
-GROUP BY firstletter 
+SELECT
+  left(surname, 1) AS firstletter,
+  count(*)
+FROM cd.members
+GROUP BY firstletter
 ORDER BY firstletter;
 
 -- 使用substring
-SELECT 
-  substring(surname FROM '#"_#"%' FOR '#') AS firstletter, 
-  count(*) 
-FROM cd.members 
-GROUP BY firstletter 
+SELECT
+  substring(surname FROM '#"_#"%' FOR '#') AS firstletter,
+  count(*)
+FROM cd.members
+GROUP BY firstletter
 ORDER BY firstletter;
 ```
 
@@ -1107,29 +1108,29 @@ ORDER BY firstletter;
 
 问题描述：
 
-数据库中的电话号码格式非常不一致。您想打印会员ID和删除'-'、'('、')'，及' '字符后的号码。按会员ID排序。
+数据库中的电话号码格式非常不一致。您想打印会员 ID 和删除'-'、'('、')'，及' '字符后的号码。按会员 ID 排序。
 
 问题答案：
 
-使用regexp_replace函数实现。
+使用 regexp_replace 函数实现。
 
 ```sql
 SELECT
-  memid, 
-  regexp_replace(telephone, '[\s\-\(\)]', '', 'g') 
-FROM cd.members 
+  memid,
+  regexp_replace(telephone, '[\s\-\(\)]', '', 'g')
+FROM cd.members
 ORDER BY memid;
 ```
 
 ### 7 递归查询
 
-本栏目涉及递归查询。在PostgreSQL，可以使用`WITH RECURSIVE`进行递归查询。这对处理树和图结构数据非常实用。详情请参阅[WITH Queries](https://www.postgresql.org/docs/current/queries-with.html)。
+本栏目涉及递归查询。在 PostgreSQL，可以使用`WITH RECURSIVE`进行递归查询。这对处理树和图结构数据非常实用。详情请参阅[WITH Queries](https://www.postgresql.org/docs/current/queries-with.html)。
 
 **1 追溯会员的上游推荐链**
 
 问题描述：
 
-寻找会员ID为27的上游推荐链：即寻找会员ID为27的推荐人，会员ID为27的推荐人的推荐人，以此类推。返回会员ID、名字和姓氏。
+寻找会员 ID 为 27 的上游推荐链：即寻找会员 ID 为 27 的推荐人，会员 ID 为 27 的推荐人的推荐人，以此类推。返回会员 ID、名字和姓氏。
 
 问题答案：
 
@@ -1139,13 +1140,13 @@ ORDER BY memid;
 WITH RECURSIVE recommenders(id) AS (
   SELECT recommendedby FROM cd.members WHERE memid = 27
   UNION ALL
-  SELECT recommendedby 
-  FROM cd.members m, recommenders r 
+  SELECT recommendedby
+  FROM cd.members m, recommenders r
   WHERE m.memid = r.id
 )
 
-SELECT r.id, m.firstname, m.surname 
-FROM recommenders r, cd.members m 
+SELECT r.id, m.firstname, m.surname
+FROM recommenders r, cd.members m
 WHERE r.id = m.memid;
 ```
 
@@ -1153,7 +1154,7 @@ WHERE r.id = m.memid;
 
 问题描述：
 
-寻找会员ID为1的下游推荐链：即寻找ID为1的会员推荐了哪些人，ID为1的会员推荐的这些人又推荐了哪些人，以此类推。返回会员ID、名字和姓氏，按会员ID排序。
+寻找会员 ID 为 1 的下游推荐链：即寻找 ID 为 1 的会员推荐了哪些人，ID 为 1 的会员推荐的这些人又推荐了哪些人，以此类推。返回会员 ID、名字和姓氏，按会员 ID 排序。
 
 问题答案：
 
@@ -1164,24 +1165,22 @@ WITH RECURSIVE recommendeds(id) AS (
   SELECT memid FROM cd.members WHERE recommendedby = 1
   UNION ALL
   SELECT m.memid
-  FROM cd.members m, recommendeds r 
+  FROM cd.members m, recommendeds r
   WHERE m.recommendedby = r.id
 )
 
 SELECT r.id, m.firstname, m.surname
-FROM recommendeds r, cd.members m 
-WHERE r.id = m.memid 
+FROM recommendeds r, cd.members m
+WHERE r.id = m.memid
 ORDER BY id;
 ```
 
-
-
 > 参考资料
 >
-> [1] [PostgreSQL Exercises](https://pgexercises.com/)
+> [1][postgresql exercises](https://pgexercises.com/)
 >
-> [2] [PostgreSQL Date/Time Functions and Operators](https://www.postgresql.org/docs/current/functions-datetime.html)
+> [2][postgresql date/time functions and operators](https://www.postgresql.org/docs/current/functions-datetime.html)
 >
-> [3] [PostgreSQL Pattern Matching](https://www.postgresql.org/docs/current/functions-matching.html)
+> [3][postgresql pattern matching](https://www.postgresql.org/docs/current/functions-matching.html)
 >
-> [4] [PostgreSQL WITH Queries (Common Table Expressions)](https://www.postgresql.org/docs/current/queries-with.html)
+> [4][postgresql with queries (common table expressions)](https://www.postgresql.org/docs/current/queries-with.html)
