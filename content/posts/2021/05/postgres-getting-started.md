@@ -1,5 +1,5 @@
 ---
-title: PostgreSQL初探
+title: PostgreSQL 初探
 author: olzhy
 type: post
 date: 2021-05-21T15:14:46+08:00
@@ -13,13 +13,14 @@ keywords:
   - 初探
 description: PostgreSQL初探 (PostgreSQL Getting Started)
 ---
-[上一篇](/posts/install-postgres-on-centos-from-source.html)已经安装好了PostgreSQL环境，本篇会在其上使用SQL做一些简单的操作。
 
-### 1 基础SQL操作
+[上一篇](/posts/install-postgres-on-centos-from-source.html)已经安装好了 PostgreSQL 环境，本篇会在其上使用 SQL 做一些简单的操作。
+
+### 1 基础 SQL 操作
 
 **a) 建表**
 
-建两张表：一张是天气表（`weather`），记录各个城市每天的温度与降水量；一张是城市表（`cities`），记录城市的坐标。PostgreSQL推荐关键字采用大写格式，字段名及类型采用小写格式。
+建两张表：一张是天气表（`weather`），记录各个城市每天的温度与降水量；一张是城市表（`cities`），记录城市的坐标。PostgreSQL 推荐关键字采用大写格式，字段名及类型采用小写格式。
 
 如下为建表语句：
 
@@ -44,7 +45,7 @@ CREATE TABLE cities (
 
 ```sql
 INSERT INTO weather (city, temp_low, temp_high, prcp, date)
-    VALUES ('Beijing', 18, 32, 0.25, '2021-05-19'), 
+    VALUES ('Beijing', 18, 32, 0.25, '2021-05-19'),
            ('Beijing', 20, 30, 0.0, '2021-05-20'),
            ('Dalian', 16, 24, 0.0, '2021-05-21');
 
@@ -63,7 +64,7 @@ FROM weather;
 ```
 
 ```text
-  city   | temp_avg |    date    
+  city   | temp_avg |    date
 ---------+----------+------------
  Beijing |       25 | 2021-05-19
  Beijing |       25 | 2021-05-20
@@ -71,7 +72,7 @@ FROM weather;
 (3 rows)
 ```
 
-使用`WHERE`条件，筛选城市为Beijing且降水量大于0的记录。
+使用`WHERE`条件，筛选城市为 Beijing 且降水量大于 0 的记录。
 
 ```sql
 SELECT *
@@ -81,7 +82,7 @@ WHERE city = 'Beijing'
 ```
 
 ```text
-  city   | temp_low | temp_high | prcp |    date    
+  city   | temp_low | temp_high | prcp |    date
 ---------+----------+-----------+------+------------
  Beijing |       18 |        32 | 0.25 | 2021-05-19
 (1 row)
@@ -90,13 +91,13 @@ WHERE city = 'Beijing'
 在被选列上使用`DISTINCT`关键字，筛选出去重后的城市名，并使用`ORDER BY`关键字按城市名字段正序返回结果。
 
 ```sql
-SELECT DISTINCT city 
-FROM weather 
+SELECT DISTINCT city
+FROM weather
   ORDER BY city;
 ```
 
 ```text
-  city   
+  city
 ---------
  Beijing
  Dalian
@@ -109,17 +110,17 @@ FROM weather
 
 ```sql
 SELECT w.city, w.temp_low, w.temp_high, w.prcp, c.location, w.date
-FROM weather w, cities c 
+FROM weather w, cities c
 WHERE w.city = c.name;
 
 -- 两种写法等价
 SELECT w.city, w.temp_low, w.temp_high, w.prcp, c.location, w.date
-FROM weather w INNER JOIN cities c 
+FROM weather w INNER JOIN cities c
   ON (w.city = c.name);
 ```
 
 ```text
-  city   | temp_low | temp_high | prcp |   location   |    date    
+  city   | temp_low | temp_high | prcp |   location   |    date
 ---------+----------+-----------+------+--------------+------------
  Beijing |       18 |        32 | 0.25 | (116.3,39.9) | 2021-05-19
  Beijing |       20 |        30 |    0 | (116.3,39.9) | 2021-05-20
@@ -135,7 +136,7 @@ FROM weather w LEFT OUTER JOIN cities c
 ```
 
 ```text
-  city   | temp_low | temp_high | prcp |   location   |    date    
+  city   | temp_low | temp_high | prcp |   location   |    date
 ---------+----------+-----------+------+--------------+------------
  Beijing |       18 |        32 | 0.25 | (116.3,39.9) | 2021-05-19
  Beijing |       20 |        30 |    0 | (116.3,39.9) | 2021-05-20
@@ -152,11 +153,11 @@ FROM weather w RIGHT OUTER JOIN cities c
 ```
 
 ```text
-   name   | temp_low | temp_high | prcp |   location   |    date    
+   name   | temp_low | temp_high | prcp |   location   |    date
 ----------+----------+-----------+------+--------------+------------
  Beijing  |       20 |        30 |    0 | (116.3,39.9) | 2021-05-20
  Beijing  |       18 |        32 | 0.25 | (116.3,39.9) | 2021-05-19
- Shanghai |          |           |      | (121.3,31.1) | 
+ Shanghai |          |           |      | (121.3,31.1) |
 (3 rows)
 ```
 
@@ -169,12 +170,12 @@ FROM weather w FULL OUTER JOIN cities c
 ```
 
 ```text
-   name   | temp_low | temp_high | prcp |   location   |    date    
+   name   | temp_low | temp_high | prcp |   location   |    date
 ----------+----------+-----------+------+--------------+------------
  Beijing  |       18 |        32 | 0.25 | (116.3,39.9) | 2021-05-19
  Beijing  |       20 |        30 |    0 | (116.3,39.9) | 2021-05-20
  Dalian   |       16 |        24 |    0 |              | 2021-05-21
- Shanghai |          |           |      | (121.3,31.1) | 
+ Shanghai |          |           |      | (121.3,31.1) |
 (4 rows)
 ```
 
@@ -188,7 +189,7 @@ WHERE w1.city = w2.city
 ```
 
 ```text
-  city   | temp_low |    date    | temp_low |    date    
+  city   | temp_low |    date    | temp_low |    date
 ---------+----------+------------+----------+------------
  Beijing |       18 | 2021-05-19 |       20 | 2021-05-20
 (1 row)
@@ -205,7 +206,7 @@ SELECT min(temp_low) FROM weather;
 ```
 
 ```text
- min 
+ min
 -----
   16
 (1 row)
@@ -220,11 +221,11 @@ FROM weather
 WHERE temp_low = (SELECT min(temp_low) FROM weather);
 
 -- 错误写法 聚集函数不允许在WHERE条件中使用
--- SELECT city FROM weather WHERE temp_low = min(temp_low); 
+-- SELECT city FROM weather WHERE temp_low = min(temp_low);
 ```
 
 ```text
-  city  | temp_low |    date    
+  city  | temp_low |    date
 --------+----------+------------
  Dalian |       16 | 2021-05-21
 (1 row)
@@ -239,14 +240,14 @@ GROUP BY city;
 ```
 
 ```text
-  city   | min 
+  city   | min
 ---------+-----
  Dalian  |  16
  Beijing |  18
 (2 rows)
 ```
 
-进一步找出每个城市历史最低温度低于17的记录。
+进一步找出每个城市历史最低温度低于 17 的记录。
 
 ```sql
 SELECT city, min(temp_low)
@@ -256,7 +257,7 @@ GROUP BY city
 ```
 
 ```text
-  city  | min 
+  city  | min
 --------+-----
  Dalian |  16
 (1 row)
@@ -264,7 +265,7 @@ GROUP BY city
 
 从如上示例也看到了`WHERE`与`HAVING`使用场景的不同：`WHERE`用于分组和聚集函数使用前的输入行筛选；而`HAVING`用于分组和聚集函数使用后的分组行筛选。且`WHERE`语句中不可以使用聚集函数，而`HAVING`语句中一般总使用聚集函数（`HAVING`语句中不使用聚集函数的条件，不如直接将其移到`WHERE`语句中）。
 
-如，接着上面，筛选首字母为`D`的城市，并返回这些城市历史最低温度低于17的记录。
+如，接着上面，筛选首字母为`D`的城市，并返回这些城市历史最低温度低于 17 的记录。
 
 ```sql
 SELECT city, min(temp_low)
@@ -281,7 +282,7 @@ GROUP BY city
 ```
 
 ```text
-  city  | min 
+  city  | min
 --------+-----
  Dalian |  16
 (1 row)
@@ -289,11 +290,11 @@ GROUP BY city
 
 **f) 更新及删除**
 
-假定`2021-05-20`及之后的数据录入时温度均比实际值低了1度，可以使用如下`UPDATE`语句进行校正。
+假定`2021-05-20`及之后的数据录入时温度均比实际值低了 1 度，可以使用如下`UPDATE`语句进行校正。
 
 ```sql
-UPDATE weather 
-  SET temp_low = temp_low + 1, temp_high = temp_high + 1 
+UPDATE weather
+  SET temp_low = temp_low + 1, temp_high = temp_high + 1
   WHERE date >= '2021-05-20';
 ```
 
@@ -304,7 +305,7 @@ SELECT * FROM weather;
 ```
 
 ```text
-  city   | temp_low | temp_high | prcp |    date    
+  city   | temp_low | temp_high | prcp |    date
 ---------+----------+-----------+------+------------
  Beijing |       18 |        32 | 0.25 | 2021-05-19
  Beijing |       21 |        31 |    0 | 2021-05-20
@@ -323,7 +324,7 @@ SELECT * FROM weather;
 ```
 
 ```text
-  city  | temp_low | temp_high | prcp |    date    
+  city  | temp_low | temp_high | prcp |    date
 --------+----------+-----------+------+------------
  Dalian |       17 |        25 |    0 | 2021-05-21
 (1 row)
@@ -344,7 +345,7 @@ DELETE FROM weather;
 ```sql
 CREATE VIEW myview AS
     SELECT w.city, w.temp_low, w.temp_high, w.prcp, c.location, w.date
-    FROM weather w, cities c 
+    FROM weather w, cities c
     WHERE w.city = c.name;
 
 SELECT * FROM myview;
@@ -404,7 +405,7 @@ DETAIL:  Key (name)=(Tianjin) is still referenced from table "weather".
 
 事务将多步操作看作一个单元，这些操作要么都做，要么都不做。
 
-现有两张表，`accounts`与`branches`，分别用于记录客户余额与分行总余额。现在Alice想给Bob转100.00块钱。可以将SQL语句用`BEGIN`及`COMMIT`包起来作为一个事务块。
+现有两张表，`accounts`与`branches`，分别用于记录客户余额与分行总余额。现在 Alice 想给 Bob 转 100.00 块钱。可以将 SQL 语句用`BEGIN`及`COMMIT`包起来作为一个事务块。
 
 ```sql
 BEGIN;
@@ -425,7 +426,7 @@ COMMIT;
 
 此外，在事务中还可以使用`SAVEPOINT`来细粒度控制执行语句。
 
-假定从Alice的账号给Bob的账号打100.00块钱，后来才发现收款人应是Wally。使用`SAVEPOINT`的语句如下：
+假定从 Alice 的账号给 Bob 的账号打 100.00 块钱，后来才发现收款人应是 Wally。使用`SAVEPOINT`的语句如下：
 
 ```sql
 BEGIN;
@@ -479,7 +480,7 @@ INSERT INTO empsalary (depname, empno, salary, enroll_date)
            ('develop', 11, 5200, '2021/08/15');
 ```
 
-使用如下SQL列出每个雇员的信息及部门平均薪资。
+使用如下 SQL 列出每个雇员的信息及部门平均薪资。
 
 ```sql
 SELECT *, avg(salary) OVER (PARTITION BY depname) FROM empsalary;
@@ -502,7 +503,7 @@ SELECT *, avg(salary) OVER (PARTITION BY depname) FROM empsalary;
 (11 rows)
 ```
 
-使用如下SQL列出每个雇员的信息及部门内薪资排名。
+使用如下 SQL 列出每个雇员的信息及部门内薪资排名。
 
 ```sql
 SELECT
@@ -529,7 +530,7 @@ FROM
 (11 rows)
 ```
 
-使用如下SQL列出所有部门的雇员信息及全员薪资总和。（未使用`PARTITION BY`，表示全表为一个分区）
+使用如下 SQL 列出所有部门的雇员信息及全员薪资总和。（未使用`PARTITION BY`，表示全表为一个分区）
 
 ```sql
 SELECT
@@ -556,7 +557,7 @@ FROM
 (11 rows)
 ```
 
-注意，若对如上SQL指定了`ORDER BY`，结果大不同。这是因为指定`ORDER BY`后，`sum`针对的是最低薪资到当前行及与当前薪资相等的行的计算。
+注意，若对如上 SQL 指定了`ORDER BY`，结果大不同。这是因为指定`ORDER BY`后，`sum`针对的是最低薪资到当前行及与当前薪资相等的行的计算。
 
 ```sql
 SELECT
@@ -613,7 +614,7 @@ FROM
 
 **e) 表继承**
 
-PostgreSQL支持表继承，下面创建城市表`cities`，及首都表`capitals`，首都表继承城市表。
+PostgreSQL 支持表继承，下面创建城市表`cities`，及首都表`capitals`，首都表继承城市表。
 
 ```sql
 CREATE TABLE cities (
@@ -627,22 +628,20 @@ CREATE TABLE capitals (
 ) INHERITS (cities);
 ```
 
-使用如下SQL查询包含首都的所有城市：
+使用如下 SQL 查询包含首都的所有城市：
 
 ```sql
 SELECT * FROM cities;
 ```
 
-使用如下SQL查询不包含首都的所有城市：
+使用如下 SQL 查询不包含首都的所有城市：
 
 ```sql
 SELECT * FROM ONLY cities;
 ```
 
-综上，本文对PostgreSQL的基础功能及高级功能进行了初探。
-
-
+综上，本文对 PostgreSQL 的基础功能及高级功能进行了初探。
 
 > 参考资料
 >
-> [1] [PostgreSQL Tutorial](https://www.postgresql.org/docs/13/tutorial.html)
+> [1][postgresql tutorial](https://www.postgresql.org/docs/13/tutorial.html)
