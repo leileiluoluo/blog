@@ -49,9 +49,21 @@ postgres=# \db+
 
 这两个表空间（`pg_default`与`pg_global`）是在 PostgreSQL 初始化后自动创建的。`pg_default`是`template0`与`template1`数据库的默认表空间（因此，也将是其它数据库的默认表空间）；`pg_global`是共享系统目录表（`pg_database`、`pg_authid`、`pg_tablespace`、`pg_shdepend`等）及其索引的表空间。
 
-我们注意到，上面的信息没有 Location。这是因为它们总是对应 PostgreSQL 数据目录（`$POSTGRES_HOME/data`）下的两个子目录：`pg_default`使用`base`子目录，`pg_global`使用`global`子目录。
+我们注意到，上面的信息没有 Location。这是因为它们总是对应 PostgreSQL 数据目录（`$POSTGRES_HOME/data`或`$PGDATA`）下的两个子目录：`pg_default`使用`base`子目录，`pg_global`使用`global`子目录。
 
 ### 3 创建及使用表空间
+
+要创建一个新的表空间，需要提前创建一个新的文件夹（注意不要在 PostgreSQL 数据文件夹下创建），且该文件夹的所有者须是`postgres`系统用户。示例如下：
+
+```shell
+
+```
+
+可使用`CREATE TABLESPACE`命令来创建一个表空间。示例如下：
+
+```sql
+
+```
 
 ### 4 表空间相关的系统表
 
