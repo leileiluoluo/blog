@@ -17,7 +17,7 @@ description: PostgreSQL Tablespaces (PostgreSQL 表空间使用详解)
 
 PostgreSQL 的表空间允许在文件系统中定义数据库对象存储的位置。实际上就是为表、序列和索引等数据库对象的数据文件的存储指定了一个目录。
 
-PostgreSQL 使用操作系统的文件系统进行存储，这与 Oracle 等其它数据库有点不同，后者实现了自己的“文件系统”。
+PostgreSQL 使用操作系统的文件系统进行存储，这与 Oracle 有点不同，后者实现了自己的“文件系统”。
 
 ### 1 何时使用表空间？
 
