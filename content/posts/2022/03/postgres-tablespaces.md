@@ -35,6 +35,22 @@ PostgreSQL 中，一个表空间可供多个数据库使用；而一个数据库
 
 ### 2 默认表空间
 
+在`psql`中使用`\db+`命令即可列出表空间的详情：
+
+```text
+postgres=# \db+
+                                  List of tablespaces
+    Name    |  Owner   | Location | Access privileges | Options |  Size  | Description
+------------+----------+----------+-------------------+---------+--------+-------------
+ pg_default | postgres |          |                   |         | 25 MB  |
+ pg_global  | postgres |          |                   |         | 560 kB |
+(2 rows)
+```
+
+这两个表空间（`pg_default`与`pg_global`）是在 PostgreSQL 初始化后自动创建的。`pg_default`是`template0`与`template1`数据库的默认表空间（因此，也将是其它数据库的默认表空间）；`pg_global`是共享系统目录表（`pg_database`、`pg_authid`、`pg_tablespace`、`pg_shdepend`等）及其索引的表空间。
+
+我们注意到，上面的信息没有 Location。这是因为它们总是对应 PostgreSQL 数据目录（`$POSTGRES_HOME/data`）下的两个子目录：`pg_default`使用`base`子目录，`pg_global`使用`global`子目录。
+
 ### 3 创建及使用表空间
 
 ### 4 表空间相关的系统表
