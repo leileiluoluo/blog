@@ -35,6 +35,54 @@ PostgreSQL 中，一个表空间可供多个数据库使用；而一个数据库
 
 ### 2 默认表空间
 
+从前文[在 CentOS 上以源码安装 PostgreSQL](https://olzhy.github.io/posts/install-postgres-on-centos-from-source.html)知道，PostgreSQL 初始化时需要指定一个数据目录（`$PGDATA`），命令如下：
+
+```shell
+$ initdb -D /usr/local/pgsql/data
+```
+
+初始化完成后，该目录下会包含 PostgreSQL 要启动时的所有东西（配置文件、数据文件和消息队列等）。
+
+PostgreSQL 启动后，所有数据库对象的数据文件都是在该文件夹下存储的。
+
+```shell
+$ pg_ctl -D /usr/local/pgsql/data -l server.log start
+```
+
+该文件夹下的内容如下：
+
+```shell
+$ ls -lht /usr/local/pgsql/data
+
+total 124K
+drwx------ 2 postgres postgres 4.0K Mar 28 09:00 pg_stat_tmp
+drwx------ 4 postgres postgres 4.0K Mar  8 17:52 pg_logical
+drwx------ 2 postgres postgres 4.0K Mar  8 17:48 global
+drwx------ 2 postgres postgres 4.0K Mar  8 17:47 pg_stat
+-rw------- 1 postgres postgres   87 Mar  8 17:47 postmaster.pid
+-rw------- 1 postgres postgres   59 Mar  8 17:47 postmaster.opts
+drwx------ 6 postgres postgres 4.0K May 13  2021 base
+drwx------ 2 postgres postgres 4.0K May 13  2021 pg_subtrans
+drwx------ 3 postgres postgres 4.0K May 13  2021 pg_wal
+drwx------ 2 postgres postgres 4.0K May 13  2021 pg_xact
+-rw------- 1 postgres postgres 1.6K May 13  2021 pg_ident.conf
+-rw------- 1 postgres postgres 4.7K May 13  2021 pg_hba.conf
+-rw------- 1 postgres postgres   88 May 13  2021 postgresql.auto.conf
+-rw------- 1 postgres postgres  28K May 13  2021 postgresql.conf
+drwx------ 2 postgres postgres 4.0K May 13  2021 pg_dynshmem
+drwx------ 4 postgres postgres 4.0K May 13  2021 pg_multixact
+drwx------ 2 postgres postgres 4.0K May 13  2021 pg_notify
+drwx------ 2 postgres postgres 4.0K May 13  2021 pg_replslot
+drwx------ 2 postgres postgres 4.0K May 13  2021 pg_serial
+drwx------ 2 postgres postgres 4.0K May 13  2021 pg_snapshots
+drwx------ 2 postgres postgres 4.0K May 13  2021 pg_tblspc
+drwx------ 2 postgres postgres 4.0K May 13  2021 pg_twophase
+-rw------- 1 postgres postgres    3 May 13  2021 PG_VERSION
+drwx------ 2 postgres postgres 4.0K May 13  2021 pg_commit_ts
+```
+
+而简短一点说，表空间即是告诉 PostgreSQL 服务器数据库对象物理文件存储位置的一种方式。
+
 在`psql`中使用`\db+`命令即可列出表空间的详情：
 
 ```text
@@ -42,14 +90,14 @@ postgres=# \db+
                                   List of tablespaces
     Name    |  Owner   | Location | Access privileges | Options |  Size  | Description
 ------------+----------+----------+-------------------+---------+--------+-------------
- pg_default | postgres |          |                   |         | 25 MB  |
- pg_global  | postgres |          |                   |         | 560 kB |
+ pg_default | postgres |          |                   |         | 31 MB  |
+ pg_global  | postgres |          |                   |         | 559 kB |
 (2 rows)
 ```
 
 这两个表空间（`pg_default`与`pg_global`）是在 PostgreSQL 初始化后自动创建的。`pg_default`是`template0`与`template1`数据库的默认表空间（因此，也将是其它数据库的默认表空间）；`pg_global`是共享系统目录表（`pg_database`、`pg_authid`、`pg_tablespace`、`pg_shdepend`等）及其索引的表空间。
 
-我们注意到，上面的信息没有 Location。这是因为它们总是对应 PostgreSQL 数据目录（`$POSTGRES_HOME/data`或`$PGDATA`）下的两个子目录：`pg_default`使用`base`子目录，`pg_global`使用`global`子目录。
+我们注意到，上面的信息没有 Location。这是因为它们总是对应 PostgreSQL 数据目录（`$PGDATA`）下的两个子目录：`pg_default`使用`base`子目录，`pg_global`使用`global`子目录。
 
 ### 3 创建及使用表空间
 
