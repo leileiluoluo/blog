@@ -154,6 +154,4 @@ postgres=# CREATE DATABASE testdb TABLESPACE myspace;
 >
 > \[4\] [How can I tell what is in a Postgresql tablespace?](https://stackoverflow.com/questions/4970966/how-can-i-tell-what-is-in-a-postgresql-tablespace)
 >
-> \[5\] [PostgreSQL - 表空间](https://www.cnblogs.com/yanshw/p/11351136.html)
->
-> \[6\] [PostgreSQL 的表空间](https://www.cnblogs.com/lottu/p/9239535.html)
+> \[5\] [PostgreSQL 的表空间](https://www.cnblogs.com/lottu/p/9239535.html)
