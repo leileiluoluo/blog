@@ -99,7 +99,9 @@ postgres=# \db+
 
 我们注意到，上面的信息没有 Location。这是因为它们总是对应 PostgreSQL 数据目录（`$PGDATA`）下的两个子目录：`pg_default`使用`base`子目录，`pg_global`使用`global`子目录。
 
-### 3 创建及使用表空间
+### 3 使用表空间
+
+#### 3.1 创建表空间
 
 要创建一个新的表空间，需要提前创建一个新的空文件夹（注意不要在 PostgreSQL 数据文件夹`$PGDATA`下创建），且该文件夹的所有者须是`postgres`系统用户。示例如下：
 
@@ -116,7 +118,15 @@ $ psql -U postgres postgres
 postgres=# CREATE TABLESPACE myspace LOCATION '/data/postgres/testspace';
 ```
 
-然后，要想让普通用户使用该表空间，须为普通用户赋予该表空间的`CREATE`权限。下面示例演示为普通用户`testuser`赋权限：
+这时，查阅`$PGDATA/pg_tblspc`目录，即可看到一个符号链接指向了新建表空间对应文件夹的位置（数字`24577`是表空间的 OID）：
+
+```shell
+$ ls -lht /usr/local/pgsql/data/pg_tblspc/
+
+lrwxrwxrwx 1 postgres postgres 24 Mar 28 15:17 24577 -> /data/postgres/testspace
+```
+
+要想让普通用户使用新建的表空间，须为普通用户赋予该表空间的`CREATE`权限。下面示例演示为普通用户`testuser`赋权限：
 
 ```shell
 postgres=# GRANT CREATE ON TABLESPACE myspace TO testuser;
@@ -141,6 +151,10 @@ postgres=> CREATE INDEX foo_idx ON foo(id) TABLESPACE myspace;
 ```shell
 postgres=# CREATE DATABASE testdb TABLESPACE myspace;
 ```
+
+#### 3.2 更改表空间
+
+#### 3.3 临时表空间
 
 ### 4 表空间相关的系统表
 
