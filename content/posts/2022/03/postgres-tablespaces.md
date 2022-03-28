@@ -101,16 +101,50 @@ postgres=# \db+
 
 ### 3 创建及使用表空间
 
-要创建一个新的表空间，需要提前创建一个新的文件夹（注意不要在 PostgreSQL 数据文件夹下创建），且该文件夹的所有者须是`postgres`系统用户。示例如下：
+要创建一个新的表空间，需要提前创建一个新的空文件夹（注意不要在 PostgreSQL 数据文件夹下创建），且该文件夹的所有者须是`postgres`系统用户。示例如下：
 
 ```shell
-
+$ mkdir -p /data/postgres/testspace
+$ chown -R postgres:postgres /data/postgres/testspace
 ```
 
-可使用`CREATE TABLESPACE`命令来创建一个表空间。示例如下：
+超级用户（superuser）可使用`CREATE TABLESPACE`命令来创建一个表空间。示例如下：
 
-```sql
+```shell
+$ psql -U postgres postgres
 
+postgres=# CREATE TABLESPACE myspace LOCATION '/data/postgres/testspace';
+CREATE TABLESPACE
+```
+
+然后，要想让普通用户使用该表空间，须为普通用户赋予该表空间的`CREATE`权限。下面示例演示为普通用户`testuser`赋权限：
+
+```shell
+postgres=# GRANT CREATE ON TABLESPACE myspace TO testuser;
+GRANT
+```
+
+随后，使用表空间`myspace`的所有对象都会将数据存储在该文件夹（`/data/postgres/testspace`）下。
+
+下面示例演示使用普通用户`testuser`连接到数据库`postgres`，建表并为其指定表空间`myspace`：
+
+```shell
+$ psql -U testuser postgres
+
+postgres=> CREATE TABLE foo(id int) TABLESPACE myspace;
+CREATE TABLE
+```
+
+除了为表指定表空间外，还可以为索引或数据库指定表空间。示例如下：
+
+```shell
+postgres=> CREATE INDEX foo_idx ON foo(id) TABLESPACE myspace;
+CREATE INDEX
+```
+
+```shell
+postgres=# CREATE DATABASE testdb TABLESPACE myspace;
+CREATE DATABASE
 ```
 
 ### 4 表空间相关的系统表
