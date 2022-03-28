@@ -114,14 +114,12 @@ $ chown -R postgres:postgres /data/postgres/testspace
 $ psql -U postgres postgres
 
 postgres=# CREATE TABLESPACE myspace LOCATION '/data/postgres/testspace';
-CREATE TABLESPACE
 ```
 
 然后，要想让普通用户使用该表空间，须为普通用户赋予该表空间的`CREATE`权限。下面示例演示为普通用户`testuser`赋权限：
 
 ```shell
 postgres=# GRANT CREATE ON TABLESPACE myspace TO testuser;
-GRANT
 ```
 
 随后，使用表空间`myspace`的所有对象都会将数据存储在该文件夹（`/data/postgres/testspace`）下。
@@ -132,19 +130,16 @@ GRANT
 $ psql -U testuser postgres
 
 postgres=> CREATE TABLE foo(id int) TABLESPACE myspace;
-CREATE TABLE
 ```
 
 除了为表指定表空间外，还可以为索引或数据库指定表空间。示例如下：
 
 ```shell
 postgres=> CREATE INDEX foo_idx ON foo(id) TABLESPACE myspace;
-CREATE INDEX
 ```
 
 ```shell
 postgres=# CREATE DATABASE testdb TABLESPACE myspace;
-CREATE DATABASE
 ```
 
 ### 4 表空间相关的系统表
