@@ -101,7 +101,7 @@ postgres=# \db+
 
 ### 3 创建及使用表空间
 
-要创建一个新的表空间，需要提前创建一个新的空文件夹（注意不要在 PostgreSQL 数据文件夹下创建），且该文件夹的所有者须是`postgres`系统用户。示例如下：
+要创建一个新的表空间，需要提前创建一个新的空文件夹（注意不要在 PostgreSQL 数据文件夹`$PGDATA`下创建），且该文件夹的所有者须是`postgres`系统用户。示例如下：
 
 ```shell
 $ mkdir -p /data/postgres/testspace
