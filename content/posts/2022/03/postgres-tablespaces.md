@@ -154,7 +154,54 @@ postgres=# CREATE DATABASE testdb TABLESPACE myspace;
 
 #### 3.2 更改表空间
 
+使用对应的`ALTER`语句，可将现有数据库对象由一个表空间移动到另一个表空间。
+
+下面示例演示使用`ALTER TABLE`和`ALTER INDEX`为表和索引指定新的表空间：
+
+```shell
+postgres=> ALTER TABLE foo SET TABLESPACE pg_default;
+postgres=> ALTER INDEX foo_idx SET TABLESPACE pg_default;
+```
+
+也可以使用如下语句将一个表空间中的所有表或索引移至另一个表空间：
+
+```shell
+postgres=> ALTER TABLE ALL IN TABLESPACE myspace SET TABLESPACE pg_default;
+postgres=> ALTER INDEX ALL IN TABLESPACE myspace SET TABLESPACE pg_default;
+```
+
+当重新指定表空间时，受影响的表或索引会被锁定，直至数据移动完成。
+
 #### 3.3 临时表空间
+
+创建两个空文件夹，并将所有者设定为`postgres`：
+
+```shell
+$ mkdir /data/postgres/tempspace1
+$ mkdir /data/postgres/tempspace2
+$ chown -R postgres:postgres /data/postgres/tempspace1
+$ chown -R postgres:postgres /data/postgres/tempspace2
+```
+
+使用`superuser`新建两个表空间，位置对应刚刚建好的两个文件夹；并为普通用户`testuser`赋这两个表空间的`CREATE`权限：
+
+```shell
+$ psql -U postgres postgres
+
+postgres=# CREATE TABLESPACE tempspace1 LOCATION '/data/postgres/tempspace1';
+postgres=# CREATE TABLESPACE tempspace2 LOCATION '/data/postgres/tempspace2';
+
+postgres=# GRANT CREATE ON TABLESPACE tempspace1 TO testuser;
+postgres=# GRANT CREATE ON TABLESPACE tempspace2 TO testuser;
+```
+
+这样，使用普通用户登录，将`temp_tablespaces`变量设置为`tempspace1, tempspace2`（可设置为多个值）：
+
+```shell
+$ psql -U testuser postgres
+
+postgres=> SET temp_tablespaces = tempspace1, tempspace2;
+```
 
 ### 4 表空间相关的系统表
 
