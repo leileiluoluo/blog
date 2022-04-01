@@ -172,7 +172,17 @@ postgres=> ALTER INDEX ALL IN TABLESPACE myspace SET TABLESPACE pg_default;
 
 当重新指定表空间时，受影响的表或索引会被锁定，直至数据移动完成。
 
-#### 3.3 表空间属性
+#### 3.3 更新表空间属性
+
+根据上述表空间使用场景，表空间常见用途是将表或索引移动到更快（IOPS 更高）的文件系统上。这时，就需要告知 PostgreSQL 查询规划器新的表空间到底有多快，这样即可使其更好的评估查询性能。
+
+若您测评发现新的表空间的顺序访问及随机访问速度是之前的两倍，则可使用如下语句更新表空间属性：
+
+```sql
+ALTER TABLESPACE myspace SET (seq_page_cost=0.5, random_page_cost=0.5);
+```
+
+有关这两个参数的详情，请参阅文档[seq_page_cost ](https://www.postgresql.org/docs/14/runtime-config-query.html#GUC-SEQ-PAGE-COST)及[random_page_cost](https://www.postgresql.org/docs/14/runtime-config-query.html#GUC-RANDOM-PAGE-COST)。
 
 #### 3.4 临时表空间
 
