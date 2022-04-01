@@ -229,13 +229,36 @@ postgres=# DROP TABLESPACE myspace;
 
 ### 4 表空间相关的系统表
 
-除了上面使用过的在 psql 使用`\db+`命令外，PostgreSQL 还有一些查询表空间的系统表或系统目录。
+除了上面使用过的在 psql 使用`\db+`命令外，PostgreSQL 还有一些与表空间相关的系统目录或系统表。
 
 查看已创建的表空间：
 
 ```sql
 SELECT * FROM pg_tablespace;
+
+-- 表空间名及目录位置
+SELECT spcname, pg_tablespace_location(oid) FROM pg_tablespace;
 ```
+
+查看某个表空间被哪些表或索引使用：
+
+```sql
+SELECT
+    c.relname
+FROM
+    pg_class      c,
+    pg_tablespace t
+WHERE
+    c.reltablespace = t.oid
+AND t.spcname='myspace';
+```
+
+```sql
+SELECT * FROM pg_tables WHERE tablespace='myspace';
+SELECT * FROM pg_indexes WHERE tablespace='myspace';
+```
+
+综上，完成了对 PostgreSQL 表空间使用场景及使用方式的总结。
 
 > 参考资料
 >
