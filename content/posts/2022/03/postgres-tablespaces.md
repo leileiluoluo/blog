@@ -174,7 +174,11 @@ postgres=> ALTER INDEX ALL IN TABLESPACE myspace SET TABLESPACE pg_default;
 
 #### 3.3 临时表空间
 
-创建两个空文件夹，并将所有者设定为`postgres`：
+PostgreSQL 允许使用`temp_tablespaces`参数来指定临时表空间（可使用逗号分隔，指定多个表空间）。临时表空间用于定义临时表、临时索引以及大型 SQL（大型数据集的排序或聚合等）可能产生的临时文件的存储位置。PostgreSQL 每次创建这些临时对象时，即会从指定的表空间列表随机获取并使用。临时表空间参数未指定时，会使用默认表空间`pg_default`。
+
+下面演示如何指定临时表空间。
+
+首先，创建两个空文件夹，并将所有者设定为`postgres`：
 
 ```shell
 $ mkdir /data/postgres/tempspace1
@@ -195,13 +199,20 @@ postgres=# GRANT CREATE ON TABLESPACE tempspace1 TO testuser;
 postgres=# GRANT CREATE ON TABLESPACE tempspace2 TO testuser;
 ```
 
-这样，使用普通用户登录，将`temp_tablespaces`变量设置为`tempspace1, tempspace2`（可设置为多个值）：
+使用普通用户登录，将`temp_tablespaces`变量设置为`tempspace1, tempspace2`：
 
 ```shell
 $ psql -U testuser postgres
 
 postgres=> SET temp_tablespaces = tempspace1, tempspace2;
+postgres=> SHOW temp_tablespaces;
+    temp_tablespaces
+------------------------
+ tempspace1, tempspace2
+(1 row)
 ```
+
+这样，即可使用了。需要注意的是，该种设置方式只在当前会话生效。若要永久生效，需要更改系统配置（`postgresql.conf`）。
 
 ### 4 表空间相关的系统表
 
