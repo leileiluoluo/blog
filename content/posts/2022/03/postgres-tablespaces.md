@@ -214,7 +214,26 @@ postgres=> SHOW temp_tablespaces;
 
 这样，即可使用了。需要注意的是，该种设置方式只在当前会话生效。若要永久生效，需要更改系统配置（`postgresql.conf`）。
 
+#### 3.4 删除表空间
+
+表空间一旦创建，只要用户有权限，即可供任意数据库使用。要想删除表空间，须先将使用该表空间的数据库对象全部移除。
+
+这样，即可使用`DROP TABLESPACE`命令来删除一个空表空间了：
+
+```shell
+$ psql -U postgres postgres
+postgres=# DROP TABLESPACE myspace;
+```
+
 ### 4 表空间相关的系统表
+
+除了上面使用过的在 psql 使用`\db+`命令外，PostgreSQL 还有一些查询表空间的系统表或系统目录。
+
+查看已创建的表空间：
+
+```sql
+SELECT * FROM pg_tablespace;
+```
 
 > 参考资料
 >
