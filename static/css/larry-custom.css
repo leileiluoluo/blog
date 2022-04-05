@@ -97,7 +97,7 @@ a.navbar-brand::selection {
   padding: 4px 4px !important;
   border: 0px !important;
   font-size: 14px;
-  color: inherit !important;
+  color: rgb(31 107 183) !important;
 }
 
 .content .highlight pre code {
