@@ -224,7 +224,7 @@ trigger:
 
 ```yaml
 pr:
-  - main
+  - master
   - releases/*
 ```
 
