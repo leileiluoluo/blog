@@ -18,7 +18,7 @@ description: Azure 流水线使用总结
 
 Azure 流水线（Azure Pipelines）是 Azure DevOps 的一部分。Azure 流水线结合了持续集成（CI）和持续交付（CD）来构建和测试代码，并可将其发布到任何目标环境。
 
-**下面，先从几个方面简略看一下 Azure 流水线支持的场景或环境：**
+**Azure 流水线支持的场景或环境**
 
 - 支持的版本控制系统
 
@@ -42,7 +42,7 @@ Azure 流水线（Azure Pipelines）是 Azure DevOps 的一部分。Azure 流水
 
   Azure 流水线支持市面上常用的打包工具（如 NuGet、npm 及 Maven 等），且支持将构建好的包发布到 Azure 流水线内置的包管理仓库或其它外部包管理仓库（如 Nexus、Artifactory 等）。
 
-**接着，简略看一下 Azure 流水线的编写方式：**
+**Azure 流水线的编写方式**
 
 须在工程根目录新建`azure-pipelines.yml` YAML 文件来定义 Azure 流水线。
 
