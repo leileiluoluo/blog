@@ -60,9 +60,68 @@ Azure 流水线定义文件与项目代码同属一个仓库，一同进行版�
 
 ### 1 开始使用 Azure 流水线
 
+**注册 Azure 流水线**
+
 打开[Azure 流水线介绍页](https://azure.microsoft.com/en-us/services/devops/pipelines/)，然后点击`Start free`或`Start free with Github`，其会引导你使用微软账号或 Github 账号来注册 Azure 流水线；完成后，需要创建一个 Azure DevOps 组织，填好以后即可以用 URL 的方式进行访问了（如本文 Azure DevOps 组织地址为：https://dev.azure.com/olzhy）。组织建好后，其会引导你创建一个项目，项目建好后，即可以在其下看到有流水线。
 
 ![](https://olzhy.github.io/static/images/uploads/2022/04/azure-pipelines-home.png#center)
+
+**创建第一条流水线**
+
+下面，使用一个 Java 编写的示例应用创建我们的第一条流水线。
+
+- Fork 示例仓库
+
+  将如下仓库 Fork 到自己的 Github 账号
+
+  ```text
+  https://github.com/MicrosoftDocs/pipelines-java
+  ```
+
+  我的 Github 地址为：[https://github.com/olzhy](https://github.com/olzhy)；Fork 完成后的仓库地址为：[https://github.com/olzhy/pipelines-java](https://github.com/olzhy/pipelines-java)。
+
+- 创建流水线
+
+  打开上一步创建好的项目（https://dev.azure.com/olzhy/test），点击 Pipelines 后新建一条流水线；选择从 Github 获取源码，选择推荐的 Maven 流水线模板，保存并运行。会发现，YAML 流水线文件`azure-pipelines.yml`已被自动创建并提交至仓库。
+
+  `azure-pipelines.yml`的内容为：
+
+  ```yaml
+  # Maven
+  # Build your Java project and run tests with Apache Maven.
+  # Add steps that analyze code, save build artifacts, deploy, and more:
+  # https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+  trigger:
+    - master
+
+  pool:
+    vmImage: ubuntu-latest
+
+  steps:
+    - task: Maven@3
+      inputs:
+        mavenPomFile: "pom.xml"
+        mavenOptions: "-Xmx3072m"
+        javaHomeOption: "JDKVersion"
+        jdkVersionOption: "1.8"
+        jdkArchitectureOption: "x64"
+        publishJUnitResults: true
+        testResultsFiles: "**/surefire-reports/TEST-*.xml"
+        goals: "package"
+  ```
+
+- 添加 Github 状态标识
+
+  将如下内容添加到工程根目录`README.md`文件最上面，并提交至仓库，即可在 Github 仓库上（[https://github.com/olzhy/pipelines-java](https://github.com/olzhy/pipelines-java)）看到流水线状态了。
+
+  ```markdown
+  [![Build Status](https://dev.azure.com/olzhy/test/_apis/build/status/olzhy.pipelines-java?branchName=master)](https://dev.azure.com/olzhy/test/_build/latest?definitionId=3&branchName=master)
+  ```
+
+**自定义流水线内容**
+
+**多阶段流水线初体验**
 
 > 参考资料
 >
