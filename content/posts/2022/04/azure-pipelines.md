@@ -146,6 +146,138 @@ Azure 流水线定义文件与项目代码同属一个仓库，一同进行版�
 
 **自定义流水线内容**
 
+自定义流水线内容前，先分析一下当前`azure-pipelines.yml`的内容。
+
+```yaml
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+  - master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: Maven@3
+    inputs:
+      mavenPomFile: "pom.xml"
+      mavenOptions: "-Xmx3072m"
+      javaHomeOption: "JDKVersion"
+      jdkVersionOption: "1.8"
+      jdkArchitectureOption: "x64"
+      publishJUnitResults: true
+      testResultsFiles: "**/surefire-reports/TEST-*.xml"
+      goals: "package"
+```
+
+- `trigger`部分说明：当 Git 仓库的`master`分支有新的提交或新的 PR 时，该流水线即会被触发；
+- `pool`部分说明：该流水线将会在一台 Linux 节点上运行，节点采用的镜像为`ubuntu-latest`；
+- `steps`部分说明：该流水线只有一步，即运行 Maven 任务。
+
+初步了解了这些参数的意思后，就可以根据自己的需求对流水线做一些修改了。
+
+如想更改构建平台，即可将`pool`下面的`vmImage`指定为`windows-latest`或`macos-latest`。
+
+如想增加一步测试覆盖率报告，即可在`steps`下加一个任务`PublishCodeCoverageResults@1`：
+
+```
+steps:
+  - task: Maven@3
+    ...
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      codeCoverageTool: "JaCoCo"
+      summaryFileLocation: "$(System.DefaultWorkingDirectory)/**/site/jacoco/jacoco.xml"
+      reportDirectory: "$(System.DefaultWorkingDirectory)/**/site/jacoco"
+      failIfCoverageEmpty: true
+```
+
+如想在多个平台并行运行作业，可将`pool`部分替换为如下配置：
+
+```yaml
+strategy:
+  matrix:
+    linux:
+      imageName: "ubuntu-latest"
+    mac:
+      imageName: "macOS-latest"
+    windows:
+      imageName: "windows-latest"
+  maxParallel: 3
+
+pool:
+  vmImage: $(imageName)
+```
+
+如想更改触发分支，可更改`trigger`部分。如下配置说明仅`master`分支或`releases/*`分支有提交才会触发重新构建。
+
+```yaml
+trigger:
+  - master
+  - releases/*
+```
+
+将`trigger`替换为`pr`后，说明针对列出的分支有新的 PR 即会触发构建。
+
+```yaml
+pr:
+  - main
+  - releases/*
+```
+
+如想设置流水线启停策略或更改流水线文件（`azure-pipelines.yml`）路径，需要到流水线详情页上去改，这些关于流水线设置类的功能未在 YAML 文件中管理。
+
+![](https://olzhy.github.io/static/images/uploads/2022/04/azure-pipeline-settings.png#center)
+
+此外，还可以为流水线添加错误处理器。
+
+如下示例流水线有两个`Job`，第一个`Job`模拟普通流水线工作。若其发生错误，会触发第二个`Job`，该`Job`会直接使用命令的方式调用工作项的 REST API 在项目中创建一个 Bug。
+
+```yaml
+# When manually running the pipeline, you can select whether it
+# succeeds or fails.
+parameters:
+  - name: succeed
+    displayName: Succeed or fail
+    type: boolean
+    default: false
+
+trigger:
+  - master
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+  - job: Work
+    steps:
+      - script: echo Hello, world!
+        displayName: "Run a one-line script"
+
+      # This malformed command causes the job to fail
+      # Only run this command if the succeed variable is set to false
+      - script: git clone malformed input
+        condition: eq(${{ parameters.succeed }}, false)
+
+  # This job creates a work item, and only runs if the previous job failed
+  - job: ErrorHandler
+    dependsOn: Work
+    condition: failed()
+    steps:
+      - bash: |
+          az boards work-item create \
+            --title "Build $(build.buildNumber) failed" \
+            --type bug \
+            --org $(System.TeamFoundationCollectionUri) \
+            --project $(System.TeamProject)
+        env:
+          AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+        displayName: "Create work item on failure"
+```
+
 **多阶段流水线初体验**
 
 > 参考资料
