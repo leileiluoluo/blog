@@ -46,7 +46,7 @@ Azure 流水线（Azure Pipelines）是 Azure DevOps 的一部分。Azure 流水
 
 须在工程根目录新建`azure-pipelines.yml` YAML 文件来定义 Azure 流水线。
 
-Azure 流水线定义文件与项目代码同属一个仓库，一同进行版本控制，并遵循相同的分支策略（如 feature-xxx => develop => master 分支策略）。通过检查 PR（拉取请求，Pull Request）来验证更改。
+Azure 流水线定义文件与项目代码同属一个仓库，一同进行版本控制，并遵循相同的分支策略（如 `feature-xxx => develop => master` 分支策略）。通过检查 PR（拉取请求，Pull Request）来验证更改。
 
 所以，使用 Azure 流水线的基本步骤为：
 
