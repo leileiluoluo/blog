@@ -80,6 +80,21 @@ Azure 流水线定义文件与项目代码同属一个仓库，一同进行版�
 
   我的 Github 地址为：[https://github.com/olzhy](https://github.com/olzhy)；Fork 完成后的仓库地址为：[https://github.com/olzhy/pipelines-java](https://github.com/olzhy/pipelines-java)。
 
+  该工程是一个普通的 Java 工程，仅有一个样例代码文件（`Demo.java`）和一个单元测试文件（`MyTest.java`）。
+
+  目录结构如下：
+
+  ```text
+  pipelines-java
+  |--- pom.xml
+  |--- src
+  |    |--- main       # 代码目录
+  |    |    |--- com.microsoft.demo.Demo.java
+  |    \--- test/java  # 单元测试目录
+  |         \--- MyTest.java
+  \--- README.md
+  ```
+
 - 创建流水线
 
   打开上一步创建好的项目（https://dev.azure.com/olzhy/test），点击 Pipelines 后新建一条流水线；选择从 Github 获取源码，选择推荐的 Maven 流水线模板，保存并运行。会发现，YAML 流水线文件`azure-pipelines.yml`已被自动创建并提交至仓库。
@@ -117,7 +132,7 @@ Azure 流水线定义文件与项目代码同属一个仓库，一同进行版�
 
   ![](https://olzhy.github.io/static/images/uploads/2022/04/azure-pipelines-result.png#center)
 
-  可以看到，日志最后打印说将测试结果发布到了一个地址，打开后发现，Juint 测试结果被自动发布到了 Azure DevOps 的另一个服务模块 Test Plan 下。
+  可以看到，日志最后打印说将测试结果发布到了一个地址，打开后发现，单元测试结果被自动发布到了 Azure DevOps 的另一个服务模块 Test Plan 下。
 
   ![](https://olzhy.github.io/static/images/uploads/2022/04/auzre-pipelines-junit-test-report.png#center)
 
