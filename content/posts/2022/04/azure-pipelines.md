@@ -58,7 +58,7 @@ Azure 流水线定义文件与项目代码同属一个仓库，一同进行版�
 
 下面就一步一步探索下如何使用 Azure 流水线。
 
-### 开始使用 Azure 流水线
+### 1 开始使用 Azure 流水线
 
 打开[Azure 流水线介绍页](https://azure.microsoft.com/en-us/services/devops/pipelines/)，然后点击`Start free`或`Start free with Github`，其会引导你使用微软账号或 Github 账号来注册 Azure 流水线；完成后，需要创建一个 Azure DevOps 组织，填好以后即可以用 URL 的方式进行访问了（本文 Azure DevOps 组织地址：[https://dev.azure.com/olzhy](https://dev.azure.com/olzhy)）。组织建好后，其会引导你创建一个项目，项目建好后，即可以在其下看到有流水线。
 
