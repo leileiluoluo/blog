@@ -278,8 +278,6 @@ jobs:
         displayName: "Create work item on failure"
 ```
 
-**多阶段流水线初体验**
-
 > 参考资料
 >
 > \[1\] [Azure Pipelines documentation](https://docs.microsoft.com/en-us/azure/devops/pipelines/)
