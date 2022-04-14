@@ -22,7 +22,7 @@ Azure 流水线（Azure Pipelines）是 Azure DevOps 的一部分。Azure 流水
 
 - 支持的版本控制系统
 
-  为应用配置 CI/CD 前，须将源码提交到一个版本控制系统上。Azure DevOps 仅支持 GitHub 和 Azure Repos 两种版本控制平台。
+  为应用配置 CI/CD 前，须将源码提交到一个版本控制系统上。Azure DevOps 支持 GitHub、 Azure Repos 和 Bitbucket 等版本控制平台。
 
 - 支持的开发语言或应用
 
@@ -290,6 +290,26 @@ jobs:
 
   Pipeline 定义了应用的整个持续集成与部署流程，其由多个 Stage 组成。可将 Pipeline 认为成是一个定义如何执行构建、测试、部署等步骤的工作流。
 
+- Stage（阶段）
+
+  Stage 是流水线中的逻辑边界，可使用其将关注的部分进行分离（如分成构建，QA，部署等）。一个 Stage 由一个或多个 Job 组成。一个流水线中的多个 Stage 默认按顺序执行。我们可以指定 Stage 运行的条件。
+
+- Job（作业）
+
+  Job 表示一组 Step 执行的边界，其需要在 Agent 上运行，一个 Job 的所有 Step 均在同一个 Agent 上运行。一个 Stage 包含一个或多个 Job。
+
+- Step（步骤）
+
+  Step 是一条流水线最小的构建块，每一个 Step 可以是 Script，也可以是 Task。
+
+- Task（任务）
+
+  Task 是一条流水线中定义自动化的一个构建块。
+
+- Script（脚本）
+
+  Script 是流水线中使用命令行、PowerShell 或 Bash 来运行的代码。
+
 - Agent（代理）
 
   Agent 为运行 Job 的基础环境。
@@ -313,6 +333,30 @@ jobs:
 - Environment（环境）
 
   Environment 为托管应用的一组资源（如请求域名，虚拟机，容器等）。一条流水线可能在构建和测试完成后将应用部署到多个环境。
+
+- Run（运行）
+
+  Run 代表流水线的一次执行。其会收集与运行步骤相关的日志及测试结果。
+
+- Trigger（触发器）
+
+  Trigger 用来告诉流水线何时运行。Trigger 可以配置为由代码提交至仓库时、调度时间到来时或当另一个构建完成时。
+
+- Library（库）
+
+  库包括安全文件和变量组。安全文件是一种在多条流水线共享文件的方法。如在构建流水线将一个文件存储成 DevOps 级别，然后在部署流水线使用它。变量组是跨流水线传递值或密钥的方法。
+
+下面会详细看看如何使用这些基础功能。
+
+**Trigger**
+
+**Task 及模板**
+
+**Job 及 Stage**
+
+**Library、变量与安全文件**
+
+**审批、检查与门禁**
 
 > 参考资料
 >
