@@ -505,6 +505,8 @@ Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Tr
     - bash: echo "app-ci runs after security-lib-ci completes"
   ```
 
+  若想更加精确的指定源流水线的哪个阶段完成才触发当前流水线，可以参阅[文档](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/pipeline-triggers?view=azure-devops)稍作配置即可实现。
+
 **Task 及模板**
 
 **Job 及 Stage**
