@@ -1,5 +1,5 @@
 ---
-title: Azure 流水线使用总结
+title: Azure 流水线使用详解
 author: olzhy
 type: post
 date: 2022-04-12T14:19:33+08:00
@@ -13,7 +13,7 @@ keywords:
   - 流水线
   - Pipelines
   - DevOps
-description: Azure 流水线使用总结
+description: Azure 流水线使用详解
 ---
 
 Azure 流水线（Azure Pipelines）是 Azure DevOps 的一部分。Azure 流水线结合了持续集成（CI）和持续交付（CD）来构建和测试代码，并可将其发布到任何目标环境。
