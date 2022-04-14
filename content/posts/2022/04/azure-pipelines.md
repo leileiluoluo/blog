@@ -183,7 +183,7 @@ steps:
 
 如想增加一步测试覆盖率报告，即可在`steps`下加一个任务`PublishCodeCoverageResults@1`：
 
-```
+```yaml
 steps:
   - task: Maven@3
     ...
