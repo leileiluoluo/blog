@@ -16,7 +16,7 @@ keywords:
 description: Azure 流水线使用详解
 ---
 
-Azure 流水线（Azure Pipelines）是 Azure DevOps 的一部分。Azure 流水线结合了持续集成（CI）和持续交付（CD）来构建和测试代码，并可将其发布到任何目标环境。
+Azure 流水线（Azure Pipelines）是 Azure DevOps 的一部分。Azure 流水线结合了持续集成（CI）和持续交付（CD）来构建和测试代码，并可将其发布到任何目标环境。Azure 流水线有经典（可视化）和 YAML 两种配置使用方式。作为开发，本文仅关注 YAML 这种配置方式。
 
 **Azure 流水线支持的场景或环境**
 
@@ -349,6 +349,82 @@ jobs:
 下面会详细看看如何使用这些基础功能。
 
 **Trigger**
+
+Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Trigger、定时 Trigger 和流水线完成 Trigger 三种类型。
+
+- CI/PR Trigger
+
+  CI Trigger 或 PR Trigger 会因代码仓库的类型不同而有所差别。本文仅关注 Github 仓库的 Trigger 配置。
+
+  CI Trigger 用于指定当哪些分支或 Tag 有新的提交时触发流水线运行。
+
+  最简单的配置方式为：
+
+  ```yaml
+  trigger: # 仅`master`分支和`releases/*`分支有提交时触发构建
+    - master # 指定分支名
+    - releases/* # 采用通配符
+  ```
+
+  稍微复杂点的配置方式为：
+
+  ```yaml
+  trigger: # 仅`master`分支和`releases/*`分支（`releases/old*`除外）有提交时触发构建
+    branches:
+      include:
+        - master
+        - releases/*
+      exclude:
+        - releases/old*
+  ```
+
+  设置批量运行的配置方式：
+
+  ```yaml
+  trigger: # 若团队成员提交频繁，可将流水线设置为batch运行，即待当前流水线运行完成后再运行一次最新的提交
+    batch: true
+    branches:
+      include:
+        - master
+  ```
+
+  指定包含或排除的 Tag：
+
+  ```yaml
+  trigger: # 若有`v2.*`的新Tag（`v2.0`除外）会触发构建
+    tags:
+      include:
+        - v2.*
+      exclude:
+        - v2.0
+  ```
+
+  PR Trigger 用于指定当哪些目标分支有新的 PR 时（或 PR 有更新时）触发流水线运行。
+
+  简单一点的配置如下：
+
+  ```yaml
+  pr: # 当如下分支有PR时会触发构建
+    - master
+    - develop
+    - releases/*
+  ```
+
+  复杂一点的配置如下：
+
+  ```yaml
+  pr: # 当`master`分支与`releases/*`分支（`releases/old*`除外）有PR时会触发构建
+    branches:
+      include:
+        - master
+        - releases/*
+      exclude:
+        - releases/old*
+  ```
+
+- 定时 Trigger
+
+- 流水线完成 Trigger
 
 **Task 及模板**
 
