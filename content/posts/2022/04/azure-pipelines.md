@@ -424,56 +424,56 @@ Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Tr
 
 - 定时 Trigger
 
-支持使用 Cron 表达式定时触发流水线。Cron 表达式的时区采用 UTC 时间，若使用了模板，须将调度规则配置在主文件，不可配置在其它模板文件。
+  支持使用 Cron 表达式定时触发流水线。Cron 表达式的时区采用 UTC 时间，若使用了模板，须将调度规则配置在主文件，不可配置在其它模板文件。
 
-如下的例子定义了两个调度：
+  如下的例子定义了两个调度：
 
-```yaml
-schedules:
-  - cron: "0 0 * * *" # 每天半夜构建，仅当自上次运行成功后有新的提交
-    displayName: Daily midnight build
-    branches:
-      include:
-        - main
-        - releases/*
-      exclude:
-        - releases/ancient/*
-  - cron: "0 12 * * 0" # 每周日中午构建，不管自上次运行成功后有没有新的提交
-    displayName: Weekly Sunday build
-    branches:
-      include:
-        - releases/*
-    always: true
-```
+  ```yaml
+  schedules:
+    - cron: "0 0 * * *" # 每天半夜构建，仅当自上次运行成功后有新的提交
+      displayName: Daily midnight build
+      branches:
+        include:
+          - main
+          - releases/*
+        exclude:
+          - releases/ancient/*
+    - cron: "0 12 * * 0" # 每周日中午构建，不管自上次运行成功后有没有新的提交
+      displayName: Weekly Sunday build
+      branches:
+        include:
+          - releases/*
+      always: true
+  ```
 
-Cron 表达式的语法是业界通用的。
+  Cron 表达式的语法是业界通用的。
 
-表达式字段意思如下：
+  表达式字段意思如下：
 
-```text
-mm HH DD MM DW
- \  \  \  \  \__ 一周中的哪一天，自周日（0）起
-  \  \  \  \____ 月
-   \  \  \______ 天
-    \  \________ 时
-     \__________ 分
-```
+  ```text
+  mm HH DD MM DW
+  \  \  \  \  \__ 一周中的哪一天，自周日（0）起
+    \  \  \  \____ 月
+    \  \  \______ 天
+      \  \________ 时
+      \__________ 分
+  ```
 
-复杂 Cron 示例（如下的几种写法等价）：
+  复杂 Cron 示例（如下的几种写法等价）：
 
-```text
-# 每周一、三、五18点触发
-0 18 * * Mon,Wed,Fri
-0 18 * * 1,3,5
-0 18 * * 1-5/2
-```
+  ```text
+  # 每周一、三、五18点触发
+  0 18 * * Mon,Wed,Fri
+  0 18 * * 1,3,5
+  0 18 * * 1-5/2
+  ```
 
-```text
-# 每6小时触发一次
-0 0,6,12,18 * * *
-0 */6 * * *
-0 0-18/6 * * *
-```
+  ```text
+  # 每6小时触发一次
+  0 0,6,12,18 * * *
+  0 */6 * * *
+  0 0-18/6 * * *
+  ```
 
 - 流水线完成 Trigger
 
