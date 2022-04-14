@@ -477,6 +477,34 @@ Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Tr
 
 - 流水线完成 Trigger
 
+  若想在一条流水线运行完成后触发另一条流水线。可以通过配置流水线资源实现。
+
+  下面示例了两条流水线，第一条流水线 security-lib-ci 运行完成时触发第二条流水线 app-ci：
+
+  ```yaml
+  # 流水线 security-lib-ci
+  steps:
+    - bash: echo "The security-lib-ci pipeline runs first"
+  ```
+
+  ```yaml
+  # 当指定分支的流水线 security-lib-ci 运行完成后会触发当前流水线 app-ci 运行
+  resources:
+    pipelines:
+      - pipeline: securitylib
+        source: security-lib-ci # 被当前流水线资源引用的流水线名
+        project: FabrikamProject # 仅当源流水线在别的项目时，需要指定项目名称
+        trigger: # 仅当源流水线的`releases/*`分支（`releases/old*`除外）完成运行时，触发当前流水线运行
+          branches:
+            include:
+              - releases/*
+            exclude:
+              - releases/old*
+
+  steps:
+    - bash: echo "app-ci runs after security-lib-ci completes"
+  ```
+
 **Task 及模板**
 
 **Job 及 Stage**
