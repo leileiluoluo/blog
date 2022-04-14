@@ -278,6 +278,42 @@ jobs:
         displayName: "Create work item on failure"
 ```
 
+### 2 Azure 流水线基础概念
+
+一条 Azure 流水线由多个 Stage 组成，一个 Stage 由多个 Job 组成，一个 Job（运行在 Agent 上） 由多个 Step 组成，Step 可以是 Script 或 Task。
+
+![](https://olzhy.github.io/static/images/uploads/2022/04/azure-pipelines-key-concepts-overview.svg#center)
+
+下面看一下 Azure 流水线常用到的几个术语：
+
+- Pipeline（流水线）
+
+  Pipeline 定义了应用的整个持续集成与部署流程，其由多个 Stage 组成。可将 Pipeline 认为成是一个定义如何执行构建、测试、部署等步骤的工作流。
+
+- Agent（代理）
+
+  Agent 为运行 Job 的基础环境。
+
+- Approvals（审批）
+
+  Approvals 为构建或部署前的一组校验，如用于控制发布到生产环境的手动审批校验。
+
+- Artifact（制品）
+
+  Artifact 为构建产生的一组包或文件，其用于后续的部署 Task。
+
+- Deployment（部署）
+
+  Deployment 为流水线中的部署 Job，即部署到一个目标环境的一组步骤。
+
+- Deployment group（部署组）
+
+  Deployment group 为一组安装代理的目标部署机器。
+
+- Environment（环境）
+
+  Environment 为托管应用的一组资源（如请求域名，虚拟机，容器等）。一条流水线可能在构建和测试完成后将应用部署到多个环境。
+
 > 参考资料
 >
 > \[1\] [Azure Pipelines documentation](https://docs.microsoft.com/en-us/azure/devops/pipelines/)
