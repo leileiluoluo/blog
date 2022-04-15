@@ -1127,6 +1127,32 @@ Job 是顺序运行的一系列步骤。
 
 **审批、检查与门禁**
 
+可以在流水线前后插入审批和门禁来控制部署流水线的工作流。
+
+审批与门禁的设置需要在 UI 上进行，详情请参阅[文档](https://docs.microsoft.com/en-us/azure/devops/pipelines/release/deploy-using-approvals?view=azure-devops)。
+
+如下是一个配置等待手动校验的示例：
+
+```yaml
+# 等待手动校验
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+  - job: waitForValidation
+    displayName: Wait for external validation
+    pool: server
+    timeoutInMinutes: 4320 # Job 最长3天超时
+    steps:
+      - task: ManualValidation@0
+        timeoutInMinutes: 1440 # Task 最长1天超时
+        inputs:
+          notifyUsers: |
+            someone@example.com
+          instructions: "Please validate the build configuration and resume"
+          onTimeout: "resume"
+```
+
 > 参考资料
 >
 > \[1\] [Azure Pipelines documentation](https://docs.microsoft.com/en-us/azure/devops/pipelines/)
