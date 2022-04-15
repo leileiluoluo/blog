@@ -870,6 +870,74 @@ Job 是顺序运行的一系列步骤。
       jobs: [ job | templateReference]
   ```
 
+- Deployment Job
+
+  建议将部署类的步骤放在一个称为 Deployment 的特殊 Job 中。使用 Deployment 的益处有：可以获得流水线的部署历史以及特定的资源和部署状态，以便进行审核；可以自定义部署策略，如应用的升级方式（目前支持`runOnce`、`rolling`和`canary`三种升级方式）。
+
+  此外，Deployment Job 还有一些限制：不自动克隆代码仓库；若需检出代码，需要指定`checkout: self`。且 Deployment Job 仅支持一次检出。
+
+  定义一个 Deployment Job 的完整语法如下：
+
+  ```yaml
+  jobs:
+    - deployment: string # 名称，支持`[A-Za-z0-9_]`
+      displayName: string # UI 显示名称
+      pool: # 对虚拟机资源是不需要的
+        name: string # 池名称
+        demands: string | [ string ]
+      workspace:
+        clean: outputs | resources | all # Job 运行前需要清理什么
+      dependsOn: string
+      condition: string
+      continueOnError: boolean # 若为 true，表示即使该Job失败，也要运行其它的 Job；默认为 false
+      container: containerReference # 运行该 Job 的容器
+      services: { string: string | container } # 作为服务容器运行的容器资源
+      timeoutInMinutes: nonEmptyString # 自动终止前的最长等待时间
+      cancelTimeoutInMinutes: nonEmptyString # 在终止任务前，给“即使任务被取消，也要运行”的 Job 多长时间
+      variables: # 变量
+      environment: string # 目标环境名及记录部署历史的资源名（可选）； 格式为：<environment-name>.<resource-name>
+      strategy:
+        runOnce: # 部署策略，除了 runOnce 还支持 rolling 和 canary
+          deploy:
+            steps:
+              [
+                script | bash | pwsh | powershell | checkout | task | templateReference,
+              ]
+  ```
+
+  如下是一个使用 Deployment Job 将应用部署到 Kubernetes 的示例：
+
+  ```yaml
+  jobs:
+    - deployment: DeployWeb
+      displayName: deploy Web App
+      pool:
+        vmImage: "ubuntu-latest"
+      environment: "smarthotel-dev.bookings"
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              # 无须显示传递连接信息
+              - task: KubernetesManifest@0
+                displayName: Deploy to Kubernetes cluster
+                inputs:
+                  action: deploy
+                  namespace: $(k8sNamespace)
+                  manifests: |
+                    $(System.ArtifactsDirectory)/manifests/*
+                  imagePullSecrets: |
+                    $(imagePullSecret)
+                  containers: |
+                    $(containerRegistry)/$(imageRepository):$(tag)
+  ```
+
+- 装饰器
+
+  使用装饰器可以为每个 Job 的开头和结尾自动注入额外的步骤。如：可以使用装饰器自动对整个团队流水线的构建输出作病毒扫描。
+
+  关于如何开发、安装及使用装饰器，请参阅[文档](https://docs.microsoft.com/en-us/azure/devops/extend/develop/add-pipeline-decorator?toc=%2Fazure%2Fdevops%2Fpipelines%2Ftoc.json&bc=%2Fazure%2Fdevops%2Fpipelines%2Fbreadcrumb%2Ftoc.json&view=azure-devops)。
+
 **Library、变量与安全文件**
 
 **审批、检查与门禁**
