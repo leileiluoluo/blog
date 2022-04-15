@@ -803,6 +803,39 @@ Job 是顺序运行的一系列步骤。
       clean: outputs | resources | all # Job运行前，需要清理的内容
   ```
 
+- Job 中的制品下载
+
+  如下示例有`Build`与`Deploy`两个 Job，分别作制品上传与制品下载。
+
+  ```yaml
+  # 将 Build 作业中构建的制品命名为 `WebSite` 并发布到工作区，然后在 Deploy 作业中下载它
+  jobs:
+    - job: Build
+      pool:
+        vmImage: "ubuntu-latest"
+      steps:
+        - script: npm test
+        - task: PublishBuildArtifacts@1
+          inputs:
+            pathtoPublish: "$(System.DefaultWorkingDirectory)"
+            artifactName: WebSite
+
+    # download the artifact and deploy it only if the build job succeeded
+    - job: Deploy
+      pool:
+        vmImage: "ubuntu-latest"
+      steps:
+        - checkout: none # 跳过默认检出仓库内容
+        - task: DownloadBuildArtifacts@0
+          displayName: "Download Build Artifacts"
+          inputs:
+            artifactName: WebSite
+            downloadPath: $(System.DefaultWorkingDirectory)
+
+      dependsOn: Build
+      condition: succeeded()
+  ```
+
 **Library、变量与安全文件**
 
 **审批、检查与门禁**
