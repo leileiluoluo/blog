@@ -579,6 +579,128 @@ Task 是定义管道中自动化的构建块。一个 Job 有一个或多个 Tas
 
 模板可以用来定义可重用的逻辑，也可以用来控制流水线的安全性。
 
+- 模板用作重用
+
+  可以将一些公共的 Job、Stage、Step 等抽取到模板，而在`azure-pipelines.yml`直接使用。
+
+  如下示例将 Job 抽取成模板，而在`azure-pipelines.yml`引用：
+
+  ```yaml
+  # 文件：templates/npm-with-params.yml
+  parameters:
+    - name: name # defaults for any parameters that aren't specified
+      default: ""
+    - name: vmImage
+      default: ""
+
+  jobs:
+    - job: ${{ parameters.name }}
+      pool:
+        vmImage: ${{ parameters.vmImage }}
+      steps:
+        - script: npm install
+        - script: npm test
+  ```
+
+  ```yaml
+  # 文件：azure-pipelines.yml
+  jobs:
+    - template: templates/npm-with-params.yml # Template reference
+      parameters:
+        name: Linux
+        vmImage: "ubuntu-latest"
+
+    - template: templates/npm-with-params.yml # Template reference
+      parameters:
+        name: macOS
+        vmImage: "macOS-latest"
+
+    - template: templates/npm-with-params.yml # Template reference
+      parameters:
+        name: Windows
+        vmImage: "windows-latest"
+  ```
+
+- 模板用作安全控制
+
+  为了提高安全性，可以强制流水线必须从特定的模板扩展。
+
+  如下示例会对非法的 Task 名作报错处理：
+
+  ```yaml
+  # 文件：start.yml
+  parameters:
+    - name: buildSteps # 参数名为 buildSteps
+      type: stepList # 数据类型为 StepList
+      default: [] # 默认值为空列表
+  stages:
+    - stage: secure_buildstage
+      pool:
+        vmImage: windows-latest
+      jobs:
+        - job: secure_buildjob
+          steps:
+            - script: echo This happens before code
+              displayName: "Base: Pre-build"
+            - script: echo Building
+              displayName: "Base: Build"
+
+            - ${{ each step in parameters.buildSteps }}:
+                - ${{ each pair in step }}:
+                    ${{ if ne(pair.value, 'CmdLine@2') }}:
+                      ${{ pair.key }}: ${{ pair.value }}
+                    ${{ if eq(pair.value, 'CmdLine@2') }}:
+                      # 若使用 Task 'CmdLine@2' 会抛错
+                      "${{ pair.value }}": error
+
+            - script: echo This happens after code
+              displayName: "Base: Signing"
+  ```
+
+  ```yaml
+  # 文件：azure-pipelines.yml
+  trigger:
+    - main
+
+  extends:
+    template: start.yml
+    parameters:
+      buildSteps:
+        - bash: echo Test # 会被正常解析
+          displayName: succeed
+        - bash: echo "Test"
+          displayName: succeed
+        # 这一步解析会报YAML语法错误 `Unexpected value 'CmdLine@2'`
+        - task: CmdLine@2
+          inputs:
+            script: echo "Script Test"
+        # 这一步解析会报YAML语法错误 `Unexpected value 'CmdLine@2'`
+        - script: echo "Script Test"
+  ```
+
+- 模板抽到一个仓库
+
+  可以将模板文件抽取到一个仓库（类似 Jenkins 的`SharedLibrary`），供需要的工程使用。
+
+  如下示例`azure-pipelines.yml`引用另一个仓库的模板：
+
+  ```yaml
+  # 仓库：Contoso/LinuxProduct
+  # 文件：azure-pipelines.yml
+  resources: # 配置模板所在的仓库信息
+    repositories:
+      - repository: templates
+        type: github
+        name: Contoso/BuildTemplates
+        endpoint: myServiceConnection # 配置 Azure DevOps 服务连接信息
+        ref: refs/tags/v1.0 # 配置引用的 Tag
+
+  jobs:
+    - template: common.yml@templates # 使用`文件@模板名`的方式引用模板
+  ```
+
+此外，关于模板参数类型，变量重用，模板表达式等更详细的配置，请参阅[文档](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/templates?view=azure-devops)。
+
 **Job 及 Stage**
 
 **Library、变量与安全文件**
