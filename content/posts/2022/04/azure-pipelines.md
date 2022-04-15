@@ -752,6 +752,10 @@ Job 是顺序运行的一系列步骤。
 
 - Job 的类型
 
+  Job 有几种类型，用于区分在哪里运行，分别为：Agent 池 Job、Server Job 和 Container Job。
+
+  Agent 池 Job 为最常见的 Job 类型，它们在 Agent 池中的 Agent 上运行。当使用 Microsoft 托管的 Agent 时，流水线中的每个 Job 都会获得一个新的 Agent。若使用自托管 Agent 的来满足特定 Job 的需求时，根据 Agent 的数目多少，Job 可能会使用到相同的 Agent。
+
 - 依赖
 
 - 条件
