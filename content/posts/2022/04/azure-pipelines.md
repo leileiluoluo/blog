@@ -899,15 +899,12 @@ Job 是顺序运行的一系列步骤。
       strategy:
         runOnce: # 部署策略，除了 runOnce 还支持 rolling 和 canary
           deploy:
-            steps:
-              [
-                script | bash | pwsh | powershell | checkout | task | templateReference,
-              ]
+            steps: # [ script | bash | pwsh | powershell | checkout | task | templateReference \]
   ```
 
   如下是一个使用 Deployment Job 将应用部署到 Kubernetes 的示例：
 
-  ```yaml
+  ```text
   jobs:
     - deployment: DeployWeb
       displayName: deploy Web App
@@ -939,6 +936,194 @@ Job 是顺序运行的一系列步骤。
   关于如何开发、安装及使用装饰器，请参阅[文档](https://docs.microsoft.com/en-us/azure/devops/extend/develop/add-pipeline-decorator?toc=%2Fazure%2Fdevops%2Fpipelines%2Ftoc.json&bc=%2Fazure%2Fdevops%2Fpipelines%2Fbreadcrumb%2Ftoc.json&view=azure-devops)。
 
 **Library、变量与安全文件**
+
+- Library
+
+  Library 是 Azure DevOps 存放构建和发布资产的地方。可以使用安全模型配置哪些人可以创建或使用相应的资产。
+
+- 变量
+
+  变量有预定义变量（如系统变量）、环境变量和用户自定义变量三种。
+
+  预定义变量也可用作环境变量使用，如预定义变量`Build.ArtifactStagingDirectory`的环境变量名为`BUILD_ARTIFACTSTAGINGDIRECTORY`。关于预定义变量有哪些，请参阅[文档](https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops)。
+
+  看一个用户自定义变量的例子：
+
+  ```yaml
+  variables:
+    VMS_USER: $(vmsUser)
+    VMS_PASS: $(vmsAdminPass)
+
+  pool:
+    vmImage: "ubuntu-latest"
+
+  steps:
+    - task: AzureFileCopy@4
+      inputs:
+        SourcePath: "my/path"
+        azureSubscription: "my-subscription"
+        Destination: "AzureVMs"
+        storage: "my-storage"
+        resourceGroup: "my-rg"
+        vmsAdminUserName: $(VMS_USER)
+        vmsAdminPassword: $(VMS_PASS)
+  ```
+
+  其它复杂点的使用方式，请参阅[文档](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops)。
+
+- 使用变量组中的密钥
+
+  可以在变量组中创建密钥类和非密钥类的变量，然后在流水线中使用。
+
+  下面是一个使用参数和变量（包活自定义变量和系统变量）的示例：
+
+  ```yaml
+  parameters:
+    - name: image
+      displayName: "Pool image"
+      default: ubuntu-latest
+      values:
+        - windows-latest
+        - ubuntu-latest
+        - macOS-latest
+    - name: test
+      displayName: Run Tests?
+      type: boolean
+      default: false
+
+  variables:
+    - group: "Contoso Variable Group"
+    - name: va
+      value: $[variables.a]
+    - name: vcontososecret
+      value: $[variables.contososecret]
+
+  trigger:
+    - master
+
+  pool:
+    vmImage: ubuntu-latest
+
+  steps:
+    - script: |
+        echo "Hello, world!"
+        echo "Pool image: ${{ parameters.image }}"
+        echo "Run tests? ${{ parameters.test }}"
+      displayName: "Show runtime parameter values"
+
+    - script: |
+        echo "a=$(va)"
+        echo "b=$(vb)"
+        echo "contososecret=$(vcontososecret)"
+        echo
+        echo "Count up to the value of the variable group's nonsecret variable *a*:"
+        for number in {1..$(va)}
+          do
+              echo "$number"
+          done
+        echo "Count up to the value of the variable group's secret variable *contososecret*:"
+        for number in {1..$(vcontososecret)}
+        do
+            echo "$number"
+        done
+      displayName: "Test variable group variables (secret and nonsecret)"
+      env:
+        SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+  ```
+
+- 设置变量
+
+  通常会有在一个 Stage（或 Job 与 Task）设置一个变量值，然后在后续的 Stage（或 Job 与 Task） 使用的场景。变量设置可通过`task.setvariable`实现。
+
+  下面看一下示例：
+
+  ```yaml
+  # Job A 设置变量 `myOutputVar=this is from job A`，然后在 Job B 打印
+  jobs:
+  - job: A
+    steps:
+    - bash: |
+      echo "##vso[task.setvariable variable=myOutputVar;isoutput=true]this is from job A"
+      name: passOutput
+  - job: B
+    dependsOn: A
+    variables:
+      myVarFromJobA: $[ dependencies.A.outputs['passOutput.myOutputVar'] ]
+    steps:
+    - bash: |
+      echo $(myVarFromJobA)
+  ```
+
+- 运行时参数
+
+  使用运行时参数可以控制传入流水线的参数值。
+
+  如下示例将 Trigger 设置为 none，只允许用户手动触发流水线，触发时需要选择具体的参数：
+
+  ```yaml
+  parameters:
+    - name: image
+      displayName: Pool Image
+      type: string
+      default: ubuntu-latest # 若用户未选择具体的参数，会使用该默认值
+      values:
+        - windows-latest
+        - ubuntu-latest
+        - macOS-latest
+
+  trigger: none
+
+  jobs:
+    - job: build
+      displayName: build
+      pool:
+        vmImage: ${{ parameters.image }}
+      steps:
+        - script: echo building $(Build.BuildNumber) with ${{ parameters.image }}
+  ```
+
+  ![](https://olzhy.github.io/static/images/uploads/2022/04/azure-pipelines-runtime-param-ui.png#center)
+
+- 使用 Azure Key Vault 密钥
+
+  Azure Key Vault 提供 API Key、密钥和证书等敏感信息管理。
+
+  可以使用 Azure 命令（`az keyvault`）或直接在页面设置密钥信息。然后在流水线使用需要的密钥值。
+
+  示例如下：
+
+  ```yaml
+  trigger:
+    - main
+
+  pool:
+    vmImage: ubuntu-latest
+
+  steps:
+    - task: AzureKeyVault@2
+      inputs:
+        azureSubscription: "Your-Azure-Subscription"
+        KeyVaultName: "Your-Key-Vault-Name"
+        SecretsFilter: "*"
+        RunAsPreJob: false
+
+    - task: CmdLine@2
+      inputs:
+        script: "echo $(Your-Secret-Name) > secret.txt"
+
+    - task: CopyFiles@2
+      inputs:
+        Contents: secret.txt
+        targetFolder: "$(Build.ArtifactStagingDirectory)"
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: "$(Build.ArtifactStagingDirectory)"
+        ArtifactName: "drop"
+        publishLocation: "Container"
+  ```
+
+  关于 Azure Key Vault 的使用及策略设置，请查阅[文档](https://docs.microsoft.com/en-us/azure/devops/pipelines/release/key-vault-in-own-project?view=azure-devops)。
 
 **审批、检查与门禁**
 
