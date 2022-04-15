@@ -853,6 +853,23 @@ Job 是顺序运行的一系列步骤。
     - script: printenv
   ```
 
+- 使用 Stage
+
+  可以将流水线 Job 组织成 Stage。Stage 是流水线中的逻辑边界，如：构建、测试、部署到测试环境及部署到生产环境是现实运用中常见的 Stage。
+
+  指定一个 Stage 的完整语法如下：
+
+  ```yaml
+  stages:
+    - stage: string  # Stage 名称 [A-Za-z0-9_]
+      displayName: string  # UI 展示名称
+      dependsOn: string | [ string ] # 指定依赖的 Stage
+      condition: string # 指定依赖的 Stage 的条件，如 failed() 等
+      pool: string | pool # 若在 Stage 上指定了 pool，除非在 Job 中覆盖该选项，否则所有该 Stage 下的 Job 都会使用所指定的 pool
+      variables: { string: string } | [ variable | variableReference ]
+      jobs: [ job | templateReference]
+  ```
+
 **Library、变量与安全文件**
 
 **审批、检查与门禁**
