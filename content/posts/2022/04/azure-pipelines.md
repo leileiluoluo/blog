@@ -752,15 +752,56 @@ Job 是顺序运行的一系列步骤。
 
 - Job 的类型
 
-  Job 有几种类型，用于区分在哪里运行，分别为：Agent 池 Job、Server Job 和 Container Job。
+  Job 有几种类型，用于区分在哪里运行，分别为：Agent Job、Server Job 和 Container Job。
 
-  Agent 池 Job 为最常见的 Job 类型，它们在 Agent 池中的 Agent 上运行。当使用 Microsoft 托管的 Agent 时，流水线中的每个 Job 都会获得一个新的 Agent。若使用自托管 Agent 的来满足特定 Job 的需求时，根据 Agent 的数目多少，Job 可能会使用到相同的 Agent。
+  Agent Job 为最常见的 Job 类型，它们在 Agent 池中的 Agent 上运行。当使用 Microsoft 托管的 Agent 时，流水线中的每个 Job 都会获得一个新的 Agent。若使用自托管 Agent 的来满足特定 Job 的需求时，根据 Agent 的数目多少，Job 可能会使用到相同的 Agent。Job 默认为 Agent 类型。
 
-- 依赖
+  Server Job 在服务器上运行，不需要 Agent 或任何目标机器。目前，仅少数 Task 支持在 Server Job 执行。不需要 Agent 的 Task 有：Azure 函数调用任务、REST API 调用任务、手动校验任务和查询工作项任务等。
 
-- 条件
+  如下示例指定一个 Server Job：
 
-- 工作空间
+  ```yaml
+  jobs:
+    - job: somejob
+      pool: server
+  ```
+
+- Job 的依赖与条件
+
+  可以指定 Job 运行的依赖及条件。
+
+  示例如下：
+
+  ```yaml
+  # Job B 依赖 Job A，仅当 Job A 运行成功并且分支为 master 时才运行 Job B
+  jobs:
+    - job: A
+      steps:
+        - script: echo hello
+
+    - job: B
+      dependsOn: A
+      condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+      steps:
+        - script: echo this only runs for master
+  ```
+
+- Job 的工作空间
+
+  当运行 Agent Job 时，其会在 Agent 上创建一个工作区。工作区是一个文件夹，流水线在其中下载代码，运行步骤及输出结果。可以在流水线中引用工作区目录。
+
+  其中，`Build.SourcesDirectory`表示源码下载目录；`Build.ArtifactStagingDirectory`为下载制品的目录及生成制品在发布前的目录；`Build. BinariesDirectory`为输出文件的目录；`Common.TestResultsDirectory`为上传测试结果的目录。
+
+  前面已提到，工作区清理选项只对自托管 Agent 适用；对于 Microsoft 托管的 Agent，Job 每次运行使用的是一个新的 Agent。
+
+  工作区清理的配置如下：
+
+  ```yaml
+  # 工作区清理选项，只对自托管 Agent 适用
+  - job: myJob
+    workspace:
+      clean: outputs | resources | all # Job运行前，需要清理的内容
+  ```
 
 **Library、变量与安全文件**
 
