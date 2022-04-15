@@ -703,6 +703,61 @@ Task 是定义管道中自动化的构建块。一个 Job 有一个或多个 Tas
 
 **Job 及 Stage**
 
+Job 是顺序运行的一系列步骤。
+
+- Job 定义
+
+  如下是定义一个 Job 的完整语法：
+
+  ```yaml
+  - job: string  # Job名称 `[A-Za-z0-9_]`
+    displayName: string  # UI 显示名称
+    dependsOn: string | [ string ]
+    condition: string
+    strategy: # 注意：`parallel` 与 `matrix` 互斥，仅可指定一个
+      parallel: # 并行策略
+      matrix: # 矩阵策略
+      maxParallel: number # 仅针对 `matrix` 使用，最大并行数
+    continueOnError: boolean  # 设置为 true，表示即使当前Job失败，也会继续运行后续 Job；默认为 false
+    pool: pool # Agent 池
+    workspace:
+      clean: outputs | resources | all # Job 运行前是否清除工作空间
+    container: containerReference # 指定运行该 Job 的容器
+    timeoutInMinutes: number # 自动终止前的最长运行时间
+    cancelTimeoutInMinutes: number # 在终止任务之前，给“即使任务被取消，也要始终运行的Job”多少时间
+    variables: { string: string } | [ variable | variableReference ]
+    steps: [ script | bash | pwsh | powershell | checkout | task | templateReference ]
+    services: { string: string | container } # 作为服务容器运行的容器资源
+    uses: # 此作业所需的尚未引用的任何资源（仓库或池）
+      repositories: [ string ] # 引用 Azure Git 仓库
+      pools: [ string ] # 池名称，一般在使用矩阵策略时会用到
+  ```
+
+  若 Job 的主要工作是部署（非构建或测试），可以使用一个叫做 Deployment 的特殊 Job。
+
+  示例如下：
+
+  ```yaml
+  - deployment: string # 取代 job，使用 deployment 关键字
+    pool:
+      name: string
+      demands: string | [ string ]
+    environment: string
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - script: echo Hi!
+  ```
+
+- Job 的类型
+
+- 依赖
+
+- 条件
+
+- 工作空间
+
 **Library、变量与安全文件**
 
 **审批、检查与门禁**
