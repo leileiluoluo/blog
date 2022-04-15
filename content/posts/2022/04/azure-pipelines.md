@@ -577,6 +577,8 @@ Task 是定义管道中自动化的构建块。一个 Job 有一个或多个 Tas
     displayName: "List variable groups using the command line task"
   ```
 
+模板可以用来定义可重用的逻辑，也可以用来控制流水线的安全性。
+
 **Job 及 Stage**
 
 **Library、变量与安全文件**
