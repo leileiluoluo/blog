@@ -106,7 +106,6 @@ Azure 流水线定义文件与项目代码同属一个仓库，一同进行版�
   # Build your Java project and run tests with Apache Maven.
   # Add steps that analyze code, save build artifacts, deploy, and more:
   # https://docs.microsoft.com/azure/devops/pipelines/languages/java
-
   trigger:
     - master
 
@@ -153,7 +152,6 @@ Azure 流水线定义文件与项目代码同属一个仓库，一同进行版�
 # Build your Java project and run tests with Apache Maven.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
-
 trigger:
   - master
 
@@ -361,7 +359,8 @@ Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Tr
   最简单的配置方式为：
 
   ```yaml
-  trigger: # 仅`master`分支和`releases/*`分支有提交时触发构建
+  # 仅`master`分支和`releases/*`分支有提交时触发构建
+  trigger:
     - master # 指定分支名
     - releases/* # 采用通配符
   ```
@@ -369,7 +368,8 @@ Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Tr
   稍微复杂点的配置方式为：
 
   ```yaml
-  trigger: # 仅`master`分支和`releases/*`分支（`releases/old*`除外）有提交时触发构建
+  # 仅`master`分支和`releases/*`分支（`releases/old*`除外）有提交时触发构建
+  trigger:
     branches:
       include:
         - master
@@ -381,7 +381,8 @@ Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Tr
   设置批量运行的配置方式：
 
   ```yaml
-  trigger: # 若团队成员提交频繁，可将流水线设置为batch运行，即待当前流水线运行完成后再运行一次最新的提交
+  # 若团队成员提交频繁，可将流水线设置为batch运行，即待当前流水线运行完成后再运行一次最新的提交
+  trigger:
     batch: true
     branches:
       include:
@@ -391,7 +392,8 @@ Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Tr
   指定包含或排除的 Tag：
 
   ```yaml
-  trigger: # 若有`v2.*`的新Tag（`v2.0`除外）会触发构建
+  # 若有`v2.*`的新Tag（`v2.0`除外）会触发构建
+  trigger:
     tags:
       include:
         - v2.*
@@ -404,7 +406,8 @@ Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Tr
   简单一点的配置如下：
 
   ```yaml
-  pr: # 当如下分支有PR时会触发构建
+  # 当如下分支有PR时会触发构建
+  pr:
     - master
     - develop
     - releases/*
@@ -413,7 +416,8 @@ Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Tr
   复杂一点的配置如下：
 
   ```yaml
-  pr: # 当`master`分支与`releases/*`分支（`releases/old*`除外）有PR时会触发构建
+  # 当`master`分支与`releases/*`分支（`releases/old*`除外）有PR时会触发构建
+  pr:
     branches:
       include:
         - master
@@ -453,9 +457,9 @@ Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Tr
   ```text
   mm HH DD MM DW
   \  \  \  \  \__ 一周中的哪一天，自周日（0）起
-    \  \  \  \____ 月
+   \  \  \  \____ 月
     \  \  \______ 天
-      \  \________ 时
+     \  \________ 时
       \__________ 分
   ```
 
