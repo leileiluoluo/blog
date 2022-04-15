@@ -513,6 +513,70 @@ Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Tr
 
 **Task 及模板**
 
+Task 是定义管道中自动化的构建块。一个 Job 有一个或多个 Task，运行 Job 时，所有 Task 依次运行。Azure 流水线除了提供诸多内置的 Task 满足基本的构建与部署场景外，还支持创建自定义 Task。
+
+- Task 版本
+
+  Task 是有版本号的，使用时需要指定主版本号。如您指定使用的 Task 的主版本为 1，那对应该主版本有新的次版本时（如 1.2），会自动使用最新的；但有另一个主版本 2 出现时，若非您显示指定，流水线使用的还是版本 1。
+
+  可在 Task 名后加@指定版本，示例如下：
+
+  ```yaml
+  steps:
+    - task: PublishTestResults@2
+  ```
+
+- Task 控制选项
+
+  Task 的控制选项可以用 Key/Value 的方式来指定。
+
+  ```yaml
+  - task: string # 指定Task名和版本，如 VSBuild@1
+    condition: expression # 运行条件，如设置为 succeededOrFailed()，表示不管前面步骤成功失败都运行这一步；设置为 failed()，表示只有前面步骤失败了才运行这一步；always() 表示无论如何要运行这一步
+    continueOnError: boolean # 若设置为 true，表示即使这一步失败了，后续步骤也应运行；默认为 false
+    enabled: boolean # 是否运行此步骤；默认为 true
+    retryCountOnTaskFailure: number # Task失败时，最大重试次数；默认值为 0
+    timeoutInMinutes: number # 最长等待时间
+    target: string # 主机或目标容器资源的名称
+  ```
+
+  Task 一般在 Agent 上运行，若指定`target`（可以是 host 或定义的容器资源），则会在目标机器会容器上运行。
+
+  ```yaml
+  resources:
+  containers:
+    - container: pycontainer
+      image: python:3.8
+
+  steps:
+    - task: SampleTask@1
+      target: host
+    - task: AnotherTask@1
+      target: pycontainer
+  ```
+
+- Task 环境变量
+
+  可以使用`env`属性来指定 Task 需要用到的环境变量。
+
+  如下示例分别使用 Scrpt 快捷语法和与其等价的 Task 语法来执行一条命令，命令中会用到环境变量`AZURE_DEVOPS_EXT_PAT`：
+
+  ```yaml
+  # 使用 Script 快捷语法
+  - script: az pipelines variable-group list --output table
+    env:
+      AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+    displayName: "List variable groups using the script step"
+
+  # 使用Task语法
+  - task: CmdLine@2
+    inputs:
+      script: az pipelines variable-group list --output table
+    env:
+      AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+    displayName: "List variable groups using the command line task"
+  ```
+
 **Job 及 Stage**
 
 **Library、变量与安全文件**
