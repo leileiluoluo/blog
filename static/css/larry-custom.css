@@ -114,6 +114,7 @@ a.navbar-brand::selection {
   background: 0 0 !important;
   padding: 0px 0px !important;
   color: #383737 !important;
+  font-size: 13px;
 }
 
 p,
