@@ -836,6 +836,23 @@ Job 是顺序运行的一系列步骤。
       condition: succeeded()
   ```
 
+- 使用容器 Job
+
+  默认情况下，Job 在安装了 Agent 的主机上运行。若想自己控制 Job 运行的环境，可以使用容器 Job。
+
+  下面看一个简单的示例：
+
+  ```yaml
+  # 从 Docker Hub 获取版本为 18.04 的 ubuntu 镜像，然后启动容器，完成后在其中使用 printenv 命令。
+  pool:
+  vmImage: "ubuntu-18.04"
+
+  container: ubuntu:18.04
+
+  steps:
+    - script: printenv
+  ```
+
 **Library、变量与安全文件**
 
 **审批、检查与门禁**
