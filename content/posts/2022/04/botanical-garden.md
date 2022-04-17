@@ -1,5 +1,5 @@
 ---
-title: 游览植物园
+title: 遊覽植物園
 author: olzhy
 type: post
 date: 2022-04-16T17:37:18+08:00
@@ -12,6 +12,16 @@ keywords:
   - 游览植物园
 description: 游览植物园
 ---
+
+週六和太太帶孩子去植物園賞花。
+
+迎春花開，櫻花綻放。
+
+各種顏色的鬱金香開的亭亭玉立，婀娜多姿，香氣撲鼻。
+
+還有漫山遍野的小野花也在爭春。
+
+春天，萬物復蘇，一個個開始綻放的生命讓人心情開朗，生機勃勃。
 
 [![](https://olzhy.github.io/static/images/uploads/2022/04/botanical-garden-1.jpg#center)](https://imglf5.lf127.net/img/696e91b4fbb24ee8/L0FZWERkUnp2ZHRYWnQxVDZlUU1wamNxTDNiamp2TGcrSHdCSCtLRFBBRT0.jpg)
 
