@@ -276,6 +276,8 @@ jobs:
         displayName: "Create work item on failure"
 ```
 
+本节，我们对 Azure 流水线的使用有了一个最基本的了解，下面详细看一下 Azure 流水线的组成部分及基础概念。
+
 ## 2 Azure 流水线基础概念
 
 一条 Azure 流水线由多个 Stage 组成，一个 Stage 由多个 Job 组成，一个 Job（运行在 Agent 上） 由多个 Step 组成，Step 可以是 Script 或 Task。
