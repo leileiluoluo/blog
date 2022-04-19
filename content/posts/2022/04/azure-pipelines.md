@@ -171,7 +171,7 @@ steps:
       goals: "package"
 ```
 
-- `trigger`部分说明：当 Git 仓库的`master`分支有新的提交或新的 PR 时，该流水线即会被触发；
+- `trigger`部分说明：当 Git 仓库的`master`分支有新的提交时，该流水线即会被触发；
 - `pool`部分说明：该流水线将会在一台 Linux 节点上运行，节点采用的镜像为`ubuntu-latest`；
 - `steps`部分说明：该流水线只有一步，即运行 Maven 任务。
 
