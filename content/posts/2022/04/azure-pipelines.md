@@ -880,7 +880,7 @@ Job 是顺序运行的一系列步骤。
 
   定义一个 Deployment Job 的完整语法如下：
 
-  ```yaml
+  ```text
   jobs:
     - deployment: string # 名称，支持`[A-Za-z0-9_]`
       displayName: string # UI 显示名称
@@ -901,7 +901,7 @@ Job 是顺序运行的一系列步骤。
       strategy:
         runOnce: # 部署策略，除了 runOnce 还支持 rolling 和 canary
           deploy:
-            steps: # [ script | bash | pwsh | powershell | checkout | task | templateReference \]
+            steps: [ script | bash | pwsh | powershell | checkout | task | templateReference ]
   ```
 
   如下是一个使用 Deployment Job 将应用部署到 Kubernetes 的示例：
