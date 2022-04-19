@@ -863,7 +863,7 @@ Job 是顺序运行的一系列步骤。
 
   ```yaml
   stages:
-    - stage: string  # Stage 名称 [A-Za-z0-9_]
+    - stage: string  # Stage 名称，支持`[A-Za-z0-9_]`
       displayName: string  # UI 展示名称
       dependsOn: string | [ string ] # 指定依赖的 Stage
       condition: string # 指定依赖的 Stage 的条件，如 failed() 等
@@ -876,7 +876,7 @@ Job 是顺序运行的一系列步骤。
 
   建议将部署类的步骤放在一个称为 Deployment 的特殊 Job 中。使用 Deployment 的益处有：可以获得流水线的部署历史以及特定的资源和部署状态，以便进行审核；可以自定义部署策略，如应用的升级方式（目前支持`runOnce`、`rolling`和`canary`三种升级方式）。
 
-  此外，Deployment Job 还有一些限制：不自动克隆代码仓库；若需检出代码，需要指定`checkout: self`。且 Deployment Job 仅支持一次检出。
+  此外，Deployment Job 还有些限制：不自动克隆代码仓库（若需检出代码，需要指定`checkout: self`，且 Deployment Job 仅支持一次检出）。
 
   定义一个 Deployment Job 的完整语法如下：
 
