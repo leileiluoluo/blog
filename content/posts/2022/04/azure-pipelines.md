@@ -570,7 +570,7 @@ Task 是定义管道中自动化的构建块。一个 Job 有一个或多个 Tas
       AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
     displayName: "List variable groups using the script step"
 
-  # 使用Task语法
+  # 使用 Task 语法
   - task: CmdLine@2
     inputs:
       script: az pipelines variable-group list --output table
@@ -672,11 +672,11 @@ Task 是定义管道中自动化的构建块。一个 Job 有一个或多个 Tas
           displayName: succeed
         - bash: echo "Test"
           displayName: succeed
-        # 这一步解析会报YAML语法错误 `Unexpected value 'CmdLine@2'`
+        # 这一步解析会报 YAML 语法错误 `Unexpected value 'CmdLine@2'`
         - task: CmdLine@2
           inputs:
             script: echo "Script Test"
-        # 这一步解析会报YAML语法错误 `Unexpected value 'CmdLine@2'`
+        # 这一步解析会报 YAML 语法错误 `Unexpected value 'CmdLine@2'`
         - script: echo "Script Test"
   ```
 
@@ -720,7 +720,7 @@ Job 是顺序运行的一系列步骤。
       parallel: # 并行策略
       matrix: # 矩阵策略
       maxParallel: number # 仅针对 `matrix` 使用，最大并行数
-    continueOnError: boolean  # 设置为 true，表示即使当前Job失败，也会继续运行后续 Job；默认为 false
+    continueOnError: boolean  # 设置为 true，表示即使当前 Job 失败，也会继续运行后续 Job；默认为 false
     pool: pool # Agent 池
     workspace:
       clean: outputs | resources | all # Job 运行前是否清除工作空间
@@ -802,7 +802,7 @@ Job 是顺序运行的一系列步骤。
   # 工作区清理选项，只对自托管 Agent 适用
   - job: myJob
     workspace:
-      clean: outputs | resources | all # Job运行前，需要清理的内容
+      clean: outputs | resources | all # Job 运行前，需要清理的内容
   ```
 
 - Job 中的制品下载
@@ -822,7 +822,7 @@ Job 是顺序运行的一系列步骤。
             pathtoPublish: "$(System.DefaultWorkingDirectory)"
             artifactName: WebSite
 
-    # download the artifact and deploy it only if the build job succeeded
+    # 仅当 Build Job 构建成功，才会下载并部署制品
     - job: Deploy
       pool:
         vmImage: "ubuntu-latest"
