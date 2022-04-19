@@ -58,15 +58,15 @@ Azure 流水线定义文件与项目代码同属一个仓库，一同进行版�
 
 下面就一步一步探索下如何使用 Azure 流水线。
 
-### 1 开始使用 Azure 流水线
+## 1 开始使用 Azure 流水线
 
-**注册 Azure 流水线**
+### 1.1 注册 Azure 流水线
 
 打开[Azure 流水线介绍页](https://azure.microsoft.com/en-us/services/devops/pipelines/)，然后点击`Start free`或`Start free with Github`，其会引导你使用微软账号或 Github 账号来注册 Azure 流水线；完成后，需要创建一个 Azure DevOps 组织，填好以后即可以用 URL 的方式进行访问了（如本文 Azure DevOps 组织地址为：https://dev.azure.com/olzhy）。组织建好后，其会引导你创建一个项目，项目建好后，即可以在其下看到有流水线。
 
 ![](https://olzhy.github.io/static/images/uploads/2022/04/azure-pipelines-home.png#center)
 
-**创建第一条流水线**
+### 1.2 创建第一条流水线
 
 下面，使用一个 Java 编写的示例应用创建我们的第一条流水线。
 
@@ -143,7 +143,7 @@ Azure 流水线定义文件与项目代码同属一个仓库，一同进行版�
   [![Build Status](https://dev.azure.com/olzhy/test/_apis/build/status/olzhy.pipelines-java?branchName=master)](https://dev.azure.com/olzhy/test/_build/latest?definitionId=3&branchName=master)
   ```
 
-**自定义流水线内容**
+### 1.3 自定义流水线内容
 
 自定义流水线内容前，先分析一下当前`azure-pipelines.yml`的内容。
 
@@ -276,7 +276,7 @@ jobs:
         displayName: "Create work item on failure"
 ```
 
-### 2 Azure 流水线基础概念
+## 2 Azure 流水线基础概念
 
 一条 Azure 流水线由多个 Stage 组成，一个 Stage 由多个 Job 组成，一个 Job（运行在 Agent 上） 由多个 Step 组成，Step 可以是 Script 或 Task。
 
@@ -346,7 +346,7 @@ jobs:
 
 下面会详细看看如何使用这些基础功能。
 
-**Trigger**
+### 2.1 Trigger
 
 Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Trigger、定时 Trigger 和流水线完成 Trigger 三种类型。
 
@@ -511,7 +511,7 @@ Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Tr
 
   若想更加精确的指定源流水线的哪个阶段完成才触发当前流水线，可以参阅[文档](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/pipeline-triggers?view=azure-devops)稍作配置即可实现。
 
-**Task 及模板**
+### 2.2 Task 及模板
 
 Task 是定义管道中自动化的构建块。一个 Job 有一个或多个 Task，运行 Job 时，所有 Task 依次运行。Azure 流水线除了提供诸多内置的 Task 满足基本的构建与部署场景外，还支持创建自定义 Task。
 
@@ -701,7 +701,7 @@ Task 是定义管道中自动化的构建块。一个 Job 有一个或多个 Tas
 
 此外，关于模板参数类型，变量重用，模板表达式等更详细的配置，请参阅[文档](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/templates?view=azure-devops)。
 
-**Job 及 Stage**
+### 2.3 Job 及 Stage
 
 Job 是顺序运行的一系列步骤。
 
@@ -935,7 +935,7 @@ Job 是顺序运行的一系列步骤。
 
   关于如何开发、安装及使用装饰器，请参阅[文档](https://docs.microsoft.com/en-us/azure/devops/extend/develop/add-pipeline-decorator?toc=%2Fazure%2Fdevops%2Fpipelines%2Ftoc.json&bc=%2Fazure%2Fdevops%2Fpipelines%2Fbreadcrumb%2Ftoc.json&view=azure-devops)。
 
-**Library、变量与安全文件**
+### 2.4 Library、变量与安全文件
 
 - Library
 
@@ -1125,7 +1125,7 @@ Job 是顺序运行的一系列步骤。
 
   关于 Azure Key Vault 的使用及策略设置，请查阅[文档](https://docs.microsoft.com/en-us/azure/devops/pipelines/release/key-vault-in-own-project?view=azure-devops)。
 
-**审批、检查与门禁**
+### 2.5 审批、检查与门禁
 
 可以在流水线前后插入审批和门禁来控制部署流水线的工作流。
 
@@ -1152,6 +1152,8 @@ jobs:
           instructions: "Please validate the build configuration and resume"
           onTimeout: "resume"
 ```
+
+综上，我们对 Azure 流水线的基础概念及 YAML 配置方式有了一个整体的了解。
 
 > 参考资料
 >
