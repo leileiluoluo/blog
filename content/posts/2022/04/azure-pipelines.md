@@ -89,7 +89,7 @@ Azure 流水线定义文件与项目代码同属一个仓库，一同进行版�
   |--- pom.xml
   |--- src
   |    |--- main       # 代码目录
-  |    |    |--- com.microsoft.demo.Demo.java
+  |    |    \--- com.microsoft.demo.Demo.java
   |    \--- test/java  # 单元测试目录
   |         \--- MyTest.java
   \--- README.md
