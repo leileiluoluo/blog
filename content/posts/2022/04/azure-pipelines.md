@@ -210,7 +210,7 @@ pool:
   vmImage: $(imageName)
 ```
 
-如想更改触发分支，可更改`trigger`部分。如下配置说明仅`master`分支或`releases/*`分支有提交才会触发重新构建。
+如想更改触发分支，可更改`trigger`部分。如下示例说明仅`master`分支或`releases/*`分支有提交时才会触发构建。
 
 ```yaml
 trigger:
@@ -218,7 +218,7 @@ trigger:
   - releases/*
 ```
 
-将`trigger`替换为`pr`后，说明针对列出的分支有新的 PR 即会触发构建。
+将`trigger`替换为`pr`后，说明针对列出的分支有新的 PR 时即会触发构建。
 
 ```yaml
 pr:
