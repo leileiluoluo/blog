@@ -28,7 +28,7 @@ Azure 流水线（Azure Pipelines）是 Azure DevOps 的一部分。Azure 流水
 
   Azure 流水线支持在 Linux、macOS 及 Windows 三种代理节点上构建、测试及部署绝大多数语言（诸如：Python、Java、JavaScript、PHP、Ruby、C#、C++ 和 Go 等）开发的应用。
 
-  Azure 流水线提供一组现成任务（Task）来构建或测试这些常用语言编写的应用。此外，还支持在流水线直接运行命令行、PowerShell 或 Shell 脚本。
+  Azure 流水线提供一组现成的 Task（任务）来构建或测试这些常用语言编写的应用。此外，还支持在流水线直接运行命令行、PowerShell 或 Shell 脚本。
 
 - 支持的目标部署环境
 
