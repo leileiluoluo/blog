@@ -383,7 +383,7 @@ Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Tr
   设置批量运行的配置方式：
 
   ```yaml
-  # 若团队成员提交频繁，可将流水线设置为batch运行，即待当前流水线运行完成后再运行一次最新的提交
+  # 若团队成员提交频繁，可将流水线设置为 batch 运行，即待当前流水线运行完成后，再统一运行一次最新的提交
   trigger:
     batch: true
     branches:
@@ -394,7 +394,7 @@ Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Tr
   指定包含或排除的 Tag：
 
   ```yaml
-  # 若有`v2.*`的新Tag（`v2.0`除外）会触发构建
+  # 若有`v2.*`的新 Tag（`v2.0`除外），即会触发构建
   trigger:
     tags:
       include:
@@ -408,7 +408,7 @@ Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Tr
   简单一点的配置如下：
 
   ```yaml
-  # 当如下分支有PR时会触发构建
+  # 当如下分支有 PR 时会触发构建
   pr:
     - master
     - develop
@@ -418,7 +418,7 @@ Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Tr
   复杂一点的配置如下：
 
   ```yaml
-  # 当`master`分支与`releases/*`分支（`releases/old*`除外）有PR时会触发构建
+  # 当`master`分支与`releases/*`分支（`releases/old*`除外）有 PR 时会触发构建
   pr:
     branches:
       include:
@@ -430,7 +430,7 @@ Trigger 即触发器，用于定义流水线的自动执行策略。有 CI/PR Tr
 
 - 定时 Trigger
 
-  支持使用 Cron 表达式定时触发流水线。Cron 表达式的时区采用 UTC 时间，若使用了模板，须将调度规则配置在主文件，不可配置在其它模板文件。
+  支持配置 Cron 表达式来定时触发流水线。Cron 表达式的时区采用 UTC 时间，若使用了模板，须将调度规则配置在主文件，不可配置在其它模板文件。
 
   如下的例子定义了两个调度：
 
@@ -533,7 +533,7 @@ Task 是定义管道中自动化的构建块。一个 Job 有一个或多个 Tas
   Task 的控制选项可以用 Key/Value 的方式来指定。
 
   ```yaml
-  - task: string # 指定Task名和版本，如 VSBuild@1
+  - task: string # 指定 Task 名和版本，如 VSBuild@1
     condition: expression # 运行条件，如设置为 succeededOrFailed()，表示不管前面步骤成功失败都运行这一步；设置为 failed()，表示只有前面步骤失败了才运行这一步；always() 表示无论如何要运行这一步
     continueOnError: boolean # 若设置为 true，表示即使这一步失败了，后续步骤也应运行；默认为 false
     enabled: boolean # 是否运行此步骤；默认为 true
@@ -542,7 +542,7 @@ Task 是定义管道中自动化的构建块。一个 Job 有一个或多个 Tas
     target: string # 主机或目标容器资源的名称
   ```
 
-  Task 一般在 Agent 上运行，若指定`target`（可以是 host 或定义的容器资源），则会在目标机器会容器上运行。
+  Task 一般在 Agent 上运行，若指定`target`（可以是 host 或定义的容器资源），则会在指定的目标机器或容器上运行。
 
   ```yaml
   resources:
