@@ -977,7 +977,7 @@ Job 是顺序运行的一系列步骤。
 
   可以在变量组中创建密钥类和非密钥类的变量，然后在流水线中使用。
 
-  下面是一个使用参数和变量（包活自定义变量和系统变量）的示例：
+  下面是一个使用参数和变量（包括自定义变量和系统变量）的示例：
 
   ```yaml
   parameters:
@@ -1039,7 +1039,7 @@ Job 是顺序运行的一系列步骤。
 
   下面看一下示例：
 
-  ```yaml
+  ```text
   # Job A 设置变量 `myOutputVar=this is from job A`，然后在 Job B 打印
   jobs:
   - job: A
@@ -1129,13 +1129,13 @@ Job 是顺序运行的一系列步骤。
 
 ### 2.5 审批、检查与门禁
 
-可以在流水线前后插入审批和门禁来控制部署流水线的工作流。
+可以在一条流水线的任意 Stage 前后插入审批和门禁来控制其工作流。
 
 审批与门禁的设置需要在 UI 上进行，详情请参阅[文档](https://docs.microsoft.com/en-us/azure/devops/pipelines/release/deploy-using-approvals?view=azure-devops)。
 
 如下是一个配置等待手动校验的示例：
 
-```yaml
+```text
 # 等待手动校验
 pool:
   vmImage: ubuntu-latest
@@ -1155,7 +1155,7 @@ jobs:
           onTimeout: "resume"
 ```
 
-综上，我们对 Azure 流水线的基础概念及 YAML 配置方式有了一个整体的了解。
+综上，我们对 Azure 流水线的基础概念及 YAML 配置方式有了一个整体的了解。后面通过一些真实场景的项目实践，相信会对其有更好的掌握。
 
 > 参考资料
 >
