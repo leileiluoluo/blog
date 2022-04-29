@@ -172,7 +172,7 @@ enable = false
 
 # baidu tongji
 [params.baidu_tongji]
-enable = false
+enable = true
 
 
 ############################# Social Site ##########################
