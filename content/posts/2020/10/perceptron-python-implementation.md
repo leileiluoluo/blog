@@ -188,6 +188,17 @@ iris.data
 predict.data
 ```
 
+`iris.data`的内容如下（每一行的数值表示：萼长 - Sepal length、萼宽 - Sepal width、瓣长 - Petal length、瓣宽 - Petal width、花的种类）：
+
+```text
+5.1,3.5,1.4,0.2,Iris-setosa
+4.9,3.0,1.4,0.2,Iris-setosa
+...
+7.0,3.2,4.7,1.4,Iris-versicolor
+6.4,3.2,4.5,1.5,Iris-versicolor
+...
+```
+
 调用 Perceptron 的代码如下：
 
 ```text
