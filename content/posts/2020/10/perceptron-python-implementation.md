@@ -245,7 +245,7 @@ predict label: -1, real: Iris-versicolor
 predict label: -1, real: Iris-versicolor
 ```
 
-综上，对感知机算法的原理作了学习与了解，并使用 Python 对其进行了实现。本文代码已托管至[GitHub](https://github.com/olzhy/machine-learning/tree/main/perceptron)，欢迎 Fork。
+综上，对感知机算法的原理作了学习与了解，并使用 Python 对其进行了实现及初步应用。本文代码已托管至[GitHub](https://github.com/olzhy/machine-learning/tree/main/perceptron)，欢迎 Fork。
 
 > 参考资料
 >
