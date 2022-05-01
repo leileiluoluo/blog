@@ -176,7 +176,7 @@ times: 3, xi: [1, 1], yi: -1, y_predict: -1, _w: [-8.0, 10.0, -6.0]
 
 ### 4 对 Iris 数据集进行训练及预测
 
-下面使用 3 中的代码对[iris(鸢尾花)](https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data)数据集进行训练及预测。该数据集共包含三类鸢尾花品种，因 Perceptron 模型是一个仅支持二分类的分类器。所以仅选取该数据集中的两类数据（Iris-setosa 与 Iris-versicolor）进行训练及预测（该两类数据均有 50 条，分别取两者的前 40 条作为训练样本，分别取两者的后 10 条作为预测样本）。
+下面使用 3 中的代码对[iris(鸢尾花)](https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data)数据集进行训练及预测。该数据集共包含三类鸢尾花品种，因 Perceptron 模型是一个仅支持二分类的分类器。所以仅选取该数据集中的两类数据（Iris-setosa 与 Iris-versicolor）进行训练及预测（该两类数据均有 50 条，分别取两者的前 40 条作为训练样本，两者的后 10 条作为预测样本）。
 
 测试代码，测试数据，与 Perceptron 模型代码（perceptron.py）的目录结构如下：
 
@@ -219,7 +219,7 @@ if '__main__' == __name__:
             print('predict label: {}, real: {}'.format(p.predict(xi), yi))
 ```
 
-观察输出可以发现，该 Perceptron 算法经过 4 轮迭代找到合适的权重向量，然后采用训练的模型对 20 条测试数据进行预测，结果准确无误。
+观察输出可以发现，该 Perceptron 算法经过 7 轮迭代找到合适的权重向量，然后采用训练的模型对 20 条测试数据进行预测，结果准确无误。
 
 ```text
 ...
@@ -245,7 +245,7 @@ predict label: -1, real: Iris-versicolor
 predict label: -1, real: Iris-versicolor
 ```
 
-本文代码已托管至[GitHub](https://github.com/olzhy/machine-learning/tree/main/perceptron)，欢迎 Fork。
+综上，对感知机算法的原理作了学习与了解，并使用 Python 对其进行了实现。本文代码已托管至[GitHub](https://github.com/olzhy/machine-learning/tree/main/perceptron)，欢迎 Fork。
 
 > 参考资料
 >
