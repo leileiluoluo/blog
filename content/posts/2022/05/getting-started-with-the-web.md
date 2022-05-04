@@ -60,6 +60,40 @@ description: Web 开发入门
 
 ### 1 基础软件安装
 
+本小节会介绍进行基础 Web 开发所需的软件或工具。
+
+**专业人士都用啥工具？**
+
+- 一台电脑
+
+  一个专业的 Web 开发人员应有一台运行 Windows、macOS 或 Linux 的台式机或笔记本电脑。
+
+- 一个文本编辑器
+
+  一个用来编写代码的文本编辑器。诸如 [Visual Studio Code](https://code.visualstudio.com/)、[Notepad++](https://notepad-plus-plus.org/)、[Sublime Text](https://www.sublimetext.com/)、[Atom](https://atom.io/)、[GNU Emacs](https://www.gnu.org/software/emacs/) 与 [VIM](https://www.vim.org/) 等文本编辑器；或诸如 [Dreamweaver](https://www.adobe.com/products/dreamweaver.html) 与 [WebStorm](https://www.jetbrains.com/webstorm/) 等混合编辑器。
+
+- 一个 Web 浏览器
+
+  一个用来测试代码的 Web 浏览器。最常用的有 [Chrome](https://www.google.com/chrome/)、[Firefox](https://www.mozilla.org/en-US/firefox/new/)、[Opera](https://www.opera.com/)、[Safari](https://www.apple.com/safari/)、[Internet Explorer](https://support.microsoft.com/en-us/windows/internet-explorer-downloads-d49e1f0d-571c-9a7b-d97e-be248806ca70) 与 [Microsoft Edge](https://www.microsoft.com/en-us/edge)。
+
+- 一个图形编辑器
+
+  一个用来为网站制作图像或图形的编辑器。诸如 [GIMP](https://www.gimp.org/)、[Figma](https://www.figma.com/)、[Paint.NET](https://www.getpaint.net/)、[Photoshop](https://www.adobe.com/products/photoshop.html)、[Sketch](https://www.sketch.com/) 与 [XD](https://www.adobe.com/products/xd.html)。
+
+- 一个版本控制系统
+
+  一个用来进行代码管理及团队协作的工具。[Git](https://git-scm.com/) 及基于其衍生的 [GitHub](https://github.com/) 托管服务是目前最流行的版本控制系统。
+
+- 一个自动化工具
+
+  一个用来执行重复性任务（如：压缩代码或运行测试）的自动化工具。常见的有 [Webpack](https://webpack.js.org/)、[Grunt](https://gruntjs.com/) 与 [Gulp](https://gulpjs.com/)。
+
+此外，还可能会涉及一些常用的库或框架等，基于其可以加快功能的实现。
+
+**现在需要用啥工具？**
+
+针对本文的练习，只需安装好一个文本编辑器和一个浏览器即可。
+
 ### 2 网页设计
 
 ### 3 文件编排
