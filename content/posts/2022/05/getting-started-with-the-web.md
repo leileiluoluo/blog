@@ -94,6 +94,22 @@ description: Web 开发入门
 
 ### 2 网页设计
 
+编写代码前必须要考虑清楚的问题 —— 做一个什么样的网站？展示哪些信息？采用何种字体和色调？本小节会给出一个大概的着手办法。
+
+- 最基本的规划
+
+  想一想做一个关于什么的网站？美食？健身？旅游？
+  选好主题后，写上标题和几段话，并考虑想在页面上显示的一幅图片。
+  接下来，构思网站应该长什么样？采用什么背景颜色？何种字体？
+
+  _注：大型项目一般需要一套详尽的设计指导手册，包括颜色、字体、页面模块间的间距等都有严格的要求。业界一般叫作设计系统。诸如 Firefox 的 [Photon Design System](https://design.firefox.com/photon/)、IBM 的 [Carbon Design System](https://carbondesignsystem.com/) 和 Google 的 [Material Design](https://material.io/)。_
+
+- 勾勒网站的轮廓
+
+  接下来，拿起纸和笔试着勾勒出网站的雏形（这个习惯很重要）。
+
+  ![手绘网站雏形 - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-drawing-scan.png#center)
+
 ### 3 文件编排
 
 ### 4 HTML 基础
