@@ -20,11 +20,9 @@ keywords:
 description: Web 开发入门
 ---
 
-**本文整理自[『MDN Web 开发入门引导』](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web)。**
+**本文整理自[『MDN Web 开发入门』](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web)。**
 
 本文由如下几个小节组成，通过依次对各个小节的学习，我们将从零开始开发一个网页，并将其上线。
-
-各小节的基本内容如下：
 
 - 基础软件安装
 
