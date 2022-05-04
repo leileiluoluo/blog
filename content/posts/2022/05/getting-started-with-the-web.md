@@ -96,7 +96,7 @@ description: Web 开发入门
 
 编写代码前必须要考虑清楚的问题 —— 做一个什么样的网站？展示哪些信息？采用何种字体和色调？本小节会给出一个大概的着手办法。
 
-- 最基本的规划
+- 规划基础内容
 
   想一想做一个关于什么的网站？美食？健身？旅游？
   选好主题后，写上标题和几段话，并考虑想在页面上显示的一幅图片。
@@ -109,6 +109,22 @@ description: Web 开发入门
   接下来，拿起纸和笔试着勾勒出网站的雏形（这个习惯很重要）。
 
   ![手绘网站雏形 - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-drawing-scan.png#center)
+
+  _注：即使对于现实场景的复杂网站设计，设计团队也通常会先在纸上构思网站的轮廓。_
+
+- 选择字体和色调
+
+  现在，将之前规划的内容（标题、段落和图片等）组织到一起。
+
+  借助[『取色器』](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Colors/Color_picker_tool)选择喜欢的颜色（颜色采用 6 位十六进制代码表示，诸如`#660066`）。
+
+  ![Color Picker - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/color-picker.png#center)
+
+  借助[『谷歌图片』](https://www.google.com/imghp?gws_rd=ssl)找一张喜欢的图片。
+
+  ![Google Images - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/updated-google-images-licensing.png#center)
+
+  借助[『Google Fonts』](https://developers.google.com/fonts/docs/getting_started)寻找喜欢的字体。
 
 ### 3 文件编排
 
