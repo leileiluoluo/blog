@@ -176,6 +176,8 @@ description: Web 开发入门
 
 ### 4 HTML 基础
 
+HTML（HyperText Markup Language，超文本标记语言）用于构建网页的内容，如使用一组文字段落、一组列表、一组图片或几张表格构成一个网页。本小节将会对 HTML 有一个基本的介绍。
+
 ### 5 CSS 基础
 
 ### 6 JavaScript 基础
