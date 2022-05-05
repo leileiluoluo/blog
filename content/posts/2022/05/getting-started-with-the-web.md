@@ -198,11 +198,11 @@ HTML 是定义网页内容结构的一种标记语言。HTML 由一系列元素�
 
   开始标签（这里的`<p>`）表示元素从哪里开始（这里表示段落开始的地方）；结束标签（这里的`</p>`）表示元素到哪里结束（这里表示段落结束的地方）；元素内容即表示元素的内容（这里的一句话）。
 
-  _小提示：忘加结束标签是初学者常犯的错误之一，会导致各种奇怪的结果。_
+  _**小提示**：忘加结束标签是初学者常犯的错误之一，会导致各种奇怪的结果，所以要多加注意。_
 
   此外，元素还可以有属性。示例如下：
 
-  ![Grumpy Cat Attribute Small - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/grumpy-cat-attribute-small.png.png#center)
+  ![Grumpy Cat Attribute Small - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/grumpy-cat-attribute-small.png#center)
 
   属性包含您不希望出现在实际内容中的额外元素信息。这里的`class`是属性名，`editor-note`是属性值，使用`class`属性可以控制元素的样式。
 
@@ -210,13 +210,13 @@ HTML 是定义网页内容结构的一种标记语言。HTML 由一系列元素�
 
   用一组元素包含另一组元素，叫作元素嵌套。
 
-  如下示例，在段落元素内使用`<strong></strong>`标签将单词`very`特别强调。
+  如下示例，在段落元素内使用`<strong></strong>`元素将单词`very`特别强调。
 
   ```html
   <p>My cat is <strong>very</strong> grumpy.</p>
   ```
 
-  _小提示：使用元素嵌套时，要注意元素开闭的顺序，确保使用正确。_
+  _**小提示**：使用元素嵌套时，要注意元素开闭的顺序，确保使用正确。_
 
 - 空元素
 
@@ -226,7 +226,7 @@ HTML 是定义网页内容结构的一种标记语言。HTML 由一系列元素�
   <img src="images/firefox-icon.png" alt="My test image" />
   ```
 
-  可以看到，该元素有两个属性`src`与`alt`，没有结束标签`</img>`，也没有内容。这是因为，图像元素不需要有文本内容，其目的是将图片嵌入 HTML 页面的某一处即可。
+  可以看到，该元素有两个属性`src`与`alt`，没有结束标签`</img>`，也没有内容。这是因为，图像元素不需要有文本内容，其目的是将图片嵌入 HTML 页面的某一处。
 
 - HTML 文档剖析
 
