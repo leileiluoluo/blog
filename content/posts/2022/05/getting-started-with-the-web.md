@@ -220,7 +220,7 @@ HTML 是定义网页内容结构的一种标记语言。HTML 由一系列元素�
 
 - 空元素
 
-  有些元素没有内容，称为空元素。前面在`index.html`用到的`<img />`元素即是一个空元素。
+  有些元素没有内容，称为空元素。前面在`index.html`用到的`<img>`元素即是一个空元素。
 
   ```html
   <img src="images/firefox-icon.png" alt="My test image" />
@@ -269,9 +269,41 @@ HTML 是定义网页内容结构的一种标记语言。HTML 由一系列元素�
 
   `<body>`元素，其包含需要向页面访问者显示的所有内容，包含文本、图像与视频等。
 
-**标记文本**
+**图像**
+
+再次将注意力转回到`<img>`元素。
+
+```html
+<img src="images/firefox-icon.png" alt="My test image" />
+```
+
+正如前面所讲，该元素将一个图片嵌入到页面的某个位置。其通过`src`（source）属性指定了图片的路径；通过`alt`（alternative）属性为因某种原因（比如图片路径不对）看不到图片的用户显示一段描述。
+
+**文本标记**
+
+该部分将介绍用于标记文本的几个基本元素。
+
+- 标题
+
+  标题元素用于将一段内容指定为标题或子标题。HTML 文档有 6 个标题级别`<h1> - <h6>`，通常最多用到 3-4 个。
+
+  ```html
+  <!-- 4 heading levels: -->
+  <h1>My main title</h1>
+  <h2>My top level heading</h2>
+  <h3>My subheading</h3>
+  <h4>My sub-subheading</h4>
+  ```
+
+  _**小提示**：HTML 中使用`<!-- ... -->`作注释，浏览器显示页面时会将其忽略。_
 
 - 段落
+
+  如前面所讲，`<p>`元素用于标记文本段落，即常规文本内容。
+
+  ```html
+  <p>This is a single paragraph</p>
+  ```
 
 - 列表
 
