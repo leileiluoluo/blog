@@ -358,11 +358,3 @@ HTML 是定义网页内容结构的一种标记语言。HTML 由一系列元素�
 > 参考资料
 >
 > [1] [Getting started with the web - Learn web development | MDN](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web)
-
-```
-
-```
-
-```
-
-```
