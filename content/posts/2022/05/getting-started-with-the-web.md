@@ -347,7 +347,7 @@ HTML 是定义网页内容结构的一种标记语言。HTML 由一系列元素�
 
 ![Finished Test Page - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/finished-test-page-small.jpeg#center)
 
-### 5 CSS 基础 s
+### 5 CSS 基础
 
 ### 6 JavaScript 基础
 
