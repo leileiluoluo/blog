@@ -176,7 +176,67 @@ description: Web 开发入门
 
 ### 4 HTML 基础
 
-HTML（HyperText Markup Language，超文本标记语言）用于构建网页的内容，如使用一组文字段落、一组列表、一组图片或几张表格构成一个网页。本小节将会对 HTML 有一个基本的介绍。
+HTML（HyperText Markup Language，超文本标记语言）用于构建网页的内容，如使用一组文字段落、一组列表、一组图片或几张表格构成一个网页。本小节会对 HTML 和其功用有一个基本的介绍。
+
+**到底啥是 HTML？**
+
+HTML 是定义网页内容结构的一种标记语言。HTML 由一系列元素组成，这些元素用于封装内容的不同部分，以使其按照某种方式显现。闭合标签可以做诸如控制文本或图片超链接到某个地方及控制字体的大小等各种事情。
+
+比如，想让一句话独立显示，可以使用`<p></p>`段落标签将其包起来：
+
+```html
+<p>My cat is very grumpy</p>
+```
+
+- HTML 元素剖析
+
+  下面剖析一下刚刚用到的段落元素。
+
+  ![Grumpy Cat Small - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/grumpy-cat-small.png#center)
+
+  可以看到，这个段落元素由开始标签、结束标签和内容这几个部分组成。
+
+  开始标签（这里的`<p>`）表示元素从哪里开始（这里表示段落开始的地方）；结束标签（这里的`</p>`）表示元素到哪里结束（这里表示段落结束的地方）；元素内容即表示元素的内容（这里的一句话）。
+
+  _小提示：忘加结束标签是初学者常犯的错误之一，会导致各种奇怪的结果。_
+
+  此外，元素还可以有属性。示例如下：
+
+  ![Grumpy Cat Attribute Small - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/grumpy-cat-attribute-small.png.png#center)
+
+  属性包含您不希望出现在实际内容中的额外元素信息。这里的`class`是属性名，`editor-note`是属性值，使用`class`属性可以控制元素的样式。
+
+- 元素嵌套
+
+  用一组元素包含另一组元素，叫作元素嵌套。
+
+  如下示例，在段落元素内使用`<strong></strong>`标签将单词`very`特别强调。
+
+  ```html
+  <p>My cat is <strong>very</strong> grumpy.</p>
+  ```
+
+  _小提示：使用元素嵌套时，要注意元素开闭的顺序，确保使用正确。_
+
+- 空元素
+
+  有些元素没有内容，称为空元素。前面在`index.html`用到的`<img />`元素即是一个空元素。
+
+  ```html
+  <img src="images/firefox-icon.png" alt="My test image" />
+  ```
+
+  可以看到，该元素有两个属性`src`与`alt`，没有结束标签`</img>`，也没有内容。这是因为，图像元素不需要有文本内容，其目的是将图片嵌入 HTML 页面的某一处即可。
+
+- HTML 文档剖析
+
+**标记文本**
+
+- 段落
+
+- 列表
+
+- 链接
 
 ### 5 CSS 基础
 
