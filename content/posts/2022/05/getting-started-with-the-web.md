@@ -230,6 +230,33 @@ HTML 是定义网页内容结构的一种标记语言。HTML 由一系列元素�
 
 - HTML 文档剖析
 
+  下面剖析一下前面已见过的`index.html`文件的内容，看看多个独立的元素如何组合到一起形成一个完整的 HTML 页面。
+
+  ```html
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <title>My test page</title>
+    </head>
+    <body>
+      <img src="images/firefox-icon.png" alt="My test image" />
+    </body>
+  </html>
+  ```
+
+  ① `<!DOCTYPE html>`
+
+  ② `<html></html>`
+
+  ③ `<head></head>`
+
+  ④ `<meta charset="utf-8">`
+
+  ⑤ `<title></title>`
+
+  ⑥ `<body></body>`
+
 **标记文本**
 
 - 段落
