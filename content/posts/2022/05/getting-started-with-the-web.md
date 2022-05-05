@@ -102,7 +102,7 @@ description: Web 开发入门
   选好主题后，写上标题和几段话，并考虑想在页面上显示的一幅图片。
   接下来，构思网站应该长什么样？采用什么背景颜色？何种字体？
 
-  _注：大型项目一般需要一套详尽的设计指导手册，包括颜色、字体、页面模块间的间距等都有严格的要求。业界一般叫作设计系统。诸如 Firefox 的 [Photon Design System](https://design.firefox.com/photon/)、IBM 的 [Carbon Design System](https://carbondesignsystem.com/) 和 Google 的 [Material Design](https://material.io/)。_
+  _**小提示**：大型项目一般需要一套详尽的设计指导手册，包括颜色、字体、页面模块间的间距等都有严格的要求。业界一般叫作设计系统。诸如 Firefox 的 [Photon Design System](https://design.firefox.com/photon/)、IBM 的 [Carbon Design System](https://carbondesignsystem.com/) 和 Google 的 [Material Design](https://material.io/)。_
 
 - 勾勒网站的轮廓
 
@@ -110,7 +110,7 @@ description: Web 开发入门
 
   ![手绘网站雏形 - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-drawing-scan.png#center)
 
-  _注：即使对于现实场景的复杂网站设计，设计团队也通常会先在纸上构思网站的轮廓。_
+  _**小提示**：即使对于现实场景的复杂网站设计，设计团队也通常会先在纸上构思网站的轮廓。_
 
 - 选择字体和色调
 
@@ -129,6 +129,28 @@ description: Web 开发入门
 ### 3 文件编排
 
 一个网站由诸多文件组成，有文本内容、代码、样式表和媒体文件等。我们需要将这些文件按照一个合理的结构组织在一起。本小节会探讨文件的组织及注意的问题。
+
+- 创建网站文件夹
+
+  在磁盘的某个位置，创建一个名为诸如`workspace`的文件夹，用于存放所有的项目代码；在其下创建一个诸如`test-site`的文件夹，用于本次的练习。
+
+  _**文件及文件夹命名小提示**：因浏览器、服务器与编程语言对空格的处理不一致，且因一些服务器是大小写敏感的，所以进行文件或文件夹命名时，不要使用空格及大小写混合方式。建议直接使用全小写字母加短横线的方式进行文件及文件夹命名。如`test-site/my-file.html`即是一个规范的命名方式。_
+
+- 编排网站目录结构
+
+  接下来，考虑如何编排网站的目录结构。
+
+  一个 Web 项目中常见的文件有：`index.html`文件、图像文件、`CSS`样式文件与`JavaScript`脚本文件。
+
+  因此，一个初步的网站目录结构如下所示：
+
+  ```text
+  test-site
+  |--- images      # 存放所有的图片文件
+  |--- styles      # 存放所有的 CSS 样式文件
+  |--- scripts     # 存放所有的 JavaScript 脚本文件
+  \--- index.html  # 网站主页
+  ```
 
 ### 4 HTML 基础
 
