@@ -307,9 +307,47 @@ HTML 是定义网页内容结构的一种标记语言。HTML 由一系列元素�
 
 - 列表
 
+  HTML 为列表内容分配了专门的元素。常见的有有序列表和无序列表两种类型。
+
+  无序列表（对应`<ul>`元素）用于对顺序无关紧要的场景（如：购物列表）；有序列表（对应`<ol>`元素）用于对顺序重要的场景（如：食谱步骤）。
+
+  列表中的每个条目都被包在一个`<li>`元素中。
+
+  示例如下：
+
+  ```html
+  <p>At Mozilla, we're a global community of</p>
+
+  <ul>
+    <li>technologists</li>
+    <li>thinkers</li>
+    <li>builders</li>
+  </ul>
+
+  <p>working together ...</p>
+  ```
+
 - 链接
 
-### 5 CSS 基础
+  链接很重要，其是 Web 成为 Web 的关键所在。
+
+  要添加一个链接，使用`<a>`（anchor 的缩写，意思是“锚”）元素即可。
+
+  示例如下：
+
+  ```html
+  <a href="https://www.mozilla.org/en-US/about/manifesto/">Mozilla Manifesto</a>
+  ```
+
+  这里的`<a>`元素使用`href`属性指定要链接到的一个网址。
+
+  _**小提示**：`href`为 Hypertext Reference 的缩写，即超文本引用。_
+
+本小节的内容跟着一步步走下来，最终看到的页面如下图所示。
+
+![Finished Test Page - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/finished-test-page-small.png#center)
+
+### 5 CSS 基础 s
 
 ### 6 JavaScript 基础
 
@@ -320,3 +358,11 @@ HTML 是定义网页内容结构的一种标记语言。HTML 由一系列元素�
 > 参考资料
 >
 > [1] [Getting started with the web - Learn web development | MDN](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web)
+
+```
+
+```
+
+```
+
+```
