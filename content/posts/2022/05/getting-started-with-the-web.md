@@ -116,11 +116,11 @@ description: Web 开发入门
 
   现在，将之前规划的内容（标题、段落和图片等）组织到一起。
 
-  借助[『取色器』](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Colors/Color_picker_tool)选择喜欢的颜色（颜色采用 6 位十六进制代码表示，诸如`#660066`）。
+  借助[『取色器』](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Colors/Color_picker_tool)选择喜欢的颜色（颜色采用 6 位十六进制代码表示，诸如`#660066`），并记录好。
 
   ![Color Picker - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/color-picker.png#center)
 
-  借助[『谷歌图片』](https://www.google.com/imghp?gws_rd=ssl)找一张喜欢的图片。
+  借助[『谷歌图片』](https://www.google.com/imghp?gws_rd=ssl)找一张喜欢的图片（诸如`firefox-logo.png`），并保存好。
 
   ![Google Images - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/updated-google-images-licensing.png#center)
 
@@ -147,10 +147,32 @@ description: Web 开发入门
   ```text
   test-site
   |--- images      # 存放所有的图片文件
+  |     \--- firefox-logo.png
   |--- styles      # 存放所有的 CSS 样式文件
   |--- scripts     # 存放所有的 JavaScript 脚本文件
   \--- index.html  # 网站主页
   ```
+
+- 指定文件引用路径
+
+  要使文件可以正确的找到对方，需要指定好文件的路径。下面，在`index.html`文件引用前面找好的图片`firefox-logo.png`。
+
+  ```html
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <title>My test site</title>
+    </head>
+    <body>
+      <img src="images/firefox-logo.png" alt="My test image" />
+    </body>
+  </html>
+  ```
+
+  将`index.html`保存好后，使用浏览器打开，效果如下：
+
+  ![Website Screenshot - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-screenshot.png#center)
 
 ### 4 HTML 基础
 
