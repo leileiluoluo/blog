@@ -170,7 +170,7 @@ description: Web 开发入门
   </html>
   ```
 
-  将`index.html`保存好后，使用浏览器打开，效果如下：
+  将`index.html`保存好后，使用浏览器打开，效果如下图所示：
 
   ![Website Screenshot - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-screenshot.png#center)
 
