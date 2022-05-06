@@ -581,6 +581,14 @@ CSS 布局主要是基于“框”模型实现的。占用页面空间的每个�
   }
   ```
 
+  接下来，同样使用`margin: 0 auto;`结合`display: block;`将图片水平居中。
+
+  `<body>`是一个块元素，这意味着它会占用页面上的空间。应用于块元素的边距同样会被页面上的其它元素遵循。相比之下，图像是内联元素，要让自动边距设置在此图像上起作用，必须结合使用`display: block;`将其指定为块级行为。
+
+  _**小提示**：如上设置假定图片的宽度小于 body 的宽度（600 像素），若图片宽度大于 600 像素，则会溢出到 body 的外边。这时，可以使用`<img>`元素的`width`属性来调整图片的显示宽度。_
+
+  _**小提示**：若现在对`display: block;`或块元素和内联元素之间的区别不太理解，也不必太担心。随着对 CSS 学习的深入，就会明白了。_
+
 本小节的内容跟着一步步走下来，最终看到的页面如下图所示（比对下[`style.css`的源码](hhttps://github.com/mdn/beginner-html-site-styled/blob/gh-pages/styles/style.css)）。
 
 ![Website Screenshot Final - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-screenshot-final.jpeg#center)
