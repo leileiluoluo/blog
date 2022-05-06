@@ -431,6 +431,58 @@ p {
 
 **字体与文本**
 
+现在有了 CSS 的一些基础知识，我们可以接着在`style.css`文件试着加入更多的规则来丰富示例页面的外观。
+
+① 修改`index.html`文件
+
+找到前面『网页设计』小节选好的字体，使用`<link>`元素将其放在标签`<head>`与`</head>`之间。
+
+```html
+<link
+  href="https://fonts.googleapis.com/css?family=Open+Sans"
+  rel="stylesheet"
+/>
+```
+
+如上代码将`Open Sans`字体加载到了页面。
+
+② 清除`style.css`文件现有规则集
+
+③ 将如下规则集添加到`style.css`文件
+
+```css
+html {
+  font-size: 10px; /* px means "pixels": the base font size is now 10 pixels high  */
+  font-family: "Open Sans", sans-serif; /* this should be the rest of the output you got from Google fonts */
+}
+```
+
+如上代码指定了页面的字体大小与类型。因`<html>`是整个页面的父元素，所以该页面所有的元素都会继承该`font-size`与`font-family`设置。
+
+_**小提示**：CSS 中使用`/* ... */`作注释，浏览器在渲染页面时同样会忽略它们。_
+
+④ 更改元素样式
+
+```css
+h1 {
+  font-size: 60px;
+  text-align: center;
+}
+
+p,
+li {
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 1px;
+}
+```
+
+如上代码指定了`<h1>`、`<li>`与`<p>`元素的字体大小，且让`<h1>`元素居中，并指定了`<li>`与`<p>`的行高与字母间距以使内容更具可读性。
+
+样式调整后的页面效果如下图所示：
+
+![Website Screenshot Styled - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-screenshot-font-small.jpeg#center)
+
 **关于箱子的一切**
 
 - 改变页面背景色
