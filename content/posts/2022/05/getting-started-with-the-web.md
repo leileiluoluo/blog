@@ -377,6 +377,24 @@ p {
 
 ![Website Screenshot Styled - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-screenshot-styled.jpeg#center)
 
+- CSS 规则集剖析
+
+- 多个元素选择
+
+- 选择器的类型
+
+**字体与文本**
+
+**关于箱子的一切**
+
+- 改变页面背景色
+
+- 给页面 body 指定样式
+
+- 给页面标题指定位置与样式
+
+- 图片居中对齐
+
 ### 6 JavaScript 基础
 
 ### 7 网站发布
