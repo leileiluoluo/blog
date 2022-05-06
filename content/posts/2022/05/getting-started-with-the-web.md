@@ -483,11 +483,71 @@ li {
 
 ![Website Screenshot Styled - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-screenshot-font-small.jpeg#center)
 
-**关于箱子的一切**
+**关于“框”的一切**
+
+编写 CSS 时，大家可能会注意到：很多都是关于“框”的。包括设置尺寸、颜色和位置。页面上的众多 HTML 元素可被认为是建在“框”上面的“框”。
+
+CSS 布局主要是基于“框”模型实现的。占用页面空间的每个“框”都具有以下属性：
+
+① `padding`（内边距）
+
+边框与元素内容之间的空间。
+
+② `border`（边框）
+
+内边距外的实线。
+
+③ `margin`（外边距）
+
+元素边框外的空白区域。
+
+![Box Model - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/box-model.png#center)
+
+此外，本小节还会用到：`width`（元素宽度）、`background-color`（元素内容和`padding`的背景色）、`color`（元素内容的颜色）、`text-shadow`（元素内的文本的投影）与`display`（元素的显示模式）。
+
+接下来，继续在`style.css`文件添加更多的规则集，看看页面外观有什么变化。
 
 - 改变页面背景色
 
+  ```css
+  html {
+    background-color: #00539f;
+  }
+  ```
+
+  如上规则集为整个页面设置了背景颜色。
+
 - 给页面 body 指定样式
+
+  ```css
+  body {
+    width: 600px;
+    margin: 0 auto;
+    background-color: #ff9500;
+    padding: 0 20px 20px 20px;
+    border: 5px solid black;
+  }
+  ```
+
+  ① `width: 600px;`
+
+  强制设定页面 body 的宽度为 600 像素。
+
+  ② `margin: 0 auto;`
+
+  设定`margin`或`padding`时，值可以为 1 ～ 4 个。
+  1 个值时，表示应用到所有四个方向；
+  2 个值时，分别表示垂直和水平；
+  3 个值时，分别表示上、水平、下；
+  4 个值时，分别表示上、右、下、左。
+
+  本例中，`margin`的设置仅有两个值，表示将垂直方向的内边距设置为 0，水平方向设置为自动平分。
+
+  ③ `background-color: #FF9500;`
+
+  ④ `padding: 0 20px 20px 20px;`
+
+  ⑤ `border: 5px solid black;`
 
 - 给页面标题指定位置与样式
 
