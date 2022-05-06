@@ -42,7 +42,7 @@ description: Web 开发入门
 
 - CSS 基础
 
-  CSS（Cascading Stylesheets，级联样式表）是用于定义网站样式的代码。使用其来定义诸如：网页的背景图片、文本的颜色和模块的位置。
+  CSS（Cascading Stylesheets，层叠样式表）是用于定义网站样式的代码。使用其来定义诸如：网页的背景图片、文本的颜色和模块的位置。
 
 - JavaScript 基础
 
@@ -345,9 +345,37 @@ HTML 是定义网页内容结构的一种标记语言。HTML 由一系列元素�
 
 本小节的内容跟着一步步走下来，最终看到的页面如下图所示（比对下[`index.html`的源码](https://github.com/mdn/beginner-html-site/blob/gh-pages/index.html)）。
 
-![Finished Test Page - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/finished-test-page-small.jpeg#center)
+![Finished Test Page - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/finished-test-page-small.png#center)
 
 ### 5 CSS 基础
+
+CSS（Cascading Style Sheets，层叠样式表）是为网页内容添加样式的代码。诸如：如何使文本显示为红色？如何使内容显示在网页布局的某个位置？如何给网页指定背景图片或背景颜色？本小节将会对 CSS 的基础使用作一个的介绍。
+
+**到底啥是 CSS？**
+
+CSS 与 HTML 一样，都不是编程语言。CSS 是一种样式表语言，是用来选择性设置 HTML 元素样式的工具。
+
+如下示例 CSS 可将文本段落设置为红色：
+
+```css
+p {
+  color: red;
+}
+```
+
+现在看一下效果：
+
+① 使用文本编辑器，将如上 3 行 CSS 代码拷入`styles`目录下的`style.css`文件中；
+
+② 编辑`index.html`，将如下代码粘贴在`<head>`与`</head>`标签之间；
+
+```html
+<link href="styles/style.css" rel="stylesheet" />
+```
+
+③ 保存`index.html`，并再次使用浏览器打开，即可看到如下效果。
+
+![Website Screenshot Styled - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-screenshot-styled.jpeg#center)
 
 ### 6 JavaScript 基础
 
