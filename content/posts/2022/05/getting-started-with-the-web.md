@@ -345,7 +345,7 @@ HTML 是定义网页内容结构的一种标记语言。HTML 由一系列元素�
 
 本小节的内容跟着一步步走下来，最终看到的页面如下图所示（比对下[`index.html`的源码](https://github.com/mdn/beginner-html-site/blob/gh-pages/index.html)）。
 
-![Finished Test Page - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/finished-test-page-small.png#center)
+![Finished Test Page - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/finished-test-page-small.jpeg#center)
 
 ### 5 CSS 基础
 
