@@ -98,7 +98,7 @@ description: Web 开发入门
 
 - 规划基础内容
 
-  想一想做一个关于什么的网站？美食？健身？旅游？
+  想一想，做一个关于什么的网站？美食？健身？旅游？
   选好主题后，写上标题和几段话，并考虑想在页面上显示的一幅图片。
   接下来，构思网站应该长什么样？采用什么背景颜色？何种字体？
 
@@ -124,7 +124,7 @@ description: Web 开发入门
 
   ![Google Images - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/updated-google-images-licensing.png#center)
 
-  借助[『Google Fonts』](https://developers.google.com/fonts/docs/getting_started)寻找喜欢的字体。
+  借助[『Google Fonts』](https://developers.google.com/fonts/docs/getting_started)寻找喜欢的字体，并记下来。
 
 ### 3 文件编排
 
