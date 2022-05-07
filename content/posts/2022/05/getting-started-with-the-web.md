@@ -349,7 +349,7 @@ HTML 是定义网页内容结构的一种标记语言。HTML 由一系列元素�
 
 ### 5 CSS 基础
 
-CSS（Cascading Style Sheets，层叠样式表）是为网页内容添加样式的代码。诸如：如何使文本显示为红色？如何使内容显示在网页布局的某个位置？如何给网页指定背景图片或背景颜色？本小节将会对 CSS 的基础使用作一个的介绍。
+CSS（Cascading Style Sheets，层叠样式表）是为网页内容添加样式的代码。诸如：如何使文本显示为红色？如何使内容显示在网页布局的某个位置？如何给网页指定背景图片或背景颜色？本小节将会对 CSS 的基础使用作一个介绍。
 
 **到底啥是 CSS？**
 
@@ -594,6 +594,40 @@ CSS 布局主要是基于“框”模型实现的。占用页面空间的每个�
 ![Website Screenshot Final - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-screenshot-final.jpeg#center)
 
 ### 6 JavaScript 基础
+
+JavaScript 是一种为网站增加交互性的编程语言。如控制按钮点击或表单输入后的行为，也可以作样式的动态设置等事情。本小节会对 JavaScript 的基础作一介绍。
+
+**到底啥是 JavaScript？**
+
+JavaScript 由 Brendan Eich（Mozilla 联合创始人）发明，其语法简单且应用广泛，可以用来做很多事情。
+
+**Hello world 样例**
+
+**JavaScript 快速入门**
+
+- 变量
+
+- 注释
+
+- 运算符
+
+- 条件语句
+
+- 函数
+
+- 事件
+
+**完善示例网页**
+
+- 添加图像切换器
+
+- 添加欢迎信息
+
+- 用户名非空检查
+
+本小节的内容跟着一步步走下来，最终看到的页面如下图所示。
+
+![Website Screenshot Scripted - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-screen-scripted.jpeg#center)
 
 ### 7 网站发布
 
