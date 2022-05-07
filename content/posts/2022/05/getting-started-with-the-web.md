@@ -676,6 +676,8 @@ JavaScript 由 Brendan Eich（Mozilla 联合创始人）发明，其语法简单
 
 - 组件文件请求顺序概述
 
+综上，我们对 Web 网站的开发工具、开发流程、文件结构、组成部分与运行机制有了一个整体和初步的了解。
+
 > 参考资料
 >
 > [1] [Getting started with the web - Learn web development | MDN](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web)
