@@ -635,7 +635,7 @@ JavaScript 由 Brendan Eich（Mozilla 联合创始人）发明，其语法简单
 
 为了更好的控制网站内容和用户体验，多数人一般会选择购置域名和虚拟主机来实现。
 
-用于创建个人博客或日常练习的话，用 [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages)就够了。非常简单，只需要创建一个仓库，上传代码并稍作配置即可。具体可以参阅相关文档。
+用于创建个人博客或日常练习的话，用 [『GitHub Pages』](https://docs.github.com/en/pages/getting-started-with-github-pages)就够了。非常简单，只需要创建一个仓库，上传代码并稍作配置即可。具体可以参阅相关文档。
 
 ### 8 Web 工作机制初探
 
