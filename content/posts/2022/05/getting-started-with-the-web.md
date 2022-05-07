@@ -686,6 +686,13 @@ JavaScript 由 Brendan Eich（Mozilla 联合创始人）发明，其语法简单
 
 - 网页文件解析顺序概述
 
+  当浏览器向服务器发送 HTML 文件请求时，这些 HTML 文件通常会以`<link>`方式引用外部 CSS 或以`<script>`方式引用外部 JavaScript 。当浏览器加载页面时，了解这些文件的解析顺序很重要：
+
+  ① 浏览器解析 HTML 文件，找到所有引用 CSS 和 JavaScript 的`<link>`元素和`<script>`元素。
+  ② 根据上一步搜集的 CSS 和 JavaScript 地址，请求对应服务器，获取这些 CSS 文件和 JavaScript 文件。
+  ③ 浏览器将 HTML 解析好后，在内存中生成一个 DOM（Document Object Model，文档对象模型）树；将 CSS 解析好后，在内存中生成一个 CSSOM（CSS Object Model，CSS 对象模型）树；将 JavaScript 解析好后，开始编译并执行。
+  ④ 随着浏览器对 DOM 树的构建、CSSOM 树中样式的应用与 JavaScript 的执行，页面就一步步在屏幕上画出来了。
+
 综上，我们对 Web 网站的开发工具、开发流程、文件结构、组成部分与运行机制有了一个整体和初步的了解。
 
 > 参考资料
