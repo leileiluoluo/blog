@@ -383,7 +383,7 @@ p {
 
   ![CSS Declaration - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/css-declaration-small.png#center)
 
-  整个结构称为一个规则集。主要有如下几个组成部分：
+  整个结构称为一个规则集。主要有如下几个部分组成：
 
   ① 选择器
 
