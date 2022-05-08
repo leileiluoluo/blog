@@ -645,7 +645,7 @@ _**小提示**：`querySelector()`方法及`textContent`属性均属 DOM（Docum
   let myVariable;
   ```
 
-  关于变量命名规则，请参阅[『JavaScript 变量](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#variables)。
+  关于变量命名规则，请参阅[『JavaScript 变量』](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#variables)。
 
   JavaScript 是大小写敏感的。所以`myVariable`与`myvariable`不同。
 
