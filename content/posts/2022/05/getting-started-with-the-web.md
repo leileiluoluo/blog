@@ -17,7 +17,8 @@ keywords:
   - HTML
   - CSS
   - JavaScript
-description: Web 开发入门
+  - Web 开发
+description: Web 开发入门，本文整理自“MDN Web 开发入门”，介绍 Web 网站的开发工具、开发流程、文件结构、组成部分与运行机制。
 ---
 
 **本文整理自[『MDN Web 开发入门』](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web)。**
