@@ -647,7 +647,7 @@ myHeading.textContent = "Hello world!";
 
 - 用户名非空检查
 
-本小节的内容跟着一步步走下来，最终看到的页面如下图所示。
+本小节的内容跟着一步步走下来，最终看到的页面如下图所示（比对下[`main.js`的源码](https://github.com/mdn/beginner-html-site-scripted/blob/gh-pages/scripts/main.js)）。
 
 ![Website Screenshot Scripted - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-screen-scripted.jpeg#center)
 
