@@ -119,3 +119,4 @@ wip_template:
 
 - [MDN Web Docs](https://developer.mozilla.org/)
 - [Web Fundamentals | Google Developers](https://developers.google.com/web/fundamentals/)
+- [Learn JavaScript](https://learnjavascript.online/)
