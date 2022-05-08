@@ -625,7 +625,7 @@ myHeading.textContent = "Hello world!";
 
 ![Hello World - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/hello-world.png#center)
 
-_**小提示**：将`<script>`元素放置在 HTML 文件底部的原因是由于浏览器按照文件中代码的先后顺序来读取代码，这样做是为了保证 HTML 加载完成后再加载 JavaScript。若将 JavaScript 放在待控制 HTML 的前面，就不会达到该效果。详情请参阅[『JavaScript 加载策略』](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript#script_loading_strategies)_
+_**小提示**：将`<script>`元素放置在 HTML 文件底部的原因是由于浏览器按照文件中代码的先后顺序来读取代码，这样做是为了保证 HTML 加载完成后再加载 JavaScript。若将 JavaScript 放在待控制 HTML 的前面，就不会达到该效果。详情请参阅[『JavaScript 加载策略』](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript#script_loading_strategies)。_
 
 可以看到，标题被更改为了“Hello world!”。下面，解释一下上面这段 JavaScript 的作用：
 
