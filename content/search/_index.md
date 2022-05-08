@@ -1,5 +1,5 @@
 ---
-title: "Search Result"
+title: "搜索结果"
 draft: false
-description : "站内搜索"
+description: "站内搜索"
 ---
