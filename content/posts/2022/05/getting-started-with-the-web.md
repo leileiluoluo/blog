@@ -759,9 +759,76 @@ _**小提示**：`querySelector()`方法及`textContent`属性均属 DOM（Docum
 
 - 添加图像切换器
 
+  现在使用 JavaScript 和 DOM API 来实现一个图片交替显示的功能。
+
+  ① 选择一张与`firefox-icon.png`大小相近的图片，将其命名为`firefox2.png`，然后放在网站根目录的`images`文件夹下。
+
+  ② 将如下 JavaScript 代码拷贝至文件`main.js`中。
+
+  ```js
+  let myImage = document.querySelector("img");
+
+  myImage.onclick = function () {
+    let mySrc = myImage.getAttribute("src");
+    if (mySrc === "images/firefox-logo.png") {
+      myImage.setAttribute("src", "images/firefox2.png");
+    } else {
+      myImage.setAttribute("src", "images/firefox-logo.png");
+    }
+  };
+  ```
+
+  使用浏览器重新加载`index.html`页面，点击图片，将看到图片会被切换。
+
+  这是因为，我们使用`myImage`变量存储了对`<img>`元素的引用。然后，为`onclick`事件指定一个匿名函数。该函数拿到图片的`src`属性值，判断其若根当前图片地址一样就改变其为另一张图片地址。
+
 - 添加欢迎信息
 
-- 用户名非空检查
+  接下来，使用 JavaScript 将页面标题更改为一个与登录用户相关的个性化欢迎消息。
+
+  ① 修改`index.html`文件，在`<script>`元素前增加如下代码。
+
+  ```html
+  <button>Change user</button>
+  ```
+
+  ② 修改`main.js`文件，在底部加入如下代码。
+
+  ```js
+  let myButton = document.querySelector("button");
+  let myHeading = document.querySelector("h1");
+
+  function setUserName() {
+    let myName = prompt("Please enter your name.");
+    if (!myName) {
+      setUserName();
+    } else {
+      localStorage.setItem("name", myName);
+      myHeading.textContent = "Mozilla is cool, " + myName;
+    }
+  }
+
+  if (!localStorage.getItem("name")) {
+    setUserName();
+  } else {
+    let storedName = localStorage.getItem("name");
+    myHeading.textContent = "Mozilla is cool, " + storedName;
+  }
+
+  myButton.onclick = function () {
+    setUserName();
+  };
+  ```
+
+  接着，分析一下上面的代码：
+
+  前两句，声明了两个变量`myButton`与`myHeading`，分别对`button`和`h1`元素作引用；
+
+  接下来，定义了一个函数`setUserName()`，该函数用于设置个性化问候语（函数中的`prompt()`用于获取用户输入，若用户输入为空即重新弹窗；否则使用`localStorage`浏览器 API 将用户输入的字符串存下来，并将`myHeading`的`textContent`设置为该字符串）；
+
+  接下来，是一个`if ... else`块，是一段初始化代码（首先判断`localStorage`里是否有设置的信息，没有的话即调用`setUserName()`函数进行设置，否则直接获取并更新`textContent`）；
+
+  最后，将事件处理器绑定到`button`上。
 
 本小节的内容跟着一步步走下来，最终看到的页面如下图所示（比对下[`main.js`的源码](https://github.com/mdn/beginner-html-site-scripted/blob/gh-pages/scripts/main.js)）。
 
@@ -781,61 +848,65 @@ _**小提示**：`querySelector()`方法及`textContent`属性均属 DOM（Docum
 
 - 客户端与服务器
 
-  连接到 Web 的计算机被称为客户端（Clients）和服务器（Servers）。
+连接到 Web 的计算机被称为客户端（Clients）和服务器（Servers）。
 
-  客户端为用户的网络连接设备（台式机、笔记本、手机或其它可上网设备）和这些设备上的 Web 访问软件（如 Chrome 或 Firefox 浏览器）。
-  服务器为存储网页或应用的计算机。当客户使用设备访问一个网页时，该网页会被下载到客户端机器，然后再被 Web 浏览器显示。
+客户端为用户的网络连接设备（台式机、笔记本、手机或其它可上网设备）和这些设备上的 Web 访问软件（如 Chrome 或 Firefox 浏览器）。
+服务器为存储网页或应用的计算机。当客户使用设备访问一个网页时，该网页会被下载到客户端机器，然后再被 Web 浏览器显示。
 
 - 其它方面
 
-  此外，从客户端到服务器还需要经过如下几个部分，先做一下名词解释：
+此外，从客户端到服务器还需要经过如下几个部分，先做一下名词解释：
 
-  ① 用户本地网络连接
+① 用户本地网络连接
 
-  允许用户在网络上发送和接收数据。
+允许用户在网络上发送和接收数据。
 
-  ② DNS
+② DNS
 
-  即域名系统（Domain Name System），域名与 IP 的映射表。浏览器知道域名对应的服务器 IP 才能将消息正确的发送到目的地。
+即域名系统（Domain Name System），域名与 IP 的映射表。浏览器知道域名对应的服务器 IP 才能将消息正确的发送到目的地。
 
-  ③ TCP/IP
+③ TCP/IP
 
-  即传输协议和网络协议（Transmission Control Protocol and Internet Protocol），定义了数据如何在网络上传输。
+即传输协议和网络协议（Transmission Control Protocol and Internet Protocol），定义了数据如何在网络上传输。
 
-  ④ HTTP
+④ HTTP
 
-  即超文本传输协议（Hypertext Transfer Protocol），客户端与服务器相互交流的语言。
+即超文本传输协议（Hypertext Transfer Protocol），客户端与服务器相互交流的语言。
 
-  ⑤ 网页文件
+⑤ 网页文件
 
-  一个网站由多种文件组成，主要有代码文件（HTML、CSS 与 JavaScript）和资产文件（图片、视频与文档）。
+一个网站由多种文件组成，主要有代码文件（HTML、CSS 与 JavaScript）和资产文件（图片、视频与文档）。
 
 - 整体交互顺序概述
 
-  当用户在浏览器输入一个网址时，发生的事情依序为：
+当用户在浏览器输入一个网址时，发生的事情依序为：
 
-  ① 浏览器询问 DNS 服务器，找到网址对应服务器的 IP 地址。
+① 浏览器询问 DNS 服务器，找到网址对应服务器的 IP 地址。
 
-  ② 浏览器向服务器发送一条 HTTP 请求消息，要求它向客户端发送一份网站副本。此消息以及客户端和服务器之间发送的所有其它数据均通过用户本地网络连接的 TCP/IP 协议发送。
+② 浏览器向服务器发送一条 HTTP 请求消息，要求它向客户端发送一份网站副本。此消息以及客户端和服务器之间发送的所有其它数据均通过用户本地网络连接的 TCP/IP 协议发送。
 
-  ③ 若服务器同意客户端的请求，则会向客户端发送“200 OK”消息，然后将网站的文件以多个数据块的方式连续发送到浏览器。
+③ 若服务器同意客户端的请求，则会向客户端发送“200 OK”消息，然后将网站的文件以多个数据块的方式连续发送到浏览器。
 
-  ④ 浏览器接收到全部数据块后，将其组装成一个完整的网页来显示给用户。
+④ 浏览器接收到全部数据块后，将其组装成一个完整的网页来显示给用户。
 
 - 网页文件解析顺序概述
 
-  当浏览器向服务器发送 HTML 文件请求时，这些 HTML 文件通常会以`<link>`方式引用外部 CSS 或以`<script>`方式引用外部 JavaScript 。当浏览器加载页面时，了解这些文件的解析顺序很重要：
+当浏览器向服务器发送 HTML 文件请求时，这些 HTML 文件通常会以`<link>`方式引用外部 CSS 或以`<script>`方式引用外部 JavaScript 。当浏览器加载页面时，了解这些文件的解析顺序很重要：
 
-  ① 浏览器解析 HTML 文件，找到所有引用 CSS 和 JavaScript 的`<link>`元素和`<script>`元素。
+① 浏览器解析 HTML 文件，找到所有引用 CSS 和 JavaScript 的`<link>`元素和`<script>`元素。
 
-  ② 根据上一步搜集的 CSS 和 JavaScript 地址，请求对应服务器，获取这些 CSS 文件和 JavaScript 文件。
+② 根据上一步搜集的 CSS 和 JavaScript 地址，请求对应服务器，获取这些 CSS 文件和 JavaScript 文件。
 
-  ③ 浏览器将 HTML 解析好后，在内存中生成一个 DOM（Document Object Model，文档对象模型）树；将 CSS 解析好后，在内存中生成一个 CSSOM（CSS Object Model，CSS 对象模型）树；将 JavaScript 解析好后，开始编译并执行。
+③ 浏览器将 HTML 解析好后，在内存中生成一个 DOM（Document Object Model，文档对象模型）树；将 CSS 解析好后，在内存中生成一个 CSSOM（CSS Object Model，CSS 对象模型）树；将 JavaScript 解析好后，开始编译并执行。
 
-  ④ 随着浏览器对 DOM 树的构建、CSSOM 树中样式的应用与 JavaScript 的执行，页面就一步步在屏幕上画出来了。
+④ 随着浏览器对 DOM 树的构建、CSSOM 树中样式的应用与 JavaScript 的执行，页面就一步步在屏幕上画出来了。
 
 综上，我们对 Web 网站的开发工具、开发流程、文件结构、组成部分与运行机制有了一个整体和初步的了解。
 
 > 参考资料
 >
 > [1] [Getting started with the web - Learn web development | MDN](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web)
+
+```
+
+```
