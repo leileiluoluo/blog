@@ -729,9 +729,33 @@ _**小提示**：`querySelector()`方法及`textContent`属性均属 DOM（Docum
 
   _**小提示**：`return`语句告诉解释器从函数中返回结果变量，以便结果可以被使用。_
 
-- 事件
+- 事件处理
+
+  在网站上实现交互需要事件处理器的帮助。事件处理器会监听指定的行为，当行为发生时即会触发响应。典型的例子即是浏览器的点击行为处理器。
+
+  下面，将如下代码在浏览器 Console 中执行。然后点击当前页面，看看效果。
+
+  ```js
+  document.querySelector("html").addEventListener("click", function () {
+    alert("Ouch! Stop poking me!");
+  });
+  ```
+
+  如上代码先选择`<html>`元素，然后调用其`addEventListener()`函数，传入一个要监听的事件名称（点击事件）和事件发生时要运行的函数。
+
+  这里传递给`addEventListener()`的函数称为匿名函数（因其没有名称）。还有另一种编写匿名函数的方法，称之为箭头函数。箭头函数使用`() =>`代替函数`function ()`。
+
+  ```js
+  document.querySelector("html").addEventListener("click", () => {
+    alert("Ouch! Stop poking me!");
+  });
+  ```
 
 **完善示例网页**
+
+对 JavaScript 基础进行速览后，接着使用其向示例网页添加一些新功能。
+
+开始之前，先删除`main.js`文件现有内容。
 
 - 添加图像切换器
 
