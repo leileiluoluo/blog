@@ -627,6 +627,12 @@ myHeading.textContent = "Hello world!";
 
 _**小提示**：将`<script>`元素放置在 HTML 文件底部的原因是由于浏览器按照文件中代码的先后顺序来读取代码，这样做是为了保证 HTML 加载完成后再加载 JavaScript。若将 JavaScript 放在待控制 HTML 的前面，就不会达到该效果。详情请参阅[JavaScript 加载策略](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript#script_loading_strategies)_
 
+可以看到，标题被更改为了“Hello world!”。下面，解释一下上面这段 JavaScript 的作用：
+
+使用`querySelector()`函数获取对标题的引用，然后将其存储在名为`myHeading`的变量中；接着，代码将`myHeading`变量的`textContent`属性（表示标题的内容）值设置为`Hello world!`。
+
+_**小提示**：`querySelector()`方法及`textContent`属性均属 DOM（Document Object Model，文档对象模型）API 的一部分，其具有操作文档的能力。_
+
 **JavaScript 快速入门**
 
 - 变量
