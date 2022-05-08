@@ -906,7 +906,3 @@ _**小提示**：`querySelector()`方法及`textContent`属性均属 DOM（Docum
 > 参考资料
 >
 > [1] [Getting started with the web - Learn web development | MDN](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web)
-
-```
-
-```
