@@ -625,7 +625,7 @@ myHeading.textContent = "Hello world!";
 
 ![Hello World - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/hello-world.png#center)
 
-_**小提示**：将`<script>`元素放置在 HTML 文件底部的原因是由于浏览器按照文件中代码的先后顺序来读取代码，这样做是为了保证 HTML 加载完成后再加载 JavaScript。若将 JavaScript 放在待控制 HTML 的前面，就不会达到该效果。详情请参阅[JavaScript 加载策略](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript#script_loading_strategies)_
+_**小提示**：将`<script>`元素放置在 HTML 文件底部的原因是由于浏览器按照文件中代码的先后顺序来读取代码，这样做是为了保证 HTML 加载完成后再加载 JavaScript。若将 JavaScript 放在待控制 HTML 的前面，就不会达到该效果。详情请参阅[『JavaScript 加载策略』](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript#script_loading_strategies)_
 
 可以看到，标题被更改为了“Hello world!”。下面，解释一下上面这段 JavaScript 的作用：
 
@@ -635,9 +635,45 @@ _**小提示**：`querySelector()`方法及`textContent`属性均属 DOM（Docum
 
 **JavaScript 快速入门**
 
+为了更好的理解 JavaScript 的工作原理，下面简单过一下其核心特性。
+
 - 变量
 
+  变量为存储值的容器。可使用`let`关键字声明一个变量：
+
+  ```js
+  let myVariable;
+  ```
+
+  关于变量命名规则，请参阅[『JavaScript Variables』](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#variables)。
+
+  JavaScript 是大小写敏感的。所以`myVariable`与`myvariable`不同。
+
+  变量声明后，可以为其赋值：
+
+  ```js
+  myVariable = "Bob";
+  ```
+
+  也可以同时进行声明和赋值：
+
+  ```js
+  let myVariable = "Bob";
+  ```
+
+  变量可以持有的值的数据类型如下：
+
+  | 变量类型 | 说明                                                  | 示例                                             |
+  | -------- | ----------------------------------------------------- | ------------------------------------------------ |
+  | String   | 字符串                                                | `let myVariable = 'Bob';`                        |
+  | Number   | 数值                                                  | `let myVariable = 10;`                           |
+  | Boolean  | 布尔值                                                | `let myVariable = true;`                         |
+  | Array    | 数组                                                  | `let myVariable = [1,'Bob','Steve',10];`         |
+  | Object   | 对象，JavaScript 中的一切都是对象，都可以存储在变量中 | `let myVariable = document.querySelector('h1');` |
+
 - 注释
+
+  JavaScript 使用`/* ... */`或`//`作注释，浏览器会忽略标记为注释的文本。
 
 - 运算符
 
