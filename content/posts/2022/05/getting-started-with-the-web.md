@@ -596,13 +596,34 @@ CSS 布局主要是基于“框”模型实现的。占用页面空间的每个�
 
 ### 6 JavaScript 基础
 
-JavaScript 是一种为网站增加交互性的编程语言。如控制按钮点击或表单输入后的行为，也可以作样式的动态设置等事情。本小节会对 JavaScript 的基础作一介绍。
+JavaScript 是一种为网站增加交互性的编程语言。如控制按钮点击或表单输入后的行为以及作样式的动态控制等事情。本小节会对 JavaScript 的基础作一介绍。
 
 **到底啥是 JavaScript？**
 
 JavaScript 由 Brendan Eich（Mozilla 联合创始人）发明，其语法简单且应用广泛，可以用来做很多事情。
 
 **Hello world 样例**
+
+下面，使用 JavaScript 将页面标题动态修改为“Hello world”。步骤如下：
+
+① 在网站根目录的`scripts`文件夹下新建`main.js`，并将如下代码拷入文件中。
+
+```js
+const myHeading = document.querySelector("h1");
+myHeading.textContent = "Hello world!";
+```
+
+② 编辑`index.html`文件，将如下代码加入`</body>`标签前。
+
+```html
+<script src="scripts/main.js"></script>
+```
+
+这与使用`<link>`元素引入 CSS 一样。其将 JavaScript 引入页面，因此可以对 HTML （包括页面上的 CSS）产生影响。
+
+这样，使用浏览器重新加载`index.html`页面，即会看到如下效果：
+
+![Hello World - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/hello-world.png#center)
 
 **JavaScript 快速入门**
 
