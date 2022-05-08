@@ -645,7 +645,7 @@ _**小提示**：`querySelector()`方法及`textContent`属性均属 DOM（Docum
   let myVariable;
   ```
 
-  关于变量命名规则，请参阅[『JavaScript Variables』](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#variables)。
+  关于变量命名规则，请参阅[『JavaScript 变量](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#variables)。
 
   JavaScript 是大小写敏感的。所以`myVariable`与`myvariable`不同。
 
@@ -668,18 +668,66 @@ _**小提示**：`querySelector()`方法及`textContent`属性均属 DOM（Docum
   | String   | 字符串                                                | `let myVariable = 'Bob';`                        |
   | Number   | 数值                                                  | `let myVariable = 10;`                           |
   | Boolean  | 布尔值                                                | `let myVariable = true;`                         |
-  | Array    | 数组                                                  | `let myVariable = [1,'Bob','Steve',10];`         |
+  | Array    | 数组                                                  | `let myVariable = [1, 'Bob', 'Steve', 10];`      |
   | Object   | 对象，JavaScript 中的一切都是对象，都可以存储在变量中 | `let myVariable = document.querySelector('h1');` |
 
 - 注释
 
-  JavaScript 使用`/* ... */`或`//`作注释，浏览器会忽略标记为注释的文本。
+  JavaScript 中分别使用`/* ... */`与`//`作多行与单行注释，浏览器会忽略标记为注释的文本。
 
 - 运算符
 
+  运算符是基于两个值（或变量）来做计算的数学符号。下表列出 JavaScript 中常用的运算符：
+
+  | 运算符                          | 说明                         | 示例                                                                                                                                                                                       |
+  | ------------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+  | `+`（加）                       | 将两数相加或将两个字符串合并 | `6 + 9;` {{< line_break >}} `'Hello ' + 'world!';`                                                                                                                                         |
+  | `-`（减）、`*`（乘）、`/`（除） | 基础数学运算                 | `9 - 3;` {{< line_break >}} `8 * 2;` {{< line_break >}} `9 / 3;`                                                                                                                           |
+  | `=`（赋值）                     | 将值赋给一个变量             | `let myVariable = 'Bob';`                                                                                                                                                                  |
+  | `===`（相等）                   | 测试两个值是否相等           | `let myVariable = 3;` {{< line_break >}} `myVariable === 4`                                                                                                                                |
+  | `!`（非）、`!==`（不相等）      | 返回与之前逻辑相反的值       | `let myVariable = 3;` {{< line_break >}} `!(myVariable === 3); // 为 false` {{< line_break >}} {{< line_break >}} `let myVariable = 3;` {{< line_break >}} `myVariable !== 3; // 为 false` |
+
+  JavaScript 中完整的运算符列表请参阅[『JavaScript 表达式与操作符』](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators)。
+
+  _**小提示**：做运算时，混合数据类型会导致一些奇怪的结果。如：`'35' + '25'`会被认为是字符串连接，而不会将两数相加。所以在引用变量时，要多加注意其类型。_
+
 - 条件语句
 
+  条件语句用来测试表达式是否为 true。常见的条件语句是`if ... else`。示例如下：
+
+  ```js
+  let iceCream = "chocolate";
+  if (iceCream === "chocolate") {
+    alert("Yay, I love chocolate ice cream!");
+  } else {
+    alert("Awwww, but chocolate is my favorite...");
+  }
+  ```
+
+  如上示例中，若表达式`iceCream === "chocolate"`为`true`，则运行第一个代码块。否则，运行`else`代码块。
+
 - 函数
+
+  函数是一种重用代码的方式。
+
+  函数通常带有参数。参数使用括号括起来，若有多个参数，则用逗号分隔。如下示例定义了一个函数将两数相乘：
+
+  ```js
+  function multiply(num1, num2) {
+    let result = num1 * num2;
+    return result;
+  }
+  ```
+
+  调用方式如下：
+
+  ```js
+  multiply(4, 7);
+  multiply(20, 20);
+  multiply(0.5, 3);
+  ```
+
+  _**小提示**：`return`语句告诉解释器从函数中返回结果变量，以便结果可以被使用。_
 
 - 事件
 
