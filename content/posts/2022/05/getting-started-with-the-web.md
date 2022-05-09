@@ -4,7 +4,6 @@ author: olzhy
 type: post
 date: 2022-05-03T16:28:26+08:00
 url: /posts/getting-started-with-the-web.html
-math: true
 categories:
   - 计算机
 tags:
