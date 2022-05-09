@@ -619,7 +619,7 @@ myHeading.textContent = "Hello world!";
 <script src="scripts/main.js"></script>
 ```
 
-这与使用`<link>`元素引入 CSS 一样。其将 JavaScript 引入页面，因此可以对 HTML （包括页面上的 CSS）产生影响。
+这与使用`<link>`元素引入 CSS 一样，其将 JavaScript 引入页面，因此可以对 HTML （包括页面上的 CSS）产生影响。
 
 这样，使用浏览器重新加载`index.html`页面，即会看到如下效果：
 
@@ -687,13 +687,13 @@ _**小提示**：`querySelector()`方法及`textContent`属性均属 DOM（Docum
   | `===`（相等）                   | 测试两个值是否相等           | `let myVariable = 3;` {{< line_break >}} `myVariable === 4`                                                                                                                                |
   | `!`（非）、`!==`（不相等）      | 返回与之前逻辑相反的值       | `let myVariable = 3;` {{< line_break >}} `!(myVariable === 3); // 为 false` {{< line_break >}} {{< line_break >}} `let myVariable = 3;` {{< line_break >}} `myVariable !== 3; // 为 false` |
 
-  JavaScript 中完整的运算符列表请参阅[『JavaScript 表达式与操作符』](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators)。
+  JavaScript 中完整的运算符列表请参阅[『JavaScript 表达式与运算符』](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators)。
 
   _**小提示**：做运算时，混合数据类型会导致一些奇怪的结果。如：`'35' + '25'`会被认为是字符串连接，而不会将两数相加。所以在引用变量时，要多加注意其类型。_
 
 - 条件语句
 
-  条件语句用来测试表达式是否为 true。常见的条件语句是`if ... else`。示例如下：
+  条件语句用来测试表达式是否为`true`。常见的条件语句是`if ... else`。示例如下：
 
   ```js
   let iceCream = "chocolate";
@@ -704,13 +704,13 @@ _**小提示**：`querySelector()`方法及`textContent`属性均属 DOM（Docum
   }
   ```
 
-  如上示例中，若表达式`iceCream === "chocolate"`为`true`，则运行第一个代码块。否则，运行`else`代码块。
+  如上示例中，若表达式`iceCream === "chocolate"`为`true`，则运行第一个代码块；否则，运行`else`代码块。
 
 - 函数
 
   函数是一种重用代码的方式。
 
-  函数通常带有参数。参数使用括号括起来，若有多个参数，则用逗号分隔。如下示例定义了一个函数将两数相乘：
+  函数通常带有参数，参数使用括号括起来。若有多个参数，则用逗号分隔。如下示例定义了一个将两数相乘的函数：
 
   ```js
   function multiply(num1, num2) {
@@ -731,7 +731,7 @@ _**小提示**：`querySelector()`方法及`textContent`属性均属 DOM（Docum
 
 - 事件处理
 
-  在网站上实现交互需要事件处理器的帮助。事件处理器会监听指定的行为，当行为发生时即会触发响应。典型的例子即是浏览器的点击行为处理器。
+  在网站上实现交互需要事件处理器的帮助。事件处理器会监听指定的行为，当行为发生时即会触发响应。典型的例子是浏览器的点击行为处理器。
 
   下面，将如下代码在浏览器 Console 中执行。然后点击当前页面，看看效果。
 
@@ -743,7 +743,7 @@ _**小提示**：`querySelector()`方法及`textContent`属性均属 DOM（Docum
 
   如上代码先选择`<html>`元素，然后调用其`addEventListener()`函数，传入一个要监听的事件名称（点击事件）和事件发生时要运行的函数。
 
-  这里传递给`addEventListener()`的函数称为匿名函数（因其没有名称）。还有另一种编写匿名函数的方法，称之为箭头函数。箭头函数使用`() =>`代替函数`function ()`。
+  这里传递给`addEventListener()`的函数称为匿名函数（因其没有名称）。还有另一种编写匿名函数的方法，称之为箭头函数。箭头函数使用`() =>`代替`function ()`。
 
   ```js
   document.querySelector("html").addEventListener("click", () => {
@@ -761,7 +761,7 @@ _**小提示**：`querySelector()`方法及`textContent`属性均属 DOM（Docum
 
   现在使用 JavaScript 和 DOM API 来实现一个图片交替显示的功能。
 
-  ① 选择一张与`firefox-icon.png`大小相近的图片，将其命名为`firefox2.png`，然后放在网站根目录的`images`文件夹下。
+  ① 选择一张与`firefox-logo.png`大小相近的图片，将其命名为`firefox2.png`，同样放在网站根目录的`images`文件夹下。
 
   ② 将如下 JavaScript 代码拷贝至文件`main.js`中。
 
@@ -778,13 +778,13 @@ _**小提示**：`querySelector()`方法及`textContent`属性均属 DOM（Docum
   };
   ```
 
-  使用浏览器重新加载`index.html`页面，点击图片，将看到图片会被切换。
+  使用浏览器重新加载`index.html`页面，点击图片，将看到当前图片会被切换为另一张不同的图片。
 
-  这是因为，我们使用`myImage`变量存储了对`<img>`元素的引用。然后，为`onclick`事件指定一个匿名函数。该函数拿到图片的`src`属性值，判断其若根当前图片地址一样就改变其为另一张图片地址。
+  这是因为，我们使用`myImage`变量存储了对`<img>`元素的引用。然后，为`onclick`事件指定了一个匿名函数。该函数拿到图片的`src`属性值，判断其若与当前图片地址一样就改变其为另一张图片地址。
 
 - 添加欢迎信息
 
-  接下来，使用 JavaScript 将页面标题更改为一个与登录用户相关的个性化欢迎消息。
+  接下来，使用 JavaScript 将页面标题更改为一个与登录用户相关的个性化欢迎语。
 
   ① 修改`index.html`文件，在`<script>`元素前增加如下代码。
 
@@ -820,7 +820,7 @@ _**小提示**：`querySelector()`方法及`textContent`属性均属 DOM（Docum
   };
   ```
 
-  接着，分析一下上面的代码：
+  分析一下上面的代码：
 
   前两句，声明了两个变量`myButton`与`myHeading`，分别对`button`和`h1`元素作引用；
 
