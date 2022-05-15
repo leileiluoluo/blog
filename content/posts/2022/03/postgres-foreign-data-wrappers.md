@@ -14,7 +14,7 @@ keywords:
 description: PostgreSQL Foreign Data Wrappers (PostgreSQL 外部数据包装器 postgres_fdw 使用详解)
 ---
 
-PostgreSQL 外部数据包装器，即 PostgreSQL Foreign Data Wrappers（下面简称为 FDW），是现实数据库使用场景中一个非常实用的功能，PostgreSQL 的 FDW 类似于 Oracle 的 dblink，DB2 的 Federation，使用其可以将本地数据库与外部数据库建立连接，从而可以像操作本地数据一样来操作外部数据。
+PostgreSQL 外部数据包装器，即 PostgreSQL Foreign Data Wrappers（下面简称为 FDW），是现实数据库使用场景中一个非常实用的功能。PostgreSQL 的 FDW 类似于 Oracle 的 dblink，DB2 的 Federation，使用其可以将本地数据库与外部数据库建立连接，从而可以像操作本地数据一样来操作外部数据。
 
 **FDW 有何用？**
 

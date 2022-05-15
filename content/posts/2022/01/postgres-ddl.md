@@ -4,7 +4,6 @@ author: olzhy
 type: post
 date: 2022-01-18T09:11:39+08:00
 url: /posts/postgres-ddl.html
-math: true
 categories:
   - 计算机
 tags:
