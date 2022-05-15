@@ -28,6 +28,12 @@ wip_template:
 - [赫赫文王](https://kqh.me/)
 - [程可八八](https://chenghouwen.com/)
 - [无色墨水](https://wuse.ink/)
+  
+**正体字学习**
+
+- [中文輸入法世界](http://input.foruto.com/)
+- [快意速成輸入法](http://input.foruto.com/fast/index.php)
+- [OpenVanilla 輸入法套件](https://openvanilla.org/)
 
 **趣站收藏**
 
