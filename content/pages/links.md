@@ -32,9 +32,11 @@ wip_template:
 **正体字学习**
 
 - [萌典](https://www.moedict.tw/)
+- [韻典網](https://ytenx.org/)
 - [中文輸入法世界](http://input.foruto.com/)
 - [快意速成輸入法](http://input.foruto.com/fast/index.php)
 - [OpenVanilla 輸入法套件](https://openvanilla.org/)
+- [開放中文轉換](https://opencc.byvoid.com/)
 
 **趣站收藏**
 
