@@ -9,16 +9,17 @@ categories:
 tags:
   - 自动化测试
 keywords:
-  - Apache JMeter
+  - JMeter
+  - 自动化测试
   - 性能测试
-description: Apache JMeter 初探
+  - 负载测试
+  - 压力测试
+description: Apache JMeter 初探。包括对测试计划、线程组、控制器等组成元素的介绍。
 ---
-
-### 1 JMeter 概述
 
 Apache JMeter 是一个使用纯 Java 编写的、由 Apache 软件基金会开源的、用于度量软件性能的负载测试工具。
 
-JMeter 支持测试诸多不同类型的协议或应用：
+JMeter 支持测试的协议或应用类型如下：
 
 - Web - HTTP、HTTPS（实现语言可以是 Java、NodeJS、PHP 及 ASP.NET 等）
 - SOAP 或 REST Web 服务
@@ -30,6 +31,16 @@ JMeter 支持测试诸多不同类型的协议或应用：
 - 原生命令或 Shell 脚本
 - TCP
 - Java 对象
+
+此外，JMeter 还具有如下特性：
+
+- GUI 模式功能齐全，支持从浏览器或原生应用录制测试计划，支持调试。
+- 命令行模式支持在任何可以运行 Java 的操作系统上进行负载测试。
+- JMeter HTML 报告功能丰富，易于使用。
+- 可以非常方便的从 HTML、JSON、XML 等流行的文本响应格式中提取数据。
+- 以多线程方式来模拟并发访问。
+- 支持通过插件来扩展数据可视化能力。
+- 支持脚本化采样器（可使用诸如 Groovy 与 BeanShell 等 JSR223 兼容的语言来编写采样脚本）。
 
 ### 2 测试计划组成元素
 
