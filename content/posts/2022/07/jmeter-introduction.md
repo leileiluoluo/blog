@@ -14,7 +14,7 @@ keywords:
   - 性能测试
   - 负载测试
   - 压力测试
-description: Apache JMeter 初探。包括对测试计划、线程组、控制器等组成元素的介绍。
+description: Apache JMeter 初探。包括对测试计划、线程组、控制器、采样器、监听器等组成元素的介绍。
 ---
 
 Apache JMeter 是一个使用纯 Java 编写的、由 Apache 软件基金会开源的、用于度量软件性能的负载测试工具。
@@ -44,7 +44,7 @@ JMeter 目前支持测试的协议或应用类型具体如下：
 - 支持通过插件来扩展数据可视化能力。
 - 支持脚本化采样器（可使用诸如 Groovy 与 BeanShell 等 JSR223 兼容的语言来编写采样脚本）。
 
-需要注意的是 JMeter 不是浏览器，其在协议级别工作。不会像浏览器一样解析 JavaScript，也不会渲染页面。
+**_需要注意的是 JMeter 不是浏览器，其在协议级别工作。不会像浏览器一样解析 JavaScript，也不会渲染页面。_**
 
 下面会梳理下 JMeter 中常用的一些概念或组件。
 
@@ -62,7 +62,7 @@ JMeter 中常用的一些概念或组件梳理如下。
 
   多个线程用于模拟对服务器应用的并发访问，线程之间相互独立，各自完整的执行测试计划。
 
-  加速期（Ramp-up）用于告诉 JMeter 需要多长时间来“加速到”设定的全部线程数量。如设置线程数为 30，加速期为 120 秒，每个线程将会在上一个线程启动 4（120/30）秒后启动。需要根据实际需求来设定加速期。加速期设置的太短会导致在测试开始时工作负载太大，而设置的太长又会使负载太小，没有达到预期的并发量；即第一个线程已完成工作，而最后一个线程还没启动运行。
+  加速期（Ramp-up）用于告诉 JMeter 需要多长时间来“加速到”设定的全部线程数量。如设置线程数为 30，加速期为 120 秒，每个线程将会在上一个线程启动 4（120/30）秒后启动。需要根据实际需求来设定加速期。加速期设置的太短会导致在测试开始时工作负载太大；而设置的太长又会使负载太小，而没有达到预期的并发量（即第一个线程已完成工作，而最后一个线程还没启动运行）。
 
 - 逻辑控制器（Logic Controller）
 
@@ -70,9 +70,7 @@ JMeter 中常用的一些概念或组件梳理如下。
 
   逻辑控制器用于控制采样器的处理顺序。
 
-  常见的逻辑控制器有 Simple Controller、Loop Controller 和 If Controller 等。Simple Controller 没什么别的功能，只用于将其它逻辑控制器或采样器进行组合；Loop Controller 用于对其它逻辑控制器或采样器执行多次（如将一个 HTTP Request 采样器添加到循环次数为 2 的 Loop Controller，并将 Thread Group 循环次数配置为 3，那么 JMeter 将总共执行 2 \* 3 = 6 次 HTTP Request）。
-
-  If Controller 用于控制在其下的测试元素是否执行。
+  常见的逻辑控制器有 Simple Controller、Loop Controller 和 If Controller 等。Simple Controller 没什么别的功能，只用于将其它逻辑控制器或采样器进行组合；Loop Controller 用于对其它逻辑控制器或采样器执行多次（如将一个 HTTP Request 采样器添加到循环次数为 2 的 Loop Controller，并将 Thread Group 循环次数配置为 3，那么 JMeter 将总共执行 2 \* 3 = 6 次 HTTP Request）；If Controller 用于控制在其下的测试元素是否执行。
 
 - 采样器（Sampler）
 
@@ -84,15 +82,13 @@ JMeter 中常用的一些概念或组件梳理如下。
 
   监听器用于监听、保存和读取测试结果，一般在测试流程的最后执行。默认情况下测试结果保存在一个后缀为`.jtl`的 XML 文件里。
 
-  常用的监听器有 Graph Results 和 View Results in Table 等。
-
-  Graph Results 会将测试结果以图形的方式显示。很直观，但很占用内存和 CPU，所以仅在 GUI 端调试测试用例时使用；View Results in Table 会将测试结果按表格方式显示，也仅在调试用例时使用。
+  常用的监听器有 Graph Results 和 View Results in Table 等。Graph Results 会将测试结果以图形的方式显示（很直观，但很占用内存和 CPU，所以仅在 GUI 端调试测试用例时使用）；View Results in Table 会将测试结果按表格方式显示，也仅在调试用例时使用。
 
 - 配置元素（Configuration Element）
 
   配置元素可用来设置变量和默认值以供后面的采样器使用。
 
-  常用的配置元素有 CSV Data Set Config、HTTP Header Manager 和等。CSV Data Set Config 用于从文件中读取行，并将它们拆分为变量；HTTP Header Manager 用于设置 HTTP 请求头参数，以供多个 HTTP Request 采样器复用。
+  常用的配置元素有 CSV Data Set Config、HTTP Header Manager 等。CSV Data Set Config 用于从文件中读取行，并将它们拆分为变量；HTTP Header Manager 用于设置 HTTP 请求头参数，以供多个 HTTP Request 采样器复用。
 
 - 断言（Assertion）
 
@@ -116,7 +112,7 @@ JMeter 中常用的一些概念或组件梳理如下。
 
   后处理器用于在采样器执行后做一些后置工作。
 
-  常用的预处理器有 Regular Expression Extractor、XPath Extractor 等。Regular Expression Extractor 允许用户使用正则表达式从响应中提取信息；XPath Extractor 允许用户使用 XPath 查询语言从响应（XML 或 HTML）中提取信息。
+  常用的后处理器有 Regular Expression Extractor、XPath Extractor 等。Regular Expression Extractor 允许用户使用正则表达式从响应中提取信息；XPath Extractor 允许用户使用 XPath 查询语言从响应（XML 或 HTML）中提取信息。
 
 JMeter 中常用的一些概念或组件即梳理完了。下面接着会对 JMeter 进行一些初步的使用。
 
