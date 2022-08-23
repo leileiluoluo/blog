@@ -114,9 +114,21 @@ JMeter 中常用的一些概念或组件梳理如下。
 
   常用的后处理器有 Regular Expression Extractor、XPath Extractor 等。Regular Expression Extractor 允许用户使用正则表达式从响应中提取信息；XPath Extractor 允许用户使用 XPath 查询语言从响应（XML 或 HTML）中提取信息。
 
-JMeter 中常用的一些概念或组件即梳理完了。下面接着会对 JMeter 进行一些初步的使用。
+JMeter 中常用的一些概念或组件即梳理完了。下面接着介绍下 JMeter 的下载与安装。最后会对 JMeter 进行一些初步的使用。
 
-### 2 初步使用
+### 2 下载安装
+
+**_安装 JMeter 前请确保已安装 JDK，且保证版本为 1.8 及以上。_**
+
+从官网（[http://jmeter.apache.org/download_jmeter.cgi](http://jmeter.apache.org/download_jmeter.cgi)）下载最新版的 JMeter 压缩包，解压至指定文件夹，并设置系统环境变量。键入`jmeter --version`命令能正常输出版本号，即说明安装成功。
+
+```shell
+jmeter --version
+```
+
+### 3 初步使用
+
+#### 3.1 Web 项目测试
 
 > 参考资料
 >
