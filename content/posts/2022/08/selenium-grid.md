@@ -8,11 +8,13 @@ categories:
   - 计算机
 tags:
   - 自动化测试
+  - Python
 keywords:
   - 自动化测试
   - Selenium
   - UI 测试
   - Grid
+  - Python
 description: Selenium Grid 搭建及使用。
 ---
 
