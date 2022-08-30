@@ -93,6 +93,47 @@ if '__main__' == __name__:
 
 ### 2 使用 jar 文件的方式搭建 Grid
 
+Grid `jar` 文件依赖的 Java 版本为 11 或以上。
+
+欲使用 Grid，Standalone 模式是最简单快速的一种。
+
+可以从[github.com/SeleniumHQ/selenium](https://github.com/SeleniumHQ/selenium/releases/latest)发布页面下载最新的`selenium-server-<version>.jar`文件，然后使用如下命令启动：
+
+```shell
+java -jar selenium-server-<version>.jar standalone
+```
+
+接着，对测试代码稍作修改（获取`browser`的方式替换为如下写法）即可成功运行。
+
+```python
+self.browser = webdriver.Remote(
+            command_executor='http://localhost:4444',
+            options=webdriver.ChromeOptions()
+        )
+```
+
+而要想更好的使用 Grid，需要了解其里边的几个角色。
+
+- Hub：负责将从 WebDriver 接收的浏览器操作指令分发至对应的 Node，并将从 Node 接收的结果返回给 WebDriver。
+- Node：负责接收来自 Hub 的指令，并调用浏览器驱动来完成页面操作。
+
+Hub 与 Node 可位于不同的主机，通过 HTTP 协议来通信。
+
+使用 Hub 与 Node 分工的方式来启动 Grid 的命令如下：
+
+```shell
+# 启动 Hub
+java -jar selenium-server-<version>.jar hub
+
+# 启动 Node 1
+java -jar selenium-server-<version>.jar node --port 5555
+
+# 启动 Node 2
+java -jar selenium-server-<version>.jar node --port 6666
+```
+
+测试代码使用 Grid 的方式不会因此发生变化，仍指向`http://localhost:4444`即可。
+
 ### 3 使用 Docker 镜像的方式搭建 Grid
 
 ### 4 使用 Kubernetes 描述文件的方式搭建 Grid
