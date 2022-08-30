@@ -18,7 +18,7 @@ keywords:
 description: Selenium Grid 搭建及使用。
 ---
 
-Selenium 测试的组成部分主要有：测试代码、WebDriver、Grid（Selenium Server，非必须）、浏览器驱动（Driver）和浏览器。
+Selenium 测试的主要组成部分有：测试代码、WebDriver、Grid（Selenium Server，非必须）、浏览器驱动（Driver）和浏览器。
 
 当我们编写完 Selenium 测试用例在本地调试时，WebDriver 通过浏览器驱动直接与浏览器进行交互。这时，WebDriver、浏览器驱动和浏览器位于同一主机。这种最基本的交互方式如下图所示。
 
