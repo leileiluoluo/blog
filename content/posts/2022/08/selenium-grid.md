@@ -32,6 +32,21 @@ Selenium 测试的组成部分主要有：测试代码、WebDriver、Grid（Sele
 
 可以看到，使用 Grid 以后，测试用例的执行只需一个 Grid 的 URL 即可，无需安装浏览器及驱动，使得测试用例的执行变得非常简单。
 
+本文主要关注 Grid 的搭建及使用。接下来，主要有如下几个部分。
+
+- 引入一段测试代码，并使用本地直接交互的方式来执行。
+- 使用原始`jar`文件的方式搭建 Grid 环境，并执行测试代码。
+- 使用 Docker 镜像的方式搭建 Grid 环境，并执行测试代码。
+- 使用 Kubernetes 描述文件的方式搭建 Grid 环境，并执行测试代码。
+
+### 1 测试代码
+
+### 2 使用 jar 文件的方式启动 Grid
+
+### 3 使用 Docker 镜像的方式搭建 Grid
+
+### 4 使用 Kubernetes 描述文件的方式搭建 Grid
+
 > 参考资料
 >
 > [1] [Selenium Grid Documentation - selenium.dev](https://www.selenium.dev/documentation/grid/)
