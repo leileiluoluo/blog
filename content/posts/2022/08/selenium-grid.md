@@ -41,7 +41,7 @@ Selenium 测试的组成部分主要有：测试代码、WebDriver、Grid（Sele
 
 ### 1 测试代码
 
-### 2 使用 jar 文件的方式启动 Grid
+### 2 使用 jar 文件的方式搭建 Grid
 
 ### 3 使用 Docker 镜像的方式搭建 Grid
 
