@@ -151,6 +151,7 @@ java -jar selenium-server-<version>.jar node --port 6666
 使用 Docker 快速启动一个 Standalone 模式 Grid 的命令如下：
 
 ```shell
+# 启动一个 Chrome Standalone Grid
 docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-chrome:4.4.0
 ```
 
@@ -179,7 +180,7 @@ docker run -d -p 7900:7900 --net grid -e SE_EVENT_BUS_HOST=selenium-hub \
     selenium/node-chrome:4.4.0
 ```
 
-还可以添加别的浏览器 Node，如下命令添加了 Edge 和 Firefox Node。
+还可以按需添加别的浏览器 Node，如下命令添加了 Edge 和 Firefox Node。
 
 ```shell
 # 添加一个 Edge Node
@@ -199,7 +200,7 @@ docker run -d -p 7902:7900 --net grid -e SE_EVENT_BUS_HOST=selenium-hub \
 
 想查看浏览器运行桌面，直接访问`http://localhost:7900`（Chrome）、`http://localhost:7901`（Edge）或`http://localhost:7902`（Firefox）即可。
 
-这就是 Grid 的威力所在，提供一个浏览器池，测试项目根据所需直接指定 broswerName 使用就好了，非常的方便。
+这就是 Grid 的威力所在，其提供一个浏览器池，测试项目根据所需直接指定 broswerName 使用就好了，非常的方便。
 
 ### 4 使用 Kubernetes 描述文件的方式搭建 Grid
 
