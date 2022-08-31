@@ -157,7 +157,7 @@ docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-chro
 
 打开`http://localhost:4444`同样可以看到控制台页面。
 
-新版 Grid 另一个非常便捷的功能是，直接在浏览器打开`http://localhost:7900`即可看到运行测试的桌面。
+新版 Grid 另一个非常便捷的功能是，直接在浏览器打开`http://localhost:7900`（密码为`secret`）即可看到运行测试的桌面。
 
 ![Selenium Grid 运行桌面](https://olzhy.github.io/static/images/uploads/2022/08/selenium-grid-desktop.png#center)
 
@@ -198,9 +198,27 @@ docker run -d -p 7902:7900 --net grid -e SE_EVENT_BUS_HOST=selenium-hub \
     selenium/node-firefox:4.4.0
 ```
 
+这就是 Grid 的威力所在，其提供一个浏览器池，测试项目只需指向 Grid 地址即可使用所需的浏览器，非常的方便。
+
 想查看浏览器运行桌面，直接访问`http://localhost:7900`（Chrome）、`http://localhost:7901`（Edge）或`http://localhost:7902`（Firefox）即可。
 
-这就是 Grid 的威力所在，其提供一个浏览器池，测试项目根据所需直接指定 broswerName 使用就好了，非常的方便。
+另外一种传统的查看浏览器运行桌面的方式是 VNC。VNC 是一种远程桌面显示技术，有服务端和客户端两部分组成。Grid 的各 Node 镜像开放了`5900`端口来提供 VNC 服务。我们想使用这种方式查看 Node 内部的桌面，需要下载一个 VNC Client。
+
+本文使用 VNC Viewer 来作演示。从 [VNC Viewer 下载页](https://www.realvnc.com/en/connect/download/viewer/) 下载并安装好 VNC Viewer 后。
+
+使用如下命令启动一个 Chrome Node，并开放`5900`端口：
+
+```shell
+docker run -d -p 5900:5900 --net grid -e SE_EVENT_BUS_HOST=selenium-hub \
+    --shm-size="2g" \
+    -e SE_EVENT_BUS_PUBLISH_PORT=4442 \
+    -e SE_EVENT_BUS_SUBSCRIBE_PORT=4443 \
+    selenium/node-chrome:4.4.0
+```
+
+打开 VNC Viewer，键入`localhost:5700`后回车，输入密码（`secret`）后即可看到 Node 的桌面。
+
+![使用 VNC Viewer 查看 Selenium Grid 运行桌面](https://olzhy.github.io/static/images/uploads/2022/08/selenium-grid-desktop-vnc.jpeg#center)
 
 ### 4 使用 Kubernetes 描述文件的方式搭建 Grid
 
