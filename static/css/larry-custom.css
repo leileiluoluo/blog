@@ -42,6 +42,10 @@ p,
   word-break: normal;
 }
 
+.highlight * {
+  margin-bottom: 0px !important;
+}
+
 a.post-title {
   color: #24292f;
 }
