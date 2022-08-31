@@ -89,7 +89,7 @@ if '__main__' == __name__:
 
 如上测试代码使用的是 WebDriver 与浏览器（驱动）直接交互的方式。
 
-运行该代码前需要在本地安装有 Chrome 浏览器及 ChromeDriver（从[chromium.org](https://chromedriver.chromium.org/downloads)下载 Chrome 对应的驱动并解压至指定目录，并将安装目录添加至系统环境变量），测试代码会驱动本地浏览器执行完指定步骤后会打印成功的信息。
+运行该代码前需要在本地安装有 Chrome 浏览器及 ChromeDriver（从 [chromium.org](https://chromedriver.chromium.org/downloads) 下载 Chrome 对应的驱动并解压至指定目录，并将安装目录添加至系统环境变量），测试代码会驱动本地浏览器执行完指定步骤后会打印成功的信息。
 
 ### 2 使用 jar 文件的方式搭建 Grid
 
@@ -97,11 +97,15 @@ Grid `jar` 文件依赖的 Java 版本为 11 或以上。
 
 欲使用 Grid，Standalone 模式是最简单快速的一种。
 
-可以从[github.com/SeleniumHQ/selenium](https://github.com/SeleniumHQ/selenium/releases/latest)发布页面下载最新的`selenium-server-<version>.jar`文件，然后使用如下命令启动：
+可以从 [github.com/SeleniumHQ/selenium](https://github.com/SeleniumHQ/selenium/releases/latest) 发布页面下载最新的`selenium-server-<version>.jar`文件，然后使用如下命令启动：
 
 ```shell
 java -jar selenium-server-<version>.jar standalone
 ```
+
+Grid 启动完成后，打开网址`http://localhost:4444`可以看到可使用的所有浏览器类型以及会话的状态。
+
+![Selenium Grid UI](https://olzhy.github.io/static/images/uploads/2022/08/selenium-grid-ui.png#center)
 
 接着，对测试代码稍作修改（获取`browser`的方式替换为如下写法）即可成功运行。
 
