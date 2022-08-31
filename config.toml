@@ -188,3 +188,9 @@ link = "mailto:leileiluoluo@leileiluoluo.com"
 [[params.social]]
 icon = "ti-rss" # themify icon pack https://themify.me/themify-icons
 link = "/index.xml"
+
+# markup
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
