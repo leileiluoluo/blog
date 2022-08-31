@@ -148,6 +148,59 @@ java -jar selenium-server-<version>.jar node --port 6666
 
 ### 3 使用 Docker 镜像的方式搭建 Grid
 
+使用 Docker 快速启动一个 Standalone 模式 Grid 的命令如下：
+
+```shell
+docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-chrome:4.4.0
+```
+
+打开`http://localhost:4444`同样可以看到控制台页面。
+
+新版 Grid 另一个非常便捷的功能是，直接在浏览器打开`http://localhost:7900`即可看到运行测试的桌面。
+
+![Selenium Grid 运行桌面](https://olzhy.github.io/static/images/uploads/2022/08/selenium-grid-desktop.png#center)
+
+测试代码同样只需将 RemoteWebDriver 地址指向`http://localhost:4444`即可运行。
+
+使用 Hub 与 Node 分工的方式启动 Grid 的 Docker 命令如下：
+
+```shell
+# 创建网络
+docker network create grid
+
+# 启动 Hub
+docker run -d -p 4442-4444:4442-4444 --net grid --name selenium-hub selenium/hub:4.4.0
+
+# 启动一个 Chrome Node
+docker run -d -p 7900:7900 --net grid -e SE_EVENT_BUS_HOST=selenium-hub \
+    --shm-size="2g" \
+    -e SE_EVENT_BUS_PUBLISH_PORT=4442 \
+    -e SE_EVENT_BUS_SUBSCRIBE_PORT=4443 \
+    selenium/node-chrome:4.4.0
+```
+
+还可以添加别的浏览器 Node，如下命令添加了 Edge 和 Firefox Node。
+
+```shell
+# 添加一个 Edge Node
+docker run -d -p 7901:7900 --net grid -e SE_EVENT_BUS_HOST=selenium-hub \
+    --shm-size="2g" \
+    -e SE_EVENT_BUS_PUBLISH_PORT=4442 \
+    -e SE_EVENT_BUS_SUBSCRIBE_PORT=4443 \
+    selenium/node-edge:4.4.0
+
+# 添加一个 Firefox Node
+docker run -d -p 7902:7900 --net grid -e SE_EVENT_BUS_HOST=selenium-hub \
+    --shm-size="2g" \
+    -e SE_EVENT_BUS_PUBLISH_PORT=4442 \
+    -e SE_EVENT_BUS_SUBSCRIBE_PORT=4443 \
+    selenium/node-firefox:4.4.0
+```
+
+想查看浏览器运行桌面，直接访问`http://localhost:7900`（Chrome）、`http://localhost:7901`（Edge）或`http://localhost:7902`（Firefox）即可。
+
+这就是 Grid 的威力所在，提供一个浏览器池，测试项目根据所需直接指定 broswerName 使用就好了，非常的方便。
+
 ### 4 使用 Kubernetes 描述文件的方式搭建 Grid
 
 > 参考资料
