@@ -206,7 +206,7 @@ docker run -d -p 7902:7900 --net grid -e SE_EVENT_BUS_HOST=selenium-hub \
 
 本文使用 VNC Viewer 来作演示。从 [VNC Viewer 下载页](https://www.realvnc.com/en/connect/download/viewer/) 下载并安装好 VNC Viewer 后。
 
-使用如下命令启动一个 Chrome Node，并开放`5900`端口：
+使用如下命令再启动一个 Chrome Node，并开放`5900`端口：
 
 ```shell
 docker run -d -p 5900:5900 --net grid -e SE_EVENT_BUS_HOST=selenium-hub \
