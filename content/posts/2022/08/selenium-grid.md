@@ -136,6 +136,10 @@ java -jar selenium-server-<version>.jar node --port 5555
 java -jar selenium-server-<version>.jar node --port 6666
 ```
 
+启动完成后，从网址`http://localhost:4444`可以看到有两个可以使用的 Node。
+
+![Selenium Grid UI](https://olzhy.github.io/static/images/uploads/2022/08/selenium-grid-ui-2-nodes.png#center)
+
 测试代码使用 Grid 的方式不会因此发生变化，仍指向`http://localhost:4444`即可。
 
 ### 3 使用 Docker 镜像的方式搭建 Grid
