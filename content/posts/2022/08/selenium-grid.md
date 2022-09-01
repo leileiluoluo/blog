@@ -216,7 +216,7 @@ docker run -d -p 5900:5900 --net grid -e SE_EVENT_BUS_HOST=selenium-hub \
     selenium/node-chrome:4.4.0
 ```
 
-打开 VNC Viewer，键入`localhost:5700`后回车，输入密码（`secret`）后即可看到 Node 的桌面。
+打开 VNC Viewer，键入`localhost:5900`后回车，输入密码（`secret`）后即可看到 Node 的桌面。
 
 ![使用 VNC Viewer 查看 Selenium Grid 运行桌面](https://olzhy.github.io/static/images/uploads/2022/08/selenium-grid-desktop-vnc.jpeg#center)
 
