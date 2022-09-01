@@ -244,6 +244,12 @@ kubectl expose deployment selenium-node-chrome --name=selenium-node-chrome-exter
 
 这样，在本地访问`http://localhost:4444`和`http://localhost:7900`就可以分别看到 Selenium 控制台和 Chrome Node 桌面。
 
+同样可以使用 VNC 的方式访问位于 Kubenetes 内的 Chrome 的桌面。
+
+```shell
+kubectl port-forward selenium-node-chrome-5854c6c789-xlcxf 5900:5900
+```
+
 > 参考资料
 >
 > [1] [Selenium Grid Documentation - selenium.dev](https://www.selenium.dev/documentation/grid/)
