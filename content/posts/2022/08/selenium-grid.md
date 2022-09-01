@@ -222,6 +222,28 @@ docker run -d -p 5900:5900 --net grid -e SE_EVENT_BUS_HOST=selenium-hub \
 
 ### 4 使用 Kubernetes 描述文件的方式搭建 Grid
 
+拥有 Kubernetes 环境的话，在 Kubernetes 搭建好 Grid，会变得非常实用。这样，从 Kubernetes Ingress 暴露 Grid 的 URL 出来，可以供团队内的任何测试项目使用。自动化流水线的测试阶段也变得简单，无需准备测试用例运行环境，直接指向 Grid 的 URL 即可。
+
+本文基于 Docker Desktop 自带的 Kubernetes 环境，基于官方提供的 [Kubernetes 描述文件](https://github.com/kubernetes/examples/tree/master/staging/selenium) 稍作改动来搭建一个 Selenium Hub/Node 环境（修改后的 K8s Yaml 文件已整理至我[个人 GitHub 仓库](https://github.com/olzhy/kubernetes-excercises/tree/main/selenium)）。然后在 Ingress 开放 Grid Hub 的 URL 出来供程序使用，再开放一个 Chrome Node 的桌面 URL 出来供测试人员查看。
+
+```shell
+kubectl apply -f selenium-hub-deployment.yaml
+kubectl apply -f selenium-node-chrome-deployment.yaml
+
+kubectl apply -f selenium-hub-service.yaml
+kubectl apply -f selenium-node-chrome-service.yaml
+```
+
+```shell
+kubectl expose deployment selenium-hub --name=selenium-hub-external --labels="app=selenium-hub,external=true" --type=LoadBalancer
+```
+
+```shell
+kubectl expose deployment selenium-node-chrome --name=selenium-node-chrome-external --labels="app=selenium-hub,external=true" --type=LoadBalancer
+```
+
+这样，在本地访问`http://localhost:4444`和`http://localhost:7900`就可以分别看到 Selenium 控制台和 Chrome Node 桌面。
+
 > 参考资料
 >
 > [1] [Selenium Grid Documentation - selenium.dev](https://www.selenium.dev/documentation/grid/)
