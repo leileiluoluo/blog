@@ -226,6 +226,8 @@ docker run -d -p 5900:5900 --net grid -e SE_EVENT_BUS_HOST=selenium-hub \
 
 本文基于 Docker Desktop 自带的 Kubernetes 环境，基于官方提供的 [Kubernetes 描述文件](https://github.com/kubernetes/examples/tree/master/staging/selenium) 稍作改动来搭建一个 Selenium Hub/Node 环境（修改后的 K8s Yaml 文件已整理至我[个人 GitHub 仓库](https://github.com/olzhy/kubernetes-excercises/tree/main/selenium)）。然后在 Ingress 开放 Grid Hub 的 URL 出来供程序使用，再开放一个 Chrome Node 的桌面 URL 出来供测试人员查看。
 
+应用 Selenium Hub/Node `Deployment`及`Service` 描述文件。
+
 ```shell
 kubectl apply -f selenium-hub-deployment.yaml
 kubectl apply -f selenium-node-chrome-deployment.yaml
@@ -234,9 +236,13 @@ kubectl apply -f selenium-hub-service.yaml
 kubectl apply -f selenium-node-chrome-service.yaml
 ```
 
+暴露 Selenium Hub：
+
 ```shell
 kubectl expose deployment selenium-hub --name=selenium-hub-external --labels="app=selenium-hub,external=true" --type=LoadBalancer
 ```
+
+暴露 Selenium Chrome Node：
 
 ```shell
 kubectl expose deployment selenium-node-chrome --name=selenium-node-chrome-external --labels="app=selenium-hub,external=true" --type=LoadBalancer
@@ -244,11 +250,19 @@ kubectl expose deployment selenium-node-chrome --name=selenium-node-chrome-exter
 
 这样，在本地访问`http://localhost:4444`和`http://localhost:7900`就可以分别看到 Selenium 控制台和 Chrome Node 桌面。
 
-同样可以使用 VNC 的方式访问位于 Kubenetes 内 Chrome 的桌面。如下命令将 Chrome Pod 的 5900 端口转发到本地的 5900 端口，使用 VNCViewer 访问`localhost:5900`即可看到 Chrome 浏览器所在的桌面。
+同样可以使用 VNC 的方式访问位于 Kubenetes 内 Chrome 的桌面。
+
+使用如下命令将 Chrome Pod 的 5900 端口转发到本地的 5900 端口：
 
 ```shell
 kubectl port-forward selenium-node-chrome-5854c6c789-xlcxf 5900:5900
 ```
+
+这样，使用 VNCViewer 访问`localhost:5900`即可看到 Chrome 浏览器所在的桌面。
+
+{{< line_break >}}
+
+综上，我们引入一段 Selenium 测试代码，分别使用`jar`文件方式、Docker 镜像方式和 Kubenetes 描述文件方式搭建了 Selenium Grid 并介绍了使用方法，还说明了在各种环境下浏览器运行桌面的查看方式。为使用 Selenium 的朋友在本地调试或实际测试场景中的环境准备上提供了参考经验。
 
 > 参考资料
 >
