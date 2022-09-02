@@ -24,7 +24,7 @@ Selenium 测试的主要组成部分有：测试代码、WebDriver、Grid（Sele
 
 ![WebDriver与浏览器直接交互过程 - selenium.dev](https://olzhy.github.io/static/images/uploads/2022/08/selenium-basic-comms.png#center)
 
-{{% center %}}（图片引自 selenium.dev）{{% /center %}}
+{{% center %}}（图片引自 [selenium.dev](https://www.selenium.dev/documentation/overview/components/)）{{% /center %}}
 
 本地调试完成，使用自动化流水线触发执行测试用例时，一般不会使用上述这种 WebDriver 与浏览器（驱动）直接交互的方式，而会选择远程交互的方式。
 
@@ -32,7 +32,7 @@ Selenium 测试的主要组成部分有：测试代码、WebDriver、Grid（Sele
 
 ![WebDriver与浏览器远程交互过程 - selenium.dev](https://olzhy.github.io/static/images/uploads/2022/08/selenium-remote-comms-server.png#center)
 
-{{% center %}}（图片引自 selenium.dev）{{% /center %}}
+{{% center %}}（图片引自 [selenium.dev](https://www.selenium.dev/documentation/overview/components/)）{{% /center %}}
 
 可以看到，使用 Grid 以后，测试用例的执行只需一个 Grid 的 URL 即可，无需安装浏览器及驱动，使得测试用例的执行变得非常简单。
 
