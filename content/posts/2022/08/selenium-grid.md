@@ -18,7 +18,7 @@ keywords:
 description: Selenium Grid 搭建及使用。引入一段测试代码，并使用本地直接交互的方式来执行。使用原始`jar`文件的方式搭建 Grid 环境，并执行测试代码；然后，使用 Docker 镜像的方式搭建 Grid 环境；最后使用 Kubernetes 描述文件的方式搭建 Grid 环境。
 ---
 
-Selenium 测试的主要组成部分有：测试代码、WebDriver、Grid（Selenium Server，非必须）、浏览器驱动（Driver）和浏览器。
+Selenium 测试的主要组成部分有：测试代码、WebDriver、Grid（Selenium Server，非必需）、浏览器驱动（Driver）和浏览器。
 
 当我们编写完 Selenium 测试用例在本地调试时，WebDriver 通过浏览器驱动直接与浏览器进行交互。这时，WebDriver、浏览器驱动和浏览器位于同一主机。这种最基本的交互方式如下图所示。
 
