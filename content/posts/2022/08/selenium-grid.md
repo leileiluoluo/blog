@@ -34,7 +34,7 @@ Selenium 测试的主要组成部分有：测试代码、WebDriver、Grid（Sele
 
 {{% center %}}（图片引自 [selenium.dev](https://www.selenium.dev/documentation/overview/components/)）{{% /center %}}
 
-可以看到，使用 Grid 以后，测试用例的执行只需一个 Grid 的 URL 即可，无需安装浏览器及驱动，使得测试用例的执行变得非常简单。
+可以看到，使用 Grid 以后，测试用例只需知道 Grid 的地址即可，无需安装浏览器及驱动，使得测试用例的执行变得非常简单。
 
 本文主要关注 Grid 的搭建及使用。接下来，主要有如下几个部分。
 
