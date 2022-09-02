@@ -109,7 +109,7 @@ java -jar selenium-server-<version>.jar standalone
 
 Grid 启动完成后，打开网址`http://localhost:4444`可以看到可使用的所有浏览器类型以及会话的状态。
 
-![Selenium Grid UI](https://olzhy.github.io/static/images/uploads/2022/08/selenium-grid-ui.png#center)
+![Selenium Grid UI](https://olzhy.github.io/static/images/uploads/2022/08/selenium-grid-ui.jpeg#center)
 
 接着，对测试代码稍作修改（获取`browser`的方式替换为如下写法）即可成功运行。
 
@@ -142,7 +142,7 @@ java -jar selenium-server-<version>.jar node --port 6666
 
 启动完成后，从网址`http://localhost:4444`可以看到有两个可以使用的 Node。
 
-![Selenium Grid UI](https://olzhy.github.io/static/images/uploads/2022/08/selenium-grid-ui-2-nodes.png#center)
+![Selenium Grid UI](https://olzhy.github.io/static/images/uploads/2022/08/selenium-grid-ui-2-nodes.jpeg#center)
 
 测试代码使用 Grid 的方式不会因此发生变化，仍指向`http://localhost:4444`即可。
 
@@ -159,7 +159,7 @@ docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-chro
 
 新版 Grid 另一个非常便捷的功能是，直接在浏览器打开`http://localhost:7900`（密码为`secret`）即可看到运行测试的桌面。
 
-![Selenium Grid 运行桌面](https://olzhy.github.io/static/images/uploads/2022/08/selenium-grid-desktop.png#center)
+![Selenium Grid 运行桌面](https://olzhy.github.io/static/images/uploads/2022/08/selenium-grid-desktop.jpeg#center)
 
 测试代码同样只需将 RemoteWebDriver 地址指向`http://localhost:4444`即可运行。
 
