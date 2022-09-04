@@ -263,7 +263,7 @@ kubectl port-forward $PODNAME 5900:5900
 
 {{< line_break >}}
 
-综上，我们引入一段 Selenium 测试代码，分别使用`jar`文件方式、Docker 镜像方式和 Kubenetes 描述文件方式搭建了 Selenium Grid，并介绍了使用方法；还说明了在各种环境下浏览器运行桌面的查看方式。为使用 Selenium 的朋友在本地调试或实际测试场景中的环境准备上提供了参考经验。
+综上，我们引入一段 Selenium 测试代码，分别使用`jar`文件方式、Docker 镜像方式和 Kubernetes 描述文件方式搭建了 Selenium Grid，并介绍了使用方法；还说明了在各种环境下浏览器运行桌面的查看方式。为使用 Selenium 的朋友在本地调试或实际测试场景中的环境准备上提供了参考经验。
 
 > 参考资料
 >
