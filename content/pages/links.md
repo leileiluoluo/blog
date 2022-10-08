@@ -28,7 +28,7 @@ wip_template:
 - [赫赫文王](https://kqh.me/)
 - [程可八八](https://chenghouwen.com/)
 - [无色墨水](https://wuse.ink/)
-  
+
 **正体字学习**
 
 - [萌典](https://www.moedict.tw/)
@@ -90,6 +90,7 @@ wip_template:
 - [Golang](https://golang.org/)
 - [Golang Spec](https://golang.org/ref/spec)
 - [GopherAcademy](https://gopheracademy.com/)
+- [Bitfield Consulting](https://bitfieldconsulting.com/)
 - [Go 101](https://go101.org/)
 - [Go 语言中文网](https://studygolang.com/)
 - [Golang Bot](https://golangbot.com)
