@@ -126,9 +126,29 @@ JMeter 中常用的一些概念或组件即梳理完了。下面接着介绍下 
 jmeter --version
 ```
 
-### 3 初步使用
+### 3 构建一个 Web 测试计划
 
-#### 3.1 Web 项目测试
+该部分会创建一个用于测试 Web 站点的最基本的测试计划。我们会创建 5 个用户，对 JMeter 网站的 2 个页面发送请求，并且会让用户运行 2 次这样的测试。所以，请求总数为：(5 个用户) x (2 个请求) x (重复 2 次) = 20 个 HTTP 请求。要构建测试计划，将用到如下元素：线程组（Thread Group）、HTTP Request、HTTP Request Defaults 和 Graph Results.
+
+具体步骤如下：
+
+- 添加用户
+
+  第一步是为测试计划添加一个线程组（Thread Group）。线程组会告诉 JMeter 用于模拟的用户数量以及用户发送请求的频率和数目。
+
+  ![添加线程组](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-adding-users-thread-group.png#center)
+
+- 添加默认 HTTP 请求属性
+
+- 添加 Cookie 支持
+
+- 添加 HTTP 请求
+
+- 添加监听器以查看测试结果
+
+- 网站登录
+
+- 选择相同用户或不同用户
 
 > 参考资料
 >
