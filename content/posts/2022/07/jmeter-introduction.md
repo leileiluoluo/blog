@@ -14,7 +14,7 @@ keywords:
   - 性能测试
   - 负载测试
   - 压力测试
-description: Apache JMeter 初探。包括对测试计划、线程组、控制器、采样器、监听器等组成元素的介绍。
+description: Apache JMeter 初探。本文分三部分对 JMeter 进行初探：首先会梳理 JMeter 中常用的一些概念或组件；接着会介绍 JMeter 的下载与安装；最后会对其进行简单的使用，即构建一个 Web 测试计划。
 ---
 
 Apache JMeter 是一个使用纯 Java 编写的、由 Apache 软件基金会开源的、用于度量软件性能的负载测试工具。
@@ -46,7 +46,7 @@ JMeter 目前支持测试的协议或应用类型具体如下：
 
 **_需要注意的是 JMeter 不是浏览器，其在协议级别工作。不会像浏览器一样解析 JavaScript，也不会渲染页面。_**
 
-下面会梳理下 JMeter 中常用的一些概念或组件。
+本文接下来分三部分对 JMeter 进行初探：首先会梳理 JMeter 中常用的一些概念或组件；接着会介绍 JMeter 的下载与安装；最后会对其进行简单的使用，即构建一个 Web 测试计划。
 
 ### 1 概念梳理
 
@@ -128,19 +128,49 @@ jmeter --version
 
 ### 3 构建一个 Web 测试计划
 
-该部分会创建一个用于测试 Web 站点的最基本的测试计划。我们会创建 5 个用户，对 JMeter 网站的 2 个页面发送请求，并且会让用户运行 2 次这样的测试。所以，请求总数为：(5 个用户) x (2 个请求) x (重复 2 次) = 20 个 HTTP 请求。要构建测试计划，将用到如下元素：线程组（Thread Group）、HTTP Request、HTTP Request Defaults 和 Graph Results.
+该部分以测试`jmeter.apache.org`做示例，演示如何创建一个用于测试 Web 站点的最基本的测试计划。我们会创建 5 个用户，对 JMeter 网站的 2 个页面发送请求，并且会让用户运行 2 次这样的测试。所以，请求总数为：(5 个用户) x (2 个请求) x (重复 2 次) = 20 个 HTTP 请求。要构建测试计划，将用到如下元素：线程组（Thread Group）、HTTP Request、HTTP Request Defaults 和 Graph Results.
 
 具体步骤如下：
 
 - 添加用户
 
-  第一步是为测试计划添加一个线程组（Thread Group）。线程组会告诉 JMeter 用于模拟的用户数量以及用户发送请求的频率和数目。
+  每个 JMeter 测试计划的第一步都是添加一个线程组（Thread Group）。线程组会告诉 JMeter 用于模拟的用户数量及用户发送请求的频率和数目。
 
-  ![添加线程组](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-adding-users-thread-group.png#center)
+  选择 Test Plan，然后单击鼠标右键，选择 Add -> Threads -> Thread Group，即可看到 Thread Group 元素的控制面板。
+
+  接下来，修改默认属性值：将 Number of Threads 修改为 5；Ramp-up period 使用默认值 1（其为启动每个用户的延迟时间，假设有 5 个用户，Ramp-up period 为 5，则意味着每隔 1 秒启动一个用户）；将 Loop Count 设置为 2（该属性告诉 JMeter 重复执行测试的次数）。
+
+  修改后的 Thread Group 如下图所示。
+
+  ![Thread Group](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-thread-group.png#center)
 
 - 添加默认 HTTP 请求属性
 
+  上一步定义好了用户，现在开始定义它们要执行的任务。
+
+  这一步指定 HTTP 请求的默认设置，从而为下一步的 HTTP Request 元素所使用。
+
+  选择 Thread Group，然后单击鼠标右键，选择 Add -> Config Element -> HTTP Request Defaults，即可看到 HTTP Request Defaults 的控制面板。
+
+  接下来，填写属性值：将 Server Name or IP 填写为 jmeter.apache.org（对于我们正在构建的测试计划，所有 HTTP 请求都将发送到该服务器）；其它字段无需填写，采用默认值即可。
+
+  **_HTTP Request Defaults 元素不会告诉 JMeter 发送 HTTP 请求，它只是定义了 HTTP Request 元素使用的默认值。。_**
+
+  配置后的 HTTP Request Defaults 如下图所示。
+
+  ![HTTP Request Defaults](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-http-request-defaults.png#center)
+
 - 添加 Cookie 支持
+
+  几乎绝大多数的网站都需要 Cookie 支持。
+
+  欲添加 Cookie 支持，需要在测试计划的每个 Thread Group 下添加一个 HTTP Cookie Manager。这将确保每个线程都有自己的 Cookie，但在所有 HTTP Request 对象之间共享。
+
+  添加方式为：选择 Thread Group，然后单击鼠标右键，选择 Add -> Config Element -> HTTP Cookie Manager，即可看到 HTTP Cookie Manager 的控制面板。
+
+  添加 HTTP Cookie Manager 后的 Test Plan 如下图所示。
+
+  ![HTTP Cookie Manager](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-http-cookie-manager.png#center)
 
 - 添加 HTTP 请求
 
@@ -157,7 +187,3 @@ jmeter --version
 > [2] [JMeter Wiki - cwiki.apache.org](https://cwiki.apache.org/confluence/display/JMETER/Home)
 >
 > [3] [Apache JMeter - GitHub](https://github.com/apache/jmeter)
->
-> [4] [JMeter 必知必会系列 - 知乎专栏](https://www.zhihu.com/column/c_1131969374868938752)
->
-> [5] [JMeter 性能测试实现与分析 - 微信公众平台](https://mp.weixin.qq.com/s?src=11&timestamp=1658901525&ver=3945&signature=fiSHdGb3SleF1hNh9eR7yhAIl0pTQipegLVS2C8G2c8bj5Yy716AtYPQ1bK0tUeoT52nrKqxv0H3oO*fCq84I2lwuTgflo22k6qT22hqPpjR5jxw5D7FsOKc12TzCLT-&new=1)
