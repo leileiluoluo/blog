@@ -222,6 +222,10 @@ jmeter -n -t build-web-test-plan.jmx -l build-web-test-plan.jtl -e -o build-web
 
 ![Report](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-report.png#center)
 
+{{< line_break >}}
+
+综上，完成了对 JMeter 的初探。
+
 > 参考资料
 >
 > [1] [Apache JMeter - apache.org](https://jmeter.apache.org/index.html)
