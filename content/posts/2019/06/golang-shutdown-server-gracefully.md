@@ -152,7 +152,7 @@ exit status 1
 
 处理完成后，关闭 processed 通道，最后主 goroutine 退出。
 
-代码同时托管在 GitHub，欢迎关注（[github.com/olzhy/go-excercises](https://github.com/olzhy/go-excercises/blob/master/shutdown_server_gracefully/test.go)）。
+代码同时托管在 GitHub，欢迎关注（[github.com/olzhy/go-exercises](https://github.com/olzhy/go-exercises/blob/master/shutdown_server_gracefully/test.go)）。
 
 ```go
 var addr = flag.String("server addr", ":8080", "server address")

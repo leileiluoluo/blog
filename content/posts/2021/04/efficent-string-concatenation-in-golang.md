@@ -15,15 +15,16 @@ keywords:
   - Concat
 description: Golang 高效的字符串拼接方法 (Go 字符串拼接哪种方法效率高)
 ---
+
 日常编码中离不开字符串拼接，最常用的当属原生的拼接方式（`+=`）。但其在少量次数拼接中性能还可以，若进行大量的字符串拼接则应使用其它更高效的方式。
 
-本文首先列出Golang中常用的几种字符串拼接方式，然后会对它们进行基准测试，以期阅读完本文，我们能对各种拼接方法的适用场景有一个基本了解。
+本文首先列出 Golang 中常用的几种字符串拼接方式，然后会对它们进行基准测试，以期阅读完本文，我们能对各种拼接方法的适用场景有一个基本了解。
 
 ### 1 字符串拼接有几种方法？
 
-孔乙己问：“回字有几种写法？”。我们在Golang使用中也难免会被问到：“字符串拼接有几种方法？”。下面就一一道来。
+孔乙己问：“回字有几种写法？”。我们在 Golang 使用中也难免会被问到：“字符串拼接有几种方法？”。下面就一一道来。
 
-***a) 原生拼接方式（+=）***
+**_a) 原生拼接方式（+=）_**
 
 原生拼接方式即使用`+`操作符直接对两个字符串进行拼接。
 
@@ -34,22 +35,22 @@ var s string
 s += "hello"
 ```
 
-该种方式为什么不高效呢？因在Golang中string是不可变的，其拼接时先得将s的值取下来（从头遍历复制），然后与一个字符串进行拼接，计算好后再将新值（一个全新的字符串）重新赋给s，而s的旧值会等待垃圾回收器回收。因其每次拼接都会从头遍历复制，会涉及较多的计算与内存分配。
+该种方式为什么不高效呢？因在 Golang 中 string 是不可变的，其拼接时先得将 s 的值取下来（从头遍历复制），然后与一个字符串进行拼接，计算好后再将新值（一个全新的字符串）重新赋给 s，而 s 的旧值会等待垃圾回收器回收。因其每次拼接都会从头遍历复制，会涉及较多的计算与内存分配。
 
-该方式的时间复杂度为O(N^2)。
+该方式的时间复杂度为 O(N^2)。
 
-***b) bytes.Buffer***
+**_b) bytes.Buffer_**
 
-bytes.Buffer是一个变长的字节缓存区。其内部使用slice来存储字节（`buf []byte`）。
+bytes.Buffer 是一个变长的字节缓存区。其内部使用 slice 来存储字节（`buf []byte`）。
 
 ```go
 buf := bytes.NewBufferString("hello")
 buf.WriteString(" world") // fmt.Fprint(buf, " world")
 ```
 
-使用WriteString进行字符串拼接时，其会根据情况动态扩展slice长度，并使用内置slice内存拷贝函数将待拼接字符串拷贝到缓冲区中。因其是变长的slice，每次拼接时，无须重新拷贝旧有的部分，仅将待拼接的部分追加到尾部即可，所以较原生拼接方式性能高。
+使用 WriteString 进行字符串拼接时，其会根据情况动态扩展 slice 长度，并使用内置 slice 内存拷贝函数将待拼接字符串拷贝到缓冲区中。因其是变长的 slice，每次拼接时，无须重新拷贝旧有的部分，仅将待拼接的部分追加到尾部即可，所以较原生拼接方式性能高。
 
-该方式的时间复杂度为O(N)。
+该方式的时间复杂度为 O(N)。
 
 ```go
 // WriteString appends the contents of s to the buffer, growing the buffer as
@@ -65,16 +66,16 @@ func (b *Buffer) WriteString(s string) (n int, err error) {
 }
 ```
 
-***c) strings.Builder***
+**_c) strings.Builder_**
 
-strings.Builder内部也是使用字节slice来作存储。
+strings.Builder 内部也是使用字节 slice 来作存储。
 
 ```go
 var builder strings.Builder
 builder.WriteString("hello") // fmt.Fprint(&builder, "hello")
 ```
 
-使用WriteString进行字符串拼接时，其会调用内置append函数仅将待拼接字符串并入缓存区。其效率亦很高。
+使用 WriteString 进行字符串拼接时，其会调用内置 append 函数仅将待拼接字符串并入缓存区。其效率亦很高。
 
 ```go
 // WriteString appends the contents of s to b's buffer.
@@ -86,9 +87,9 @@ func (b *Builder) WriteString(s string) (int, error) {
 }
 ```
 
-***d) 内置copy函数***
+**_d) 内置 copy 函数_**
 
-内置copy函数支持将一个源slice拷贝到一个目标slice，因字符串的底层表示就是`[]byte`，所以也可以使用该函数进行字符串拼接。不过限制是需要预先知道字节slice的长度。
+内置 copy 函数支持将一个源 slice 拷贝到一个目标 slice，因字符串的底层表示就是`[]byte`，所以也可以使用该函数进行字符串拼接。不过限制是需要预先知道字节 slice 的长度。
 
 ```go
 bytes := make([]byte, 11)
@@ -97,9 +98,9 @@ copy(bytes[size:], " world")
 fmt.Println(string(bytes))
 ```
 
-内置copy函数支持将一个slice拷贝到另一个slice（其支持将一个字符串拷贝到`[]byte`），其返回值为所拷贝元素的长度。
+内置 copy 函数支持将一个 slice 拷贝到另一个 slice（其支持将一个字符串拷贝到`[]byte`），其返回值为所拷贝元素的长度。
 
-每次拼接时，其亦只需将待拼接字符串追加到slice尾部，效率亦很高。
+每次拼接时，其亦只需将待拼接字符串追加到 slice 尾部，效率亦很高。
 
 ```go
 // The copy built-in function copies elements from a source slice into a
@@ -110,15 +111,15 @@ fmt.Println(string(bytes))
 func copy(dst, src []Type) int
 ```
 
-***e) strings.Join***
+**_e) strings.Join_**
 
-若想将一个string slice（`[]string`）的各部分拼成一个字符串，可以使用`strings.Join`进行操作。
+若想将一个 string slice（`[]string`）的各部分拼成一个字符串，可以使用`strings.Join`进行操作。
 
 ```go
 s := strings.Join([]string{"hello world"}, "")
 ```
 
-其内部也是使用bytes.Builder进行实现的。所以也是非常高效的。
+其内部也是使用 bytes.Builder 进行实现的。所以也是非常高效的。
 
 ```go
 // Join concatenates the elements of its first argument to create a single string. The separator
@@ -140,9 +141,9 @@ func Join(elems []string, sep string) string {
 
 下面将如上介绍的几种字符串拼接方法组装为一个测试文件`string_test.go`进行基准测试。（因`strings.Join`需要预先生成一个`[]string`，与其它方法的使用场景不太一样，所以该方法不参与本次测试）
 
-该基准测试将使用每种方法将一个字符串“s”，拼接1000次。
+该基准测试将使用每种方法将一个字符串“s”，拼接 1000 次。
 
-[string_test.go](https://github.com/olzhy/go-excercises/blob/master/string_concatenation/string_test.go) 源码：
+[string_test.go](https://github.com/olzhy/go-exercises/blob/master/string_concatenation/string_test.go) 源码：
 
 ```go
 package string_test
@@ -209,7 +210,7 @@ func BenchmarkCopy(b *testing.B) {
 }
 ```
 
-执行Benchmark测试命令：
+执行 Benchmark 测试命令：
 
 ```shell
 $ go test -benchmem -bench .
@@ -226,8 +227,7 @@ PASS
 ok      github.com/olzhy/test   5.773s
 ```
 
-可以看到内置copy函数与strings.Builder的方式是最高效的，bytes.Buffer次之，原生拼接方式最低效。
-
+可以看到内置 copy 函数与 strings.Builder 的方式是最高效的，bytes.Buffer 次之，原生拼接方式最低效。
 
 > 参考资料
 >

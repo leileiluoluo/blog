@@ -224,7 +224,7 @@ docker run -d -p 5900:5900 --net grid -e SE_EVENT_BUS_HOST=selenium-hub \
 
 拥有 Kubernetes 环境的话，在 Kubernetes 搭建好 Grid，会变得非常实用。这样，从 Kubernetes Ingress 暴露 Grid 的 URL 出来，可以供团队内的任何测试项目使用。自动化流水线的测试阶段也变得简单，无需准备测试用例运行环境，直接指向 Grid 的 URL 即可。
 
-本文基于 Docker Desktop 自带的 Kubernetes 环境，基于官方提供的 [Kubernetes 描述文件](https://github.com/kubernetes/examples/tree/master/staging/selenium) 稍作改动来搭建一个 Selenium Hub/Node 环境（修改后的 K8s Yaml 文件已整理至我的 [个人 GitHub 仓库](https://github.com/olzhy/kubernetes-excercises/tree/main/selenium)），然后开放 Grid Hub 的 URL 出来供测试项目使用，再开放一个 Chrome Node 的桌面 URL 出来供测试人员查看。
+本文基于 Docker Desktop 自带的 Kubernetes 环境，基于官方提供的 [Kubernetes 描述文件](https://github.com/kubernetes/examples/tree/master/staging/selenium) 稍作改动来搭建一个 Selenium Hub/Node 环境（修改后的 K8s Yaml 文件已整理至我的 [个人 GitHub 仓库](https://github.com/olzhy/kubernetes-exercises/tree/main/selenium)），然后开放 Grid Hub 的 URL 出来供测试项目使用，再开放一个 Chrome Node 的桌面 URL 出来供测试人员查看。
 
 应用 Selenium Hub/Node `Deployment`及`Service` 描述文件。
 

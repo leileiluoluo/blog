@@ -13,11 +13,11 @@ keywords:
   - Golang
   - Template
 description: Golang text/template 包使用说明。
-
 ---
-Golang `text/template` 包是一个数据驱动的模版渲染工具。提供条件判断，数组或map遍历；参数赋值，函数或方法调用；自定义函数扩展，模板嵌套及重用等功能。基于该工具，可以轻松实现复杂场景的文本渲染。如[Helm Template](https://helm.sh/docs/chart_template_guide/getting_started/)基于此实现了功能强大的Kubernetes配置文件渲染工作。
 
-本文使用一个样例来演示`text/template`的使用，代码已托管至[GitHub](https://github.com/olzhy/go-excercises/blob/master/text_template/test.go)。
+Golang `text/template` 包是一个数据驱动的模版渲染工具。提供条件判断，数组或 map 遍历；参数赋值，函数或方法调用；自定义函数扩展，模板嵌套及重用等功能。基于该工具，可以轻松实现复杂场景的文本渲染。如[Helm Template](https://helm.sh/docs/chart_template_guide/getting_started/)基于此实现了功能强大的 Kubernetes 配置文件渲染工作。
+
+本文使用一个样例来演示`text/template`的使用，代码已托管至[GitHub](https://github.com/olzhy/go-exercises/blob/master/text_template/test.go)。
 
 ### 1 样例代码
 
@@ -33,7 +33,7 @@ import (
 const text = `
 {{/* This is a zoo template */}}
 {{with .Name}}Welcome to {{.}}{{end}}
-There are {{len .Animals}} animals, they are: 
+There are {{len .Animals}} animals, they are:
 {{range .Animals}}
 {{- . | upper -}},
 {{end}}
@@ -83,7 +83,7 @@ func main() {
 
 ```text
 Welcome to Beijing Zoo
-There are 3 animals, they are: 
+There are 3 animals, they are:
 ELEPHANT,
 TIGER,
 DOLPHIN,
@@ -97,8 +97,6 @@ There are 3 zookeepers, they are:
 
 You're welcome to visit Beijing Zoo next time!
 ```
-
-
 
 > 参考资料
 >
