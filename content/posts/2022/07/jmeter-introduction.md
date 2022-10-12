@@ -180,13 +180,13 @@ jmeter --version
 
   HTTP Request 添加方式为：选择 Thread Group，然后单击鼠标右键，选择 Add -> Sampler -> HTTP Request，即可看到 HTTP Request 的控制面板。
 
-  先添加第一个：将 Name 字段填写为 Home Page；将 Path 字段填写为`/`。Server Name or IP 字段无需添加，因为已在 HTTP Request Defaults 元素中设置。
+  先添加第一个：将 Name 字段填写为 “Home Page”；将 Path 字段填写为 “/”。Server Name or IP 字段无需填写，因为已在 HTTP Request Defaults 元素中设置。
 
   第一个 HTTP Request 添加完后，如下图所示。
 
   ![HTTP Request](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-http-request-home-page.png#center)
 
-  再添加第二个：将 Name 字段填写为 Changes；将 Path 字段填写为`/changes.html`。
+  再添加第二个：将 Name 字段填写为 “Changes”；将 Path 字段填写为 “/changes.html”。
 
   第二个 HTTP Request 添加完后，如下图所示。
 
