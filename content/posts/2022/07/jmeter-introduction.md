@@ -154,7 +154,7 @@ jmeter --version
 
   接下来，填写属性值：将 Server Name or IP 填写为 jmeter.apache.org（对于我们正在构建的测试计划，所有 HTTP 请求都将发送到该服务器）；其它字段无需填写，采用默认值即可。
 
-  **_HTTP Request Defaults 元素不会告诉 JMeter 发送 HTTP 请求，它只是定义了 HTTP Request 元素使用的默认值。。_**
+  **_HTTP Request Defaults 元素不会告诉 JMeter 发送 HTTP 请求，它只是定义了 HTTP Request 元素使用的默认值。_**
 
   配置后的 HTTP Request Defaults 如下图所示。
 
@@ -174,11 +174,43 @@ jmeter --version
 
 - 添加 HTTP 请求
 
+  在我们的 Test Plan 中，会对两个页面发送 HTTP 请求。第一个是 JMeter Home 页（http://jmeter.apache.org/），第二个是 Changes 页（http://jmeter.apache.org/changes.html）。
+
+  **_JMeter 会按照 HTTP Request 在树中出现的顺序依次发送请求。_**
+
+  HTTP Request 添加方式为：选择 Thread Group，然后单击鼠标右键，选择 Add -> Sampler -> HTTP Request，即可看到 HTTP Request 的控制面板。
+
+  先添加第一个：将 Name 字段填写为 Home Page；将 Path 字段填写为`/`。Server Name or IP 字段无需添加，因为已在 HTTP Request Defaults 元素中设置。
+
+  第一个 HTTP Request 添加完后，如下图所示。
+
+  ![HTTP Request](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-http-request-home-page.png#center)
+
+  再添加第二个：将 Name 字段填写为 Changes；将 Path 字段填写为`/changes.html`。
+
+  第二个 HTTP Request 添加完后，如下图所示。
+
+  ![HTTP Request](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-http-request-changes-page.png#center)
+
 - 添加监听器以查看测试结果
 
-- 网站登录
+  最后一个要添加的元素是一个 Listener，名为 View Results Tree，用于查看每个请求的发送次序及响应结果。
 
-- 选择相同用户或不同用户
+  添加方式为：选择 Thread Group，然后单击鼠标右键，选择 Add -> Listener -> View Results Tree 即可。
+
+  添加 View Results Tree 后的 Test Plan 如下图所示。
+
+  ![View Results Tree](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-view-results-tree.png#center)
+
+所有步骤已配置完成，点击 Start 即可在 GUI 端调试运行。
+
+![View Results Tree](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-view-results-tree.png#center)
+
+可以在 View Results Tree 看到，一共发送了 20 次请求，点击可查看各个 Request 的响应信息。
+
+```shell
+jmeter -n -t build-web-test-plan.jmx -l build-web-test-plan.jtl -e -o build-web-test-plan.report
+```
 
 > 参考资料
 >
