@@ -202,15 +202,25 @@ jmeter --version
 
   ![View Results Tree](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-view-results-tree.png#center)
 
-所有步骤已配置完成，点击 Start 即可在 GUI 端调试运行。
+所有步骤已配置完成，最终的`jmx`文件（`build-web-test-plan.jmx`）已托管至 [本人 GitHub](https://github.com/olzhy/daily-exercises/blob/main/jmeter/build-web-test-plan.jmx)。
 
-![View Results Tree](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-view-results-tree.png#center)
+点击 Start 即可在 GUI 端调试运行。运行结果如下图所示：
 
-可以在 View Results Tree 看到，一共发送了 20 次请求，点击可查看各个 Request 的响应信息。
+![View Results Tree Result](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-view-results-tree-result.png#center)
+
+可以在 View Results Tree 看到，一共发送了 20 次请求，点击某个请求可查看具体的采样结果和响应信息。
+
+真正做负载测试时，需要使用命令行模式进行。
+
+基于`jmx`文件执行测试，生成结果数据文件以及生成报告文件夹的命令如下：
 
 ```shell
 jmeter -n -t build-web-test-plan.jmx -l build-web-test-plan.jtl -e -o build-web-test-plan.report
 ```
+
+执行完成后，打开报告文件夹（`build-web-test-plan.report`）的`index.html`文件，即可看到测试报告。效果如下图所示。
+
+![Report](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-report.png#center)
 
 > 参考资料
 >
