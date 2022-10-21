@@ -133,7 +133,7 @@ toc = true
 
 # preloader
 [params.preloader]
-enable = true
+enable = false
 preloader = "" # use png, jpg, svg or gif format
 
 # search
