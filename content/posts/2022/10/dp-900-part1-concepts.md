@@ -13,7 +13,7 @@ keywords:
 description: Azure 数据基础之核心数据概念。包括核心数据概念、数据角色和服务。
 ---
 
-**本文依据 Azure 参考资料进行翻译及整理，作学习及知识总结之用。**
+**本文依据文末 Azure 参考资料进行翻译及整理，作学习及知识总结之用。**
 
 介绍常见的数据格式、工作负载，以及角色和服务。
 
@@ -318,30 +318,105 @@ OLAP 模型是一种聚合类型的数据存储，其针对分析工作负载进
 
 ### 2.2 数据服务
 
+下面介绍 Azure 提供的一些最常用的数据云服务。
+
 #### Azure SQL
 
-#### Azure Database - 开源关系型数据库版
+Azure SQL 是基于 Microsoft SQL Server 数据库引擎的一系列关系型数据库解决方案的统称。特定的 Azure SQL 服务包括：
+
+- Azure SQL Database - 完全托管的平台即服务 (PaaS) 数据库。
+- Azure SQL Managed Instance - 具有自动维护功能的 SQL Server 托管实例，比 Azure SQL Database 拥有更灵活的配置，但所有者需要承担更多的管理责任。
+- Azure SQL VM - 安装了 SQL Server 的虚拟机，可实现最大的可配置性并承担全部管理责任。
+
+数据库管理员通常预配和管理 Azure SQL 数据库系统，以支持需要存储事务数据的业务线 (LOB，Line of Business) 应用程序。
+
+数据工程师可以使用 Azure SQL 数据库系统作为管道的数据源，这些管道执行提取、转换和加载 (ETL) 操作以将事务数据提取到分析系统中。
+
+数据分析师可以直接查询 Azure SQL 数据库以创建报告，但在大型组织中，这些数据通常与分析数据存储中的其它数据相结合，以支持企业分析。
+
+#### 用于开源关系数据库的 Azure Database
+
+Azure 提供诸多流行开源关系型数据库的托管服务，包括：
+
+- Azure Database for MySQL - 一个易于使用的开源数据库管理系统，通常用于 Linux、Apache、MySQL 和 PHP (LAMP) 技术栈应用程序。
+- Azure Database for MariaDB - 一种较新的数据库管理系统，由 MySQL 的原始开发人员创建。该数据库引擎已被重写并针对性能作了优化。 MariaDB 提供与 Oracle 数据库的兼容性。
+- Azure Database for PostgreSQL - 一种混合关系对象数据库。您可以将数据存储在关系表中，但 PostgreSQL 数据库还允许存储自定义数据类型，以及它们自己的非关系属性。
 
 #### Azure Cosmos DB
 
+Azure Cosmos DB 是一个全球规模的非关系型 (NoSQL) 数据库，它支持多个应用程序接口 (API)，使你能够以 JSON 文档、键值对、列族和图形的形式存储和管理数据。
+
 #### Azure Storage
+
+Azure 存储是一项核心 Azure 服务，可让您将数据存储在：
+
+- Blob containers - 可扩展、经济高效的二进制文件存储。
+- File shares - 网络文件共享，例如您通常在公司网络中找到的文件。
+- Tables - 需要快速读写数据的应用程序的键值存储。
+
+数据工程师使用 Azure Storage 来托管数据湖 - 具有分层命名空间的 blob 存储，使文件能够在分布式文件系统的文件夹中组织。
 
 #### Azure Data Factory
 
+Azure Data Factory 是一个可让你定义和调度数据流水线以传输和转换数据的 Azure 服务。您可以将流水线与其他 Azure 服务集成，使您能够从云数据存储中提取数据，以及使用云上的计算服务处理数据，并将结果保存在另一个数据存储中。
+
+数据工程师使用 Azure Data Factory 构建 ETL（提取、转换和加载）解决方案，这些解决方案使用来自整个组织的事务系统的数据来填充分析数据存储。
+
 #### Azure Synapse Analytics
+
+Azure Synapse Analytics 是一个全面、统一的数据分析解决方案，它为多种分析功能提供单一服务接口，包括：
+
+- 流水线 - 基于与 Azure Data Factory 相同的技术。
+- SQL - 一种高度可扩展的 SQL 数据库引擎，针对数据仓库工作负载进行了优化。
+- Apache Spark - 一个开源分布式数据处理系统，支持多种编程语言和 API，包括 Java、Scala、Python 和 SQL。
+- Azure Synapse Data Explorer - 一种高性能数据分析解决方案，针对使用 Kusto 查询语言 (KQL) 实时查询日志和遥测数据进行了优化。
+
+数据工程师可以使用 Azure Synapse Analytics 创建统一的数据分析解决方案，通过单一服务将数据提取管道、数据仓库存储和数据湖存储结合起来。
+
+数据分析师可以通过交互式 Notebook 使用 SQL 和 Spark 池来探索和分析数据，并利用与 Azure 机器学习和 Microsoft Power BI 等服务的集成来创建数据模型并从数据中提取洞察力。
 
 #### Azure Databricks
 
+Azure Databricks 是流行的 Databricks 平台的 Azure 集成版本，它将 Apache Spark 数据处理平台与 SQL 数据库语义和集成管理界面相结合，以实现大规模数据分析。
+
+数据工程师可以使用现有的 Databricks 和 Spark 技能在 Azure Databricks 中创建分析数据存储。
+
+数据分析师可以使用 Azure Databricks 中的原生 Notebook 支持来在 Web 界面中查询和查看数据视图。
+
 #### Azure HDInsight
+
+Azure HDInsight 为流行的 Apache 开源大数据处理技术提供 Azure 托管的集群，包括：
+
+- Apache Spark - 一个开源分布式数据处理系统，支持多种编程语言和 API，包括 Java、Scala、Python 和 SQL。
+- Apache Hadoop - 一个分布式系统，它使用 MapReduce 作业跨多个集群节点有效地处理大量数据。 MapReduce 作业可以用 Java 编写，也可以通过 Apache Hive（一种在 Hadoop 上运行的基于 SQL 的 API）等接口进行抽象。
+- Apache HBase - 一个用于大规模 NoSQL 数据存储和查询的开源系统。
+- Apache Kafka - 用于数据流处理的消息组件。
+- Apache Storm - 一个通过 spout 和 bolts 拓扑进行实时数据处理的开源系统。
+
+数据工程师可以使用 Azure HDInsight 来支持依赖多种开源技术的大数据分析工作负载。
 
 #### Azure Stream Analytics
 
+Azure 流分析是一个实时流处理引擎，它从输入中捕获数据流，从输入流中应用查询来提取和操作数据，并将结果写入输出以进行分析或进一步处理。
+
+数据工程师可以将 Azure Stream Analytics 整合到数据分析体系结构中，这些体系结构捕获流数据以将其引入分析数据存储或进行实时可视化。
+
 #### Azure Data Explorer
+
+Azure Data Explorer 是一个独立的服务，它提供与 Azure Synapse Analytics 中的 Azure Synapse Data Explorer 运行时相同的高性能日志和遥测数据查询能力。
+
+数据分析师可以使用 Azure Data Explorer 查询和分析包含时间戳属性的数据，例如通常在日志文件和物联网 (IoT) 遥测数据中找到的数据。
 
 #### Microsoft Purview
 
+Microsoft Purview 为企业范围的数据治理和可发现性提供了解决方案。您可以使用 Microsoft Purview 创建数据地图并跨多个数据源和系统跟踪数据沿袭，使您能够找到可靠的数据进行分析和报告。
+
+数据工程师可以使用 Microsoft Purview 在整个企业中实施数据治理，并确保用于支持分析工作负载的数据的完整性。
+
 #### Microsoft Power BI
+
+Microsoft Power BI 是一个用于分析数据建模和报告展示的平台，数据分析师可以使用它来创建和共享交互式数据可视化报告。Power BI 报表可使用 Power BI Desktop 应用程序创建，然后通过基于 Web 的报表发布到 Power BI 服务以及 Power BI 移动应用中。
 
 > 参考资料
 >
-> [1] [Exam DP-900: Microsoft Azure Data Fundamentals - microsoft.com](https://learn.microsoft.com/en-us/certifications/exams/dp-900)
+> [1] [Exam DP-900: Microsoft Azure Data Fundamentals - learn.microsoft.com](https://learn.microsoft.com/en-us/certifications/exams/dp-900)
