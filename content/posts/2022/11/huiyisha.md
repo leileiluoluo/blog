@@ -21,7 +21,7 @@ description:
 
 網上搜索磁帶，發現沒幾年的時間，這種東西竟然成了古董。想買都很難買著。
 
-最後去二手平台買了幾盤周杰倫的帶。
+最後去二手平台淘了幾盤周杰倫的帶。想著找找中學時代那種聽歌的感覺。播放鍵按下後，似乎這經歷幾多歲月的帶子裡的聲音也像被風吹雨打一樣，早已不是記憶力的那般清脆動人了。
 
 [![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay-cover.jpeg#center)](https://imglf4.lf127.net/img/a433078e222c3b1f/L0FZWERkUnp2ZHRYVmdwL1hoWGNMS1pobGVmQXVhTlBIcUZsN3Uya1ZxQT0.jpeg?imageView&thumbnail=2666y2000&type=jpg&quality=96&stripmeta=0&type=jpg)
 
