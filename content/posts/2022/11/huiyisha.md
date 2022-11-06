@@ -33,6 +33,6 @@ description:
 
 [![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay7.jpeg#center)](https://imglf4.lf127.net/img/a67ba19bd234a213/L0FZWERkUnp2ZHUyWmdzMTRvaUh4cXU1YXBuYWlpRUVvMWMwYldFNUhrMD0.jpeg?imageView&thumbnail=2666y2000&type=jpg&quality=96&stripmeta=0&type=jpg)
 
-[![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/philips.jpeg#center)](https://imglf4.lf127.net/img/b5476d839fdd6d02/L0FZWERkUnp2ZHUyWmdzMTRvaUh4a1NxcTRmT1lxMUsvbm9vb3lNNS9pQT0.jpeg?imageView&thumbnail=2666y2000&type=jpg&quality=96&stripmeta=0&type=jpg)
+[![磁帶播放器](https://olzhy.github.io/static/images/uploads/2022/11/philips.jpeg#center)](https://imglf4.lf127.net/img/b5476d839fdd6d02/L0FZWERkUnp2ZHUyWmdzMTRvaUh4a1NxcTRmT1lxMUsvbm9vb3lNNS9pQT0.jpeg?imageView&thumbnail=2666y2000&type=jpg&quality=96&stripmeta=0&type=jpg)
 
 ## 80 後記憶裡的玩具
