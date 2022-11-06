@@ -10,7 +10,7 @@ tags:
   - 随笔
 keywords:
   - 属于8090的回忆
-description:
+description: 周杰倫的磁帶和80後記憶裡的玩具。
 ---
 
 ## 周杰倫的磁帶
