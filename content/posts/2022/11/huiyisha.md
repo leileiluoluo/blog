@@ -43,9 +43,9 @@ description: 周杰倫的磁帶和80後記憶裡的玩具。
 
 ### 80 後記憶裡的玩具
 
-太太給孩子從網上買了一些我們當年小時候玩的玩具。今天到貨，打開袋子一看，一下子勾起了我們兩人童年關於這些玩具的很多美好回憶。
+太太給孩子從網上買了一些我們當年小時候玩的玩具。今天到貨，打開袋子一看，一下子勾起了我們兩人很多童年的快樂記憶。
 
-從現在的眼光來看這些玩具，顯得略有點粗糙。但在當時，卻讓我們這些80後愛不釋手，玩的不亦樂乎！
+從現在的眼光來看這些玩具，顯得略有點粗糙。但在當時，卻讓我們這些 80 後愛不釋手，玩的不亦樂乎！
 
 [![小時候的玩具](https://olzhy.github.io/static/images/uploads/2022/11/wanju1.jpeg#center)](https://imglf5.lf127.net/img/df65ce9440375bd0/L0FZWERkUnp2ZHRMelMzVGdpVUY4Mmw0dk4yWlU4R0xubndpN1JRc2x3dz0.jpeg?imageView&thumbnail=2666y2000&type=jpg&quality=96&stripmeta=0&type=jpg)
 
