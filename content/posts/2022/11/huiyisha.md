@@ -15,7 +15,13 @@ description:
 
 ## 周杰倫的磁帶
 
-前段時間公司獎勵了一些“豆”，不知道用來兌換些什麼？翻看翻看，被一台錄音機吸引了。可以播放磁帶，也可以用來收聽廣播。
+前段時間公司獎勵了一些“豆”，翻看可兌換的獎品，被一台錄音機吸引了。可以播放磁帶，也可以用來收聽廣播。
+
+錄音機收到後，從哪裡買磁帶卻成了頭疼的問題。從地圖上搜索“影像店”，將電話打過去，老闆說早已不賣磁帶了。
+
+網上搜索磁帶，發現沒幾年的時間，這種東西竟然成了古董。想買都很難買著。
+
+最後去二手平台買了幾盤周杰倫的帶。
 
 [![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay-cover.jpeg#center)](https://imglf4.lf127.net/img/a433078e222c3b1f/L0FZWERkUnp2ZHRYVmdwL1hoWGNMS1pobGVmQXVhTlBIcUZsN3Uya1ZxQT0.jpeg?imageView&thumbnail=2666y2000&type=jpg&quality=96&stripmeta=0&type=jpg)
 
@@ -36,6 +42,10 @@ description:
 [![磁帶播放器](https://olzhy.github.io/static/images/uploads/2022/11/philips.jpeg#center)](https://imglf4.lf127.net/img/b5476d839fdd6d02/L0FZWERkUnp2ZHUyWmdzMTRvaUh4a1NxcTRmT1lxMUsvbm9vb3lNNS9pQT0.jpeg?imageView&thumbnail=2666y2000&type=jpg&quality=96&stripmeta=0&type=jpg)
 
 ## 80 後記憶裡的玩具
+
+太太給孩子從網上買了一些我們當年小時候玩的玩具。今天到貨，打開袋子一看，一下子勾起了我們兩人童年關於這些玩具的很多美好回憶。
+
+從現在的眼光來看這些玩具，顯得略有點粗糙。但在當時，卻讓我們這些80後愛不釋手，玩的不亦樂乎！
 
 [![小時候的玩具](https://olzhy.github.io/static/images/uploads/2022/11/wanju1.jpeg#center)](https://imglf5.lf127.net/img/df65ce9440375bd0/L0FZWERkUnp2ZHRMelMzVGdpVUY4Mmw0dk4yWlU4R0xubndpN1JRc2x3dz0.jpeg?imageView&thumbnail=2666y2000&type=jpg&quality=96&stripmeta=0&type=jpg)
 
