@@ -36,3 +36,11 @@ description:
 [![磁帶播放器](https://olzhy.github.io/static/images/uploads/2022/11/philips.jpeg#center)](https://imglf4.lf127.net/img/b5476d839fdd6d02/L0FZWERkUnp2ZHUyWmdzMTRvaUh4a1NxcTRmT1lxMUsvbm9vb3lNNS9pQT0.jpeg?imageView&thumbnail=2666y2000&type=jpg&quality=96&stripmeta=0&type=jpg)
 
 ## 80 後記憶裡的玩具
+
+[![小時候的玩具](https://olzhy.github.io/static/images/uploads/2022/11/wanju1.jpeg#center)](https://imglf5.lf127.net/img/df65ce9440375bd0/L0FZWERkUnp2ZHRMelMzVGdpVUY4Mmw0dk4yWlU4R0xubndpN1JRc2x3dz0.jpeg?imageView&thumbnail=2666y2000&type=jpg&quality=96&stripmeta=0&type=jpg)
+
+[![小時候的玩具](https://olzhy.github.io/static/images/uploads/2022/11/wanju2.jpeg#center)](https://imglf4.lf127.net/img/5e4fcb14c152a432/L0FZWERkUnp2ZHRMelMzVGdpVUY4ekJUN244V3JrM0piamRFczdVOElWWT0.jpeg?imageView&thumbnail=2666y2000&type=jpg&quality=96&stripmeta=0&type=jpg)
+
+[![小時候的玩具](https://olzhy.github.io/static/images/uploads/2022/11/wanju3.jpeg#center)](https://imglf5.lf127.net/img/37b48f2f628479a9/L0FZWERkUnp2ZHRMelMzVGdpVUY4K0lwUjQ2K3lCa0FUNDJabDZoZ1dQTT0.jpeg?imageView&thumbnail=2666y2000&type=jpg&quality=96&stripmeta=0&type=jpg)
+
+[![小時候的玩具](https://olzhy.github.io/static/images/uploads/2022/11/wanju4.jpeg#center)](https://imglf5.lf127.net/img/2d3ccee72162d9c8/L0FZWERkUnp2ZHRMelMzVGdpVUY4MGRXQ0tIa3c2UUJ6Z1N5U09GNnhXVT0.jpeg?imageView&thumbnail=2666y2000&type=jpg&quality=96&stripmeta=0&type=jpg)
