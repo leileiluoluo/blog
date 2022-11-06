@@ -13,7 +13,7 @@ keywords:
 description: 周杰倫的磁帶和80後記憶裡的玩具。
 ---
 
-## 周杰倫的磁帶
+### 周杰倫的磁帶
 
 前段時間公司獎勵了一些“豆”，翻看可兌換的獎品，被一台錄音機吸引了。可以播放磁帶，也可以用來收聽廣播。
 
@@ -41,7 +41,7 @@ description: 周杰倫的磁帶和80後記憶裡的玩具。
 
 [![磁帶播放器](https://olzhy.github.io/static/images/uploads/2022/11/philips.jpeg#center)](https://imglf4.lf127.net/img/b5476d839fdd6d02/L0FZWERkUnp2ZHUyWmdzMTRvaUh4a1NxcTRmT1lxMUsvbm9vb3lNNS9pQT0.jpeg?imageView&thumbnail=2666y2000&type=jpg&quality=96&stripmeta=0&type=jpg)
 
-## 80 後記憶裡的玩具
+### 80 後記憶裡的玩具
 
 太太給孩子從網上買了一些我們當年小時候玩的玩具。今天到貨，打開袋子一看，一下子勾起了我們兩人童年關於這些玩具的很多美好回憶。
 
