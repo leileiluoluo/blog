@@ -161,7 +161,135 @@ INSERT 语句的基本形式是一次插入一行。默认情况下，SELECT、U
 
 **_SQL 没有二次确认提示。因此在使用不带 WHERE 子句的 DELETE 或 UPDATE 时要小心，因为您可能会丢失或修改大量数据。_**
 
+以下代码是一个 SQL 语句示例，该语句从 Customer 表中选择 City 列值为“Seattle”的所有列（用 \* 表示）：
+
+```sql
+SELECT *
+FROM Customer
+WHERE City = 'Seattle';
+```
+
+仅从表中检索特定的列，请在 SELECT 子句中列出它们，SQL 如下：
+
+```sql
+SELECT FirstName, LastName, Address, City
+FROM Customer
+WHERE City = 'Seattle';
+```
+
+如果查询返回许多行，它们不一定以任何特定顺序出现。如果要对数据进行排序，可以添加 ORDER BY 子句。数据将按指定列排序：
+
+```sql
+SELECT FirstName, LastName, Address, City
+FROM Customer
+WHERE City = 'Seattle'
+ORDER BY LastName;
+```
+
+您还可以在 SELECT 语句中使用 JOIN 子句从多个表中检索数据。JOIN 指示一个表中的行如何与另一个表中的行连接以确定要返回的数据。典型的连接条件匹配一个表中的外键及其在另一个表中的关联主键。
+
+以下查询显示了连接 Customer 和 Order 表的示例。当指定在 SELECT 子句中检索哪些列以及在 JOIN 子句中匹配哪些列时，查询使用表别名来缩写表名。
+
+```sql
+SELECT o.OrderNo, o.OrderDate, c.Address, c.City
+FROM Order AS o
+JOIN Customer AS c
+ON o.Customer = c.ID
+```
+
+下一个示例显示如何使用 SQL 修改现有行。对于 ID 列中值为 1 的行，它会更改 Customer 表中 Address 列的值。所有其它行保持不变：
+
+```sql
+UPDATE Customer
+SET Address = '123 High St.'
+WHERE ID = 1;
+```
+
+**_如果省略 WHERE 子句，UPDATE 语句将修改表中的所有行。_**
+
+使用 DELETE 语句删除行。指定表名，以及标识要删除的行的 WHERE 子句：
+
+```sql
+DELETE FROM Product
+WHERE ID = 162;
+```
+
+**_如果省略 WHERE 子句，则 DELETE 语句将删除表中的所有行。_**
+
+INSERT 语句的形式略有不同。在 INTO 子句中指定表和列，以及要存储在这些列中的值列表。标准 SQL 仅支持一次插入一行，如下例所示。某些方言允许您指定多个 VALUES 子句以一次添加多行：
+
+```sql
+INSERT INTO Product(ID, Name, Price)
+VALUES (99, 'Drill', 4.99);
+```
+
 ### 1.4 描述数据库对象
+
+除了表之外，关系数据库还可以包含其他有助于优化数据组织、封装编程操作和提高访问速度的结构。在本单元中，您将更详细地了解其中三种结构：视图、存储过程和索引。
+
+#### 什么是视图？
+
+视图是基于 SELECT 查询结果的虚拟表。您可以将视图视为一个或多个基础表中指定行的窗口。例如，您可以在 Order 和 Customer 表上创建一个视图，该视图检索订单和客户数据以提供单个对象，以便轻松确定订单的交货地址：
+
+```sql
+CREATE VIEW Deliveries
+AS
+SELECT o.OrderNo, o.OrderDate,
+       c.FirstName, c.LastName, c.Address, c.City
+FROM Order AS o JOIN Customer AS c
+ON o.Customer = c.ID;
+```
+
+您可以像查询表一样查询视图和过滤数据。以下查询查找居住在 Seattle 的客户的订单详细信息：
+
+```sql
+SELECT OrderNo, OrderDate, LastName, Address
+FROM Deliveries
+WHERE City = 'Seattle';
+```
+
+#### 什么是存储过程？
+
+存储过程定义了可以在命令上运行的 SQL 语句。存储过程用于将程序逻辑封装在数据库中，以用于应用程序在处理数据时需要执行的操作。
+
+您可以使用参数定义存储过程，为可能需要根据特定键或条件应用于数据的常见操作创建灵活的解决方案。例如，可以定义以下存储过程来根据指定的产品 ID 更改产品的名称。
+
+```sql
+CREATE PROCEDURE RenameProduct
+	@ProductID INT,
+	@NewName VARCHAR(20)
+AS
+UPDATE Product
+SET Name = @NewName
+WHERE ID = @ProductID;
+```
+
+当需要重命名产品时，您可以传递产品的 ID 和要分配的新名称来执行如下存储过程：
+
+```sql
+EXEC RenameProduct 201, 'Spanner';
+```
+
+#### 什么是索引？
+
+索引可帮助您搜索表中的数据。将表格上的索引想象成书后的索引。书籍索引包含一组排序的参考文献，以及每个参考文献出现的页面。当你想在书中找到对某个项目的引用时，你可以通过索引来查找它。您可以使用索引中的页码直接转到书中正确的页面。如果没有索引，您可能必须通读整本书才能找到您要查找的参考资料。
+
+在数据库中创建索引时，您从表中指定一列，并且索引包含该数据排序后的副本，这些副本带有指向表中相应行的指针。当用户运行在 WHERE 子句中指定该列的查询时，数据库管理系统可以使用该索引来更快地获取数据，而不是必须逐行扫描整个表。
+
+例如，您可以使用以下代码在 Product 表的 Name 列上创建索引：
+
+```sql
+CREATE INDEX idx_ProductName
+ON Product(Name);
+```
+
+该索引创建了一个基于树的结构，数据库系统的查询优化器可以使用该结构根据指定的名称在 Product 表中快速查找行。
+
+![索引](https://olzhy.github.io/static/images/uploads/2022/10/index.png#center)
+
+对于包含少量行的表，使用索引可能并不比简单地读取整个表并查找请求的行更有效（在这种情况下，查询优化器将忽略索引）。但是，当一个表有很多行时，索引可以显著提高查询的性能。
+
+您可以在一个表上创建许多索引。因此，如果您还想根据价格查找产品，则在 Product 表的 Price 列上创建另一个索引可能会很有用。但是，索引不是免费的。索引会消耗存储空间，每次在表中插入、更新或删除数据时，都必须维护该表的索引。这种额外的工作会减慢插入、更新和删除操作。您必须在拥有加快查询速度的索引与执行其他操作的成本之间取得平衡。
 
 ## 2 Azure 中的关系型数据库服务
 
