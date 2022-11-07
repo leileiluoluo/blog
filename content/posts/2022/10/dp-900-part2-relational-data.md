@@ -68,6 +68,99 @@ description: Azure 中的关系型数据。包括基本的关系数据概念和 
 
 ### 1.3 探索 SQL
 
+SQL 代表结构化查询语言（Structured Query Language），用于与关系数据库进行通信。SQL 语句用于执行诸如更新或检索数据等任务。一些使用 SQL 的常见关系数据库管理系统包括 Microsoft SQL Server、MySQL、PostgreSQL、MariaDB 和 Oracle。
+
+**_SQL 最初于 1986 年由美国国家标准协会 (ANSI，American National Standards Institute) 标准化，并于 1987 年由国际标准化组织 (ISO，International Organization for Standardization) 标准化。从那时起，随着关系数据库供应商向其系统中添加新功能，该标准已多次扩展.此外，大多数数据库供应商都包括他们自己的专有扩展，这些扩展不属于标准的一部分，这导致了各种 SQL 方言。_**
+
+您可以使用 SELECT、INSERT、UPDATE、DELETE、CREATE 和 DROP 等 SQL 语句来完成几乎所有需要对数据库执行的操作。尽管这些 SQL 语句是 SQL 标准的一部分，但许多数据库管理系统也有自己的附加专有扩展来处理该数据库管理系统的细节。这些扩展提供 SQL 标准未涵盖的功能，并包括安全管理和可编程性等领域。
+
+例如，基于 SQL Server 数据库引擎的 Microsoft SQL Server 和 Azure 数据库服务使用了 Transact-SQL。该实现包括用于编写存储过程、触发器（可以存储在数据库中的应用程序代码）以及管理用户帐户的专有扩展。 PostgreSQL 和 MySQL 也有自己的这些特性的版本。
+
+一些流行的 SQL 方言包括：
+
+- Transact-SQL (T-SQL)，此版本的 SQL 由 Microsoft SQL Server 和 Azure SQL 服务所使用。
+- pgSQL，这是在 PostgreSQL 中实现了扩展的 SQL 方言。
+- PL/SQL，这是甲骨文使用的方言。 PL/SQL 代表 Procedural Language/SQL。
+
+计划专门使用单个数据库系统的用户应该了解他们首选的 SQL 方言和平台的复杂性。
+
+**_除非另有说明，本模块中的 SQL 代码示例均基于 Transact-SQL 方言。其他方言的语法大体相似，但在某些细节上可能有所不同。_**
+
+#### SQL 语句类型
+
+SQL 语句主要分三种：
+
+- 数据定义语言 (Data Definition Language，DDL)
+- 数据控制语言 (Data Control Language，DCL)
+- 数据操作语言 (Data Manipulation Language，DML)
+
+**DDL 语句**
+
+您可以使用 DDL 语句来创建、修改和删除数据库中的表和其他对象（表、存储过程、视图等）。
+
+最常见的 DDL 语句是：
+
+| 语句   | 描述                                     |
+| ------ | ---------------------------------------- |
+| CREATE | 在数据库中创建一个新对象，例如表或视图。 |
+| ALTER  | 修改对象的结构。例如，更改表以添加新列。 |
+| DROP   | 从数据库中删除一个对象。                 |
+| RENAME | 重命名现有对象。                         |
+
+**_DROP 语句非常强大。删除表时，该表中的所有行都将丢失。除非您有备份，否则您将无法检索此数据。_**
+
+下面的示例创建了一个新的数据库表。括号之间内指定了每列的详细信息，包括名称、数据类型、值是否非空（NOT NULL）以及列中的数据是否用于唯一（PRIMARY KEY ）。每个表都应该有一个主键，尽管 SQL 不强制执行此规则。
+
+标记为 NOT NULL 的列称为强制列。如果省略 NOT NULL 子句，则可以创建列中不包含值的行。行中的空列被称为含有 NULL 值。
+
+```sql
+CREATE TABLE Product
+(
+    ID INT PRIMARY KEY,
+    Name VARCHAR(20) NOT NULL,
+    Price DECIMAL NULL
+);
+```
+
+表中列可用的数据类型因不同的数据库管理系统而异。但是，大多数数据库管理系统都支持诸如 INT 数值类型（整数）、DECIMAL（十进制数）和字符串（如 VARCHAR）类型。
+
+**DCL 语句**
+
+数据库管理员通常使用 DCL 语句来授予、拒绝或撤销特定用户或组的权限来管理对数据库中对象的访问。
+
+三个主要的 DCL 语句是：
+
+| 语句   | 描述                     |
+| ------ | ------------------------ |
+| GRANT  | 授予执行特定操作的权限。 |
+| DENY   | 拒绝执行特定操作的权限。 |
+| REVOKE | 删除之前授予的权限。     |
+
+例如，以下 GRANT 语句允许名为 user1 的用户读取、插入和修改 Product 表中的数据。
+
+```sql
+GRANT SELECT, INSERT, UPDATE
+ON Product
+TO user1;
+```
+
+**DML 语句**
+
+您使用 DML 语句来操作表中的行。这些语句使您能够检索（查询）数据、插入新行或修改现有行。如果不再需要某些行，也可以删除它们。
+
+四个主要的 DML 语句是：
+
+| 语句   | 描述                 |
+| ------ | -------------------- |
+| SELECT | 从表中读取行。       |
+| INSERT | 向表中插入新行。     |
+| UPDATE | 修改现有行中的数据。 |
+| DELETE | 删除现有行。         |
+
+INSERT 语句的基本形式是一次插入一行。默认情况下，SELECT、UPDATE 和 DELETE 语句应用于表中的每一行。通常在这些语句中应用 WHERE 子句来指定条件，只有符合这些条件的行才会被选择、更新或删除。
+
+**_SQL 没有二次确认提示。因此在使用不带 WHERE 子句的 DELETE 或 UPDATE 时要小心，因为您可能会丢失或修改大量数据。_**
+
 ### 1.4 描述数据库对象
 
 ## 2 Azure 中的关系型数据库服务
