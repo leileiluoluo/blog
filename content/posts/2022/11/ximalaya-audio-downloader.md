@@ -49,7 +49,7 @@ description:
 
 实现音频下载的 Golang 代码已托管至本人 [GitHub](https://github.com/olzhy/ximalaya-downloader)。
 
-因实现逻辑简单，整个实现的代码也只有 100 多行，下面只看一下 main 函数的逻辑。
+因实现逻辑简单，整个实现的代码也不到 200 行，下面只看一下 main 函数的逻辑。
 
 ```go
 func main() {
