@@ -126,7 +126,7 @@ downloaded! file: 张庆祥讲孟子/4.仁者无敌.m4a
 
 最简单直观的方式是搜索在线 m4a 到 mp3 转换工具（如[freeconvert.com/m4a-to-mp3](https://www.freeconvert.com/m4a-to-mp3)），在网页上传文件并等待转换完成后进行下载即可。
 
-但作为程序员，本人更喜欢使用命令的方式进行转换。下面会介绍一个小工具 - FFmpeg，使用其即可进行 m4a 到 mp3 的音频转换。
+但作为程序员，本人更喜欢使用命令的方式进行转换。下面会介绍一个小工具 - [FFmpeg](https://ffmpeg.org/)，使用其即可进行 m4a 到 mp3 的音频转换。
 
 首先到[「FFmpeg 可执行文件下载页」](https://evermeet.cx/ffmpeg/)找到下载链接，然后使用如下命令对压缩包下载、解压并将解压后的可执行文件`ffmpeg`移动至`/usr/local/bin`：
 
