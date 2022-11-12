@@ -148,7 +148,7 @@ for f in *.m4a; do ffmpeg -i "$f" -codec:v copy -codec:a libmp3lame -q:a 2 after
 
 ![转换后的结果截图](https://olzhy.github.io/static/images/uploads/2022/11/xima-after.png#center)
 
-有了这些更通用的 mp3 格式，即可在离线情况下在几乎任何可以播放音频的设备上随心听这些音频了。
+有了这些更通用的 mp3 格式，即可在离线情况下在几乎任何可以播放音频的设备上随心去听这些音频了。
 
 {{< line_break >}}
 
