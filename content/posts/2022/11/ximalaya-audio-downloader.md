@@ -29,13 +29,21 @@ description:
 
 #### 专辑 ID 如何获取？
 
-我们想获取一个专辑（Album）下的所有音频时，必须要知道专辑的 ID。
+要获取一个专辑（Album）下所有的音频，必须要知道专辑的 ID。
 
 如下图所示，访问喜马拉雅的某个专辑时，从浏览器地址栏可以看到该专辑的 ID（本例中，248003 就是「张庆祥讲孟子」的专辑 ID）。
 
 ![喜马拉雅专辑ID](https://olzhy.github.io/static/images/uploads/2022/11/xima-url.png#center)
 
-有了专辑 ID，就可以根据 API 查询到其下的所有音频详情（包括名称，地址等），有了音频地址，就可以进行下载了。
+#### 获取音频的 API
+
+写作本文时，喜马拉雅网站：
+
+- 根据专辑 ID 分页获取音频列表的 API 为：`https://www.ximalaya.com/revision/album/v1/getTracksList?albumId=:albumId&pageNum=:pageNum`
+
+- 根据音频 ID 获取音频下载链接的 API 为：`https://www.ximalaya.com/revision/play/v1/audio?id=:trackId&ptype=1`
+
+这样，有了专辑 ID，就可以根据上面第一个 API 查询到其下的所有音频详情（包括音频 ID、音频标题等）；有了音频 ID，就可以根据第二个 API 查询到音频地址，然后进行下载了。
 
 ### 2 Golang 实现
 
