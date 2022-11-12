@@ -29,7 +29,7 @@ description:
 
 #### 专辑 ID 如何获取？
 
-我们想获取一个专辑（Album）下的所有音频时，必须知道专辑的 ID。
+我们想获取一个专辑（Album）下的所有音频时，必须要知道专辑的 ID。
 
 如下图所示，访问喜马拉雅的某个专辑时，从浏览器地址栏可以看到该专辑的 ID（本例中，248003 就是「张庆祥讲孟子」的专辑 ID）。
 
@@ -41,11 +41,60 @@ description:
 
 实现音频下载的 Golang 代码已托管至本人[GitHub](https://github.com/olzhy/ximalaya-downloader)。
 
+因实现逻辑简单，整个实现的代码也只有 100 多行，下面只看一下 main 函数的逻辑。
+
+```go
+func main() {
+    // parameter validation
+    if len(os.Args) < 2 {
+        fmt.Println("please provide an album id")
+        return
+    }
+    albumId, err := strconv.Atoi(os.Args[1])
+    if err != nil {
+        fmt.Println("album id should be an integer")
+        return
+    }
+    fmt.Printf("album id: %d\n", albumId)
+
+    // get all track list
+    tracks, err := getAllTrackList(albumId)
+    if err != nil {
+        fmt.Printf("error in get all track list, err: %v\n", err)
+        return
+    }
+    fmt.Printf("all track list got, total: %d\n", len(tracks))
+
+    // get audio addresses
+    for _, track := range tracks {
+        audioAddr, err := getAudioAddress(track.TrackId)
+        if err != nil {
+            fmt.Printf("error in get audio address, err: %v\n", err)
+            break
+        }
+
+        // download
+        filePath, err := download(audioAddr, track.Title, track.AlbumTitle)
+        if err != nil {
+            fmt.Printf("error in audo download, err: %v\n", err)
+            continue
+        }
+        fmt.Printf("downloaded! file: %s\n", filePath)
+    }
+}
+```
+
+可以看到，在`main`函数中：
+
+- 首先作了参数校验（必须提供一个专辑 ID）；
+- 调用 getAllTrackList 函数获取指定专辑下的所有 tracks（每个 track 中有音频 ID、标题等信息）；
+- 遍历 tracks 数组，对每个 track，调用 getAudioAddress 函数获取音频地址，然后进行下载。
+
 ### 3 如何使用？
 
 使用起来非常简单，指定专辑 ID 直接运行即可。示例如下：
 
-```go
+```shell
 go run main.go 248003
 
 album id: 248003
@@ -67,9 +116,35 @@ downloaded! file: 张庆祥讲孟子/4.仁者无敌.m4a
 
 怎么办呢？我们可以借助工具将其转换为更加通用的`mp3`格式。
 
-最简单直观的方式是搜索在线 m4a to mp3 转换工具，在网页上传文件并等待转换完成后进行下载即可。
+最简单直观的方式是搜索在线 m4a 到 mp3 转换工具，在网页上传文件并等待转换完成后进行下载即可。
 
-但作为程序员，本人更喜欢使用命令的方式进行转换。下面会介绍一个小工具 - FFmpeg，使用其即可进行 m4a to mp3 音频转换。
+但作为程序员，本人更喜欢使用命令的方式进行转换。下面会介绍一个小工具 - FFmpeg，使用其即可进行 m4a 到 mp3 的音频转换。
+
+首先到[FFmpeg 可执行文件下载页](https://evermeet.cx/ffmpeg/)找到下载链接，然后使用如下命令对压缩包下载、解压并将解压后的可执行文件`ffmpeg`移动至`/usr/local/bin`：
+
+```shell
+curl -O https://evermeet.cx/ffmpeg/ffmpeg-109029-g1800a0da09.zip
+unzip ffmpeg-109029-g1800a0da09.zip
+sudo mv ffmpeg /usr/local/bin
+```
+
+安装好了`ffmpeg`，即可使用如下命令对`m4a`文件进行转换了：
+
+```shell
+cd 张庆祥讲孟子/
+mkdir after
+for f in *.m4a; do ffmpeg -i "$f" -codec:v copy -codec:a libmp3lame -q:a 2 after/"${f%.m4a}.mp3"; done
+```
+
+如上命令首先进入待转换的`m4a`音频文件所在文件夹，然后创建转换后的文件存储文件夹`after`，最后对所有的`m4a`文件使用`ffmpeg`将其转换为`mp3`格式并放至文件夹`after`。转换后的结果如下图所示：
+
+![转换后的结果截图](https://olzhy.github.io/static/images/uploads/2022/11/xima-after.png#center)
+
+有了这些更通用的 mp3 格式，即可在离线情况下在几乎任何可以播放音频的设备上随心听这些音频了。
+
+{{< line_break >}}
+
+综上，本文介绍了如何使用 Golang 实现喜马拉雅音频下载及 m4a 到 mp3 的格式转换方法。总结一下，主要作自己使用，也希望对感兴趣的同学有所帮助。
 
 > 参考资料
 >
