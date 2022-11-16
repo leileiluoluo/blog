@@ -51,7 +51,7 @@ Microsoft Power Platform 由 Power Apps、Power Automate、Power BI 和 Power Vi
 
 - Connectors
 
-  Connectors 使您能够连接云上的应用、数据和设备，可将 Connectors 视为信息和命令传输的桥梁。Power Platform 有 600 多个连接器，流行的连接器有 Salesforce、Office 365 和 Twitter 等。
+  Connectors 使您能够连接云上的应用、数据和设备。可将 Connectors 视为信息和命令传输的桥梁。Power Platform 有 600 多个连接器，流行的连接器有 Salesforce、Office 365 和 Twitter 等。
 
 ## Power Platform 的商业价值
 
