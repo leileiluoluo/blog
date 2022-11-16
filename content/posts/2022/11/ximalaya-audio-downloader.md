@@ -16,7 +16,7 @@ keywords:
   - 音频转换
   - FFmpeg
   - MP3
-description:
+description: 本文介绍如何使用 Golang 下载喜马拉雅音频。包括 API 调研、Golang 代码实现、如何使用和如何进行音频格式转换几个部分。
 ---
 
 [「喜马拉雅」](https://www.ximalaya.com/)是本人非常喜欢的一款音频软件。里面有很多优质的音频节目，丰富了我的日常生活。
