@@ -14,12 +14,12 @@ keywords:
   - 低代码
   - 微软
   - Microsoft
-description:
+description: 本文首先会对 Power Platform 的四个产品的功能及应用场景作一个基础的介绍；接着会介绍一下 Power Platform 的商业价值；最后介绍一下 Power Platform 提供的数据安全和隐私保护能力。以期阅读完本文后，我们会对 Power Platform 有一个整体及初步的了解。
 ---
 
 Microsoft Power Platform 由 Power Apps、Power Automate、Power BI 和 Power Virtual Agents 四个产品组成，可以使用其来快速构建应用程序、自动化流程、分析数据和构建聊天机器人。
 
-本文首先会对 Power Platform 的四个产品的功能及应用场景作一个基础的介绍；接着会介绍一下 Power Platform 的商业价值。以期阅读完本文后，我们会对 Power Platform 有一个整体及初步的了解。
+本文首先会对 Power Platform 的四个产品的功能及应用场景作一个基础的介绍；接着会介绍一下 Power Platform 的商业价值；最后介绍一下 Power Platform 提供的数据安全和隐私保护能力。以期阅读完本文后，我们会对 Power Platform 有一个整体及初步的了解。
 
 ## 1 Power Platform 的四大产品
 
