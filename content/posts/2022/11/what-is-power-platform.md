@@ -37,7 +37,7 @@ Microsoft Power Platform 由 Power Apps、Power Automate、Power BI 和 Power Vi
 
 - Power Virtual Agents
 
-  Power Virtual Agents 允许人们使用引导式、无代码的方式创建一个功能强大的聊天机器人。还可以借助 Power Automate 与 Power 家族的其它组件进行无缝集成（如使用聊天机器人调用 Power Automate 流程来执行一些操作）。
+  Power Virtual Agents 允许人们使用引导式、无代码的方式创建一个功能强大的聊天机器人。还可以借助 Power Automate 及数百个 Connectors 与现有系统进行无缝集成，如使用聊天机器人调用 Power Automate 流程（流程也可以调用后台系统）来执行一些操作。
 
 除了上述的四个主要部分，下面列出的几个功能也为 Power Platform 注入了强大的潜能。
 
