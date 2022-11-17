@@ -71,7 +71,7 @@ Microsoft Power Platform 由 Power Apps、Power Automate、Power BI 和 Power Vi
 
 - 需要具备组建更加高效的开发团队的能力
 
-  要满足复杂多变的需求，企业应具有组建一个更加高效的开发团队的能力。通过组建由平民开发人员（Citizens Developers，低代码业内术语，如使用 Power 产品开发应用的开发人员）和专业开发人员组成的混合开发团队，使交付变得更加高效。
+  要满足复杂多变的需求，企业应具有组建一个更加高效的开发团队的能力。通过组建由平民开发人员（Citizen Developers，低代码业内术语，如使用 Power 产品开发应用的开发人员）和专业开发人员组成的混合开发团队，使交付变得更加高效。
 
 Power Platform 可以帮助企业更好的应对如上挑战。
 
