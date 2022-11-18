@@ -23,6 +23,12 @@ Microsoft Power Platform 由 Power Apps、Power Automate、Power BI 和 Power Vi
 
 ### 1 Power Platform 的四大产品
 
+下面是 Power Platform 的概览图。
+
+![Power Platform 概览](https://olzhy.github.io/static/images/uploads/2022/11/microsoft-power-platform-overview.png#center)
+
+接下来，会对其几个主要的组成部分作一下简单介绍。
+
 - Power Apps
 
   Power Apps 提供一个低代码开发环境，其包含一组应用、服务和连接器套件，可以使用其来快速构建定制化的应用程序（支持 Web 应用和移动应用）。
