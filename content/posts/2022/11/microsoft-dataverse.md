@@ -45,6 +45,10 @@ Dataverse 有什么功能呢？请看下图：
 
   Dataverse 将数据存储在 Azure 云上，让使用者完全无需关心数据的存储和扩展。
 
+- 系统集成
+
+  Dataverse 支持多种数据导出方式，并可通过各种 API 与外部系统进行集成。
+
 > 参考资料
 >
 > [1] [Introduction to Dataverse - microsoft.com](https://learn.microsoft.com/en-us/training/modules/introduction-common-data-service/)
