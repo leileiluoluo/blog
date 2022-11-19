@@ -41,6 +41,10 @@ Dataverse 有什么功能呢？请看下图：
 
   Dataverse 允许对数据进行塑形。
 
+- 数据存储
+
+  Dataverse 将数据存储在 Azure 云上，让使用者完全无需关心数据的存储和扩展。
+
 > 参考资料
 >
 > [1] [Introduction to Dataverse - microsoft.com](https://learn.microsoft.com/en-us/training/modules/introduction-common-data-service/)
