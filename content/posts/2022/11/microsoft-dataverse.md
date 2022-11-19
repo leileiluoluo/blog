@@ -27,15 +27,15 @@ Dataverse 有什么功能呢？请看下图：
 
 ![Dataverse的功能](https://olzhy.github.io/static/images/uploads/2022/11/dataverse-diagram.png#center)
 
-可以看到，Dataverse 提供安全控制、逻辑处理、数据处理、数据存储及与与外部系统集成等诸多功能。下面分别看一下：
+可以看到，Dataverse 提供安全控制、逻辑处理、数据处理、数据存储及与外部系统集成等诸多功能。下面分别看一下：
 
 - 安全控制
 
-  Dataverse 使用 Azure AD（Azure Active Directory，Azure 身份认证与访问管理服务）作身份验证。可以提供行或列级别的权限控制，并提供丰富的审计功能。
+  Dataverse 使用 Azure AD（Azure Active Directory，Azure 身份认证与访问管理服务）作身份验证。可以提供细致到行或列级别的权限控制，并提供丰富的审计功能。
 
 - 逻辑处理
 
-  Dataverse 允许在数据级别进行业务逻辑处理。如进行重复检查、业务规则处理和工作流处理等。
+  Dataverse 允许在数据级别进行业务逻辑处理。如进行重复检查、业务规则应用和工作流处理等。
 
 - 数据处理
 
