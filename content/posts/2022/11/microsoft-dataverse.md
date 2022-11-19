@@ -49,6 +49,8 @@ Dataverse 有什么功能呢？请看下图：
 
   Dataverse 支持多种数据导出方式，并可通过各种 API 与外部系统进行集成。
 
+可以看到，Dataverse 是一个非常易于使用的云数据服务。创建 Dataverse 后，可以自定义列来存储数据。数据存好后，可以在 Power Apps、Power Automate 和 Power BI 中直接访问，
+
 > 参考资料
 >
 > [1] [Introduction to Dataverse - microsoft.com](https://learn.microsoft.com/en-us/training/modules/introduction-common-data-service/)
