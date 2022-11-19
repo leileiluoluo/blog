@@ -21,10 +21,10 @@ description:
 
 本文会稍微深入的了解一下 Dataverse。
 
-Dataverse 主要为 Power Apps、Power Automate 和 Power BI 所使用，其负责安全的存储与管理数据。
+Dataverse 主要为 Power Apps、Power Automate 和 Power BI 所使用，负责安全的存储与管理数据。
 
 > 参考资料
 >
 > [1] [Introduction to Dataverse - microsoft.com](https://learn.microsoft.com/en-us/training/modules/introduction-common-data-service/)
 >
-> [2] [Microsoft Dataverse documentation](https://learn.microsoft.com/en-us/power-apps/maker/data-platform/)
+> [2] [Microsoft Dataverse documentation - microsoft.com](https://learn.microsoft.com/en-us/power-apps/maker/data-platform/)
