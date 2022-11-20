@@ -55,7 +55,7 @@ Dataverse 有什么功能呢？请看下图：
 
 Dataverse 数据库中的表遵循通用数据模型标准（Common Data Model，由 Microsoft 和伙伴公司发起，提供模式、表与关系的设计标准），这样即可与任何遵循该标准的应用进行无缝集成。
 
-有了如上对 Dataverse 的简单介绍后，下面会从 Dataverse 中的表、关系、业务规则及 Dataverse 环境与管理中心几个方面分别作介绍。
+有了如上对 Dataverse 的简单介绍后，下面会从 Dataverse 中的表、表与表的关系、业务规则设置及 Dataverse 环境与管理中心几个方面分别作介绍。
 
 ### 1 Dataverse 中的表
 
