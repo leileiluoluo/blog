@@ -8,7 +8,37 @@ wip_template:
   - right-sidebar
 ---
 
-[Go 语言中文网](https://studygolang.com/) | [Tony Bai](https://tonybai.com/) | [Jing blog](https://jingine.com/) | [Xiaobin’s Blog](https://lxb.wiki/) | [土木坛子](https://tumutanzi.com/) | [有点才艺的孟仔](https://www.mengchen.cc/)
+如下为本站友情链接，以添加时间先后进行排序。
+
+---
+
+**[Go 语言中文网](https://studygolang.com/)**
+
+`Golang 中文社区，为国内建立的比较早的 Go 语言问答社区。`
+
+**[Tony Bai](https://tonybai.com/)**
+
+`国内知名技术博主，Go 语言布道师。坚持写博十余年，仍孜孜不倦。`
+
+**[Jing blog](https://jingine.com/)**
+
+`一位旅居海外的新生代软件工程师。`
+
+**[Xiaobin’s Blog](https://lxb.wiki/)**
+
+`一位热爱技术热爱写博的技术人。`
+
+**[土木坛子](https://tumutanzi.com/)**
+
+`知名互联网博主，对理财、社会问题等有自己独到的见解。`
+
+**[有点才艺的孟仔](https://www.mengchen.cc/)**
+
+`全栈工程师、技术管理者。拥有广泛的兴趣爱好与自律的生活方式。`
+
+---
+
+如下为个人收藏，以所属类别进行分类。
 
 ---
 
@@ -130,3 +160,5 @@ wip_template:
 - [MDN Web Docs](https://developer.mozilla.org/)
 - [Web Fundamentals | Google Developers](https://developers.google.com/web/fundamentals/)
 - [Learn JavaScript](https://learnjavascript.online/)
+
+---
