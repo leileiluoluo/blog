@@ -10,6 +10,7 @@ categories:
   - 计算机
 tags:
   - Golang
+  - 自动化测试
   - 工具使用
 ---
 
