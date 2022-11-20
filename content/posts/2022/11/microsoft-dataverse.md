@@ -57,6 +57,14 @@ Dataverse 数据库中的表遵循通用数据模型标准（Common Data Model�
 
 ### 1 Dataverse 中的表
 
+表由行和列组成，为表示一组数据的逻辑结构。Dataverse 包含三种类型的表，分别为：标准表、托管表和自定义表。
+
+- 标准表（Standard Table） - 为 Dataverse 环境中自带的表，也称为“开箱即用”表，如帐户、业务部门和联系人等都为 Dataverse 中的标准表。大多数标准表都支持自定义。
+- 托管表（Managed Table） - 无法自定义的表。其作为托管解决方案的一部分被导入到 Dataverse 环境中。
+- 自定义表（Custom Table）- 由非托管解决方案导入的非托管表或在 Dataverse 环境中新创建的表。
+
+列用于存储表中行的离散信息，其有具体的类型（如用于存储日期的 Date 类型列和用于存储数字的 Number 类型列）。
+
 ### 2 Dataverse 中表与表的关系
 
 ### 3 Dataverse 中的业务规则
