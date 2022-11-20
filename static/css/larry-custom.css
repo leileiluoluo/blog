@@ -68,6 +68,15 @@ img {
   background: antiquewhite !important;
 }
 
+.search-wrapper {
+  display: none;
+}
+
+.search-wrapper.open {
+  display: block;
+  visibility: visible;
+}
+
 .section {
   padding-top: 0px !important;
   padding-bottom: 40px !important;
