@@ -27,7 +27,7 @@ description: 本文详细介绍 Power Apps 里边的基础概念，并且尝试�
 
 Power Apps 一些常用的数据源包括：Dataverse、SharePoint、Dynamics 365、Azure SQL（或 SQL Server） 和 Office 365。
 
-可以使用 Power Apps 创建三种类型的应用，分别为：画布应用（Canvas App）、模型驱动应用（Model-driven App）和门户（Portal）。
+可以使用 Power Apps 创建三种类型的应用，分别为：画布应用（Canvas App）、模型驱动应用（Model-driven App）和门户应用（Portal App）。
 
 下面分别看一下各种类型的应用所适用的用户和场景：
 
