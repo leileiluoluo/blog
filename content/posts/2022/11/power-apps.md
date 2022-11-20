@@ -40,6 +40,13 @@ Power Apps 一些常用的数据源包括：Dataverse、SharePoint、Dynamics 36
   ![移动画布应用示例](https://olzhy.github.io/static/images/uploads/2022/11/mobile-canvas-apps.png#center)
 
 - 型驱动应用（Model-driven App）
+
+  模型驱动应用基于 Dataverse 中的数据所构建。我们无需编写公式，只需在 Dataverse 数据层定义表单、关系、视图和业务规则即可对业务结果进行完全控制。
+
+  如下为一个用于捐款跟踪的模型驱动应用示例：
+
+  ![模型驱动应用示例](https://olzhy.github.io/static/images/uploads/2022/11/fundraiser.png#center)
+
 - 门户（Portal）
 
 > 参考资料
