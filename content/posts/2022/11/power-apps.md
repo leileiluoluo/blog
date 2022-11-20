@@ -19,6 +19,10 @@ keywords:
 description:
 ---
 
+在上文[「Power Platform 是什么？」](https://olzhy.github.io/posts/what-is-power-platform.html)中，我们知道 Power Apps 是一个低代码开发工具，可以使用其来快速构建一个定制化应用程序。
+
+本文会详细介绍一下 Power Apps 里边的基础概念，并且尝试使用其去构建一个画布应用和模型驱动应用。
+
 > 参考资料
 >
 > [1] [Introduction to Power Apps - microsoft.com](https://learn.microsoft.com/en-us/training/modules/introduction-power-apps/)
