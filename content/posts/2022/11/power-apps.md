@@ -47,7 +47,13 @@ Power Apps 一些常用的数据源包括：Dataverse、SharePoint、Dynamics 36
 
   ![模型驱动应用示例](https://olzhy.github.io/static/images/uploads/2022/11/fundraiser.png#center)
 
-- 门户（Portal）
+- 门户应用（Portal App）
+
+  门户应用同样基于 Dataverse 中的数据所构建。同样是可以通过以拖拽控件的方式来构建一个具有交互功能的网站。还可以为网站添加登录认证。
+
+  如下为一个门户应用的示例：
+
+  ![门户应用示例](https://olzhy.github.io/static/images/uploads/2022/11/portal.png#center)
 
 > 参考资料
 >
