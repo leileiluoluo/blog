@@ -25,7 +25,7 @@ Dataverse 是一个云上的低代码数据服务，主要为 Power Apps、Power
 
 Dataverse 有什么功能呢？请看下图：
 
-![Dataverse的功能](https://olzhy.github.io/static/images/uploads/2022/11/dataverse-diagram.png#center)
+![Dataverse 的功能](https://olzhy.github.io/static/images/uploads/2022/11/dataverse-diagram.png#center)
 
 可以看到，Dataverse 提供安全控制、逻辑处理、数据处理、数据存储及与外部系统集成等诸多功能。下面分别看一下：
 
@@ -76,6 +76,20 @@ Dataverse 数据库中的表遵循通用数据模型标准（Common Data Model�
 而且，一个表中只允许唯一值的列（如 Order 表的 ID 列）被称为主键。若一个表的主键被另一个表的某一列所引用（如 Order 表的 ID 列被 OrderItem 的 OrderID 列所引用），则其被称为另一个表的外键。
 
 ### 3 Dataverse 中的业务规则
+
+我们可以在 Dataverse 中定义业务规则，这样即可以在数据层（而非应用层）应用业务逻辑。有助于提高数据准确性、简化应用程序开发和简化呈现给最终用户的表单。
+
+业务规则可被画布应用（Canvas App）和模型驱动应用（Model-driven App）用于填充或清空一个表某些列的值，也可被用于校验数据或展示错误信息。
+
+此外模型驱动应用还可以使用业务规则来显示或隐藏某些列，启用或禁用某些列，以及使用商业智能来创建推荐信息。
+
+下面举一个使用业务规则的例子：
+
+若信用限额字段`Credit Limit`的值超过 100 万美元，则将信用限额 VP 审批人字段`Credit Limit VP Approver`设置为必填字段。
+
+![业务规则使用示例](https://olzhy.github.io/static/images/uploads/2022/11/business-rule.png#center)
+
+这样，在数据层应用业务规则，可以使得数据不论以何种方式访问（如在 Power Apps 或 Power Automate 中直接访问或通过 API 访问），都可以得到很好的控制。
 
 ### 4 Dataverse 环境与管理中心
 
