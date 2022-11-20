@@ -22,7 +22,7 @@ wip_template:
 
 **[Jing blog](https://jingine.com/)**
 
-`一位旅居海外的新生代软件工程师。`
+`一位旅居海外的新生代软件工程师、管理人。`
 
 **[Xiaobin’s Blog](https://lxb.wiki/)**
 
