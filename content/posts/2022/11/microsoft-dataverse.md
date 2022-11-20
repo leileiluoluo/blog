@@ -17,7 +17,7 @@ keywords:
 description: Dataverse 基础。包含 Dataverse 的功能，Dataverse 中的表、表与表的关系、业务规则的设置及 Dataverse 环境与管理中心等几个方面。
 ---
 
-在上文[「Power Platform 是什么？」](/posts/what-is-power-platform.html)中，我们对 Microsoft Dataverse 是什么作过一个简单的介绍。
+在上文[「Power Platform 是什么？」](https://olzhy.github.io/posts/what-is-power-platform.html)中，我们对 Microsoft Dataverse 是什么作过一个简单的介绍。
 
 本文会稍微深入的了解一下 Dataverse。
 
