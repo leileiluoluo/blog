@@ -17,7 +17,7 @@ keywords:
 description: Dataverse 基础。包含 Dataverse 的功能，Dataverse 中的表、表与表的关系、业务规则的设置及 Dataverse 环境与管理中心等几个方面。
 ---
 
-在上文[「Power Platform 是什么？」](/posts/what-is-power-platform.html)中，我们对 Microsoft Dataverse 是什么作过一个简单的介绍。
+在上文[「Power Platform 是什么？」](https://olzhy.github.io/posts/what-is-power-platform.html)中，我们对 Microsoft Dataverse 是什么作过一个简单的介绍。
 
 本文会稍微深入的了解一下 Dataverse。
 
@@ -55,7 +55,7 @@ Dataverse 有什么功能呢？请看下图：
 
 Dataverse 数据库中的表遵循通用数据模型标准（Common Data Model，由 Microsoft 和伙伴公司发起，提供模式、表与关系的设计标准），这样即可与任何遵循该标准的应用进行无缝集成。
 
-有了如上对 Dataverse 的简单介绍后，下面会从 Dataverse 中的表、关系、业务规则及 Dataverse 环境与管理中心几个方面分别作介绍。
+有了如上对 Dataverse 的简单介绍后，下面会从 Dataverse 中的表、表与表的关系、业务规则设置及 Dataverse 环境与管理中心几个方面分别作介绍。
 
 ### 1 Dataverse 中的表
 
@@ -77,7 +77,7 @@ Dataverse 数据库中的表遵循通用数据模型标准（Common Data Model�
 
 ### 3 Dataverse 中的业务规则
 
-我们可以在 Dataverse 中定义业务规则，这样即可以在数据层（而非应用层）应用业务逻辑。有助于提高数据准确性、简化应用程序开发和简化呈现给最终用户的表单。
+我们可以在 Dataverse 中定义业务规则，这样即可以在数据层（而非应用层）应用业务逻辑。这有助于提高数据的准确性、简化应用程序开发和简化呈现给最终用户的表单。
 
 业务规则可被画布应用（Canvas App）和模型驱动应用（Model-driven App）用于填充或清空一个表某些列的值，也可被用于校验数据或展示错误信息。
 
