@@ -89,7 +89,7 @@ Dataverse 数据库中的表遵循通用数据模型标准（Common Data Model�
 
 ![业务规则使用示例](https://olzhy.github.io/static/images/uploads/2022/11/business-rule.png#center)
 
-这样，在数据层应用业务规则，可以使得数据不论以何种方式访问（如在 Power Apps 或 Power Automate 中直接访问或通过 API 访问），都可以得到很好的控制。
+这样，在数据层应用业务规则，可以使得数据不论以何种方式访问（如在 Power Apps 或 Power Automate 中直接访问或通过 API 访问），都可以得到一致的控制。
 
 ### 4 Dataverse 环境与管理中心
 
