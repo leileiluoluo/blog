@@ -58,6 +58,12 @@ Power Apps 一些常用的数据源包括：Dataverse、SharePoint、Dynamics 36
 
 此外，Power Apps 还可以充分借助 Azure 机器学习服务和认知服务的能力来为应用程序添加 AI（人工智能）能力，包括图像识别、文本分类、结果预测等。
 
+了解了这些概念，下面开始动手练习去构建一个画布应用和一个模型驱动应用。
+
+### 1 构建一个画布应用（Canvas App）
+
+### 2 构建一个模型驱动应用（Model-driven App）
+
 > 参考资料
 >
 > [1] [Introduction to Power Apps - microsoft.com](https://learn.microsoft.com/en-us/training/modules/introduction-power-apps/)
