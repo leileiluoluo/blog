@@ -20,7 +20,7 @@ keywords:
 description: 本文详细介绍 Power Apps 里边的基础概念，并且尝试使用其去构建一个画布应用和模型驱动应用。
 ---
 
-在上文[「Power Platform 是什么？」](https://olzhy.github.io/posts/what-is-power-platform.html)中，我们知道 Power Apps 是一个低代码开发工具，可以使用其来快速构建一个定制化应用程序。
+在上文[「Power Platform 是什么？」](https://olzhy.github.io/posts/what-is-power-platform.html)中，我们知道 Power Apps 是一个低代码开发工具，可以使用其来快速构建一个定制化应用程序（支持 Web 应用和移动应用）。
 
 本文会详细介绍一下 Power Apps 里边的基础概念，并且尝试使用其去构建一个画布应用和模型驱动应用。
 
@@ -36,7 +36,7 @@ Power Apps 一些常用的数据源包括：Dataverse、SharePoint、Dynamics 36
 
   可以选择一个适应平板或手机屏幕的空白画布，然后添加数据源，并可以拖拽各种控件进来，以及像写 Excel 公式一样来为控件添加各种功能。
 
-  如下为一个机场服务公司所构建的移动画布应用的示例：
+  如下为一个机场所构建的移动画布应用的示例：
 
   ![移动画布应用示例](https://olzhy.github.io/static/images/uploads/2022/11/mobile-canvas-apps.png#center)
 
@@ -44,7 +44,7 @@ Power Apps 一些常用的数据源包括：Dataverse、SharePoint、Dynamics 36
 
   模型驱动应用基于 Dataverse 中的数据所构建。我们无需编写公式，只需在 Dataverse 数据层定义表单、关系、视图和业务规则即可对业务结果进行完全控制。
 
-  如下为一个用于捐款跟踪的模型驱动应用示例：
+  如下为一个用于捐款跟踪的模型驱动应用的示例：
 
   ![模型驱动应用示例](https://olzhy.github.io/static/images/uploads/2022/11/fundraiser.png#center)
 
@@ -55,6 +55,8 @@ Power Apps 一些常用的数据源包括：Dataverse、SharePoint、Dynamics 36
   如下为一个门户应用的示例：
 
   ![门户应用示例](https://olzhy.github.io/static/images/uploads/2022/11/portal.png#center)
+
+此外，Power Apps 还可以充分借助 Azure 机器学习服务和认知服务的能力来为应用程序添加 AI（人工智能）能力，包括图像识别、文本分类、结果预测等。
 
 > 参考资料
 >
