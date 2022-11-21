@@ -13,6 +13,7 @@ keywords:
   - Power Apps
   - 画布应用
   - 模型驱动应用
+  - 门户应用
   - 低代码
   - 微软
   - Microsoft
