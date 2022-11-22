@@ -74,7 +74,7 @@ Power Apps 一些常用的数据源包括：Dataverse、SharePoint、Dynamics 36
 
 - Form 控件
 
-  负责单条记录的处理（包括显示、编辑与保存）。
+  负责单条记录的处理（包括新建、显示、编辑与保存）。
 
 - 输入控件
 
