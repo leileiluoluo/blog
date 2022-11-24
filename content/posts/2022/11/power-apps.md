@@ -88,6 +88,27 @@ Power Apps 一些常用的数据源包括：Dataverse、SharePoint、Dynamics 36
 
   函数是将控件和数据源绑定到一起的粘合剂。使用多个函数组成的公式即可实现各种行为。
 
+接下来，我们基于 Excel 来生成一个画布应用。
+
+我们本地的原始 Excel 文件（`Students.xlsx`）里有如下几条记录。开始工作前先将该文件上传至「OneDrive for Business」。
+
+![Students.xlsx 文件中的记录](https://olzhy.github.io/static/images/uploads/2022/11/student-excel.png#center)
+
+基于 Excel 生成画布应用的步骤如下：
+
+- 1 打开 Power Apps Studio - [https://make.powerapps.com](https://make.powerapps.com)
+- 2 点击「Start from Excel」->「New Connection」->「OneDrive for Business」，然后选择 `Students.xlsx`，并点击「Connect」。
+
+可以看到，Power Apps 根据我们提供的数据自动生成了最初的应用。
+
+![Power Apps Studio](https://olzhy.github.io/static/images/uploads/2022/11/power-apps-studio.png#center)
+
+点击「Preview the app」，可以进行模拟使用，发现有列表、详情、编辑和新增这几个页面，可以进行增删改查等操作。
+
+![Power Apps Studio](https://olzhy.github.io/static/images/uploads/2022/11/students-app.png#center)
+
+这些最基本的功能对于一个商业应用来说是远远不够的。要完善这个应用，就需要借助公式的能力。使用公式可以实现页面跳转、数据过滤、排序，字段校验等功能。我们可以借助 Power Apps 提供的海量函数来组成一个公式去解决复杂的业务问题。
+
 ### 2 构建一个模型驱动应用
 
 > 参考资料
