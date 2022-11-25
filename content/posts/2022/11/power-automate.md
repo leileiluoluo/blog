@@ -11,25 +11,26 @@ tags:
 keywords:
   - Power Platform
   - Power Automate
+  - 定时任务流程
+  - 按钮触发流程
+  - 审批流程
   - 低代码
   - 微软
   - Microsoft
-description:
+description: 本文会详细介绍一下 Power Automate 的概念和功能，并且尝试使用其去构建一些常用的自动化流程（包括定时任务流程、按钮触发流程和审批流程）。
 ---
 
-在上文[「Power Platform 是什么？」](https://olzhy.github.io/posts/what-is-power-platform.html)中，我们知道 Power Automate 是一个流程自动化工具，可以使用其来将重复性的业务流程进行自动化处理。
+在上文[「Power Platform 是什么？」](https://olzhy.github.io/posts/what-is-power-platform.html)中，我们知道 Power Automate 是一个流程自动化工具，可以使用其来将重复性的工作进行自动化处理。
 
-本文会详细介绍一下 Power Automate 的概念和功能，并且尝试使用其去构建一个自动化的流程。
+本文会详细介绍一下 Power Automate 的概念和功能，并且尝试使用其去构建一些常用的自动化流程。
 
 Power Automate 可以做哪些事情呢？
 
 - 处理日常重复性工作（如系统间同步数据）。
-- 工作流处理。
+- 工作流。
 - 通过 Connector 或 API 与外部系统集成。
 
-构建流程时，需要注意如下几个概念：
-
-Power Automate 流程主要有两部分组成：Trigger（一个） 和 Action（一个或多个）。
+Power Automate 流程主要有两部分组成：Trigger（只有一个） 和 Action（一个或多个）。
 
 - Trigger 是流程的触发点，如收件箱收到一封新邮件或 SharePoint 列表新增了一个条目。
 
@@ -43,7 +44,7 @@ Trigger 有如下几种类型：
 
 - On a schedule
 
-  定时执行的触发器。如 每天 8 点检查是否有新的订单生成，有的话发送给相关人员处理。
+  定时执行的触发器。如每天 8 点检查是否有新的订单生成，有的话发送给相关人员处理。
 
 - On a button press
 
@@ -53,7 +54,7 @@ Action 有哪些类型呢？
 
 - Loop
 
-  对某个 Action 一直循环执行直到退出条件满足而进入流程的下一步。
+  对某个 Action 一直循环执行直到退出条件满足后才进入流程的下一步。
 
 - Switch
 
@@ -72,6 +73,8 @@ Action 有哪些类型呢？
   Power Automate 流程中描述实际运行逻辑的表达式。如 Trigger 为「在 SharePoint 某文件夹下创建了一个新文件」，那么在 Action 中获取该文件内容的表达式为`@{triggerOutputs()?['body']`。
 
 ### 2 构建一个自动化流程
+
+下面就尝试使用其去构建一些常用的自动化流程。
 
 #### 2.1 基于模板创建流程
 
