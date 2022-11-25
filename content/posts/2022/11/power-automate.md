@@ -27,6 +27,60 @@ Power Automate 可以做哪些事情呢？
 - 工作流处理。
 - 通过 Connector 或 API 与外部系统集成。
 
+构建流程时，需要注意如下几个概念：
+
+Power Automate 流程主要有两部分组成：Trigger（一个） 和 Action（一个或多个）。
+
+- Trigger 是流程的触发点，如收件箱收到一封新邮件或 SharePoint 列表新增了一个条目。
+
+- Action 是 Trigger 被调用后，你真正想做的事情。如收到新邮件后将附件存储到「OneDrive for Business」或 SharePoint 新增一个条目后通知相关人员做某些操作。
+
+Trigger 有如下几种类型：
+
+- When something changes
+
+  当数据更改时执行的触发器。如 SharePoint 中创建了新的条目、Dynamics 中的线索被更新等。
+
+- On a schedule
+
+  定时执行的触发器。如 每天 8 点检查是否有新的订单生成，有的话发送给相关人员处理。
+
+- On a button press
+
+  当 Power Apps 或第三方应用中某个 Button 被点击时执行的触发器。该种类型给了用户按需控制流程执行的能力。
+
+Action 有哪些类型呢？
+
+- Loop
+
+  对某个 Action 一直循环执行直到退出条件满足而进入流程的下一步。
+
+- Switch
+
+  根据输入条件判断是否执行当前的单个 Action。
+
+- Do Until
+
+  执行一组 Action，直到指定条件为 true。
+
+- Apply to each
+
+  对输入数组的每一条都执行一组 Action。
+
+- Expressions
+
+  Power Automate 流程中描述实际运行逻辑的表达式。如 Trigger 为「在 SharePoint 某文件夹下创建了一个新文件」，那么在 Action 中获取该文件内容的表达式为`@{triggerOutputs()?['body']`。
+
+### 2 构建一个自动化流程
+
+#### 2.1 基于模板创建流程
+
+#### 2.2 构建定时任务流程
+
+#### 2.3 构建按钮触发流程
+
+#### 2.4 构建审批流程
+
 > 参考资料
 >
 > [1] [Introduction to Power Automate - microsoft.com](https://learn.microsoft.com/en-us/training/modules/introduction-power-automate/)
