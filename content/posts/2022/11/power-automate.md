@@ -75,6 +75,22 @@ Action 有哪些类型呢？
 
 #### 2.1 基于模板创建流程
 
+登录[「Power Automate」](https://make.powerapps.com/) 后，点击左侧菜单栏的「Templates」，可以看到有大量的模板可供使用。
+
+![流程模板](https://olzhy.github.io/static/images/uploads/2022/11/flow-templates.png#center)
+
+下面使用模板「Save Office 365 email attachments to OneDrive for Business」来创建一个自动将邮件附件保存到「OneDrive for Business」的流程。
+
+创建过程非常简单，只要按照提示点击按钮、授权即可。
+
+创建完成后，编辑流程，可以看到该流程有 Trigger 和 Action 两部分组成。
+
+![将邮件附件保存到 OneDrive 的流程](https://olzhy.github.io/static/images/uploads/2022/11/save-email-attachments-to-onedrive.png#center)
+
+Trigger 条件为：「当收到了新邮件」。Action 的逻辑为：对邮件中的每个附件，在「OneDrive for Business」的「/Email attachments from Power Automate」文件夹下将其创建出来。
+
+可以看到，基于模板创建流程的操作非常简单。
+
 #### 2.2 构建定时任务流程
 
 #### 2.3 构建按钮触发流程
