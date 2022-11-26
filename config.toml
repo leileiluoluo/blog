@@ -22,7 +22,7 @@ disqusShortname = "" # get your shortname form here : https://disqus.com
     # Email
     email = "leileiluoluo@leileiluoluo.com"
     # Motto or introduction
-    motto = "磊磊落落的博客"
+    motto = "磊磊落落"
 
 [outputs]
 home = ["HTML", "AMP", "RSS", "JSON", "SectionsAtom", "SectionsRSS"]
@@ -151,7 +151,7 @@ image = ""
 ######################## call to action ###############################
 [params.cta]
 enable = false
-image = "static/images/site/jinshu.png"
+image = "static/images/self/weixinhaoqrcode.png"
 title = "“大丈夫行事，当磊磊落落，如日月皎然。”——《晋书》"
 description = "磊磊落落：IT从业者，生活记录者。博客名称取自《晋书》，勉励本人光明磊落做人做事。该博客是本人用于记录内心波澜，分享读书感想，思考人生哲学，关注社会百态，梳理计算机专业知识的纯原创站点。"
 [params.cta.button]
@@ -176,6 +176,9 @@ enable = false
 
 
 ############################# Social Site ##########################
+[[params.social]]
+icon = "ti-archive" # themify icon pack https://themify.me/themify-icons
+link = "/archives/"
 [[params.social]]
 icon = "ti-tag" # themify icon pack https://themify.me/themify-icons
 link = "/tags/"
