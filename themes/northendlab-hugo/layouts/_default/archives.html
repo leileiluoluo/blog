@@ -8,8 +8,9 @@
         <div class="bg-white shadow block">
             <div class="content mb-5">
                 {{ range (.Site.RegularPages.GroupByDate "2006") }}
+                {{ if ne .Key "0001" }}
                 <h3>{{ .Key }}</h3>
-                    <ul class="archive-list">
+                <ul class="archive-list">
                     {{ range (where .Pages "Type" "post") }}
                         <li>
                         {{ .PublishDate.Format "2006-01-02" }}
@@ -17,6 +18,7 @@
                         </li>
                     {{ end }}
                 </ul>
+                {{ end }}
             {{ end }}
         </div>
       </div>
