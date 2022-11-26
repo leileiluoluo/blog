@@ -188,8 +188,10 @@ h1 {
 .toc {
   position: fixed;
   top: 50%;
-  right: 10%;
-  width: 12%;
+  right: 40px;
+  padding: 4px;
+  max-width: 220px;
+  padding: 4px;
   transform: translateY(-50%);
   border-radius: 5px;
   padding-bottom: 1rem;
