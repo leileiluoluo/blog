@@ -14,7 +14,7 @@ wip_template:
 
 **[Go 语言中文网](https://studygolang.com/)**
 
-`Golang 中文社区，为国内建立的比较早的 Go 语言问答社区。`
+`Golang 中文社区，国内建立的比较早的 Go 语言问答社区。`
 
 **[Tony Bai](https://tonybai.com/)**
 
