@@ -24,6 +24,8 @@ description: 本文会详细介绍一下 Power Automate 的概念和功能，并
 
 本文会详细介绍一下 Power Automate 的概念和功能，并且尝试使用其去构建一些常用的自动化流程。
 
+### 1 Power Automate 基础概念
+
 Power Automate 可以做哪些事情呢？
 
 - 处理日常重复性工作（如系统间同步数据）。
