@@ -179,18 +179,23 @@ enable = false
 [[params.social]]
 icon = "ti-archive" # themify icon pack https://themify.me/themify-icons
 link = "/archives/"
+title = "文章归档"
 [[params.social]]
 icon = "ti-tag" # themify icon pack https://themify.me/themify-icons
 link = "/tags/"
+title = "文章标签"
 [[params.social]]
 icon = "ti-github" # themify icon pack https://themify.me/themify-icons
 link = "https://github.com/olzhy"
+title = "我的 GitHub"
 [[params.social]]
 icon = "ti-email" # themify icon pack https://themify.me/themify-icons
 link = "mailto:leileiluoluo@leileiluoluo.com"
+title = "给我发邮件"
 [[params.social]]
 icon = "ti-rss" # themify icon pack https://themify.me/themify-icons
 link = "/index.xml"
+title = "网站 RSS"
 
 # markup
 [markup]
