@@ -120,6 +120,14 @@ Trigger 条件为：「当收到了新邮件」。Action 的逻辑为：对邮�
 
 #### 2.4 构建审批流程
 
+还可以使用 Power Automate 来构建审批流程。其主要用到的一个 Action 步骤是「Start and wait for an approval」。
+
+可以在需要审批操作的流程中加入该步骤，然后判断审批结果并执行后续的操作。
+
+![审批流程设计](https://olzhy.github.io/static/images/uploads/2022/11/approval-flow.png#center)
+
+综上，我们完成了对 Power Automate 的初探。
+
 > 参考资料
 >
 > [1] [Introduction to Power Automate - microsoft.com](https://learn.microsoft.com/en-us/training/modules/introduction-power-automate/)
