@@ -106,7 +106,7 @@ Trigger 条件为：「当收到了新邮件」。Action 的逻辑为：对邮�
 
 ![新建定时任务流程](https://olzhy.github.io/static/images/uploads/2022/11/recurring-flow.png#center)
 
-点击「Create」后即跳转到流程设计页面。在 Trigger「Recurrence」下新增「Get current weather」和「Send an email (V2)」两个 Action 并指定相关的字段。这样即实现了需要的功能。
+点击「Create」后即跳转到流程设计页面。在 Trigger「Recurrence」下新增「Get current weather」和「Send an email (V2)」两个 Action 并填写相关的字段。这样即实现了需要的功能。
 
 ![定时任务流程设计](https://olzhy.github.io/static/images/uploads/2022/11/flow-send-weather-to-email.png#center)
 
