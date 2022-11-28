@@ -26,7 +26,7 @@ Power BI 可从多种数据源（Excel 工作簿、云上数据库或 On-Premise
 
 ![Power BI 简介](https://olzhy.github.io/static/images/uploads/2022/11/power-bi-intro.png#center)
 
-Power BI 由三部分组成，分别是：Power BI Desktop、Power BI service 和 Power BI apps。Power BI Desktop 主要为开发人员所使用，Power BI service 主要用来设置分享，Power BI apps 则用来查看可视化报告。
+Power BI 由三部分组成，分别是：Power BI Desktop（Windows 桌面应用）、Power BI service（SaaS 服务）和 Power BI apps（移动应用）。Power BI Desktop 主要为开发人员所使用，Power BI service 主要提供管理控制和分享设置，Power BI apps 则用来查看可视化报告。
 
 ![Power BI 组成部分](https://olzhy.github.io/static/images/uploads/2022/11/power-bi-parts.png#center)
 
