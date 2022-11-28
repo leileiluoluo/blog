@@ -40,10 +40,12 @@
       {{ end }}
 
       {{ if .Site.Params.reward.enable }}
+      {{ if ne (strings.HasSuffix .Page.Permalink "about/") true }}
       <div class="col-lg-8 mx-auto block shadow">
         <!-- reward -->
         {{ template "partials/reward.html" . }}
       </div>
+      {{ end }}
       {{ end }}
 
       {{ if .Site.Params.comment.enable }}
