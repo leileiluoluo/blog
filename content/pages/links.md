@@ -38,31 +38,37 @@ wip_template:
 
 {{< line_break >}}
 
-**想与我交换友情链接？满足如下条件即可申请！**
+**想与我交换友情链接？**
 
-> **友链交换条件：**
+> **1 友链交换条件**
 >
 > a) 网站建立一年及以上
 >
-> b) 内容健康、原创文章不少于十篇
+> b) 内容健康且原创文章不少于十篇
 >
-> c) 申请交换友链前，请提前添加好本站友链（磊磊落落：https://leileiluoluo.com/）
+> c) 申请交换友链前，请提前添加好本站友链
 >
-> **若满足条件，按照如下格式给我发送邮件（[leileiluoluo@leileiluoluo.com](mailto:leileiluoluo@leileiluoluo.com)）即可：**
+> 本站信息如下：
 >
-> **a) 标题**
+> ```
+> 网站标题：磊磊落落
+> 网站首页：https://leileiluoluo.com/
+> 网站 LOGO：https://leileiluoluo.com/images/favicon.png
+> 网站描述：浩然的个人博客，用于记录生活和分享技术。
+> ```
 >
-> `[友链交换申请] https://example.com/homepage`
+> **2 满足条件，即可按照如下格式给我发送申请邮件（[leileiluoluo@leileiluoluo.com](mailto:leileiluoluo@leileiluoluo.com)）**
 >
-> **b) 内容**
+> 标题格式：`[友链交换申请] https://example.com/homepage`
 >
-> `网站标题：xxxx`
+> 内容格式：
 >
-> `网站首页：https://example.com/`
->
-> `网站建立年份：xxxx 年`
->
-> `网站友链地址：https://example.com/links`
+> ```
+> 网站标题：xxxx
+> 网站首页：https://example.com/
+> 网站建立年份：xxxx 年
+> 网站友链地址：https://example.com/links
+> ```
 >
 > **收到邮件后，若您的站点满足条件，我会按照您提供的网站标题和网站首页为您添加友链并告知您；若不满足条件，我也会告知您原因！**
 
