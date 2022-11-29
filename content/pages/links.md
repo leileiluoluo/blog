@@ -57,7 +57,9 @@ wip_template:
 > 网站描述：浩然的个人博客，用于记录生活和分享技术。
 > ```
 >
-> **2 满足条件，即可按照如下格式给我发送申请邮件（[leileiluoluo@leileiluoluo.com](mailto:leileiluoluo@leileiluoluo.com)）**
+> **2 满足条件，即可按照如下格式给我发送申请邮件**
+>
+> 我的邮箱：**[leileiluoluo@leileiluoluo.com](mailto:leileiluoluo@leileiluoluo.com)**
 >
 > 标题格式：`[友链交换申请] https://example.com/homepage`
 >
