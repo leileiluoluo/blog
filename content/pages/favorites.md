@@ -127,5 +127,5 @@ wip_template:
 - [Web Fundamentals | Google Developers](https://developers.google.com/web/fundamentals/)
 - [Learn JavaScript](https://learnjavascript.online/)
 - [The Modern JavaScript Tutorial](https://javascript.info/)
-- [Frontend Developer Roadmap](https://roadmap.sh/frontend)s
+- [Frontend Developer Roadmap](https://roadmap.sh/frontend)
 - [TypeScript](https://www.typescriptlang.org/)
