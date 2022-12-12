@@ -126,3 +126,5 @@ wip_template:
 - [Bootstrap](https://getbootstrap.com/)
 - [Web Fundamentals | Google Developers](https://developers.google.com/web/fundamentals/)
 - [Learn JavaScript](https://learnjavascript.online/)
+- [The Modern JavaScript Tutorial](https://javascript.info/)
+- [Frontend Developer Roadmap](https://roadmap.sh/frontend)s
