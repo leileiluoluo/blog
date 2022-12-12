@@ -128,3 +128,4 @@ wip_template:
 - [Learn JavaScript](https://learnjavascript.online/)
 - [The Modern JavaScript Tutorial](https://javascript.info/)
 - [Frontend Developer Roadmap](https://roadmap.sh/frontend)s
+- [TypeScript](https://www.typescriptlang.org/)
