@@ -14,7 +14,11 @@ wip_template:
 
 **[Go 语言中文网](https://studygolang.com/)**
 
-`Golang 中文社区，国内建立的比较早的 Go 语言问答社区。`
+`Golang 中文社区，活跃度极高的 Go 语言问答社区。`
+
+**[个站商店](https://storeweb.cn/)**
+
+`一个精致的，带社交元素的个人网站发布平台，博客收录网站。`
 
 **[Tony Bai](https://tonybai.com/)**
 
