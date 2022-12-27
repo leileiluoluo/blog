@@ -164,7 +164,7 @@ enable = true
 
 # reward
 [params.reward]
-enable = true
+enable = false
 
 # comment
 [params.comment]
