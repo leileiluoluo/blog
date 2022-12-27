@@ -127,7 +127,7 @@ google_analitycs_id = "" # your id
 # contact form action
 contact_form_action = "#" # contact form works with : https://formspree.io
 # copyright
-copyright = "Thanks [Hugo](https://gohugo.io/) & [NorthendLab](https://github.com/themefisher/northendlab-hugo) | [晋ICP备08100400号-4](http://beian.miit.gov.cn/state/outPortal/loginPortal.action) | Copyright &copy; 2017-2022"
+copyright = "Thanks [Hugo](https://gohugo.io/) & [NorthendLab](https://github.com/themefisher/northendlab-hugo) | [辽ICP备2022012085号-1](http://beian.miit.gov.cn/state/outPortal/loginPortal.action) | Copyright &copy; 2017-2022"
 # toc
 toc = true
 
