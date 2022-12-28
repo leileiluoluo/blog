@@ -25,7 +25,3 @@ leileiluoluo#leileiluoluo.com （将#替换为@）
 **我的 GitHub**
 
 [https://github.com/olzhy](https://github.com/olzhy)
-
-**我的微信公众号**
-
-![](https://olzhy.github.io/static/images/self/weixinhaoqrcode.png#center)
