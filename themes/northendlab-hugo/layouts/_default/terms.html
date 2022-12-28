@@ -14,7 +14,7 @@
               {{ end }}
               {{ else if strings.HasSuffix .Page.Permalink "categories/" }}
               {{ range sort .Site.Taxonomies.categories.ByCount }}
-              <li><a href="{{ .Page.Permalink }}"> #{{ .Page.Title }}<sup>{{ .Count }}</sup></a></li>
+              <li><a href="{{ .Page.Permalink }}"> {{ .Page.Title }}<sup>{{ .Count }}</sup></a></li>
               {{ end }}
               {{ end }}
             </ul>
