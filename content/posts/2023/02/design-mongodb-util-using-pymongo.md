@@ -10,7 +10,10 @@ tags:
   - Python
 keywords:
   - Python
-description: Python 中如何使用 PyMongo 封装一个易用的 MongoDB 工具类。
+  - MongoDB
+  - PyMongo
+  - 工具类
+description: 本文介绍 Python 中如何使用 PyMongo 封装一个易用的 MongoDB 工具类，包括实现源码和单元测试。
 ---
 
 本文介绍在 Python 中如何使用 PyMongo 来封装一个简单易用的 MongoDB 工具类。
