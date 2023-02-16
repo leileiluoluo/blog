@@ -22,21 +22,19 @@ from typing import Dict, List, Tuple
 
 import os
 from pymongo import MongoClient
-from dotenv import load_dotenv, find_dotenv
-
-# load .env k/v pairs as environment variables
-load_dotenv(find_dotenv())
 
 
 class Connection:
     def __init__(self, collect_name: str):
-        conn_str = os.environ.get('MONGO_URL')
-        db_name = os.environ.get('MONGO_DB')
+        conn_str = os.getenv('MONGO_URL')
+        db_name = os.getenv('MONGO_DB')
+        if conn_str is None or db_name is None:
+            raise EnvironmentError("MONGO_URL or MONGO_DB is not set")
+
         self.collection = MongoClient(conn_str)[db_name][collect_name]
 
     def insert(self, item: Dict) -> str:
-        _id = self.collection.insert_one(item).inserted_id
-        return str(_id)
+        return self.collection.insert_one(item).inserted_id
 
     def count(self, condition: Dict) -> int:
         return self.collection.count_documents(condition)
@@ -51,7 +49,6 @@ class Connection:
 
         items = []
         for item in cursor:
-            item['_id'] = str(item['_id'])
             items.append(item)
         return items
 
@@ -70,6 +67,7 @@ from unittest import TestCase
 
 import pymongo
 import mongomock
+from bson import ObjectId
 
 from connection import Connection
 
@@ -82,20 +80,22 @@ class TestConnection(TestCase):
         self.connection.collection = mongomock.MongoClient().db.collection
 
         # insert initial data
-        now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        user = {
-            '_id': '0',
-            'name': 'Larry',
-            'age': 19,
-            'createdAt': now,
-            'updatedAt': now
-        }
-        self.connection.insert(user)
+        id = ObjectId('63eca79d252cd5ac908a7f06')
+        user = self.connection.get({'_id': id})
+        if user is None:
+            user = {
+                '_id': id,
+                'name': 'Larry',
+                'age': 19,
+                'createdAt': '2023-02-16 14:43:45',
+                'updatedAt': '2023-02-16 14:43:45'
+            }
+            self.connection.insert(user)
 
     def test_insert(self):
         now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         user = {
-            '_id': '1',
+            '_id': ObjectId('63eca79d252cd5ac908a7f07'),
             'name': 'Larry',
             'age': 19,
             'createdAt': now,
@@ -104,7 +104,7 @@ class TestConnection(TestCase):
 
         id = self.connection.insert(user)
 
-        self.assertEqual(id, user['_id'])
+        self.assertEqual(user['_id'], id)
 
     def test_count(self):
         condition = {'name': 'Larry'}
@@ -113,7 +113,7 @@ class TestConnection(TestCase):
         self.assertTrue(user_count > 0)
 
     def test_get(self):
-        condition = {'name': 'Larry'}
+        condition = {'_id': ObjectId('63eca79d252cd5ac908a7f06')}
         user = self.connection.get(condition)
 
         self.assertIsNotNone(user)
@@ -129,7 +129,7 @@ class TestConnection(TestCase):
         self.assertTrue(len(users) > 0)
 
     def test_update(self):
-        condition = {'_id': '0'}
+        condition = {'_id': ObjectId('63eca79d252cd5ac908a7f06')}
         now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         update_dict = {
             'name': 'Larry Update',
@@ -142,7 +142,7 @@ class TestConnection(TestCase):
         # get
         user = self.connection.get(condition)
 
-        self.assertEqual(user['name'], update_dict['name'])
+        self.assertEqual(update_dict['name'], user['name'])
 
     def test_delete(self):
         condition = {'name': 'Larry'}
@@ -152,7 +152,7 @@ class TestConnection(TestCase):
 
         count = self.connection.count(condition)
 
-        self.assertEqual(count, 0)
+        self.assertEqual(0, count)
 ```
 
 
