@@ -41,9 +41,11 @@ description: Python 中如何使用 PyMongo 封装一个易用的 MongoDB 工具
 
   指定条件对数据进行删除。
 
-### 1 进行封装
+工具类应具备的功能确定以后，就可以着手进行编码了。依赖包为`pymongo`，只在其上做了简单的封装。
 
-封装后的工具类名为`connection.py`，源码如下：
+### 1 封装后的工具类
+
+封装后的工具类文件名为`connection.py`，源码如下：
 
 ```python
 from typing import Dict, List, Tuple
@@ -94,15 +96,19 @@ class Connection:
         self.collection.delete_many(condition)
 ```
 
-创建该工具类需要隐式提供两个环境变量：`MONGO_URL`与`MONGO_DB`。
-`MONGO_URL`为 MongoDB 连接地址，格式为`mongodb://{username}:{password}@{host}:{port}`；
-`MONGO_DB`为数据库名。
+创建该工具类需要隐式提供两个环境变量：`MONGO_URL`与`MONGO_DB`。`MONGO_URL`为 MongoDB 连接地址，格式为`mongodb://{username}:{password}@{host}:{port}`；`MONGO_DB`为数据库名。
 
-### 2 进行测试
+`Connection`类中，除`list_with_pagination`方法外，其它方法的实现都比较简单。
 
-封装完成后，我们对`connection.py`编写测试类进行单元测试。
+下面仅对`list_with_pagination`的实现细节作一点说明：
 
-测试类`connection_test.py`源码如下：
+`self.collection.find(condition)` 会返回一个`Cursor`实例，可对其进行遍历。可以看到我们使用`skip`、`sort`和`limit`来分别进行跳过记录、排序和限制返回条目，这样即很好的实现了带排序的分页查询。
+
+### 2 对工具类进行测试
+
+封装完成后，我们对`connection.py`编写测试类来进行单元测试。
+
+测试文件`connection_test.py`的源码如下：
 
 ```python
 import datetime
@@ -197,6 +203,26 @@ class TestConnection(TestCase):
 
         self.assertEqual(0, count)
 ```
+
+下面，对几个比较关键的地方作一下说明。
+
+- `setUp`方法
+
+  我们使用`mongomock`做了一个 Mock 的`collection`，不会真的对数据库进行连接和测试。
+
+- `test_insert` 方法
+
+  注意调用`self.connection.insert(user)`后，返回的 ID 非`str`类型，而是`bson.ObjectId`类型。插入数据时，若不想让 MongoDB 自动生成一个随机 ID，而要自己指定 ID 的话，也需要指定为`bson.ObjectId`类型。
+
+- `test_get` 方法
+
+  可以看到，如想根据 ID 查询一条记录，同样查询条件中的`_id`需要为`bson.ObjectId`类型。
+
+- `test_list_with_pagination` 方法
+
+  调用`self.connection.list_with_pagination(condition, page_no, page_size, sort_tuples)`进行分页查询时，排序条件`sort_tuples`是一个数组，所以可以依次按多个字段进行排序。如先按创建时间降序再按姓名升序，则`sort_tuples`可以设置为`[('createdAt', pymongo.DESCENDING), ('name', pymongo.ASCENDING)]`。
+
+综上，完成了对 PyMongo 的封装，实现了一个简单易用的 Python MongoDB 工具类。
 
 > 参考资料
 >
