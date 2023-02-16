@@ -13,15 +13,45 @@ keywords:
 description: Python 中如何使用 PyMongo 封装一个易用的 MongoDB 工具类。
 ---
 
-### 1 代码
+本文介绍在 Python 中如何使用 PyMongo 来封装一个简单易用的 MongoDB 工具类。
 
-#### connection.py
+进行编码之前，应考虑一下这个工具类应具有的几个基本的功能：
+
+- 新增 `insert`
+
+  支持插入单条记录，并返回插入后所生成的 ID。
+
+- 查询条数 `count`
+
+  查询满足条件的数据条数。
+
+- 查询单条记录 `get`
+
+  查询满足条件的一条记录。
+
+- 分页查询一组记录 `list_with_pagination`
+
+  指定查询条件、页码（`page_no`）、单页记录数(`page_size`)和排序规则进行查询，返回满足条件的一组排序记录。
+
+- 更新 `update`
+
+  指定查询条件和待更新字段健值对来进行更新。
+
+- 删除 `delete`
+
+  指定条件对数据进行删除。
+
+### 1 进行封装
+
+封装后的工具类名为`connection.py`，源码如下：
 
 ```python
 from typing import Dict, List, Tuple
 
 import os
-from pymongo import MongoClient
+
+import pymongo
+from bson import ObjectId
 
 
 class Connection:
@@ -31,9 +61,9 @@ class Connection:
         if conn_str is None or db_name is None:
             raise EnvironmentError("MONGO_URL or MONGO_DB is not set")
 
-        self.collection = MongoClient(conn_str)[db_name][collect_name]
+        self.collection = pymongo.MongoClient(conn_str)[db_name][collect_name]
 
-    def insert(self, item: Dict) -> str:
+    def insert(self, item: Dict) -> ObjectId:
         return self.collection.insert_one(item).inserted_id
 
     def count(self, condition: Dict) -> int:
@@ -43,9 +73,14 @@ class Connection:
         return self.collection.find_one(condition)
 
     def list_with_pagination(self, condition: Dict,
-                             page_no: int, page_size: int, sort_tuples: List[Tuple]) -> List[Dict]:
+                             page_no: int = 1, page_size: int = 10,
+                             sort_tuples: List[Tuple] = list()) -> List[Dict]:
         items_skipped = (page_no - 1) * page_size
-        cursor = self.collection.find(condition).skip(items_skipped).sort(sort_tuples).limit(page_size)
+        cursor = self.collection.find(condition).skip(items_skipped)
+        if len(sort_tuples) > 0:
+            cursor = cursor.sort(sort_tuples).limit(page_size)
+        else:
+            cursor = cursor.limit(page_size)
 
         items = []
         for item in cursor:
@@ -59,7 +94,15 @@ class Connection:
         self.collection.delete_many(condition)
 ```
 
-#### connection_test.py
+创建该工具类需要隐式提供两个环境变量：`MONGO_URL`与`MONGO_DB`。
+`MONGO_URL`为 MongoDB 连接地址，格式为`mongodb://{username}:{password}@{host}:{port}`；
+`MONGO_DB`为数据库名。
+
+### 2 进行测试
+
+封装完成后，我们对`connection.py`编写测试类进行单元测试。
+
+测试类`connection_test.py`源码如下：
 
 ```python
 import datetime
@@ -121,7 +164,7 @@ class TestConnection(TestCase):
     def test_list_with_pagination(self):
         condition = {'name': 'Larry'}
         page_no = 1
-        page_size = 10
+        page_size = 20
         sort_tuples = [('createdAt', pymongo.DESCENDING)]
 
         users = self.connection.list_with_pagination(condition, page_no, page_size, sort_tuples)
@@ -154,7 +197,6 @@ class TestConnection(TestCase):
 
         self.assertEqual(0, count)
 ```
-
 
 > 参考资料
 >
