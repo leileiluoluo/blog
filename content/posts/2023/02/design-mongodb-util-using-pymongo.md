@@ -1,5 +1,5 @@
 ---
-title: 使用 PyMongo 封装一个简单易用的 MongoDB 工具类
+title: Python 中如何使用 PyMongo 封装一个易用的 MongoDB 工具类
 author: olzhy
 type: post
 date: 2023-02-15T08:00:00+08:00
@@ -10,7 +10,7 @@ tags:
   - Python
 keywords:
   - Python
-description: 使用 PyMongo 封装一个简单易用的 MongoDB 工具类。
+description: Python 中如何使用 PyMongo 封装一个易用的 MongoDB 工具类。
 ---
 
 ### 1 代码
@@ -18,7 +18,6 @@ description: 使用 PyMongo 封装一个简单易用的 MongoDB 工具类。
 #### connection.py
 
 ```python
-# connection.py
 from typing import Dict, List, Tuple
 
 import os
@@ -46,9 +45,9 @@ class Connection:
         return self.collection.find_one(condition)
 
     def list_with_pagination(self, condition: Dict,
-                             page_no: int, page_size: int, sort_tuple: List[Tuple]) -> List[Dict]:
+                             page_no: int, page_size: int, sort_tuples: List[Tuple]) -> List[Dict]:
         items_skipped = (page_no - 1) * page_size
-        cursor = self.collection.find(condition).skip(items_skipped).sort(sort_tuple).limit(page_size)
+        cursor = self.collection.find(condition).skip(items_skipped).sort(sort_tuples).limit(page_size)
 
         items = []
         for item in cursor:
@@ -56,8 +55,8 @@ class Connection:
             items.append(item)
         return items
 
-    def update(self, condition: Dict, values: Dict) -> None:
-        self.collection.update_many(condition, {'$set': values})
+    def update(self, condition: Dict, update_dict: Dict) -> None:
+        self.collection.update_many(condition, {'$set': update_dict})
 
     def delete(self, condition: Dict) -> None:
         self.collection.delete_many(condition)
@@ -66,40 +65,56 @@ class Connection:
 #### connection_test.py
 
 ```python
-# connection_test.py
 import datetime
 from unittest import TestCase
 
 import pymongo
+import mongomock
 
 from connection import Connection
 
 
-class ConnectionTest(TestCase):
+class TestConnection(TestCase):
     def setUp(self) -> None:
-        self.collection = Connection('users')
+        self.connection = Connection('users')
 
-    def test_insert(self):
+        # mock
+        self.connection.collection = mongomock.MongoClient().db.collection
+
+        # insert initial data
         now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         user = {
+            '_id': '0',
             'name': 'Larry',
             'age': 19,
             'createdAt': now,
             'updatedAt': now
         }
-        id = self.collection.insert(user)
+        self.connection.insert(user)
 
-        self.assertIsNotNone(id)
+    def test_insert(self):
+        now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        user = {
+            '_id': '1',
+            'name': 'Larry',
+            'age': 19,
+            'createdAt': now,
+            'updatedAt': now
+        }
+
+        id = self.connection.insert(user)
+
+        self.assertEqual(id, user['_id'])
 
     def test_count(self):
         condition = {'name': 'Larry'}
-        user_count = self.collection.count(condition)
+        user_count = self.connection.count(condition)
 
         self.assertTrue(user_count > 0)
 
     def test_get(self):
         condition = {'name': 'Larry'}
-        user = self.collection.get(condition)
+        user = self.connection.get(condition)
 
         self.assertIsNotNone(user)
 
@@ -107,26 +122,37 @@ class ConnectionTest(TestCase):
         condition = {'name': 'Larry'}
         page_no = 1
         page_size = 10
-        sort_tuple = [('createdAt', pymongo.DESCENDING)]
+        sort_tuples = [('createdAt', pymongo.DESCENDING)]
 
-        users = self.collection.list_with_pagination(condition, page_no, page_size, sort_tuple)
+        users = self.connection.list_with_pagination(condition, page_no, page_size, sort_tuples)
 
         self.assertTrue(len(users) > 0)
 
     def test_update(self):
-        condition = {'name': 'Larry'}
+        condition = {'_id': '0'}
         now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         update_dict = {
             'name': 'Larry Update',
             'updatedAt': now
         }
 
-        self.collection.update(condition, update_dict)
+        # update
+        self.connection.update(condition, update_dict)
+
+        # get
+        user = self.connection.get(condition)
+
+        self.assertEqual(user['name'], update_dict['name'])
 
     def test_delete(self):
         condition = {'name': 'Larry'}
 
-        self.collection.delete(condition)
+        # delete
+        self.connection.delete(condition)
+
+        count = self.connection.count(condition)
+
+        self.assertEqual(count, 0)
 ```
 
 
