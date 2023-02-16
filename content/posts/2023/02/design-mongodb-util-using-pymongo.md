@@ -222,7 +222,20 @@ class TestConnection(TestCase):
 
   调用`self.connection.list_with_pagination(condition, page_no, page_size, sort_tuples)`进行分页查询时，排序条件`sort_tuples`是一个数组，所以可以依次按多个字段进行排序。如先按创建时间降序再按姓名升序，则`sort_tuples`可以设置为`[('createdAt', pymongo.DESCENDING), ('name', pymongo.ASCENDING)]`。
 
-综上，完成了对 PyMongo 的封装，实现了一个简单易用的 Python MongoDB 工具类。
+下面跑一下`connection_test.py`，可以看到所有 6 个测试用例全部通过。
+
+```shell
+export MONGO_URL=xxx
+export MONGO_DB=test
+python3 -m unittest connection_test.py
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.008s
+
+OK
+```
+
+综上，完成了对 PyMongo 的封装，实现了一个简单易用的 Python MongoDB 工具类并对其进行了测试。
 
 > 参考资料
 >
