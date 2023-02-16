@@ -235,7 +235,7 @@ Ran 6 tests in 0.008s
 OK
 ```
 
-综上，完成了对 PyMongo 的封装，实现了一个简单易用的 Python MongoDB 工具类并对其进行了测试。
+综上，完成了对 PyMongo 的封装，实现了一个简单易用的 Python MongoDB 工具类并对其进行了测试。本文涉及的代码已托管至[GitHub](https://github.com/olzhy/python-exercises/tree/main/mongodb-util)。
 
 > 参考资料
 >
