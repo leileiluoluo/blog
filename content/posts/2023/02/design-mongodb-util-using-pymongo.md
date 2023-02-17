@@ -13,7 +13,7 @@ keywords:
   - MongoDB
   - PyMongo
   - 工具类
-description: 本文介绍 Python 中如何使用 PyMongo 封装一个易用的 MongoDB 工具类，包括实现源码和单元测试。
+description: 本文介绍 Python 中如何使用 PyMongo 封装一个简单易用的 MongoDB 工具类，包括实现代码和单元测试。
 ---
 
 本文介绍在 Python 中如何使用 PyMongo 来封装一个简单易用的 MongoDB 工具类。
@@ -34,7 +34,7 @@ description: 本文介绍 Python 中如何使用 PyMongo 封装一个易用的 M
 
 - 分页查询一组记录 `list_with_pagination`
 
-  指定查询条件、页码（`page_no`）、单页记录数(`page_size`)和排序规则进行查询，返回满足条件的一组排序记录。
+  指定查询条件、页码（`page_no`）、单页记录数(`page_size`)和排序规则进行查询，返回满足条件的一组排好序的记录。
 
 - 更新 `update`
 
@@ -101,11 +101,11 @@ class Connection:
 
 创建该工具类需要隐式提供两个环境变量：`MONGO_URL`与`MONGO_DB`。`MONGO_URL`为 MongoDB 连接地址，格式为`mongodb://{username}:{password}@{host}:{port}`；`MONGO_DB`为数据库名。
 
-`Connection`类中，除`list_with_pagination`方法外，其它方法的实现都比较简单。
+该工具类`Connection`中，除`list_with_pagination`方法外，其它方法的实现都比较简单。
 
-下面仅对`list_with_pagination`的实现细节作一点说明：
+下面仅对`list_with_pagination`的实现细节作一下说明：
 
-`self.collection.find(condition)` 会返回一个`Cursor`实例，可对其进行遍历。可以看到我们使用`skip`、`sort`和`limit`来分别进行跳过记录、排序和限制返回条目，这样即很好的实现了带排序的分页查询。
+`self.collection.find(condition)`会返回一个`Cursor`实例，可对其进行遍历。可以看到我们使用`skip`、`sort`和`limit`来分别进行跳过记录、排序和限制返回条目，这样即很好的实现了带排序的分页查询。
 
 ### 2 对工具类进行测试
 
@@ -207,15 +207,15 @@ class TestConnection(TestCase):
         self.assertEqual(0, count)
 ```
 
-下面，对几个比较关键的地方作一下说明。
+下面，对几个比较关键的方法作一下说明：
 
 - `setUp`方法
 
-  我们使用`mongomock`做了一个 Mock 的`collection`，不会真的对数据库进行连接和测试。
+  使用`mongomock`做了一个 Mock 的`collection`，不会真的对 MongoDB 数据库进行连接和测试。
 
 - `test_insert` 方法
 
-  注意调用`self.connection.insert(user)`后，返回的 ID 非`str`类型，而是`bson.ObjectId`类型。插入数据时，若不想让 MongoDB 自动生成一个随机 ID，而要自己指定 ID 的话，也需要指定为`bson.ObjectId`类型。
+  调用`self.connection.insert(user)`后，返回的 ID 非`str`类型，而是`bson.ObjectId`类型。插入数据时，若不想让 MongoDB 自动生成一个随机 ID，而要自己指定 ID 的话，也需要指定为`bson.ObjectId`类型。
 
 - `test_get` 方法
 
@@ -230,6 +230,7 @@ class TestConnection(TestCase):
 ```shell
 export MONGO_URL=xxx
 export MONGO_DB=test
+
 python3 -m unittest connection_test.py
 
 ----------------------------------------------------------------------
@@ -238,7 +239,7 @@ Ran 6 tests in 0.008s
 OK
 ```
 
-综上，完成了对 PyMongo 的封装，实现了一个简单易用的 Python MongoDB 工具类并对其进行了测试。本文涉及的代码已托管至[GitHub](https://github.com/olzhy/python-exercises/tree/main/mongodb-util)。
+综上，完成了对 PyMongo 的封装，实现了一个简单易用的 Python MongoDB 工具类并对其进行了测试。本文涉及的代码已托管至 [GitHub](https://github.com/olzhy/python-exercises/tree/main/mongodb-util)，欢迎关注或 Fork。
 
 > 参考资料
 >
