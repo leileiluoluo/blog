@@ -8,6 +8,7 @@ categories:
   - 计算机
 tags:
   - Python
+  - MongoDB
 keywords:
   - Python
   - MongoDB
