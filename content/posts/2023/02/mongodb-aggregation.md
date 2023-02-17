@@ -70,7 +70,7 @@ db.phones.insertMany( [
 SELECT name,
        sum(quantity) AS total_quantity
 FROM phones
-WHERE TYPE='standard'
+WHERE type='standard'
 GROUP BY name
 ORDER BY total_quantity DESC;
 ```
