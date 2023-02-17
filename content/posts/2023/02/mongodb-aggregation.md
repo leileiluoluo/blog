@@ -76,7 +76,7 @@ ORDER BY total_quantity DESC;
 ```
 
 ```text
-  name  | total_quantity 
+  name  | total_quantity
 --------+----------------
  VIVO   |             50
  HUAWEI |             40
