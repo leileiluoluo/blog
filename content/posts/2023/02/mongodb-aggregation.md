@@ -12,22 +12,38 @@ keywords:
   - MongoDB
   - 聚合操作
   - 聚合查询
-description: 对比 SQL 来学习 MongoDB 的聚合操作。
+description: 本文以对比 SQL 的方式来学习 MongoDB 的聚合操作。
 ---
 
-### 聚合查询
+## 1 聚合流水线概念
+
+MongoDB 聚合流水线用于处理文档，其由一个或多个阶段（Stage）组成。每个阶段会对文档执行一类操作，一个阶段输出的文档会传递到下一个阶段，使用聚合流水线可以对文档进行过滤、分组和聚合计算（如计算平均值、最大值、最小值或总值）。除了进行聚合查询以外，自 MongoDB 4.2 版本起，还可以使用聚合流水线来进行文档更新。
+
+_注意：使用`db.collection.aggregate()`方法运行聚合流水线时，除非该流水线包含`$merge`或`$out`阶段，否则不会更改集合中的文档。_
+
+## 2 准备数据
+
+对比 SQL 来学习 MongoDB 的聚合操作会比较容易理解。该部分会准备一下数据，以方便后面的对比学习。
+
+考虑有一张用于存放手机信息的表 `phones`，其有字段 `id`（主键）、`name`（名称）、`type`（类型）、`price`（价格）、`quantiy`（数量）和`published_at`（发布时间）这几个字段。
+
+`phones` 表的建表语句如下：
 
 ```sql
 CREATE TABLE phones (
-	id serial,
-	name varchar(100),
-	type varchar(10),
-	price int,
-	quantity int,
-	published_at timestamp,
+	id serial,              -- 主键
+	name varchar(100),      -- 名称
+	type varchar(10),       -- 类型（standard 或 plus）
+	price int,              -- 价格
+	quantity int,           -- 数量
+	published_at timestamp, -- 发布时间
 	PRIMARY KEY (id)
 );
+```
 
+给 `phones` 表插入 10 条数据，命令如下：
+
+```sql
 INSERT INTO phones (name, type, price, quantity, published_at)
 VALUES ('Apple', 'plus', 7000, 10, '2023-01-16 16:08:00'),
 	('Apple', 'standard', 6000, 10, '2023-01-16 16:08:00'),
@@ -40,6 +56,8 @@ VALUES ('Apple', 'plus', 7000, 10, '2023-01-16 16:08:00'),
 	('VIVO', 'plus', 3000, 50, '2023-05-16 16:08:00'),
 	('VIVO', 'standard', 2000, 50, '2023-05-16 16:08:00');
 ```
+
+使用 MongoShell 在 MongoDB 插入与如上命令相同的 10 条数据，命令如下：
 
 ```shell
 db.phones.insertMany( [
@@ -66,6 +84,18 @@ db.phones.insertMany( [
 ] )
 ```
 
+数据准备完成，下面会使用对比 SQL 语句的方式来学习 MongoDB 的聚合流水线知识。
+
+### 3 对比 SQL 来学习聚合流水线
+
+#### 3.1 过滤、分组和排序
+
+问题描述：找出类型为`standard`的手机，然后按名称分组后计算其总数量，返回结果按总数量降序排序。
+
+针对上述问题，SQL 中首先会使用`WHERE`来进行筛选，然后使用`GROUP BY`来分组，使用聚集函数`sum`来进行累加，最后使用`ORDER BY`来进行排序。
+
+SQL 查询语句及运行结果如下：
+
 ```sql
 SELECT name,
        sum(quantity) AS total_quantity
@@ -84,6 +114,22 @@ ORDER BY total_quantity DESC;
  OPPO   |             20
  Apple  |             10
 ```
+
+该问题若使用 MongoDB 的聚合流水线来实现，需要有 3 个阶段：
+
+- 第一个阶段`$match`
+
+  过滤类型为`standard`的文档，并将结果传递到下一个阶段。
+
+- 第二个阶段`$group`
+
+  针对输入文档，按名称进行分组，然后对每个名称计算新字段`total_quantity`的值，该字段值为数量的累加。完成后，将结果传递到下一个阶段。
+
+- 第三个阶段`$sort`
+
+  针对输入文档，按`total_quantity`进行降序排序，完成后返回结果。
+
+MongoShell `aggregate` 聚合查询命令及运行结果如下：
 
 ```shell
 db.phones.aggregate( [
@@ -108,6 +154,8 @@ db.phones.aggregate( [
   { _id: 'Apple', total_quantity: 10 }
 ]
 ```
+
+可以看到，MongoDB 聚合流水线的查询结果与上面的 SQL 语句查询结果是一致的。
 
 > 参考资料
 >
