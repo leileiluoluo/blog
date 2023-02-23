@@ -90,7 +90,7 @@ db.phones.insertMany( [
 
 本部分以出问题的形式来设定一个查询场景，然后分别以 SQL 及 聚合流水线两种方式来实现。
 
-#### 3.1 过滤、分组和排序
+#### 3.1 按字段过滤，然后进行分组和排序
 
 问题描述：找出类型为`standard`的手机，然后按名称分组并计算其对应的总数量，返回结果包含名称和总数量两列，按总数量降序排序。
 
@@ -125,11 +125,11 @@ ORDER BY total_quantity DESC;
 
 - 第二个阶段`$group`
 
-  针对输入文档，按名称进行分组，然后对每个名称计算新字段`total_quantity`的值，该字段值为数量的累加。完成后，将结果传递到下一个阶段。
+  针对输入文档，按名称进行分组，然后对每个名称计算新字段`totalQuantity`的值，该字段值为数量的累加。完成后，将结果传递到下一个阶段。
 
 - 第三个阶段`$sort`
 
-  针对输入文档，按`total_quantity`进行降序排序，完成后返回结果。
+  针对输入文档，按`totalQuantity`进行降序排序，完成后返回结果。
 
 MongoShell `aggregate` 聚合查询命令及运行结果如下：
 
@@ -139,28 +139,115 @@ db.phones.aggregate( [
         $match: { type: "standard" }
     },
     {
-        $group: { _id: "$name", total_quantity: { $sum: "$quantity" } }
+        $group: { _id: "$name", totalQuantity: { $sum: "$quantity" } }
     },
     {
-        $sort: { total_quantity: -1 }
+        $sort: { totalQuantity: -1 }
     }
 ] )
 ```
 
 ```text
 [
-  { _id: 'VIVO', total_quantity: 50 },
-  { _id: 'HUAWEI', total_quantity: 40 },
-  { _id: 'XIAOMI', total_quantity: 30 },
-  { _id: 'OPPO', total_quantity: 20 },
-  { _id: 'Apple', total_quantity: 10 }
+  { _id: 'VIVO', totalQuantity: 50 },
+  { _id: 'HUAWEI', totalQuantity: 40 },
+  { _id: 'XIAOMI', totalQuantity: 30 },
+  { _id: 'OPPO', totalQuantity: 20 },
+  { _id: 'Apple', totalQuantity: 10 }
 ]
 ```
 
 可以看到，MongoDB 聚合流水线的查询结果与上面的 SQL 语句查询结果是一致的。
+
+#### 3.2 对时间字段限定范围、然后进行分组和排序
+
+问题描述：找出发布时间`published_at`在 2023 年 2 月到 2023 年 4 月这三个月所发布的手机，然后按发布年月计算当月发布的手机总数量，返回结果包含发布年月和总数量两列，按总数量降序排序。
+
+针对上述问题，SQL 中首先会将时间戳转换为年月格式，然后使用`WHERE`来限定日期范围，然后使用`GROUP BY`来分组，使用聚集函数`sum`来进行累加，最后使用`ORDER BY`来进行排序。
+
+SQL 查询语句及运行结果如下：
+
+```sql
+SELECT to_char(published_at, 'YYYY-MM') AS year_month,
+       sum(quantity) AS total_quantity
+FROM phones
+WHERE published_at BETWEEN '2023-02-01 00:00:00' AND '2023-05-01 00:00:00'
+GROUP BY year_month
+ORDER BY year_month DESC;
+```
+
+```text
+ year_month | total_quantity
+------------+----------------
+ 2023-04    |             80
+ 2023-03    |             40
+ 2023-02    |             60
+```
+
+该问题若使用 MongoDB 的聚合流水线来实现，亦需要有 3 个阶段：
+
+- 第一个阶段`$match`
+
+  过滤发布日期`published_at`在`2023-02-01 00:00:00`与`2023-05-01 00:00:00`之间的文档，并将结果传递到下一个阶段。
+
+- 第二个阶段`$group`
+
+  针对输入文档，将发布日期转换为`%Y-%m`格式后按其进行分组，然后计算该年月发布的手机总数量`totalQuantity`。完成后，将结果传递到下一个阶段。
+
+- 第三个阶段`$sort`
+
+  针对输入文档，按年月字段进行降序排序，完成后返回结果。
+
+MongoShell `aggregate` 聚合查询命令及运行结果如下：
+
+```shell
+db.phones.aggregate( [
+  {
+    $match:
+      {
+        published_at: {
+          $gte: new ISODate("2023-02-01 00:00:00"),
+          $lt: new ISODate("2023-05-01 00:00:00"),
+        },
+      },
+  },
+  {
+    $group:
+      {
+        _id: {
+          $dateToString: {
+            format: "%Y-%m",
+            date: "$published_at",
+          },
+        },
+        totalQuantity: {
+          $sum: "$quantity",
+        },
+      },
+  },
+  {
+    $sort:
+      {
+        _id: -1,
+      },
+  },
+] )
+```
+
+```text
+[
+  { _id: '2023-04', totalQuantity: 80 },
+  { _id: '2023-03', totalQuantity: 40 },
+  { _id: '2023-02', totalQuantity: 60 }
+]
+```
+
+可以看到，聚合流水线的查询结果与 SQL 语句查询结果也是一致的。
 
 > 参考资料
 >
 > [1] [MongoDB Aggregation Operations - www.mongodb.com](https://www.mongodb.com/docs/manual/aggregation/)
 >
 > [2] [Practical MongoDB Aggregations Book - www.practical-mongodb-aggregations.com](https://www.practical-mongodb-aggregations.com/)
+>
+> [3] [Format SQL Statements Online - sqlformat.org](https://sqlformat.org/)
