@@ -244,6 +244,8 @@ db.phones.aggregate( [
 
 可以看到，聚合流水线的查询结果与 SQL 语句查询结果也是一致的。
 
+综上，本文对比 SQL 来学习了最基本的 MongoDB 聚合操作，对于聚合操作更复杂一点的特性，待后面有时间来学习整理。
+
 > 参考资料
 >
 > [1] [MongoDB Aggregation Operations - www.mongodb.com](https://www.mongodb.com/docs/manual/aggregation/)
