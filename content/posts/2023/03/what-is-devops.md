@@ -26,7 +26,43 @@ description: 一文了解什么是 DevOps。
 
 ## 1 DevOps 生命周期
 
+下图展示了 DevOps 生命周期的各个阶段，可以看到 DevOps 的生命周期大概由 8 个阶段组成，左侧是开发部分，右边是运维部分，是一个无限循环。
+
 ![DevOps 生命周期](https://olzhy.github.io/static/images/uploads/2023/03/the-devops-lifecycle.png#center)
+
+下面简单看一下，每个阶段都是做什么的：
+
+- Discover
+
+  着手前的准备工作，团队开展头脑风暴等活动探索及明确要做的事情及其优先级。
+
+- Plan
+
+  计划阶段，采用敏捷等方法将需求拆分为更易于快速交付的工作。
+
+- Build
+
+  对代码进行编译构建。
+
+- Test
+
+  正式部署到生产环境前，采用自动化测试来确保变更的准确性。
+
+- Deploy
+
+  负责以自动化的方式将功能部署到生产环境。
+
+- Operate
+
+  负责 IT 基础设施的运行和运维工作。
+
+- Observe
+
+  通过监控及告警来快速发现并解决各种功能或性能问题。
+
+- Continuous feedback
+
+  回顾当前版本并搜集客户反馈以发现不足，以期在下次发布做出改进。
 
 > 参考资料
 >
