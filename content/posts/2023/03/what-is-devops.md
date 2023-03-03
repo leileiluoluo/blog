@@ -64,6 +64,8 @@ description: 一文了解什么是 DevOps。
 
   回顾当前版本并搜集客户反馈以发现不足，以期在下次发布做出改进。
 
+## 2 DevOps 五原则
+
 > 参考资料
 >
 > [1] [What is DevOps? | Atlassian - www.atlassian.com](https://www.atlassian.com/devops)
