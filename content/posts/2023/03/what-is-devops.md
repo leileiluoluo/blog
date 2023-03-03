@@ -32,39 +32,55 @@ description: 一文了解什么是 DevOps。
 
 下面简单看一下，每个阶段都是做什么的：
 
-- Discover
+- 发现（Discover）
 
   着手前的准备工作，团队开展头脑风暴等活动探索及明确要做的事情及其优先级。
 
-- Plan
+- 计划（Plan）
 
   计划阶段，采用敏捷等方法将需求拆分为更易于快速交付的工作。
 
-- Build
+- 构建（Build）
 
   对代码进行编译构建。
 
-- Test
+- 测试（Test）
 
   正式部署到生产环境前，采用自动化测试来确保变更的准确性。
 
-- Deploy
+- 部署（Deploy）
 
   负责以自动化的方式将功能部署到生产环境。
 
-- Operate
+- 运维（Operate）
 
   负责 IT 基础设施的运行和运维工作。
 
-- Observe
+- 观测（Observe）
 
   通过监控及告警来快速发现并解决各种功能或性能问题。
 
-- Continuous feedback
+- 持续反馈（Continuous feedback）
 
   回顾当前版本并搜集客户反馈以发现不足，以期在下次发布做出改进。
 
 ## 2 DevOps 五原则
+
+要充分发挥 DevOps 的潜力，团队需要遵循如下五个原则：
+
+- 协作（Collaboration）
+
+- 自动化（Automation）
+
+- 持续改进（Continuous Improvement）
+
+- 以客户为中心的行动（Customer-centric action）
+
+- 以终为始（Create with the end in mind）
+
+## 3 DevOps 流水线
+
+## 4 什么是 DevSecOps？
 
 > 参考资料
 >
