@@ -113,7 +113,7 @@ DevSecOps 是一个将安全性集成到持续集成、持续交付和持续部�
 
 - 构建阶段（Build）
 
-可以通过使用静态应用软件测试（Static Application Security Testing，SAST）软件（诸如 SonarQube）来扫描代码可能存在的漏洞。
+可以通过使用静态应用安全测试（Static Application Security Testing，SAST）软件（诸如 SonarQube）来扫描代码可能存在的漏洞。
 
 - 测试阶段（Test）
 
