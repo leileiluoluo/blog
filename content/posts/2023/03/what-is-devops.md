@@ -109,23 +109,23 @@ DevSecOps 是一个将安全性集成到持续集成、持续交付和持续部�
 
 - 计划阶段（Plan）
 
-可以通过威胁建模等方法来识别软件可能存在的安全漏洞。
+  可以通过威胁建模等方法来识别软件可能存在的安全漏洞。
 
 - 构建阶段（Build）
 
-可以通过使用静态应用安全测试（Static Application Security Testing，SAST）软件（诸如 SonarQube）来扫描代码可能存在的漏洞。
+  可以通过使用静态应用安全测试（Static Application Security Testing，SAST）软件（诸如 SonarQube）来扫描代码可能存在的漏洞。
 
 - 测试阶段（Test）
 
-可以通过动态应用安全测试（Dynamic Application Security Testing，DAST）软件来测试是否存在诸如 OWASP Top 10 等列出的安全漏洞。
+  可以通过动态应用安全测试（Dynamic Application Security Testing，DAST）软件来测试是否存在诸如 OWASP Top 10 等列出的安全漏洞。
 
 - 部署阶段（Deploy）
 
-部署阶段需要检查基础设施及运行环境的配置是否安全，包括网络防火墙、密钥数据等。一些流行的配置管理工具包括 Ansible、Puppet、HashiCorp Terraform 和 Chef 等。
+  部署阶段需要检查基础设施及运行环境的配置是否安全，包括网络防火墙、密钥数据等。一些流行的配置管理工具包括 Ansible、Puppet、HashiCorp Terraform 和 Chef 等。
 
 - 运维阶段（Operate）
 
-通过使用 Web 应用防火墙（Web Application Firewall，WAF）等提供额外安全保障。
+  通过使用 Web 应用防火墙（Web Application Firewall，WAF）等提供额外安全保障。
 
 综上，本文首先介绍了 DevOps 的概念、生命周期及实践的原则，然后对 DevOps 流水线与 DevSecOps 作了解释。以期阅读完本文的朋友对什么是 DevOps 能有一个基本的了解。
 
