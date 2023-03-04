@@ -10,8 +10,11 @@ tags:
   - DevOps
 keywords:
   - DevOps
+  - DevOps 生命周期
+  - DevOps 五原则
+  - DevOps 流水线
   - DevSecOps
-description: 一文了解什么是 DevOps。
+description: 本文介绍 DevOps 的概念、生命周期及实践的原则，并对 DevOps 流水线与 DevSecOps 作了解释。
 ---
 
 什么是 DevOps？如下是一段来自 Atlassian 对 DevOps 的定义。
