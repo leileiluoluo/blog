@@ -57,7 +57,7 @@ description: 本文介绍 DevOps 的概念、生命周期及实践的原则，�
 
 - 运维（Operate）
 
-  负责 IT 基础设施的运行和运维工作。
+  负责 IT 基础设施的运行和维护工作。
 
 - 观测（Observe）
 
