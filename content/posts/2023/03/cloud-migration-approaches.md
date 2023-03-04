@@ -9,8 +9,13 @@ categories:
 tags:
   - 架构设计
 keywords:
-  - 云迁移
-description: 5 种云迁移方法及其优缺点。
+  - 云迁移方法
+  - Rehost
+  - Refactor
+  - Replatform
+  - Rebuild
+  - Replace
+description: 本文介绍 5 种常用的云迁移方法，然后分析其使用场景及优缺点。
 ---
 
 云迁移是将数字系统的一部分或全部迁移到云上的过程。主要有三种迁移方向：On-Premise 到云、云到云以及云到 On-Premise。
