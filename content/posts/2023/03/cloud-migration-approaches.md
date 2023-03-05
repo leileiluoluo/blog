@@ -15,6 +15,7 @@ keywords:
   - Replatform
   - Rebuild
   - Replace
+  - 优缺点
 description: 本文介绍 5 种常用的云迁移方法，然后分析其适用场景及优缺点。
 ---
 
