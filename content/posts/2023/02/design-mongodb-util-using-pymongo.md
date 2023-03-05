@@ -1,5 +1,5 @@
 ---
-title: Python 中如何使用 PyMongo 封装一个易用的 MongoDB 工具类
+title: 使用 PyMongo 封装一个易用的 MongoDB 工具类
 author: olzhy
 type: post
 date: 2023-02-15T08:00:00+08:00
