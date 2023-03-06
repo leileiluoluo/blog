@@ -21,6 +21,14 @@ description: 如何对现代大型机（Mainframe）做 DevOps？
 
 接下来几年的趋势是一种混合的解决方案：即大型机系统中能改造的部分会逐步进行现代化改造，而极难改造的部分也会借助现代化技术来为其提升效率。这些现代化技术中很重要的一个就是 DevOps，所以本文要探讨的即是如何为现代大型机做 DevOps？
 
+## 1 文化上
+
+大型机开发人员在其它团队看来有种“与世隔绝”的感觉。要让大型机团队更好的拥抱 DevOps，首先得需要从文化上做出改变。主要有如下几个方面：
+
+- 跨团队互相穿插人员
+
+  将来自一个团队的成员穿插到其它团队中，这样即可以了解其它团队的日常活动，从而了解看问题的不同视角和解决问题的不同思路。
+
 > 参考资料
 >
 > [1] [DevOps - Modern Mainframe Development | O'Reilly - learning.oreilly.com](https://learning.oreilly.com/library/view/modern-mainframe-development/9781098107017/ch09.html)
