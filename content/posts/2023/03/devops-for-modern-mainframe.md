@@ -49,6 +49,10 @@ description: 如何对现代大型机（Mainframe）做 DevOps？
 
   安全为企业之本。注重效率的同时，绝不能丢掉安全。通过拥抱 DevSecOps 来为交付安全的软件保驾护航。
 
+## 2 管理上
+
+## 3 工具上
+
 > 参考资料
 >
 > [1] [DevOps - Modern Mainframe Development | O'Reilly - learning.oreilly.com](https://learning.oreilly.com/library/view/modern-mainframe-development/9781098107017/ch09.html)
