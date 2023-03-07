@@ -51,6 +51,24 @@ description: 本文根据 O'Reilly 提供的资料来梳理如何从文化上、
 
 ## 2 管理上
 
+管理上可以引入如下关键绩效指标（key performance indicators，KPIs）来测试 DevOps 推进的怎么样。
+
+- 平均恢复时间
+
+  平均恢复时间（Mean time to recovery，MTTR），故障发生到恢复所用的时间。
+
+- 平均检测时间
+
+  平均检测时间（Mean time to detection，MTTD），识别问题所用的时间。其涉及复杂的监控系统。
+
+- 部署效率
+
+  代码发布到生产所用的时间。为敏捷的重要指标。
+
+- 变更失败率
+
+  变更失败率（Change failure rate），为变更失败百分比。
+
 ## 3 工具上
 
 > 参考资料
