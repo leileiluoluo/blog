@@ -12,7 +12,7 @@ keywords:
   - DevOps
   - Mainframe
   - 大型机
-description: 如何对现代大型机（Mainframe）做 DevOps？
+description: 本文根据 O'Reilly 提供的资料来梳理如何从文化上、管理上和工具上对现代大型机（Mainframe）做 DevOps。
 ---
 
 尽管大型机（Mainframe）已服役约半个多世纪，但其在安全性、可靠性、一致性和性能上久经考验，依然承担着目前世界上多数银行、保险、通信公司以及政府系统中极其关键的部分。
