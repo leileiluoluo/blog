@@ -29,6 +29,26 @@ description: 如何对现代大型机（Mainframe）做 DevOps？
 
   将来自一个团队的成员穿插到其它团队中，这样即可以了解其它团队的日常活动，从而了解看问题的不同视角和解决问题的不同思路。长此以往，即可以对团队的文化有所改变。
 
+- 划分好职责
+
+  清晰的划分好职责，是 DevOps 落地的前提。
+
+- 引入“混世魔猴”
+
+  Chaos monkey（混世魔猴）为 Netflix 首创，通过时不时有意的破坏系统来促使系统更具韧性。
+
+- “对事不对人”的事后复盘
+
+  通过“对事不对人”的事后复盘，以从问题中吸取教训。
+
+- 拥抱“基础设施即代码”
+
+  通过拥抱 Infrastructure as code（基础设施即代码）来提升 IT 基础设施的可靠性与敏捷性。
+
+- 拥抱 DevSecOps
+
+  安全为企业之本。注重效率的同时，绝不能丢掉安全。通过拥抱 DevSecOps 来为交付安全的软件保驾护航。
+
 > 参考资料
 >
 > [1] [DevOps - Modern Mainframe Development | O'Reilly - learning.oreilly.com](https://learning.oreilly.com/library/view/modern-mainframe-development/9781098107017/ch09.html)
