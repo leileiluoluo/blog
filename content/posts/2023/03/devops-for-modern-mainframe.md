@@ -71,6 +71,16 @@ description: 本文根据 O'Reilly 提供的资料来梳理如何从文化上、
 
 ## 3 工具上
 
+- 配置管理
+
+  尝试使用 Chef 、 Puppet 和 Ansible 等配置管理工具管理基础设施。
+
+- CI/CD
+
+  尝试使用 Jenkins 做 CI/CD。如在 Jenkins 上安装 Topaz IDE 插件来实现与 COBOL 批处理文件、CICS 和 IMS 程序的交互。
+
+综上，本文从文化、管理和工具上对如何为现代大型机做 DevOps 做了初步探索。
+
 > 参考资料
 >
 > [1] [DevOps - Modern Mainframe Development | O'Reilly - learning.oreilly.com](https://learning.oreilly.com/library/view/modern-mainframe-development/9781098107017/ch09.html)
