@@ -129,7 +129,7 @@ contact_form_action = "#" # contact form works with : https://formspree.io
 # copyright
 copyright = "Thanks [Hugo](https://gohugo.io/) & [NorthendLab](https://github.com/themefisher/northendlab-hugo) | [辽ICP备2022012085号-1](https://beian.miit.gov.cn) | Copyright &copy; 2023"
 # toc
-toc = true
+toc = false
 
 # preloader
 [params.preloader]
