@@ -1,3 +1,8 @@
+.col-lg-8 {
+  flex: 0 0 76.666667% !important;
+  max-width: 76.666667% !important;
+}
+
 h1,
 h2,
 h3,
