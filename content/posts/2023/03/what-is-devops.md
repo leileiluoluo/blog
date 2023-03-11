@@ -27,11 +27,15 @@ description: 本文介绍 DevOps 的概念、生命周期及实践的原则，�
 
 ![DevOps 混乱之墙](https://olzhy.github.io/static/images/uploads/2023/03/devops-wall-of-confusion.jpeg#center)
 
+{{% center %}}（图片引用自 [Kovair Blog](https://www.kovair.com/blog/the-battle-dev-vs-ops/)）{{% /center %}}
+
 ## 1 DevOps 生命周期
 
 下图展示了 DevOps 生命周期的各个阶段，可以看到 DevOps 的生命周期大概由 8 个阶段组成，左侧是开发部分，右边是运维部分，是一个无限循环。
 
 ![DevOps 生命周期](https://olzhy.github.io/static/images/uploads/2023/03/the-devops-lifecycle.png#center)
+
+{{% center %}}（图片引用自 [Atlassian](https://www.atlassian.com/devops)）{{% /center %}}
 
 下面简单看一下，每个阶段都是做什么的：
 
@@ -99,6 +103,8 @@ DevOps 流水线是一组自动化的流程和工具，允许开发和运维人�
 
 ![DevOps 流水线](https://olzhy.github.io/static/images/uploads/2023/03/devops-pipeline.png#center)
 
+{{% center %}}（图片引用自 [Atlassian](https://www.atlassian.com/devops/devops-tools/devops-pipeline)）{{% /center %}}
+
 ## 4 DevSecOps
 
 DevSecOps 是一个将安全性集成到持续集成、持续交付和持续部署流水线中的实践。
@@ -106,6 +112,8 @@ DevSecOps 是一个将安全性集成到持续集成、持续交付和持续部�
 下图演示了如何在 DevOps 生命周期中注入安全。
 
 ![DevSecOps 生命周期](https://olzhy.github.io/static/images/uploads/2023/03/devsecops-diagram.png#center)
+
+{{% center %}}（图片引用自 [Atlassian](https://www.atlassian.com/devops/devops-tools/devsecops-tools)）{{% /center %}}
 
 - 计划阶段（Plan）
 
@@ -136,3 +144,5 @@ DevSecOps 是一个将安全性集成到持续集成、持续交付和持续部�
 > [2] [DevOps Lifecycle : Different Phases in DevOps | BrowserStack - www.browserstack.com](https://www.browserstack.com/guide/devops-lifecycle)
 >
 > [3] [How DevOps Tools Work Together? | TechieRoop - techieroop.com](https://techieroop.com/how-devops-tools-work-together/)
+>
+> [4] [The Battle – Dev vs Ops | Kovair Blog - www.kovair.com](https://www.kovair.com/blog/the-battle-dev-vs-ops/)
