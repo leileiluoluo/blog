@@ -1,9 +1,9 @@
 ---
-title: 如何搭建一个使用 Spring Boot 框架的 Maven 父子项目？
+title: 如何使用 Maven 搭建 Spring Boot 父子项目？
 author: olzhy
 type: post
 date: 2023-03-12T08:00:00+08:00
-url: /posts/spring-boot-parent-child-maven-projects.html
+url: /posts/spring-boot-parent-child-projects-with-maven.html
 categories:
   - 计算机
 tags:
@@ -15,7 +15,7 @@ keywords:
   - 父子项目
   - Maven
   - 多模块
-description: 如何搭建一个使用 Spring Boot 框架的 Maven 父子项目？
+description: 如何使用 Maven 搭建 Spring Boot 父子项目？
 ---
 
 使用 Maven 搭建基于 Spring Boot 框架的微服务项目时，最直接的做法是在每个项目的`pom.xml`中直接引用 Spring Boot Starter 父项目`org.springframework.boot:spring-boot-starter-parent`，并配置各项依赖。
