@@ -261,6 +261,8 @@ curl 'http://localhost:8080/hello?name=Larry'
 Hello Larry! 2023-03-13 16:31:23
 ```
 
+本文中涉及的代码已托管至 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-parent-child-maven-project)，欢迎 Fork。
+
 > 参考资料
 >
 > [1] [Introduction to the POM | Maven - maven.apache.org](https://maven.apache.org/guides/introduction/introduction-to-the-pom.html)
