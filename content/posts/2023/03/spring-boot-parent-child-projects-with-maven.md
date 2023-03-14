@@ -15,7 +15,7 @@ keywords:
   - 父子项目
   - Maven
   - 多模块
-description: 本文探索了如何使用 Maven 来搭建 Spring Boot 父子项目。
+description: 本文探索如何使用 Maven 来搭建 Spring Boot 父子项目，方便我们在搭建 Spring Boot 微服务时作参考。
 ---
 
 使用 Maven 搭建 Spring Boot 微服务项目时，最直接的做法是在每个项目的`pom.xml`中直接引用 Spring Boot Starter 父项目`org.springframework.boot:spring-boot-starter-parent`，并配置各项依赖。
@@ -32,11 +32,11 @@ description: 本文探索了如何使用 Maven 来搭建 Spring Boot 父子项�
 
 ## 1 创建父项目
 
-首先，开始搭建父项目，父项目可包括多个子模块，本文的例子仅含`common-utils`一个子模块，该子模块用于编写项目用到的工具类。
+首先，开始搭建父项目`starter-parent`，父项目可包括多个子模块，本文的例子仅含`common-utils`一个子模块，该子模块用于编写项目用到的工具类。
 
-可使用`mvn archetype:generate`来生成项目的脚手架。
+下面使用`mvn archetype:generate`来生成项目的脚手架。
 
-使用如下命令生成`starter-parent`空项目，生成后删除不用的`src`文件夹，并修改`pom.xml`中的`<packaging>`为`pom`。
+首先，使用如下命令生成`starter-parent`空项目，生成后删除不用的`src`文件夹，并修改`pom.xml`中的`<packaging>`为`pom`。
 
 ```shell
 mvn archetype:generate  \
@@ -46,7 +46,7 @@ mvn archetype:generate  \
     -DinteractiveMode=false
 ```
 
-然后进入`starter-parent`文件夹下，生成子模块`common-utils`，命令如下：
+然后，进入`starter-parent`文件夹下，生成子模块`common-utils`，命令如下：
 
 ```shell
 cd starter-parent/
@@ -69,6 +69,8 @@ starter-parent
 ```
 
 修改下两个`pom.xml`文件，使配置更简单紧凑；并在`common-utils`下加一个工具类`DataUtil.java`。
+
+修改后，项目目录结构如下：
 
 ```text
 starter-parent
@@ -187,7 +189,7 @@ starter-parent
 
 ### 1.3 common-utils 下的 DataUtil.java
 
-`common-utils`子模块下的 Java 类，供后面的项目使用。
+`DataUtil.java`为`common-utils`子模块下的 Java 类，供后面的项目使用。
 
 ```java
 package com.leileiluoluo.common.util;
@@ -205,7 +207,7 @@ public class DateUtil {
 }
 ```
 
-接下来尝试创建一个项目来引用这个父项目。进行使用之前，使用 Maven 将该项目打包并安装到本地。
+接下来尝试创建一个项目来引用这个父项目。尝试之前，使用 Maven 将该项目打包并安装到本地。
 
 命令如下：
 
@@ -242,7 +244,7 @@ app-child
 
 ### 2.1 pom.xml
 
-子项目 POM，注意`<parent>`引用了`starter-parent`；`<packaging>`采用默认类型`jar`；`<dependencies>`下引用的公共依赖均无需指定`<version>`；`plugins`下引用的公共插件也无需指定`<version>`。
+该项目 POM，注意`<parent>`引用了前面搭建好的`starter-parent`；`<packaging>`采用默认类型`jar`；`<dependencies>`下引用的公共依赖均无需指定`<version>`；`plugins`下引用的公共插件也无需指定`<version>`。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -338,7 +340,7 @@ curl 'http://localhost:8080/hello?name=Larry'
 Hello Larry! 2023-03-13 16:31:23
 ```
 
-综上，本文探索了如何使用 Maven 来搭建 Spring Boot 父子项目。本文中涉及的代码已托管至 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-parent-child-maven-project)，欢迎关注或 Fork。
+综上，本文探索了如何使用 Maven 来搭建 Spring Boot 父子项目，方便我们在搭建 Spring Boot 微服务时作参考。本文中涉及的父项目`starter-parent`与子项目`app-child`的完整代码已托管至 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-parent-child-maven-project)，欢迎关注或 Fork。
 
 > 参考资料
 >
