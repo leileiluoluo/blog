@@ -18,6 +18,8 @@ keywords:
 description: 本文探索如何使用 Maven 来搭建 Spring Boot 父子项目，方便我们在搭建 Spring Boot 微服务时作参考。
 ---
 
+本文探索如何使用 Maven 来搭建 Spring Boot 父子项目，方便我们在搭建 Spring Boot 微服务时作参考。
+
 使用 Maven 搭建 Spring Boot 微服务项目时，最直接的做法是在每个项目的`pom.xml`中直接引用 Spring Boot Starter 父项目`org.springframework.boot:spring-boot-starter-parent`，并配置各项依赖。
 
 但有多个微服务项目时，若要升级它们各自`pom.xml`中的依赖会产生大量的重复工作。因此，若将这些公共依赖抽取到一个父项目中，而这些子项目都引用这个父项目，那么依赖可在父项目中统一管理；这样，子项目若需升级，只需升级一下引用的父项目版本，升级过程将会变得非常简单。
