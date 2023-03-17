@@ -7,12 +7,13 @@ url: /posts/how-to-use-github-auth-in-flask.html
 categories:
   - 计算机
 tags:
-  - Flask
   - Python
 keywords:
   - Flask
   - Python
   - GitHub Auth
+  - 授权
+  - 登陆
 description: 如何在 Flask 框架中使用 GitHub Auth 做授权登陆？
 ---
 
