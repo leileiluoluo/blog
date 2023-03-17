@@ -1,5 +1,5 @@
 ---
-title: Flask 应用如何与 GitHub Auth 集成？
+title: Flask 如何使用 GitHub Auth 做授权登陆？
 author: olzhy
 type: post
 date: 2023-03-17T08:00:00+08:00
@@ -13,7 +13,7 @@ keywords:
   - Flask
   - Python
   - GitHub Auth
-description: Flask 应用如何与 GitHub Auth 集成？
+description: Flask 如何使用 GitHub Auth 做授权登陆？
 ---
 
 > 参考资料
