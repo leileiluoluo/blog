@@ -83,6 +83,8 @@ export CLIENT_SECRET=XXX
 python3 app.py
 ```
 
+![登录演示](https://olzhy.github.io/static/images/uploads/2023/03/app-login.gif#center)
+
 > 参考资料
 >
 > [1] [Flask Quickstart | Flask - flask.palletsprojects.com](https://flask.palletsprojects.com/en/2.2.x/quickstart/)
