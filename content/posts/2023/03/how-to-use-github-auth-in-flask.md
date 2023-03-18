@@ -101,6 +101,8 @@ if '__main__' == __name__:
 
 ## 3 程序运行和验证
 
+使用如下命令安装依赖包、指定 CLIENT_ID 和 CLIENT_SECRET 变量值并运行程序。
+
 ```shell
 python3 -m pip install requirements.txt
 
@@ -108,6 +110,10 @@ export CLIENT_ID=XXX
 export CLIENT_SECRET=XXX
 python3 app.py
 ```
+
+程序启动完成后，浏览器访问`http://localhost:5000`尝试使用 GitHub 登录功能。
+
+登录过程如下图所示：
 
 ![登录演示](https://olzhy.github.io/static/images/uploads/2023/03/app-login.gif#center)
 
