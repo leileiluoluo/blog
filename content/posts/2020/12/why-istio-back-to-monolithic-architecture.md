@@ -8,6 +8,8 @@ categories:
   - 计算机
 tags:
   - 架构设计
+  - 服务网格
+  - Istio
 keywords:
   - 架构设计
   - 服务网格
