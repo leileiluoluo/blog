@@ -1,5 +1,5 @@
 ---
-title: Istio流量管理之Ingress Gateway
+title: Istio 流量管理之 Ingress Gateway
 author: olzhy
 type: post
 date: 2021-01-01T08:07:25+08:00
@@ -7,7 +7,8 @@ url: /posts/istio-ingress-gateways.html
 categories:
   - 计算机
 tags:
-  - 工具使用
+  - 服务网格
+  - Istio
 keywords:
   - 工具使用
   - 服务网格
@@ -15,24 +16,24 @@ keywords:
   - 云原生
   - Istio
 description: Istio流量管理之Ingress Gateway (Ingress Gateways of Istio Traffic Management)
-
 ---
-Istio Ingress Gateway是允许外部流量进入Istio服务网格的边缘服务。其比Kubernetes Ingress更具扩展性。且使用Istio Ingress Gateway，使得Istio对于入口流量同样具有策略控制能力及可观察性。
 
-本文将使用Istio安装目录自带的httpbin样例来演示如何配置Gateway来实现外部访问。关于Istio安装等环境准备，请参阅“[Istio安装使用](https://olzhy.github.io/posts/istio-get-started.html)”。
+Istio Ingress Gateway 是允许外部流量进入 Istio 服务网格的边缘服务。其比 Kubernetes Ingress 更具扩展性。且使用 Istio Ingress Gateway，使得 Istio 对于入口流量同样具有策略控制能力及可观察性。
 
-### 1 httpbin样例部署
+本文将使用 Istio 安装目录自带的 httpbin 样例来演示如何配置 Gateway 来实现外部访问。关于 Istio 安装等环境准备，请参阅“[Istio 安装使用](https://olzhy.github.io/posts/istio-get-started.html)”。
 
-进入Istio安装目录，应用自带的httpbin部署文件，将其部署到`istio-demo` namespace。
+### 1 httpbin 样例部署
+
+进入 Istio 安装目录，应用自带的 httpbin 部署文件，将其部署到`istio-demo` namespace。
 
 ```shell
 $ cd /usr/local/istio-1.8.1
 $ kubectl apply -n istio-demo -f samples/httpbin/httpbin.yaml
 ```
 
-### 2 httpbin配置Gateway
+### 2 httpbin 配置 Gateway
 
-为httpbin创建Gateway。
+为 httpbin 创建 Gateway。
 
 ```shell
 $ kubectl apply -n istio-demo -f - <<EOF
@@ -53,7 +54,7 @@ spec:
 heredoc> EOF
 ```
 
-为httpbin配置Virtual Service。
+为 httpbin 配置 Virtual Service。
 
 ```shell
 $ kubectl apply -n istio-demo -f - <<EOF
@@ -78,13 +79,13 @@ spec:
 heredoc> EOF
 ```
 
-上述命令为httpbin配置Gateway与VirtualService，将其暴露给集群外部访问。且指定访问httpbin的Host须为`httpbin.example.com`，且只可访问前缀为`/status`的REST资源。同时我们可以看到，Istio Gateway与Kubernetes Ingress不同的是，无须在Gateway部署文件配置路由，而将路由配置移到了VirtualService。
+上述命令为 httpbin 配置 Gateway 与 VirtualService，将其暴露给集群外部访问。且指定访问 httpbin 的 Host 须为`httpbin.example.com`，且只可访问前缀为`/status`的 REST 资源。同时我们可以看到，Istio Gateway 与 Kubernetes Ingress 不同的是，无须在 Gateway 部署文件配置路由，而将路由配置移到了 VirtualService。
 
-下面通过查询用于外部访问的INGRESS_HOST与INGRESS_PORT来测试我们的配置。
+下面通过查询用于外部访问的 INGRESS_HOST 与 INGRESS_PORT 来测试我们的配置。
 
-### 3 httpbin外部访问
+### 3 httpbin 外部访问
 
-查询用于外部访问的INGRESS_HOST与INGRESS_PORT。
+查询用于外部访问的 INGRESS_HOST 与 INGRESS_PORT。
 
 ```shell
 $ kubectl get svc istio-ingressgateway -n istio-system
@@ -93,20 +94,20 @@ NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)
 istio-ingressgateway   LoadBalancer   10.102.158.234   localhost     ...80:30841/TCP...
 ```
 
-本文使用的是Docker Desktop自带的Kubernetes，可以看到INGRESS_HOST即为localhost，INGRESS_PORT为80。
+本文使用的是 Docker Desktop 自带的 Kubernetes，可以看到 INGRESS_HOST 即为 localhost，INGRESS_PORT 为 80。
 
-亦可以使用如下命令查看INGRESS_HOST与INGRESS_PORT，得到同样的结果。
+亦可以使用如下命令查看 INGRESS_HOST 与 INGRESS_PORT，得到同样的结果。
 
 ```shell
 $ kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
 $ kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.spec.ports[?(@.name=="http2")].port}'
 ```
 
-下面，分别尝试通过curl命令及浏览器来访问httpbin的status接口。
+下面，分别尝试通过 curl 命令及浏览器来访问 httpbin 的 status 接口。
 
-**curl命令访问**
+**curl 命令访问**
 
-通过如下命令访问httpbin的status接口时，发现报404错误。
+通过如下命令访问 httpbin 的 status 接口时，发现报 404 错误。
 
 ```shell
 $ curl -s -I http://localhost/status/200
@@ -117,7 +118,7 @@ server: istio-envoy
 transfer-encoding: chunked
 ```
 
-原因是我们在第2步的Gateway中指定访问Host必须为`httpbin.example.com`，加上Header后重新访问，发现状态码为200，访问成功。
+原因是我们在第 2 步的 Gateway 中指定访问 Host 必须为`httpbin.example.com`，加上 Header 后重新访问，发现状态码为 200，访问成功。
 
 ```shell
 $ curl -s -I -H "Host: httpbin.example.com" http://localhost/status/200
@@ -131,9 +132,9 @@ content-length: 0
 x-envoy-upstream-service-time: 20
 ```
 
-**Web浏览器访问**
+**Web 浏览器访问**
 
-使用浏览器直接打开`http://localhost/status/200`时，发现同样报404错误。因我们仅是在做测试，未真正配置域名解析，所以尝试将Gateway与VirtualService中hosts由`httpbin.example.com`改为通配符`*`来实现访问。
+使用浏览器直接打开`http://localhost/status/200`时，发现同样报 404 错误。因我们仅是在做测试，未真正配置域名解析，所以尝试将 Gateway 与 VirtualService 中 hosts 由`httpbin.example.com`改为通配符`*`来实现访问。
 
 ```shell
 $ kubectl apply -n istio-demo -f - <<EOF
@@ -172,26 +173,25 @@ spec:
         host: httpbin
 ```
 
-这样，再次访问`http://localhost/status/200`时，发现返回200状态码。
+这样，再次访问`http://localhost/status/200`时，发现返回 200 状态码。
 
 ### 4 环境清理
 
-测试完成，使用如下命令清除httpbin的Gateway及VirtualService配置。
+测试完成，使用如下命令清除 httpbin 的 Gateway 及 VirtualService 配置。
 
 ```shell
 $ kubectl delete gateway httpbin-gateway -n istio-demo
 $ kubectl delete virtualservice httpbin -n istio-demo
 ```
 
-卸载httpbin。
+卸载 httpbin。
 
 ```shell
 $ cd /usr/local/istio-1.8.1
 $ kubectl delete -n istio-demo -f samples/httpbin/httpbin.yaml
 ```
 
-总结本文，首先介绍了使用Istio Gateway可以实现外部流量进入服务网格，然后为httpbin样例配置了Gateway并做了外部访问演示。
-
+总结本文，首先介绍了使用 Istio Gateway 可以实现外部流量进入服务网格，然后为 httpbin 样例配置了 Gateway 并做了外部访问演示。
 
 > 参考资料
 >

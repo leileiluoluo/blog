@@ -7,7 +7,6 @@ url: /posts/azure-devops-services.html
 categories:
   - 计算机
 tags:
-  - 工具使用
   - Azure
   - DevOps
 keywords:

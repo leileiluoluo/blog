@@ -10,7 +10,6 @@ categories:
   - 计算机
 tags:
   - Golang
-  - 工具使用
 ---
 
 [delve](https://github.com/go-delve/delve)是一款专门针对 Golang 程序调试而开发的命令行调试器，该工具功能强大，简单易用。

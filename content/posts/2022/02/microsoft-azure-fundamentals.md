@@ -7,7 +7,6 @@ url: /posts/microsoft-azure-fundamentals.html
 categories:
   - 计算机
 tags:
-  - 工具使用
   - Azure
 keywords:
   - Azure 基础
