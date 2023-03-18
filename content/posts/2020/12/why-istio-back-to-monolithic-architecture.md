@@ -1,5 +1,5 @@
 ---
-title: 为什么Istio重回单体架构？
+title: 为什么 Istio 重回单体架构？
 author: olzhy
 type: post
 date: 2020-12-09T17:52:16+08:00
