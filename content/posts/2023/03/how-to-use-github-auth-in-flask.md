@@ -93,6 +93,8 @@ python3 app.py
 
 ![登录演示](https://olzhy.github.io/static/images/uploads/2023/03/app-login.gif#center)
 
+综上，本文探索了如何在 Python Flask 框架中集成 GitHub Auth 来做登录。示例程序代码已托管至本人 [GitHub](https://github.com/olzhy/python-exercises/tree/main/use-github-auth-in-flask)，欢迎关注和 Fork。
+
 > 参考资料
 >
 > [1] [Flask Quickstart | Flask - flask.palletsprojects.com](https://flask.palletsprojects.com/en/2.2.x/quickstart/)
