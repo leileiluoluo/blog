@@ -1,5 +1,5 @@
 ---
-title: 如何在 Flask 框架中使用 GitHub Auth 做授权登陆？
+title: 如何在 Flask 框架中使用 GitHub Auth 做授权登录？
 author: olzhy
 type: post
 date: 2023-03-17T08:00:00+08:00
@@ -13,11 +13,11 @@ keywords:
   - Python
   - GitHub Auth
   - 授权
-  - 登陆
-description: 如何在 Flask 框架中使用 GitHub Auth 做授权登陆？
+  - 登录
+description: 如何在 Flask 框架中使用 GitHub Auth 做授权登录？
 ---
 
-本文探讨如何在 Python Flask 框架中使用 GitHub Auth 做授权登陆？即一个 Flask 应用，如何集成第三方的 GitHub 账号系统来做登录。
+本文探讨如何在 Python Flask 框架中使用 GitHub Auth 做授权登录？即一个 Flask 应用，如何集成第三方的 GitHub 账号系统来做登录。
 
 ## 1 申请 GitHub Auth 应用
 
