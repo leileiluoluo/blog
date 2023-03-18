@@ -25,6 +25,24 @@ description: 如何在 Flask 框架中使用 GitHub Auth 做授权登陆？
 
 ## 2 使用 Authlib 包集成 GitHub Auth
 
+如下 Python Flask 程序有四个页面，分别为：
+
+- 首页（index）
+
+  根据 Session 信息，判断用户是否已登录，若已登录，则显示欢迎信息；未登录，则显示登录链接。
+
+- 登录页面（login）
+
+  跳转至 GitHub 认证页面，并指定接收 Code 的回调地址。
+
+- GitHub 回调页面（callback）
+
+  GitHub 登录并授权后，接收 Code 并获取 Token，然后根据 Token 请求用户信息并写入 Session，最后跳转至首页。
+
+- 登出页面（logout）
+
+  清除 Session 信息。
+
 ```python
 from flask import Flask, url_for, redirect, session
 from authlib.integrations.flask_client import OAuth
