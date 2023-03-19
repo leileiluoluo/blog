@@ -110,7 +110,7 @@ if '__main__' == __name__:
 使用如下命令安装依赖包、指定 CLIENT_ID 和 CLIENT_SECRET 变量值并运行程序。
 
 ```shell
-python3 -m pip install requirements.txt
+python3 -m pip install -r requirements.txt
 
 export CLIENT_ID=XXX
 export CLIENT_SECRET=XXX
