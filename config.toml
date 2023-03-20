@@ -62,8 +62,8 @@ link = "js/fuse.min.js"
 link = "js/mark.js"
 [[params.plugins.js]]
 link = "js/search.js"
-[[params.plugins.js]]
-link = "js/toc.js"
+# [[params.plugins.js]]
+# link = "js/toc.js"
 
 ########################### Navigation ###################################
 
