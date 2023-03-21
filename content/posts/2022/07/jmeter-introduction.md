@@ -8,6 +8,7 @@ categories:
   - 计算机
 tags:
   - 自动化测试
+  - JMeter
 keywords:
   - JMeter
   - 自动化测试

@@ -9,6 +9,7 @@ categories:
 tags:
   - 自动化测试
   - Python
+  - Selenium
 keywords:
   - 自动化测试
   - Selenium

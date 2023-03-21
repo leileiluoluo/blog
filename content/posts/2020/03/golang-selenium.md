@@ -11,6 +11,7 @@ categories:
 tags:
   - Golang
   - 自动化测试
+  - Selenium
 ---
 
 Selenium 整合了一揽子工具与依赖库，支持 Web 浏览器自动化，提供一组扩展来模拟人与浏览器交互。我们基于其满足 W3C 标准的 WebDriver 来编写的自动化代码可在各种主流浏览器复用。
