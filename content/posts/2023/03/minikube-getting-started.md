@@ -14,6 +14,21 @@ keywords:
 description: Minikube 安装使用。
 ---
 
+## 1 安装 Podman
+
+```shell
+brew install podman
+
+podman machine init
+podman machine start
+```
+
+## 2 安装 Minikube
+
+```shell
+brew install minikube
+```
+
 > 参考资料
 >
 > [1] [Hello Minikube | Kubernetes - kubernetes.io](https://kubernetes.io/docs/tutorials/hello-minikube/)
