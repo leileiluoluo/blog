@@ -29,6 +29,10 @@ podman machine start
 brew install minikube
 ```
 
+```shell
+minikube start
+```
+
 > 参考资料
 >
 > [1] [Hello Minikube | Kubernetes - kubernetes.io](https://kubernetes.io/docs/tutorials/hello-minikube/)
