@@ -54,13 +54,13 @@ podman machine start
 brew install minikube
 ```
 
-安装完成后，使用如下命令进行启动。
+安装完成后，使用如下命令指定驱动为 Podman，并启动 Minikube。
 
 ```shell
-minikube start
+minikube start --driver=podman
 ```
 
-这样即可以使用`kubectl`命令与 Minikube 集群进行交互了。
+启动完成后，即可以使用`kubectl`命令与 Minikube 集群进行交互了。
 
 ### 2.2 使用
 
