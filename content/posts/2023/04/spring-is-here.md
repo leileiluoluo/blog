@@ -1,5 +1,5 @@
 ---
-title: 春天来了
+title: 春天來了
 author: olzhy
 type: post
 date: 2023-04-02T08:00:00+08:00
@@ -9,9 +9,11 @@ categories:
 tags:
   - 随笔
 keywords:
-  - 春天来了
-description: 春天来了，春天随拍。
+  - 春天來了
+description: 春天來了，春天隨拍。
 ---
+
+春天來了，北方的春天來的比較晚一些，但春意一樣盎然。走在新生的花草樹木之間，能感受到一種萬物復蘇的活力。以前母親對我說「人隨春意泰」，真實不虛。
 
 [![春天随拍](https://olzhy.github.io/static/images/uploads/2023/04/spring-1.jpeg#center)](https://imglf6.lf127.net/img/5a96980de55715b7/L0FZWERkUnp2ZHRlYSt6N2VicXlVbGxsOGc3cmo5bHIvY3ZkUUswckp6QT0.jpeg)
 
