@@ -135,4 +135,3 @@ minikube stop
 > [2] [minikube start | minikube - minikube.sigs.k8s.io](https://minikube.sigs.k8s.io/docs/start/)
 >
 > [3] [Getting Started with Podman | Podman - podman.io](https://podman.io/getting-started/)
-
