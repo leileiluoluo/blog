@@ -138,4 +138,3 @@ python3 app.py
 > [5] [Authentication with Flask and GitHub | Dev Community - dev.to](https://dev.to/nelsoncode/authentication-with-flask-and-github-authlib-19ej)
 >
 > [6] [Authentication with Cookies and Sessions in Flask | Rithm School - www.rithmschool.com](https://www.rithmschool.com/courses/intermediate-flask/cookies-sessions-flask)
-
