@@ -66,7 +66,7 @@ minikube start --driver=podman
 
 下面使用`kubectl`将一个 Nginx 应用部署到 Minikube。
 
-应用 Deployment 配置：
+应用如下 Deployment 配置部署一个 Nginx 应用：
 
 ```shell
 kubectl apply -f - <<EOF
@@ -94,7 +94,39 @@ spec:
 heredoc> EOF
 ```
 
+使用如下`kubectl expose`命令暴露流量到外部：
+
+```shell
+kubectl expose deployment nginx --type=NodePort --port=80
+```
+
+运行如下`minikube service`命令，会打开一个浏览器窗口，可以看到 Nginx 首页成功显示：
+
+```shell
+minikube service nginx
+```
+
 ### 2.3 管理
+
+查询插件列表：
+
+```shell
+minikube addons list
+```
+
+启用某个插件：
+
+```shell
+minikube addons enable ingress
+```
+
+停止 Minikube 集群：
+
+```shell
+minikube stop
+```
+
+综上，完成了在 MacOS 上对 Minikube 的安装与初步使用。
 
 > 参考资料
 >
