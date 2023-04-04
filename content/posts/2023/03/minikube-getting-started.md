@@ -126,7 +126,7 @@ minikube addons enable ingress
 minikube stop
 ```
 
-综上，完成了在 MacOS 上对 Minikube 的安装与初步使用。
+综上，探索了 MacOS 上 Minikube 的安装与初步使用。
 
 > 参考资料
 >
