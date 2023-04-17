@@ -1,3 +1,7 @@
+.fixed-bottom, .fixed-top {
+  position: absolute;
+}
+
 h1,
 h2,
 h3,
