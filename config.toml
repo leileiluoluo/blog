@@ -143,8 +143,9 @@ enable = true
 ####################### banner #######################################
 [params.banner]
 enable = true
-bgImage = "static/images/site/henry-small.jpg" # background site https://unsplash.com/s/photos/blog-background
-title = "人心惟危 道心惟微 惟精惟一 允執厥中"
+bgImage = "static/images/site/flower.jpeg" # reference https://www.hdwallpaper.nu/beautiful-flowers-wallpapers/
+# background site https://unsplash.com/s/photos/blog-background
+title = ""
 image = ""
 
 
@@ -198,3 +199,4 @@ title = "网站 RSS"
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
