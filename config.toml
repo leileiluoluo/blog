@@ -168,7 +168,7 @@ enable = false
 
 # comment
 [params.comment]
-enable = true
+enable = false
 
 # baidu tongji
 [params.baidu_tongji]
