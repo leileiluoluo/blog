@@ -2,6 +2,10 @@
   position: absolute;
 }
 
+.bg-lights {
+  background: #f8f8f8 !important;
+}
+
 h1,
 h2,
 h3,
