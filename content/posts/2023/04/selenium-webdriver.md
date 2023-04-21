@@ -19,7 +19,7 @@ keywords:
 description: Selenium WebDriver 使用详解。
 ---
 
-[Selenium](https://www.selenium.dev/)是一个支持 Web 浏览器自动化的开源项目，可使用其来模拟用户与浏览器的一系列交互行为。
+[Selenium](https://www.selenium.dev/) 是一个支持 Web 浏览器自动化的开源项目，可使用其来模拟用户与浏览器的一系列交互行为。
 
 本文分三个部分：首先会介绍一下 Selenium 的组成部分；接着会使用一个实际的例子介绍 WebDriver 如何使用；最后会介绍 WebDriver 的高级特性。整个过程中涉及的代码示例，使用 Python 语言来描述。
 
