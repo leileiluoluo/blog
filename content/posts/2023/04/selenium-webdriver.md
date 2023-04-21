@@ -47,7 +47,9 @@ description: Selenium WebDriver 使用详解。
 
 ### 2.1 安装 Driver
 
-除了 Internet Explorer 以外，其它浏览器的 Driver 都是由浏览器厂商自己提供的。本文使用 Chrome 浏览器作演示，下面介绍 ChromeDriver 的下载及安装过程。
+由上面「Selenium 组成部分」知道，WebDriver 必须通过 Driver 来与 Browser 进行交互。所以，使用 WebDriver 操作浏览器前，需要先安装对应浏览器的 Driver。
+
+所有 Selenium 支持的主流浏览器中，除了 Internet Explorer 以外，其它浏览器的 Driver 都是由浏览器厂商自己提供的。因本文使用 Chrome 浏览器作演示，所以下面仅介绍 ChromeDriver 的下载及安装过程。
 
 进入「[ChromeDriver 官方下载页面](https://chromedriver.chromium.org/downloads)」，下载与您机器上 Chrome 版本对应的 ChromeDriver。
 
