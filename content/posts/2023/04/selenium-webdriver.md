@@ -31,7 +31,7 @@ description: Selenium WebDriver 使用详解。
 
 ![Selenium 组成部分](https://olzhy.github.io/static/images/uploads/2023/04/selenium-components.svg#center)
 
-可以看到，WebDriver 通过 Driver 来与 Browser 进行双向通信。即 WebDriver 通过 Driver 传递指令给 Browser，然后 WebDriver 再由 Driver 接收浏览器的响应信息。
+可以看到，WebDriver 通过 Driver 来与 Browser 进行双向通信。即 WebDriver 通过 Driver 传递指令给 Browser；然后 WebDriver 再由 Driver 接收浏览器的响应信息。
 
 ## 2 WebDriver 初步使用
 
