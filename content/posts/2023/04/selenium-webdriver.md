@@ -33,6 +33,8 @@ description: Selenium WebDriver 使用详解。
 
 可以看到，WebDriver 通过 Driver 来与 Browser 进行双向通信。即 WebDriver 通过 Driver 传递指令给 Browser；然后 WebDriver 再由 Driver 接收浏览器的响应信息。
 
+需要说明的是：该图展示的情形中， WebDriver 与 Browser（及 Driver） 位于同一主机。但使用 Selenium Grid 后，WebDriver 可与 Browser（及 Driver）位于不同的主机。关于 Selenium Grid 是什么，以及如何搭建及使用，请参考我之前所写的一篇文章「[Selenium Grid 搭建及使用](https://olzhy.github.io/posts/selenium-grid.html)」。
+
 ## 2 WebDriver 初步使用
 
 ## 3 WebDriver 高级特性
