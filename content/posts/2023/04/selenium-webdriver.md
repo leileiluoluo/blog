@@ -16,12 +16,18 @@ keywords:
   - WebDriver
   - 使用详解
   - Python
+  - Chrome
 description: Selenium WebDriver 使用详解。
 ---
 
 [Selenium](https://www.selenium.dev/) 是一个支持 Web 浏览器自动化的开源项目，可使用其来模拟用户与浏览器的一系列交互行为。
 
-本文分三个部分：首先会介绍一下 Selenium 的组成部分；接着会使用一个实际的例子介绍 WebDriver 如何使用；最后会介绍 WebDriver 的高级特性。整个过程中涉及的代码示例，使用 Python 语言来描述。
+本文分三个部分：首先会介绍一下 Selenium 的组成部分；接着会使用一个实际的例子介绍 WebDriver 如何使用；最后会介绍 WebDriver 的高级特性。
+
+整个过程中涉及的代码示例，使用 Python 语言来描述。此外，下面还列出了本文所使用的操作系统及浏览器信息。
+
+- 操作系统：MacOS
+- 浏览器：Chrome
 
 ## 1 Selenium 组成部分
 
@@ -37,8 +43,49 @@ description: Selenium WebDriver 使用详解。
 
 ## 2 WebDriver 初步使用
 
+了解了 WebDriver 是做什么的以及其如何与浏览器进行交互后，接着开始对 WebDriver 进行初步使用。
+
+### 2.1 安装 Driver
+
+除了 Internet Explorer 以外，其它浏览器的 Driver 都是由浏览器厂商自己提供的。本文使用 Chrome 浏览器作演示，下面介绍 ChromeDriver 的下载及安装过程。
+
+进入「[ChromeDriver 官方下载页面](https://chromedriver.chromium.org/downloads)」，下载与您机器上 Chrome 版本对应的 ChromeDriver。
+
+下载及安装命令如下：
+
+```shell
+curl -O https://chromedriver.storage.googleapis.com/112.0.5615.49/chromedriver_mac64.zip
+unzip chromedriver_mac64.zip
+
+sudo mkdir /usr/local/chromedriver
+sudo mv chromedriver /usr/local/chromedriver/
+```
+
+编辑`/etc/profile`，将`chromedriver`所属文件夹添加到`PATH`。
+
+```shell
+sudo vi /etc/profile
+
+# chromedriver
+export PATH=$PATH:/usr/local/chromedriver/
+```
+
+这样，尝试执行下`chromedriver`命令，即可看到 ChromeDriver 启动成功的信息，说明 Driver 已安装成功。
+
+```shell
+source /etc/profile
+chromedriver
+
+...
+ChromeDriver was started successfully.
+```
+
+### 2.2 WebDriver 初步使用
+
 ## 3 WebDriver 高级特性
 
 > 参考资料
 >
 > [1] [WebDriver | Selenium - www.selenium.dev](https://www.selenium.dev/documentation/webdriver/)
+>
+> [2] [ChromeDriver | WebDriver for Chrome - chromedriver.chromium.org](https://chromedriver.chromium.org/downloads)
