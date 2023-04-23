@@ -1,4 +1,6 @@
-uthor: olzhy
+---
+title: Selenium WebDriver 基础使用
+author: olzhy
 type: post
 date: 2023-04-21T08:00:00+08:00
 url: /posts/selenium-webdriver.html
@@ -32,7 +34,7 @@ description: 本文介绍了 Selenium 的组成部分；Driver 的安装；最�
 
 开始使用 Selenium 前，需要了解一下一个自动化测试过程涉及的几个主要组成部分。它们是 WebDriver（Selenium 提供的针对各个语言的浏览器操作库）、Driver（浏览器驱动）和 Browser（浏览器）。
 
-这三个部分的交互过程如下图所示。
+这三个部分的交互过程如下图所示：
 
 ![Selenium 组成部分](https://olzhy.github.io/static/images/uploads/2023/04/selenium-components.svg#center)
 
