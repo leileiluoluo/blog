@@ -1,6 +1,4 @@
----
-title: Selenium WebDriver 基础使用
-author: olzhy
+uthor: olzhy
 type: post
 date: 2023-04-21T08:00:00+08:00
 url: /posts/selenium-webdriver.html
@@ -22,7 +20,7 @@ description: 本文介绍了 Selenium 的组成部分；Driver 的安装；最�
 
 「[Selenium](https://www.selenium.dev/)」是一个支持 Web 浏览器自动化的开源项目，可使用其来模拟用户与浏览器的一系列交互行为。
 
-本文分三个部分：首先会介绍一下 Selenium 的组成部分；接着会使用一个实际的例子介绍 WebDriver 如何使用；最后会介绍 WebDriver 的高级特性。
+本文分两个部分：首先会介绍一下 Selenium 的组成部分；接着会使用一个实际的例子介绍 WebDriver 如何使用。
 
 整个过程中涉及的代码示例，均使用 Python 语言描述。此外，下面还列出了本文所使用的操作系统、浏览器和 Selenium 版本信息。
 
