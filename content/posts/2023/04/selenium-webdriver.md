@@ -93,7 +93,7 @@ ChromeDriver was started successfully.
 
 ![Selenium Web Form 示例页面](https://olzhy.github.io/static/images/uploads/2023/04/selenium-web-form.jpeg#center)
 
-接下来，针对该页面的表单，编写一个 Python 测试用例（[selenium_form_test.py](github.com)）来进行输入和提交。
+接下来，针对该页面的表单，编写一个 Python 测试用例（[selenium_form_test.py](https://github.com/olzhy/python-exercises/tree/main/selenium-web-form)）来进行输入和提交。
 
 代码如下：
 
@@ -235,7 +235,7 @@ OK
   self.browser.quit()
   ```
 
-综上，本文首先介绍了 Selenium 测试的组成部分；Driver 的安装；最后，通过 Python 代码编写了一个自动提交表单的示例程序，学习了 WebDriver 的基础使用。本文涉及的代码已托管至我的 [GitHub](github.com)，欢迎有需要的同学关注和 Fork！
+综上，本文首先介绍了 Selenium 测试的组成部分；Driver 的安装；最后，通过 Python 代码编写了一个自动提交表单的示例程序，学习了 WebDriver 的基础使用。本文涉及的代码已托管至我的 [GitHub](https://github.com/olzhy/python-exercises/tree/main/selenium-web-form)，欢迎有需要的同学关注或 Fork！
 
 > 参考资料
 >
