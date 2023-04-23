@@ -17,7 +17,7 @@ keywords:
   - 基础使用
   - Python
   - Chrome
-description: Selenium WebDriver 基础使用。
+description: 本文介绍了 Selenium 的组成部分；Driver 的安装；最后使用 Python 代码演示了如何使用 WebDriver 来自动化填充和提交表单。
 ---
 
 「[Selenium](https://www.selenium.dev/)」是一个支持 Web 浏览器自动化的开源项目，可使用其来模拟用户与浏览器的一系列交互行为。
