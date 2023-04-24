@@ -63,7 +63,7 @@ Selenium WebDriver 的浏览器选项有三种页面加载侧策略可供选择�
 
   HTML 文档以及依赖的脚本、图片、样式表、iFrame 等外部资源均已加载完成。
 
-下图即使用这两种方式展示了一个网页的生命周期：
+下图将这两种方式组合到一起来看一下一个网页的生命周期：
 
 ![网页生命周期](https://olzhy.github.io/static/images/uploads/2023/04/web-page-lifecycle.svg#center)
 
