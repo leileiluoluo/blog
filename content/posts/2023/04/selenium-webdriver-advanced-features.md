@@ -79,7 +79,7 @@ Selenium WebDriver 的浏览器选项有三种页面加载策略可供选择，�
 
 可以看到，当访问一个 URL 时，Selenium WebDriver 的默认策略是等待整个页面全部加载完成（除了使用`JavaScript`在`load`事件后再动态添加内容）。在编写自动化测试用例时，如果测试逻辑不依赖外部资源的加载，即可以将页面加载策略从默认选项`normal`改为`eager`或`none`来加速测试过程。
 
-更改页面加载策略选项的 Python 代码如下：
+更改页面加载策略的 Python 代码如下：
 
 ```python
 from selenium import webdriver
@@ -90,7 +90,6 @@ options.page_load_strategy = 'eager'  # 'none', 'normal'
 driver = webdriver.Chrome(options=options)
 driver.get("http://www.baidu.com")
 driver.quit()
-
 ```
 
 ## 2 等待策略
