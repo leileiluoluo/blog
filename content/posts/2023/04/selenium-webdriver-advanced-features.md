@@ -27,7 +27,7 @@ description: Selenium WebDriver 高级特性使用。
 
 ### 1.1 页面加载策略
 
-Selenium WebDriver 的浏览器选项有三种页面加载侧策略可供选择，它们是：`normal`、`eager`和`none`。
+Selenium WebDriver 的浏览器选项有三种页面加载策略可供选择，它们是：`normal`、`eager`和`none`。
 
 了解它们代表什么之前，先介绍一下加载及渲染一个 Web 页面大概有哪些阶段。
 
@@ -68,6 +68,30 @@ Selenium WebDriver 的浏览器选项有三种页面加载侧策略可供选择�
 ![网页生命周期](https://olzhy.github.io/static/images/uploads/2023/04/web-page-lifecycle.svg#center)
 
 可以看到，事件里的`DOMContentLoaded`对应`document.readyState`里的`interactive`；事件里的`load`对应`document.readyState`里的`complete`。
+
+而 Selenium WebDriver 支持的三种加载策略与事件和`document.readyState`的对应关系如下表所示：
+
+| Selenium 页面加载策略选项 | 对应的事件         | 对应的`document.readyState` |
+| ------------------------- | ------------------ | --------------------------- |
+| `normal`（默认值）        | `load`             | `complete`                  |
+| `eager`                   | `DOMContentLoaded` | `interactive`               |
+| `none`                    | 无                 | `Any`（任何状态都可以）     |
+
+可以看到，当访问一个 URL 时，Selenium WebDriver 的默认策略是等待整个页面全部加载完成（除了使用`JavaScript`在`load`事件后再动态添加内容）。在编写自动化测试用例时，如果测试逻辑不依赖外部资源的加载，即可以将页面加载策略从默认选项`normal`改为`eager`或`none`来加速测试过程。
+
+更改页面加载策略选项的 Python 代码如下：
+
+```python
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+options = Options()
+options.page_load_strategy = 'eager'  # 'none', 'normal'
+driver = webdriver.Chrome(options=options)
+driver.get("http://www.baidu.com")
+driver.quit()
+
+```
 
 ## 2 等待策略
 
