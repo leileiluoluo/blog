@@ -18,10 +18,12 @@ keywords:
   - 使用总结
   - Python
   - Chrome
-description: Selenium WebDriver 高级特性使用。
+description: 本文以 Python 示例代码的方式介绍了 Selenium WebDriver 高级特性的使用，涉及浏览器选项、等待策略、元素定位与操作、浏览器交互以及键盘鼠标等输入控制。
 ---
 
-本文中涉及的所有示例程序均使用 Python 语言描述。
+上文「[Selenium WebDriver 基础使用](https://olzhy.github.io/posts/selenium-webdriver.html)」介绍了 Selenium WebDriver 基础功能的使用；本文将接着介绍 Selenium WebDriver 高级特性的使用，涉及浏览器选项、等待策略、元素定位与操作、浏览器交互以及键盘鼠标等输入控制。
+
+本文涉及的所有示例程序均使用 Python 语言描述。
 
 ## 1 浏览器选项
 
@@ -71,15 +73,15 @@ Selenium WebDriver 的浏览器选项有三种页面加载策略可供选择，�
 
 而 Selenium WebDriver 支持的三种加载策略与事件和`document.readyState`的对应关系如下表所示：
 
-| Selenium 页面加载策略选项 | 对应的事件         | 对应的`document.readyState` |
-| ------------------------- | ------------------ | --------------------------- |
-| `normal`（默认值）        | `load`             | `complete`                  |
-| `eager`                   | `DOMContentLoaded` | `interactive`               |
-| `none`                    | 无                 | `Any`（任何状态都可以）     |
+| Selenium 页面加载策略 | 对应的事件         | 对应的`document.readyState` |
+| --------------------- | ------------------ | --------------------------- |
+| `normal`（默认值）    | `load`             | `complete`                  |
+| `eager`               | `DOMContentLoaded` | `interactive`               |
+| `none`                | 无                 | Any（任何状态都可以）       |
 
 可以看到，当访问一个 URL 时，Selenium WebDriver 的默认策略是等待整个页面全部加载完成（除了使用`JavaScript`在`load`事件后再动态添加内容）。在编写自动化测试用例时，如果测试逻辑不依赖外部资源的加载，即可以将页面加载策略从默认选项`normal`改为`eager`或`none`来加速测试过程。
 
-更改页面加载策略的 Python 代码如下：
+更改 Selenium WebDriver 页面加载策略的示例 Python 代码如下：
 
 ```python
 from selenium import webdriver
