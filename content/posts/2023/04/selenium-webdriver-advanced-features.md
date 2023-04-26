@@ -115,7 +115,7 @@ print(first_result_title)
 driver.quit()
 ```
 
-这段代码打开了百度首页，然后键入关键字`Selenium`后回车进行搜索，接着即找第一个结果的标题进行打印。运行该代码时，会抛出`NoSuchElementException`，原因是定位元素的时候，搜索结果页面还没有完全代开，因此未找到对应的元素。
+这段代码打开了百度首页，然后键入关键字`Selenium`后回车进行搜索，接着即找第一个结果的标题进行打印。运行该代码时，会抛出`NoSuchElementException`，原因是定位元素的时候，搜索结果页面还没有完全打开，因此未找到对应的元素。
 
 遇到这样的问题怎么办呢？可以通过 Selenium WebDriver 提供的显式等待或隐式等待功能来解决。
 
@@ -151,7 +151,7 @@ driver.quit()
 
 ### 2.2 隐式等待
 
-隐式等待是告诉 WebDriver 在查找元素时，若不存在，即轮询 DOM 一段时间，默认为不等待。其一般在新建 WebDriver 时设置，对整个会话有效。
+隐式等待是告诉 WebDriver 在查找元素时，若不存在，即轮询 DOM 一段时间。其一般在新建 WebDriver 时设置，对整个会话有效。
 
 上面抛出「no such element」错误的代码（[no_such_element.py](https://github.com/olzhy/python-exercises/blob/main/selenium-advanced-features/no_such_element.py)）可使用隐式等待的方式改造为（[implicit_wait.py](https://github.com/olzhy/python-exercises/blob/main/selenium-advanced-features/implicit_wait.py)）：
 
