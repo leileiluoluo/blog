@@ -183,6 +183,97 @@ driver.quit()
 
 ## 3 元素定位与操作
 
+### 3.1 元素定位
+
+Selenium WebDriver 提供 8 种基本的元素定位方法。
+
+| 定位方法          | 描述                                                             |
+| ----------------- | ---------------------------------------------------------------- |
+| id                | 查找 id 属性与搜索值匹配的元素                                   |
+| name              | 查找 name 属性与搜索值匹配的元素                                 |
+| class name        | 查找 class 名包含搜索值的元素                                    |
+| css selector      | 查找与 CSS 选择器匹配的元素                                      |
+| link text         | 查找其可见文本与搜索值匹配的锚元素                               |
+| partial link text | 查找其可见文本包含搜索值的锚元素。如有多个，则仅选择第一个元素。 |
+| tag name          | 查找 tag 名与搜索值匹配的元素                                    |
+| xpath             | 查找与 XPath 表达式匹配的元素                                    |
+
+如下为百度搜索框 input 标签的 HTML 代码：
+
+```html
+<input id="kw" name="wd" class="s_ipt" maxlength="255" autocomplete="off" />
+```
+
+可使用如下几种方式来定位到该 input 元素：
+
+```python
+driver.find_element(By.ID, 'kw')
+driver.find_element(By.CLASS_NAME, 's_ipt')
+driver.find_element(By.NAME, 'wd')
+driver.find_element(By.XPATH, '//input[@name="wd"]')
+```
+
+此外，Selenium 在版本 4 引入了相对定位器，即可使用空间相对位置来定位一个元素，其可在传统定位器无法描述时使用。
+
+如下为 Selenium 官网提供的一个「[Web 表单示例页面](https://www.selenium.dev/selenium/web/web-form.html)」：
+
+![Selenium Web 表单示例页面](https://olzhy.github.io/static/images/uploads/2023/04/selenium-web-form.jpeg#center)
+
+可以看到，在该页面左侧部分`Text input`输入框下有一个`Password`输入框。
+
+若`Password`输入框采用传统方法不好定位，则可使用相对定位器来定位：
+
+```python
+password_locator = locate_with(By.TAG_NAME, 'input').below({By.ID: 'my-text-id'})
+driver.find_element(password_locator)
+```
+
+### 3.2 元素操作
+
+Selenium 提供 4 个基本的元素操作命令。它们是：
+
+- Click
+- Send Keys
+- Clear
+- Select
+
+如下为百度关键字输入框和「百度一下」搜索按钮的 HTML 代码：
+
+```html
+<input id="kw" name="wd" class="s_ipt" maxlength="255" autocomplete="off" />
+...
+<input type="submit" id="su" value="百度一下" class="bg s_btn" />
+```
+
+可使用如下命令进行关键字清除、键入关键字和点击搜素按钮操作：
+
+```python
+input_text = driver.find_element(By.ID, 'kw')
+input_text.clear()
+input_text.send_keys('Selenium')
+driver.find_element(By.ID, 'su').click()
+```
+
+关于 Select 命令的使用，同样使用 Selenium 官网的「[Web 表单示例页面](https://www.selenium.dev/selenium/web/web-form.html)」作示例。
+
+该页面上的`Dropdown (select)`是一个单选框，其 HTML 代码如下：
+
+```html
+<select class="form-select" name="my-select">
+  <option selected="">Open this select menu</option>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option>
+</select>
+```
+
+使用`Select`对象选择选项的 Python 代码如下：
+
+```python
+dropdown = Select(driver.find_element(By.NAME, 'my-select'))
+dropdown.select_by_value('2')
+```
+
 ## 4 浏览器交互
 
 ## 5 键盘、鼠标等输入控制
