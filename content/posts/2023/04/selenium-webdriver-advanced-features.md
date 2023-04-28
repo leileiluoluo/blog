@@ -183,6 +183,8 @@ driver.quit()
 
 ## 3 元素定位与操作
 
+定位与操作 DOM 中的元素是使用 Selenium 编写自动化测试用例的主要工作。
+
 ### 3.1 元素定位
 
 Selenium WebDriver 提供 8 种基本的元素定位方法。
@@ -267,7 +269,7 @@ driver.find_element(By.ID, 'su').click()
 </select>
 ```
 
-使用`Select`对象选择选项的 Python 代码如下：
+使用`Select`对象选择下拉选项的 Python 代码如下：
 
 ```python
 dropdown = Select(driver.find_element(By.NAME, 'my-select'))
