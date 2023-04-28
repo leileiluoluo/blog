@@ -247,7 +247,7 @@ Selenium 提供 4 个基本的元素操作命令。它们是：
 <input type="submit" id="su" value="百度一下" class="bg s_btn" />
 ```
 
-可使用如下命令进行关键字清除、键入关键字和点击搜素按钮操作：
+可使用如下命令进行关键字清除、键入关键字和点击搜索按钮操作：
 
 ```python
 input_text = driver.find_element(By.ID, 'kw')
