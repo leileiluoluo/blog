@@ -15,7 +15,7 @@ description: 五一 · 鄂尔多斯之行。
 
 铁西公园
 
-[![铁西公园](https://olzhy.github.io/static/images/uploads/2023/04/ordos-1.jpg#center)](https://leileiluoluo-1253317978.cos.ap-beijing.myqcloud.com/2023-05/ordos-1.jpg)
+[![铁西公园](https://olzhy.github.io/static/images/uploads/2023/05/ordos-1.jpg#center)](https://leileiluoluo-1253317978.cos.ap-beijing.myqcloud.com/2023-05/ordos-1.jpg)
 
 库布齐沙漠
 
@@ -45,6 +45,6 @@ description: 五一 · 鄂尔多斯之行。
 
 饭店吃的莜面和刀削面
 
-[![饭店吃的莜面和刀削面](https://olzhy.github.io/static/images/uploads/2023/05/ordos-11.jpg#center)](https://leileiluoluo-1253317978.cos.ap-beijing.myqcloud.com/2023-05/ordos-11.jpg)
-
 [![饭店吃的莜面和刀削面](https://olzhy.github.io/static/images/uploads/2023/05/ordos-12.jpg#center)](https://leileiluoluo-1253317978.cos.ap-beijing.myqcloud.com/2023-05/ordos-12.jpg)
+
+[![饭店吃的莜面和刀削面](https://olzhy.github.io/static/images/uploads/2023/05/ordos-11.jpg#center)](https://leileiluoluo-1253317978.cos.ap-beijing.myqcloud.com/2023-05/ordos-11.jpg)
