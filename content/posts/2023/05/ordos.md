@@ -33,18 +33,20 @@ description: 五一 · 鄂爾多斯之行。
 
 [![烏蘭木倫河](https://olzhy.github.io/static/images/uploads/2023/05/ordos-7.jpg#center)](https://leileiluoluo-1253317978.cos.ap-beijing.myqcloud.com/2023-05/ordos-7.jpg)
 
-父母做的燉牛肉
+父母做的燉牛肉和燉羊肉
 
-[![父母做的燉牛肉](https://olzhy.github.io/static/images/uploads/2023/05/ordos-8.jpg#center)](https://leileiluoluo-1253317978.cos.ap-beijing.myqcloud.com/2023-05/ordos-8.jpg)
+[![父母做的燉牛肉和燉羊肉](https://olzhy.github.io/static/images/uploads/2023/05/ordos-8.jpg#center)](https://leileiluoluo-1253317978.cos.ap-beijing.myqcloud.com/2023-05/ordos-8.jpg)
 
-[![父母做的燉牛肉](https://olzhy.github.io/static/images/uploads/2023/05/ordos-9.jpg#center)](https://leileiluoluo-1253317978.cos.ap-beijing.myqcloud.com/2023-05/ordos-9.jpg)
+[![父母做的燉牛肉和燉羊肉](https://olzhy.github.io/static/images/uploads/2023/05/ordos-9.jpg#center)](https://leileiluoluo-1253317978.cos.ap-beijing.myqcloud.com/2023-05/ordos-9.jpg)
+
+[![父母做的燉牛肉和燉羊肉](https://olzhy.github.io/static/images/uploads/2023/05/ordos-10.jpg#center)](https://leileiluoluo-1253317978.cos.ap-beijing.myqcloud.com/2023-05/ordos-10.jpg)
 
 舅家吃的燉羊肉和豬肉燴酸菜
 
-[![舅家吃的燉羊肉和豬肉燴酸菜](https://olzhy.github.io/static/images/uploads/2023/05/ordos-10.jpg#center)](https://leileiluoluo-1253317978.cos.ap-beijing.myqcloud.com/2023-05/ordos-10.jpg)
+[![舅家吃的燉羊肉和豬肉燴酸菜](https://olzhy.github.io/static/images/uploads/2023/05/ordos-11.jpg#center)](https://leileiluoluo-1253317978.cos.ap-beijing.myqcloud.com/2023-05/ordos-11.jpg)
 
 飯店吃的莜面和刀削麵
 
 [![飯店吃的莜面和刀削麵](https://olzhy.github.io/static/images/uploads/2023/05/ordos-12.jpg#center)](https://leileiluoluo-1253317978.cos.ap-beijing.myqcloud.com/2023-05/ordos-12.jpg)
 
-[![飯店吃的莜面和刀削麵](https://olzhy.github.io/static/images/uploads/2023/05/ordos-11.jpg#center)](https://leileiluoluo-1253317978.cos.ap-beijing.myqcloud.com/2023-05/ordos-11.jpg)
+[![飯店吃的莜面和刀削麵](https://olzhy.github.io/static/images/uploads/2023/05/ordos-13.jpg#center)](https://leileiluoluo-1253317978.cos.ap-beijing.myqcloud.com/2023-05/ordos-13.jpg)
