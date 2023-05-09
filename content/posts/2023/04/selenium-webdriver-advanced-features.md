@@ -276,13 +276,31 @@ dropdown = Select(driver.find_element(By.NAME, 'my-select'))
 dropdown.select_by_value('2')
 ```
 
-## 4 浏览器交互
+## 4 浏览器操作
 
-### 4.2 Alerts
+### 4.1 导航操作
+
+进行浏览器导航操作的 Python 代码如下：
+
+```python
+# 打开网址
+driver.get("https://selenium.dev")
+
+# 点击向后按钮
+driver.back()
+
+# 点击向前按钮
+driver.forward()
+
+# 点击刷新按钮
+driver.refresh()
+```
+
+### 4.2 原生弹窗操作
 
 可使用 Selenium WebDriver 来与三种原生的消息弹窗（Alert、Confirm 和 Prompt）交互。
 
-下面先看一段用于演示这三种弹窗的 HTML 代码（[alerts-test.html](https://github.com/olzhy/python-exercises/blob/main/selenium-advanced-features/alerts-test.html)）：
+下面，先看一下用于演示这三种弹窗的 HTML 代码（[alerts-test.html](https://github.com/olzhy/python-exercises/blob/main/selenium-advanced-features/alerts-test.html)）：
 
 ```html
 <!DOCTYPE html>
@@ -393,6 +411,63 @@ class TestAlerts(TestCase):
 
         # 断言
         self.assertEqual(favorite_sport, 'Football')
+```
+
+### 4.3 Cookie 操作
+
+可使用 Selenium WebDriver 来操作 Cookie。
+
+查询、添加和删除 Cookie 的示例 Python 代码如下：
+
+```python
+from selenium import webdriver
+
+driver = webdriver.Chrome()
+
+# 打开 URL
+driver.get('https://www.baidu.com')
+
+# 将 Cookie 添加到当前浏览器
+driver.add_cookie({'name': 'foo', 'value': 'bar'})
+
+# 获取所有的 Cookie
+print(driver.get_cookies())
+
+# 获取名为 foo 的 Cookie 信息
+print(driver.get_cookie('foo'))
+
+# 删除名为 foo 的 Cookie 信息
+driver.delete_cookie('foo')
+
+# 删除所有的 Cookie
+driver.delete_all_cookies()
+
+driver.quit()
+```
+
+### 4.4 窗口与选项卡操作
+
+可使用 Selenium WebDriver 来打开、关闭和切换窗口或选项卡。
+
+操作窗口或选项卡的示例 Python 代码如下：
+
+```python
+# 获取所有的窗口或选项卡句柄
+driver.window_handles
+
+# 获取当前窗口或选项卡的句柄
+driver.current_window_handle
+
+# 切换窗口或选项卡
+driver.switch_to.window(handle)
+
+# 新建窗口
+driver.switch_to.new_window('window')
+# 新建选项卡
+driver.switch_to.new_window('tab')
+
+# 关闭当前窗口或选项卡
+driver.close()
 ```
 
 ## 5 键盘、鼠标等输入控制
