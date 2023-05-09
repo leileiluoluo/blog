@@ -294,7 +294,7 @@ dropdown.select_by_value('2')
 
 ```python
 # 打开网址
-driver.get("https://selenium.dev")
+driver.get('https://selenium.dev')
 
 # 点击向后按钮
 driver.back()
