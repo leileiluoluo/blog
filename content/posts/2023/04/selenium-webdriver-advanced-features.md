@@ -18,10 +18,10 @@ keywords:
   - 使用总结
   - Python
   - Chrome
-description: 本文以 Python 代码示例的方式介绍了 Selenium WebDriver 高级特性的使用，涉及页面加载策略、等待策略、元素定位与操作、浏览器交互以及键盘鼠标等输入控制几个方面。
+description: 本文以 Python 代码示例的方式介绍了 Selenium WebDriver 高级特性的使用，涉及页面加载策略、等待策略、元素定位与操作、浏览器操作。
 ---
 
-上文「[Selenium WebDriver 基础使用](https://olzhy.github.io/posts/selenium-webdriver.html)」介绍了 Selenium WebDriver 基础功能的使用；本文将接着介绍 Selenium WebDriver 高级特性的使用，涉及页面加载策略、等待策略、元素定位与操作、浏览器交互以及键盘鼠标等输入控制。
+上文「[Selenium WebDriver 基础使用](https://olzhy.github.io/posts/selenium-webdriver.html)」介绍了 Selenium WebDriver 基础功能的使用；本文将接着介绍 Selenium WebDriver 高级特性的使用，涉及页面加载策略、等待策略、元素定位与操作、浏览器操作。
 
 本文涉及的所有示例程序均使用 Python 语言描述。此外，下面还列出了本文所使用的浏览器和 Selenium 版本信息。
 
@@ -470,7 +470,7 @@ driver.switch_to.new_window('tab')
 driver.close()
 ```
 
-## 5 键盘、鼠标等输入控制
+综上，本文使用 Python 示例代码介绍了如何使用 Selenium WebDriver 对页面加载策略、等待策略、元素定位与操作、浏览器操作这些高级特性进行使用。
 
 > 参考资料
 >
