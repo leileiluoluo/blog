@@ -223,6 +223,14 @@ driver.find_element(By.XPATH, '//input[@name="wd"]')
 
 可以看到，在该页面左侧部分`Text input`输入框下有一个`Password`输入框。
 
+这两个输入框的 HTML 代码如下：
+
+```html
+<input type="text" name="my-text" id="my-text-id" />
+...
+<input type="password" name="my-password" autocomplete="off" />
+```
+
 若`Password`输入框采用传统方法不好定位，则可使用相对定位器来定位：
 
 ```python
@@ -238,6 +246,8 @@ Selenium 提供 4 个基本的元素操作命令。它们是：
 - Send Keys
 - Clear
 - Select
+
+下面使用一个例子来演示如何使用这几个命令。
 
 如下为百度关键字输入框和「百度一下」搜索按钮的 HTML 代码：
 
