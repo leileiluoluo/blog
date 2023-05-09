@@ -278,6 +278,123 @@ dropdown.select_by_value('2')
 
 ## 4 浏览器交互
 
+### 4.2 Alerts
+
+可使用 Selenium WebDriver 来与三种原生的消息弹窗（Alert、Confirm 和 Prompt）交互。
+
+下面先看一段用于演示这三种弹窗的 HTML 代码（[alerts-test.html](https://github.com/olzhy/python-exercises/blob/main/selenium-advanced-features/alerts-test.html)）：
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Alerts, Prompts and Confirmations test</title>
+    <script>
+      function exampleAlert() {
+        alert("This is an example alert");
+      }
+
+      function exampleConfirm() {
+        let confirmed = confirm("Do you want to confirm?");
+        document.getElementById("confirmed").innerText = confirmed;
+      }
+
+      function examplePrompt() {
+        let favoriteSport = prompt(
+          "What is your favorite sport?",
+          "Basketball"
+        );
+        document.getElementById("favorite-sport").innerText = favoriteSport;
+      }
+    </script>
+  </head>
+  <body>
+    <table border="1">
+      <tr>
+        <td><a onclick="exampleAlert()">Click to see an example alert</a></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <a onclick="exampleConfirm()">Click to see an example confirm</a>
+        </td>
+        <td><p id="confirmed"></p></td>
+      </tr>
+      <tr>
+        <td><a onclick="examplePrompt()">Click to see an example prompt</a></td>
+        <td><p id="favorite-sport"></p></td>
+      </tr>
+    </table>
+  </body>
+</html>
+```
+
+接着，看一下测试如上 HTML 页面三种弹窗的 Python 代码（[alerts_test.py](https://github.com/olzhy/python-exercises/blob/main/selenium-advanced-features/alerts_test.py)）：
+
+```python
+from unittest import TestCase
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+
+class TestAlerts(TestCase):
+    def setUp(self) -> None:
+        self.driver = webdriver.Chrome()
+        self.addCleanup(self.driver.quit)
+
+    def test_alert(self) -> None:
+        # 打开 Alerts 示例页面
+        self.driver.get('file:///Users/larry/Desktop/alerts-test.html')
+
+        # 点击超链接 "Click to see an example alert"
+        self.driver.find_element(By.LINK_TEXT, 'Click to see an example alert').click()
+
+        # 等待窗口弹出，获取 Alert 信息，点击 OK
+        alert = WebDriverWait(self.driver, 10).until(EC.alert_is_present())
+        alert_message = alert.text
+        alert.accept()
+
+        # 断言
+        self.assertEqual(alert_message, 'This is an example alert')
+
+    def test_confirm(self) -> None:
+        # 打开 Alerts 示例页面
+        self.driver.get('file:///Users/larry/Desktop/alerts-test.html')
+
+        # 点击超链接 "Click to see an example confirm"
+        self.driver.find_element(By.LINK_TEXT, 'Click to see an example confirm').click()
+
+        # 等待窗口弹出，点击 OK
+        alert = WebDriverWait(self.driver, 10).until(EC.alert_is_present())
+        alert.accept()
+
+        # 获取 `#confirmed` 文本
+        confirmed = self.driver.find_element(By.ID, 'confirmed').text
+
+        # 断言
+        self.assertEqual(confirmed, 'true')
+
+    def test_prompt(self) -> None:
+        # 打开 Alerts 示例页面
+        self.driver.get('file:///Users/larry/Desktop/alerts-test.html')
+
+        # 点击超链接 "Click to see an example prompt"
+        self.driver.find_element(By.LINK_TEXT, 'Click to see an example prompt').click()
+
+        # 等待窗口弹出，输入信息，点击 OK
+        alert = WebDriverWait(self.driver, 10).until(EC.alert_is_present())
+        alert.send_keys('Football')
+        alert.accept()
+
+        # 获取 `#favorite-sport` 文本
+        favorite_sport = self.driver.find_element(By.ID, 'favorite-sport').text
+
+        # 断言
+        self.assertEqual(favorite_sport, 'Football')
+```
+
 ## 5 键盘、鼠标等输入控制
 
 > 参考资料
