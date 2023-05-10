@@ -45,8 +45,8 @@ description: 五一 · 鄂爾多斯之行。
 
 [![舅家吃的燉羊肉和豬肉燴酸菜](https://olzhy.github.io/static/images/uploads/2023/05/ordos-11.jpg#center)](https://static.leileiluoluo.com/2023/05/original-ordos-11.jpg)
 
-飯店吃的莜面和刀削麵
+飯店吃的莜麵和刀削麵
 
-[![飯店吃的莜面和刀削麵](https://olzhy.github.io/static/images/uploads/2023/05/ordos-12.jpg#center)](https://static.leileiluoluo.com/2023/05/original-ordos-12.jpg)
+[![飯店吃的莜麵和刀削麵](https://olzhy.github.io/static/images/uploads/2023/05/ordos-12.jpg#center)](https://static.leileiluoluo.com/2023/05/original-ordos-12.jpg)
 
 [![飯店吃的莜麵和刀削麵](https://olzhy.github.io/static/images/uploads/2023/05/ordos-13.jpg#center)](https://static.leileiluoluo.com/2023/05/original-ordos-13.jpg)
