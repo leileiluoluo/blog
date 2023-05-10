@@ -22,12 +22,171 @@ description: Selenium 自动化测试最佳实践。
 
 ## 1 好的代码结构是什么样的？
 
-页面对象模型（Page Object Model）借鉴了面向对象编程思想，是一种在自动化测试中被广泛使用的设计模式，用于减少重复代码并增加代码的可维护性。页面对象是一个面向对象的类，其将同一页面的 Web 元素存储在同一个对象中；当需要与该对象的 UI 进行交互时，不直接访问该页面的 Web 元素，而通过调用该对象提供的方法来实现。这样做的好处是如果某个面的 UI 发生了改变，测试代码无须更改，只需要更改对应页面对象内的代码即可。
+![Selenium Web 表单示例页面](https://olzhy.github.io/static/images/uploads/2023/05/selenium-web-form.gif#center)
 
-这样做的优点：
+改造前的测试代码（[original_form_test.py](https://github.com/olzhy/python-exercises/blob/main/selenium-best-practices/page-object-model/original_form_test.py)）：
+
+```python
+from unittest import TestCase
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+
+class TestForm(TestCase):
+    def setUp(self) -> None:
+        self.driver = webdriver.Chrome()
+        self.addCleanup(self.driver.quit)
+
+    def test_web_form(self) -> None:
+        # 打开表单页面
+        self.driver.get('https://www.selenium.dev/selenium/web/web-form.html')
+        self.assertEqual(self.driver.title, 'Web form')
+
+        # Text 输入
+        text_input_elem = self.driver.find_element(By.ID, 'my-text-id')
+        text_input_elem.send_keys('Selenium')
+
+        # Password 输入
+        password_elem = self.driver.find_element(By.NAME, 'my-password')
+        password_elem.send_keys('Selenium')
+
+        # Dropdown 选择
+        dropdown_elem = Select(self.driver.find_element(By.NAME, 'my-select'))
+        dropdown_elem.select_by_value('2')
+
+        # 日期输入
+        date_input_elem = self.driver.find_element(By.XPATH, '//input[@name="my-date"]')
+        date_input_elem.send_keys('05/10/2023')
+
+        # 点击 Submit 按钮
+        submit_button_elem = self.driver.find_element(By.XPATH, '//button[@type="submit"]')
+        submit_button_elem.click()
+
+        # 等待进入已提交页面
+        WebDriverWait(self.driver, 10).until(EC.title_is('Web form - target page'))
+
+        # 断言
+        message = self.driver.find_element(By.ID, 'message').text
+        self.assertEqual(message, 'Received!')
+```
+
+页面对象模型（Page Object Model）借鉴了面向对象编程思想，是一种在自动化测试中被广泛使用的设计模式，用于减少重复代码并增加代码的可维护性。页面对象是一个面向对象的类，其将同一页面的 Web 元素存储在同一个对象中；当需要与该对象的 UI 进行交互时，不直接访问该页面的 Web 元素，而通过调用该对象提供的方法来实现。这样做的好处是如果某个页面的 UI 发生了改变，测试代码无须更改，只需要更改对应页面对象内的代码即可。
+
+此外，使用页面对象模型的好处还有：
 
 - 测试代码与特定于页面的代码分离；
 - 页面元素和功能被封装在页面对象的属性和方法中，而不是让其分散在整个测试代码中。
+
+改造后的项目目录结构：
+
+```shell
+$ tree
+.
+├─ pages
+│   ├─ form.py
+│   └─ form_target.py
+└─ optimized_form_test.py
+```
+
+`Form`页面对象代码（[form.py](https://github.com/olzhy/python-exercises/blob/main/selenium-best-practices/page-object-model/form.py)）：
+
+```python
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+
+class Form:
+    def __init__(self, driver):
+        self.driver = driver
+
+    def open(self):
+        self.driver.get('https://www.selenium.dev/selenium/web/web-form.html')
+
+    def get_title(self):
+        return self.driver.title
+
+    def input_text(self, text: str):
+        elem = self.driver.find_element(By.ID, 'my-text-id')
+        elem.send_keys(text)
+
+    def input_password(self, password: str):
+        elem = self.driver.find_element(By.NAME, 'my-password')
+        elem.send_keys(password)
+
+    def select_from_dropdown(self, value: str):
+        elem = Select(self.driver.find_element(By.NAME, 'my-select'))
+        elem.select_by_value(value)
+
+    def input_date(self, date: str):
+        elem = self.driver.find_element(By.XPATH, '//input[@name="my-date"]')
+        elem.send_keys(date)
+
+    def submit(self):
+        elem = self.driver.find_element(By.XPATH, '//button[@type="submit"]')
+        elem.click()
+
+        # 等待进入已提交页面
+        WebDriverWait(self.driver, 10).until(EC.title_is('Web form - target page'))
+```
+
+`FormTarget`页面对象代码（[form_target.py](https://github.com/olzhy/python-exercises/blob/main/selenium-best-practices/page-object-model/form_target.py)）：
+
+```python
+from selenium.webdriver.common.by import By
+
+
+class FormTarget:
+    def __init__(self, driver):
+        self.driver = driver
+
+    def get_message_text(self):
+        return self.driver.find_element(By.ID, 'message').text
+```
+
+测试代码（[optimized_form_test.py](https://github.com/olzhy/python-exercises/blob/main/selenium-best-practices/page-object-model/optimized_form_test.py)）：
+
+```python
+from unittest import TestCase
+from selenium import webdriver
+from pages.form import Form
+from pages.form_target import FormTarget
+
+
+class TestForm(TestCase):
+    def setUp(self) -> None:
+        self.driver = webdriver.Chrome()
+        self.addCleanup(self.driver.quit)
+
+    def test_web_form(self) -> None:
+        # 打开表单页面
+        form_page = Form(self.driver)
+        form_page.open()
+        self.assertEqual(form_page.get_title(), 'Web form')
+
+        # Text 输入
+        form_page.input_text('Selenium')
+
+        # Password 输入
+        form_page.input_password('Selenium')
+
+        # Dropdown 选择
+        form_page.select_from_dropdown('2')
+
+        # 日期输入
+        form_page.input_date('05/10/2023')
+
+        # 点击 Submit 按钮
+        form_page.submit()
+
+        # 断言
+        message = FormTarget(self.driver).get_message_text()
+        self.assertEqual(message, 'Received!')
+```
 
 > 参考资料
 >
