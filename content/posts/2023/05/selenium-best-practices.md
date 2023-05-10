@@ -22,10 +22,13 @@ description: Selenium 自动化测试最佳实践。
 
 ## 1 好的代码结构是什么样的？
 
-页面对象模型（Page Object Model）借鉴了面向对象编程思想，是一种在自动化测试中应用广泛的设计模式，用于减少重复代码并增加代码的可维护性。页面对象是一个面向对象的类，其将同一页面的 Web 元素存储在同一个对象中；当需要与该对象的 UI 进行交互时，不直接访问该页面的 Web 元素，而通过调用该对象提供的方法来实现。这样做的好处是如果某个面的 UI 发生了改变，测试逻辑层代码无须更改，只需要更改对应页面对象内的代码即可。
+页面对象模型（Page Object Model）借鉴了面向对象编程思想，是一种在自动化测试中被广泛使用的设计模式，用于减少重复代码并增加代码的可维护性。页面对象是一个面向对象的类，其将同一页面的 Web 元素存储在同一个对象中；当需要与该对象的 UI 进行交互时，不直接访问该页面的 Web 元素，而通过调用该对象提供的方法来实现。这样做的好处是如果某个面的 UI 发生了改变，测试代码无须更改，只需要更改对应页面对象内的代码即可。
+
+这样做的优点：
+
+- 测试代码与特定于页面的代码分离；
+- 页面元素和功能被封装在页面对象的属性和方法中，而不是让其分散在整个测试代码中。
 
 > 参考资料
 >
 > [1] [Test Practices | Selenium - www.selenium.dev](https://www.selenium.dev/documentation/test_practices/)
->
-> [2] [Page Object Model (POM) | Medium - medium.com](https://medium.com/tech-tajawal/page-object-model-pom-design-pattern-f9588630800b)
