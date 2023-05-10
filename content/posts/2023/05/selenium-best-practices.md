@@ -18,7 +18,7 @@ keywords:
 description: Selenium 自动化测试最佳实践。
 ---
 
-前两篇文章「[Selenium WebDriver 基础使用](https://olzhy.github.io/posts/selenium-webdriver.html)」和「[Selenium WebDriver 高级特性使用](https://olzhy.github.io/posts/selenium-webdriver-advanced-features.html)」分别介绍了 Selenium WebDriver 的基础功能使用和高级功能使用，通过阅读这两篇文章，我们了解了如何使用 Selenium 对 Web 网站进行自动化测试；本文将接着探讨「构建一个 Selenium 自动化测试项目的最佳实践是什么样的？」，包括：一个好的 Selenium 测试项目的代码结构是什么样的？各种元素定位方法的适用场景是什么？怎么输出一个好的测试报告？下面会一一讨论。
+前两篇文章「[Selenium WebDriver 基础使用](https://olzhy.github.io/posts/selenium-webdriver.html)」和「[Selenium WebDriver 高级特性使用](https://olzhy.github.io/posts/selenium-webdriver-advanced-features.html)」分别介绍了 Selenium WebDriver 的基础功能和高级功能的使用。通过阅读这两篇文章，我们了解了如何使用 Selenium 对一个 Web 页面进行自动化测试；本文将接着探讨「构建一个 Selenium 自动化测试项目的最佳实践是什么样的？」，包括：一个好的 Selenium 测试项目的代码结构是什么样的？各种元素定位方法的适用场景是什么？怎么输出一个好的测试报告？下面会一一讨论。
 
 ## 1 好的代码结构是什么样的？
 
