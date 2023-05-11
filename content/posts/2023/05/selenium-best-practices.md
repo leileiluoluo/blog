@@ -17,7 +17,7 @@ keywords:
   - 最佳实践
   - Python
   - 页面对象模型
-description: Selenium 自动化测试最佳实践。
+description: 本文总结了 Selenium 自动化测试的最佳实践，即构建一个大型测试项目时分析需求的基本指导思想、编排测试代码的实践策略（页面对象模型）以及使用定位器的推荐顺序。
 ---
 
 前两篇文章「[Selenium WebDriver 基础使用](https://olzhy.github.io/posts/selenium-webdriver.html)」和「[Selenium WebDriver 高级特性使用](https://olzhy.github.io/posts/selenium-webdriver-advanced-features.html)」分别介绍了 Selenium WebDriver 的基础功能和高级功能的使用。这两篇文章更多的是从底层实现细节的角度去练习 Selenium WebDriver API 的使用。
