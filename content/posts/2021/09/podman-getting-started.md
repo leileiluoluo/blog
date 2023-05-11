@@ -7,7 +7,7 @@ url: /posts/podman-getting-started.html
 categories:
   - 计算机
 tags:
-  - 容器化
+  - 云原生
 keywords:
   - Podman
 description: Podman初探 (Podman Getting Started)
