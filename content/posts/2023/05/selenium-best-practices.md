@@ -7,8 +7,9 @@ url: /posts/selenium-best-practices.html
 categories:
   - 计算机
 tags:
-  - 自动化测试
   - Selenium
+  - 自动化测试
+  - 架构设计
   - Python
 keywords:
   - Selenium
@@ -18,11 +19,13 @@ keywords:
 description: Selenium 自动化测试最佳实践。
 ---
 
-前两篇文章「[Selenium WebDriver 基础使用](https://olzhy.github.io/posts/selenium-webdriver.html)」和「[Selenium WebDriver 高级特性使用](https://olzhy.github.io/posts/selenium-webdriver-advanced-features.html)」分别介绍了 Selenium WebDriver 的基础功能和高级功能的使用。通过阅读这两篇文章，我们知道如何使用 Selenium 对一个 Web 页面进行自动化测试。本文将接着探讨「构建一个 Selenium 自动化测试项目的最佳实践是什么样的？」，包括：一个 Selenium 测试项目的好的代码结构是什么样的？各种元素定位方法的适用场景是什么？怎么输出一个好的测试报告？下面会一一讨论。
+前两篇文章「[Selenium WebDriver 基础使用](https://olzhy.github.io/posts/selenium-webdriver.html)」和「[Selenium WebDriver 高级特性使用](https://olzhy.github.io/posts/selenium-webdriver-advanced-features.html)」分别介绍了 Selenium WebDriver 的基础功能和高级功能的使用。这两篇文章更多的是从底层实现细节的角度去练习 Selenium WebDriver API 的使用。
 
-## 1 好的代码结构是什么样的？
+本文将探讨「构建一个 Selenium 自动化测试项目的最佳实践是什么样的？」，该部分更多的是从上层设计与架构的角度来思考大型测试项目的构建。包括：如何编排测试代码？如何输出一个直观的测试报告？下面会一一讨论。
 
-该部分将探讨一个 Selenium 测试项目的好的代码结构是什么样的？即如何组织与编排测试代码，从而让代码更简洁且更好维护。
+## 1 如何编排测试代码？
+
+该部分将探讨如何编排测试代码？即采用何种策略组织与编排测试代码，从而让代码更简洁且更好维护。
 
 我们依然使用实际的例子来说明将要探讨的问题。
 
@@ -30,7 +33,7 @@ description: Selenium 自动化测试最佳实践。
 
 ![Selenium Web 表单示例页面](https://olzhy.github.io/static/images/uploads/2023/05/selenium-web-form.gif#center)
 
-可以看到，该图展示的自动化测试代码对表单页面进行了文本输入、密码输入、下拉框选项选择和日期输入，并点击了提交按钮，最后跳转至已提交页面。
+可以看到，该动图展示的自动化测试代码对表单页面进行了文本输入、密码输入、下拉框选项选择和日期输入，并点击了提交按钮，最后跳转至已提交页面。
 
 对应动图原始的 Python 测试代码（[original_form_test.py](https://github.com/olzhy/python-exercises/blob/main/selenium-best-practices/page-object-model/original_form_test.py)）如下：
 
@@ -85,7 +88,7 @@ class TestForm(TestCase):
 
 然而这种写法存在几个问题：
 
-- 测试代码（`assertEqual(..., ...)`）和定位与操作元素的代码（`find_element(..., ...) ... send_keys(...)`）耦合在一起。这样，如果元素定位标识发生变化或者元素操作方式发生变化，这块测试代码都需要修改。
+- 测试代码（`assertEqual`）和定位与操作元素的代码（`find_element ... send_keys ... click`）耦合在一起。这样，如果元素定位标识发生变化或者元素操作方式发生变化，这块测试代码都需要修改。
 
 - 如果要编写针对该页面本身或者依赖该页面的其它测试代码，定位与操作元素的代码都需要重写一遍。
 
@@ -109,7 +112,7 @@ $ tree
 └─ optimized_form_test.py
 ```
 
-可以看到，针对各个页面的页面对象被放在`pages`目录下，测试用例需要时调用其方法即可。
+可以看到，针对各个页面的页面对象被放在`pages`目录下，编写测试用例时调用其对应的方法即可。
 
 下面看一下优化后的代码。
 
@@ -216,7 +219,7 @@ class TestForm(TestCase):
 
 可以看到，经过优化后的代码清晰了许多。
 
-下面总结一下使用页面对象模型时的几个注意事项。
+下面总结一下使用页面对象模型时的几个注意事项：
 
 - 断言是测试逻辑的一部分，应放在测试代码中，因此，页面对象中不应有断言或验证相关的代码；
 - 页面对象只应将页面提供的服务通过公共方法暴露出来，其它内部细节不要暴露出来。
