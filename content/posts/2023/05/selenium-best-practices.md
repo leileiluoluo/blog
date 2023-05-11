@@ -121,39 +121,44 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from pages.form_target import FormTarget
+
 
 class Form:
-    def __init__(self, driver):
+    def __init__(self, driver) -> None:
         self.driver = driver
 
-    def open(self):
+    def open(self) -> None:
         self.driver.get('https://www.selenium.dev/selenium/web/web-form.html')
 
-    def get_title(self):
+    def get_title(self) -> str:
         return self.driver.title
 
-    def input_text(self, text: str):
+    def input_text(self, text: str) -> None:
         elem = self.driver.find_element(By.ID, 'my-text-id')
         elem.send_keys(text)
 
-    def input_password(self, password: str):
+    def input_password(self, password: str) -> None:
         elem = self.driver.find_element(By.NAME, 'my-password')
         elem.send_keys(password)
 
-    def select_from_dropdown(self, value: str):
+    def select_from_dropdown(self, value: str) -> None:
         elem = Select(self.driver.find_element(By.NAME, 'my-select'))
         elem.select_by_value(value)
 
-    def input_date(self, date: str):
+    def input_date(self, date: str) -> None:
         elem = self.driver.find_element(By.XPATH, '//input[@name="my-date"]')
         elem.send_keys(date)
 
-    def submit(self):
+    def submit(self) -> FormTarget:
         elem = self.driver.find_element(By.XPATH, '//button[@type="submit"]')
         elem.click()
 
         # 等待进入已提交页面
         WebDriverWait(self.driver, 10).until(EC.title_is('Web form - target page'))
+
+        # 返回 FormTarget 对象
+        return FormTarget(self.driver)
 ```
 
 `FormTarget`页面对象代码（[form_target.py](https://github.com/olzhy/python-exercises/blob/main/selenium-best-practices/page-object-model/form_target.py)）：
@@ -163,10 +168,10 @@ from selenium.webdriver.common.by import By
 
 
 class FormTarget:
-    def __init__(self, driver):
+    def __init__(self, driver) -> None:
         self.driver = driver
 
-    def get_message_text(self):
+    def get_message_text(self) -> str:
         return self.driver.find_element(By.ID, 'message').text
 ```
 
@@ -176,7 +181,6 @@ class FormTarget:
 from unittest import TestCase
 from selenium import webdriver
 from pages.form import Form
-from pages.form_target import FormTarget
 
 
 class TestForm(TestCase):
@@ -203,14 +207,18 @@ class TestForm(TestCase):
         form_page.input_date('05/10/2023')
 
         # 点击 Submit 按钮
-        form_page.submit()
+        form_target_page = form_page.submit()
 
         # 断言
-        message = FormTarget(self.driver).get_message_text()
+        message = form_target_page.get_message_text()
         self.assertEqual(message, 'Received!')
 ```
 
 可以看到，经过优化后的代码清晰了许多。
+
+下面总结一下使用页面对象模型时的几个注意事项。
+
+- 断言是测试逻辑的一部分，应放在测试代码中，因此，页面对象中不应有断言或验证相关的代码；
 
 > 参考资料
 >
