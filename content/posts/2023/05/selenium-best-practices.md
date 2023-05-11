@@ -23,6 +23,12 @@ description: Selenium 自动化测试最佳实践。
 
 本文将探讨「构建一个 Selenium 自动化测试项目的最佳实践是什么样的？」，该部分更多的是从上层设计与架构的角度来思考大型测试项目的构建。包括：如何编排测试代码？如何输出一个直观的测试报告？下面会一一讨论。
 
+本文涉及的所有示例程序均使用 Python 语言描述。下面列出本文所使用的 Python 版本、Selenium 版本和 Chrome 浏览器版本信息。
+
+- Python 版本：3.11.3
+- Selenium 版本：4.9.1
+- Chrome 浏览器版本：113
+
 ## 1 如何编排测试代码？
 
 该部分将探讨如何编排测试代码？即采用何种策略组织与编排测试代码，从而让代码更简洁且更好维护。
@@ -123,35 +129,40 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
 from pages.form_target import FormTarget
+from typing import Self
 
 
 class Form:
     def __init__(self, driver) -> None:
         self.driver = driver
 
-    def open(self) -> None:
+    def open(self) -> Self:
         self.driver.get('https://www.selenium.dev/selenium/web/web-form.html')
+        return self
 
     def get_title(self) -> str:
         return self.driver.title
 
-    def input_text(self, text: str) -> None:
+    def input_text(self, text: str) -> Self:
         elem = self.driver.find_element(By.ID, 'my-text-id')
         elem.send_keys(text)
+        return self
 
-    def input_password(self, password: str) -> None:
+    def input_password(self, password: str) -> Self:
         elem = self.driver.find_element(By.NAME, 'my-password')
         elem.send_keys(password)
+        return self
 
-    def select_from_dropdown(self, value: str) -> None:
+    def select_from_dropdown(self, value: str) -> Self:
         elem = Select(self.driver.find_element(By.NAME, 'my-select'))
         elem.select_by_value(value)
+        return self
 
-    def input_date(self, date: str) -> None:
+    def input_date(self, date: str) -> Self:
         elem = self.driver.find_element(By.XPATH, '//input[@name="my-date"]')
         elem.send_keys(date)
+        return self
 
     def submit(self) -> FormTarget:
         elem = self.driver.find_element(By.XPATH, '//button[@type="submit"]')
@@ -197,20 +208,12 @@ class TestForm(TestCase):
         form_page.open()
         self.assertEqual(form_page.get_title(), 'Web form')
 
-        # Text 输入
-        form_page.input_text('Selenium')
-
-        # Password 输入
-        form_page.input_password('Selenium')
-
-        # Dropdown 选择
-        form_page.select_from_dropdown('2')
-
-        # 日期输入
-        form_page.input_date('05/10/2023')
-
-        # 点击 Submit 按钮
-        form_target_page = form_page.submit()
+        # 输入
+        form_target_page = form_page.input_text('Selenium') \
+            .input_password('Selenium') \
+            .select_from_dropdown('2') \
+            .input_date('05/10/2023') \
+            .submit()
 
         # 断言
         message = form_target_page.get_message_text()
