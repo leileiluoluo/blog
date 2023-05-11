@@ -23,23 +23,23 @@ description: 周杰倫的磁帶和80後記憶裡的玩具。
 
 最後去二手平台淘到了幾盤周杰倫的帶，想著找找中學時代那種聽歌的感覺。播放鍵按下後，似乎這經歷幾多歲月的帶子裡的聲音也像被風吹雨打一樣，早已不是記憶裡的那般清脆動人了。
 
-[![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay-cover.jpeg#center)](http://ruf7zqsku.hb-bkt.clouddn.com/2022/11/original-jay-cover.jpeg)
+[![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay-cover.jpeg#center)](http://static.leileiluoluo.com/2022/11/original-jay-cover.jpeg)
 
-[![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay1.jpeg#center)](http://ruf7zqsku.hb-bkt.clouddn.com/2022/11/original-jay1.jpeg)
+[![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay1.jpeg#center)](http://static.leileiluoluo.com/2022/11/original-jay1.jpeg)
 
-[![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay2.jpeg#center)](http://ruf7zqsku.hb-bkt.clouddn.com/2022/11/original-jay2.jpeg)
+[![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay2.jpeg#center)](http://static.leileiluoluo.com/2022/11/original-jay2.jpeg)
 
-[![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay3.jpeg#center)](http://ruf7zqsku.hb-bkt.clouddn.com/2022/11/original-jay3.jpeg)
+[![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay3.jpeg#center)](http://static.leileiluoluo.com/2022/11/original-jay3.jpeg)
 
-[![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay4.jpeg#center)](http://ruf7zqsku.hb-bkt.clouddn.com/2022/11/original-jay4.jpeg)
+[![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay4.jpeg#center)](http://static.leileiluoluo.com/2022/11/original-jay4.jpeg)
 
-[![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay5.jpeg#center)](http://ruf7zqsku.hb-bkt.clouddn.com/2022/11/original-jay5.jpeg)
+[![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay5.jpeg#center)](http://static.leileiluoluo.com/2022/11/original-jay5.jpeg)
 
-[![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay6.jpeg#center)](http://ruf7zqsku.hb-bkt.clouddn.com/2022/11/original-jay6.jpeg)
+[![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay6.jpeg#center)](http://static.leileiluoluo.com/2022/11/original-jay6.jpeg)
 
-[![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay7.jpeg#center)](http://ruf7zqsku.hb-bkt.clouddn.com/2022/11/original-jay7.jpeg)
+[![周杰倫磁帶](https://olzhy.github.io/static/images/uploads/2022/11/jay7.jpeg#center)](http://static.leileiluoluo.com/2022/11/original-jay7.jpeg)
 
-[![磁帶播放器](https://olzhy.github.io/static/images/uploads/2022/11/philips.jpeg#center)](http://ruf7zqsku.hb-bkt.clouddn.com/2022/11/original-philips.jpeg)
+[![磁帶播放器](https://olzhy.github.io/static/images/uploads/2022/11/philips.jpeg#center)](http://static.leileiluoluo.com/2022/11/original-philips.jpeg)
 
 ### 80 後記憶裡的玩具
 
@@ -47,10 +47,10 @@ description: 周杰倫的磁帶和80後記憶裡的玩具。
 
 從現在的眼光來看這些玩具，顯得略有點粗糙。但在當時，卻讓我們這些 80 後愛不釋手，玩的不亦樂乎！
 
-[![小時候的玩具](https://olzhy.github.io/static/images/uploads/2022/11/wanju1.jpeg#center)](http://ruf7zqsku.hb-bkt.clouddn.com/2022/11/original-wanju1.jpeg)
+[![小時候的玩具](https://olzhy.github.io/static/images/uploads/2022/11/wanju1.jpeg#center)](http://static.leileiluoluo.com/2022/11/original-wanju1.jpeg)
 
-[![小時候的玩具](https://olzhy.github.io/static/images/uploads/2022/11/wanju2.jpeg#center)](http://ruf7zqsku.hb-bkt.clouddn.com/2022/11/original-wanju2.jpeg)
+[![小時候的玩具](https://olzhy.github.io/static/images/uploads/2022/11/wanju2.jpeg#center)](http://static.leileiluoluo.com/2022/11/original-wanju2.jpeg)
 
-[![小時候的玩具](https://olzhy.github.io/static/images/uploads/2022/11/wanju3.jpeg#center)](http://ruf7zqsku.hb-bkt.clouddn.com/2022/11/original-wanju3.jpeg)
+[![小時候的玩具](https://olzhy.github.io/static/images/uploads/2022/11/wanju3.jpeg#center)](http://static.leileiluoluo.com/2022/11/original-wanju3.jpeg)
 
-[![小時候的玩具](https://olzhy.github.io/static/images/uploads/2022/11/wanju4.jpeg#center)](http://ruf7zqsku.hb-bkt.clouddn.com/2022/11/original-wanju4.jpeg)
+[![小時候的玩具](https://olzhy.github.io/static/images/uploads/2022/11/wanju4.jpeg#center)](http://static.leileiluoluo.com/2022/11/original-wanju4.jpeg)

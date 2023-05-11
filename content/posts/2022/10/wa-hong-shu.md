@@ -21,8 +21,8 @@ description: 週末挖紅薯。
 
 帶回家時，竟連那像大拇指那麼大小的都捨不得扔掉。
 
-[![挖红薯](https://olzhy.github.io/static/images/uploads/2022/10/wahongshu-1.jpg#center)](http://ruf7zqsku.hb-bkt.clouddn.com/2022/10/original-wahongshu-1.jpg)
+[![挖红薯](https://olzhy.github.io/static/images/uploads/2022/10/wahongshu-1.jpg#center)](http://static.leileiluoluo.com/2022/10/original-wahongshu-1.jpg)
 
-[![挖红薯](https://olzhy.github.io/static/images/uploads/2022/10/wahongshu-2.jpg#center)](http://ruf7zqsku.hb-bkt.clouddn.com/2022/10/original-wahongshu-2.jpg)
+[![挖红薯](https://olzhy.github.io/static/images/uploads/2022/10/wahongshu-2.jpg#center)](http://static.leileiluoluo.com/2022/10/original-wahongshu-2.jpg)
 
-[![挖红薯](https://olzhy.github.io/static/images/uploads/2022/10/wahongshu-3.jpg#center)](http://ruf7zqsku.hb-bkt.clouddn.com/2022/10/original-wahongshu-3.jpg)
+[![挖红薯](https://olzhy.github.io/static/images/uploads/2022/10/wahongshu-3.jpg#center)](http://static.leileiluoluo.com/2022/10/original-wahongshu-3.jpg)
