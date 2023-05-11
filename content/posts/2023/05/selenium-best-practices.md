@@ -18,13 +18,21 @@ keywords:
 description: Selenium 自动化测试最佳实践。
 ---
 
-前两篇文章「[Selenium WebDriver 基础使用](https://olzhy.github.io/posts/selenium-webdriver.html)」和「[Selenium WebDriver 高级特性使用](https://olzhy.github.io/posts/selenium-webdriver-advanced-features.html)」分别介绍了 Selenium WebDriver 的基础功能和高级功能的使用。通过阅读这两篇文章，我们知道如何使用 Selenium 对一个 Web 页面进行自动化测试。本文将接着探讨「构建一个 Selenium 自动化测试项目的最佳实践是什么样的？」，包括：一个好的 Selenium 测试项目的代码结构是什么样的？各种元素定位方法的适用场景是什么？怎么输出一个好的测试报告？下面会一一讨论。
+前两篇文章「[Selenium WebDriver 基础使用](https://olzhy.github.io/posts/selenium-webdriver.html)」和「[Selenium WebDriver 高级特性使用](https://olzhy.github.io/posts/selenium-webdriver-advanced-features.html)」分别介绍了 Selenium WebDriver 的基础功能和高级功能的使用。通过阅读这两篇文章，我们知道如何使用 Selenium 对一个 Web 页面进行自动化测试。本文将接着探讨「构建一个 Selenium 自动化测试项目的最佳实践是什么样的？」，包括：一个 Selenium 测试项目的好的代码结构是什么样的？各种元素定位方法的适用场景是什么？怎么输出一个好的测试报告？下面会一一讨论。
 
 ## 1 好的代码结构是什么样的？
 
+该部分将探讨一个 Selenium 测试项目的好的代码结构是什么样的？即如何组织与编排测试代码，从而让代码更简洁且更好维护。
+
+我们依然使用实际的例子来说明将要探讨的问题。
+
+下面是一个「[Selenium Web 表单示例页面](https://www.selenium.dev/selenium/web/web-form.html)」的自动化测试动图：
+
 ![Selenium Web 表单示例页面](https://olzhy.github.io/static/images/uploads/2023/05/selenium-web-form.gif#center)
 
-改造前的测试代码（[original_form_test.py](https://github.com/olzhy/python-exercises/blob/main/selenium-best-practices/page-object-model/original_form_test.py)）：
+可以看到，该图展示的自动化测试代码对表单页面进行了文本输入、密码输入、下拉框选项选择和日期输入，并点击了提交按钮，最后跳转至已提交页面。
+
+对应动图原始的 Python 测试代码（[original_form_test.py](https://github.com/olzhy/python-exercises/blob/main/selenium-best-practices/page-object-model/original_form_test.py)）如下：
 
 ```python
 from unittest import TestCase
@@ -73,14 +81,24 @@ class TestForm(TestCase):
         self.assertEqual(message, 'Received!')
 ```
 
-页面对象模型（Page Object Model）借鉴了面向对象编程思想，是一种在自动化测试中被广泛使用的设计模式，用于减少重复代码并增加代码的可维护性。页面对象是一个面向对象的类，其将同一页面的 Web 元素存储在同一个对象中；当需要与该对象的 UI 进行交互时，不直接访问该页面的 Web 元素，而通过调用该对象提供的方法来实现。这样做的好处是如果某个页面的 UI 发生了改变，测试代码无须更改，只需要更改对应页面对象内的代码即可。
+可以看到，这是一种常见的最直接的测试代码编写方式。
 
-此外，使用页面对象模型的好处还有：
+然而这种写法存在几个问题：
 
-- 测试代码与特定于页面的代码分离；
-- 页面元素和功能被封装在页面对象的属性和方法中，而不是让其分散在整个测试代码中。
+- 测试代码（`assertEqual(..., ...)`）和定位与操作元素的代码（`find_element(..., ...) ... send_keys(...)`）耦合在一起。这样，如果元素定位标识发生变化或者元素操作方式发生变化，这块测试代码都需要修改。
 
-改造后的项目目录结构：
+- 如果要编写针对该页面本身或者依赖该页面的其它测试代码，定位与操作元素的代码都需要重写一遍。
+
+要解决如上问题，须从代码结构与代码编排上着手，即引入一种设计模式 —— 页面对象模型。
+
+**页面对象模型（Page Object Model）借鉴了面向对象编程的思想，是一种在自动化测试中被广泛使用的设计模式，用于减少重复代码并增加代码的可维护性。页面对象是一个面向对象的类，其将同一页面的 Web 元素存储在同一个对象中；当需要与该对象的 UI 进行交互时，不直接访问该页面的 Web 元素，而通过调用该对象提供的方法来实现。这样做的好处是如果某个页面的 UI 发生了改变，测试代码无须更改，只需要更改对应页面对象内的代码即可。**
+
+总结一下，使用页面对象模型的好处包括：
+
+- 测试代码与特定于页面的代码分离（增加了简洁性）；
+- 页面元素和功能被封装在页面对象的属性和方法中，而不是让其分散在整个测试代码中（减少了重复代码并增加了可维护性）。
+
+下面就使用页面对象模型设计一下测试项目的目录结构：
 
 ```shell
 $ tree
@@ -90,6 +108,10 @@ $ tree
 │   └─ form_target.py
 └─ optimized_form_test.py
 ```
+
+可以看到，针对各个页面的页面对象被放在`pages`目录下，测试用例需要时调用其方法即可。
+
+下面看一下优化后的代码。
 
 `Form`页面对象代码（[form.py](https://github.com/olzhy/python-exercises/blob/main/selenium-best-practices/page-object-model/form.py)）：
 
@@ -148,7 +170,7 @@ class FormTarget:
         return self.driver.find_element(By.ID, 'message').text
 ```
 
-测试代码（[optimized_form_test.py](https://github.com/olzhy/python-exercises/blob/main/selenium-best-practices/page-object-model/optimized_form_test.py)）：
+使用如上两个页面对象后的测试代码（[optimized_form_test.py](https://github.com/olzhy/python-exercises/blob/main/selenium-best-practices/page-object-model/optimized_form_test.py)）：
 
 ```python
 from unittest import TestCase
@@ -187,6 +209,8 @@ class TestForm(TestCase):
         message = FormTarget(self.driver).get_message_text()
         self.assertEqual(message, 'Received!')
 ```
+
+可以看到，经过优化后的代码清晰了许多。
 
 > 参考资料
 >
