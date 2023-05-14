@@ -132,3 +132,7 @@ wip_template:
 - [Bootstrap](https://getbootstrap.com/)
 - [网道 JavaScript 教程](https://wangdoc.com/javascript/)
 - [ES6 入门教程](https://es6.ruanyifeng.com/)
+
+**实用工具相关**
+
+- [在线 GIF 图片制作](https://ezgif.com/make/)
