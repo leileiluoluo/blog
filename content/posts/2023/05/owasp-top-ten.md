@@ -49,3 +49,7 @@ OWASP Top 10 是 OWASP 组织定期更新的一份风险报告，其由世界各
 > [2] [OWASP Top Ten | OWASP Foundation - owasp.org](https://owasp.org/www-project-top-ten/)
 >
 > [3] [What is OWASP? What is the OWASP Top 10? | Cloudflare - www.cloudflare.com](https://www.cloudflare.com/learning/security/threats/owasp-top-10/)
+>
+> [4] [OWASP Top 10 2021 全新出炉 | 郑州市网络安全协会 - www.zzwa.org.cn](https://www.zzwa.org.cn/3007/)
+>
+> [5] [OWASP—Top10（2021 知识总结）| CSDN 博客 - blog.csdn.net](https://blog.csdn.net/weixin_45996361/article/details/123683993)
