@@ -13,7 +13,7 @@ keywords:
   - 网络安全
   - OWASP
   - Top 10
-description: 什么是 OWASP Top 10？
+description: 本文介绍什么是 OWASP？ 以及什么是 OWASP Top 10？
 ---
 
 OWASP（Open Worldwide Application Security Project，开放全球应用程序安全项目）是一个致力于提高软件安全性的非营利性组织，其提供 Web 应用程序安全领域的标准、工具和指导手册，被业界大量的企业作为权威来参考。
