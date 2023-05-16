@@ -87,6 +87,25 @@ OWASP Top 10 是 OWASP 组织定期更新的一份风险报告，其由世界各
 
 ## 3 注入
 
+注入为收集的数据集中名列第三的风险。需要注意的 CWE 有：跨站点脚本（CWE-79）、SQL 注入（CWE-89）和文件名或路径的外部控制（CWE-73）。
+
+**应用程序在如下情况易受到攻击：**
+
+- 应用程序未对用户提供的数据进行校验、过滤和清洗；
+- 动态查询或无上下文感知转义的非参数化调用直接在解释器中使用；
+- 在 ORM（Object Relational Mapping，对象关系映射）搜索参数中使用恶意数据来提取额外的敏感记录；
+- 直接使用或连接恶意数据。 SQL（Structured Query Language，结构化查询语言）或命令包含动态查询、命令或存储过程中的结构和恶意数据。
+
+常见的注入有：SQL 注入、NoSQL（Not Only SQL，非结构化查询语言）注入、OS（Operating System，操作系统）命令注入、ORM 注入、LDAP（Lightweight Directory Access Protocol， 轻型目录访问协议）注入、EL（Expression Language，表达式语言）注入和 OGNL（Object Graph Navigation Language，对象图导航语言）注入。
+
+Code Review（源代码审查）是检测应用程序是否易受注入威胁的最佳方法。建议将请求参数、请求头、Cookie、JSON 请求体、SOAP 数据体和 XML 数据体进行自动化测试。此外，还建议在 CI/CD（Continuous Integration and Continuous Delivery，持续集成和持续交付）流水线中加入 SAST（Static Application Security Testing，静态应用安全测试）、DAST（Dynamic Application Security Testing，动态应用安全测试）和 IAST（Interactive Application Security Testing，交互式应用安全测试）等多种安全测试来提前发现可能的注入风险。
+
+**预防措施：**
+
+- 首选方案是使用安全的 API（避免完全使用解释器、提供参数化接口、规范使用 ORM 工具）；
+- 对于任何残留的动态查询，对解释器使用特定的转义语法来转义特殊字符；
+- 在查询中使用`LIMIT`或其它 SQL 控件，以防止在 SQL 注入的情况下大量泄露记录。
+
 ## 4 不安全的设计
 
 ## 5 安全配置错误
