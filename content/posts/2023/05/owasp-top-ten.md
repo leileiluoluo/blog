@@ -237,7 +237,7 @@ Code Review（源代码审查）是检测应用程序是否易受注入威胁的
 
 ## 10 服务端请求伪造
 
-Web 应用程序在获取远程资源时没有验证用户所提供的 URL，就会出现服务端请求伪造（Server-Side Request Forgery，SSRF）风险。它允许攻击者即使受到防火墙、VPN 或 ACL (Access Control List，网络访问控制列表) 的保护下，强制应用程序发送一个精心构造的请求到一个意想不到的目的地。
+Web 应用程序在获取远程资源时没有验证用户所提供的 URL，就会出现服务端请求伪造（Server-Side Request Forgery，SSRF）风险。它允许攻击者即使受到防火墙、VPN 或 ACL (Access Control List，网络访问控制列表) 的保护下，强制应用程序也能发送一个精心构造的请求到一个意想不到的目的地。
 
 **预防措施：**
 
