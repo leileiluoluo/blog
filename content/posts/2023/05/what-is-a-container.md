@@ -10,7 +10,6 @@ tags:
   - 云原生
 keywords:
   - 容器
-  - Docker
 description: 一文了解什么是容器
 ---
 
