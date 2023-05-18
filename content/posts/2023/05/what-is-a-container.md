@@ -31,6 +31,14 @@ description: 一文了解什么是容器
 
 ## 2 容器与虚拟机有何不同？
 
+容器与虚拟机都属于虚拟化技术且都具有类似的资源隔离和分配上的优势，但两者的一个主要的不同点是：容器虚拟化了操作系统，而虚拟机虚拟化了硬件。
+
+- 容器的特点
+
+  容器是应用层的抽象，
+
+- 虚拟机的特点
+
 ## 3 容器有哪些使用场景？
 
 ## 4 容器编排是什么？
@@ -46,3 +54,5 @@ description: 一文了解什么是容器
 > [4] [What are Containers and How Do They Work? | Ridge Cloud - www.ridge.co](https://www.ridge.co/blog/what-are-containers/)
 >
 > [5] [What is a Container and How Does it Work? | DevopsCube - devopscube.com](https://devopscube.com/what-is-a-container-and-how-does-it-work/)
+>
+> [6] [Containers vs Virtual Machines | Atlassian - www.atlassian.com](https://www.atlassian.com/microservices/cloud-computing/containers-vs-vms)
