@@ -74,6 +74,8 @@ description: 一文了解什么是容器，包括：为什么要使用容器？�
 
 ## 4 容器编排是什么？
 
+容器编排是对容器化应用进行自动化管理（包括：调度、扩展和网络通信等）的平台。
+
 > 参考资料
 >
 > [1] [What is a Container? | Docker - www.docker.com](https://www.docker.com/resources/what-container/)
@@ -87,3 +89,5 @@ description: 一文了解什么是容器，包括：为什么要使用容器？�
 > [5] [What is a Container and How Does it Work? | DevopsCube - devopscube.com](https://devopscube.com/what-is-a-container-and-how-does-it-work/)
 >
 > [6] [Containers vs Virtual Machines | Atlassian - www.atlassian.com](https://www.atlassian.com/microservices/cloud-computing/containers-vs-vms)
+>
+> [7] [What is container orchestration? | RedHat - www.redhat.com](https://www.redhat.com/en/topics/containers/what-is-container-orchestration)
