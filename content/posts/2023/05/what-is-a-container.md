@@ -31,11 +31,13 @@ description: 一文了解什么是容器
 
 ## 2 容器与虚拟机有何不同？
 
-容器与虚拟机都属于虚拟化技术且都具有类似的资源隔离和分配上的优势，但两者的一个主要的不同点是：容器虚拟化了操作系统，而虚拟机虚拟化了硬件。
+虚拟化是一种将 RAM、CPU、磁盘或网络等系统单一资源虚拟化为多个资源的过程。容器与虚拟机都属于虚拟化技术且都具有类似的资源隔离和分配上的优势，但两者最主要的不同点是：容器仅将整个机器虚拟化到了操作系统层，而虚拟机则将其虚拟化到了硬件层。
+
+![集装箱](https://olzhy.github.io/static/images/uploads/2023/05/containers-vs-virtual-machines.png#center)
+
+{{% center %}}（图片引用自 [Atlassian](https://www.atlassian.com/microservices/cloud-computing/containers-vs-vms)）{{% /center %}}
 
 - 容器的特点
-
-  容器是应用层的抽象，
 
 - 虚拟机的特点
 
