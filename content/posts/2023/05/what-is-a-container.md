@@ -10,14 +10,17 @@ tags:
   - 云原生
 keywords:
   - 容器
-description: 一文了解什么是容器
+  - 虚拟机
+  - 使用场景
+  - 容器编排
+description: 一文了解什么是容器，包括：为什么要使用容器？容器与虚拟机有何不同？容器有哪些使用场景？容器编排是什么？
 ---
 
 正如运输行业使用集装箱作为标准单元来包装货物以便快速装卸与运输一样，软件行业也在越来越多的使用容器作为标准单元来打包应用程序以便简化应用程序的迁移。
 
-![集装箱](https://olzhy.github.io/static/images/uploads/2023/05/physical-containers.jpg#center)
+![现实生活中的集装箱](https://olzhy.github.io/static/images/uploads/2023/05/physical-containers.jpg#center)
 
-{{% center %}}（图片引用自 [Ridge Cloud](https://www.ridge.co/blog/what-are-containers/)）{{% /center %}}
+{{% center %}}（现实生活中的集装箱 - 引用自 [Ridge Cloud](https://www.ridge.co/blog/what-are-containers/)）{{% /center %}}
 
 所以容器到底是什么呢？容器就是一个将软件代码和其所有依赖项打包在一起的标准单元。使用容器后，运行在一个计算环境的应用程序，可以快速可靠的运行在另一个计算环境上。
 
@@ -31,15 +34,23 @@ description: 一文了解什么是容器
 
 ## 2 容器与虚拟机有何不同？
 
-虚拟化是一种将 RAM、CPU、磁盘或网络等系统单一资源虚拟化为多个资源的过程。容器与虚拟机都属于虚拟化技术且都具有类似的资源隔离和分配上的优势，但两者最主要的不同点是：容器仅将整个机器虚拟化到了操作系统层，而虚拟机则将其虚拟化到了硬件层。
+虚拟化是一种将 RAM、CPU、磁盘或网络等系统单一资源虚拟化为多个资源的过程。容器（Containers）与虚拟机（Virtual Machines）都属于虚拟化技术且都具有类似的资源隔离和分配上的优势，但两者最主要的不同点是：容器仅将整个机器虚拟化到了操作系统层，而虚拟机则将其虚拟化到了硬件层。
 
-![集装箱](https://olzhy.github.io/static/images/uploads/2023/05/containers-vs-virtual-machines.png#center)
+![容器与虚拟机对比](https://olzhy.github.io/static/images/uploads/2023/05/containers-vs-virtual-machines.png#center)
 
-{{% center %}}（图片引用自 [Atlassian](https://www.atlassian.com/microservices/cloud-computing/containers-vs-vms)）{{% /center %}}
+{{% center %}}（容器与虚拟机在机器上的分层对比 - 引用自 [Atlassian](https://www.atlassian.com/microservices/cloud-computing/containers-vs-vms)）{{% /center %}}
 
 - 容器的特点
 
+  容器是在应用层将代码和依赖项打包在一起的抽象。容器引擎（Container Engine）允许多个容器以共享操作系统内核的方式在同一台机器上运行，它们是用户空间中的独立进程。容器较虚拟机占用更少的空间（容器镜像一般占用约几十 MB 的空间）且可处理更多的应用程序。
+
+  容器的优点是体积轻、启动快，只要基础镜像一致，就可以在任何地方运行。缺点是不可在不同操作系统间移植（如：Linux 容器不能运行在 Windows 上）。
+
 - 虚拟机的特点
+
+  虚拟机是将一台服务器变成多台服务器的物理硬件的抽象。虚拟机管理程序（Hypervisor）允许多个虚拟机以共享硬件资源的方式在同一台机器上运行。每个虚拟机都包含了操作系统、应用程序、必要的二进制文件和系统库的完成副本（占用约几十 GB 的空间）。
+
+  虚拟机的优点是允许在同一台机器上运行不同的操作系统。缺点是占用空间大、启动慢。
 
 ## 3 容器有哪些使用场景？
 
