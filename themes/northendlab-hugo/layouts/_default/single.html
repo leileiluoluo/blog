@@ -32,6 +32,12 @@
           {{- end -}}
         </div>
       </div>
+      
+      <!-- related -->
+      {{ if .Site.Params.related.enable }}
+      {{ template "partials/related.html" . }}
+      {{ end }}
+      
       {{ if .Site.DisqusShortname}}
       <div class="col-lg-8 mx-auto block shadow">
         <!-- comments -->

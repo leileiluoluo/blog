@@ -175,6 +175,10 @@ enable = true
 [params.baidu_tongji]
 enable = true
 
+# related posts
+[params.related]
+enable = true
+
 
 ############################# Social Site ##########################
 [[params.social]]
@@ -199,3 +203,21 @@ title = "网站 RSS"
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
+# related posts
+[related]
+  includeNewer = true
+  threshold = 80
+  toLower = false
+
+  [[related.indices]]
+    name = "title"
+    weight = 30
+
+  [[related.indices]]
+    name = "tags"
+    weight = 30
+
+  [[related.indices]]
+    name = "date"
+    weight = 10
