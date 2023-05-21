@@ -51,6 +51,8 @@ Docker 使用的是 C/S（客户端-服务器）架构。
 
 ![Docker 架构](https://olzhy.github.io/static/images/uploads/2023/05/docker-architecture.svg#center)
 
+{{% center %}}（Docker 架构 - 引用自 [Docker Documentation](https://docs.docker.com/get-started/overview/)）{{% /center %}}
+
 ## 2 Docker 安装
 
 ## 3 Docker 初步使用
