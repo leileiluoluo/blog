@@ -47,6 +47,10 @@ Docker 提供工具和平台来管理容器的生命周期，包括:
 
 ### 1.3 Docker 架构
 
+Docker 使用的是 C/S（客户端-服务器）架构。
+
+![Docker 架构](https://olzhy.github.io/static/images/uploads/2023/05/docker-architecture.svg#center)
+
 ## 2 Docker 安装
 
 ## 3 Docker 初步使用
