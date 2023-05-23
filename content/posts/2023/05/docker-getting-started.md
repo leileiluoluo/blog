@@ -12,7 +12,10 @@ tags:
 keywords:
   - Docker
   - 初探
-description: Docker 初探。
+  - 概览
+  - 安装
+  - 使用
+description: 本文对 Docker 进行了初探，包括 Docker 概览、Docker 安装和 Docker 的初步使用。
 ---
 
 上文「[一文了解什么是容器](https://olzhy.github.io/posts/what-is-a-container.html)」介绍了容器的基本概念，本文接着介绍当前最流行的容器提供商 Docker，并对其进行初步使用。
@@ -52,6 +55,36 @@ Docker 使用的是 C/S（客户端-服务器）架构。
 ![Docker 架构](https://olzhy.github.io/static/images/uploads/2023/05/docker-architecture.svg#center)
 
 {{% center %}}（Docker 架构 - 引用自 [Docker Documentation](https://docs.docker.com/get-started/overview/)）{{% /center %}}
+
+Docker 客户端和 Docker 守护程序（负责构建、运行和分发 Docker 容器）使用 UNIX 套接字或网络接口之上的 REST API 进行通信。Docker 客户端与 Docker 守护程序可位于同一系统，也可以位于不同的系统上（Docker 客户端可连接远程的 Docker 守护程序）。Docker Compose 也算 Docker 客户端的一种，其允许处理由一组容器组成的应用程序。
+
+- Docker 守护程序
+
+  Docker 守护程序（`dockerd`）负责监听 Docker API 请求并管理 Docker 对象（镜像、容器、网络和卷等）。Docker 守护程序还可以与其它守护程序进行通信来管理 Docker 服务。
+
+- Docker 客户端
+
+  Docker 客户端（`docker`）是与 Docker 交互的主要方式。当使用诸如`docker run`之类的命令时，Docker 客户端会使用 Docker API 调用守护程序`dockerd`，守护程序`dockerd`会处理这些命令。Docker 客户端可与多个守护程序进行通信。
+
+- Docker 桌面
+
+  Docker 桌面是一个「All in One」安装包，包含了 Docker 客户端、Docker 守护程序、Docker Compose、Kubernetes 和凭证助手等功能。
+
+- Docker 镜像仓库
+
+  Docker 镜像仓库用于存储 Docker 镜像。Docker Hub 是一个所有人都可以使用的镜像仓库，也是 Docker 默认的镜像存储仓库。
+
+- Docker 对象
+
+  我们使用 Docker 时，主要是使用镜像、容器、网络、卷或插件等 Docker 对象，下面会简单介绍下镜像和容器这两个对象。
+
+  - 镜像
+
+    Docker 镜像是一个包含命令的创建 Docker 容器的只读模板。通常，一个镜像依赖另一个镜像并有一些额外的定制。
+
+    创建自己的 Docker 镜像时，使用`Dockerfile`来定义构建与运行镜像的所需步骤。`Dockerfile`中的每条命令都会在镜像中创建一个层，当修改`Dockerfile`并重新构建镜像时，只有变化的层会被重新构建，这也是容器镜像比其它虚拟技术更轻量快速的原因。
+
+  - 容器
 
 ## 2 Docker 安装
 
