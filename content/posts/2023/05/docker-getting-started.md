@@ -135,12 +135,17 @@ EXPOSE 3000
 然后，在`getting-started/app`文件夹下执行如下命令来构建镜像：
 
 ```shell
+# -t 表示给镜像起一个名字
+# . 表示在当前文件夹寻找 Dockerfile
 docker build -t getting-started .
 ```
 
 镜像构建完成后，使用如下命令来启动容器：
 
 ```shell
+# -d 表示以后台方式运行
+# -p 表示使用主机的 3000 端口映射容器的 3000 端口
+# getting-started 即是要运行的镜像名
 docker run -dp 3000:3000 getting-started
 ```
 
