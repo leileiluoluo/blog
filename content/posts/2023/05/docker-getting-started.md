@@ -68,7 +68,7 @@ Docker 客户端和 Docker 守护程序（负责构建、运行和分发 Docker 
 
 - Docker 桌面
 
-  Docker 桌面是一个「All in One」安装包，包含了 Docker 客户端、Docker 守护程序、Docker Compose、Kubernetes 和凭证助手等功能。
+  Docker 桌面是一个「全家桶」安装包，包含了 Docker 客户端、Docker 守护程序、Docker Compose、Kubernetes 和凭证助手等功能。
 
 - Docker 镜像仓库
 
