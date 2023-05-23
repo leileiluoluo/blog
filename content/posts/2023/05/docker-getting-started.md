@@ -94,9 +94,57 @@ Docker 客户端和 Docker 守护程序（负责构建、运行和分发 Docker 
 
 ## 2 Docker 安装
 
-最直接最快速安装 Docker 的方法就是安装 Docker 桌面。本文使用的操作系统为 MacOS，直接从「Docker Desktop for Mac」下载最新的版本，双击后一步步「Accept」即可。
+最直接快速安装 Docker 的方法就是安装 Docker 桌面。本文使用的操作系统为 MacOS，直接从「[Docker Desktop for Mac](https://docs.docker.com/get-docker/)」下载最新的版本，双击运行后「Accept」即可。
 
 ## 3 Docker 初步使用
+
+### 3.1 对应用程序进行容器化
+
+下面使用一个`Node.js`示例应用程序来演示 Docker 的初步使用。
+
+开始前，先将代码克隆下来：
+
+```shell
+git clone https://github.com/docker/getting-started.git
+```
+
+然后可以看到`getting-started/app`文件夹下有两子个子文件夹`src`和`spec`，以及一个`package.json`文件。
+
+```text
+getting-started
+├─ app
+│   ├─ src/
+|   ├─ spec/
+│   └─ package.json
+└─ ...
+```
+
+下面，在`getting-started/app`文件夹下新建一个`Dockerfile`文件，并为其添加如下内容：
+
+```dockerfile
+# syntax=docker/dockerfile:1
+
+FROM node:18-alpine
+WORKDIR /app
+COPY . .
+RUN yarn install --production
+CMD ["node", "src/index.js"]
+EXPOSE 3000
+```
+
+然后，在`getting-started/app`文件夹下执行如下命令来构建镜像：
+
+```shell
+docker build -t getting-started .
+```
+
+镜像构建完成后，使用如下命令来启动容器：
+
+```shell
+docker run -dp 3000:3000 getting-started
+```
+
+这样，即可以使用`http://localhost:3000`对应用程序进行访问了。
 
 > 参考资料
 >
