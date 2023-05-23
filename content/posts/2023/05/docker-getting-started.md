@@ -94,6 +94,8 @@ Docker 客户端和 Docker 守护程序（负责构建、运行和分发 Docker 
 
 ## 2 Docker 安装
 
+最直接最快速安装 Docker 的方法就是安装 Docker 桌面。本文使用的操作系统为 MacOS，直接从「Docker Desktop for Mac」下载最新的版本，双击后一步步「Accept」即可。
+
 ## 3 Docker 初步使用
 
 > 参考资料
