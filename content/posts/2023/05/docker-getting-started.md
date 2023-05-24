@@ -132,7 +132,7 @@ CMD ["node", "src/index.js"]
 EXPOSE 3000
 ```
 
-然后，在`getting-started/app`文件夹下执行如下命令来构建镜像：
+然后，在`getting-started/app`文件夹下执行`docker build`命令来构建镜像：
 
 ```shell
 # -t 表示给镜像起一个名字
@@ -140,7 +140,7 @@ EXPOSE 3000
 docker build -t getting-started .
 ```
 
-镜像构建完成后，使用如下命令来启动容器：
+镜像构建完成后，使用`docker run`命令来启动容器：
 
 ```shell
 # -d 表示以后台方式运行
@@ -150,6 +150,10 @@ docker run -dp 3000:3000 getting-started
 ```
 
 这样，即可以使用`http://localhost:3000`对应用程序进行访问了。
+
+此外，还可以使用`docker ps`命令来查看容器状态，使用`docker stop`命令来停止容器，以及对停止的容器使用`docker rm`来进行移除。
+
+### 3.2 镜像推送与分享
 
 > 参考资料
 >
