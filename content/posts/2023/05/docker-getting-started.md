@@ -94,9 +94,94 @@ Docker 客户端和 Docker 守护程序（负责构建、运行和分发 Docker 
 
 ## 2 Docker 安装
 
-最直接最快速安装 Docker 的方法就是安装 Docker 桌面。本文使用的操作系统为 MacOS，直接从「Docker Desktop for Mac」下载最新的版本，双击后一步步「Accept」即可。
+最直接快速安装 Docker 的方法就是安装 Docker 桌面。本文使用的操作系统为 MacOS，直接从「[Docker Desktop for Mac](https://docs.docker.com/get-docker/)」下载最新的版本，双击运行后「Accept」即可。
 
 ## 3 Docker 初步使用
+
+### 3.1 对应用程序进行容器化
+
+下面使用一个`Node.js`示例应用程序来演示 Docker 的初步使用。
+
+开始前，先将代码克隆下来：
+
+```shell
+git clone https://github.com/docker/getting-started.git
+```
+
+然后可以看到`getting-started/app`文件夹下有两子个子文件夹`src`和`spec`，以及一个`package.json`文件。
+
+```text
+getting-started
+├─ app
+│   ├─ src/
+|   ├─ spec/
+│   └─ package.json
+└─ ...
+```
+
+下面，在`getting-started/app`文件夹下新建一个`Dockerfile`文件，并为其添加如下内容：
+
+```dockerfile
+# syntax=docker/dockerfile:1
+
+FROM node:18-alpine
+WORKDIR /app
+COPY . .
+RUN yarn install --production
+CMD ["node", "src/index.js"]
+EXPOSE 3000
+```
+
+然后，在`getting-started/app`文件夹下执行`docker build`命令来构建镜像：
+
+```shell
+# -t 表示给镜像起一个名字
+# . 表示在当前文件夹寻找 Dockerfile
+docker build -t getting-started .
+```
+
+镜像构建完成后，使用`docker run`命令来启动容器：
+
+```shell
+# -d 表示以后台方式运行
+# -p 表示使用主机的 3000 端口映射容器的 3000 端口
+# getting-started 即是要运行的镜像名
+docker run -dp 3000:3000 getting-started
+```
+
+这样，即可以使用`http://localhost:3000`对应用程序进行访问了。
+
+此外，还可以使用`docker ps`命令来查看容器状态，使用`docker stop`命令来停止容器，以及对停止的容器使用`docker rm`来进行移除。
+
+### 3.2 镜像推送与分享
+
+下面，尝试将镜像推送到「[Docker Hub](https://hub.docker.com/)」。
+
+开始前，首先需要注册一个 Docker Hub 账号，我的账号为 olzhy。
+
+接着，使用`docker login`命令登录到 Docker Hub：
+
+```shell
+docker login
+```
+
+然后，使用`docker tag`命令将`getting-started`镜像重命名：
+
+```shell
+docker tag getting-started olzhy/getting-started
+```
+
+最后，使用`docker push`命令将镜像推送至 Docker Hub：
+
+```shell
+docker push olzhy/getting-started
+```
+
+这样，别人即可以在任何安装 Docker 的机器上使用我们刚刚推送的镜像了：
+
+```shell
+docker run -dp 3000:3000 olzhy/getting-started
+```
 
 > 参考资料
 >
