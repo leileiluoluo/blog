@@ -353,6 +353,8 @@ volumes:
   todo-mysql-data:
 ```
 
+可以看到，配置非常的简单明了。
+
 然后，使用如下命令启动容器：
 
 ```shell
@@ -424,7 +426,9 @@ CMD ["node", "src/index.js"]
 
 下面用两个具体的例子来说明如何进行多阶段构建。
 
-一个是 Maven/Tomcat 应用程序的例子，`Dockerfile`文件内容如下：
+一个是 Maven/Tomcat 应用程序的例子：当构建一个使用 Maven 管理的 Java 应用程序时，JDK 是必需的；而在运行时，JDK 和 Maven 却不是必需的。这时就可以使用多阶段构建来帮忙了。
+
+使用了多阶段构建的`Dockerfile`文件内容看起来应当是如下这样：
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -437,7 +441,7 @@ FROM tomcat
 COPY --from=build /app/target/file.war /usr/local/tomcat/webapps
 ```
 
-该例子中第一个阶段（`build`）基于`Maven`环境将 Java 源码编译为一个`war`包；第二个阶段准备了一个 Tomcat 环境，然后将`war`包拷贝到了对应的位置。
+该例子中第一个阶段（`build`）基于`Maven`环境将 Java 源码编译为一个`war`包；第二个阶段准备了一个 Tomcat 环境，然后将`war`包拷贝到了对应的位置。最终的镜像只有 Tomcat 这个，省去了很多没必要的内容。
 
 另一个是 React 应用程序的例子，`Dockerfile`文件内容如下：
 
