@@ -108,7 +108,7 @@ Docker 客户端和 Docker 守护程序（负责构建、运行和分发 Docker 
 git clone https://github.com/docker/getting-started.git
 ```
 
-然后可以看到`getting-started/app`文件夹下有两子个子文件夹`src`和`spec`，以及一个`package.json`文件。
+然后可以看到`getting-started/app`文件夹下有两个子文件夹`src`和`spec`，以及一个`package.json`文件。
 
 ```text
 getting-started
