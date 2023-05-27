@@ -100,7 +100,7 @@ Docker 客户端和 Docker 守护程序（负责构建、运行和分发 Docker 
 
 ### 3.1 对应用程序进行容器化
 
-下面使用一个`Node.js`示例应用程序来演示 Docker 的初步使用。
+下面使用一个`Node.js`编写的「待办列表」示例应用程序来演示 Docker 的使用。
 
 开始前，先将代码克隆下来：
 
@@ -177,11 +177,53 @@ docker tag getting-started olzhy/getting-started
 docker push olzhy/getting-started
 ```
 
-这样，别人即可以在任何安装 Docker 的机器上使用我们刚刚推送的镜像了：
+这样，任何人即可以在安装了 Docker 的机器上使用我们刚刚推送的镜像了：
 
 ```shell
 docker run -dp 3000:3000 olzhy/getting-started
 ```
+
+### 3.3 数据库持久化
+
+目前的这个「待办列表」示例应用程序重启后，数据会丢失。这是因为未对数据库进行持久化，下面看一下如何持久化数据库。
+
+卷提供了将容器的特定文件系统路径连接到主机的功能。
+
+「待办列表」示例应用程序使用的是 SQLite 数据库，其数据存储在文件`/etc/todos/todo.db`中。
+
+下面，使用`docker volume create`命令创建一个卷：
+
+```shell
+docker volume create todo-db
+```
+
+然后，指定挂载的卷，并启动容器：
+
+```shell
+docker run -dp 3000:3000 --mount type=volume,src=todo-db,target=/etc/todos getting-started
+```
+
+启动完成后，增加一些数据。这时，停止并移除上述容器后，再次使用如上命令启动新的容器时，仍可以看到之前添加的数据。
+
+最后，使用`docker volume inspect`命令看一下数据到底存到了哪里：
+
+```shell
+docker volume inspect todo-db
+
+[
+    {
+        "CreatedAt": "2023-05-21T02:27:07Z",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/todo-db/_data",
+        "Name": "todo-db",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+```
+
+挂载点（Mountpoint）显示了数据在主机的具体位置。
 
 > 参考资料
 >
