@@ -372,6 +372,91 @@ docker compose down
 
 ### 3.6 镜像构建最佳实践
 
+**利用分层缓存加快构建时间**
+
+基于`Dockerfile`进行镜像构建时，一旦某一层发生变化，后面的步骤都需要重新构建。
+
+看一下前面构建「待办列表」应用程序的`Dockerfile`文件：
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM node:18-alpine
+WORKDIR /app
+COPY . .
+RUN yarn install --production
+CMD ["node", "src/index.js"]
+```
+
+其存在几个问题：
+
+- COPY 时，未指定应当忽略的文件夹，`node_modules`会被拷贝进去；
+- 任何文件有修改时，都需要重新进行`yarn install`。
+
+下面，在当前文件夹下新建一个`.dockerignore`文件，并添加如下内容：
+
+```text
+node_modules
+```
+
+表示 COPY 时，忽略`node_modules`文件夹。
+
+接着，对`Dockerfile`文件进行一下改造，改造后的内容如下：
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM node:18-alpine
+WORKDIR /app
+COPY package.json yarn.lock ./
+RUN yarn install --production
+COPY . .
+CMD ["node", "src/index.js"]
+```
+
+改造的思路是：`yarn install`主要依赖`package.json`文件，所以将这两步放到一块，这样只要不改`package.json`这个文件，就不用重新进行`yarn install`。
+
+经过改造会，较之前会大大节省镜像的构建时间。
+
+**利用多阶段构建减小镜像体积**
+
+多阶段构建可以将构建时依赖项与运行时依赖项分开，并且可以通过仅提供运行所需的内容来减小镜像的体积。
+
+下面用两个具体的例子来说明如何进行多阶段构建。
+
+一个是 Maven/Tomcat 应用程序的例子，`Dockerfile`文件内容如下：
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM maven AS build
+WORKDIR /app
+COPY . .
+RUN mvn package
+
+FROM tomcat
+COPY --from=build /app/target/file.war /usr/local/tomcat/webapps
+```
+
+该例子中第一个阶段（`build`）基于`Maven`环境将 Java 源码编译为一个`war`包。第二个阶段准备了一个 Tomcat 环境，然后将`war`包拷贝到了对应的位置。
+
+另一个是 React 应用程序的例子，`Dockerfile`文件内容如下：
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM node:18 AS build
+WORKDIR /app
+COPY package* yarn.lock ./
+RUN yarn install
+COPY public ./public
+COPY src ./src
+RUN yarn run build
+
+FROM nginx:alpine
+COPY --from=build /app/build /usr/share/nginx/html
+```
+
+该例子中第一个阶段（`build`）基于`Node.js`环境将 JSX 源码文件和 SASS 样式文件编译为 HTML、JS 和 CSS 静态文件。第二个阶段仅需要一个 Nginx 环境，然后将这些静态文件拷贝到对应目录即可。
+
+综上，本文完成了对 Docker 的初探。阅读完本文，我们对 Docker 是什么、Docker 能做什么、Docker 的架构是什么样的以及 Docker 怎么使用都有了一个基本的了解。
+
 > 参考资料
 >
 > [1] [Get started | Docker Documentation - docs.docker.com](https://docs.docker.com/get-started/)
