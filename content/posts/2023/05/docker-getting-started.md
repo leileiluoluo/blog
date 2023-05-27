@@ -56,7 +56,7 @@ Docker 使用的是 C/S（客户端-服务器）架构。
 
 {{% center %}}（Docker 架构 - 引用自 [Docker Documentation](https://docs.docker.com/get-started/overview/)）{{% /center %}}
 
-Docker 客户端和 Docker 守护程序（负责构建、运行和分发 Docker 容器）使用 UNIX 套接字或网络接口之上的 REST API 进行通信。Docker 客户端与 Docker 守护程序可位于同一系统，也可以位于不同的系统上（Docker 客户端可连接远程的 Docker 守护程序）。Docker Compose 也算 Docker 客户端的一种，其允许处理由一组容器组成的应用程序。
+Docker 客户端和 Docker 守护程序（负责构建、运行和分发 Docker 容器）使用 UNIX 套接字或网络接口之上的 REST API 进行通信。Docker 客户端与 Docker 守护程序可位于同一系统，也可以位于不同的系统上（Docker 客户端可连接远程的 Docker 守护程序）。Docker Compose 也算 Docker 客户端的一种，其允许处理多个容器组成的应用程序。
 
 - Docker 守护程序
 
@@ -90,7 +90,7 @@ Docker 客户端和 Docker 守护程序（负责构建、运行和分发 Docker 
 
     默认情况下，容器与其它容器及主机是严格隔离的。当然，容器的网络、存储等与其它容器及主机的隔离程度是可以控制的。
 
-    **_补充说明：Docker 是使用 Go 语言编写的，且利用了 Linux 内核提供的特性。Docker 使用命名空间技术来提供容器的空间隔离_**
+    **_补充说明：Docker 是使用 Go 语言编写的，且利用了 Linux 内核提供的特性。Docker 使用命名空间技术来提供容器的空间隔离。_**
 
 ## 2 Docker 安装
 
