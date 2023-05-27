@@ -102,7 +102,7 @@ Docker 客户端和 Docker 守护程序（负责构建、运行和分发 Docker 
 
 下面使用一个`Node.js`编写的「待办列表」示例应用程序来演示 Docker 的使用。
 
-开始前，先将代码克隆下来：
+开始前，先将[代码](https://github.com/docker/getting-started)克隆下来：
 
 ```shell
 git clone https://github.com/docker/getting-started.git
@@ -149,7 +149,9 @@ docker build -t getting-started .
 docker run -dp 3000:3000 getting-started
 ```
 
-这样，即可以使用`http://localhost:3000`对应用程序进行访问了。
+这样，浏览器访问`http://localhost:3000`即可以看到应用程序了：
+
+![待办列表示例应用程序](https://olzhy.github.io/static/images/uploads/2023/05/todo-list-empty.png#center)
 
 此外，还可以使用`docker ps`命令来查看容器状态，使用`docker stop`命令来停止容器，以及对停止的容器使用`docker rm`来进行移除。
 
