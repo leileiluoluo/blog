@@ -236,7 +236,7 @@ docker run -dp 3000:3000 --mount type=bind,src=/tmp/todos,target=/etc/todos gett
 docker run -dp 3000:3000 -v /tmp/todos:/etc/todos getting-started
 ```
 
-### 3.4 多容器交互
+### 3.4 多容器应用
 
 下面，新建一个 MySQL 数据库容器，然后尝试用「待办列表」容器连接这个数据库。
 
@@ -312,6 +312,65 @@ mysql> select * from todo_items;
  | 2912a79e-8486-4bc3-a4c5-460793a575ab | Be awesome!        |         0 |
  +--------------------------------------+--------------------+-----------+
 ```
+
+### 3.5 使用 Docker Compose
+
+上面，启动多个容器时，需要考虑新建网络、启动容器，暴露端口和指定环境变量等一系列步骤。而如果使用 Docker Compose 的话，就会变得很简单。
+
+Docker Compose 是一个定义多容器应用程序的工具。
+
+下面，在`getting-started/app`文件夹下创建一个名为`docker-compose.yml`的文件。
+
+然后，将如下内容填充到该文件中：
+
+```yaml
+services:
+  app:
+    image: node:18-alpine
+    command: sh -c "yarn install && yarn run dev"
+    ports:
+      - 3000:3000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_DB: todos
+
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - todo-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: todos
+
+volumes:
+  todo-mysql-data:
+```
+
+然后，使用如下命令启动容器：
+
+```shell
+docker compose up -d
+```
+
+使用如下命令查看日志：
+
+```shell
+docker compose logs -f
+```
+
+测试完成后，可使用如下命令移除容器：
+
+```shell
+# 若要将 Volume 一并移除，需要加 --volumes 标记
+docker compose down
+```
+
+### 3.6 镜像构建最佳实践
 
 > 参考资料
 >
