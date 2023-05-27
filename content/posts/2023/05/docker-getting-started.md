@@ -187,7 +187,7 @@ docker run -dp 3000:3000 olzhy/getting-started
 
 目前的这个「待办列表」示例应用程序重启后，数据会丢失。这是因为未对数据库进行持久化，下面看一下如何持久化数据库。
 
-卷提供了将容器的特定文件系统路径连接到主机的功能。
+卷（Volume）提供了将容器的特定文件系统路径映射到主机的功能。
 
 「待办列表」示例应用程序使用的是 SQLite 数据库，其数据存储在文件`/etc/todos/todo.db`中。
 
@@ -224,6 +224,17 @@ docker volume inspect todo-db
 ```
 
 挂载点（Mountpoint）显示了数据在主机的具体位置。
+
+除了使用卷外，还可以使用绑定挂载（Bind Mounts）来将主机的任一文件或文件夹挂载到容器。
+
+使用方式与卷类似，下面是使用 Bind Mounts 挂载方式运行容器的命令：
+
+```shell
+docker run -dp 3000:3000 --mount type=bind,src=/tmp/todos,target=/etc/todos getting-started
+
+# 亦可以直接简化为 -v 方式
+docker run -dp 3000:3000 -v /tmp/todos:/etc/todos getting-started
+```
 
 > 参考资料
 >
