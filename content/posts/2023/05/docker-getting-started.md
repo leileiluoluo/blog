@@ -455,7 +455,7 @@ FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
 ```
 
-该例子中第一个阶段（`build`）基于`Node.js`环境将 JSX 源码文件和 SASS 样式文件编译为 HTML、JS 和 CSS 静态文件；第二个阶段仅需要一个 Nginx 环境，然后将这些静态文件拷贝到对应目录即可。
+该例子中第一个阶段（`build`）基于`Node.js`环境将 JSX 源码文件和 SASS 样式文件编译为 HTML、JS 和 CSS 静态文件；第二个阶段仅需要一个 Nginx 环境，然后将第一个阶段生成的静态文件拷贝到了对应目录。
 
 综上，本文完成了对 Docker 的初探。阅读完本文，我们对 Docker 是什么、Docker 能做什么、Docker 的架构是什么样的以及 Docker 怎么使用都有了一个基本的了解。
 
