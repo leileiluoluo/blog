@@ -236,6 +236,83 @@ docker run -dp 3000:3000 --mount type=bind,src=/tmp/todos,target=/etc/todos gett
 docker run -dp 3000:3000 -v /tmp/todos:/etc/todos getting-started
 ```
 
+### 3.4 多容器交互
+
+下面，新建一个 MySQL 数据库容器，然后尝试用「待办列表」容器连接这个数据库。
+
+两个容器需要使用网络进行通信，首先需要创建网络：
+
+```shell
+docker network create todo-app
+```
+
+接着，运行 MySQL 容器：
+
+```shell
+# 可以看到，挂载的时候，未创建卷 todo-mysql-data，这个时候 Docker 会自动帮我们创建
+docker run -d \
+     --network todo-app --network-alias mysql \
+     -v todo-mysql-data:/var/lib/mysql \
+     -e MYSQL_ROOT_PASSWORD=secret \
+     -e MYSQL_DATABASE=todos \
+     mysql:8.0
+```
+
+使用如下命令进入容器，尝试连接数据库并执行数据库命令：
+
+```shell
+docker exec -it <mysql-container-id> mysql -u root -p
+```
+
+```shell
+mysql> SHOW DATABASES;
+
++--------------------+
+ | Database           |
+ +--------------------+
+ | information_schema |
+ | mysql              |
+ | performance_schema |
+ | sys                |
+ | todos              |
+ +--------------------+
+ 5 rows in set (0.00 sec)
+```
+
+可以看到，数据库`todos`已被创建。
+
+下面，进入`getting-started/app`文件夹，使用如下命令来启动「待办列表」容器：
+
+```shell
+docker run -dp 3000:3000 \
+   -w /app -v "$(pwd):/app" \
+   --network todo-app \
+   -e MYSQL_HOST=mysql \
+   -e MYSQL_USER=root \
+   -e MYSQL_PASSWORD=secret \
+   -e MYSQL_DB=todos \
+   node:18-alpine \
+   sh -c "yarn install && yarn run dev"
+```
+
+访问应用程序，并增加一些条目。
+
+这时，查看数据库时，发现表里边已经写入了数据：
+
+```shell
+docker exec -it <mysql-container-id> mysql -p todos
+```
+
+```shell
+mysql> select * from todo_items;
+ +--------------------------------------+--------------------+-----------+
+ | id                                   | name               | completed |
+ +--------------------------------------+--------------------+-----------+
+ | c906ff08-60e6-44e6-8f49-ed56a0853e85 | Do amazing things! |         0 |
+ | 2912a79e-8486-4bc3-a4c5-460793a575ab | Be awesome!        |         0 |
+ +--------------------------------------+--------------------+-----------+
+```
+
 > 参考资料
 >
 > [1] [Get started | Docker Documentation - docs.docker.com](https://docs.docker.com/get-started/)
