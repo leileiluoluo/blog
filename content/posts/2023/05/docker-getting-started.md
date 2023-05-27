@@ -18,7 +18,7 @@ keywords:
 description: 本文对 Docker 进行了初探，包括 Docker 概览、Docker 安装和 Docker 的初步使用。
 ---
 
-上文「[一文了解什么是容器](https://olzhy.github.io/posts/what-is-a-container.html)」介绍了容器的基本概念，本文接着介绍当前最流行的容器提供商 Docker，并对其进行初步使用。
+上文「[一文了解什么是容器](https://olzhy.github.io/posts/what-is-a-container.html)」介绍了容器的基本概念，本文接着介绍当前最流行的容器平台 Docker，并对其进行初步使用。
 
 ## 1 Docker 概览
 
