@@ -31,7 +31,7 @@ description: 本文总结了使用 Docker 的几个最佳实践，包括：镜�
 
 - 使用多阶段构建
 
-  例如：对于 Maven 管理的 Java 应用程序，可在`Dockerfile`中编写两个阶段。第一个阶段使用`maven`镜像，将 Java 源码编译为`jar`包或`war`包；第二个阶段使用`tomcat`镜像，将第一个阶段生成的`jar`包或`war`包拷贝到对应位置。这样的话，最终的镜像只有`tomcat`这个阶段的部分，不会包括构建阶段的环境或拉取的依赖包，只有运行必须的包和环境。
+  例如：对于 Maven 管理的 Java 应用程序，可在`Dockerfile`中编写两个阶段。第一个阶段使用`maven`镜像，将 Java 源码编译为`jar`包或`war`包；第二个阶段使用`tomcat`镜像，将第一个阶段生成的`jar`包或`war`包拷贝到对应位置。这样的话，最终的镜像只有`tomcat`这个阶段的部分，不会包括编译阶段的环境或拉取的依赖包，只有运行必须的包和环境。
 
   针对该场景，具体`Dockerfile`的编写请参考上文「[镜像构建最佳实践：利用多阶段构建减小镜像体积 - Docker 初探](https://olzhy.github.io/posts/docker-getting-started.html#36-镜像构建最佳实践)」。
 
