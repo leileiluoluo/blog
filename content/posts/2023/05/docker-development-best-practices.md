@@ -35,6 +35,21 @@ description: 本文总结了使用 Docker 的几个最佳实践，包括：为�
 
   针对该场景，具体`Dockerfile`的编写请参考上文「[镜像构建最佳实践：利用多阶段构建减小镜像体积 - Docker 初探](https://olzhy.github.io/posts/docker-getting-started.html#36-镜像构建最佳实践)」。
 
+- 尝试减少镜像的层数
+
+  尝试合并`Dockerfile`中单独的`RUN`命令数量来减少镜像的层数。
+
+  如下的两个`Dockerfile`代码片段，第一个在镜像中创建了两层，而第二个仅创建了一层。
+
+  ```dockerfile
+  RUN apt-get -y update
+  RUN apt-get install -y python
+  ```
+
+  ```dockerfile
+  RUN apt-get -y update && apt-get install -y python
+  ```
+
 ## 2 持久化应用程序数据的最佳实践
 
 ## 3 测试镜像与部署容器的最佳实践
