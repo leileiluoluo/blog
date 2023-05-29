@@ -1,5 +1,5 @@
 ---
-title: Docker 构建安全镜像最佳实践
+title: 使用 Docker 构建安全镜像的几个最佳实践
 author: olzhy
 type: post
 date: 2023-05-29T08:00:00+08:00
@@ -13,7 +13,7 @@ keywords:
   - Docker
   - 安全镜像
   - 最佳实践
-description: Docker 构建安全镜像最佳实践。
+description: 使用 Docker 构建安全镜像的几个最佳实践。
 ---
 
 > 参考资料
