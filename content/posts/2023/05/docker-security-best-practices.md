@@ -24,6 +24,8 @@ description: 使用 Docker 构建安全镜像的几个最佳实践。
 
 满足需求的最小镜像是指尽量少包含或不包含无用的依赖项，以降低从依赖项引入漏洞的风险。
 
+## 2 使用多阶段构建
+
 > 参考资料
 >
 > [1] [Docker security best practices | Docker Documentation - docs.docker.com](https://docs.docker.com/develop/security-best-practices/)
