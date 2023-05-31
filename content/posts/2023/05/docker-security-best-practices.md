@@ -13,7 +13,7 @@ keywords:
   - Docker
   - 安全镜像
   - 最佳实践
-description: 使用 Docker 构建安全镜像的几个最佳实践。
+description: 使用 Docker 构建安全镜像的几个最佳实践，包括：选择正确的基础镜像、使用多阶段构建、关注基础镜像更新和定期做漏洞扫描等几个方面。
 ---
 
 前两篇文章「[Docker 初探](https://olzhy.github.io/posts/docker-getting-started.html)」与「[使用 Docker 的几个最佳实践](https://olzhy.github.io/posts/docker-development-best-practices.html)」分别介绍了 Docker 的基本概念与使用方法，以及 Docker 在基础使用上的几个最佳实践。本文接着介绍一下 Docker 在构建安全镜像上的几个最佳实践。
