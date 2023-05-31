@@ -28,6 +28,8 @@ description: 使用 Docker 构建安全镜像的几个最佳实践。
 
 ## 2 使用多阶段构建
 
+多阶段构建是指使用`Dockerfile`描述镜像构建步骤时，可以定义多个阶段，每个阶段使用不同的基础镜像，做不同的事情。而最后可以选择性的只将某些阶段生成的内容复制到最终阶段，而其它没必要的依赖项并不会带到最终的镜像。这样，多阶段构建不仅保证了最终镜像的轻巧，还避免了无关依赖项带来漏洞的风险。
+
 > 参考资料
 >
 > [1] [Docker security best practices | Docker Documentation - docs.docker.com](https://docs.docker.com/develop/security-best-practices/)
