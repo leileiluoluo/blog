@@ -20,7 +20,7 @@ Spring Boot 可以用最少的配置来快速创建一个独立的、生产级�
 
 本文介绍如何快速搭建一个 Spring Boot「Hello World！」项目。
 
-写作本文时，所使用的 JDK 版本、Maven 版本和 Spring Boot 版本分别为：
+本文使用的操作系统为 MacOS。另外，写作本文时，所使用的 JDK 版本、Maven 版本和 Spring Boot 版本分别为：
 
 - JDK 版本：BellSoft Liberica JDK 17
 - Maven 版本：3.9.2
@@ -94,7 +94,29 @@ public class DemoApplication {
 
 ## 3 进行测试
 
-本文涉及的完整项目代码已托管至「[GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-quick-start)」，欢迎关注或 Fork。
+下面，使用 Maven 构建并运行程序。
+
+打开命令行，进入程序根目录，然后使用如下 Maven 命令运行程序：
+
+```shell
+mvn clean & package
+```
+
+程序启动完成后，使用如下 CURL 命令进行测试：
+
+```shell
+curl http://localhost:8080/hello
+
+Hello World!
+```
+
+```shell
+curl 'http://localhost:8080/hello?name=Larry'
+
+Hello Larry!
+```
+
+本文涉及的完整项目代码已托管至「[GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-quick-start-demo)」，欢迎关注或 Fork。
 
 > 参考资料
 >
