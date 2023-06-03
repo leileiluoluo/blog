@@ -26,6 +26,8 @@ Spring Boot 可以用最少的配置来快速创建一个独立的、生产级�
 - Maven 版本：3.1.0
 - Spring Boot 版本：3.1.0
 
+关于 [JDK 的下载与安装](https://bell-sw.com/pages/downloads/)、[Maven 的下载与安装](https://maven.apache.org/download.cgi)均非常简单，本文不再赘述。
+
 ## 1 创建模板项目
 
 浏览器访问「[start.spring.io](https://start.spring.io/)」，使用 Spring Initializr 来创建一个 Spring Boot Web 项目。
@@ -56,3 +58,5 @@ Spring Boot 可以用最少的配置来快速创建一个独立的、生产级�
 > [3] [Spring Boot | Spring - spring.io](https://spring.io/projects/spring-boot)
 >
 > [4] [Download Java - OpenJDK Builds for Linux, Windows & macOS | BellSoft - bell-sw.com](https://bell-sw.com/pages/downloads/)
+>
+> [5] [Download Apache Maven | Maven - maven.apache.org](https://maven.apache.org/download.cgi)
