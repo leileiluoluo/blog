@@ -94,7 +94,7 @@ public class DemoApplication {
 
 ## 3 进行测试
 
-本文涉及的完整项目代码已托管至 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-quick-start)，欢迎关注或 Fork。
+本文涉及的完整项目代码已托管至「[GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-quick-start)」，欢迎关注或 Fork。
 
 > 参考资料
 >
