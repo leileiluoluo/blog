@@ -45,7 +45,44 @@ Spring Boot 可以用最少的配置来快速创建一个独立的、生产级�
 
 选好以后，点击「Generate」按钮即可以生成项目模板，将 zip 包下载到本地，解压以后即可以使用 IDE 打开了。
 
+打开以后，可以看到该模板工程的项目结构：
+
+```text
+demo
+├─ src/main/java
+│   └─ com.example.demo
+│       └─ DemoApplication.java
+└─ pom.xml
+```
+
 ## 2 添加代码
+
+下面，将`src/main/java/com/example/demo`文件夹下的`DemoApplication.java`文件内容替换为如下内容：
+
+```java
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@SpringBootApplication
+public class DemoApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+
+    @GetMapping("/hello")
+    public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
+        return String.format("Hello %s!", name);
+    }
+
+}
+```
 
 ## 3 进行测试
 
