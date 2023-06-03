@@ -18,7 +18,7 @@ description: 本文介绍如何快速搭建一个 Sping Boot 项目，包括使�
 
 Spring Boot 可以用最少的配置来快速创建一个独立的、生产级的 Spring 应用程序。
 
-本文介绍如何快速搭建一个 Spring Boot「Hello World」项目。
+本文介绍如何快速搭建一个 Spring Boot「Hello World！」项目。
 
 写作本文时，所使用的 JDK 版本、Maven 版本和 Spring Boot 版本分别为：
 
@@ -83,6 +83,14 @@ public class DemoApplication {
 
 }
 ```
+
+这就是使用 Spring Boot 搭建一个「Hello World！」Web 服务的全部代码。
+
+下面解释一下用到的几个注解：
+
+- `@RestController`告诉 Spring 当前类提供了一个 Web 访问端点；
+- `@GetMapping("/hello")`告诉 Spring 使用`hello()`方法来响应发送至`http://localhost:8080/hello`的请求；
+- `@RequestParam`告诉 Spring 可在请求中为`name`参数传值（不传的话使用默认值`World`）。
 
 ## 3 进行测试
 
