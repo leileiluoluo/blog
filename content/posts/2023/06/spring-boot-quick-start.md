@@ -96,10 +96,11 @@ public class DemoApplication {
 
 下面，使用 Maven 构建并运行程序。
 
-打开命令行，进入程序根目录，然后使用如下 Maven 命令运行程序：
+打开命令行，进入程序根目录，然后使用如下 Maven 命令打包及运行程序：
 
 ```shell
-mvn clean & package
+mvn clean package
+mvn spring-boot:run --quiet
 ```
 
 程序启动完成后，使用如下 CURL 命令进行测试：
