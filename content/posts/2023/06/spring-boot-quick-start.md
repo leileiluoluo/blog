@@ -23,7 +23,7 @@ Spring Boot 可以用最少的配置来快速创建一个独立的、生产级�
 写作本文时，所使用的 JDK 版本、Maven 版本和 Spring Boot 版本分别为：
 
 - JDK 版本：BellSoft Liberica JDK 17
-- Maven 版本：3.1.0
+- Maven 版本：3.9.2
 - Spring Boot 版本：3.1.0
 
 关于 [JDK 的下载与安装](https://bell-sw.com/pages/downloads/)、[Maven 的下载与安装](https://maven.apache.org/download.cgi)均非常简单，本文不再赘述。
