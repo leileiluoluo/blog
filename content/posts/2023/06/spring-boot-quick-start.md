@@ -1,5 +1,5 @@
 ---
-title: 如何快速搭建一个 Sping Boot 项目
+title: 如何快速搭建一个 Spring Boot 项目
 author: olzhy
 type: post
 date: 2023-06-03T08:00:00+08:00
@@ -13,7 +13,7 @@ tags:
 keywords:
   - 快速搭建
   - Spring Boot
-description: 本文介绍如何快速搭建一个 Sping Boot 项目，包括使用 Spring Initializr 创建项目模板、添加代码和进行测试三个部分。
+description: 本文介绍如何快速搭建一个 Spring Boot 项目，包括使用 Spring Initializr 创建项目模板、添加代码和进行测试三个部分。
 ---
 
 Spring Boot 可以用最少的配置来快速创建一个独立的、生产级的 Spring 应用程序。
