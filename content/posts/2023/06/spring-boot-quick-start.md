@@ -116,7 +116,7 @@ curl 'http://localhost:8080/hello?name=Larry'
 Hello Larry!
 ```
 
-本文涉及的完整项目代码已托管至「[GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-quick-start-demo)」，欢迎关注或 Fork。
+综上，本文完成了对 Spring Boot 项目的快速搭建，可以看到 Spring Boot 项目非常的简单易用。本文涉及的完整项目代码已托管至「[GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-quick-start-demo)」，欢迎关注或 Fork。
 
 > 参考资料
 >
