@@ -203,6 +203,13 @@ public class UserController {
 }
 ```
 
+该类中：
+
+- 注解`@RestController`相当于是`@Controller`和`@ResponseBody`两个注解的结合，表示该类提供 Web 接口，该类中的方法会处理 HTTP 请求并以 JSON 响应客户端；
+- 注解`@GetMapping`表示方法接收 HTTP GET 请求，而`@PostMapping`、`@PatchMapping`和`@DeleteMapping`分别接收 POST、PATCH 和 DELETE 请求；
+- 注解`@ResponseStatus`用于指定方法返回的 HTTP 状态码；
+- 注解`@RequestBody`用于指定接收 JSON 请求体的对象，`@PathVariable`用于获取 URL 路径中对应的参数值。
+
 ### 2.3 Service 代码
 
 服务接口类`src/main/java/com/example/demo/service/UserService.java`的代码如下：
@@ -298,6 +305,8 @@ public class UserServiceImpl implements UserService {
 
 }
 ```
+
+可以看到，Service 使用`ArrayList`来存储数据，并提供对 User 增、删、改、查的支持。
 
 ## 3 程序运行与测试
 
@@ -415,7 +424,9 @@ public class UserControllerTest {
 }
 ```
 
-本文涉及的完整项目代码已托管至「[GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-restful-service-demo)」，欢迎关注或 Fork。
+可以看到，如上代码使用`MockMvc`实现了对`UserController`的单元测试。
+
+综上，本文完成了对 Spring Boot RESTful 服务的搭建。本文涉及的完整项目代码已托管至「[GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-restful-service-demo)」，欢迎关注或 Fork。
 
 > 参考资料
 >
