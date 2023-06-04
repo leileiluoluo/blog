@@ -123,7 +123,7 @@ Spring Boot 提供各类封装好的 Starter（以`spring-boot-starter-*`格式�
 
 ### 2.1 启动类代码
 
-程序入口类`src/main/java/com/example/demo/controller/DemoApplication.java`的代码如下：
+程序入口类`src/main/java/com/example/demo/DemoApplication.java`的代码如下：
 
 ```java
 package com.example.demo;
@@ -150,6 +150,8 @@ public class DemoApplication {
 - `@ComponentScan`：扫描指定路径，将类装配到 Spring 容器中。
 
 ### 2.2 Controller 代码
+
+控制器类`src/main/java/com/example/demo/controller/UserController.java`的代码如下：
 
 ```java
 package com.example.demo.controller;
@@ -203,6 +205,8 @@ public class UserController {
 
 ### 2.3 Service 代码
 
+服务接口类`src/main/java/com/example/demo/service/UserService.java`的代码如下：
+
 ```java
 package com.example.demo.service;
 
@@ -224,6 +228,8 @@ public interface UserService {
 
 }
 ```
+
+服务实现类`src/main/java/com/example/demo/service/impl/UserServiceImpl.java`的代码如下：
 
 ```java
 package com.example.demo.service.impl;
@@ -307,8 +313,10 @@ curl -X DELETE http://localhost:8080/users/2
 
 ## 4 添加单元测试代码
 
+控制器测试类`src/test/java/com/example/demo/controller/UserControllerTest.java`的代码如下：
+
 ```java
-package com.example.demo;
+package com.example.demo.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
