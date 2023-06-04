@@ -18,9 +18,9 @@ keywords:
 description: 如何使用 Spring Boot 构建一个 RESTful Web 服务。
 ---
 
-上文「[如何快速搭建一个 Spring Boot 项目](https://olzhy.github.io/posts/spring-boot-quick-start.html)」介绍了使用 Spring Initializr 搭建 Spring Boot 模板项目的方法，本文接着介绍如何使用 Spring Boot 构建一个 RESTful Web 服务。
+上文「[如何快速搭建一个 Spring Boot 项目](https://olzhy.github.io/posts/spring-boot-quick-start.html)」介绍了使用 Spring Initializr 搭建 Spring Boot 模板项目的方法。本文接着介绍如何使用 Spring Boot 构建一个 RESTful Web 服务，主要关注项目的结构、注解的使用和单元测试代码的编写。
 
-本文实现的 RESTful Web 服务提供用户的增删改查功能，内部使用 Java ArrayList 实现数据的存储。
+本文实现的 RESTful Web 服务提供用户（User）的增删改查功能，内部使用 Java ArrayList 实现数据的存储。
 
 写作本文时，所使用的 JDK 版本、Maven 版本和 Spring Boot 版本分别为：
 
@@ -50,9 +50,9 @@ demo
 └─ pom.xml
 ```
 
-## 1 源码分析
+## 2 源码分析
 
-### 1.1 启动类代码
+### 2.1 启动类代码
 
 ```java
 package com.example.demo;
@@ -70,7 +70,7 @@ public class DemoApplication {
 }
 ```
 
-### 1.2 Controller 代码
+### 2.2 Controller 代码
 
 ```java
 package com.example.demo.controller;
@@ -122,7 +122,7 @@ public class UserController {
 }
 ```
 
-### 1.3 Service 代码
+### 2.3 Service 代码
 
 ```java
 package com.example.demo.service;
@@ -214,7 +214,7 @@ public class UserServiceImpl implements UserService {
 }
 ```
 
-## 2 程序运行与测试
+## 3 程序运行与测试
 
 ```shell
 curl -X GET http://localhost:8080/users/2
@@ -226,7 +226,7 @@ curl -X PATCH -H "Content-Type: application/json" -d '{"id": 3, "name": "Alan", 
 curl -X DELETE http://localhost:8080/users/2
 ```
 
-## 3 添加单元测试代码
+## 4 添加单元测试代码
 
 ```java
 package com.example.demo;
