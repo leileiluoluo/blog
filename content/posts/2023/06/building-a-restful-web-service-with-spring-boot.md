@@ -210,7 +210,19 @@ public class UserServiceImpl implements UserService {
 }
 ```
 
-## 2 单元测试
+## 2 程序运行与测试
+
+```shell
+curl -X GET http://localhost:8080/users/2
+
+curl -X POST -H "Content-Type: application/json" -d '{"id": 3, "name": "Jacky", "age": 30}' http://localhost:8080/users/
+
+curl -X PATCH -H "Content-Type: application/json" -d '{"id": 3, "name": "Alan", "age": 29}' http://localhost:8080/users/
+
+curl -X DELETE http://localhost:8080/users/2
+```
+
+## 3 添加单元测试代码
 
 > 参考资料
 >
