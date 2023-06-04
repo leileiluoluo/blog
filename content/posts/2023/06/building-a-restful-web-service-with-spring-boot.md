@@ -15,7 +15,7 @@ keywords:
   - Spring Boot
   - RESTful
   - Web 服务
-description: 如何使用 Spring Boot 构建一个 RESTful Web 服务。
+description: 本文介绍如何使用 Spring Boot 构建一个 RESTful Web 服务，主要关注项目的结构、注解的使用和单元测试代码的编写，并由此探索 Spring Boot 的设计理念与使用方法。
 ---
 
 上文「[如何快速搭建一个 Spring Boot 项目](https://olzhy.github.io/posts/spring-boot-quick-start.html)」介绍了使用 Spring Initializr 搭建 Spring Boot 模板项目的方法。本文接着介绍如何使用 Spring Boot 构建一个 RESTful Web 服务，主要关注项目的结构、注解的使用和单元测试代码的编写，并由此探索 Spring Boot 的设计理念与使用方法。
@@ -56,7 +56,7 @@ spring-boot-restful-service-demo
 
 ## 2 源码分析
 
-下面分析下该项目的源码，以期对 Spring Boot 的使用一个基本的了解。
+下面分析下该项目的源码，以期对 Spring Boot 的使用有一个基本的了解。
 
 ### 2.1 pom.xml 代码
 
@@ -121,7 +121,7 @@ Spring Boot 提供各类封装好的 Starter（以`spring-boot-starter-*`格式�
 
 此外，还使用了一个插件`spring-boot-maven-plugin`，提供了对程序打包和运行的支持。
 
-### 2.1 启动类代码
+### 2.2 启动类代码
 
 程序入口类`src/main/java/com/example/demo/DemoApplication.java`的代码如下：
 
@@ -149,7 +149,7 @@ public class DemoApplication {
 - `@EnableAutoConfiguration`：用于自动装入应用程序所需的所有 Bean；
 - `@ComponentScan`：扫描指定路径，将类装配到 Spring 容器中。
 
-### 2.2 Controller 代码
+### 2.3 Controller 代码
 
 控制器类`src/main/java/com/example/demo/controller/UserController.java`的代码如下：
 
@@ -210,7 +210,7 @@ public class UserController {
 - 注解`@ResponseStatus`用于指定方法返回的 HTTP 状态码；
 - 注解`@RequestBody`用于指定接收 JSON 请求体的对象，`@PathVariable`用于获取 URL 路径中对应的参数值。
 
-### 2.3 Service 代码
+### 2.4 Service 代码
 
 服务接口类`src/main/java/com/example/demo/service/UserService.java`的代码如下：
 
