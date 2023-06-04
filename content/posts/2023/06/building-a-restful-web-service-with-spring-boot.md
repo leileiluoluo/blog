@@ -20,11 +20,197 @@ description: 如何使用 Spring Boot 构建一个 RESTful Web 服务。
 
 上文「[如何快速搭建一个 Spring Boot 项目](https://olzhy.github.io/posts/spring-boot-quick-start.html)」介绍了使用 Spring Initializr 搭建 Spring Boot 模板项目的方法，本文接着介绍如何使用 Spring Boot 构建一个 RESTful Web 服务。
 
+本文实现的 RESTful Web 服务提供用户的增删改查功能，内部使用 Java ArrayList 实现数据的存储。
+
 写作本文时，所使用的 JDK 版本、Maven 版本和 Spring Boot 版本分别为：
 
 - JDK 版本：BellSoft Liberica JDK 17
 - Maven 版本：3.9.2
 - Spring Boot 版本：3.1.0
+
+## 1 项目结构
+
+```text
+demo
+├─ src/main/java
+│   └─ com.example.demo
+│       ├─ controller
+│       │   └─ UserController.java
+│       ├─ model
+│       │   └─ User.java
+│       ├─ service
+│       │   ├─ UserService.java
+│       │   └─ impl
+│       │       └─ UserServiceImpl.java
+│       └─ DemoApplication.java
+└─ pom.xml
+```
+
+## 1 源码分析
+
+### 1.1 启动类代码
+
+```java
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class DemoApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+
+}
+```
+
+### 1.2 Controller 代码
+
+```java
+package com.example.demo.controller;
+
+import com.example.demo.model.User;
+import com.example.demo.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/users")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/")
+    public List<User> getUsers() {
+        return userService.getUsers();
+    }
+
+    @GetMapping("/{id}")
+    public User getUser(@PathVariable("id") Integer id) {
+        return userService.getUser(id);
+    }
+
+    @PostMapping("/")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addUser(@RequestBody @Validated User user) {
+        userService.addUser(user);
+    }
+
+    @PatchMapping("/")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateUser(@RequestBody @Validated User user) {
+        userService.updateUser(user);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(@PathVariable("id") Integer id) {
+        userService.deleteUser(id);
+    }
+
+}
+```
+
+### 1.3 Service 代码
+
+```java
+package com.example.demo.service;
+
+import com.example.demo.model.User;
+
+import java.util.List;
+
+public interface UserService {
+
+    List<User> getUsers();
+
+    User getUser(Integer id);
+
+    void addUser(User user);
+
+    void updateUser(User user);
+
+    void deleteUser(Integer id);
+
+}
+```
+
+```java
+package com.example.demo.service.impl;
+
+import com.example.demo.model.User;
+import com.example.demo.service.UserService;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+    private static final List<User> USERS = new ArrayList<>();
+
+    @Override
+    public List<User> getUsers() {
+        return USERS;
+    }
+
+    @Override
+    public User getUser(Integer id) {
+        int i = findUserIndex(id);
+
+        if (i < USERS.size()) {
+            return USERS.get(i);
+        }
+        return null;
+    }
+
+    @Override
+    public void addUser(User user) {
+        USERS.add(user);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        int i = findUserIndex(user.id());
+
+        // update
+        if (i < USERS.size()) {
+            USERS.set(i, user);
+        }
+    }
+
+    @Override
+    public void deleteUser(Integer id) {
+        int i = findUserIndex(id);
+
+        // update
+        if (i < USERS.size()) {
+            USERS.remove(i);
+        }
+    }
+
+    private int findUserIndex(Integer userId) {
+        int i = 0;
+        for (; i < USERS.size(); i++) {
+            if (USERS.get(i).id().equals(userId)) {
+                break;
+            }
+        }
+        return i;
+    }
+
+}
+```
+
+## 2 单元测试
 
 > 参考资料
 >
