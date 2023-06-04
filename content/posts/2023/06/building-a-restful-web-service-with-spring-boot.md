@@ -123,6 +123,8 @@ Spring Boot 提供各类封装好的 Starter（以`spring-boot-starter-*`格式�
 
 ### 2.1 启动类代码
 
+程序入口类`src/main/java/com/example/demo/controller/DemoApplication.java`的代码如下：
+
 ```java
 package com.example.demo;
 
@@ -138,6 +140,14 @@ public class DemoApplication {
 
 }
 ```
+
+从启动类即可以看到，Spring Boot 应用程序无须`web.xml`等冗长的配置文件，使用纯 Java 注解的方式即可进行配置。
+
+可以看到，该类只使用了一个注解：`@SpringBootApplication`，该注解是一个便捷注解，其包含了如下三个注解：
+
+- `@Configuration`：用于定义配置类；
+- `@EnableAutoConfiguration`：用于自动装入应用程序所需的所有 Bean；
+- `@ComponentScan`：扫描指定路径，将类装配到 Spring 容器中。
 
 ### 2.2 Controller 代码
 
