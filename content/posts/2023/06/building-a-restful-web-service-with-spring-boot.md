@@ -54,6 +54,71 @@ demo
 
 ## 2 源码分析
 
+下面分析下该项目的源码，以期对 Spring Boot 的使用一个基本的了解。
+
+### 2.1 pom.xml 代码
+
+Spring Boot 提供各类封装好的 Starter（以`spring-boot-starter-*`格式命名）供我们去使用，当需要某项依赖时，直接在`pom.xml`引用对应的 Starter 即可。
+
+本文使用 Maven 管理依赖，`pom.xml`源码如下：
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.1.0</version>
+        <relativePath/>
+    </parent>
+    <groupId>com.example</groupId>
+    <artifactId>demo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>demo</name>
+    <description>Demo project for Spring Boot</description>
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+```
+
+可以看到，本文的示例项目使用了三个 Starter：`spring-boot-starter-web`、`spring-boot-starter-validation`和`spring-boot-starter-test`。
+
+- `spring-boot-starter-web`包含了编写 Spring Web 程序相关的所有依赖，如编写 RESTful 接口相关的依赖、Spring MVC 相关的依赖、程序的运行时服务器（默认为 Apache Tomcat）相关的依赖等；
+
+- `spring-boot-starter-validation`包含了请求参数校验相关的所有依赖；
+
+- `spring-boot-starter-test`包含了测试 Spring Boot 程序的所有依赖，如 JUnit Jupiter、Hamcrest 和 Mockito 等。
+
+此外，还使用了一个插件`spring-boot-maven-plugin`，提供了对程序打包和运行的支持。
+
 ### 2.1 启动类代码
 
 ```java
