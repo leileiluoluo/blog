@@ -30,6 +30,8 @@ description: 如何使用 Spring Boot 构建一个 RESTful Web 服务。
 
 ## 1 项目结构
 
+本文使用三层架构代码结构，主要分三个目录：`controller`、`model`和`service`。处理请求和返回响应的逻辑控制器代码需要放在`controller`目录下；表示数据对象的 POJO 类需要方在`model`目录下；主要的业务逻辑代码需要抽取到服务中，然后放在`service`目录下（`service`目录下是接口类，`impl`目录下是实现类）。
+
 ```text
 demo
 ├─ src/main/java
