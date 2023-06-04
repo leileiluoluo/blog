@@ -206,7 +206,7 @@ public class UserController {
 该类中：
 
 - 注解`@RestController`相当于是`@Controller`和`@ResponseBody`两个注解的结合，表示该类提供 Web 接口，该类中的方法会处理 HTTP 请求并以 JSON 响应客户端；
-- 注解`@GetMapping`表示方法接收 HTTP GET 请求，而`@PostMapping`、`@PatchMapping`和`@DeleteMapping`分别接收 POST、PATCH 和 DELETE 请求；
+- 注解`@GetMapping`表示方法接收 HTTP GET 请求，而`@PostMapping`、`@PatchMapping`和`@DeleteMapping`分别表示方法接收 POST、PATCH 和 DELETE 请求；
 - 注解`@ResponseStatus`用于指定方法返回的 HTTP 状态码；
 - 注解`@RequestBody`用于指定接收 JSON 请求体的对象，`@PathVariable`用于获取 URL 路径中对应的参数值。
 
