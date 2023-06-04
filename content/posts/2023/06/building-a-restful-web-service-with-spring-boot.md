@@ -426,7 +426,7 @@ public class UserControllerTest {
 
 可以看到，如上代码使用`MockMvc`实现了对`UserController`的单元测试。
 
-综上，本文完成了对 Spring Boot RESTful 服务的搭建。本文涉及的完整项目代码已托管至「[GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-restful-service-demo)」，欢迎关注或 Fork。
+综上，本文完成了对 Spring Boot RESTful 服务的搭建，了解了 Spring Boot 常用注解的含义和使用方式。本文涉及的完整项目代码已托管至「[GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-restful-service-demo)」，欢迎关注或 Fork。
 
 > 参考资料
 >
