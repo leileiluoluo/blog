@@ -301,14 +301,56 @@ public class UserServiceImpl implements UserService {
 
 ## 3 程序运行与测试
 
+打开命令行，在程序根目录执行如下 Maven 命令启动应用程序：
+
 ```shell
-curl -X GET http://localhost:8080/users/2
+mvn spring-boot:run
+```
+
+程序启动后，命令行执行如下 CURL 命令新建三个 User：
+
+```shell
+curl -X POST -H "Content-Type: application/json" -d '{"id": 1, "name": "Larry", "age": 28}' http://localhost:8080/users/
+
+curl -X POST -H "Content-Type: application/json" -d '{"id": 2, "name": "Lucy", "age": 18}' http://localhost:8080/users/
 
 curl -X POST -H "Content-Type: application/json" -d '{"id": 3, "name": "Jacky", "age": 30}' http://localhost:8080/users/
+```
 
+执行如下 CURL 命令 查询全部 User：
+
+```shell
+curl -X GET http://localhost:8080/users/
+
+[{"id":1,"name":"Larry","age":28},{"id":2,"name":"Lucy","age":18},{"id":3,"name":"Jacky","age":30}]
+```
+
+执行如下 CURL 命令更新 ID 为 3 的 User：
+
+```shell
 curl -X PATCH -H "Content-Type: application/json" -d '{"id": 3, "name": "Alan", "age": 29}' http://localhost:8080/users/
+```
 
-curl -X DELETE http://localhost:8080/users/2
+执行如下 CURL 命令查询 ID 为 3 的 User，发现信息已被更新：
+
+```shell
+curl -X GET http://localhost:8080/users/3
+
+{"id":3,"name":"Alan","age":29}
+```
+
+执行如下 CURL 命令删除 ID 为 3 的 User：
+
+```shell
+curl -X DELETE http://localhost:8080/users/3
+```
+
+再次查询所有 User，发现 ID 为 3 的 User 已被删除：
+
+```shell
+curl -X GET http://localhost:8080/users/
+
+[{"id":1,"name":"Larry","age":28},{"id":2,"name":"Lucy","age":18}]
 ```
 
 ## 4 添加单元测试代码
