@@ -32,10 +32,22 @@ description: Java 并发编程。
 
 更通俗一点，假如一个人是一个处理器内核的话，并发与并行做的事情可以用一句话来比喻：一个人一边吃饭一边看书是并发，多个人同时吃饭是并行。
 
+了解了操作系统处理任务的两种方式后，接着就有一个问题：任务是以什么为单位执行的？这里，就不得不介绍进程与线程的概念。
+
+## 2 什么是进程？什么是线程？
+
+进程是一个执行的程序，一个进程里有多个线程。进程是资源分配的最小单位，进程间相互独立，不共享数据；线程是 CPU 调度的最小单位（即操作系统分配处理器时间的基本单元），线程间共享所属进程的数据。
+
+所以，做个比喻：进程就像火车，线程就像车厢。线程无法脱离进程单独运行，就像车厢无法脱离火车单独行进；进程之间相互独立不共享数据而线程之间共享进程的数据，就像不同火车间相互独立不能跨火车共享餐车而同一火车内车厢间可以轻松穿过并共享餐车。
+
+Java 里边的并发编程其实就是多线程编程。从 Java 应用程序的角度来看，入口 Main 方法启动的就是一个 main 线程，我们可以在 main 线程创建其它的线程，多个线程一起做一些事情，就是并发编程。
+
 > 参考资料
 >
-> [1] [Difference between Concurrency and Parallelism | GeeksforGeeks - www.geeksforgeeks.org](https://www.geeksforgeeks.org/difference-between-concurrency-and-parallelism/)
+> [1] [Lesson: Concurrency | Java Documentation - docs.oracle.com](https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html)
 >
-> [2] [Concurrency vs Parallelism | Baeldung - www.baeldung.com](https://www.baeldung.com/cs/concurrency-vs-parallelism)
+> [2] [Difference between Concurrency and Parallelism | GeeksforGeeks - www.geeksforgeeks.org](https://www.geeksforgeeks.org/difference-between-concurrency-and-parallelism/)
 >
-> [3] [Lesson: Concurrency | Java Documentation - docs.oracle.com](https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html)
+> [3] [Concurrency vs Parallelism | Baeldung - www.baeldung.com](https://www.baeldung.com/cs/concurrency-vs-parallelism)
+>
+> [4] [Process vs Thread | Baeldung - www.baeldung.com](https://www.baeldung.com/cs/process-vs-thread)
