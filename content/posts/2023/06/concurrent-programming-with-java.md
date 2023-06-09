@@ -48,8 +48,10 @@ Java 里边的并发编程其实就是多线程编程。从 Java 应用程序的
 >
 > [2] [Java Concurrency and Multithreading Tutorial | Jenkov - jenkov.com](https://jenkov.com/tutorials/java-concurrency/index.html)
 >
-> [3] [Difference between Concurrency and Parallelism | GeeksforGeeks - www.geeksforgeeks.org](https://www.geeksforgeeks.org/difference-between-concurrency-and-parallelism/)
+> [3] [Java 多线程（超详细）| CSDN 博客 - blog.csdn.net](https://blog.csdn.net/zdl66/article/details/126297036)
 >
-> [4] [Concurrency vs Parallelism | Baeldung - www.baeldung.com](https://www.baeldung.com/cs/concurrency-vs-parallelism)
+> [4] [Difference between Concurrency and Parallelism | GeeksforGeeks - www.geeksforgeeks.org](https://www.geeksforgeeks.org/difference-between-concurrency-and-parallelism/)
 >
-> [5] [Process vs Thread | Baeldung - www.baeldung.com](https://www.baeldung.com/cs/process-vs-thread)
+> [5] [Concurrency vs Parallelism | Baeldung - www.baeldung.com](https://www.baeldung.com/cs/concurrency-vs-parallelism)
+>
+> [6] [Process vs Thread | Baeldung - www.baeldung.com](https://www.baeldung.com/cs/process-vs-thread)
