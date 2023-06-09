@@ -42,7 +42,17 @@ description: Java 并发编程。
 
   比如一个 Web 服务，假设请求都是顺序处理的话，只有等上一个用户请求处理完成了，才能处理下一个请求。那上一个用户请求非常耗时的话，后面的用户请求会长时间得不到处理。如果采用并发，直观感觉上，所有的用户请求都在同时处理，各个请求任务得到更公平的执行权，用户体验得到极大的改善。
 
-了解了并发的好处以后，接着就有一个问题：那怎么来实现并发呢？这里，就不得不介绍线程的概念，介绍线程又不得不先介绍进程。
+不过，凡事有利必有弊，并发也会带来诸多的问题：
+
+- 共享数据访问控制让编码变得复杂
+
+  并发任务会涉及同一块内存区域的访问问题。比如一个任务在对一个内存位置进行读的时候，另一个任务正在对这个位置进行写，那这个任务读到的值应该是另一个任务写之前的旧值，还是写之后的新值？还有，两个任务同时对一个内存位置进行写的时候，写进去的应当是哪个任务的值？这都是问题。所以需要复杂的编码来做控制。
+
+- CPU 上下文切换带来新的开销
+
+  CPU 通过对并发任务分配时间片来让各个任务得以执行，而切换任务的时候会带来上下文切换。即将一个任务切换到下一个任务的时候，CPU 会将当前任务的状态保存下来，再去加载下一个任务的状态，这就是一次上下文切换，而这个切换带来的开销并不小。
+
+了解了并发以后，接着就有一个问题：那怎么来实现并发呢？这里，就不得不介绍线程的概念，介绍线程又不得不先介绍进程。
 
 ## 2 什么是进程？什么是线程？
 
@@ -60,8 +70,10 @@ Java 里边的并发编程其实就是多线程编程。从 Java 应用程序的
 >
 > [3] [Java 多线程（超详细）| CSDN 博客 - blog.csdn.net](https://blog.csdn.net/zdl66/article/details/126297036)
 >
-> [4] [Difference between Concurrency and Parallelism | GeeksforGeeks - www.geeksforgeeks.org](https://www.geeksforgeeks.org/difference-between-concurrency-and-parallelism/)
+> [4] [并发的基础概念以及优缺点 | CSDN 博客 - blog.csdn.net](https://blog.csdn.net/weixin_41645142/article/details/125464399)
 >
-> [5] [Concurrency vs Parallelism | Baeldung - www.baeldung.com](https://www.baeldung.com/cs/concurrency-vs-parallelism)
+> [5] [Difference between Concurrency and Parallelism | GeeksforGeeks - www.geeksforgeeks.org](https://www.geeksforgeeks.org/difference-between-concurrency-and-parallelism/)
 >
-> [6] [Process vs Thread | Baeldung - www.baeldung.com](https://www.baeldung.com/cs/process-vs-thread)
+> [6] [Concurrency vs Parallelism | Baeldung - www.baeldung.com](https://www.baeldung.com/cs/concurrency-vs-parallelism)
+>
+> [7] [Process vs Thread | Baeldung - www.baeldung.com](https://www.baeldung.com/cs/process-vs-thread)
