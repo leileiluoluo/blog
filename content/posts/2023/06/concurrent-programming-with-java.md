@@ -87,7 +87,7 @@ public class HelloThread extends Thread {
 }
 ```
 
-如上代码中，`HelloThread`类继承了`Thread`类，并重写了`Thread`类的`run`方法，最后调用`Thread`的`start`方法来启动线程。
+如上代码中，`HelloThread`类继承了`Thread`类，并重写了`Thread`类的`run`方法。在`main`方法直接新建`HelloThread`对象并调用其父类`start`方法来启动线程。
 
 接下来演示一下如何以实现 Runnable 接口的方式来创建线程：
 
@@ -106,7 +106,7 @@ public class HelloRunnable implements Runnable {
 }
 ```
 
-如上代码中，`HelloRunnable`类实现了`Runnable`接口，并实现了`Runnable`接口的`run`方法，最后调用`Thread`的`start`方法来启动线程。
+如上代码中，`HelloRunnable`类实现了`Runnable`接口，并实现了`Runnable`接口的`run`方法。在`main`方法将`HelloRunnable`对象作为参数来新建`Thread`对象，最后调用`Thread`对象的`start`方法来启动线程。
 
 最后演示一下如何以实现 Callable 接口的方式来创建线程：
 
@@ -134,7 +134,7 @@ public class HelloCallable implements Callable<String> {
 }
 ```
 
-如上代码中，`HelloCallable`类实现了`Callable`接口，并实现了`Callable`接口的`call`方法，最后调用`Thread`的`start`方法来启动线程。
+如上代码中，`HelloCallable`类实现了`Callable`接口，并实现了`Callable`接口的`call`方法。在`main`方法将`HelloCallable`对象作为参数来新建`FutureTask`对象，然后将`FutureTask`对象作为参数来新建`Thread`对象，最后调用`Thread`对象的`start`方法来启动线程。
 
 > 参考资料
 >
