@@ -62,6 +62,80 @@ description: Java 并发编程。
 
 Java 里边的并发编程其实就是多线程编程。从 Java 应用程序的角度来看，入口 Main 方法启动的就是一个 main 线程，我们可以在 main 线程创建其它的线程，多个线程一起做一些事情，就是并发编程。
 
+基础概念就介绍到这里，下面就看一下 Java 里边如何使用多线程吧。
+
+## 3 开始使用 Java 多线程
+
+### 3.1 创建线程的三种方法
+
+创建 Java 线程有三种方法：继承 Thread 类、实现 Runnable 接口，以及实现 Callable 接口。
+
+下面演示一下如何以继承 Thread 类的方式来创建线程：
+
+```java
+public class HelloThread extends Thread {
+
+    public static void main(String[] args) {
+        new HelloThread().start();
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Hello from a thread!");
+    }
+
+}
+```
+
+如上代码中，`HelloThread`类继承了`Thread`类，并重写了`Thread`类的`run`方法，最后调用`Thread`的`start`方法来启动线程。
+
+接下来演示一下如何以实现 Runnable 接口的方式来创建线程：
+
+```java
+public class HelloRunnable implements Runnable {
+
+    public static void main(String[] args) {
+        new Thread(new HelloRunnable()).start();
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Hello from a thread!");
+    }
+
+}
+```
+
+如上代码中，`HelloRunnable`类实现了`Runnable`接口，并实现了`Runnable`接口的`run`方法，最后调用`Thread`的`start`方法来启动线程。
+
+最后演示一下如何以实现 Callable 接口的方式来创建线程：
+
+```java
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
+
+public class HelloCallable implements Callable<String> {
+
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        FutureTask<String> task = new FutureTask<>(new HelloCallable());
+        new Thread(task).start();
+
+        String result = task.get();
+        System.out.println(result);
+    }
+
+    @Override
+    public String call() throws Exception {
+        System.out.println("Hello from a thread!");
+        return "OK";
+    }
+
+}
+```
+
+如上代码中，`HelloCallable`类实现了`Callable`接口，并实现了`Callable`接口的`call`方法，最后调用`Thread`的`start`方法来启动线程。
+
 > 参考资料
 >
 > [1] [Lesson: Concurrency | Java Documentation - docs.oracle.com](https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html)
