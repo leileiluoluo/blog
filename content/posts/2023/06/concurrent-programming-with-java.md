@@ -22,11 +22,11 @@ description: Java 并发编程概览，涉及并发与并行的区别、进程�
 
 并行（Parallelism）指的是在同一时刻执行多个任务。与并发任务在同一个处理器内核或同一个处理器上执行不同，并行任务是在不同的处理器内核或者不同的处理器上执行的。
 
-图 1-1 展示了并发与并行在处理任务上的不同：
+下图展示了并发与并行在处理任务上的不同：
 
 ![并发与并行对比](https://olzhy.github.io/static/images/uploads/2023/06/concurrency-vs-parallelism.jpg#center)
 
-{{% center %}}（图 1-1：并发与并行对比 - 引用自 [Baeldung](https://www.baeldung.com/cs/concurrency-vs-parallelism)）{{% /center %}}
+{{% center %}}（并发与并行对比 - 引用自 [Baeldung](https://www.baeldung.com/cs/concurrency-vs-parallelism)）{{% /center %}}
 
 可以看到，在该图中有两个处理器内核（Core 1 和 Core 2）和两个任务（Task 1 与 Task 2）。并发执行的话，是在一个内核上将两个任务按时间交替切换执行；而并行执行的话，是在两个不同的内核上将两个任务同时分别独立执行。
 
