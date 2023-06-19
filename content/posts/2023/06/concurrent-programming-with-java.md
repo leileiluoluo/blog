@@ -66,30 +66,15 @@ Java 里边的并发编程其实就是多线程编程。从 Java 应用程序的
 
 ## 3 开始使用 Java 多线程
 
-### 3.1 创建线程的三种方法
+### 3.1 创建线程任务的三种方法
 
-创建 Java 线程有三种方法：继承 Thread 类、实现 Runnable 接口，以及实现 Callable 接口。
+创建 Java 线程任务有三种方法：实现 Runnable 接口、继承 Thread 类，以及实现 Callable 接口。
 
-下面演示一下如何以继承 Thread 类的方式来创建线程：
+**实现 Runnable 接口**
 
-```java
-public class HelloThread extends Thread {
+Java 中最通用的描述线程任务的方法是实现 Runnable 接口并重写其`run`方法。而线程的启动则需要将任务对象传入`Thread`对象并调用其`start`方法来实现。
 
-    public static void main(String[] args) {
-        new HelloThread().start();
-    }
-
-    @Override
-    public void run() {
-        System.out.println("Hello from a thread!");
-    }
-
-}
-```
-
-如上代码中，`HelloThread`类继承了`Thread`类，并重写了`Thread`类的`run`方法。在`main`方法直接新建`HelloThread`对象并调用其父类`start`方法来启动线程。
-
-接下来演示一下如何以实现 Runnable 接口的方式来创建线程：
+如下为使用该方法描述任务并启动线程的示例程序：
 
 ```java
 public class HelloRunnable implements Runnable {
@@ -106,9 +91,36 @@ public class HelloRunnable implements Runnable {
 }
 ```
 
-如上代码中，`HelloRunnable`类实现了`Runnable`接口，并实现了`Runnable`接口的`run`方法。在`main`方法新建`Thread`对象时，将`HelloRunnable`对象作为参数传入，最后调用`Thread`对象的`start`方法来启动线程。
+如上代码中，`HelloRunnable`类实现了`Runnable`接口，并重写了其`run`方法。在`main`方法新建`Thread`对象，并将`HelloRunnable`对象作为参数传入，最后调用`Thread`对象的`start`方法来启动线程。
 
-最后演示一下如何以实现 Callable 接口的方式来创建线程：
+**继承 Thread 类**
+
+为了方便线程的使用，`Thread`类本身实现了`Runnable`接口，所以继承`Thread`类并重写其`run`方法也是一种描述任务的方法。而线程的启动则变为直接调用对象的`start`方法即可。
+
+如下为使用该方法描述任务并启动线程的示例程序：
+
+```java
+public class HelloThread extends Thread {
+
+    public static void main(String[] args) {
+        new HelloThread().start();
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Hello from a thread!");
+    }
+
+}
+```
+
+如上代码中，`HelloThread`类继承了`Thread`类，并重写了其`run`方法。在`main`方法直接新建`HelloThread`对象并调用其父类`start`方法即可启动线程。
+
+**实现 Callable 接口**
+
+前两种方法，任务处理完均无法生成返回值。而实现 Callable 接口这种方法就是专为生成返回值设计的一种任务创建方法。使用该方法描述任务时，需要实现`Callable`接口并重写其`call`方法，而任务的启动同样需要使用`Thread`来实现，而为了获取执行结果，中间需要借用一下`FutureTask`对象，等待结果返回的过程是阻塞的。
+
+如下为使用该方法描述任务并启动线程的示例程序：
 
 ```java
 import java.util.concurrent.Callable;
@@ -134,9 +146,7 @@ public class HelloCallable implements Callable<String> {
 }
 ```
 
-如上代码中，`HelloCallable`类实现了`Callable`接口，并实现了`Callable`接口的`call`方法。在`main`方法新建`FutureTask`对象时，`HelloCallable`对象作为参数传入；然后新建`Thread`对象时，将`FutureTask`对象作为参数传入；最后调用`Thread`对象的`start`方法来启动线程。
-
-可以看到，相比于前两种创建线程的方式，该种方式是一种可以生成返回值的方法。
+如上代码中，`HelloCallable`类实现了`Callable`接口，并实现了其`call`方法。在`main`方法新建`FutureTask`对象，并将`HelloCallable`对象作为参数传入；然后新建`Thread`对象，将`FutureTask`对象作为参数传入；最后调用`Thread`对象的`start`方法来启动线程。
 
 ### 3.2 几个线程控制相关的方法
 
