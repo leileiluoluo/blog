@@ -106,7 +106,7 @@ public class HelloRunnable implements Runnable {
 }
 ```
 
-如上代码中，`HelloRunnable`类实现了`Runnable`接口，并实现了`Runnable`接口的`run`方法。在`main`方法将`HelloRunnable`对象作为参数来新建`Thread`对象，最后调用`Thread`对象的`start`方法来启动线程。
+如上代码中，`HelloRunnable`类实现了`Runnable`接口，并实现了`Runnable`接口的`run`方法。在`main`方法新建`Thread`对象时，将`HelloRunnable`对象作为参数传入，最后调用`Thread`对象的`start`方法来启动线程。
 
 最后演示一下如何以实现 Callable 接口的方式来创建线程：
 
@@ -134,7 +134,212 @@ public class HelloCallable implements Callable<String> {
 }
 ```
 
-如上代码中，`HelloCallable`类实现了`Callable`接口，并实现了`Callable`接口的`call`方法。在`main`方法将`HelloCallable`对象作为参数来新建`FutureTask`对象，然后将`FutureTask`对象作为参数来新建`Thread`对象，最后调用`Thread`对象的`start`方法来启动线程。
+如上代码中，`HelloCallable`类实现了`Callable`接口，并实现了`Callable`接口的`call`方法。在`main`方法新建`FutureTask`对象时，`HelloCallable`对象作为参数传入；然后新建`Thread`对象时，将`FutureTask`对象作为参数传入；最后调用`Thread`对象的`start`方法来启动线程。
+
+可以看到，相比于前两种创建线程的方式，该种方式是一种可以生成返回值的方法。
+
+### 3.2 几个线程控制相关的方法
+
+**yield**
+
+表示当前线程的主要任务已经完成，告诉线程调度器，可以让渡 CPU 给其它的线程使用一会了。
+
+如下为使用`Thread.yield`的一个示例程序：
+
+```java
+public class HelloYield implements Runnable {
+
+    public static void main(String[] args) {
+        // 启动两个线程
+        for (int i = 0; i < 2; i++) {
+            new Thread(new HelloYield()).start();
+        }
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            System.out.println(Thread.currentThread().getName() + "#" + i);
+
+            // 每循环打印一次，即让渡 CPU 给别的线程
+            Thread.yield();
+        }
+    }
+
+}
+```
+
+运行结果如下：
+
+```text
+Thread-0#0
+Thread-1#0
+Thread-0#1
+Thread-1#1
+Thread-0#2
+Thread-1#2
+Thread-1#3
+Thread-0#3
+Thread-0#4
+Thread-1#4
+```
+
+**sleep**
+
+表示当前线程要休眠一段指定的时间，这段时间不占用 CPU 处理时间，从而别的线程可能会抢占到执行权。休眠的过程中可能被别的线程打断，从而抛出`InterruptedException`。
+
+如下为使用`Thread.sleep`的一个示例程序：
+
+```java
+import java.util.concurrent.TimeUnit;
+
+public class HelloSleep implements Runnable {
+
+    public static void main(String[] args) {
+        // 启动两个线程
+        for (int i = 0; i < 2; i++) {
+            new Thread(new HelloSleep()).start();
+        }
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            System.out.println(Thread.currentThread().getName() + "#" + i);
+
+            // 休眠 100 毫秒
+            try {
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+}
+```
+
+运行结果如下：
+
+```text
+Thread-0#0
+Thread-1#0
+Thread-0#1
+Thread-1#1
+Thread-1#2
+Thread-0#2
+Thread-1#3
+Thread-0#3
+Thread-1#4
+Thread-0#4
+```
+
+**join**
+
+一个线程可以调用另一个线程的`join`方法，表示调用`join`方法的这个线程会被阻塞执行，一直等待被调用`join`方法的另一个线程执行完毕后再继续执行当前线程。
+
+如下为使用`Thread.join`的一个示例程序：
+
+```java
+import java.util.concurrent.TimeUnit;
+
+public class HelloJoin implements Runnable {
+
+    public static void main(String[] args) {
+        // 启动线程 t
+        Thread t = new Thread(new HelloJoin());
+        t.start();
+
+        // 等待 t 线程执行完毕
+        try {
+            t.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // 打印 main 线程信息
+        System.out.println("Hello from main Thread!");
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            System.out.println(Thread.currentThread().getName() + "#" + i);
+
+            // 休眠 100 毫秒
+            try {
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+}
+```
+
+运行结果如下：
+
+```text
+Thread-0#0
+Thread-0#1
+Thread-0#2
+Thread-0#3
+Thread-0#4
+Hello from main Thread!
+```
+
+**interrupt**
+
+可以使用 interrupt 来中断一个线程，但被中断线程并未消亡，只是收到一个提醒。
+
+如下为使用`Thread.interrupt()`的一个示例程序：
+
+```java
+import java.util.concurrent.TimeUnit;
+
+public class HelloInterrupt implements Runnable {
+
+    public static void main(String[] args) {
+        // 启动线程 t
+        Thread t = new Thread(new HelloInterrupt());
+        t.start();
+
+        // 打断线程 t
+        t.interrupt();
+
+        // 打印 main 线程信息
+        System.out.println("Hello from main Thread!");
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            System.out.println(Thread.currentThread().getName() + "#" + i);
+
+            // 休眠 100 毫秒
+            try {
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException e) {
+                System.out.println("Interrupted by other Thread!");
+            }
+        }
+    }
+
+}
+```
+
+运行结果如下：
+
+```text
+Hello from main Thread!
+Thread-0#0
+Interrupted by other Thread!
+Thread-0#1
+Thread-0#2
+Thread-0#3
+Thread-0#4
+```
 
 > 参考资料
 >
