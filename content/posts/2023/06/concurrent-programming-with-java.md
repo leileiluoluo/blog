@@ -140,9 +140,9 @@ public class HelloCallable implements Callable<String> {
 
 ### 3.2 几个线程控制相关的方法
 
-**yield**
+**yield()**
 
-表示当前线程的主要任务已经完成，告诉线程调度器，可以让渡 CPU 给其它的线程使用一会了。
+`Thread`的类方法，表示当前线程的主要任务已经完成，告诉线程调度器，可以让渡 CPU 给其它的线程使用一会了。
 
 如下为使用`Thread.yield`的一个示例程序：
 
@@ -184,9 +184,9 @@ Thread-0#4
 Thread-1#4
 ```
 
-**sleep**
+**sleep()**
 
-表示当前线程要休眠一段指定的时间，这段时间不占用 CPU 处理时间，从而别的线程可能会抢占到执行权。休眠的过程中可能被别的线程打断，从而抛出`InterruptedException`。
+`Thread`的类方法，表示当前线程要休眠一段指定的时间，这段时间不占用 CPU 处理时间，从而别的线程可能会抢占到执行权。休眠的过程中可能被别的线程打断，从而抛出`InterruptedException`。
 
 如下为使用`Thread.sleep`的一个示例程序：
 
@@ -234,9 +234,9 @@ Thread-1#4
 Thread-0#4
 ```
 
-**join**
+**join()**
 
-一个线程可以调用另一个线程的`join`方法，表示调用`join`方法的这个线程会被阻塞执行，一直等待被调用`join`方法的另一个线程执行完毕后再继续执行当前线程。
+`Thread`的实例方法，一个线程可以调用另一个线程的`join`方法，表示调用`join`方法的这个线程会被阻塞执行，一直等待被调用`join`方法的另一个线程执行完毕后再继续执行当前线程。
 
 如下为使用`Thread.join`的一个示例程序：
 
@@ -289,9 +289,9 @@ Thread-0#4
 Hello from main Thread!
 ```
 
-**interrupt**
+**interrupt()**
 
-可以使用 interrupt 来中断一个线程，但被中断线程并未消亡，只是收到一个提醒。
+`Thread`的实例方法，可以使用 interrupt 来中断一个线程，但被中断线程并未消亡，只是收到一个提醒。
 
 如下为使用`Thread.interrupt()`的一个示例程序：
 
