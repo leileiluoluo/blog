@@ -16,10 +16,6 @@ wip_template:
 
 `Golang 中文社区，活跃度极高的 Go 语言问答社区。`
 
-**[个站商店](https://storeweb.cn/)**
-
-`一个精致的，带社交元素的个人网站发布平台，博客收录网站。`
-
 **[Tony Bai](https://tonybai.com/)**
 
 `国内知名技术博主，Go 语言布道师。坚持写博十余年，仍孜孜不倦。`
