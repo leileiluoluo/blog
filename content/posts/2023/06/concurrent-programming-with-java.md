@@ -1,5 +1,5 @@
 ---
-title: Java 并发编程入门
+title: Java 并发编程基础
 author: olzhy
 type: post
 date: 2023-06-07T08:00:00+08:00
@@ -11,7 +11,7 @@ tags:
 keywords:
   - Java
   - 并发编程
-description: Java 并发编程入门，涉及并发与并行的区别、进程与线程的区别、使用多线程的方法等内容。
+description: Java 并发编程基础，涉及并发与并行的区别、进程与线程的区别、使用多线程的方法等内容。
 ---
 
 开始探索 Java 并发编程之前，我们需要知道：什么是并发？以及，并发与并行有什么不同？
