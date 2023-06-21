@@ -161,6 +161,7 @@ public class HelloCallable implements Callable<String> {
 | join()      | Thread 实例方法 | 等待线程执行完成                                    |
 | interrupt() | Thread 实例方法 | 打断线程的执行                                      |
 | setDaemon() | Thread 实例方法 | 设置是否为守护线程                                  |
+| setName()   | Thread 实例方法 | 设置线程名                                          |
 
 **yield()**
 
@@ -410,9 +411,46 @@ public class HelloDaemon implements Runnable {
 }
 ```
 
-运行该示例程序发现未打印任何内容。
+该示例代码只是对前面的示例代码稍稍作了一点修改，只是启动时将 Daemon 设置为了 true。可以看到运行该程序将不会打印任何内容，这是因为`main`线程退出时，Daemon 线程也跟着退出了，没有得到执行。
 
-该示例代码中，`HelloDaemon`是一个实现了`Runnable`接口的线程任务，该任务是一个迭代次数为 5 的循环，每次循环会打印线程名和当前循环编号，然后休眠 100 毫秒。我们在`main`线程将`HelloDaemon`线程任务作为 Daemon 线程启动后，程序将不会打印任何内容，这是因为`main`线程退出了，Daemon 线程也跟着退出了，没有得到执行。
+**setName()**
+
+`Thread`的实例方法，用于给线程设置一个名称。
+
+如下为使用`Thread.setName`的一个示例程序：
+
+```java
+
+public class HelloThreadWithName implements Runnable {
+
+    public static void main(String[] args) {
+        // 启动线程
+        Thread t = new Thread(new HelloThreadWithName());
+        t.setName("HelloThread");
+        t.start();
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            System.out.println(Thread.currentThread().getName() + "#" + i);
+        }
+    }
+
+}
+```
+
+该示例程序的运行结果如下：
+
+```text
+HelloThread#0
+HelloThread#1
+HelloThread#2
+HelloThread#3
+HelloThread#4
+```
+
+可以看到，打印的线程名不再是之前的`Thread-0`这种默认名称了，而变成了我们启动前给线程设置的名称。
 
 > 参考资料
 >
