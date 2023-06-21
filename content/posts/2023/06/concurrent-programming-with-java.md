@@ -420,7 +420,6 @@ public class HelloDaemon implements Runnable {
 如下为使用`Thread.setName()`的一个示例程序：
 
 ```java
-
 public class HelloThreadWithName implements Runnable {
 
     public static void main(String[] args) {
