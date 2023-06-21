@@ -150,7 +150,16 @@ public class HelloCallable implements Callable<String> {
 
 如上代码中，`HelloCallable`类实现了`Callable`接口，并实现了其`call`方法。在`main`方法新建`FutureTask`对象，并将`HelloCallable`对象作为参数传入；然后新建`Thread`对象，将`FutureTask`对象作为参数传入；最后调用`Thread`对象的`start`方法来启动线程。
 
+了解了线程的创建方法，下面看看`Thread`类自带的几个线程控制相关的方法。
+
 ### 3.2 几个线程控制相关的方法
+
+| 方法名      | 方法类型        | 功用                                                |
+| ----------- | --------------- | --------------------------------------------------- |
+| yield()     | Thread 类方法   | 告诉调度器，当前线程可以让渡 CPU 给其它线程使用了。 |
+| sleep()     | Thread 类方法   | 让当前线程休眠指定时间                              |
+| join()      | Thread 实例方法 | 等待线程执行完成                                    |
+| interrupt() | Thread 实例方法 | 打断线程的执行                                      |
 
 **yield()**
 
