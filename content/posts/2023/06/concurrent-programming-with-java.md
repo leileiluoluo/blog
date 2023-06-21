@@ -72,7 +72,7 @@ Java 里边的并发编程其实就是多线程编程。从 Java 应用程序的
 
 创建 Java 线程任务有三种方法：实现 Runnable 接口、继承 Thread 类，以及实现 Callable 接口。
 
-**实现 Runnable 接口**
+#### 实现 Runnable 接口
 
 Java 中最通用的描述线程任务的方法是实现 Runnable 接口并重写其`run`方法。而线程的启动则需要将任务对象传入`Thread`对象并调用其`start`方法来实现。
 
@@ -95,7 +95,7 @@ public class HelloRunnable implements Runnable {
 
 如上代码中，`HelloRunnable`类实现了`Runnable`接口，并重写了其`run`方法。在`main`方法新建`Thread`对象，并将`HelloRunnable`对象作为参数传入，最后调用`Thread`对象的`start`方法来启动线程。
 
-**继承 Thread 类**
+#### 继承 Thread 类
 
 为了方便线程的使用，`Thread`类本身实现了`Runnable`接口，所以继承`Thread`类并重写其`run`方法也是一种描述任务的方法。而线程的启动则变为直接调用对象的`start`方法即可。
 
@@ -118,7 +118,7 @@ public class HelloThread extends Thread {
 
 如上代码中，`HelloThread`类继承了`Thread`类，并重写了其`run`方法。在`main`方法直接新建`HelloThread`对象并调用其父类`start`方法即可启动线程。
 
-**实现 Callable 接口**
+#### 实现 Callable 接口
 
 前两种方法，任务处理完均无法生成返回值。而实现 Callable 接口这种方法就是专为生成返回值设计的一种任务创建方法。使用该方法描述任务时，需要实现`Callable`接口并重写其`call`方法，而任务的启动同样需要使用`Thread`来实现，而为了获取执行结果，中间需要借用一下`FutureTask`对象，等待结果返回的过程是阻塞的。
 
@@ -163,11 +163,11 @@ public class HelloCallable implements Callable<String> {
 | setDaemon() | Thread 实例方法 | 设置是否为守护线程                                  |
 | setName()   | Thread 实例方法 | 设置线程名                                          |
 
-**yield()**
+#### yield()
 
 `Thread`的类方法，表示当前线程的主要任务已经完成，告诉线程调度器，可以让渡 CPU 给其它的线程使用一会了。
 
-如下为使用`Thread.yield`的一个示例程序：
+如下为使用`Thread.yield()`的一个示例程序：
 
 ```java
 public class HelloYield implements Runnable {
@@ -211,11 +211,11 @@ Thread-1#4
 
 从运行结果可以看到，两个`HelloYield`线程任务交替打印信息直至执行完毕。
 
-**sleep()**
+#### sleep()
 
 `Thread`的类方法，表示当前线程要休眠一段指定的时间，这段时间不占用 CPU 处理时间，从而别的线程可能会抢占到执行权。休眠的过程中可能被别的线程打断，从而抛出`InterruptedException`。
 
-如下为使用`Thread.sleep`的一个示例程序：
+如下为使用`Thread.sleep()`的一个示例程序：
 
 ```java
 import java.util.concurrent.TimeUnit;
@@ -265,11 +265,11 @@ Thread-0#4
 
 从运行结果可以看到，两个`HelloSleep`线程任务交替打印信息直至执行完毕。
 
-**join()**
+#### join()
 
 `Thread`的实例方法，一个线程可以调用另一个线程的`join`方法，表示调用`join`方法的这个线程会被阻塞执行，一直等待被调用`join`方法的另一个线程执行完毕后再继续执行当前线程。
 
-如下为使用`Thread.join`的一个示例程序：
+如下为使用`Thread.join()`的一个示例程序：
 
 ```java
 import java.util.concurrent.TimeUnit;
@@ -324,7 +324,7 @@ Hello from main Thread!
 
 从运行结果可以看到，该子线程运行完毕后才打印了`main`线程的 Hello 信息。
 
-**interrupt()**
+#### interrupt()
 
 `Thread`的实例方法，可以调用其来中断一个线程，但被中断线程并未消亡，只是收到一个提醒。
 
@@ -376,11 +376,11 @@ Thread-0#4
 
 从运行结果可以看到，该子线程运行过程中捕获到了`InterruptedException`并打印了被中断信息，但未中止，直至任务完毕才退出执行。
 
-**setDaemon()**
+#### setDaemon()
 
 `Thread`的实例方法。Java 线程有用户线程和守护线程两种类型，如果设置为守护线程，那当用户线程结束时，守护线程会跟着结束。需要注意`main`线程是用户线程。
 
-如下为使用`Thread.setDaemon`的一个示例程序：
+如下为使用`Thread.setDaemon()`的一个示例程序：
 
 ```java
 import java.util.concurrent.TimeUnit;
@@ -413,11 +413,11 @@ public class HelloDaemon implements Runnable {
 
 该示例代码只是对前面的示例代码稍稍作了一点修改，只是启动时将 Daemon 设置为了 true。可以看到运行该程序将不会打印任何内容，这是因为`main`线程退出时，Daemon 线程也跟着退出了，没有得到执行。
 
-**setName()**
+#### setName()
 
 `Thread`的实例方法，用于给线程设置一个名称。
 
-如下为使用`Thread.setName`的一个示例程序：
+如下为使用`Thread.setName()`的一个示例程序：
 
 ```java
 
