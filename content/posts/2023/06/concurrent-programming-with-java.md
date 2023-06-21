@@ -313,7 +313,7 @@ Hello from main Thread!
 
 **interrupt()**
 
-`Thread`的实例方法，可以使用 interrupt 来中断一个线程，但被中断线程并未消亡，只是收到一个提醒。
+`Thread`的实例方法，可以调用其来中断一个线程，但被中断线程并未消亡，只是收到一个提醒。
 
 如下为使用`Thread.interrupt()`的一个示例程序：
 
