@@ -194,7 +194,7 @@ Thread-0#4
 Thread-1#4
 ```
 
-该示例代码中，`HelloYield`是一个实现了`Runnable`接口的线程任务，该任务是一个迭代次数为 5 的循环，每次循环会打印线程名和当前循环编号，并调用一次`Thread`的`yield()`方法。我们在`main`线程启动了两个`HelloYield`线程任务。
+该示例代码中，`HelloYield`是一个实现了`Runnable`接口的线程任务，该任务是一个迭代次数为 5 的循环，每次循环会打印线程名和当前循环编号，并调用一次`Thread`的`yield`方法。我们在`main`线程启动了两个`HelloYield`线程任务。
 
 从运行结果可以看到，两个`HelloYield`线程任务交替打印信息直至执行完毕。
 
@@ -307,7 +307,7 @@ Thread-0#4
 Hello from main Thread!
 ```
 
-该示例代码中，`HelloJoin`是一个实现了`Runnable`接口的线程任务，该任务是一个迭代次数为 5 的循环，每次循环会打印线程名和当前循环编号，然后休眠 100 毫秒。我们在`main`线程将`HelloJoin`线程任务启动后，接着调用其`join()`方法，然后`main`线程打印一句 Hello 信息。
+该示例代码中，`HelloJoin`是一个实现了`Runnable`接口的线程任务，该任务是一个迭代次数为 5 的循环，每次循环会打印线程名和当前循环编号，然后休眠 100 毫秒。我们在`main`线程将`HelloJoin`线程任务启动后，接着调用其`join`方法，然后`main`线程打印一句 Hello 信息。
 
 从运行结果可以看到，该子线程运行完毕后才打印了`main`线程的 Hello 信息。
 
@@ -359,7 +359,7 @@ Thread-0#3
 Thread-0#4
 ```
 
-该示例代码中，`HelloInterrupt`是一个实现了`Runnable`接口的线程任务，该任务是一个迭代次数为 5 的循环，每次循环会打印线程名和当前循环编号，然后休眠 100 毫秒；休眠中若捕获到`InterruptedException`，则打印一句被中断的信息。我们在`main`线程将`HelloInterrupt`线程任务启动后，接着调用其`interrupt()`方法将其打断。
+该示例代码中，`HelloInterrupt`是一个实现了`Runnable`接口的线程任务，该任务是一个迭代次数为 5 的循环，每次循环会打印线程名和当前循环编号，然后休眠 100 毫秒；休眠中若捕获到`InterruptedException`，则打印一句被中断的信息。我们在`main`线程将`HelloInterrupt`线程任务启动后，接着调用其`interrupt`方法将其打断。
 
 从运行结果可以看到，该子线程运行过程中捕获到了`InterruptedException`并打印了被中断信息，但未中止，直至任务完毕才退出执行。
 
