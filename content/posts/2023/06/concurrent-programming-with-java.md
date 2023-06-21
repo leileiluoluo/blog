@@ -160,6 +160,7 @@ public class HelloCallable implements Callable<String> {
 | sleep()     | Thread 类方法   | 让当前线程休眠指定时间                              |
 | join()      | Thread 实例方法 | 等待线程执行完成                                    |
 | interrupt() | Thread 实例方法 | 打断线程的执行                                      |
+| setDaemon() | Thread 实例方法 | 设置是否为守护线程                                  |
 
 **yield()**
 
@@ -373,6 +374,45 @@ Thread-0#4
 该示例代码中，`HelloInterrupt`是一个实现了`Runnable`接口的线程任务，该任务是一个迭代次数为 5 的循环，每次循环会打印线程名和当前循环编号，然后休眠 100 毫秒；休眠中若捕获到`InterruptedException`，则打印一句被中断的信息。我们在`main`线程将`HelloInterrupt`线程任务启动后，接着调用其`interrupt`方法将其打断。
 
 从运行结果可以看到，该子线程运行过程中捕获到了`InterruptedException`并打印了被中断信息，但未中止，直至任务完毕才退出执行。
+
+**setDaemon()**
+
+`Thread`的实例方法。Java 线程有用户线程和守护线程两种类型，如果设置为守护线程，那当用户线程结束时，守护线程会跟着结束。需要注意`main`线程是用户线程。
+
+如下为使用`Thread.setDaemon`的一个示例程序：
+
+```java
+import java.util.concurrent.TimeUnit;
+
+public class HelloDaemon implements Runnable {
+
+    public static void main(String[] args) {
+        // 启动线程
+        Thread t = new Thread(new HelloDaemon());
+        t.setDaemon(true);
+        t.start();
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            System.out.println(Thread.currentThread().getName() + "#" + i);
+
+            // 休眠 100 毫秒
+            try {
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+}
+```
+
+运行该示例程序发现未打印任何内容。
+
+该示例代码中，`HelloDaemon`是一个实现了`Runnable`接口的线程任务，该任务是一个迭代次数为 5 的循环，每次循环会打印线程名和当前循环编号，然后休眠 100 毫秒。我们在`main`线程将`HelloDaemon`线程任务作为 Daemon 线程启动后，程序将不会打印任何内容，这是因为`main`线程退出了，Daemon 线程也跟着退出了，没有得到执行。
 
 > 参考资料
 >
