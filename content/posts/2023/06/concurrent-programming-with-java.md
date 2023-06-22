@@ -453,16 +453,20 @@ HelloThread#4
 
 > 参考资料
 >
-> [1] [Lesson: Concurrency | Java Documentation - docs.oracle.com](https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html)
+> [1] [Thinking in Java, 4th Edition, Bruce Eckel | Amazon - www.amazon.com](https://www.amazon.com/Thinking-Java-4th-Bruce-Eckel/dp/0131872486)
 >
-> [2] [Java Concurrency and Multithreading Tutorial | Jenkov - jenkov.com](https://jenkov.com/tutorials/java-concurrency/index.html)
+> [2] [Core Java Volume I - Fundamentals, 11th Edition, Cay Horstmann | Amazon - www.amazon.com](https://www.amazon.com/Core-Java-I-Fundamentals-11th-Horstmann/dp/0135166306)
 >
-> [3] [Java 多线程（超详细）| CSDN 博客 - blog.csdn.net](https://blog.csdn.net/zdl66/article/details/126297036)
+> [3] [Lesson: Concurrency | Java Documentation - docs.oracle.com](https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html)
 >
-> [4] [并发的基础概念以及优缺点 | CSDN 博客 - blog.csdn.net](https://blog.csdn.net/weixin_41645142/article/details/125464399)
+> [4] [Java Concurrency and Multithreading Tutorial | Jenkov - jenkov.com](https://jenkov.com/tutorials/java-concurrency/index.html)
 >
-> [5] [Difference between Concurrency and Parallelism | GeeksforGeeks - www.geeksforgeeks.org](https://www.geeksforgeeks.org/difference-between-concurrency-and-parallelism/)
+> [5] [Java 多线程（超详细）| CSDN 博客 - blog.csdn.net](https://blog.csdn.net/zdl66/article/details/126297036)
 >
-> [6] [Concurrency vs Parallelism | Baeldung - www.baeldung.com](https://www.baeldung.com/cs/concurrency-vs-parallelism)
+> [6] [并发的基础概念以及优缺点 | CSDN 博客 - blog.csdn.net](https://blog.csdn.net/weixin_41645142/article/details/125464399)
 >
-> [7] [Process vs Thread | Baeldung - www.baeldung.com](https://www.baeldung.com/cs/process-vs-thread)
+> [7] [Difference between Concurrency and Parallelism | GeeksforGeeks - www.geeksforgeeks.org](https://www.geeksforgeeks.org/difference-between-concurrency-and-parallelism/)
+>
+> [8] [Concurrency vs Parallelism | Baeldung - www.baeldung.com](https://www.baeldung.com/cs/concurrency-vs-parallelism)
+>
+> [9] [Process vs Thread | Baeldung - www.baeldung.com](https://www.baeldung.com/cs/process-vs-thread)
