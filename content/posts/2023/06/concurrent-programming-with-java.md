@@ -458,7 +458,7 @@ HelloThread#4
 ```java
 public class EvenGenerator implements Runnable {
 
-    private int COUNTER = 0;
+    private int counter = 0;
     private volatile boolean canceled = false;
 
     public static void main(String[] args) {
@@ -472,9 +472,9 @@ public class EvenGenerator implements Runnable {
 
     // 生成一个偶数
     private int generate() {
-        COUNTER++;
-        COUNTER++;
-        return COUNTER;
+        counter++;
+        counter++;
+        return counter;
     }
 
     @Override
