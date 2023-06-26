@@ -455,6 +455,52 @@ HelloThread#4
 
 ### 4.1 共享资源访问问题
 
+```java
+public class EvenGenerator implements Runnable {
+
+    private int COUNTER = 0;
+    private volatile boolean canceled = false;
+
+    public static void main(String[] args) {
+        EvenGenerator generator = new EvenGenerator();
+
+        // 同时启动 5 个 EvenGenerator 线程任务
+        for (int i = 0; i < 5; i++) {
+            new Thread(generator).start();
+        }
+    }
+
+    // 生成一个偶数
+    private int generate() {
+        COUNTER++;
+        COUNTER++;
+        return COUNTER;
+    }
+
+    @Override
+    public void run() {
+        // 无限循环调用 generate 生成 num，若生成的 num 不是偶数，则打印错误信息并退出循环
+        while (!isCanceled()) {
+            int num = generate();
+            if (num % 2 != 0) {
+                System.out.printf("Error occurred, a bad number %d generated!\n", num);
+                setCanceled(true);
+                return;
+            }
+        }
+    }
+
+    public boolean isCanceled() {
+        return canceled;
+    }
+
+    public void setCanceled(boolean canceled) {
+        this.canceled = canceled;
+    }
+
+}
+```
+
 ### 4.2 使用 synchronized 关键字进行线程同步
 
 ### 4.3 使用 Lock 对象进行线程同步
