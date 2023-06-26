@@ -455,6 +455,10 @@ HelloThread#4
 
 ### 4.1 共享资源访问问题
 
+当多个线程对同一块数据进行操作的时候，可能产生「竞争条件」，出现该现象的根本原因是对数据的操作是非「原子化」的，即前一个线程对数据的操作还未结束，而后一个线程就开始对同样的数据进行操作，这就可能造成数据的结果出现未知的情况。
+
+下面看一个示例程序：
+
 ```java
 public class EvenGenerator implements Runnable {
 
@@ -500,6 +504,26 @@ public class EvenGenerator implements Runnable {
 
 }
 ```
+
+该示例程序中，`EvenGenerator`是一个偶数生成器，其实现了`Runnable`接口。`EvenGenerator`有一个成员变量`counter`，初始值为 0；`EvenGenerator`有一个方法`generate`，每次通过对`counter`自增两次来生成一个偶数（期望的序列：0，2，4，...）；`EvenGenerator`还有一个成员变量`canceled`，其是一个标记，用于停止所有线程任务的执行，其`getters`和`setters`方法分别为`isCanceled`和`setCanceled`；`EvenGenerator`重写了`Runnable`的`run`方法，在该方法中，只要`canceled`为`false`，就会调用`generate`方法生成一个数值，如果该数值不是偶数，就会打印错误消息，然后设置`canceled`为`true`，并退出`while`循环。最后在`main`方法中，实例化了`EvenGenerator`对象，并启动 5 个线程来同时执行任务，我们期望`generate`方法生成的数值永远是偶数（0，2，4，...），该程序永远不会退出，下面就看看运行结果是否跟我们预想的一样？
+
+该示例程序的运行结果如下：
+
+```text
+Error occurred, a bad number 762519 generated!
+Error occurred, a bad number 1084511 generated!
+Error occurred, a bad number 1084509 generated!
+Error occurred, a bad number 1084507 generated!
+Error occurred, a bad number 807973 generated!
+```
+
+可以看到，该程序运行中生成了奇数，然后退出了。这是为什么呢？这个程序在单线程的情况下是没问题的，而在多线程情况下就会发生共享资源访问问题。因`generate`方法内对`counter`变量的两次自增操作并非是一个原子操作，在多个线程对其同时进行调用时，就可能会出现一个线程只进行了一次自增，而正要进行第二次自增时，另一个线程进入，又进行一次自增，这样前一个线程接着进行第二次自增并返回时就会是奇数。
+
+此外，还需要说明下`canceled`变量声明时为什么使用了`volatile`关键字？该关键字是用于解决变量可见性问题的，其能够保证`canceled`变量被修改后，对各个线程都是可见的。为啥有变量可见性问题呢？这是因为，为了性能考量，每个线程在处理时会将变量从主存拷贝到 CPU 高速缓存，然后进行计算，而当中间某个线程对共享变量值进行更改并写入主存时，其它线程对该更新「不可见」，读取的还是 CPU 高速缓存内的旧值，而`volatile`关键字就是保证变量的读取与写入都在主存而不是 CPU 缓存，这样各个线程看到的就会是变量的最新值。此外，`volatile`关键字还可以避免指令重排问题。
+
+该部分说明了共享资源访问问题，那么如何进行防范呢？防止「竞争条件」出现的办法就是进行线程同步，即将关键的代码进行加锁，让多个线程排队顺序执行操作。
+
+那么如何进行加锁呢？下面就分别介绍一下 synchronized 关键字和 Lock 对象两种常用的线程同步办法。
 
 ### 4.2 使用 synchronized 关键字进行线程同步
 
