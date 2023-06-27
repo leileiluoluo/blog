@@ -80,6 +80,10 @@ wip_template:
 - [刘建平 Pinard](https://www.cnblogs.com/pinard/)
 - [Eureka 机器学习读书笔记](https://www.zhihu.com/column/xiadayj)
 
+**Java 相关**
+
+- [Java 全栈知识体系](https://pdai.tech/)
+
 **Golang 相关**
 
 - [Golang](https://golang.org/)
