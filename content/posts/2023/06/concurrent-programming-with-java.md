@@ -593,6 +593,93 @@ Java 中除了使用 synchronized 关键字进行线程同步外，还可以使�
 
 ### 4.3 使用 Lock 对象进行线程同步
 
+除了使用 synchronized 关键字进行线程同步外，还可以使用 Lock 对象来进行线程同步。这种方式较 synchronized 方式更加灵活。
+
+相较于 synchronized 关键字不需要用户去手动释放锁（发生异常或者调用完成后会自动释放锁）而言，Lock 则必须要用户去手动释放锁，如果没有主动释放锁，就有可能出现死锁的情况。
+
+使用 Lock 对象进行线程同步的通用模式是使用`try {} finally {}`语句块：
+
+```java
+// 新建锁对象
+Lock lock = ...;
+// 加锁
+lock.lock();
+try {
+    // 处理任务
+} finally {
+    // 解锁
+    lock.unlock();
+}
+```
+
+需要记住的是，加锁后要记得解锁，而且解锁语句需要放在`finally {}`语句块内，这样不管是正常结束还是发生异常都会保证锁的释放。
+
+有`return`语句的话，也建议将其放在`try {}`语句块内，这样即可保证锁释放前不会将数据暴露给别的任务。
+
+下面使用 Lock 对象的方式对`EvenGenerator`代码进行改造，以使其满足线程安全的要求。
+
+改造后的程序代码如下：
+
+```java
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class LockedEvenGenerator implements Runnable {
+
+    private int counter = 0;
+    private volatile boolean canceled = false;
+
+    private final Lock lock = new ReentrantLock();
+
+    public static void main(String[] args) {
+        LockedEvenGenerator generator = new LockedEvenGenerator();
+
+        // 同时启动 5 个 EvenGenerator 线程任务
+        for (int i = 0; i < 5; i++) {
+            new Thread(generator).start();
+        }
+    }
+
+    // 生成一个偶数
+    private int generate() {
+        lock.lock();
+        try {
+            counter++;
+            counter++;
+            return counter;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    @Override
+    public void run() {
+        // 无限循环调用 generate 生成 num，若生成的 num 不是偶数，则打印错误信息并退出循环
+        while (!isCanceled()) {
+            int num = generate();
+            if (num % 2 != 0) {
+                System.out.printf("Error occurred, a bad number %d generated!\n", num);
+                setCanceled(true);
+                return;
+            }
+        }
+    }
+
+    public boolean isCanceled() {
+        return canceled;
+    }
+
+    public void setCanceled(boolean canceled) {
+        this.canceled = canceled;
+    }
+
+}
+```
+
+运行如上程序，同样不会出现因并发访问而生成非偶数然后自动退出的情况了。
+
+合理的使用锁机制会保证线程安全，从而解决多线程下共享资源的竞争问题。但锁的使用不当也会造成死锁等问题，下面看一下死锁造成的原因及规避办法。
+
 ### 4.4 死锁造成的原因及规避办法
 
 ## 5 线程协作
