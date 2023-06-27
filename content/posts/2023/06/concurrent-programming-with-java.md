@@ -451,6 +451,8 @@ HelloThread#4
 
 可以看到，打印的线程名不再是之前的`Thread-0`这种默认名称了，而变成了我们启动前给线程设置的名称。
 
+了解了线程的创建方式和基础操作方法后，下面介绍一下多线程下共享资源的争夺问题和解决办法。
+
 ## 4 共享资源访问控制
 
 ### 4.1 共享资源争夺问题
@@ -526,6 +528,68 @@ Error occurred, a bad number 807973 generated!
 那么如何进行加锁以进行线程同步呢？下面就分别介绍一下 synchronized 关键字和 Lock 对象两种常用的线程同步办法。
 
 ### 4.2 使用 synchronized 关键字进行线程同步
+
+可使用 synchronized 关键字进行线程同步，即使用 synchronized 关键字修饰的方法或代码块可以保证在同一时刻最多只有一个线程在访问。
+
+synchronized 关键字可以修饰实例方法、代码块和静态方法。若修饰的是实例方法，相当于是`synchronized(this)`，即锁对象为当前实例对象；若修饰的是代码块，锁对象为括号内的对象或类（`.class`）；若修饰的是静态方法，锁对象为类对象。
+
+此外，若使用 synchronized 关键字修饰实例方法，锁会作用在整个实例对象。因此，一个类中若有多个实例方法被 synchronized 修饰，调用其中一个被 synchronized 修饰的方法时，整个实例对象会被锁定，此时实例对象的其它 synchronized 方法亦不可被调用，直至前一个调用完成并释放掉锁。
+
+而使用 synchronized 关键字修饰静态方法时，锁会作用在整个类，所以由该类衍生的所有实例都会使用这同一把锁。
+
+下面使用 synchronized 关键字对上一步产生「竞争条件」的`EvenGenerator`代码改造一下，使其满足线程安全的要求。
+
+改造后的程序代码如下：
+
+```java
+public class SynchronizedEvenGenerator implements Runnable {
+
+    private int counter = 0;
+    private volatile boolean canceled = false;
+
+    public static void main(String[] args) {
+        SynchronizedEvenGenerator generator = new SynchronizedEvenGenerator();
+
+        // 同时启动 5 个 EvenGenerator 线程任务
+        for (int i = 0; i < 5; i++) {
+            new Thread(generator).start();
+        }
+    }
+
+    // 生成一个偶数
+    private synchronized int generate() {
+        counter++;
+        counter++;
+        return counter;
+    }
+
+    @Override
+    public void run() {
+        // 无限循环调用 generate 生成 num，若生成的 num 不是偶数，则打印错误信息并退出循环
+        while (!isCanceled()) {
+            int num = generate();
+            if (num % 2 != 0) {
+                System.out.printf("Error occurred, a bad number %d generated!\n", num);
+                setCanceled(true);
+                return;
+            }
+        }
+    }
+
+    public boolean isCanceled() {
+        return canceled;
+    }
+
+    public void setCanceled(boolean canceled) {
+        this.canceled = canceled;
+    }
+
+}
+```
+
+运行如上程序，发现不会因并发访问而生成非偶数而自动退出了。
+
+Java 中除了使用 synchronized 关键字进行线程同步外，还可以使用 Lock 对象进行线程同步。
 
 ### 4.3 使用 Lock 对象进行线程同步
 
