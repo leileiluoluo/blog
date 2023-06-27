@@ -529,7 +529,7 @@ Error occurred, a bad number 807973 generated!
 
 ### 4.2 使用 synchronized 关键字进行线程同步
 
-可使用 synchronized 关键字进行线程同步，即使用 synchronized 关键字修饰的方法或代码块可以保证在同一时刻最多只有一个线程在访问。
+Java 中可使用 synchronized 关键字进行线程同步，即使用 synchronized 关键字修饰的方法或代码块可以保证在同一时刻最多只有一个线程在访问。
 
 synchronized 关键字可以修饰实例方法、代码块和静态方法。若修饰的是实例方法，相当于是`synchronized(this)`，即锁对象为当前实例对象；若修饰的是代码块，锁对象为括号内的对象或类（`.class`）；若修饰的是静态方法，锁对象为类对象。
 
