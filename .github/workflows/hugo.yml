@@ -32,7 +32,10 @@ jobs:
           hugo-version: '0.81.0'
           extended: true
       - name: Build
-        run: hugo --minify
+        run: |
+          hugo --minify
+          ls -lht
+          pwd
       - name: Copy file via ssh key
         uses: appleboy/scp-action@v0.1.4
         with:
