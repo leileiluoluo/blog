@@ -26,6 +26,13 @@ jobs:
           hugoVersion: extended_0.81.0
           args: --minify
           siteDir: /github/workspace
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.81.0'
+          extended: true
+      - name: Build
+        run: hugo --minify
       - name: Copy file via ssh key
         uses: appleboy/scp-action@v0.1.4
         with:
