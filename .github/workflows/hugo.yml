@@ -30,10 +30,35 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Sync to Gitee
-        uses: wearerequired/git-mirror-action@master
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
+      - name: Copy file via ssh key
+        uses: appleboy/scp-action@v0.1.4
         with:
-          source-repo: "git@github.com:olzhy/olzhy.github.io.git"
-          destination-repo: "git@gitee.com:olzhy/olzhy.github.io.git"
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          source: '/github/workspace/*'
+          target: '/tmp/'
+      # - name: Start Service
+      #   uses: appleboy/ssh-action@v0.1.4
+      #   with:
+      #     host: ${{ secrets.HOST }}
+      #     port: ${{ secrets.PORT }}
+      #     username: ${{ secrets.USERNAME }}
+      #     password: ${{ secrets.PASSWORD }}
+      #     script: |
+      #       cd /usr/app/
+      #       source /etc/profile
+      #       ps -ef | grep java | grep -v grep | awk '{print $2}' | xargs kill -9
+      #       rm /usr/app/old/boyouquan-1.0-SNAPSHOT.jar
+      #       mv /usr/app/new/target/boyouquan-1.0-SNAPSHOT.jar /usr/app/old/
+      #       export DATABASE_URL=$DATABASE_URL
+      #       export DATABASE_USER=$DATABASE_USER
+      #       export DATABASE_PASSWORD=$DATABASE_PASSWORD
+      #       nohup java -jar /usr/app/old/boyouquan-1.0-SNAPSHOT.jar > /tmp/server.log 2>&1 &
+      #       sleep 1
+      #       while ! grep -m1 'Started BoYouQuanWebApplication' < /tmp/server.log; do
+      #         sleep 1
+      #       done
+      #       ps -ef | grep java | grep -v grep
+      #       echo "Server started!"
