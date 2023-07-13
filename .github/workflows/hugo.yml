@@ -26,10 +26,6 @@ jobs:
           hugoVersion: extended_0.81.0
           args: --minify
           siteDir: /github/workspace
-  deploy:
-    needs: publish
-    runs-on: ubuntu-latest
-    steps:
       - name: Copy file via ssh key
         uses: appleboy/scp-action@v0.1.4
         with:
