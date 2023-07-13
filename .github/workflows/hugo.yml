@@ -37,7 +37,7 @@ jobs:
           port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          source: '/github/workspace/'
+          source: '/github/workspace'
           target: '/tmp/'
       # - name: Start Service
       #   uses: appleboy/ssh-action@v0.1.4
