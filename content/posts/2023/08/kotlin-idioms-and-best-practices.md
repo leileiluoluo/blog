@@ -130,6 +130,37 @@ fun main() {
 }
 ```
 
+### 2.4 使用 apply 为对象作一组初始化操作
+
+```java
+public static void main(String[] args) {
+    File file = new File("test.txt");
+    file.setExecutable(false);
+    file.setReadable(true);
+    file.setWritable(false);
+}
+```
+
+```kotlin
+fun main() {
+    val file = File("test.txt")
+    file.setExecutable(false)
+    file.setReadable(true)
+    file.setWritable(false)
+}
+```
+
+```kotlin
+fun main() {
+    val file = File("test.txt")
+    file.apply {
+        setExecutable(false)
+        setReadable(true)
+        setWritable(false)
+    }
+}
+```
+
 > 参考资料
 >
 > [1] [Idioms | Kotlin Documentation - kotlinlang.org](https://kotlinlang.org/docs/idioms.html)
