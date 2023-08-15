@@ -44,7 +44,7 @@ public static String ageGroup(int age) {
 如果使用 Kotlin 来改写的话，会是下面这个样子：
 
 ```kotlin
-// 不建议的写法
+// 不推荐的写法
 fun ageGroup(age: Int): String {
     return if (age in 0..<18) {
         "未成年"
@@ -63,12 +63,60 @@ fun ageGroup(age: Int): String {
 所以，如上 Kotlin 代码改写为表达式结合`when`语句的写法如下：
 
 ```kotlin
-// 建议的写法
+// 推荐的写法
 fun ageGroup(age: Int): String = when {
     age in 0..<18 -> "未成年"
     age < 45 -> "青年"
     age < 60 -> "中年"
     else -> "老年"
+}
+```
+
+### 2.3 使用扩展函数充当工具包的场景
+
+```java
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class DatesUtil {
+
+    public static String formatDate(Date date) {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(formatDate(new Date()));
+    }
+
+}
+```
+
+```kotlin
+// 不推荐的写法
+import java.text.SimpleDateFormat
+import java.util.*
+
+object DateUtil {
+
+    fun formatDate(date: Date): String =
+            SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date)
+
+}
+
+fun main() {
+    println(DateUtil.formatDate(Date()))
+}
+```
+
+```kotlin
+// 推荐的写法
+import java.text.SimpleDateFormat
+import java.util.*
+
+fun Date.format(): String = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this)
+
+fun main() {
+    println(Date().format())
 }
 ```
 
