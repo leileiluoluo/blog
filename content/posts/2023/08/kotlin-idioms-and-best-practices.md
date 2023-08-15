@@ -27,25 +27,28 @@ description: 对比 Java 学习 Kotlin 中的惯用写法与最佳实践。
 
 ```java
 public static String ageGroup(int age) {
-        if (age >= 0 && age < 18) {
-            return "未成年";
-        } else if (age < 45) {
-            return "青年";
-        } else if (age < 60) {
-            return "中年";
-        } else {
-            return "老年";
-        }
+    if (age >= 0 && age < 18) {
+        return "未成年";
+    } else if (age < 45) {
+        return "青年";
+    } else if (age < 60) {
+        return "中年";
+    } else {
+        return "老年";
     }
+}
 ```
 
 ```kotlin
 fun ageGroup(age: Int): String {
-    return when {
-        age in 0..<18 -> "未成年"
-        age < 45 -> "青年"
-        age < 60 -> "中年"
-        else -> "老年"
+    return if (age in 0..<18) {
+        "未成年"
+    } else if (age < 45) {
+        "青年"
+    } else if (age < 60) {
+        "中年"
+    } else {
+        "老年"
     }
 }
 ```
