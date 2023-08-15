@@ -173,6 +173,62 @@ fun main() {
 }
 ```
 
+### 2.5 不要为了实现参数默认值而使用函数重载
+
+先看一段 Java 代码：
+
+```java
+public class TestOverload {
+
+    public static void main(String[] args) {
+        greet();
+    }
+
+    private static void greet() {
+        greet("World");
+    }
+
+    private static void greet(String name) {
+        System.out.println("Hello " + name);
+    }
+
+}
+```
+
+如上代码中，`TestOverload`类中的`greet`方法是一个重载方法，无参数`greet`方法的目的是满足默认值的场景。
+
+将如上 Java 代码直接转换为 Kotlin 写法的代码如下：
+
+```kotlin
+// 不推荐的写法
+fun main() {
+    fun greet(name: String) {
+        println("Hello $name")
+    }
+
+    fun greet() {
+        greet("World")
+    }
+
+    greet()
+}
+```
+
+而这种写法是不推荐的，对于这种使用重载实现默认值的场景，Kotlin 中可以直接使用带默认值的函数。
+
+改造后的代码如下：
+
+```kotlin
+// 推荐的写法
+fun main() {
+    fun greet(name: String = "World") {
+        println("Hello $name")
+    }
+
+    greet()
+}
+```
+
 > 参考资料
 >
 > [1] [Idioms | Kotlin Documentation - kotlinlang.org](https://kotlinlang.org/docs/idioms.html)
