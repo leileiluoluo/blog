@@ -132,6 +132,8 @@ fun main() {
 
 ### 2.4 使用 apply 为对象作一组初始化操作
 
+先看一段 Java 代码：
+
 ```java
 public static void main(String[] args) {
     File file = new File("test.txt");
@@ -141,7 +143,12 @@ public static void main(String[] args) {
 }
 ```
 
+上面这段代码是 Java 中比较常见对象初始化的写法。
+
+直接将其转化为 Kotlin 的写法，代码会是下面这个样子：
+
 ```kotlin
+// 不推荐的写法
 fun main() {
     val file = File("test.txt")
     file.setExecutable(false)
@@ -150,7 +157,12 @@ fun main() {
 }
 ```
 
+对于这种对一个对象作一组初始化操作的场景应使用`apply`扩展函数，这样不必每条语句都携带对象的变量名，看起来会更精简一些。
+
+使用`apply`后的 Kotlin 代码如下：
+
 ```kotlin
+// 推荐的写法
 fun main() {
     val file = File("test.txt")
     file.apply {
