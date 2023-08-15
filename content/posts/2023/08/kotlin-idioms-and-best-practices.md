@@ -74,6 +74,8 @@ fun ageGroup(age: Int): String = when {
 
 ### 2.3 使用扩展函数充当工具包的场景
 
+先看一段 Java 代码：
+
 ```java
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -91,6 +93,10 @@ public class DatesUtil {
 }
 ```
 
+上面这段代码是 Java 中比较常用的静态工具方法的写法。
+
+如果把它直接转化为 Kotlin 的写法，代码是下面这个样子：
+
 ```kotlin
 // 不推荐的写法
 import java.text.SimpleDateFormat
@@ -107,6 +113,10 @@ fun main() {
     println(DateUtil.formatDate(Date()))
 }
 ```
+
+对于这种工具包的场景，上面这种从 Java 延续过来的写法在 Kotlin 中是不推荐的，Kotlin 更推荐使用扩展函数来实现这类功能，这样显得代码更具有可读性。
+
+使用扩展函数充当工具包的代码如下：
 
 ```kotlin
 // 推荐的写法
