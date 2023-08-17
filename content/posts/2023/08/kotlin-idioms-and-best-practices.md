@@ -280,6 +280,7 @@ if (null != order) {
 使用 Kotlin 改写后的代码如下：
 
 ```kotlin
+// 推荐的写法
 val order: Order? = getOrderById(orderId)
 order?.let {
     val valid = isCustomerValid(it.customer)
@@ -294,6 +295,7 @@ Kotlin 中可以使用数据类（`data class`）来定义一个不可变对象�
 下面这段 Kotlin 代码定义了一个 Email 数据类，用于邮件发送：
 
 ```kotlin
+// 推荐的写法
 data class Email(val to: String, val subject: String, val content: String)
 
 interface EmailService {
@@ -311,6 +313,44 @@ public record Email(String to, String subject, String content) {}
 public interface EmailService {
     void send(Email email);
 }
+```
+
+### 2.9 做字段映射时尝试使用单表达式函数
+
+先看一段 Kotlin 代码：
+
+```kotlin
+// 不推荐的写法
+fun parseMapToUser(userMap: Map<String, Any>): User {
+    return User(
+            name = userMap["name"] as String,
+            age = userMap["age"] as Int,
+            gender = userMap["gender"] as String)
+}
+```
+
+这段代码在提取 Map 中的字段信息，从而组装成具体的对象。仅做字段映射和对象转换时，如上的这种写法是不推荐的。
+
+使用单表达式来改写如上写法会显得更精简且更具有可读性。
+
+代码如下：
+
+```kotlin
+// 推荐的写法
+fun parseMapToUser(userMap: Map<String, Any>) = User(
+        name = userMap["name"] as String,
+        age = userMap["age"] as Int,
+        gender = userMap["gender"] as String)
+```
+
+此外，也可以使用扩展函数来实现此类功能。
+
+```kotlin
+// 推荐的写法
+fun Map<String, Any>.toUser() = User(
+        name = this["name"] as String,
+        age = this["age"] as Int,
+        gender = this["gender"] as String)
 ```
 
 > 参考资料
