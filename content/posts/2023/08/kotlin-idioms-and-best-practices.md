@@ -301,14 +301,12 @@ interface EmailService {
 }
 ```
 
-Java 11 中也借鉴了 Kotlin 的`data class`也引入了`record`关键字来定义不可变数据类。
+Java 14 中也借鉴了 Kotlin 的`data class`也引入了`record`关键字来定义不可变数据类。
 
 如上代码对应 Java 中的写法如下：
 
 ```java
-public record Email(String to, String subject, String content) {
-
-}
+public record Email(String to, String subject, String content) {}
 
 public interface EmailService {
     void send(Email email);
