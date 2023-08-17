@@ -21,7 +21,7 @@ description: 对比 Java 学习 Kotlin 中的惯用写法与最佳实践。
 
 ## 2 Kotlin 最佳实践
 
-### 2.2 能使用表达式就不要使用函数块
+### 2.1 能使用表达式就不要使用函数块
 
 先看一段 Java 代码：
 
@@ -72,7 +72,7 @@ fun ageGroup(age: Int): String = when {
 }
 ```
 
-### 2.3 使用扩展函数充当工具包的场景
+### 2.2 使用扩展函数充当工具包的场景
 
 先看一段 Java 代码：
 
@@ -129,6 +129,60 @@ fun main() {
     println(Date().format())
 }
 ```
+
+### 2.3 使用命名参数代替一串 Set
+
+先看一段 Java 代码：
+
+```java
+class DatabaseConfig {
+
+    private String host;
+    private Integer port;
+    private String charset = "utf-8";
+    private String timezone = "Asia/Beijing";
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public void setPost(Integer port) {
+        this.port = port;
+    }
+
+    public void setCharset(String charset) {
+        this.charset = charset;
+    }
+
+    public void setTimezone(String timezone) {
+        this.timezone = timezone;
+    }
+}
+
+// 使用一串 Set 来设定必须的值
+DatabaseConfig databaseConfig = new DatabaseConfig();
+databaseConfig.setHost("localhost");
+databaseConfig.setPost(3306);
+```
+
+如上代码定义了一个配置类，其中有一些字段有默认值，而另一些是初始化时必须设定值的字段。
+
+而在 Kotlin 中，原生支持命名参数和默认值，所以如上代码改造为 Kotlin 的写法如下：
+
+```kotlin
+data class DatabaseConfig(val host: String,
+                          val post: Int,
+                          val charset: String = "utf-8",
+                          val timezone: String = "Asia/Beijing")
+
+// 使用命名参数设定必须的值
+val databaseConfig = DatabaseConfig(
+        host = "localhost",
+        post = 3306
+)
+```
+
+这样在初始化对象时，省去一串 Set 调用，会更简洁可读一些。
 
 ### 2.4 使用 apply 为对象作一组初始化操作
 
