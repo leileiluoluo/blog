@@ -320,6 +320,8 @@ public interface EmailService {
 先看一段 Kotlin 代码：
 
 ```kotlin
+data class User(val name: String, val age: Int, val gender: String)
+
 // 不推荐的写法
 fun parseMapToUser(userMap: Map<String, Any>): User {
     return User(
@@ -329,7 +331,7 @@ fun parseMapToUser(userMap: Map<String, Any>): User {
 }
 ```
 
-这段代码在提取 Map 中的字段信息，从而组装成具体的对象。仅做字段映射和对象转换时，如上的这种写法是不推荐的。
+这段代码在提取 Map 中的字段信息，从而组装成具体的对象。若一个函数仅做诸如此类字段映射和对象转换时，如上的这种写法是不推荐的。
 
 使用单表达式来改写如上写法会显得更精简且更具有可读性。
 
