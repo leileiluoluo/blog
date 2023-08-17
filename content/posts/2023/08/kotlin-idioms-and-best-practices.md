@@ -261,6 +261,32 @@ val city = order?.customer?.address?.city ?: throw IllegalArgumentException("Inv
 val city = order!!.customer!!.address!!.city
 ```
 
+### 2.7 将 let 用起来
+
+先看一段 Java 代码：
+
+```java
+Order order = getOrderById(orderId);
+if (null != order) {
+    boolean valid = isCustomerValid(order.getCustomer());
+    // ...
+}
+```
+
+该代码中，首先查询了 Order，判断不为空时再对 Order 下面的 Customer 做有效性检查。
+
+而在 Kotlin 中，有时可以使用`let`来取代这类`if`检查。
+
+使用 Kotlin 改写后的代码如下：
+
+```kotlin
+val order: Order? = getOrderById(orderId)
+order?.let {
+    val valid = isCustomerValid(it.customer)
+    // ...
+}
+```
+
 > 参考资料
 >
 > [1] [Idioms | Kotlin Documentation - kotlinlang.org](https://kotlinlang.org/docs/idioms.html)
