@@ -229,6 +229,38 @@ fun main() {
 }
 ```
 
+### 2.6 要合理利用 Kotlin 的空安全
+
+先看一段 Java 代码：
+
+```java
+if (null != order
+        && null != order.getCustomer()
+        && null != order.getCustomer().getAddress()) {
+    throw new IllegalArgumentException("Invalid Order");
+}
+
+String city = order.getCustomer().getAddress().getCity();
+```
+
+这段代码展示了在 Java 中对嵌套对象取值时需要逐层判空的问题。
+
+而在 Kotlin 中无需这么繁琐，只要结合使用空安全检查（`?.`）与 Elvis 表达式（`?:`）即可。
+
+用 Kotlin 改写后的代码如下：
+
+```kotlin
+// 推荐的写法
+val city = order?.customer?.address?.city ?: throw IllegalArgumentException("Invalid Order")
+```
+
+此外，需要注意，下面这种绕过空安全校验直接强制取值的写法是不推荐的：
+
+```kotlin
+// 不推荐的写法
+val city = order!!.customer!!.address!!.city
+```
+
 > 参考资料
 >
 > [1] [Idioms | Kotlin Documentation - kotlinlang.org](https://kotlinlang.org/docs/idioms.html)
