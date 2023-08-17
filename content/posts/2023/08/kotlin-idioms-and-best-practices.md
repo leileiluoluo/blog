@@ -287,6 +287,20 @@ order?.let {
 }
 ```
 
+### 2.8 将值对象（Value Object）用起来
+
+Kotlin 中可以使用数据类来定义一个不可变对象，非常适用于值对象（Java 中叫 VO，只用于传值的不可变对象）的使用场景。
+
+下面这段 Kotlin 代码定义了一个 Email 数据类，用于邮件发送：
+
+```kotlin
+data class Email(val to: String, val subject: String, val content: String)
+
+interface EmailService {
+    fun send(email: Email)
+}
+```
+
 > 参考资料
 >
 > [1] [Idioms | Kotlin Documentation - kotlinlang.org](https://kotlinlang.org/docs/idioms.html)
