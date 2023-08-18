@@ -503,7 +503,7 @@ object DefaultListener : MouseAdapter() {
 
 如上代码中，`MouseAdapter`是 Java awt 中的一个抽象类，`DefaultListener`实现了其中的两个方法。
 
-### 2.12 在需要的场景使用解构
+### 2.12 在需要的时候使用解构
 
 Java 中不支持一个方法返回多个值，也不支持多个值在变量的携带，这在实际使用中非常的不方便，多于一个值的返回就得考虑新建一个类。
 
