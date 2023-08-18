@@ -557,10 +557,10 @@ data class User(val id: Long,
 
 @Throws(UserException::class)
 fun requestUser(id: Long): User = try {
-    restTemplate.getForObject<User>("http://api.some-domain.com/api/users/$id")
+    restTemplate.getForObject<User>("https://api.some-domain.com/api/users/$id")
 } catch (ex: IOException) {
     throw UserException(
-            message = "request_failed",
+            message = "parse_failed",
             cause = ex
     )
 } catch (ex: RestClientException) {
@@ -599,7 +599,7 @@ sealed class UserResponse {
 }
 
 fun requestUser(id: Long): UserResponse = try {
-    val user = restTemplate.getForObject<User>("http://api.some-domain.com/api/users/$id")
+    val user = restTemplate.getForObject<User>("https://api.some-domain.com/api/users/$id")
     UserResponse.Success(user = user)
 } catch (ex: IOException) {
     UserResponse.Error("parse_failed", "${ex.message}")
