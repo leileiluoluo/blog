@@ -546,7 +546,10 @@ fun main() {
 
 ### 2.13 巧用密封类取代异常的使用场景
 
+先看一段 Kotlin 代码：
+
 ```kotlin
+// 不推荐的写法
 data class User(val id: Long,
                 val avatarUrl: String,
                 val name: String,
@@ -568,6 +571,7 @@ fun requestUser(id: Long): User = try {
 }
 
 fun main() {
+    // 获取用户头像
     val avatarUrl = try {
         requestUser(id).avatarUrl
     } catch (ex: UserException) {
@@ -576,7 +580,14 @@ fun main() {
 }
 ```
 
+如上这段代码的`requestUser`函数使用`restTemplate`调用 REST API 来获取单个用户的信息，若调用中出现了异常会统一封装为`UserException`抛出。
+
+其实这段代码可以通过使用 Kotlin 中的密封类（`sealed class`）来进行改写。
+
+改写后的代码如下：
+
 ```kotlin
+// 推荐的写法
 data class User(val id: Long,
                 val avatarUrl: String,
                 val name: String,
@@ -603,6 +614,8 @@ fun main() {
     }
 }
 ```
+
+可以看到，使用密封类进行改写后的代码比使用异常更具可读性，除了可读性外，因为异常检查是在运行时做的，而对密封类进行`when`判断时，Kotlin 会在编译期检查`when`里边的分支是否覆盖了密封类的所有子结果，这一点对代码的健壮性来说也是很有益的。
 
 > 参考资料
 >
