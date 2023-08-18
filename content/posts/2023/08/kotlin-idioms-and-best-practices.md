@@ -17,7 +17,7 @@ keywords:
 description: 本文以对比 Java 的方式学习了 Kotlin 中的一些惯用写法与最佳实践。
 ---
 
-本文将会以对比 Java 的方式来学习 Kotlin 中的一些惯用写法与最佳实践。
+本文将会以对比 Java 的方式来学习 Kotlin 中的一些惯用写法与最佳实践，以便对 Java 转 Kotlin 的同学能有一些帮助。
 
 ### 1 能使用表达式就不要使用函数块
 
@@ -91,7 +91,7 @@ public class DatesUtil {
 }
 ```
 
-上面这段代码是 Java 中比较常用的静态工具方法的写法。
+上面这段代码是 Java 中比较常用的静态工具类的写法。
 
 如果把它直接转化为 Kotlin 的写法，代码是下面这个样子：
 
@@ -112,7 +112,7 @@ fun main() {
 }
 ```
 
-对于这种工具包的场景，上面这种从 Java 延续过来的写法在 Kotlin 中是不推荐的，Kotlin 更推荐使用扩展函数来实现这类功能，这样显得代码更具有可读性。
+对于这种工具包的场景，上面这种从 Java 延续过来的写法在 Kotlin 中是不推荐的，Kotlin 更推荐使用扩展函数来实现这类功能，这样显得代码更具可读性。
 
 使用扩展函数充当工具包的代码如下：
 
@@ -163,9 +163,9 @@ databaseConfig.setHost("localhost");
 databaseConfig.setPost(3306);
 ```
 
-如上代码定义了一个配置类，其中有一些字段有默认值，而另一些是初始化时必须设定值的字段。
+如上代码定义了一个配置类，其中一些是有默认值的字段，而另一些是初始化时必须设定值的字段。
 
-而在 Kotlin 中，原生支持命名参数和默认值，所以如上代码改造为 Kotlin 的写法如下：
+在 Kotlin 中，原生支持命名参数和默认值，所以如上代码改造为 Kotlin 的写法如下：
 
 ```kotlin
 data class DatabaseConfig(val host: String,
@@ -247,7 +247,7 @@ public class TestOverload {
 }
 ```
 
-如上代码中，`TestOverload`类中的`greet`方法是一个重载方法，无参数`greet`方法的目的是满足默认值的场景。
+如上代码中，`TestOverload`类中的`greet`方法是一个重载方法，无参数的`greet`方法的目的是满足默认值填充的功能。
 
 将如上 Java 代码直接转换为 Kotlin 写法的代码如下：
 
@@ -266,7 +266,7 @@ fun main() {
 }
 ```
 
-而这种写法是不推荐的，对于这种使用重载实现默认值的场景，Kotlin 中可以直接使用带默认值的函数。
+而这种写法是不推荐的，Kotlin 中可以直接使用带默认值的函数。
 
 改造后的代码如下：
 
@@ -286,9 +286,9 @@ fun main() {
 先看一段 Java 代码：
 
 ```java
-if (null != order
-        && null != order.getCustomer()
-        && null != order.getCustomer().getAddress()) {
+if (null == order
+        || null == order.getCustomer()
+        || null == order.getCustomer().getAddress()) {
     throw new IllegalArgumentException("Invalid Order");
 }
 
@@ -327,7 +327,7 @@ if (null != order) {
 
 该代码中，首先查询了 Order，判断不为空时再对 Order 下面的 Customer 做有效性检查。
 
-而在 Kotlin 中，有时可以使用`let`来取代这类`if`检查。
+而在 Kotlin 中，可以使用`let`来取代这类`if-not-null`检查。
 
 使用 Kotlin 改写后的代码如下：
 
@@ -344,7 +344,7 @@ order?.let {
 
 Kotlin 中可以使用数据类（`data class`）来定义一个不可变对象，非常适用于值对象（Java 中叫 VO，只用于传值的不可变对象）的使用场景。
 
-下面这段 Kotlin 代码定义了一个 Email 数据类，用于邮件发送：
+下面这段 Kotlin 代码定义了一个`Email`数据类，用于邮件发送：
 
 ```kotlin
 // 推荐的写法
@@ -355,7 +355,7 @@ interface EmailService {
 }
 ```
 
-Java 14 中也借鉴了 Kotlin 的`data class`也引入了`record`关键字来定义不可变数据类。
+Java 14 中也借鉴了 Kotlin 的`data class`，引入了`record`关键字来定义不可变数据类。
 
 如上代码对应 Java 中的写法如下：
 
@@ -383,9 +383,9 @@ fun parseMapToUser(userMap: Map<String, Any>): User {
 }
 ```
 
-这段代码在提取 Map 中的字段信息，从而组装成具体的对象。若一个函数仅做诸如此类字段映射和对象转换时，如上的这种写法是不推荐的。
+这段代码在提取`Map`中的字段信息，从而组装成具体的对象。若一个函数仅做诸如此类字段映射和对象转换时，如上的这种写法是不推荐的。
 
-使用单表达式来改写如上写法会显得更精简且更具有可读性。
+使用单表达式来改写如上写法会显得更精简且更有可读性。
 
 代码如下：
 
@@ -436,7 +436,7 @@ public class UserClient {
 }
 ```
 
-如上代码中，有一些属性是构造器参数，需要调用时传入的；另一些属性是需要根据构造器参数进行拼接或需要在构造方法内部进行自行初始化的。
+如上代码中，有一些属性是构造器参数，需要调用时传入的；另一些属性是需要根据构造器参数进行拼接或需要在构造方法内部进行初始化的。
 
 将如上代码转换为 Kotlin 的写法可能会是下面这个样子：
 
@@ -460,7 +460,7 @@ class UserClient2(baseUrl: String) {
 }
 ```
 
-即把非构造器参数的初始化工作放在`init`块内进行。但这种方式是不推荐的，因为在 Kotlin 中可以直接在定义参数的时候直接使用单表达式对其进行初始化。
+即把非构造器参数的初始化工作放在`init`块内进行。但这种方式是不推荐的，因为在 Kotlin 中可以直接在定义参数的时候使用单表达式对其进行初始化。
 
 推荐的写法如下：
 
@@ -578,7 +578,7 @@ fun main() {
 }
 ```
 
-如上这段代码的`requestUser`函数使用`restTemplate`调用 REST API 来获取单个用户的信息，若调用中出现了异常会统一封装为`UserException`抛出。
+如上这段代码的`requestUser`函数使用`restTemplate`调用 REST API 来获取单个用户的信息，若调用中过程出现了异常会统一封装为`UserException`抛出。
 
 其实这段代码可以通过使用 Kotlin 中的密封类（`sealed class`）来进行改写。
 
@@ -617,7 +617,7 @@ fun main() {
 
 {{< line_break >}}
 
-综上，本文对比 Java 学习了 Kotlin 中的一些惯用写法与最佳实践。
+综上，本文以对比 Java 的方式总结了 Kotlin 中的一些惯用写法与最佳实践，希望对初学 Kotlin 的 Javaer 有一些帮助。
 
 > 参考资料
 >
