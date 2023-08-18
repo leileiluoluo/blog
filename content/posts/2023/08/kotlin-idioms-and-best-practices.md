@@ -505,22 +505,44 @@ object DefaultListener : MouseAdapter() {
 
 ### 2.12 在需要的场景使用解构
 
+Java 中不支持一个方法返回多个值，也不支持多个值在变量的携带，这在实际使用中非常的不方便，多于一个值的返回就得考虑新建一个类。
+
+Kotlin 虽然也没有多值返回这个功能，但 Kotlin 支持解构以及内置二值（Pair）和三值（Triple）数据类，也可以达到多值返回和使用的场景。
+
 看一段 Kotlin 代码：
 
 ```kotlin
-data class Student(val name: String, val age: Int)
-
-fun getStudents(): List<Student> =
-        listOf(Student("Larry", 28), Student("Lucy", 26))
+fun getStudents(): List<Pair<String, Int>> =
+        listOf(Pair("Larry", 28), Pair("Lucy", 26))
 
 fun main() {
     for ((name, age) in getStudents()) {
-        println("$name -> $age")
+        println("$name, $age")
     }
 }
 ```
 
-如上代码使用了 Kotlin 的解构特性，这种将一个对象拆解为多个变量的特性是非常实用的。
+这段代码即是使用内置的`Pair`类来支持二值的返回，并且数据类本身支持解构，所以支持使用（(name, age)）的方式一次性将多个值取出来。
+
+三个值的返回可以使用`Triple`类，而对于多于三个值的情形，则可以定义数据类来实现，其也支持解构。
+
+自定义数据类及使用解构的示例 Kotlin 代码如下：
+
+```kotlin
+data class Student(val name: String, val age: Int, val gender: String, val grade: Int)
+
+fun getStudents(): List<Student> =
+        listOf(
+                Student("Larry", 28, "Male", 3),
+                Student("Lucy", 26, "Female", 2)
+        )
+
+fun main() {
+    for ((name, age, gender, grade) in getStudents()) {
+        println("$name, $age, $gender, $grade")
+    }
+}
+```
 
 > 参考资料
 >
