@@ -79,7 +79,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DatesUtil {
-
     public static String formatDate(Date date) {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
     }
@@ -87,7 +86,6 @@ public class DatesUtil {
     public static void main(String[] args) {
         System.out.println(formatDate(new Date()));
     }
-
 }
 ```
 
@@ -101,10 +99,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object DateUtil {
-
     fun formatDate(date: Date): String =
             SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date)
-
 }
 
 fun main() {
@@ -134,7 +130,6 @@ fun main() {
 
 ```java
 class DatabaseConfig {
-
     private String host;
     private Integer port;
     private String charset = "utf-8";
@@ -231,7 +226,6 @@ fun main() {
 
 ```java
 public class TestOverload {
-
     public static void main(String[] args) {
         greet();
     }
@@ -243,7 +237,6 @@ public class TestOverload {
     private static void greet(String name) {
         System.out.println("Hello " + name);
     }
-
 }
 ```
 
