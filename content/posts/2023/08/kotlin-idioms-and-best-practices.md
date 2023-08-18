@@ -483,6 +483,26 @@ class UserClient(baseUrl: String) {
 }
 ```
 
+### 2.11 使用 object 声明无状态的接口实现
+
+若一个类没有状态，仅用来做诸如接口的实现工作，则非常适合将其声明为`object`。
+
+使用`object`声明的示例代码如下：
+
+```kotlin
+object DefaultListener : MouseAdapter() {
+    override fun mouseClicked(e: MouseEvent?) {
+        // ...
+    }
+
+    override fun mouseReleased(e: MouseEvent?) {
+        // ...
+    }
+}
+```
+
+如上代码中，`MouseAdapter`是 Java awt 中的一个抽象类，`DefaultListener`实现了其中的两个方法。
+
 > 参考资料
 >
 > [1] [Idioms | Kotlin Documentation - kotlinlang.org](https://kotlinlang.org/docs/idioms.html)
