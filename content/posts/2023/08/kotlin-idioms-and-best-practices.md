@@ -544,6 +544,66 @@ fun main() {
 }
 ```
 
+### 2.13 巧用密封类取代异常的使用场景
+
+```kotlin
+data class User(val id: Long,
+                val avatarUrl: String,
+                val name: String,
+                val email: String)
+
+@Throws(UserException::class)
+fun requestUser(id: Long): User = try {
+    restTemplate.getForObject<User>("http://api.some-domain.com/api/users/$id")
+} catch (ex: IOException) {
+    throw UserException(
+            message = "request_failed",
+            cause = ex
+    )
+} catch (ex: RestClientException) {
+    throw UserException(
+            message = "request_failed",
+            cause = ex
+    )
+}
+
+fun main() {
+    val avatarUrl = try {
+        requestUser(id).avatarUrl
+    } catch (ex: UserException) {
+        "https://www.some-domain.com/images/default-avatar.png"
+    }
+}
+```
+
+```kotlin
+data class User(val id: Long,
+                val avatarUrl: String,
+                val name: String,
+                val email: String)
+
+sealed class UserResponse {
+    data class Success(val user: User) : UserResponse()
+    data class Error(val code: String, val description: String) : UserResponse()
+}
+
+fun requestUser(id: Long): UserResponse = try {
+    val user = restTemplate.getForObject<User>("http://api.some-domain.com/api/users/$id")
+    UserResponse.Success(user = user)
+} catch (ex: IOException) {
+    UserResponse.Error("parse_failed", "${ex.message}")
+} catch (ex: RestClientException) {
+    UserResponse.Error("request_failed", "${ex.message}")
+}
+
+fun main() {
+    val avatarUrl = when (val userResp = requestUser(1)) {
+        is UserResponse.Success -> userResp.user.avatarUrl
+        is UserResponse.Error -> "https://www.some-domain.com/images/default-avatar.png"
+    }
+}
+```
+
 > 参考资料
 >
 > [1] [Idioms | Kotlin Documentation - kotlinlang.org](https://kotlinlang.org/docs/idioms.html)
