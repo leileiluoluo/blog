@@ -409,6 +409,80 @@ fun Map<String, Any>.toUser() = User(
         gender = this["gender"] as String)
 ```
 
+### 2.10 不建议将属性的初始化工作放在 init 块内进行
+
+先看一段 Java 代码：
+
+```java
+public class UserClient {
+    private String baseUrl;
+    private String usersUrl;
+    private CloseableHttpClient httpClient;
+
+    public UserClient(String baseUrl) {
+        this.baseUrl = baseUrl;
+
+        // 初始化 usersUrl
+        userUrl = baseUrl + "/users";
+
+        // 初始化 httpClient
+        HttpClientBuilder builder = HttpClientBuilder.create();
+        builder.setUserAgent("UserClient");
+        builder.setConnectionManagerShared(true);
+        httpClient = builder.build();
+    }
+
+    public List<User> getUsers() {
+        // ...
+    }
+}
+```
+
+如上代码中，有一些属性是构造器参数，需要调用时传入的；另一些属性是需要根据构造器参数进行拼接或需要在构造方法内部进行自行初始化的。
+
+将如上代码转换为 Kotlin 的写法可能会是下面这个样子：
+
+```kotlin
+// 不推荐的写法
+class UserClient2(baseUrl: String) {
+    private val usersUrl = "$baseUrl/users"
+    private val httpClient: CloseableHttpClient
+
+    // 在 init 块内初始化 httpClient
+    init {
+        val builder = HttpClientBuilder.create()
+        builder.setUserAgent("UserClient")
+        builder.setConnectionManagerShared(true)
+        httpClient = builder.build()
+    }
+
+    fun getUsers() {
+        // ...
+    }
+}
+```
+
+即把非构造器参数的初始化工作放在`init`块内进行。但这种方式是不推荐的，因为在 Kotlin 中可以直接在定义参数的时候直接使用单表达式对其进行初始化。
+
+推荐的写法如下：
+
+```kotlin
+// 推荐的写法
+class UserClient(baseUrl: String) {
+    private val usersUrl = "$baseUrl/users"
+
+    // 定义时就可以直接使用单表达式初始化 httpClient
+    private val httpClient = HttpClientBuilder.create().apply {
+        setUserAgent("UserClient")
+        setConnectionManagerShared(true)
+    }.build()
+
+    fun getUsers() {
+        // ...
+    }
+}
+```
+
 > 参考资料
 >
 > [1] [Idioms | Kotlin Documentation - kotlinlang.org](https://kotlinlang.org/docs/idioms.html)
