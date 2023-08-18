@@ -14,14 +14,12 @@ keywords:
   - 最佳实践
   - 对比
   - Java
-description: 对比 Java 学习 Kotlin 中的惯用写法与最佳实践。
+description: 本文以对比 Java 的方式学习了 Kotlin 中的一些惯用写法与最佳实践。
 ---
 
-## 1 Kotlin 惯用写法
+本文将会以对比 Java 的方式来学习 Kotlin 中的一些惯用写法与最佳实践。
 
-## 2 Kotlin 最佳实践
-
-### 2.1 能使用表达式就不要使用函数块
+### 1 能使用表达式就不要使用函数块
 
 先看一段 Java 代码：
 
@@ -72,7 +70,7 @@ fun ageGroup(age: Int): String = when {
 }
 ```
 
-### 2.2 使用扩展函数充当工具包的场景
+### 2 使用扩展函数充当工具包的场景
 
 先看一段 Java 代码：
 
@@ -130,7 +128,7 @@ fun main() {
 }
 ```
 
-### 2.3 使用命名参数代替一串 Set
+### 3 使用命名参数代替一串 Set
 
 先看一段 Java 代码：
 
@@ -184,7 +182,7 @@ val databaseConfig = DatabaseConfig(
 
 这样在初始化对象时，省去一串 Set 调用，会更简洁可读一些。
 
-### 2.4 使用 apply 为对象作一组初始化操作
+### 4 使用 apply 为对象作一组初始化操作
 
 先看一段 Java 代码：
 
@@ -227,7 +225,7 @@ fun main() {
 }
 ```
 
-### 2.5 不要为了实现参数默认值而使用函数重载
+### 5 不要为了实现参数默认值而使用函数重载
 
 先看一段 Java 代码：
 
@@ -283,7 +281,7 @@ fun main() {
 }
 ```
 
-### 2.6 要合理利用 Kotlin 的空安全
+### 6 要合理利用 Kotlin 的 Null 安全
 
 先看一段 Java 代码：
 
@@ -315,7 +313,7 @@ val city = order?.customer?.address?.city ?: throw IllegalArgumentException("Inv
 val city = order!!.customer!!.address!!.city
 ```
 
-### 2.7 将 let 用起来
+### 7 将 let 用起来
 
 先看一段 Java 代码：
 
@@ -342,7 +340,7 @@ order?.let {
 }
 ```
 
-### 2.8 将值对象（Value Object）用起来
+### 8 将值对象（Value Object）用起来
 
 Kotlin 中可以使用数据类（`data class`）来定义一个不可变对象，非常适用于值对象（Java 中叫 VO，只用于传值的不可变对象）的使用场景。
 
@@ -369,7 +367,7 @@ public interface EmailService {
 }
 ```
 
-### 2.9 做字段映射时尝试使用单表达式函数
+### 9 做字段映射时尝试使用单表达式函数
 
 先看一段 Kotlin 代码：
 
@@ -409,7 +407,7 @@ fun Map<String, Any>.toUser() = User(
         gender = this["gender"] as String)
 ```
 
-### 2.10 不建议将属性的初始化工作放在 init 块内进行
+### 10 不建议将属性的初始化工作放在 init 块内进行
 
 先看一段 Java 代码：
 
@@ -483,7 +481,7 @@ class UserClient(baseUrl: String) {
 }
 ```
 
-### 2.11 使用 object 声明无状态的接口实现
+### 11 使用 object 声明无状态的接口实现
 
 若一个类没有状态，仅用来做诸如接口的实现工作，则非常适合将其声明为`object`。
 
@@ -503,7 +501,7 @@ object DefaultListener : MouseAdapter() {
 
 如上代码中，`MouseAdapter`是 Java awt 中的一个抽象类，`DefaultListener`实现了其中的两个方法。
 
-### 2.12 在需要的时候使用解构
+### 12 在需要的时候使用解构
 
 Java 中不支持一个方法返回多个值，也不支持多个值在变量的携带，这在实际使用中非常的不方便，多于一个值的返回就得考虑新建一个类。
 
@@ -544,7 +542,7 @@ fun main() {
 }
 ```
 
-### 2.13 巧用密封类取代异常的使用场景
+### 13 巧用密封类取代异常的使用场景
 
 先看一段 Kotlin 代码：
 
@@ -616,6 +614,10 @@ fun main() {
 ```
 
 可以看到，使用密封类进行改写后的代码比使用异常更具可读性，除了可读性外，因为异常检查是在运行时做的，而对密封类进行`when`判断时，Kotlin 会在编译期检查`when`里边的分支是否覆盖了密封类的所有子结果，这一点对代码的健壮性来说也是很有益的。
+
+{{< line_break >}}
+
+综上，本文对比 Java 学习了 Kotlin 中的一些惯用写法与最佳实践。
 
 > 参考资料
 >
