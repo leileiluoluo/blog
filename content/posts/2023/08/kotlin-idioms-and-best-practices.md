@@ -503,6 +503,25 @@ object DefaultListener : MouseAdapter() {
 
 如上代码中，`MouseAdapter`是 Java awt 中的一个抽象类，`DefaultListener`实现了其中的两个方法。
 
+### 2.12 在需要的场景使用解构
+
+看一段 Kotlin 代码：
+
+```kotlin
+data class Student(val name: String, val age: Int)
+
+fun getStudents(): List<Student> =
+        listOf(Student("Larry", 28), Student("Lucy", 26))
+
+fun main() {
+    for ((name, age) in getStudents()) {
+        println("$name -> $age")
+    }
+}
+```
+
+如上代码使用了 Kotlin 的解构特性，这种将一个对象拆解为多个变量的特性是非常实用的。
+
 > 参考资料
 >
 > [1] [Idioms | Kotlin Documentation - kotlinlang.org](https://kotlinlang.org/docs/idioms.html)
