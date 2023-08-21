@@ -16,7 +16,9 @@ keywords:
 description: 本文以对比 Java 的方式学习了 Kotlin 中的一些开发规约。
 ---
 
-本文将会以对比 Java 的方式来学习 Kotlin 中的一些开发规约。
+上文「[对比 Java 学习 Kotlin 中的惯用写法与最佳实践](https://olzhy.github.io/posts/kotlin-idioms-and-best-practices.html)」主要从语法的层面出发，介绍了如何写出符合「最佳实践」要求的 Kotlin 的代码。
+
+本文承接上文，但更多以实际项目的角度出发，总结 Kotlin 的一些开发规约。
 
 ### 1 if-else 嵌套不要超过 3 层
 
