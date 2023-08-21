@@ -45,7 +45,6 @@ public Long getPriceTotalByOrderId(Long orderId) throws BusinessException {
                     priceTotal += product.getPrice();
                 }
             }
-            return priceTotal;
         } else {
             throw new BusinessException("该订单未包含任何商品");
         }
