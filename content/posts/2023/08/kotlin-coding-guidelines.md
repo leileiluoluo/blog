@@ -24,9 +24,7 @@ description: 本文以对比 Java 的方式学习了 Kotlin 中的一些开发�
 
 Java 中要求`if-else`嵌套不要超过 3 层。
 
-如：
-
-《阿里巴巴 Java 开发手册 · 黄山版》第一部分编程规约的控制语句部分就讲：如果非使用`if()...else if()...else...`方式表达逻辑，避免后续代码维护困难，请勿超过 3 层；超过 3 层的`if-else`的逻辑判断代码可以使用卫语句等方式实现。
+如《阿里巴巴 Java 开发手册 · 黄山版》第一部分编程规约的控制语句部分就讲：如果非使用`if()...else if()...else...`方式表达逻辑，避免后续代码维护困难，请勿超过 3 层；超过 3 层的`if-else`的逻辑判断代码可以使用卫语句等方式实现。
 
 下面先看一段 Java 代码：
 
@@ -140,6 +138,41 @@ fun getPriceTotalByOrderId(orderId: Long): Long {
     // 计算商品总价
     return products.filterNot { it.isGift() }
             .sumOf { it.price }
+}
+```
+
+### 2 不要在生产环境使用 System.out.println() 打印日志
+
+如《阿里巴巴 Java 开发手册 · 黄山版》第三部分异常日志的日志规约部分就讲：生产环境禁止使用 System.out、System.err 或 e.printStackTrace() 打印日志或异常堆栈。
+
+```java
+public class UserServiceImpl implements UserService {
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
+    @Override
+    public void save(User user) {
+        try {
+            // ...
+        } catch (Exception e) {
+            logger.error("user save failed", e);
+        }
+    }
+}
+```
+
+```kotlin
+class UserServiceImpl : UserService {
+    companion object {
+        private val logger = LoggerFactory.getLogger(UserServiceImpl::class.java)
+    }
+
+    override fun save(user: User) {
+        try {
+            // ...
+        } catch (e: Exception) {
+            logger.error("user save failed", e)
+        }
+    }
 }
 ```
 
