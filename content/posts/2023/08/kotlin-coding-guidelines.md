@@ -143,9 +143,14 @@ fun getPriceTotalByOrderId(orderId: Long): Long {
 
 ### 2 不要在生产环境使用 System.out.println() 打印日志
 
-如《阿里巴巴 Java 开发手册 · 黄山版》第三部分异常日志的日志规约部分就讲：生产环境禁止使用 System.out、System.err 或 e.printStackTrace() 打印日志或异常堆栈。
+应避免在生产环境直接使用`System.out.println()`等标准输出打印日志，而应使用日志包来完成。
+
+如《阿里巴巴 Java 开发手册 · 黄山版》第三部分异常日志的日志规约部分就讲：生产环境禁止使用`System.out`、`System.err`或`e.printStackTrace()`打印日志或异常堆栈。
+
+如下为使用 Slf4j 打印日志的 Java 代码：
 
 ```java
+// 推荐的写法
 public class UserServiceImpl implements UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -160,7 +165,10 @@ public class UserServiceImpl implements UserService {
 }
 ```
 
+如下为使用 Slf4j 打印日志的 Kotlin 代码：
+
 ```kotlin
+// 推荐的写法
 class UserServiceImpl : UserService {
     companion object {
         private val logger = LoggerFactory.getLogger(UserServiceImpl::class.java)
