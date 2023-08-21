@@ -138,7 +138,7 @@ fun getPriceTotalByOrderId(orderId: Long): Long {
     }
 
     // 计算商品总价
-    return products.filter { !it.isGift() }
+    return products.filterNot { it.isGift() }
             .sumOf { product: Product -> product.price }
 }
 ```
