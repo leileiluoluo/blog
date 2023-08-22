@@ -782,4 +782,4 @@ class UserServiceImpl : UserService {
 >
 > [2] [Idiomatic Kotlin Best Practices | Philipp Hauer's Blog - phauer.com](https://phauer.com/2017/idiomatic-kotlin-best-practices/)
 >
-> [3] [阿里巴巴 Java 开发手册黄山版 | Alibab P3C - github.com](https://github.com/alibaba/p3c)
+> [3] [阿里巴巴 Java 开发手册黄山版 | Alibaba P3C - github.com](https://github.com/alibaba/p3c)
