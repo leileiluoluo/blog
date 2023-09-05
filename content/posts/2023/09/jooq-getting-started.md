@@ -14,10 +14,20 @@ keywords:
   - 工具包
   - jOOQ
   - 初探
-description: Java 数据库操作工具包 jOOQ 初探。
+description: Java 数据库操作工具包 jOOQ 初探。包括三个部分：准备数据库和测试数据、使用 jOOQ 生成 POJO 类，以及 jOOQ 与 Spring Boot 的集成。
 ---
 
+jOOQ 是一个轻量级的 Java ORM（对象关系映射）框架，可用来构建复杂的 SQL 查询。jOOQ 可以自动生成 Java POJO 类，字段类型与数据库一一对应，减少了 SQL 注入的风险。
+
+本文即是对 jOOQ 的初探，包括三个部分：准备数据库和测试数据、使用 jOOQ 生成 POJO 类，以及 jOOQ 与 Spring Boot 的集成。
+
 ## 1 准备数据库、表和测试数据
+
+探索 jOOQ 的使用之前，需要有一个数据库和几张表。学生课程系统就是一个不错的业务场景，既接近实际又涉及连表等复杂查询，很适合用来作演示学习。
+
+本文为学生课程系统创建了一个 school 数据库，并在其下创建了四张表 student（学生表）、teacher（老师表）、course（课程表）和 score（成绩表）。
+
+如下为完整的建库、建表和数据插入语句：
 
 ```sql
 -- 创建数据库 school
