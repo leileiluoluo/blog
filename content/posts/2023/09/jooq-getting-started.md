@@ -21,6 +21,7 @@ description: Java 数据库操作工具包 jOOQ 初探。
 
 ```sql
 -- 创建数据库 school
+DROP DATABASE IF EXISTS school;
 CREATE DATABASE school DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
 -- 使用数据库 school
