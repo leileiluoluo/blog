@@ -80,7 +80,7 @@ DROP TABLE IF EXISTS score;
 CREATE TABLE score (
   student_no INT NOT NULL,                                     -- 学生编号
   course_no INT NOT NULL,                                      -- 课程编号
-  degree DECIMAL(4, 1) NOT NULL,                                -- 分数
+  degree DECIMAL(4, 1) NOT NULL,                               -- 分数
   CONSTRAINT PRIMARY KEY (student_no, course_no),              -- 学生编号与课程编号为联合主键
   CONSTRAINT FOREIGN KEY (student_no) REFERENCES student(no),  -- 学生编号为外键
   CONSTRAINT FOREIGN KEY (course_no) REFERENCES course(no)     -- 课程编号为外键
