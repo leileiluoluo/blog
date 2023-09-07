@@ -435,7 +435,7 @@ public class UserClient {
 
 ```kotlin
 // 不推荐的写法
-class UserClient2(baseUrl: String) {
+class UserClient(baseUrl: String) {
     private val usersUrl = "$baseUrl/users"
     private val httpClient: CloseableHttpClient
 
