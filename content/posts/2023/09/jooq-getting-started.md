@@ -199,6 +199,14 @@ public class JOOQSimpleQueryTest {
 
 可以看到，上面这段代码首先使用`DriverManager.getConnection();`来创建了一个数据库连接；然后使用`DSL.using(conn, SQLDialect.MYSQL);`来创建了`DSLContext`对象；然后即可以用`DSLContext`来像写 SQL 语句的方式一样（`context.selectFrom(STUDENT).fetchInto(Student.class);`）来拼装查询语句了，查询结果会自动转换为 POJO 类的类型，非常方便快捷。
 
+程序运行结果如下：
+
+```text
+no: 1, name: 闫浩然, gender: 男, birthday: 1999-09-01T00:00
+no: 2, name: 肖雪, gender: 女, birthday: 2000-03-21T00:00
+no: 3, name: 张如意, gender: 女, birthday: 2001-08-08T00:00
+```
+
 上面的示例针对的是单表查询的情形，下面再看一下复杂查询的拼装：
 
 ```java
@@ -222,6 +230,20 @@ studentCourseScores.forEach(record -> {
 ```
 
 上面的查询涉及三个表的连接，依然可以像写 SQL 一样来进行构造。
+
+程序运行结果如下：
+
+```text
+student: 张如意, course: 语文, degree: 83.0
+student: 肖雪, course: 语文, degree: 78.5
+student: 闫浩然, course: 语文, degree: 90.5
+student: 张如意, course: 数学, degree: 94.5
+student: 肖雪, course: 数学, degree: 68.0
+student: 闫浩然, course: 数学, degree: 88.0
+student: 张如意, course: 英语, degree: 73.0
+student: 肖雪, course: 英语, degree: 93.0
+student: 闫浩然, course: 英语, degree: 98.0
+```
 
 其对应的 SQL 语句如下：
 
