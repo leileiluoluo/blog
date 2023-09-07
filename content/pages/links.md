@@ -38,7 +38,7 @@ wip_template:
 
 **[博友圈](https://www.boyouquan.com/)**
 
-`博客人的朋友圈。`
+`博客人的朋友圈，博客收录与文章 RSS 聚合网站。`
 
 {{< line_break >}}
 
