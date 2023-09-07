@@ -17,9 +17,18 @@ keywords:
 description: Java 数据库操作工具包 jOOQ 初探。包括三个部分：准备数据库和测试数据、使用 jOOQ 生成 POJO 类，以及 jOOQ 与 Spring Boot 的集成。
 ---
 
-jOOQ 是一个轻量级的 Java ORM（对象关系映射）框架，可用来构建复杂的 SQL 查询。jOOQ 可以自动生成 Java POJO 类，字段类型与数据库一一对应，减少了 SQL 注入的风险。
+jOOQ 是一个轻量级的 Java ORM（对象关系映射）框架，可用来构建复杂的 SQL 查询。jOOQ 可以根据数据库表自动生成对应的 Java 类，且字段类型与数据库一一对应，减少了 SQL 注入的风险。
 
-本文即是对 jOOQ 的初探，包括三个部分：准备数据库和测试数据、使用 jOOQ 生成 POJO 类，以及 jOOQ 与 Spring Boot 的集成。
+本文即是对 jOOQ 的初探，包括四个部分：准备数据库和测试数据、jOOQ Java 代码生成、jOOQ 初步使用，以及 jOOQ 与 Spring Boot 的集成。
+
+开始各个部分前，列出本文涉及的各软件版本：
+
+```text
+Java: 20（BellSoft LibericaJDK）
+Maven：3.9.2
+MySQL：8.1.0
+jOOQ：3.18.6
+```
 
 ## 1 准备数据库、表和测试数据
 
