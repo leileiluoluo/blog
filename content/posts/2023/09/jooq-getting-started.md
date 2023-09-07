@@ -153,11 +153,13 @@ mvn clean generate-sources
 
 可以看到，代码被生成到了`src/main/java`文件夹下的`com.leileiluoluo.jooq.model.generated`包下。
 
+![](https://olzhy.github.io/static/images/uploads/2023/09/jooq-code-generation.png)
+
 ## 3 jOOQ 初步使用
 
 使用 jOOQ 的一个主要目的可能是想借力其丰富的 SQL 构造能力。
 
-下面即会使用 jOOQ 以及在第二部分生成的 Java 代码来实现一些常用的查询。
+下面即会使用 jOOQ 以及在第二部分生成的 Java 代码（主要是表相关的类和 POJO 类）来实现一些常用的查询。
 
 如下即是使用 jOOQ 来查询所有 Student 的一段示例代码：
 
@@ -197,7 +199,7 @@ public class JOOQSimpleQueryTest {
 }
 ```
 
-可以看到，上面这段代码首先使用`DriverManager.getConnection();`来创建了一个数据库连接；然后使用`DSL.using(conn, SQLDialect.MYSQL);`来创建了`DSLContext`对象；然后即可以用`DSLContext`来像写 SQL 语句的方式一样（`context.selectFrom(STUDENT).fetchInto(Student.class);`）来拼装查询语句了，查询结果会自动转换为 POJO 类的类型，非常方便快捷。
+可以看到，上面这段代码首先使用`DriverManager.getConnection(url, username, password);`来创建了一个数据库连接；然后使用`DSL.using(conn, SQLDialect.MYSQL);`来创建了`DSLContext`对象；然后即可以用`DSLContext`来像写 SQL 语句一样（`context.selectFrom(STUDENT).fetchInto(Student.class);`）来拼装查询语句了，查询结果会自动转换为 POJO 类的类型，非常方便快捷。
 
 程序运行结果如下：
 
@@ -269,7 +271,7 @@ JOIN course c
 
 ### 4.1 DSLContext 的自动创建
 
-在 Spring Boot 中使用 jOOQ 时，`DSLContext`如何进行创建，这些交给`spring-boot-starter-jooq`就可以了，我们依然在`application.xml`采用通用的数据库信息配置即可，`DSLContext`会由 Spring 容器自动创建，我们只需在需要的地方进行自动注入就可以了。
+在 Spring Boot 中使用 jOOQ 时，`DSLContext`如何进行创建，这些交给`spring-boot-starter-jooq`就可以了，我们依然在`application.xml`采用通用的数据库配置即可，`DSLContext`会由 Spring 容器自动创建，我们只需在需要的地方进行自动注入就可以了。
 
 ```xml
 # application.yaml
