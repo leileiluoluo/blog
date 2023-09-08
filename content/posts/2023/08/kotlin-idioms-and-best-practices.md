@@ -8,6 +8,7 @@ categories:
   - 计算机
 tags:
   - Kotlin
+  - Java
 keywords:
   - Kotlin
   - 惯用写法
