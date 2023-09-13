@@ -132,6 +132,29 @@ tasks.withType<Test> {
 
 ### 1.2 程序入口类 DemoApplication.kt
 
+分析完 Gradle 描述文件，下面看一下程序入口类`DemoApplication.kt`：
+
+```kotlin
+// src/main/kotlin/com/example/demo/DemoApplication.kt
+package com.example.demo
+
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
+
+@SpringBootApplication
+class DemoApplication
+
+fun main(args: Array<String>) {
+    runApplication<DemoApplication>(*args)
+}
+```
+
+需要特殊说明的是：
+
+- `class DemoApplication`是一个空类，除了被添加`@SpringBootApplication`注解外，没有任何属性与方法，所以无需加花括号；
+
+- 程序入口函数`main`是一个顶层函数，不属于`DemoApplication`类。
+
 ## 2 编写业务代码
 
 ## 3 与 MyBatis 集成
