@@ -7,6 +7,7 @@ url: /posts/kubernetes-introduction.html
 categories:
   - 计算机
 tags:
+  - Kubernetes
   - 云原生
 ---
 
