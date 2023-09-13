@@ -17,12 +17,12 @@ keywords:
   - RESTful
   - API
   - 服务
-description:
+description: 本文以搭建一个真实项目的方式来演示使用 Kotlin 构建 RESTful API 服务的整个过程。主要有三个部分，即：模板项目创建、编写业务代码，以及 API 测试与验证。
 ---
 
 本文将探索「如何使用 Spring Boot 和 Kotlin 构建 RESTful API 服务？」。本文将以搭建一个真实项目的方式来演示使用 Kotlin 构建 RESTful API 服务的整个过程，除了整体框架采用 Spring Boot 外，该项目的依赖管理采用的是 Gradle、数据库访问采用的是 MyBatis，数据库使用的是本地搭建的 MySQL。
 
-本文主要有四个部分，即：模板项目创建、编写业务代码、与 MyBatis 的集成，以及 API 测试与验证。
+本文主要有三个部分，即：模板项目创建、编写业务代码，以及 API 测试与验证。
 
 下面列出该项目用到的软件或框架版本：
 
@@ -157,9 +157,188 @@ fun main(args: Array<String>) {
 
 ## 2 编写业务代码
 
-## 3 与 MyBatis 集成
+模板工程准备就绪，现在可以开始编写业务代码了。业务场景为提供 User 的增、删、改、查 API。
 
-## 4 API 测试与验证
+项目采用传统的 MVC 三层架构，代码目录结构如下：
+
+![](https://olzhy.github.io/static/images/uploads/2023/09/spring-boot-kotlin-demo-project-structure.png)
+
+下面逐一看看 Controller、Service、DAO 层的代码。
+
+### 2.1 Controller 层代码
+
+Controller 层只有一个类`UserController.kt`，用于实现 User 的增、删、改、查。
+
+完整代码如下：
+
+```kotlin
+// src/main/kotlin/com/example/demo/controller/UserController.kt
+package com.example.demo.controller
+
+import com.example.demo.model.User
+import com.example.demo.service.UserService
+import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.*
+
+@RestController
+@RequestMapping("/users")
+class UserController(val userService: UserService) {
+
+    @GetMapping("/")
+    fun listAll() = userService.listAll()
+
+    @GetMapping("/{id}")
+    fun getById(@PathVariable id: Long) = userService.getById(id)
+
+    @PatchMapping("/")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun update(@RequestBody user: User) {
+        user.id?.let { userService.update(user) }
+    }
+
+    @PostMapping("/")
+    @ResponseStatus(HttpStatus.CREATED)
+    fun save(@RequestBody user: User) = userService.save(user)
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteById(@PathVariable("id") id: Long) = userService.deleteById(id)
+
+}
+```
+
+对于这段代码，熟悉 Java 的同学对这种写法应该非常熟悉了，就是标准的 Controller 写法，只是使用了 Kotlin 的语法。
+
+### 2.2 Service 层代码
+
+Service 层为 Controller 层提供服务，包含接口和实现类。
+
+其下面的两个文件`UserService.kt`和`UserServiceImpl.kt`代码如下：
+
+```kotlin
+// src/main/kotlin/com/example/demo/service/UserService.kt
+package com.example.demo.service
+
+import com.example.demo.model.User
+
+interface UserService {
+
+    fun listAll(): List<User>
+
+    fun getById(id: Long): User?
+
+    fun update(user: User)
+
+    fun save(user: User)
+
+    fun deleteById(id: Long)
+
+}
+```
+
+```kotlin
+// src/main/kotlin/com/example/demo/service/impl/UserServiceImpl.kt
+package com.example.demo.service.impl
+
+import com.example.demo.dao.UserMapper
+import com.example.demo.model.User
+import com.example.demo.service.UserService
+import org.springframework.stereotype.Service
+
+@Service
+class UserServiceImpl(val userMapper: UserMapper) : UserService {
+
+    override fun listAll(): List<User> = userMapper.listAll()
+
+    override fun getById(id: Long): User? = userMapper.getById(id)
+
+    override fun update(user: User) = userMapper.update(user)
+
+    override fun save(user: User) = userMapper.save(user)
+
+    override fun deleteById(id: Long) = userMapper.deleteById(id)
+
+}
+```
+
+可以看到，Service 层的逻辑也比较简洁，只是调用 MyBatis Mapper 来实现对应的功能。
+
+### 2.3 DAO 层代码
+
+我们的 DAO 层使用的是 MyBatis 来实现的，没有配置繁琐的 Mapper.xml 文件，使用的是注解的方式来操作数据库。
+
+文件`UserMapper.kt`的源码如下：
+
+```kotlin
+// src/main/kotlin/com/example/demo/dao/UserMapper.kt
+package com.example.demo.dao
+
+import com.example.demo.model.User
+import org.apache.ibatis.annotations.*
+
+@Mapper
+interface UserMapper {
+
+    @Select("SELECT id, name, age FROM user")
+    fun listAll(): List<User>
+
+    @Select("SELECT id, name, age FROM user WHERE id = #{id}")
+    fun getById(id: Long): User?
+
+    @Update("UPDATE user SET name = #{name}, age = #{age} WHERE id = #{id}")
+    fun update(user: User)
+
+    @Insert("INSERT INTO user(name, age) VALUES(#{name}, #{age})")
+    fun save(user: User)
+
+    @Delete("DELETE FROM user WHERE id = #{id}")
+    fun deleteById(id: Long)
+
+}
+```
+
+### 2.4 配置文件信息
+
+我们 Spring 配置文件采用的是 YAML 格式，主要配置了数据库连接信息并指定了初始化 SQL 脚本的位置。
+
+```yaml
+# src/main/resources/application.yaml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      schema-locations: classpath:schema.sql
+      mode: always
+```
+
+连接信息指向的是在本地搭建的 MySQL 数据库，每次项目启动后都会重新执行`resources`下的`schema.sql`脚本。
+
+### 2.5 数据库脚本
+
+建表语句如下（需要手动执行）：
+
+```sql
+CREATE DATABASE `test` DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+```
+
+包含建表语句的 SQL 文件`schema.sql`内容如下（自动执行）：
+
+```sql
+-- src/main/resources/schema.sql
+DROP TABLE IF EXISTS user;
+CREATE TABLE user (
+    id BIGINT AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    age INT,
+    PRIMARY KEY (id)
+);
+```
+
+## 3 API 测试与验证
 
 > 参考资料
 >
