@@ -322,6 +322,7 @@ spring:
 建表语句如下（需要手动执行）：
 
 ```sql
+-- src/main/resources/database.sql
 CREATE DATABASE `test` DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 ```
 
@@ -338,7 +339,41 @@ CREATE TABLE user (
 );
 ```
 
+至此，支持 User 增、删、改、查的业务代码就基本写好了。
+
 ## 3 API 测试与验证
+
+下面准备启动项目并做一些 API 测试与验证。
+
+### 3.1 项目启动
+
+在项目根目录执行如下 Gradle 命令即可启动项目：
+
+```shell
+./gradlew bootRun
+```
+
+### 3.2 API 测试与验证
+
+```shell
+curl -X POST -H 'Content-Type: application/json' -d '{"name": "Larry", "age": 28}' http://localhost:8080/users/
+```
+
+```shell
+curl -X PATCH -H 'Content-Type: application/json' -d '{"id": 1, "name": "Larry2", "age": 29}' http://localhost:8080/users/
+```
+
+```shell
+curl -X GET http://localhost:8080/users/
+```
+
+```shell
+curl -X GET http://localhost:8080/users/1
+```
+
+```shell
+curl -X DELETE http://localhost:8080/users/1
+```
 
 > 参考资料
 >
