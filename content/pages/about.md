@@ -12,7 +12,7 @@ wip_template:
 
 「大丈夫行事，当磊磊落落，如日月皎然。」——《晋书》
 
-大家好，我是浩然，我是一名软件开发工程师，我的博客「磊磊落落」用于记录我在日常工作中整理的技术知识和日常生活中的点滴感想。目前我在技术上主要关注：[Java](https://olzhy.github.io/tags/java/)、[Golang](https://olzhy.github.io/tags/golang/)、[Python](https://olzhy.github.io/tags/python/)、[前端开发](https://olzhy.github.io/tags/前端开发/)、[云原生](https://olzhy.github.io/tags/云原生/)、[架构设计](https://olzhy.github.io/tags/架构设计/)、[DevOps](https://olzhy.github.io/tags/devops/) 和 [自动化测试](https://olzhy.github.io/tags/自动化测试/)。
+大家好，我是浩然，一名软件开发工程师，我的博客「磊磊落落」成立于 2017 年，用于记录我在日常工作中整理的技术知识和日常生活中的点滴感想。目前我在技术上主要关注：[Java](https://olzhy.github.io/tags/java/)、[Golang](https://olzhy.github.io/tags/golang/)、[Python](https://olzhy.github.io/tags/python/)、[前端开发](https://olzhy.github.io/tags/前端开发/)、[云原生](https://olzhy.github.io/tags/云原生/)、[架构设计](https://olzhy.github.io/tags/架构设计/)、[DevOps](https://olzhy.github.io/tags/devops/) 和 [自动化测试](https://olzhy.github.io/tags/自动化测试/)。
 
 **许可证**
 
