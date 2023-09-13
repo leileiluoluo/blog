@@ -69,6 +69,10 @@ demo
 \--- build.gradle.kts
 ```
 
+下面重点看一下该工程的 Gradle 描述文件和程序入口类`DemoApplication.kt`。
+
+### 1.1 Gradle 描述文件
+
 可以看到这是一个标准的 Gradle 工程，我们将 Gradle 描述文件`build.gradle.kts`里边的 Kotlin 版本改成最新的 1.9.10（`kotlin("jvm") version "1.9.10"`），删去不需要的 Dependency 后，完整文件内容如下：
 
 ```xml
