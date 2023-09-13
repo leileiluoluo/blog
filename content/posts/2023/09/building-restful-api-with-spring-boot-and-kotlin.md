@@ -36,7 +36,7 @@ MySQL：8.1.0
 
 ## 1 模板项目创建
 
-首先，使用 [Spring Initializr](https://start.spring.io/) 创建一个空的模板项目。
+首先，使用「[Spring Initializr](https://start.spring.io/)」创建一个空的模板项目。
 
 选项如下：
 
