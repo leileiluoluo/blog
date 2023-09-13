@@ -126,9 +126,11 @@ tasks.withType<Test> {
 
   在 dependencies 中，可以看到`mysql-connector-j`的引用方式为`runtimeOnly`，即仅在运行时需要，在编译期是不需要的。
 
-- 编译器参数`-Xjsr305=strict`
+- Kotlin 编译器参数为`-Xjsr305=strict`
 
-  开启`JSR-305`严格检查模式来充分利用 Kotlin 的空安全检查。
+  使用该编译器参数的目的是开启`JSR-305`严格检查模式，以充分利用 Kotlin 的空安全检查。
+
+### 1.2 程序入口类 DemoApplication.kt
 
 ## 2 编写业务代码
 
