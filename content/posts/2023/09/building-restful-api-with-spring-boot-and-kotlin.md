@@ -182,7 +182,6 @@ demo
 |              \--- DemoApplication.kt
 ...
 |--- gradlew
-|--- settings.gradle.kts
 \--- build.gradle.kts
 ```
 
@@ -391,25 +390,53 @@ CREATE TABLE user (
 
 ### 3.2 API 测试与验证
 
+下面，使用 CURL 命令对 API 进行测试。
+
+首先新建一个 User：
+
 ```shell
 curl -X POST -H 'Content-Type: application/json' -d '{"name": "Larry", "age": 28}' http://localhost:8080/users/
 ```
+
+然后查询所有 User，发现刚刚新建的 User 已建好，ID 为 1：
+
+```shell
+curl -X GET http://localhost:8080/users/
+
+[{"id":1,"name":"Larry","age":28}]
+```
+
+接着更新一下 ID 为 1 的 User 信息：
 
 ```shell
 curl -X PATCH -H 'Content-Type: application/json' -d '{"id": 1, "name": "Larry2", "age": 29}' http://localhost:8080/users/
 ```
 
-```shell
-curl -X GET http://localhost:8080/users/
-```
+查询 ID 为 1 的 User，发现信息已更新成功：
 
 ```shell
 curl -X GET http://localhost:8080/users/1
+
+{"id":1,"name":"Larry2","age":29}
 ```
+
+最后删除 ID 为 1 的 User，然后再次查询所有 User，发现返回为空的 List：
 
 ```shell
 curl -X DELETE http://localhost:8080/users/1
 ```
+
+```shell
+curl -X GET http://localhost:8080/users/
+
+[]
+```
+
+如上测试说明我们编写的针对 User 增、删、改、查的 API 都是好用的。
+
+综上，我们使用 Kotlin + Gradle + Spring Boot + MyBatis 搭建了一个样例 API 项目，并编写了业务代码，最后进行了测试，发现使用 Spring Boot 和 Kotlin 构建 RESTful API 服务还是比较简单可行的。
+
+本文涉及的整个样例项目代码已托管至本人 [GitHub](https://github.com/olzhy/kotlin-exercises/tree/main/spring-boot-restful-service-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
