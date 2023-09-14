@@ -186,7 +186,7 @@ demo
 \--- build.gradle.kts
 ```
 
-下面逐一看看 Controller、Service、DAO 层的代码。
+下面逐一看下 Controller 层、Service 层、DAO 层、Model 类的代码，以及配置文件和数据库脚本。
 
 ### 2.1 Controller 层代码
 
