@@ -75,7 +75,7 @@ demo
 
 可以看到这是一个标准的 Gradle 工程，我们将 Gradle 描述文件`build.gradle.kts`里边的 Kotlin 版本改成最新的 1.9.10（`kotlin("jvm") version "1.9.10"`），删去不需要的 Dependency 后，完整文件内容如下：
 
-```xml
+```gradle
 // build.gradle.kts
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -161,7 +161,30 @@ fun main(args: Array<String>) {
 
 项目采用传统的 MVC 三层架构，代码目录结构如下：
 
-![](https://olzhy.github.io/static/images/uploads/2023/09/spring-boot-kotlin-demo-project-structure.png)
+```text
+demo
+|--- src/main/
+|    |--- resources/
+|    |    |--- application.yaml
+|    |    \--- shema.sql
+|    \--- kotlin/
+|         \--- com.example.demo/
+|              |--- controller/
+|              |    \--- UserController.kt
+|              |--- service/
+|              |    |--- UserService.kt
+|              |    \--- impl/
+|              |         \--- UserServiceImpl.kt
+|              |--- dao/
+|              |    \--- UserMapper.kt
+|              |--- model/
+|              |    \--- User.kt
+|              \--- DemoApplication.kt
+...
+|--- gradlew
+|--- settings.gradle.kts
+\--- build.gradle.kts
+```
 
 下面逐一看看 Controller、Service、DAO 层的代码。
 
@@ -297,7 +320,20 @@ interface UserMapper {
 }
 ```
 
-### 2.4 配置文件信息
+### 2.4 Model 代码
+
+Model 用于数据的传递，即接收数据库查询数据，并最终序列化为 JSON 来返回给 API 调用者；也用于将 API 调用者发出的 JSON 请求体转换为 Kotlin 对象。
+
+本项目只有一个 Model`User.kt`，其源码如下：
+
+```kotlin
+// src/main/kotlin/com/example/demo/model/User.kt
+package com.example.demo.model
+
+data class User(val id: Long?, val name: String, val age: Int)
+```
+
+### 2.5 配置文件信息
 
 我们 Spring 配置文件采用的是 YAML 格式，主要配置了数据库连接信息并指定了初始化 SQL 脚本的位置。
 
@@ -317,7 +353,7 @@ spring:
 
 连接信息指向的是在本地搭建的 MySQL 数据库，每次项目启动后都会重新执行`resources`下的`schema.sql`脚本。
 
-### 2.5 数据库脚本
+### 2.6 数据库脚本
 
 建表语句如下（需要手动执行）：
 
