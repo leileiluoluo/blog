@@ -27,7 +27,7 @@ description:
 
 http4k 是一个使用纯 Kotlin 编写的非常轻巧但功能齐全的函数式 HTTP 工具包，支持使用统一的方式来编写 HTTP 服务端、客户端，以及测试代码。
 
-本文会以开发一个真实的 API 服务（User 的增、删、改、查）为例，演示如何使用 http4k 开发 RESTful API。该项目使用 Gradle 作依赖管理，采用传统的 MVC 三层架构，使用 http4k 作 Controller 层的逻辑处理，无 DAO 层，无数据库操作，Service 层使用一个 List 来模拟数据的存储。全文主要有三个部分：模板项目搭建、业务代码编写，以及 API 测试与验证。
+本文会以开发一个真实的 API 服务（User 的增、删、改、查）为例，演示如何使用 http4k 开发 RESTful API。该项目使用 Gradle 作依赖管理，采用传统的 MVC 三层架构，使用 http4k 作 Controller 层的逻辑处理，无 DAO 层，无数据库操作，Service 层使用一个 List 来模拟数据的存储，支持 Swagger UI 的自动生成。全文主要有三个部分：模板项目搭建、业务代码编写，以及 API 测试与验证。
 
 下面列出写作本文时用到的依赖项及其版本：
 
@@ -61,6 +61,7 @@ http4k-restful-service-demo
 下面主要看一下 Gralde 描述文件的内容：
 
 ```gradle
+// build.gradle.kts
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -120,6 +121,8 @@ tasks.withType<Test> {
 
 ## 2 业务代码编写
 
+项目结构：
+
 ```text
 http4k-restful-service-demo
 |--- src/main/
@@ -141,9 +144,366 @@ http4k-restful-service-demo
 \--- build.gradle.kts
 ```
 
-## 3 Swagger UI 配置
+### 2.1 Controller 层代码
+
+```kotlin
+// src/main/kotlin/com/example/demo/controller/UserController.kt
+package com.example.demo.controller
+
+import com.example.demo.code.ErrorCodes
+import com.example.demo.model.User
+import com.example.demo.service.UserService
+import jakarta.inject.Inject
+import org.http4k.contract.ContractRoute
+import org.http4k.contract.div
+import org.http4k.contract.meta
+import org.http4k.core.Body
+import org.http4k.core.Method.*
+import org.http4k.core.Request
+import org.http4k.core.Response
+import org.http4k.core.Status.Companion.CREATED
+import org.http4k.core.Status.Companion.NO_CONTENT
+import org.http4k.core.Status.Companion.OK
+import org.http4k.core.with
+import org.http4k.format.Jackson.auto
+import org.http4k.lens.Path
+import org.http4k.lens.long
+
+class UserController @Inject constructor(
+        private val userService: UserService
+) {
+    companion object {
+        private val usersLens = Body.auto<List<User>>().toLens()
+        private val userLens = Body.auto<User>().toLens()
+    }
+
+    val routes: List<ContractRoute> = listOf(
+            // listAll
+            "/users" meta {
+                summary = "list all users"
+                returning(OK, usersLens to listOf(User(1, "Larry", 28)))
+            } bindContract GET to ::listAll,
+
+            // getById
+            "/users" / Path.long().of("id") meta {
+                summary = "get user by id"
+                returning(OK, userLens to User(1, "Larry", 28))
+                returning(ErrorCodes.USER_NOT_FOUND.status, ErrorCodes.USER_NOT_FOUND.toSampleResponse())
+            } bindContract GET to { id -> { req -> getById(req, id) } },
+
+            // update
+            "/users" meta {
+                summary = "update user"
+                receiving(userLens to User(1, "Larry", 28))
+                returning(NO_CONTENT)
+                returning(ErrorCodes.USER_NOT_FOUND.status, ErrorCodes.USER_NOT_FOUND.toSampleResponse())
+            } bindContract PATCH to { req -> update(req, userLens(req)) },
+
+            // save
+            "/users" meta {
+                summary = "save user"
+                receiving(userLens to User(1, "Larry", 28))
+                returning(CREATED)
+                returning(ErrorCodes.USER_ALREADY_EXISTS.status, ErrorCodes.USER_ALREADY_EXISTS.toSampleResponse())
+            } bindContract POST to { req -> save(req, userLens(req)) },
+
+            // deleteById
+            "/users" / Path.long().of("id") meta {
+                summary = "delete user by id"
+                returning(NO_CONTENT)
+                returning(ErrorCodes.USER_NOT_FOUND.status, ErrorCodes.USER_NOT_FOUND.toSampleResponse())
+            } bindContract DELETE to { id -> { req -> deleteById(req, id) } }
+    )
+
+    private fun listAll(req: Request): Response {
+        val users = userService.listAll()
+        return Response(OK).with(usersLens of users)
+    }
+
+    private fun getById(req: Request, id: Long): Response {
+        val user = userService.getUserById(id)
+        return user?.let {
+            Response(OK).with(userLens of it)
+        } ?: ErrorCodes.USER_NOT_FOUND.toResponse()
+    }
+
+    private fun update(req: Request, user: User): Response {
+        // exists?
+        userService.getUserById(user.id) ?: return ErrorCodes.USER_NOT_FOUND.toResponse()
+
+        // update
+        userService.update(user)
+        return Response(NO_CONTENT)
+    }
+
+    private fun save(req: Request, user: User): Response {
+        // exists?
+        val userStored = userService.getUserById(user.id)
+        if (null != userStored) {
+            return ErrorCodes.USER_ALREADY_EXISTS.toResponse()
+        }
+
+        // save
+        userService.save(user)
+        return Response(CREATED)
+    }
+
+    private fun deleteById(req: Request, id: Long): Response {
+        // exists?
+        userService.getUserById(id) ?: return ErrorCodes.USER_NOT_FOUND.toResponse()
+
+        // delete
+        userService.deleteById(id)
+        return Response(NO_CONTENT)
+    }
+}
+```
+
+### 2.2 Service 层代码
+
+```kotlin
+// src/main/kotlin/com/example/demo/service/UserService.kt
+package com.example.demo.service
+
+import com.example.demo.model.User
+
+interface UserService {
+    fun listAll(): List<User>
+    fun getUserById(id: Long): User?
+    fun update(user: User)
+    fun save(user: User)
+    fun deleteById(id: Long)
+}
+
+class DefaultUserServiceImpl : UserService {
+    private val fakeUsers = mutableListOf(
+            User(id = 1L, name = "Larry", age = 28),
+            User(id = 2L, name = "Stephen", age = 19),
+            User(id = 3L, name = "Jacky", age = 24)
+    )
+
+    override fun listAll(): List<User> {
+        return fakeUsers
+    }
+
+    override fun getUserById(id: Long): User? {
+        return fakeUsers.find { it.id == id }
+    }
+
+    override fun update(user: User) {
+        fakeUsers.filter { it.id == user.id }.forEach {
+            it.name = user.name
+            it.age = user.age
+        }
+    }
+
+    override fun save(user: User) {
+        getUserById(user.id) ?: fakeUsers.add(user)
+    }
+
+    override fun deleteById(id: Long) {
+        fakeUsers.removeIf { it.id == id }
+    }
+}
+```
+
+### 2.3 Model 类代码
+
+```kotlin
+// src/main/kotlin/com/example/demo/model/User.kt
+package com.example.demo.model
+
+data class User(val id: Long, var name: String, var age: Int)
+```
+
+```kotlin
+// src/main/kotlin/com/example/demo/model/ErrorResponse.kt
+package com.example.demo.model
+
+data class ErrorResponse(val code: String, val description: String)
+```
+
+### 2.4 Error Codes 枚举类代码
+
+```kotlin
+// src/main/kotlin/com/example/demo/code/ErrorCodes.kt
+package com.example.demo.code
+
+import com.example.demo.model.ErrorResponse
+import org.http4k.core.Body
+import org.http4k.core.Response
+import org.http4k.core.Status
+import org.http4k.core.with
+import org.http4k.format.Jackson.auto
+import org.http4k.lens.BiDiBodyLens
+
+enum class ErrorCodes(val status: Status, private val code: String, private val description: String) {
+    USER_NOT_FOUND(Status.NOT_FOUND, "user_not_found", "user not found"),
+    USER_ALREADY_EXISTS(Status.BAD_REQUEST, "user_already_exists", "user already exists");
+
+    fun toResponse(): Response =
+            Response(status).with(Body.auto<ErrorResponse>().toLens() of ErrorResponse(code, description))
+
+    fun toSampleResponse(): Pair<BiDiBodyLens<ErrorResponse>, ErrorResponse> =
+            Body.auto<ErrorResponse>().toLens() to ErrorResponse(code, description)
+}
+```
+
+### 2.5 程序入口类代码
+
+```kotlin
+// src/main/kotlin/com/example/demo/DemoApplication.kt
+package com.example.demo
+
+import com.example.demo.controller.UserController
+import com.example.demo.service.DefaultUserServiceImpl
+import com.example.demo.service.UserService
+import com.google.inject.AbstractModule
+import com.google.inject.Guice
+import org.http4k.contract.ContractRoute
+import org.http4k.contract.ContractRoutingHttpHandler
+import org.http4k.contract.contract
+import org.http4k.contract.openapi.ApiInfo
+import org.http4k.contract.openapi.v3.ApiServer
+import org.http4k.contract.openapi.v3.OpenApi3
+import org.http4k.contract.ui.swagger.swaggerUiWebjar
+import org.http4k.core.*
+import org.http4k.filter.CachingFilters
+import org.http4k.format.Jackson
+import org.http4k.routing.bind
+import org.http4k.routing.routes
+import org.http4k.server.SunHttp
+import org.http4k.server.asServer
+
+class MainGuiceModule : AbstractModule() {
+    override fun configure() {
+        bind(UserService::class.java).to(DefaultUserServiceImpl::class.java)
+    }
+}
+
+fun createContractHandler(routes: List<ContractRoute>, descriptionPath: String): ContractRoutingHttpHandler {
+    return contract {
+        this.routes += routes
+        renderer = OpenApi3(
+                ApiInfo("User API", "v1.0"),
+                Jackson,
+                servers = listOf(ApiServer(Uri.of("http://localhost:8080/"), "local server"))
+        )
+        this.descriptionPath = descriptionPath
+    }
+}
+
+val timingFilter = Filter { next: HttpHandler ->
+    { req: Request ->
+        val start = System.currentTimeMillis()
+        val resp: Response = next(req)
+        val timeElapsed = System.currentTimeMillis() - start
+        println("[timing filter] request to ${req.uri} took ${timeElapsed}ms")
+        resp
+    }
+}
+
+fun main() {
+    // guice
+    val injector = Guice.createInjector(MainGuiceModule())
+    val userController = injector.getInstance(UserController::class.java)
+
+    // app
+    val app: HttpHandler = routes(
+            createContractHandler(userController.routes, "/openapi.json"),
+            "/swagger" bind swaggerUiWebjar {
+                url = "/openapi.json"
+            }
+    )
+
+    // start
+    val filteredApp: HttpHandler = CachingFilters.Response.NoCache().then(timingFilter).then(app)
+    filteredApp.asServer(SunHttp(8080)).start().block()
+}
+```
 
 ## 4 API 测试与验证
+
+### 4.1 查询所有 User
+
+```shell
+curl -X GET http://localhost:8080/users
+
+[{"id":1,"name":"Larry","age":28},{"id":2,"name":"Stephen","age":19},{"id":3,"name":"Jacky","age":24}]
+```
+
+```text
+[timing filter] GET /users took 6ms
+```
+
+### 4.2 查询单个 User
+
+```shell
+curl -X GET http://localhost:8080/users/1
+
+{"id":1,"name":"Larry","age":28}
+```
+
+```text
+[timing filter] GET /users/1 took 4ms
+```
+
+```shell
+curl -X GET http://localhost:8080/users/100
+
+{"code":"user_not_found","description":"user not found"}
+```
+
+### 4.3 更新 User
+
+```shell
+curl -X PATCH -H 'Content-Type: application/json' -d '{"id": 1, "name": "Larry2", "age": 19}' http://localhost:8080/users
+```
+
+```text
+[timing filter] PATCH /users took 31ms
+```
+
+```shell
+curl -X PATCH -H 'Content-Type: application/json' -d '{"id": 100, "name": "Larry2", "age": 19}' http://localhost:8080/users
+
+{"code":"user_not_found","description":"user not found"}
+```
+
+### 4.4 新建 User
+
+```shell
+curl -X POST -H 'Content-Type: application/json' -d '{"id": 4, "name": "Lucy", "age": 16}' http://localhost:8080/users
+```
+
+```text
+[timing filter] POST /users took 1ms
+```
+
+```shell
+curl -X POST -H 'Content-Type: application/json' -d '{"id": 1, "name": "Lucy", "age": 16}' http://localhost:8080/users
+
+{"code":"user_already_exists","description":"user already exists"}
+```
+
+### 4.5 删除单个 User
+
+```shell
+curl -X DELETE http://localhost:8080/users/1
+```
+
+```text
+[timing filter] DELETE /users/1 took 4ms
+```
+
+```shell
+curl -X DELETE http://localhost:8080/users/100
+{"code":"user_not_found","description":"user not found"}
+```
+
+综上，本文尝试使用 http4k 工具包开发了针对 User 增、删、改、查的通用 RESTful API，并进行了简单的测试，总体来看该包还是比较轻量，比较易于使用的。
+
+本文涉及的整个样例项目代码已托管至本人 [GitHub](https://github.com/olzhy/kotlin-exercises/tree/main/http4k-restful-service-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
