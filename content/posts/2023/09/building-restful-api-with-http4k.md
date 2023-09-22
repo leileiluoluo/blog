@@ -469,6 +469,8 @@ fun main() {
 ./gradlew run
 ```
 
+![Kotlin Swagger UI](https://olzhy.github.io/static/images/uploads/2023/09/http4k-swagger-ui.png#center)
+
 ### 4.1 查询所有 User
 
 ```shell
