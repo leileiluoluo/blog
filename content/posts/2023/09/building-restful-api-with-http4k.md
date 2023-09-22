@@ -40,6 +40,8 @@ http4k：5.8.1.0
 
 ## 1 模板项目搭建
 
+本文使用 Gradle 作为项目的构建与依赖管理工具，由其搭建的空项目的整体目录结构如下：
+
 ```text
 http4k-restful-service-demo
 |--- gradle/
@@ -53,6 +55,68 @@ http4k-restful-service-demo
 |--- settings.gradle.kts
 \--- build.gradle.kts
 ```
+
+可以看到这是一个标准的 Gradle 模板工程。
+
+下面主要看一下 Gralde 描述文件的内容：
+
+```gradle
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+plugins {
+    kotlin("jvm") version "1.9.10"
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(platform("org.http4k:http4k-bom:5.8.1.0"))
+    implementation("org.http4k:http4k-core")
+    implementation("org.http4k:http4k-contract")
+    implementation("org.http4k:http4k-format-jackson")
+    implementation("org.http4k:http4k-contract-ui-swagger")
+    implementation("com.google.inject:guice:7.0.0")
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs += "-Xjvm-default=all"
+        jvmTarget = "17"
+    }
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+```
+
+可以看到，我们使用的 Kotlin 版本为 1.9.10。
+
+用到的 http4k 模块有：
+
+- http4k-core
+
+  http4k 核心模块，诸如 HttpHandler、Filter 等基础功能都在里头了。
+
+- http4k-contract
+
+  支持更完善的参数配置，支持 OpenAPI 元信息描述、Swagger 配置等特性。
+
+- http4k-format-jackson
+
+  支持 JSON 和数据类的相互转换。
+
+- http4k-contract-ui-swagger
+
+  支持 Swagger UI 的生成以及 Swagger 静态资源的本地化。
+
+此外，我们还使用了 Guice 来做依赖注入（因其比较轻量，适合示例工程）。
 
 ## 2 业务代码编写
 
@@ -77,7 +141,9 @@ http4k-restful-service-demo
 \--- build.gradle.kts
 ```
 
-## 3 API 测试与验证
+## 3 Swagger UI 配置
+
+## 4 API 测试与验证
 
 > 参考资料
 >
