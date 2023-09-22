@@ -61,11 +61,11 @@ http4k-restful-service-demo
 下面主要看一下 Gralde 描述文件的内容：
 
 ```gradle
-// build.gradle.kts
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.9.10"
+    application
 }
 
 java {
@@ -85,6 +85,10 @@ dependencies {
     implementation("com.google.inject:guice:7.0.0")
 }
 
+application {
+    mainClass.set("com.example.demo.DemoApplicationKt")
+}
+
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs += "-Xjvm-default=all"
@@ -97,7 +101,7 @@ tasks.withType<Test> {
 }
 ```
 
-可以看到，我们使用的 Kotlin 版本为 1.9.10。
+可以看到，我们使用的 Kotlin 版本为 1.9.10，指定程序启动类为`com.example.demo.DemoApplication.kt`。
 
 用到的 http4k 模块有：
 
@@ -117,11 +121,13 @@ tasks.withType<Test> {
 
   支持 Swagger UI 的生成以及 Swagger 静态资源的本地化。
 
-此外，我们还使用了 Guice 来做依赖注入（因其比较轻量，适合示例工程）。
+此外，我们还使用了 Guice 来做依赖注入（因其比较轻量，适合示例工程使用）。
 
 ## 2 业务代码编写
 
-项目结构：
+该部分主要编写针对 User 增、删、改、查的业务代码。整个项目主要由 Controller 层、Service 层、Model 类、Error Codes 枚举类、程序入口类几个部分组成。
+
+看一下开发完成后的项目结构：
 
 ```text
 http4k-restful-service-demo
@@ -144,7 +150,13 @@ http4k-restful-service-demo
 \--- build.gradle.kts
 ```
 
+下面逐一看一下各层的代码。
+
 ### 2.1 Controller 层代码
+
+Controller 层负责请求接收与响应返回，而具体的处理逻辑则在 Service 层内。
+
+该项目的 Controller 层只有一个类`UserController.kt`，用于定义路由以及各个`Handler`函数，`Handler`函数内部则调用`UserService`来处理业务。
 
 ```kotlin
 // src/main/kotlin/com/example/demo/controller/UserController.kt
@@ -258,6 +270,16 @@ class UserController @Inject constructor(
     }
 }
 ```
+
+下面浅析一下这段代码：
+
+- `UserController`依赖`UserService`，使用 Guice 来自动注入依赖；
+
+- http4k 使用透镜（Lens，如代码中的`Body.auto<User>().toLens()`）来做 JSON 和 Model 的相互映射和转换；
+
+- http4k 可以定义一组路由（ContractRout，如代码中的`"/users" meta {} bindContract GET to ::xxxHandler`）来指定请求路径、OpenAPI 元数据（用于生成 Swagger 文档）、HTTP 方法，以及处理请求的 Handler 函数；
+
+- http4k 中的 Handler 函数就是一个输入为`Request`，输出为`Response`的普通函数，业务逻辑都可以在这里边完成（本文的 Handler 函数做了自定义设计，将业务上用到的参数也放到了参数列表里，如：`fun getById(req: Request, id: Long): Response`）。
 
 ### 2.2 Service 层代码
 
@@ -423,6 +445,10 @@ fun main() {
 ```
 
 ## 4 API 测试与验证
+
+```shell
+./gradlew run
+```
 
 ### 4.1 查询所有 User
 
