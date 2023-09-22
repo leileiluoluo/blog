@@ -283,6 +283,10 @@ class UserController @Inject constructor(
 
 ### 2.2 Service 层代码
 
+Service 层包含业务处理的主要部分，该项目 Service 层仅有一个类`UserService.kt`。
+
+本文为了方便且专注于 http4k 的使用，没有引入 DAO 层和数据库，仅使用一个`MutableList`（`val fakeUsers = mutableListOf()`）来存储数据。
+
 ```kotlin
 // src/main/kotlin/com/example/demo/service/UserService.kt
 package com.example.demo.service
@@ -329,7 +333,11 @@ class DefaultUserServiceImpl : UserService {
 }
 ```
 
+如上代码中包含一个接口类和一个实现类，负责 User 的增、删、改、查。
+
 ### 2.3 Model 类代码
+
+该项目包含两个 Model 类：`User.kt`和`ErrorResponse.kt`，前一个是 User 的模型类，后一个是标准的错误响应模型类。
 
 ```kotlin
 // src/main/kotlin/com/example/demo/model/User.kt
@@ -346,6 +354,8 @@ data class ErrorResponse(val code: String, val description: String)
 ```
 
 ### 2.4 Error Codes 枚举类代码
+
+该项目特别设计了一个枚举类（`ErrorCodes.kt`）来存放所有的错误响应信息。
 
 ```kotlin
 // src/main/kotlin/com/example/demo/code/ErrorCodes.kt
@@ -372,6 +382,8 @@ enum class ErrorCodes(val status: Status, private val code: String, private val 
 ```
 
 ### 2.5 程序入口类代码
+
+下面看一下程序入口类`DemoApplication.kt`的代码：
 
 ```kotlin
 // src/main/kotlin/com/example/demo/DemoApplication.kt
@@ -443,6 +455,13 @@ fun main() {
     filteredApp.asServer(SunHttp(8080)).start().block()
 }
 ```
+
+下面浅析一下这段代码：
+
+- `MainGuiceModule`类用于配置 Guice 的接口和实现；
+- `createContractHandler`函数用于配置总路由和 OpenAPI 信息；
+- `timingFilter`用于演示 http4k 中自定义`Filter`的写法，该`Filter`负责对每个请求打印请求路径和耗时信息；
+- `main`函数首先配置了一下 Guice；然后配置了一下根 app 路由和 Swagger；最后在 app 上加了自定义 Filter 然后将其启动（使用了默认的`SunHttp`，http4k 还支持`Jetty`、`Undertow`等其它服务类型）。
 
 ## 4 API 测试与验证
 
