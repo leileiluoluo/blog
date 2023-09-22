@@ -40,7 +40,42 @@ http4k：5.8.1.0
 
 ## 1 模板项目搭建
 
+```text
+http4k-restful-service-demo
+|--- gradle/
+|--- src/main/
+|    |--- resources/
+|    \--- kotlin/
+|         \--- com.example.demo.DemoApplication.kt
+|--- src/test/kotlin/
+|    \--- com.example.demo.DemoApplicationTest.kt
+|--- gradlew
+|--- settings.gradle.kts
+\--- build.gradle.kts
+```
+
 ## 2 业务代码编写
+
+```text
+http4k-restful-service-demo
+|--- src/main/
+|    |--- resources/
+|    \--- kotlin/
+|         \--- com.example.demo/
+|              |--- controller/
+|              |    \--- UserController.kt
+|              |--- service/
+|              |    |--- UserService.kt
+|              |--- code/
+|              |    \--- ErrorCodes.kt
+|              |--- model/
+|              |    |--- ErrorResponse.kt
+|              |    \--- User.kt
+|              \--- DemoApplication.kt
+...
+|--- gradlew
+\--- build.gradle.kts
+```
 
 ## 3 API 测试与验证
 
