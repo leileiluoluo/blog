@@ -2,7 +2,7 @@
 title: 如何使用 Kotlin HTTP 工具包 http4k 构建 RESTful API 服务？
 author: olzhy
 type: post
-date: 2023-09-22T08:00:00+08:00
+date: 2023-09-23T08:00:00+08:00
 url: /posts/building-restful-api-with-http4k.html
 categories:
   - 计算机
