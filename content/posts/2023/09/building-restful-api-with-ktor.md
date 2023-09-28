@@ -34,4 +34,6 @@ description:
 >
 > [4] [Using Kodein Dependency Injection framework with Ktor | GitHub - github.com](https://github.com/ktorio/ktor-samples/tree/main/di-kodein)
 >
-> [5] [Generate Ktor Project | Ktor Project Generator - start.ktor.io](https://start.ktor.io/)
+> [5] [Kotlin Dependency Injection with Kodein | Techkluster - techkluster.com](https://techkluster.com/kotlin/kodein-dependency-injection/)
+>
+> [6] [Generate Ktor Project | Ktor Project Generator - start.ktor.io](https://start.ktor.io/)
