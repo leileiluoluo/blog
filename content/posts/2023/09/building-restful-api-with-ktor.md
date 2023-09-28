@@ -30,6 +30,6 @@ description:
 >
 > [3] [Building a REST API with Ktor | Medium - medium.com](https://medium.com/@billwixted/building-a-rest-api-with-ktor-4c322d31eb31)
 >
-> [4] [Kotlin web service using Ktor, Guice and Jackson | Medium - medium.com](https://handspringer.medium.com/kotlin-web-service-using-ktor-guice-and-jackson-cf6835d2c35b)
+> [4] [Using Kodein Dependency Injection framework with Ktor | GitHub - github.com](https://github.com/ktorio/ktor-samples/tree/main/di-kodein)
 >
 > [5] [Generate Ktor Project | Ktor Project Generator - start.ktor.io](https://start.ktor.io/)
