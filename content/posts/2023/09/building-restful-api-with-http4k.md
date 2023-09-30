@@ -234,7 +234,7 @@ class UserController @Inject constructor(
     }
 
     private fun getById(req: Request, id: Long): Response {
-        val user = userService.getUserById(id)
+        val user = userService.getById(id)
         return user?.let {
             Response(OK).with(userLens of it)
         } ?: ErrorCodes.USER_NOT_FOUND.toResponse()
@@ -242,7 +242,7 @@ class UserController @Inject constructor(
 
     private fun update(req: Request, user: User): Response {
         // exists?
-        userService.getUserById(user.id) ?: return ErrorCodes.USER_NOT_FOUND.toResponse()
+        userService.getById(user.id) ?: return ErrorCodes.USER_NOT_FOUND.toResponse()
 
         // update
         userService.update(user)
@@ -251,7 +251,7 @@ class UserController @Inject constructor(
 
     private fun save(req: Request, user: User): Response {
         // exists?
-        val userStored = userService.getUserById(user.id)
+        val userStored = userService.getById(user.id)
         if (null != userStored) {
             return ErrorCodes.USER_ALREADY_EXISTS.toResponse()
         }
@@ -263,7 +263,7 @@ class UserController @Inject constructor(
 
     private fun deleteById(req: Request, id: Long): Response {
         // exists?
-        userService.getUserById(id) ?: return ErrorCodes.USER_NOT_FOUND.toResponse()
+        userService.getById(id) ?: return ErrorCodes.USER_NOT_FOUND.toResponse()
 
         // delete
         userService.deleteById(id)
@@ -296,7 +296,7 @@ import com.example.demo.model.User
 
 interface UserService {
     fun listAll(): List<User>
-    fun getUserById(id: Long): User?
+    fun getById(id: Long): User?
     fun update(user: User)
     fun save(user: User)
     fun deleteById(id: Long)
@@ -313,7 +313,7 @@ class DefaultUserServiceImpl : UserService {
         return fakeUsers
     }
 
-    override fun getUserById(id: Long): User? {
+    override fun getById(id: Long): User? {
         return fakeUsers.find { it.id == id }
     }
 
@@ -325,7 +325,7 @@ class DefaultUserServiceImpl : UserService {
     }
 
     override fun save(user: User) {
-        getUserById(user.id) ?: fakeUsers.add(user)
+        getById(user.id) ?: fakeUsers.add(user)
     }
 
     override fun deleteById(id: Long) {
