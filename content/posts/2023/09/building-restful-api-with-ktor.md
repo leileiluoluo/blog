@@ -36,4 +36,4 @@ description:
 >
 > [5] [Kotlin Dependency Injection with Kodein | Techkluster - techkluster.com](https://techkluster.com/kotlin/kodein-dependency-injection/)
 >
-> [6] [Kotlin Ktor plugin to generate OpenAPI and provide Swagger UI | GitHub - github.com](https://github.com/SMILEY4/ktor-swagger-ui)
+> [6] [Generate Ktor Project | Ktor Project Generator - start.ktor.io](https://start.ktor.io/)
