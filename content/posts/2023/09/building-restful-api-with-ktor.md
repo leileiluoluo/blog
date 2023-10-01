@@ -39,6 +39,8 @@ Ktor：2.3.4
 
 ## 1 项目结构介绍
 
+该项目使用 Gradle 管理，项目结构如下：
+
 ```text
 ktor-restful-service-demo
 |--- src/main/
@@ -63,9 +65,24 @@ ktor-restful-service-demo
 |              |    \--- KodeinConf.kt
 |              \--- DemoApplication.kt
 ...
+|--- gradle/
 |--- gradlew
 \--- build.gradle.kts
 ```
+
+可以看到，项目根目录下是 Gradle 配置文件`build.gradle.kts`、Gradle 命令`gradlew`和 gradle Wrapper 文件夹`gradle`；然后是配置文件目录`src/main/resources`和源码目录`src/main/kotlin`。
+
+`src/main/resources`下有两个文件：`application.conf`和`logback.xml`，分别为 Ktor Server 配置文件和 Logback 日志配置文件。
+
+下面看一下`src/main/kotlin`包下的几个目录和程序入口`DemoApplication.kt`：
+
+- route
+- service
+- code
+- model
+- plugin
+- conf
+- DemoApplication.kt
 
 ## 2 项目代码浅析
 
