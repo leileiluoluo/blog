@@ -100,6 +100,8 @@ ktor-restful-service-demo
 
   配置类所在目录，本项目的用于依赖注入的框架 Kodein 的配置类`KodeinConf.kt`即位于此。
 
+除了这些包，`src/main/kotlin`下还有一个文件`DemoApplication.kt`，为程序的总入口。
+
 ## 2 项目代码浅析
 
 ## 3 API 测试与验证
