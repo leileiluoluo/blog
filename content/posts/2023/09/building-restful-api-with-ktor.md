@@ -37,6 +37,40 @@ JDK：Amazon Corretto 17.0.8
 Ktor：2.3.4
 ```
 
+## 1 项目结构介绍
+
+```text
+ktor-restful-service-demo
+|--- src/main/
+|    |--- resources/
+|         |--- application.conf
+|         \--- logback.xml
+|    \--- kotlin/
+|         \--- com.example.demo/
+|              |--- route/
+|              |    \--- UserRoute.kt
+|              |--- service/
+|              |    |--- UserService.kt
+|              |--- code/
+|              |    \--- ErrorCodes.kt
+|              |--- model/
+|              |    |--- ErrorResponse.kt
+|              |    \--- User.kt
+|              |--- plugin/
+|              |    |--- Routing.kt
+|              |    \--- Serialization.kt
+|              |--- conf/
+|              |    \--- KodeinConf.kt
+|              \--- DemoApplication.kt
+...
+|--- gradlew
+\--- build.gradle.kts
+```
+
+## 2 项目代码浅析
+
+## 3 API 测试与验证
+
 > 参考资料
 >
 > [1] [Creating HTTP APIs | Ktor Documentation - ktor.io](https://ktor.io/docs/creating-http-apis.html)
