@@ -19,7 +19,7 @@ keywords:
   - RESTful
   - API
   - 服务
-description:
+description: 本文以开发 User 的增、删、改、查 API 为例，来演示 Ktor 的使用。全文共有三个部分：项目结构介绍、项目代码浅析，以及 API 测试与验证。
 ---
 
 前面两篇文章「[如何使用 Spring Boot 和 Kotlin 构建 RESTful API 服务？](https://olzhy.github.io/posts/building-restful-api-with-spring-boot-and-kotlin.html)」、「[如何使用 Kotlin HTTP 工具包 http4k 构建 RESTful API 服务？](https://olzhy.github.io/posts/building-restful-api-with-http4k.html)」分别介绍了 Kotlin 使用 Spring Boot，以及 Kotlin 使用 http4k 开发 RESTful API 的方法。本文则关注如何使用 Kotlin 官方主推的 Web 框架 Ktor 来开发 RESTful API？
