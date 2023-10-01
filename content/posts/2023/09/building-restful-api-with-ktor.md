@@ -70,19 +70,35 @@ ktor-restful-service-demo
 \--- build.gradle.kts
 ```
 
-可以看到，项目根目录下是 Gradle 配置文件`build.gradle.kts`、Gradle 命令`gradlew`和 gradle Wrapper 文件夹`gradle`；然后是配置文件目录`src/main/resources`和源码目录`src/main/kotlin`。
+可以看到，项目根目录下是 Gradle 配置文件`build.gradle.kts`、Gradle 命令`gradlew`和 Gradle Wrapper 文件夹`gradle`；然后是配置文件目录`src/main/resources`和源码目录`src/main/kotlin`。
 
 `src/main/resources`下有两个文件：`application.conf`和`logback.xml`，分别为 Ktor Server 配置文件和 Logback 日志配置文件。
 
-下面看一下`src/main/kotlin`包下的几个目录和程序入口`DemoApplication.kt`：
+下面看一下`src/main/kotlin`包下的几个目录：
 
 - route
+
+  类似于其它框架的 Controller 层，用于 Ktor 路由配置。
+
 - service
+
+  Service 层，主要业务逻辑都在这里编写。
+
 - code
+
+  `ErrorCodes.kt`枚举类所在目录，本示例项目使用该枚举类存放所有错误响应信息。
+
 - model
+
+  数据模型所在目录。
+
 - plugin
+
+  Ktor 插件所在目录，用于配置根路由和序列化等。
+
 - conf
-- DemoApplication.kt
+
+  配置类所在目录，本项目的用于依赖注入的框架 Kodein 的配置类`KodeinConf.kt`即位于此。
 
 ## 2 项目代码浅析
 
