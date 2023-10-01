@@ -24,7 +24,7 @@ description: 本文以开发 User 的增、删、改、查 API 为例，来演�
 
 前面两篇文章「[如何使用 Spring Boot 和 Kotlin 构建 RESTful API 服务？](https://olzhy.github.io/posts/building-restful-api-with-spring-boot-and-kotlin.html)」、「[如何使用 Kotlin HTTP 工具包 http4k 构建 RESTful API 服务？](https://olzhy.github.io/posts/building-restful-api-with-http4k.html)」分别介绍了 Kotlin 使用 Spring Boot，以及 Kotlin 使用 http4k 开发 RESTful API 的方法。本文则关注如何使用 Kotlin 官方主推的 Web 框架 Ktor 来开发 RESTful API？
 
-本文将以开发 User 的增、删、改、查 API 为例，来学习 Ktor 的使用。示例项目使用 Gradle 管理，项目结构依然采用业界最通用 MVC 三层架构；为了突出重点，本文不涉及数据库和 DAO 层，而在 Service 层使用一个 List 作数据存储；为了接近真实项目的情景，该示例项目采用 Kodein 作依赖注入。
+本文将以开发 User 的增、删、改、查 API 为例，来学习 Ktor 的使用。示例项目使用 Gradle 管理，项目结构依然采用业界最通用 MVC 三层架构；为了突出重点，本文不涉及数据库和 DAO 层，而在 Service 层使用一个 List 作数据存储；为了接近真实项目的情景，该示例项目的依赖注入使用 Kodein 来实现。
 
 全文共有三个部分：项目结构介绍、项目代码浅析，以及 API 测试与验证。以期阅读本文后，我们对如何使用 Ktor 开发 API 会有一个基本的了解。
 
