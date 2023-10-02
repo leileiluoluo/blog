@@ -369,6 +369,7 @@ data class ErrorResponse(val code: String, val description: String)
 其源码如下：
 
 ```kotlin
+// src/main/kotlin/com/example/demo/conf/KodeinConf.kt
 package com.example.demo.conf
 
 import com.example.demo.service.DefaultUserServiceImpl
@@ -389,6 +390,7 @@ val kodein = DI {
 `DemoApplication.kt`为程序的入口，其代码如下：
 
 ```kotlin
+// src/main/kotlin/com/example/demo/DemoApplication.kt
 package com.example.demo
 
 import com.example.demo.plugin.configureRouting
@@ -412,6 +414,7 @@ fun Application.module() {
 `application.conf`内容如下：
 
 ```hocon
+# src/main/resources/application.conf
 ktor {
     deployment {
         port = 8080
@@ -428,6 +431,7 @@ ktor {
 `logback.xml`内容如下：
 
 ```xml
+// src/main/resources/logback.xml
 <configuration>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
