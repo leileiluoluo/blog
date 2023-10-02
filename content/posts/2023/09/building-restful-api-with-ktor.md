@@ -413,7 +413,7 @@ fun Application.module() {
 
 `application.conf`内容如下：
 
-```hocon
+```text
 # src/main/resources/application.conf
 ktor {
     deployment {
