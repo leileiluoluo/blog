@@ -111,6 +111,7 @@ ktor-restful-service-demo
 该示例项目使用 Gradle 管理，配置文件`build.gradle.kts`内容如下：
 
 ```gradle
+// build.gradle.kts
 plugins {
     kotlin("jvm") version "1.9.10"
     id("io.ktor.plugin") version "2.3.4"
