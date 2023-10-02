@@ -447,6 +447,126 @@ ktor {
 
 概览了项目的整体结构和各个包下的源码，下面就将其启动，并使用 CURL 命名对各个 API 进行测试。
 
+项目启动命令如下：
+
+```shell
+./gradlew run
+```
+
+启动完成后，即可以开始 API 验证了。
+
+### 3.1 查询所有 User
+
+首先查询一下所有 User，CURL 命令如下：
+
+```shell
+curl -X GET http://localhost:8080/users
+
+[{"id":1,"name":"Larry","age":28},{"id":2,"name":"Stephen","age":19},{"id":3,"name":"Jacky","age":24}]
+```
+
+可以看到三条预置数据正确返回。
+
+### 3.2 查询单个 User
+
+下面查询一下 ID 为 1 的 User，CURL 命名如下：
+
+```shell
+curl -X GET http://localhost:8080/users/1
+
+{"id":1,"name":"Larry","age":28}
+```
+
+可以看到返回正确。
+
+再尝试查询一个不存在的 User：
+
+```shell
+curl -X GET http://localhost:8080/users/100
+
+{"code":"user_not_found","description":"user not found"}
+```
+
+可以看到，返回了我们在`ErrorCodes.kt`枚举类中定义的错误信息。
+
+### 3.3 更新 User
+
+再尝试更新一下 ID 为 1 的 User，CURL 命令如下：
+
+```shell
+curl -X PATCH -H 'Content-Type: application/json' -d '{"id": 1, "name": "Larry2", "age": 19}' http://localhost:8080/users
+```
+
+更新完成后，再次查询，发现更新成功：
+
+```shell
+curl -X GET http://localhost:8080/users/1
+
+{"id":1,"name":"Larry2","age":19}
+```
+
+再尝试对一个不存在的 User 进行更新，CURL 命令如下：
+
+```shell
+curl -X PATCH -H 'Content-Type: application/json' -d '{"id": 100, "name": "Larry2", "age": 19}' http://localhost:8080/users
+
+{"code":"user_not_found","description":"user not found"}
+```
+
+发现返回了我们设定的错误信息。
+
+### 3.4 新建 User
+
+下面，尝试一下新建 User，CURL 命令如下：
+
+```shell
+curl -X POST -H 'Content-Type: application/json' -d '{"id": 4, "name": "Lucy", "age": 16}' http://localhost:8080/users
+```
+
+然后，再次查询一下所有 User：
+
+```shell
+curl -X GET http://localhost:8080/users
+
+[{"id":1,"name":"Larry2","age":19},{"id":2,"name":"Stephen","age":19},{"id":3,"name":"Jacky","age":24},{"id":4,"name":"Lucy","age":16}]
+```
+
+发现返回结果已包含刚刚新建的 User。
+
+再尝试新建一个 ID 已存在的 User：
+
+```shell
+curl -X POST -H 'Content-Type: application/json' -d '{"id": 1, "name": "Lucy", "age": 16}' http://localhost:8080/users
+
+{"code":"user_already_exists","description":"user already exists"}
+```
+
+发现返回了设定的错误信息。
+
+### 3.5 删除单个 User
+
+最后试一下删除 User，CURL 命令如下：
+
+```shell
+# 删除已有 User
+curl -X DELETE http://localhost:8080/users/1
+```
+
+```shell
+# 删除不存在的 User
+curl -X DELETE http://localhost:8080/users/100
+
+{"code":"user_not_found","description":"user not found"}
+```
+
+返回也是正确的。
+
+综上，本文使用 Ktor 开发了一个针对 User 增、删、改、查的示例项目，并对项目结构和源码进行了分析，最后进行了 API 测试与验证，发现功能均时正常的。
+
+最后的结论是，使用 Ktor 开发 API 还是比较顺滑的，有意向使用 Ktor 的朋友也推荐进行尝试。
+
+本文整个示例项目代码已托管至本人 [GitHub](https://github.com/olzhy/kotlin-exercises/tree/main/ktor-restful-service-demo)，欢迎关注或 Fork。
+
 > 参考资料
 >
 > [1] [Creating HTTP APIs | Ktor Documentation - ktor.io](https://ktor.io/docs/creating-http-apis.html)
