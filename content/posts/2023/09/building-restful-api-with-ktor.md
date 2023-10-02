@@ -45,8 +45,8 @@ Ktor：2.3.4
 ktor-restful-service-demo
 |--- src/main/
 |    |--- resources/
-|         |--- application.conf
-|         \--- logback.xml
+|    |    |--- application.conf
+|    |    \--- logback.xml
 |    \--- kotlin/
 |         \--- com.example.demo/
 |              |--- route/
