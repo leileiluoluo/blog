@@ -431,7 +431,7 @@ ktor {
 `logback.xml`内容如下：
 
 ```xml
-// src/main/resources/logback.xml
+<!-- src/main/resources/logback.xml -->
 <configuration>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -565,11 +565,9 @@ curl -X DELETE http://localhost:8080/users/100
 
 返回也是正确的。
 
-综上，本文使用 Ktor 开发了一个针对 User 增、删、改、查的示例项目，并对项目结构和源码进行了分析，最后进行了 API 测试与验证，发现功能均时正常的。
+综上，本文使用 Ktor 开发了一个针对 User 增、删、改、查的示例项目，并对项目结构和源码进行了分析，最后进行了 API 测试与验证，发现功能均是正常的。最后的结论是，使用 Ktor 开发 API 还是比较顺滑的。
 
-最后的结论是，使用 Ktor 开发 API 还是比较顺滑的，有意向使用 Ktor 的朋友也推荐进行尝试。
-
-本文整个示例项目代码已托管至本人 [GitHub](https://github.com/olzhy/kotlin-exercises/tree/main/ktor-restful-service-demo)，欢迎关注或 Fork。
+本文整个示例项目的代码已托管至本人 [GitHub](https://github.com/olzhy/kotlin-exercises/tree/main/ktor-restful-service-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
