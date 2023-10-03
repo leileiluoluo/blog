@@ -2,7 +2,7 @@
 title: 在 VS Code 中使用 REST Client 扩展做 API 测试
 author: olzhy
 type: post
-date: 2023-10-29T08:00:00+08:00
+date: 2023-10-03T08:00:00+08:00
 url: /posts/getting-started-with-vscode-extension-rest-client.html
 categories:
   - 计算机
