@@ -51,6 +51,16 @@ Authorization: Bearer {{accessToken}}
 }
 ```
 
+```text
+@baseUrl = https://api.github.com/repos/olzhy/olzhy.github.io
+@accessToken = ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+POST {{baseUrl}}/issues
+Authorization: Bearer {{accessToken}}
+
+<@ ./body.json
+```
+
 > 参考资料
 >
 > [1] [REST Client | Visual Studio Marketplace - marketplace.visualstudio.com](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
