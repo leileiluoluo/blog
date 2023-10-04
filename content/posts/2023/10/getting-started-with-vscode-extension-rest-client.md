@@ -28,7 +28,9 @@ VS Code 中有一个非常易用的、用于 API 测试的扩展，名为 REST C
 ## 1 基础使用
 
 ```text
-GET https://api.github.com/repos/olzhy/olzhy.github.io/issues?page=1&per_page=10
+GET https://api.github.com/repos/olzhy/olzhy.github.io/issues
+    ?page=1
+    &per_page=10
 Accept: application/vnd.github+json
 Authorization: Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
