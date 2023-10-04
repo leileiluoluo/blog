@@ -16,14 +16,24 @@ keywords:
   - 扩展
   - API
   - 测试
-description: 本文结合 GitHub REST API 演示了 VS Code 扩展 REST Client 的使用，全文共有五个部分：基础使用、将文件内容载入为请求体、一个文件内编写多个请求、系统变量与环境变量的使用，以及多环境配置与按环境选择执行。
+description: 本文结合 GitHub REST API 演示了 VS Code 扩展 REST Client 的使用，全文共有五个部分：基础使用、将文件内容载入为请求体、一个文件内编写多个请求、系统变量与环境变量的使用，以及多环境配置与选择环境执行。
 ---
 
 VS Code 中有一个非常易用的、用于 API 测试的扩展，名为 REST Client。可以在 VS Code 中使用该扩展来发送 HTTP 请求及接收响应，其语法比 cURL 命令更简单，是我们开发人员在测试 API 时的一个不错的选择。
 
-本文将结合 GitHub REST API 来演示该扩展的使用，全文共有五个部分：基础使用、将文件内容载入为请求体、一个文件内编写多个请求、系统变量与环境变量的使用，以及多环境配置与按环境选择执行。
+本文将结合 GitHub REST API 来演示该扩展的使用，全文共有五个部分：基础使用、将文件内容载入为请求体、一个文件内编写多个请求、系统变量与环境变量的使用，以及多环境配置与选择环境执行。
+
+![REST Client 安装](https://olzhy.github.io/static/images/uploads/2023/10/vscode-extension-rest-client-installation.png#center)
 
 ## 1 基础使用
+
+```text
+GET https://api.github.com/repos/olzhy/olzhy.github.io/issues?page=1&per_page=10
+Accept: application/vnd.github+json
+Authorization: Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+![REST Client 基础使用](https://olzhy.github.io/static/images/uploads/2023/10/vscode-extension-rest-client-basic-usage.png#center)
 
 ## 2 将文件内容载入为请求体
 
@@ -88,7 +98,7 @@ Date: {{$datetime rfc1123}}
 }
 ```
 
-## 5 多环境配置与按环境选择执行
+## 5 多环境配置与选择环境执行
 
 ```json
 "rest-client.environmentVariables": {
@@ -114,6 +124,8 @@ Date: {{$datetime rfc1123}}
 GET {{address}}/comments/1 HTTP/1.1
 Authorization: {{token}}
 ```
+
+![REST Client 多环境配置与选择环境执行](https://olzhy.github.io/static/images/uploads/2023/10/vscode-extension-rest-client-multiple-environments.png#center)
 
 > 参考资料
 >
