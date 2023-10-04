@@ -23,6 +23,8 @@ VS Code 中有一个非常易用的、用于 API 测试的扩展，名为 REST C
 
 本文将结合 GitHub REST API 来演示该扩展的使用，全文共有五个部分：基础使用、将文件内容载入为请求体、一个文件内编写多个请求、系统变量与环境变量的使用，以及多环境配置与选择环境执行。
 
+开始前，请确保已在 VS Code 中安装了 REST Client 扩展（安装非常简单，在 VS Code 的 Extensions 中搜索「REST Client」进行安装即可）。
+
 ![REST Client 安装](https://olzhy.github.io/static/images/uploads/2023/10/vscode-extension-rest-client-installation.png#center)
 
 ## 1 基础使用
