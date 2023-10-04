@@ -71,6 +71,31 @@ Authorization: Bearer {{accessToken}}
 
 ## 3 多环境配置与按环境选择执行
 
+```json
+"rest-client.environmentVariables": {
+    "$shared": {
+        "version": "v1"
+    },
+    "dev": {
+        "address": "https://dev-api.example.com/v2",
+        "token": "xxxxxx"
+    },
+    "qa": {
+        "address": "https://qa-api.example.com/v2",
+        "token": "xxxxxx"
+    },
+    "production": {
+        "address": "https://prod-api.example.com/v2",
+        "token": "xxxxxx"
+    }
+}
+```
+
+```text
+GET {{address}}/comments/1 HTTP/1.1
+Authorization: {{token}}
+```
+
 > 参考资料
 >
 > [1] [REST Client | Visual Studio Marketplace - marketplace.visualstudio.com](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
