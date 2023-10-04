@@ -29,12 +29,22 @@ VS Code 中有一个非常易用的、用于 API 测试的扩展，名为 REST C
 
 ## 1 基础使用
 
+下面以调用 GitHub REST API 查询一个仓库（本文使用本人的一个公开仓库 [olzhy.github.io](https://github.com/olzhy/olzhy.github.io)）的 Issues 为例，来演示 REST Client 的基础使用。
+
+欲在 VS Code 中使用 REST Client，只需新建一个文件，并将其以`.http`（或`.rest`）为扩展名即可。
+
+如下即为使用 REST Client 获取`olzhy.github.io`仓库前 10 条 Issues 的写法：
+
 ```text
 GET https://api.github.com/repos/olzhy/olzhy.github.io/issues
     ?page=1
     &per_page=10
 Accept: application/vnd.github+json
 ```
+
+将如上内容保存为一个`.http`文件后，REST Client 会自动检测到如上内容，并在 GET 上面显示「Send Request」按钮；点击该按钮即可发送请求，稍后会看到右侧弹出一个窗口，显示返回的状态码、 Header，以及 Body 的完整内容。
+
+效果如下：
 
 ![REST Client 基础使用](https://olzhy.github.io/static/images/uploads/2023/10/vscode-extension-rest-client-basic-usage.png#center)
 
