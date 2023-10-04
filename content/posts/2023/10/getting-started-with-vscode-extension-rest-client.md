@@ -18,6 +18,39 @@ keywords:
 description:
 ---
 
+```text
+@baseUrl = https://api.github.com/repos/olzhy/olzhy.github.io
+@accessToken = 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
+
+# @name createIssue
+POST {{baseUrl}}/issues
+Authorization: Bearer {{accessToken}}
+
+{
+    "title": "发现一个 Bug",
+    "body": "请尽快解决！"
+}
+
+###
+
+@newCreatedIssueNumber = {{createIssue.response.body.$.number}}
+
+# @name getIssueByNumber
+GET {{baseUrl}}/issues/{{newCreatedIssueNumber}}
+
+###
+
+# @name updateIssueByNumber
+PATCH {{baseUrl}}/issues/{{newCreatedIssueNumber}}
+Authorization: Bearer {{accessToken}}
+
+{
+    "title": "紧急，发现一个 Bug",
+    "body": "请尽快解决！！"
+}
+
+```
+
 > 参考资料
 >
 > [1] [REST Client | Visual Studio Marketplace - marketplace.visualstudio.com](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
