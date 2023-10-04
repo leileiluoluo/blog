@@ -16,12 +16,12 @@ keywords:
   - 扩展
   - API
   - 测试
-description:
+description: 在 VS Code 中使用 REST Client 扩展做 API 测试。
 ---
 
 ```text
 @baseUrl = https://api.github.com/repos/olzhy/olzhy.github.io
-@accessToken = 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
+@accessToken = ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 # @name createIssue
 POST {{baseUrl}}/issues
@@ -55,4 +55,4 @@ Authorization: Bearer {{accessToken}}
 >
 > [1] [REST Client | Visual Studio Marketplace - marketplace.visualstudio.com](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
 >
-> [2] [A simple HTTP Request & Response Service | httpbin - httpbin.org](https://httpbin.org/)
+> [2] [REST API to view and manage issues | GitHub Docs - docs.github.com](https://docs.github.com/en/rest/issues?apiVersion=2022-11-28)
