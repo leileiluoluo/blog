@@ -50,12 +50,25 @@ Accept: application/vnd.github+json
 
 ## 2 将文件内容载入为请求体
 
-```text
-@baseUrl = https://api.github.com/repos/olzhy/olzhy.github.io
-@accessToken = ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+上面查询一个 GitHub 仓库的 Issues API 是一个 GET 请求，而对于诸如 POST 等需要 Body 的请求，可以采用如下写法：
 
-POST {{baseUrl}}/issues
-Authorization: Bearer {{accessToken}}
+```text
+POST https://api.github.com/repos/olzhy/olzhy.github.io/issues
+Authorization: Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+{
+    "title": "发现一个 Bug",
+    "body": "请尽快解决！"
+}
+```
+
+可以看到，上面演示的是一个针对仓库`olzhy.github.io`新建 Issue 的例子。相较于前面的 GET 请求，只需在 URL 和请求头下空出一行，填入请求体即可。
+
+请求体太长的话，也可以将其抽取到一个文件中，然后使用如下写法将文件内容载入为请求体即可：
+
+```text
+POST https://api.github.com/repos/olzhy/olzhy.github.io/issues
+Authorization: Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 <@ ./body.json
 ```
