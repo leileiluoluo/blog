@@ -32,7 +32,6 @@ GET https://api.github.com/repos/olzhy/olzhy.github.io/issues
     ?page=1
     &per_page=10
 Accept: application/vnd.github+json
-Authorization: Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 ![REST Client 基础使用](https://olzhy.github.io/static/images/uploads/2023/10/vscode-extension-rest-client-basic-usage.png#center)
