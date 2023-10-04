@@ -8,6 +8,7 @@ categories:
   - 计算机
 tags:
   - 工具使用
+  - 自动化测试
 keywords:
   - VS Code
   - 使用
