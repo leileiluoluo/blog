@@ -21,9 +21,23 @@ description: 在 VS Code 中使用 REST Client 扩展做 API 测试。
 
 VS Code 中有一个非常易用的、用于 API 测试的扩展，名为 REST Client。可以在 VS Code 中使用该扩展来发送 HTTP 请求及接收响应，其语法比 cURL 命令更简单，是我们开发人员在测试 API 时的一个不错的选择。
 
-本文将结合 GitHub REST API 来演示该扩展的使用，全文共有三个部分：一个文件内编写多个请求、将文件内容载入为请求体，以及多环境配置与按环境选择执行。
+本文将结合 GitHub REST API 来演示该扩展的使用，全文共有五个部分：基础使用、将文件内容载入为请求体、一个文件内编写多个请求、系统变量与环境变量的使用，以及多环境配置与按环境选择执行。
 
-## 1 一个文件内编写多个请求
+## 1 基础使用
+
+## 2 将文件内容载入为请求体
+
+```text
+@baseUrl = https://api.github.com/repos/olzhy/olzhy.github.io
+@accessToken = ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+POST {{baseUrl}}/issues
+Authorization: Bearer {{accessToken}}
+
+<@ ./body.json
+```
+
+## 3 一个文件内编写多个请求
 
 ```text
 @baseUrl = https://api.github.com/repos/olzhy/olzhy.github.io
@@ -57,7 +71,7 @@ Authorization: Bearer {{accessToken}}
 }
 ```
 
-## 2 系统变量与环境变量的使用
+## 4 系统变量与环境变量的使用
 
 ```text
 POST https://api.example.com/v2/comments HTTP/1.1
@@ -74,19 +88,7 @@ Date: {{$datetime rfc1123}}
 }
 ```
 
-## 2 将文件内容载入为请求体
-
-```text
-@baseUrl = https://api.github.com/repos/olzhy/olzhy.github.io
-@accessToken = ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-POST {{baseUrl}}/issues
-Authorization: Bearer {{accessToken}}
-
-<@ ./body.json
-```
-
-## 3 多环境配置与按环境选择执行
+## 5 多环境配置与按环境选择执行
 
 ```json
 "rest-client.environmentVariables": {
