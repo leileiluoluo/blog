@@ -75,6 +75,10 @@ Authorization: Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ## 3 一个文件内编写多个请求
 
+上面的两个场景均非常简单，而实际使用中，我们常会想在一个`.http`文件中编写多个请求，且可能会存在后一个请求依赖前一个请求的情况。对于这种情况，REST Client 也是支持的。
+
+下面的示例即在一个文件中编写了三个请求（分别为：新建 Issue、获取刚刚新建的 Issue 和更新刚刚新建的 Issue），且后面的请求依赖前面的返回结果。
+
 ```text
 @baseUrl = https://api.github.com/repos/olzhy/olzhy.github.io
 @accessToken = ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -106,6 +110,8 @@ Authorization: Bearer {{accessToken}}
     "body": "请尽快解决！！"
 }
 ```
+
+可以看到，三个请求以内容为`###`的行进行分割，每个请求都起了一个名字（如：`# @name createIssue`），后面的请求可以根据前面请求的名字来获取其返回的内容（如：`@newCreatedIssueNumber = {{createIssue.response.body.$.number}}`），此外我们还看到文件头部使用`@key = value`方式声明了一些共用变量。
 
 ## 4 系统变量与环境变量的使用
 
