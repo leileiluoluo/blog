@@ -49,7 +49,6 @@ Authorization: Bearer {{accessToken}}
     "title": "紧急，发现一个 Bug",
     "body": "请尽快解决！！"
 }
-
 ```
 
 > 参考资料
