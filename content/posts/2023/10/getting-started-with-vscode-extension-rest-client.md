@@ -57,6 +57,23 @@ Authorization: Bearer {{accessToken}}
 }
 ```
 
+## 2 系统变量与环境变量的使用
+
+```text
+POST https://api.example.com/v2/comments HTTP/1.1
+Content-Type: application/json
+Date: {{$datetime rfc1123}}
+
+{
+    "user_name": "{{$dotenv USERNAME}}",
+    "request_id": "{{$guid}}",
+    "updated_at": "{{$timestamp}}",
+    "created_at": "{{$timestamp -1 d}}",
+    "custom_date": "{{$datetime 'YYYY-MM-DD'}}",
+    "local_custom_date": "{{$localDatetime 'YYYY-MM-DD'}}"
+}
+```
+
 ## 2 将文件内容载入为请求体
 
 ```text
@@ -85,7 +102,7 @@ Authorization: Bearer {{accessToken}}
         "token": "xxxxxx"
     },
     "production": {
-        "address": "https://prod-api.example.com/v2",
+        "address": "https://api.example.com/v2",
         "token": "xxxxxx"
     }
 }
