@@ -16,7 +16,7 @@ keywords:
   - 扩展
   - API
   - 测试
-description: 在 VS Code 中使用 REST Client 扩展做 API 测试。
+description: 本文结合 GitHub REST API 演示了 VS Code 扩展 REST Client 的使用，全文共有五个部分：基础使用、将文件内容载入为请求体、一个文件内编写多个请求、系统变量与环境变量的使用，以及多环境配置与按环境选择执行。
 ---
 
 VS Code 中有一个非常易用的、用于 API 测试的扩展，名为 REST Client。可以在 VS Code 中使用该扩展来发送 HTTP 请求及接收响应，其语法比 cURL 命令更简单，是我们开发人员在测试 API 时的一个不错的选择。
