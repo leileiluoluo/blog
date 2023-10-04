@@ -100,7 +100,8 @@ Date: {{$datetime rfc1123}}
 
 ## 5 多环境配置与选择环境执行
 
-```json
+```text
+// settings.json
 "rest-client.environmentVariables": {
     "$shared": {
         "version": "v1"
