@@ -42,7 +42,7 @@ GET https://api.github.com/repos/olzhy/olzhy.github.io/issues
 Accept: application/vnd.github+json
 ```
 
-将如上内容保存为一个`.http`文件后，REST Client 会自动检测到如上内容，并在 GET 上面显示「Send Request」按钮；点击该按钮即可发送请求，稍后会看到右侧弹出一个窗口，显示返回的状态码、 Header，以及 Body 的完整内容。
+将如上内容保存为一个`.http`文件后，REST Client 扩展会自动检测到如上内容，并在 GET 上面显示「Send Request」按钮；点击该按钮即可发送请求，稍后会看到右侧弹出一个窗口，显示返回的状态码、 Header，以及 Body 的完整内容。
 
 效果如下：
 
