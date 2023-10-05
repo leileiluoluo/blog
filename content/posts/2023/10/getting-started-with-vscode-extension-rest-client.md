@@ -62,7 +62,7 @@ Authorization: Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 }
 ```
 
-可以看到，上面演示的是一个针对仓库`olzhy.github.io`新建 Issue 的例子。相较于前面的 GET 请求，只需在 URL 和请求头下空出一行，填入请求体即可。
+可以看到，上面演示的是一个针对仓库`olzhy.github.io`新建 Issue 的样例。相较于前面的 GET 请求，只需在 URL 和请求头下空出一行，填入请求体即可。
 
 请求体太长的话，也可以将其抽取到一个文件中，然后使用如下写法将文件内容载入为请求体即可：
 
@@ -111,13 +111,13 @@ Authorization: Bearer {{accessToken}}
 }
 ```
 
-可以看到，三个请求以内容为`###`的行进行分割，每个请求都起了一个名字（如：`# @name createIssue`），后面的请求可以根据前面请求的名字来获取其返回的内容（如：`@newCreatedIssueNumber = {{createIssue.response.body.$.number}}`），此外我们还看到文件头部使用`@key = value`方式声明了一些共用变量。
+可以看到，三个请求以内容为`###`的行进行分割，每个请求都起了一个名字（如：`# @name createIssue`），后面的请求可以根据前面请求的名字来获取其返回的内容（如：`@newCreatedIssueNumber = {{createIssue.response.body.$.number}}`），此外我们还看到文件头部使用`@key = value`方式声明了一些公用变量。
 
 ## 4 系统变量与环境变量的使用
 
 REST Client 支持读取系统环境变量以及从`.env`文件读取环境变量，此外还提供日期与 UUID 等实用的变量，以支持我们在组织请求头与请求体时使用。
 
-请看下面一个的例子：
+请看下面一个的样例：
 
 ```text
 POST https://api.example.com/v2/comments HTTP/1.1
