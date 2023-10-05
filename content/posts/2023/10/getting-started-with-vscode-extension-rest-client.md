@@ -117,7 +117,7 @@ Authorization: Bearer {{accessToken}}
 
 REST Client 支持读取系统环境变量以及从`.env`文件读取环境变量，此外还提供日期与 UUID 等实用变量，以支持我们在组织请求头与请求体时使用。
 
-请看下面一个的样例：
+请看下面的一个样例：
 
 ```text
 POST https://api.example.com/v2/comments HTTP/1.1
