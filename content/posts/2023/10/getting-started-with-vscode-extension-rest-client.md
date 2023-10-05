@@ -2,7 +2,7 @@
 title: 在 VS Code 中使用 REST Client 扩展做 API 测试
 author: olzhy
 type: post
-date: 2023-10-03T08:00:00+08:00
+date: 2023-10-05T08:00:00+08:00
 url: /posts/getting-started-with-vscode-extension-rest-client.html
 categories:
   - 计算机
@@ -115,28 +115,37 @@ Authorization: Bearer {{accessToken}}
 
 ## 4 系统变量与环境变量的使用
 
+REST Client 支持读取系统环境变量以及从`.env`文件读取环境变量，此外还提供日期与 UUID 等实用的变量，以支持我们在组织请求头与请求体时使用。
+
+请看下面一个的例子：
+
 ```text
 POST https://api.example.com/v2/comments HTTP/1.1
 Content-Type: application/json
-Date: {{$datetime rfc1123}}
 
 {
-    "user_name": "{{$dotenv USERNAME}}",
-    "request_id": "{{$guid}}",
-    "updated_at": "{{$timestamp}}",
-    "created_at": "{{$timestamp -1 d}}",
-    "custom_date": "{{$datetime 'YYYY-MM-DD'}}",
-    "local_custom_date": "{{$localDatetime 'YYYY-MM-DD'}}"
+    "user_name": "{{$dotenv USERNAME}}", // 读取与`.http`文件同一目录下的`.env`文件中的环境变量
+    "request_id": "{{$guid}}", // 生成一个 36 位的 UUID，如：f63ebc18-216b-4c8e-8d51-9ab66bbe39fc
+    "updated_at": "{{$timestamp}}", // 生成一个时间戳，表示从`1970-01-01`至今的秒数，如：1696475647
+    "created_at": "{{$timestamp -1 d}}", // 指定偏移量生成一个时间戳，如：1696389771
+    "custom_date": "{{$datetime 'YYYY-MM-DD'}}", // 格式化日期，如：2023-10-05
+    "secret": "{{$processEnv SECRET}}" // 读取系统环境变量
 }
 ```
 
+可以看到，如上请求体中的字段有的是从系统环境变量读取的，有的是从`.env`文件中读取的，还有的是使用实用变量（时间戳与 UUID）来生成的。
+
 ## 5 多环境配置与选择环境执行
+
+REST Client 还支持定义多个环境，然后执行`.http`中的请求时，可以选择环境来分别执行。
+
+下面即是一个在 VS Code 的配置文件`setting.json`中添加 REST Client 环境信息的样例：
 
 ```text
 // settings.json
 "rest-client.environmentVariables": {
     "$shared": {
-        "version": "v1"
+        "strict": true
     },
     "dev": {
         "address": "https://dev-api.example.com/v2",
@@ -153,12 +162,20 @@ Date: {{$datetime rfc1123}}
 }
 ```
 
+下面是`.http`文件的内容：
+
 ```text
 GET {{address}}/comments/1 HTTP/1.1
-Authorization: {{token}}
+Authorization: Bearer {{token}}
 ```
 
+执行请求时，在 VS Code 的右下角会有一个选择环境的 Button，点击后，选择不同环境进行执行即可。
+
+效果如下：
+
 ![REST Client 多环境配置与选择环境执行](https://olzhy.github.io/static/images/uploads/2023/10/vscode-extension-rest-client-multiple-environments.png#center)
+
+综上，本文对 VS Code 扩展 REST Client 进行了探索，发现日常的一些简单的 API 测试场景使用它来做还是很适合的。
 
 > 参考资料
 >
