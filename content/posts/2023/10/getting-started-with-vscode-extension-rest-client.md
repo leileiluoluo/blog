@@ -124,9 +124,9 @@ POST https://api.example.com/v2/comments HTTP/1.1
 Content-Type: application/json
 
 {
-    "user_name": "{{$dotenv USERNAME}}", // 读取与`.http`文件同一目录下的`.env`文件中的环境变量
+    "user_name": "{{$dotenv USERNAME}}", // 读取与 .http 文件同一目录下的 .env 文件中的环境变量
     "request_id": "{{$guid}}", // 生成一个 36 位的 UUID，如：f63ebc18-216b-4c8e-8d51-9ab66bbe39fc
-    "updated_at": "{{$timestamp}}", // 生成一个时间戳，表示从`1970-01-01`至今的秒数，如：1696475647
+    "updated_at": "{{$timestamp}}", // 生成一个时间戳，表示从 1970-01-01 至今的秒数，如：1696475647
     "created_at": "{{$timestamp -1 d}}", // 指定偏移量生成一个时间戳，如：1696389771
     "custom_date": "{{$datetime 'YYYY-MM-DD'}}", // 格式化日期，如：2023-10-05
     "secret": "{{$processEnv SECRET}}" // 读取系统环境变量
