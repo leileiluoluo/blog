@@ -24,11 +24,11 @@ jOOQ 是一个轻量级的 Java ORM（对象关系映射）框架，可用来构
 开始各个部分前，列出本文涉及的各软件版本：
 
 ```text
-Java: 20（BellSoft LibericaJDK）
+Java：20（BellSoft LibericaJDK）
 Maven：3.9.2
 MySQL：8.1.0
 jOOQ：3.18.6
-Spring Boot: 3.1.3
+Spring Boot：3.1.3
 ```
 
 ## 1 准备数据库、表和测试数据
