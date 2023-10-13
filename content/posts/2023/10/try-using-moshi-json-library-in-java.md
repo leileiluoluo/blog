@@ -18,6 +18,7 @@ description: 本文探索了在 Java 中使用 Moshi 库进行 JSON 序列化和
 [Moshi](https://github.com/square/moshi) 是一个可用于 Java 与 Kotlin 的 JSON 序列化与反序列化库，其主要使用 Kotlin 编写。本文关注该库在 Java 中的使用。
 
 ```xml
+<!-- pom.xml -->
 <dependency>
     <groupId>com.squareup.moshi</groupId>
     <artifactId>moshi</artifactId>
@@ -31,6 +32,7 @@ description: 本文探索了在 Java 中使用 Moshi 库进行 JSON 序列化和
 ```
 
 ```xml
+<!-- pom.xml -->
 <dependency>
     <groupId>org.junit.jupiter</groupId>
     <artifactId>junit-jupiter</artifactId>
