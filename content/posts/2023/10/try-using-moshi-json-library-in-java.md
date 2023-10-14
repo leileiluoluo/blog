@@ -17,7 +17,7 @@ description: 本文探索了在 Java 中使用 Moshi 库进行 JSON 序列化和
 
 [Moshi](https://github.com/square/moshi) 是一个可用于 Java 与 Kotlin 的 JSON 序列化与反序列化库，其主要使用 Kotlin 编写。本文以样例代码的方式来演示该库在 Java 中的使用。
 
-示例项目使用 Maven 管理，下面列出各依赖项及其版本：
+示例项目使用 Maven 管理，下面列出写作本文时用到的 JDK、Maven 及 Moshi 的版本：
 
 ```text
 JDK：Amazon Corretto 17.0.8
