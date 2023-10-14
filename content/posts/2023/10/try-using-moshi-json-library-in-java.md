@@ -25,6 +25,8 @@ Maven：3.9.2
 Moshi：1.18.30
 ```
 
+示例项目使用 Maven 管理，在`pom.xml`引入 Moshi 依赖（`moshi`为核心模块，`moshi-adapters`包含一些诸如日期处理等适用的 Adapter）的配置如下：
+
 ```xml
 <!-- pom.xml -->
 <dependency>
@@ -38,6 +40,8 @@ Moshi：1.18.30
     <version>1.18.30</version>
 </dependency>
 ```
+
+此外，我们使用 JUnit 编写单元测试的方式来演示 Moshi 的使用，所以需要在`pom.xml`中引入`junit-jupiter`依赖：
 
 ```xml
 <!-- pom.xml -->
