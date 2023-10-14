@@ -25,7 +25,7 @@ Maven：3.9.2
 Moshi：1.18.30
 ```
 
-开始前，需要在`pom.xml`的`<dependencies>`下引入 Moshi 依赖（`moshi`为核心模块，`moshi-adapters`包含一些诸如日期处理等适用的 Adapter）：
+开始前，需要在`pom.xml`的`<dependencies>`下引入 Moshi 依赖（`moshi`为核心模块，`moshi-adapters`模块包含诸如`Date`类型处理等实用的 Adapter）：
 
 ```xml
 <!-- pom.xml -->
