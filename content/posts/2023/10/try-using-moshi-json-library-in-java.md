@@ -136,18 +136,51 @@ public void testBasicUsage() {
 }
 ```
 
-需要注意的是，如上代码在构造 Moshi 实例时指定了`Date`类型对应的 JSON Adapter，否则在解析时会报错。
+需要注意的是，如上代码在构造 Moshi 实例时指定了`Date`类型对应的 JSON Adapter，否则在解析该类型字段时会报错。
 
 如上代码运行结果如下：
 
 ```text
-{"created_at":"2023-10-14T09:34:35.945Z","name":"Larry","roles":["ADMIN","EDITOR"]}
-User(name=Larry, roles=[ADMIN, EDITOR], createdAt=Sat Oct 14 17:34:35 CST 2023)
+{"createdAt":"2023-10-14T09:47:37.763Z","name":"Larry","roles":["ADMIN","EDITOR"]}
+User(name=Larry, roles=[ADMIN, EDITOR], createdAt=Sat Oct 14 17:47:37 CST 2023)
 ```
 
 可以看到，User 对象序列化为的 JSON、JSON 反序列化为的 User 对象都是正确的。
 
 ## 2 使用 @Json 自定义字段名
+
+上面的例子中，JSON 里的字段名与 Java 类里的字段名是完全一致的。
+
+如果某个字段名需要自定义，该怎么做呢？下面即进行了演示：
+
+```java
+package com.example.demo.model;
+
+@ToString
+@Getter
+@Setter
+@NoArgsConstructor
+public class User {
+
+    // ...
+
+    @Json(name = "created_at")
+    private Date createdAt;
+
+    // ...
+}
+```
+
+可以看到，只需在 Java 类对应的字段上加上`@Json`注解，然后自定义其名称就可以了。
+
+再次运行一下上面的测试用例（`src/test/java/com/example/demo/MoshiTest#testBasicUsage`），得到了如下结果：
+
+```text
+{"created_at":"2023-10-14T09:55:48.793Z","name":"Larry","roles":["ADMIN","EDITOR"]}
+User(name=Larry, roles=[ADMIN, EDITOR], createdAt=Sat Oct 14 17:55:48 CST 2023)
+```
+
+可以看到，User 类的`createdAt`属性在序列化为 JSON 时变为了`created_at`；该 JSON 再次反序列化为 User 对象时，`createdAt`属性的赋值也是正常的。
 
 ## 3 JSON 数组如何处理？
 
