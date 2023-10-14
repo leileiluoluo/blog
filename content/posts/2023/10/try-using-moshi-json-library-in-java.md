@@ -68,6 +68,10 @@ Moshi：1.18.30
 
 ## 1 基础使用
 
+首先，看一下最基础的使用，即 Model 类的序列化与反序列化（即 Java 对象转换为 JSON，以及 JSON 转换为 Java 对象）。
+
+先新建一个 Model 类，本文以`User`为例，该类有三个字段：`name`、`roles`和`createdAt`，包括了`String`、`List`、`Date`以及枚举类型。
+
 ```java
 // src/main/java/com/example/demo/model/User.java
 package com.example.demo.model;
@@ -98,25 +102,31 @@ public class User {
 }
 ```
 
+下面即编写一个测试用例来演示 User 对象与 JSON 的互转：
+
 ```java
 // src/test/java/com/example/demo/MoshiTest#testBasicUsage
 @Test
 public void testBasicUsage() {
+    // 构造 Moshi 实例
     Moshi moshi = new Moshi.Builder()
             .add(Date.class, new Rfc3339DateJsonAdapter())
             .build();
+
+    // 获取 User 的 JsonAdapter
     JsonAdapter<User> jsonAdapter = moshi.adapter(User.class);
 
+    // 构造 User 对象
     User user = new User();
     user.setName("Larry");
     user.setRoles(List.of(User.Role.ADMIN, User.Role.EDITOR));
     user.setCreatedAt(new Date());
 
-    // serialization
+    // 序列化
     String json = jsonAdapter.toJson(user);
     System.out.println(json);
 
-    // deserialization
+    // 反序列化
     try {
         User userParsed = jsonAdapter.fromJson(json);
         System.out.println(userParsed);
@@ -125,6 +135,17 @@ public void testBasicUsage() {
     }
 }
 ```
+
+需要注意的是，如上代码在构造 Moshi 实例时指定了`Date`类型对应的 JSON Adapter，否则在解析时会报错。
+
+如上代码运行结果如下：
+
+```text
+{"created_at":"2023-10-14T09:34:35.945Z","name":"Larry","roles":["ADMIN","EDITOR"]}
+User(name=Larry, roles=[ADMIN, EDITOR], createdAt=Sat Oct 14 17:34:35 CST 2023)
+```
+
+可以看到，User 对象序列化为的 JSON、JSON 反序列化为的 User 对象都是正确的。
 
 ## 2 使用 @Json 自定义字段名
 
