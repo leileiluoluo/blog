@@ -68,7 +68,7 @@ Moshi：1.18.30
 
 ## 1 基础使用
 
-首先，看一下最基础的使用，即 Model 类的序列化与反序列化（即 Java 对象转换为 JSON，以及 JSON 转换为 Java 对象）。
+首先，看一下最基础的使用，即序列化与反序列化（即 Java 对象转换为 JSON，以及 JSON 转换为 Java 对象）。
 
 先新建一个 Model 类，本文以`User`为例，该类有三个字段：`name`、`roles`和`createdAt`，包括了`String`、`List`、`Date`以及枚举类型。
 
