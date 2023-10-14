@@ -15,9 +15,9 @@ keywords:
 description: 本文探索了在 Java 中使用 Moshi 库进行 JSON 序列化和反序列化的各种常见用法。
 ---
 
-[Moshi](https://github.com/square/moshi) 是一个可用于 Java 与 Kotlin 的 JSON 序列化与反序列化库，其主要使用 Kotlin 编写。本文关注该库在 Java 中的使用。
+[Moshi](https://github.com/square/moshi) 是一个可用于 Java 与 Kotlin 的 JSON 序列化与反序列化库，其主要使用 Kotlin 编写。本文以样例代码的方式来演示该库在 Java 中的使用。
 
-下面列出写作本文时用到的依赖项及其版本：
+示例项目使用 Maven 管理，下面列出各依赖项及其版本：
 
 ```text
 JDK：Amazon Corretto 17.0.8
@@ -25,7 +25,7 @@ Maven：3.9.2
 Moshi：1.18.30
 ```
 
-示例项目使用 Maven 管理，在`pom.xml`引入 Moshi 依赖（`moshi`为核心模块，`moshi-adapters`包含一些诸如日期处理等适用的 Adapter）的配置如下：
+开始前，需要在`pom.xml`的`<dependencies>`下引入 Moshi 依赖（`moshi`为核心模块，`moshi-adapters`包含一些诸如日期处理等适用的 Adapter）：
 
 ```xml
 <!-- pom.xml -->
@@ -41,7 +41,7 @@ Moshi：1.18.30
 </dependency>
 ```
 
-此外，我们使用 JUnit 编写单元测试的方式来演示 Moshi 的使用，所以需要在`pom.xml`中引入`junit-jupiter`依赖：
+此外，我们以编写 JUnit 单元测试的方式来演示 Moshi 的使用，所以还需在`<dependencies>`中引入`junit-jupiter`依赖：
 
 ```xml
 <!-- pom.xml -->
@@ -52,6 +52,8 @@ Moshi：1.18.30
     <scope>test</scope>
 </dependency>
 ```
+
+准备好后，即可以开始使用了。
 
 ## 1 基础使用
 
