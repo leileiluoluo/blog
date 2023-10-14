@@ -41,7 +41,18 @@ Moshi：1.18.30
 </dependency>
 ```
 
-此外，我们以编写 JUnit 单元测试的方式来演示 Moshi 的使用，所以还需在`<dependencies>`中引入`junit-jupiter`依赖：
+为了省去编写繁琐的`Setters`与`Getters`，该示例项目还使用了 Lombok，依赖如下：
+
+```xml
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.30</version>
+    <scope>provided</scope>
+</dependency>
+```
+
+此外，我们以编写 JUnit 单元测试的方式来演示 Moshi 的使用，所以还需引入`junit-jupiter`依赖：
 
 ```xml
 <!-- pom.xml -->
