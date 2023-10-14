@@ -268,6 +268,10 @@ User(name=Larry, roles=[ADMIN, EDITOR], createdAt=Sat Oct 14 18:39:04 CST 2023)
 
 ## 4 JSON 数组如何处理？
 
+上面演示的均为 Java 对象与 JSON 对象的互相转换，Java List 如何与 JSON 数组互相转换呢？
+
+下面的测试用例作了演示：
+
 ```java
 @Test
 public void testJSONArrayParsing() {
@@ -302,6 +306,17 @@ public void testJSONArrayParsing() {
     }
 }
 ```
+
+可以看到，只需新建一个 Moshi Type 即可，使用起来也一样简单。
+
+如上测试用例的运行结果如下：
+
+```text
+[{"created_at":"2023-10-14T11:22:27.153Z","name":"Larry","roles":["A","E"]}]
+[User(name=Larry, roles=[ADMIN, EDITOR], createdAt=Sat Oct 14 19:22:27 CST 2023)]
+```
+
+User List 与 JSON Array 的互相转换结果均是正确的。
 
 综上，本文探索了在 Java 中使用 Moshi 进行 JSON 序列化和反序列化的各种常见用法。文中所涉及的全部代码已托管至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/moshi-json-library-demo)，欢迎关注或 Fork。
 
