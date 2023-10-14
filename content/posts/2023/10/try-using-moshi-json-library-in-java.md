@@ -162,7 +162,6 @@ package com.example.demo.model;
 @Setter
 @NoArgsConstructor
 public class User {
-
     // ...
 
     @Json(name = "created_at")
