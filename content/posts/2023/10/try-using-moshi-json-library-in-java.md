@@ -266,7 +266,7 @@ public void testCustomTypeAdapter() {
 User(name=Larry, roles=[ADMIN, EDITOR], createdAt=Sat Oct 14 18:39:04 CST 2023)
 ```
 
-可以看到，User 对象序列化为的 JSON 中，`roles`字段的值使用了我们的自定义逻辑（仅取第一个字母来表示 User 的 Role）；该 JSON 再次反序列化为的 User 对象也使用了我们的自定义逻辑，反序列化结果是正确的。
+可以看到，User 对象序列化为的 JSON 中，`roles`字段的值使用了我们的自定义逻辑（仅取第一个字母来表示 User 的 Role）；该 JSON 再次反序列化为的 User 对象也使用了我们的自定义逻辑，反序列化结果也是正确的。
 
 ## 4 JSON 数组如何处理？
 
