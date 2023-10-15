@@ -225,6 +225,7 @@ public class RoleAdapter {
 下面编写一个测试用例来演示该自定义 Adapter 的使用：
 
 ```java
+// src/test/java/com/example/demo/MoshiTest#testCustomTypeAdapter
 @Test
 public void testCustomTypeAdapter() {
     // 构造 Moshi 实例
