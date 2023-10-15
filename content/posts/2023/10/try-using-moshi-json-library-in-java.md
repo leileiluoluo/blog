@@ -172,7 +172,7 @@ public class User {
 }
 ```
 
-可以看到，只需在 Java 类对应的字段上加上`@Json`注解，然后自定义其名称就可以了。
+可以看到，只需在 Java 类对应的属性上加上`@Json`注解，然后自定义其名称就可以了。
 
 再次运行一下上面的测试用例（`src/test/java/com/example/demo/MoshiTest#testBasicUsage`），得到了如下结果：
 
