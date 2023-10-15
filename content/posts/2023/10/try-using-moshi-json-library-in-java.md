@@ -220,7 +220,7 @@ public class RoleAdapter {
 }
 ```
 
-可以看到，我们为`Role`类型编写一个自定义 Adapter `RoleAdapter`。该类中有两个方法`toJson`与`fromJson`，且分别被加上了注解`@ToJson`与`@FromJson`，这两个方法分别用于`Role`类型由 Java 属性转为 JSON 字段值以及由 JSON 字段转换为 Java 属性时的逻辑（本示例仅取第一个字母来表示 User 拥有的`Role`）。
+可以看到，我们为`Role`类型编写一个自定义 Adapter `RoleAdapter`。该类中有两个方法`toJson`与`fromJson`，且分别被加上了注解`@ToJson`与`@FromJson`，这两个方法分别用于`Role`类型由 Java 属性转为 JSON 字段以及由 JSON 字段转换为 Java 属性时的逻辑（本示例仅取第一个字母来表示 User 拥有的`Role`）。
 
 下面编写一个测试用例来演示该自定义 Adapter 的使用：
 
