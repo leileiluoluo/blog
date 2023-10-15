@@ -275,6 +275,7 @@ User(name=Larry, roles=[ADMIN, EDITOR], createdAt=Sat Oct 14 18:39:04 CST 2023)
 下面的测试用例作了演示：
 
 ```java
+// src/test/java/com/example/demo/MoshiTest#testJSONArrayParsing
 @Test
 public void testJSONArrayParsing() {
     // 新建一个类型
