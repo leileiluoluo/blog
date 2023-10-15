@@ -150,7 +150,7 @@ User(name=Larry, roles=[ADMIN, EDITOR], createdAt=Sat Oct 14 17:47:37 CST 2023)
 
 ## 2 使用 @Json 自定义字段名
 
-上面的例子中，JSON 里的字段名与 Java 类里的字段名是完全一致的。
+上面的例子中，JSON 里的字段名与 Java 类里的属性名是完全一致的。
 
 如果某个字段名需要自定义，该怎么做呢？下面即进行了演示：
 
