@@ -71,7 +71,7 @@ DROP TABLE products;
 
 ## 2 默认值
 
-在建表时，可以为列设定默认值。这样，当插入一行数据时，未指定值的列会被填充为对应的默认值。若未显式指定默认值，默认值将会是 `null` (代表未知数据）。
+在建表时，可以为列设定默认值。这样，当插入一行数据时，未指定值的列会被填充为对应的默认值。若未显式指定默认值，默认值将会是`null`（代表未知数据）。
 
 在表定义中，列的默认值设置须跟在数据类型之后。默认值可以是常量，也可以是表达式。若是表达式，其会在数据插入时（非表创建时）作计算。
 
@@ -79,7 +79,7 @@ DROP TABLE products;
 
 ```sql
 CREATE TABLE products (
-    id SERIAL PRIMARY KEY,             -- ID       主键 默认值为自增数值类型 SERIAL是一种简写方式 相当于 DEFAULT nextval('products_id_seq')
+    id SERIAL PRIMARY KEY,             -- ID       主键，默认值为自增数值类型，SERIAL 是一种简写方式，相当于 DEFAULT nextval('products_id_seq')
     no integer,                        -- 编号      未指定默认值，默认值将会是 null
     name text,                         -- 名称      未指定默认值，默认值将会是 null
     price numeric DEFAULT 9.99,        -- 价格      默认值是 9.99
@@ -93,12 +93,11 @@ CREATE TABLE products (
 INSERT INTO products(name) VALUES('apple');
 ```
 
-```shell
-test=# SELECT * FROM products;
-
- id | no     | name  | price | created_at
-----+--------+-------+-------+----------------------------
-  1 | (null) | apple |  9.99 | 2022-01-28 15:27:42.882119
+```text
+test=# select * from products;
+ id | no | name  | price |        created_at
+----+----+-------+-------+---------------------------
+  1 |    | apple |  9.99 | 2023-10-16 17:10:07.59643
 (1 row)
 ```
 
