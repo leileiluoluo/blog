@@ -478,22 +478,20 @@ test-# WHERE t1.tableoid = t2.oid;
 
 ## 6 修改表
 
-当一个表已经建好，后面发现有点小错误，或应用需求变更了，而这时表里已经有了数据，或表已被其它数据库对象引用时，我们不好将表删了重建，这样即可使用 PostgreSQL 提供的一系列命令来修改现有表定义。注意，这里感兴趣的是更改表的定义或结构，而非表中的数据。
-
-如下所有操作均使用了[ALTER TABLE](https://www.postgresql.org/docs/14/sql-altertable.html)命令来实现。
+当一个表已经建好，后面发现有点小错误，或应用需求变更了，而这时表里已经有了数据，或表已被其它数据库对象引用时，我们不好将表删了重建，这样即可使用 PostgreSQL 提供的一系列命令来修改现有表定义。注意，这里关注的是更改表的定义或结构，而非表中的数据。
 
 ### 增加一列
 
 要增加一列，使用如下命令：
 
 ```sql
-ALTER TABLE products ADD COLUMN description text; -- 未指定默认值 将被填充为 null
+ALTER TABLE products ADD COLUMN description text;                                 -- 未指定默认值，将被填充为 NULL
 ALTER TABLE products ADD COLUMN description text DEFAULT 'this is a description'; -- 指定了默认值
 ```
 
-新建的列最初由任何给定的默认值填充（不指定`DEFAULT`语句的话将会被填充为`null`）。
+新建的列会由默认值填充（不指定`DEFAULT`语句的话将会被填充为`NULL`）。
 
-_小提示：自 PostgreSQL 11 起，新增指定了常量默认值的一列，并不是在`ALTER TABLE`语句执行后更新表的每一行。相反，默认值将在该行被下一次访问时返回，并在重写表时真正应用。这样，使得在大表上执行`ALTER TABLE`也会非常快。然而，若默认值是可变的（如：`clock_timestamp()`），则在`ALTER TABLE`执行时，每一行即会被更新为计算的值。为了避免更新操作太耗时，可以新增列时先不指定默认值，然后使用`UPDATE`来插值，最后再使用`ALTER TABLE ... ALTER COLUMN ... SET DEFAULT ...`给该列指定想要的默认值。_
+_小提示：自 PostgreSQL 11 起，新增指定了常量默认值的一列，并非在`ALTER TABLE`语句执行后更新表的每一行。相反，默认值将在该行被下一次访问时返回，并在重写表时真正应用。这样，使得在大表上执行`ALTER TABLE`也会非常快。然而，若默认值是可变的（如：`clock_timestamp()`），则在`ALTER TABLE`执行时，每一行即会被更新为计算的值。为了避免更新操作太耗时，可以新增列时先不指定默认值，然后使用`UPDATE`来插值，最后再使用`ALTER TABLE ... ALTER COLUMN ... SET DEFAULT ...`给该列指定想要的默认值。_
 
 还可以使用通用语法，在增加一列时同时定义约束：
 
@@ -508,7 +506,7 @@ test=# ALTER TABLE products ADD COLUMN description text CHECK (description <> ''
 ERROR:  check constraint "products_description_check" of relation "products" is violated by some row
 ```
 
-或者，可以在正确填充新列后，再添加约束（稍后介绍）。
+或者，可以在正确添加新列后，再添加约束。
 
 ### 移除一列
 
@@ -518,7 +516,7 @@ ERROR:  check constraint "products_description_check" of relation "products" is 
 ALTER TABLE products DROP COLUMN description;
 ```
 
-该列的所有数据都会消失，涉及该列的表约束也会删除。然而，若该列被另一个表的外键约束所引用，PostgreSQL 不会静默删除该约束。可以通过添加`CASCADE`来授权删除依赖该列的所有内容：
+该列的所有数据都会消失，涉及该列的表约束也会删除。然而，若该列被另一个表的外键约束所参照，PostgreSQL 不会静默删除该约束。可以通过添加`CASCADE`来授权删除依赖该列的所有内容：
 
 ```sql
 ALTER TABLE products DROP COLUMN description CASCADE;
@@ -560,7 +558,7 @@ ALTER TABLE products ALTER COLUMN price SET DEFAULT 6.66;
 ALTER TABLE products ALTER COLUMN price DROP DEFAULT;
 ```
 
-其等同于将默认值设置为`null`。
+其等同于将默认值设置为`NULL`。因此，在未定义默认值的情况下删除默认值并不会引起错误，因为默认值隐式为`NULL`。
 
 ### 更改一列的数据类型
 
