@@ -234,7 +234,7 @@ _小提示：在多数数据库设计中，多数列都应标记为非空。_
 ```sql
 -- 写为列约束
 CREATE TABLE products (
-    no integer UNIQUE, -- 也可以给唯一约束起个名字 等价于 CONSTRAINT must_be_different UNIQUE
+    no integer UNIQUE, -- 也可以给唯一约束起个名字，等价于 `CONSTRAINT must_be_different UNIQUE`
     name text,
     price numeric
 );
@@ -261,7 +261,7 @@ CREATE TABLE products (
 
 这表示多列值的组合在整个表中是唯一的，但任意一列的值并不需要唯一。
 
-添加了唯一约束后，会自动在约束列出的列上（一列或一组列）创建一个唯一`B-树`索引。若您仅想在某些行上作唯一性限制，请不要使用唯一约束，请建一个唯一[部分索引](https://www.postgresql.org/docs/14/indexes-partial.html)来实现。
+添加了唯一约束后，会自动在约束列出的列上（一列或一组列）创建一个唯一`B-树`索引。若您仅想在某些行上作唯一性限制，请不要使用唯一约束，请建一个唯一[部分索引](https://www.postgresql.org/docs/16/indexes-partial.html)来实现。
 
 在唯一约束中，同样请注意`null`值。因为两个`null`值不认为是相等的，所以可能存在包含多个`null`值的行，这是符合 SQL 标准的。
 
