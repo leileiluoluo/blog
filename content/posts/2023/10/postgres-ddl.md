@@ -294,6 +294,51 @@ CREATE TABLE products (
 
 ### 外键约束
 
+外键约束用于指定一列（或一组列）中的值必须与另一个表的某些行中出现的值相匹配。我们说这维护了两个相关表之间的参照完整性。
+
+请看下面的例子：
+
+```sql
+CREATE TABLE products (
+    no integer PRIMARY KEY,
+    name text,
+    price numeric
+);
+
+CREATE TABLE orders (
+    id integer PRIMARY KEY,
+    product_no integer REFERENCES products (no),
+    -- product_no integer REFERENCES products, -- 简写方式，未指定被参照列时，被参照表的主键即为被参照列
+    quantity integer
+);
+```
+
+上面例子中的`orders`表的`product_no`列参考了`products`表中的`no`列。这样即可确保`orders`表只包含实际存在的产品订单。在这种情况下，我们说`orders`表是参照表，`products`表是被参照表；`product_no`是参照列，`no`是被参照列。
+
+外键还可以参照一组列。像往常一样，需要以表约束的形式编写。请看下面的示例：
+
+```sql
+CREATE TABLE t1 (
+  a integer PRIMARY KEY,
+  b integer,
+  c integer,
+  FOREIGN KEY (b, c) REFERENCES other_table (c1, c2) -- 被参照列的数量与类型需要与参照列的数量与类型一致
+);
+```
+
+有时，被参照表与参照表也可以是同一张表，被称作「自参照」。如使用一个表的行来代表树的节点：
+
+```sql
+CREATE TABLE tree (
+    node_id integer PRIMARY KEY,
+    parent_id integer REFERENCES tree,
+    name text,
+    ...
+);
+```
+
+根节点的`parent_id`是`NULL`，而非`NULL`的`parent_id`条目为参照表的有效行。
+
 ### 排它约束
 
 排它约束确保如果使用指定运算符在指定列或表达式上比较任意两行，这些运算符比较中至少有一个将返回`FALSE`或`NULL`。排它约束可以用于指定比简单的是否相等更通用的约束。我们可以通过使用`&&`运算符来指定一个表中没有任意两行包含重叠的圆形的约束：
