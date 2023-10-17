@@ -145,7 +145,7 @@ CREATE TABLE people (
 
 为解决这些问题，SQL 允许在表上及列上定义约束，约束给了我们在表上更多的控制数据的能力。若某人在某一列上试图违反约束而存储数据，将会抛出错误，即使该值来自于设定的默认值也适用。
 
-**检查约束**
+### 检查约束
 
 检查约束是最通用的约束类型。可以使用其来指定某列满足一个布尔（真值）表达式。如：想指定产品价格必须是正数类型，可以使用：
 
@@ -199,7 +199,7 @@ _小提示：PostgreSQL 不支持检查约束引用除了正在检查的新行�
 
 _小提示：PostgreSQL 假设检查约束的条件是不可变的，即对同样的输入行总是给出同样的结果。检查约束仅在行插入或更新时作检查。破坏该假设的一个通常的例子是在检查约束表达式引用一个用户定义的函数，后来更改了该函数的行为，这会导致后续的数据库转储及重新导入失败，是不推荐的。_
 
-**非空约束**
+### 非空约束
 
 非空约束用于指定某列不可以为空（`NOT NULL`）。语法如下：
 
@@ -227,7 +227,7 @@ CREATE TABLE products (
 
 _小提示：在多数数据库设计中，多数列都应标记为非空。_
 
-**唯一约束**
+### 唯一约束
 
 唯一约束用于确保一列或一组列的数据在表中的所有行都是唯一的。语法如下：
 
@@ -265,7 +265,7 @@ CREATE TABLE products (
 
 在唯一约束中，同样请注意`null`值。因为两个`null`值不认为是相等的，所以可能存在包含多个`null`值的行，这是符合 SQL 标准的。
 
-**主键约束**
+### 主键约束
 
 主键约束用于将表中的一列或一组列用作所有行的唯一标识符。这需要这些列的值是唯一并且非空的。语法如下：
 
@@ -292,9 +292,9 @@ CREATE TABLE products (
 
 一个表可以有多个唯一且非空约束，但至多有一个主键。关系型数据库理论上规定每个表必须有一个主键，PostgreSQL 虽不作强制，但最好还是遵循它。
 
-**外键约束**
+### 外键约束
 
-**排它约束**
+### 排它约束
 
 排它约束用于保证对于使用特定运算符在指定列或表达式上对任意两行进行比较，至少有一个会返回`FALSE`或`NULL`。详情请参阅[CREATE TABLE ... CONSTRAINT ... EXCLUDE](https://www.postgresql.org/docs/14/sql-createtable.html#SQL-CREATETABLE-EXCLUDE)。排它约束可以用于指定比简单的是否相等更通用的约束。我们可以通过使用`&&`运算符来指定一个表中没有任意两行包含重叠的圆形的约束：
 
@@ -381,7 +381,7 @@ test-# WHERE t1.tableoid = t2.oid;
 
 如下所有操作均使用了[ALTER TABLE](https://www.postgresql.org/docs/14/sql-altertable.html)命令来实现。
 
-**增加一列**
+### 增加一列
 
 要增加一列，使用如下命令：
 
@@ -409,7 +409,7 @@ ERROR:  check constraint "products_description_check" of relation "products" is 
 
 或者，可以在正确填充新列后，再添加约束（稍后介绍）。
 
-**移除一列**
+### 移除一列
 
 使用如下命令可移除一列：
 
@@ -423,7 +423,7 @@ ALTER TABLE products DROP COLUMN description;
 ALTER TABLE products DROP COLUMN description CASCADE;
 ```
 
-**增加一个约束**
+### 增加一个约束
 
 要增加一个约束，请使用表约束语法：
 
@@ -441,9 +441,9 @@ ALTER TABLE products ALTER COLUMN name SET NOT NULL;
 
 约束将被立即检查，因此表数据必须满足约束条件才能添加。
 
-**移除一个约束**
+### 移除一个约束
 
-**更改一列的默认值**
+### 更改一列的默认值
 
 要更改一列的默认值，请使用如下命令：
 
@@ -461,7 +461,7 @@ ALTER TABLE products ALTER COLUMN price DROP DEFAULT;
 
 其等同于将默认值设置为`null`。
 
-**更改一列的数据类型**
+### 更改一列的数据类型
 
 要更改一列的数据类型，请使用如下命令：
 
@@ -473,7 +473,7 @@ ALTER TABLE products ALTER COLUMN price TYPE numeric(10,2);
 
 PostgreSQL 会尝试将列的默认值及列上的约束转换到新类型。然而，这些转换可能会失败。最好修改列类型前，先删除其上的约束，当类型修改后，将约束作适当修改后再加回来。
 
-**重命名列**
+### 重命名列
 
 要重命名列，请使用如下命令：
 
@@ -481,7 +481,7 @@ PostgreSQL 会尝试将列的默认值及列上的约束转换到新类型。然
 ALTER TABLE products RENAME COLUMN no TO id;
 ```
 
-**重命名表**
+### 重命名表
 
 要重命名表，请使用如下命令：
 
