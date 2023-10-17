@@ -296,12 +296,12 @@ CREATE TABLE products (
 
 ### 排它约束
 
-排它约束用于保证对于使用特定运算符在指定列或表达式上对任意两行进行比较，至少有一个会返回`FALSE`或`NULL`。详情请参阅[CREATE TABLE ... CONSTRAINT ... EXCLUDE](https://www.postgresql.org/docs/14/sql-createtable.html#SQL-CREATETABLE-EXCLUDE)。排它约束可以用于指定比简单的是否相等更通用的约束。我们可以通过使用`&&`运算符来指定一个表中没有任意两行包含重叠的圆形的约束：
+排它约束确保如果使用指定运算符在指定列或表达式上比较任意两行，这些运算符比较中至少有一个将返回`FALSE`或`NULL`。排它约束可以用于指定比简单的是否相等更通用的约束。我们可以通过使用`&&`运算符来指定一个表中没有任意两行包含重叠的圆形的约束：
 
 ```sql
 CREATE TABLE circles (
     c circle,
-    EXCLUDE USING gist (c WITH &&) -- gist（GiST，Generalized Search Tree，通用搜索树）表示使用GiST访问方法
+    EXCLUDE USING gist (c WITH &&) -- gist（GiST，Generalized Search Tree，通用搜索树），表示使用GiST 访问方法
 );
 ```
 
