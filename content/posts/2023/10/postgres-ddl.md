@@ -339,6 +339,58 @@ CREATE TABLE tree (
 
 根节点的`parent_id`是`NULL`，而非`NULL`的`parent_id`条目为参照表的有效行。
 
+一张表可以有多个外键约束，这用于实现表之间的多对多关系。假设您有关于产品和订单的表，但现在若希望允许一个订单可包含多种产品，则可以使用如下表结构：
+
+```sql
+CREATE TABLE products (
+    no integer PRIMARY KEY,
+    name text,
+    price numeric
+);
+
+CREATE TABLE orders (
+    id integer PRIMARY KEY,
+    shipping_address text,
+    ...
+);
+
+CREATE TABLE order_items (
+    product_no integer REFERENCES products,
+    order_id integer REFERENCES orders,
+    quantity integer,
+    PRIMARY KEY (product_no, order_id) -- 主键与外键重叠的情况
+);
+```
+
+我们知道外键约束不允许在参照表创建被参照表中不存在的条目。但是，如果在参照表创建完相关数据后再将被参照表的相关数据删除会怎么样？ SQL 允许执行这样的操作。直观上，我们有几个选择：
+
+- 不允许删除被参照数据
+- 删除被参照数据的同时，也删除参照数据
+- 其它情况？
+
+为了说明这一点，我们在上面的多对多关系示例上实现以下策略：当有人想要删除被订单条目表（`order_items`）参照的产品时，不允许其执行；而当有人删除订单时，订单条目也会被删除：
+
+```sql
+CREATE TABLE products (
+    no integer PRIMARY KEY,
+    name text,
+    price numeric
+);
+
+CREATE TABLE orders (
+    id integer PRIMARY KEY,
+    shipping_address text,
+    ...
+);
+
+CREATE TABLE order_items (
+    product_no integer REFERENCES products ON DELETE RESTRICT, -- 若产品被参照，删除产品时会作限制
+    order_id integer REFERENCES orders ON DELETE CASCADE,      -- 若订单被参照，删除订单时，同时删除订单条目
+    quantity integer,
+    PRIMARY KEY (product_no, order_id)
+);
+```
+
 ### 排它约束
 
 排它约束确保如果使用指定运算符在指定列或表达式上比较任意两行，这些运算符比较中至少有一个将返回`FALSE`或`NULL`。排它约束可以用于指定比简单的是否相等更通用的约束。我们可以通过使用`&&`运算符来指定一个表中没有任意两行包含重叠的圆形的约束：
