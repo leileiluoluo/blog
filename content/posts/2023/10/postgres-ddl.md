@@ -665,6 +665,8 @@ REVOKE ALL ON accounts FROM PUBLIC;
 
 当在表上启用行安全（`ALTER TABLE ... ENABLE ROW LEVEL SECURITY`）后，被行安全策略允许时才可对表进行选择行或修改行等正常访问（表的所有者通常不受行安全策略的约束）。如果表不存在策略，则使用默认拒绝策略，即所有行不可见且不可修改。应用于整个表的操作（如`TRUNCATE`和`REFERENCES`）则不受行安全的约束。
 
+行安全策略可以指定到命令或角色上（或两者均有）。策略可以应用于所有命令，或仅应用于`SELECT`、`INSERT`、`UPDATE`或`DELETE`。一个策略可应用于多个角色，并且应用正常的角色成员资格和继承规则。
+
 ## 9 模式
 
 ## 10 继承
