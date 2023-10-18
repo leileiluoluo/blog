@@ -627,17 +627,17 @@ ALTER TABLE products RENAME TO product;
 
 当创建对象时，会为其指定一个所有者（owner）。所有者通常是执行创建语句的角色（role）。对于大多数类型的对象，初始状态是只有所有者（或超级用户 superuser）可以对对象执行任何操作。要允许其它角色使用它，就必须进行授权。
 
-有不同种类的权限：`SELECT`、`INSERT`、`UPDATE`、`DELETE`、`TRUNCATE`、`REFERENCES`、`TRIGGER`、`CREATE`、`CONNECT`、`TEMPORARY`、`EXECUTE` 和 `USAGE`。适用于特定对象的权限因对象的类型（表、函数等）而异。关于这些权限含义的更多细节见下文。
+有不同种类的权限：`SELECT`、`INSERT`、`UPDATE`、`DELETE`、`TRUNCATE`、`REFERENCES`、`TRIGGER`、`CREATE`、`CONNECT`、`TEMPORARY`、`EXECUTE`、`USAGE`、`SET`和`ALTER SYSTEM`。适用于特定对象的权限因对象的类型（表、函数等）而异。关于这些权限含义的更多细节见下文。
 
-修改或销毁一个对象的权利是对象所有者的固有权利，并且不可被自己来授权或撤销。（然而，如所有权限一样，该权利可被拥有该角色的成员继承；参看[22.3 节](https://www.postgresql.org/docs/14/role-membership.html)）。
+修改或销毁一个对象的权利是对象所有者的固有权利，并且不可被自己来授权或撤销。（然而，如所有权限一样，该权限可被拥有该角色的成员所继承。）
 
-可以使用对象对应的`ALTER`命令将对象分配给一个新的所有者。例如：
+可以使用对应的`ALTER`命令将对象分配给一个新的所有者。例如：
 
 ```sql
 ALTER TABLE table_name OWNER TO new_owner;
 ```
 
-超级用户总可以这样做；普通角色只有同时是对象的所有者（或是所有角色的成员）和新所有角色的成员时才能这样做。
+超级用户总是可以这样做；普通角色只有在既是对象的当前所有者（或继承所拥有角色的特权）并且能够将`SET ROLE`设置为新的所拥有角色时才能执行此操作。
 
 要分配权限，请使用`GRANT`命令。例如，`joe`是一个现有角色，`accounts`是一个现有表，则可为`joe`授权表的更新权限：
 
@@ -645,9 +645,9 @@ ALTER TABLE table_name OWNER TO new_owner;
 GRANT UPDATE ON accounts TO joe;
 ```
 
-写为`ALL`代替特定权限将授权对象类型相关的所有权限。
+授权时，用`ALL`代替特定权限将授权对象类型相关的所有权限。
 
-特殊的角色名称`PUBLIC`可被用于授权权限给系统中的每个角色。此外，还可以设置组（group）角色，以便在一个数据库有许多用户时帮助管理角色（详情参阅[22 章-数据库角色](https://www.postgresql.org/docs/14/user-manag.html)）。
+特殊的角色名称`PUBLIC`可被用于授权权限给系统中的每个角色。此外，还可以设置组（group）角色，以便在一个数据库有许多用户时帮助管理角色。
 
 要撤销之前授权的权限，请使用对应的`REVOKE`命令：
 
@@ -655,7 +655,7 @@ GRANT UPDATE ON accounts TO joe;
 REVOKE ALL ON accounts FROM PUBLIC;
 ```
 
-通常，只有对象的所有者（或超级用户）可以授权或撤销对象的权限。然而，有可能授予“含授权选项`WITH GRANT OPTION`“的权限，这使接收者有权利将权限继而授予他人。若授权选项随后被撤销，则所有从该接收者直接或间接获得的权限的人都将失去该权限。详情请参看 [GRANT](https://www.postgresql.org/docs/14/sql-grant.htmls) 和 [REVOKE](https://www.postgresql.org/docs/14/sql-revoke.html) 参考页。
+通常，只有对象的所有者（或超级用户）可以授权或撤销对象的权限。然而，有可能授予含授权选项`WITH GRANT OPTION`的权限，这使接收者有权利将权限继而授予他人。若授权选项随后被撤销，则所有从该接收者直接或间接获得权限的人都将失去该权限。
 
 一个对象的所有者可以选择撤销他们拥有的普通权限，例如，使一个表为自己和他人只读。但所有者总是被视为持有所有授权选项，因此他们总是可以重新授权他们拥有的权限。
 
