@@ -532,7 +532,7 @@ ALTER TABLE products ADD CONSTRAINT no_should_unique UNIQUE (no);
 ALTER TABLE orders ADD FOREIGN KEY (product_no) REFERENCES products (no);
 ```
 
-要增加一个非空约束，不可写为表约束，使用如下语法：
+要增加一个非空约束，不可写为表约束，而使用如下语法：
 
 ```sql
 ALTER TABLE products ALTER COLUMN name SET NOT NULL;
