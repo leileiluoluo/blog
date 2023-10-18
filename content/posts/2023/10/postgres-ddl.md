@@ -542,6 +542,41 @@ ALTER TABLE products ALTER COLUMN name SET NOT NULL;
 
 ### 移除一个约束
 
+要移除一个约束，需要指定约束的名称。
+
+若知道约束名称的话，直接使用如下命令进行移除即可：
+
+```sql
+ALTER TABLE products DROP CONSTRAINT some_name;
+```
+
+若是系统生成的约束名称，需要先在 psql 命令行使用`\d tablename`进行查询：
+
+```text
+test=# \d products
+                Table "public.products"
+   Column    |  Type   | Collation | Nullable | Default
+-------------+---------+-----------+----------+---------
+ no          | integer |           | not null |
+ name        | text    |           |          |
+ price       | numeric |           |          |
+ description | text    |           |          |
+Indexes:
+    "products_pkey" PRIMARY KEY, btree (no)
+Check constraints:
+    "products_description_check" CHECK (description <> ''::text)
+Referenced by:
+    TABLE "order_items" CONSTRAINT "order_items_product_no_fkey" FOREIGN KEY (product_no) REFERENCES products(no)
+```
+
+与删除列一样，如果要删除其它内容所依赖的约束，则需要添加`CASCADE`。一个例子是外键约束依赖于被参照列的唯一约束或主键约束。这对于除非空约束之外的所有约束类型都适用。
+
+而要删除非空约束，请使用：
+
+```sql
+ALTER TABLE products ALTER COLUMN name DROP NOT NULL; -- 非空约束没有名称
+```
+
 ### 更改一列的默认值
 
 要更改一列的默认值，请使用如下命令：
