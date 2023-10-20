@@ -2,7 +2,7 @@
 title: PostgreSQL 数据定义相关知识总结
 author: olzhy
 type: post
-date: 2023-10-21T08:00:00+08:00
+date: 2023-10-22T08:00:00+08:00
 url: /posts/postgres-ddl.html
 categories:
   - 计算机
@@ -821,9 +821,11 @@ SET search_path TO myschema;
 
 ## 11 表分区
 
+关于表分区的部分，可以参阅本人之前总结的一篇文章「[PostgreSQL 表分区使用详解](https://olzhy.github.io/posts/postgres-table-partitioning.html)」。
+
 ## 12 外部数据
 
-关于外部数据的部分，可以参阅本文之前总结的一篇文章「[PostgreSQL 外部数据包装器 postgres_fdw 使用详解](https://olzhy.github.io/posts/postgres-foreign-data-wrappers.html)」。
+关于外部数据的部分，可以参阅本人之前总结的一篇文章「[PostgreSQL 外部数据包装器 postgres_fdw 使用详解](https://olzhy.github.io/posts/postgres-foreign-data-wrappers.html)」。
 
 ## 13 其它数据库对象
 
