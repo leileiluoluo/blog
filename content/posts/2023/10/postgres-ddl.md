@@ -815,11 +815,15 @@ SET search_path TO myschema;
 
 当然，某些数据库系统可能根本就没有实现模式，或者通过允许（可能是有限的）跨数据库访问来提供命名空间支持。如果您需要使用这些系统，那么不使用模式就可以实现最大的可移植性。
 
-## 10 继承
+## 10 表继承
+
+关于表继承的部分，可以参阅本人之前总结的一篇文章「[PostgreSQL 表继承使用详解](https://olzhy.github.io/posts/postgres-table-inheritance.html)」。
 
 ## 11 表分区
 
 ## 12 外部数据
+
+关于外部数据的部分，可以参阅本文之前总结的一篇文章「[PostgreSQL 外部数据包装器 postgres_fdw 使用详解](https://olzhy.github.io/posts/postgres-foreign-data-wrappers.html)」。
 
 ## 13 其它数据库对象
 
