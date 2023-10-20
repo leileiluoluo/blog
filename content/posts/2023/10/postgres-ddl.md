@@ -838,6 +838,39 @@ SET search_path TO myschema;
 
 ## 14 依赖追踪
 
+当我们创建涉及许多具有外键约束、视图、触发器、函数等的表的复杂数据库结构时，我们隐式地在对象之间创建了一张依赖关系网。
+
+为了确保整个数据库结构的完整性，PostgreSQL 不允许我们直接删除被其它对象依赖的对象。如使用`DROP TABLE products;`删除被`orders`表参照的`products`表时会报错，若想删除`products`以及其所有依赖对象，则可使用`DROP TABLE products CASCADE;`。但这里须注意，使用`CASCADE`并没有删除`orders`表，而仅是移除了其外键约束。
+
+若函数或存储过程体为字符串，则其依赖关系不会被识别。
+
+例如，考虑以下情况：
+
+```sql
+CREATE TYPE rainbow AS ENUM ('red', 'orange', 'yellow', 'green', 'blue', 'purple');
+
+CREATE TABLE my_colors (color rainbow, note text);
+
+CREATE FUNCTION get_color_note (rainbow) RETURNS text AS
+  'SELECT note FROM my_colors WHERE color = $1'
+  LANGUAGE SQL;
+```
+
+PostgreSQL 将意识到`get_color_note`函数依赖于`rainbow`类型：删除该类型时将强制删除该函数。但 PostgreSQL 不知道`get_color_note`依赖于`my_colors`表，因此删除该表也不会删除该函数。这种处理方式有缺点也有好处。如果表丢失，该函数在某种意义上仍然是有用的；创建一个同名的新表可以让该函数再次工作。
+
+另一方面，若函数或存储过程体为标准 SQL 语言，其会在函数定义时被解析，所有的依赖都会被解析器识别和存储。
+
+比如，如上函数被写为：
+
+```sql
+CREATE FUNCTION get_color_note (rainbow) RETURNS text
+BEGIN ATOMIC
+  SELECT note FROM my_colors WHERE color = $1;
+END;
+```
+
+这时，函数对`my_colors`表的依赖将被`DROP`知晓并强制执行。
+
 综上，本文根据最新 PostgreSQL 官方文档，对数据定义相关的知识作了翻译与总结。
 
 > 参考资料
