@@ -11,7 +11,7 @@ tags:
 keywords:
   - PostgreSQL
   - 表继承
-description: PostgreSQL 表继承使用详解。
+description: 本文依据 PostgreSQL 官方文档翻译与整理了表继承相关的知识，期待阅读完本文，我们对 PostgreSQL 中表继承特性的使用有一个基本的了解。
 ---
 
 继承是来自于面向对象数据库的概念，其为数据库设计带来了新的可能性。
@@ -111,9 +111,17 @@ INSERT INTO capitals VALUES ('沈阳', 9.14, 50, '辽宁');
 
 当父表有子表存在时，父表不能被直接删除。如果子表的列或检查约束是从任意父表继承的，则也不能删除或更改它们。若希望删除父表及其所有的继承表，则可以使用`CASCADE`选项。
 
+如：
+
 ```sql
 DROP TABLE cities CASCADE;
 ```
+
+继承查询执行时，仅对父表作权限检查。如：授权了`cities`表更新权限，则通过`cities`访问`capitals`时，也有权更新`capitals`中的行（看起来就像数据都存在了父表中）；但没有额外授权的话，`capitals`不可直接被更新。
+
+另外，外部表也可以继承别的表或被别的表继承。
+
+综上，本文依据 PostgreSQL 官方文档翻译与整理了表继承相关的知识，期待阅读完本文，我们对 PostgreSQL 中表继承特性的使用有一个基本的了解。
 
 > 参考资料
 >
