@@ -25,7 +25,7 @@ keywords:
   - 外部数据
   - 其它数据库对象
   - 依赖追踪
-description: PostgreSQL Data Definition (PostgreSQL 数据定义相关知识总结)
+description: 本文依据官方 PostgreSQL 16 文档来总结数据定义相关的知识。包括表、模式、继承、分区、视图、函数，及触发器等知识。
 ---
 
 **本文的大部分内容翻译整理自 PostgreSQL 官方文档，作学习及知识总结之用。**
