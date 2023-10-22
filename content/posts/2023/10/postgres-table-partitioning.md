@@ -11,7 +11,7 @@ tags:
 keywords:
   - PostgreSQL
   - 表分区
-description: PostgreSQL 表分区使用详解。
+description: 本文依据官方 PostgreSQL 16 文档来介绍为什么使用表分区？以及表分区的具体使用方法。
 ---
 
 表分区指的是将逻辑上的一个大表分割为物理上的一个个小块，使用表分区可以带来性能上的提升与存储上的优化。PostgreSQL 支持基础的表分区功能。本文将依据官方 PostgreSQL 16 文档来介绍为什么使用表分区？以及表分区的具体使用方法。
