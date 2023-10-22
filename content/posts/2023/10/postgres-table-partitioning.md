@@ -38,6 +38,11 @@ PostgreSQL 中划分分区的方式有哪些呢？罗列如下：
 
 此外，若如上分区方式不满足要求，则可以使用继承和`UNION ALL`视图等替代方法，这些方法虽然可用，但没有性能优势。
 
+## 1 声明式分区
+
+## 2 继承式分区
+
+
 > 参考资料
 >
 > [1] [5.11 Table Partitioning - Data Definition | PostgreSQL 16 Documentation - www.postgresql.org](https://www.postgresql.org/docs/16/ddl-partitioning.html)
