@@ -42,7 +42,6 @@ PostgreSQL 中划分分区的方式有哪些呢？罗列如下：
 
 ## 2 继承式分区
 
-
 > 参考资料
 >
 > [1] [5.11 Table Partitioning - Data Definition | PostgreSQL 16 Documentation - www.postgresql.org](https://www.postgresql.org/docs/16/ddl-partitioning.html)
