@@ -28,3 +28,5 @@ description: 本文依据官方 PostgreSQL 16 文档来介绍为什么使用表�
 > 参考资料
 >
 > [1] [5.11 Table Partitioning - Data Definition | PostgreSQL 16 Documentation - www.postgresql.org](https://www.postgresql.org/docs/16/ddl-partitioning.html)
+>
+> [2] [PostgreSQL 表分区 | 博客园 - www.cnblogs.com](https://www.cnblogs.com/haha029/p/15718827.html)
