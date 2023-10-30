@@ -8,7 +8,7 @@ categories:
   - 随笔
 tags:
   - 随笔
-description:
+description: 悼念克强總理、尊友先生。
 ---
 
 10 月 27 日，是一個讓全體中國人悲傷的日子。
