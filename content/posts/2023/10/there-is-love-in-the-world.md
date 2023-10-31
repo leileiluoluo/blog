@@ -19,13 +19,13 @@ description: 為太太三姨家姨姐孩子籌款有感。
 
 但是，這麽大的事，光親戚朋友的支持是不夠的，重症病房一天的開銷就得成千上萬，我們的這點錢只是杯水車薪。我倆便盡量的轉發那條籌款的動態，嘗試獲取更多社會人士的幫助。
 
-讓人溫暖的是，轉發后的幾個小時裏，不管是微信群，還是朋友圈，許多天南海北、素昧平生的人都在不停的幫助與接力，看著那十元、二十元的愛心捐款慢慢地匯聚成了幾千元、幾萬元。我和太太真切地感受到了這個世界的大愛。
+讓人溫暖的是，轉發后的幾個小時裏，不管是微信群，還是朋友圈，許多天南海北、素昧平生的人都在不停的幫助與接力。看著那十元、二十元的愛心捐款慢慢地匯聚成了幾千元、幾萬元，我和太太真切地感受到了這個世界的大愛。
 
 世上還是好人多啊！
 
 下面僅附上我當時發起捐款的截圖與幾個陌生朋友轉賬的截圖，以記憶在心。
 
-![在微信群發起捐款截圖](https://olzhy.github.io/static/images/uploads/2023/10/there-is-love-in-the-world-1.jpg#center)
+![我在微信群發起捐款截圖](https://olzhy.github.io/static/images/uploads/2023/10/there-is-love-in-the-world-1.jpg#center)
 
 {{% center %}}（在我的一個微信群「上善若水 - 黃庭書院」發起了籌款）{{% /center %}}
 
@@ -33,7 +33,7 @@ description: 為太太三姨家姨姐孩子籌款有感。
 
 {{% center %}}（我和太太都在的一個「拼娃」群，一位來自廣西的陌生群友「大海」給太太轉來 68 元）{{% /center %}}
 
-![來自福建的陌生群友的轉賬截圖](https://olzhy.github.io/static/images/uploads/2023/10/there-is-love-in-the-world-3.jpg#center)
+![來自福建的陌生群友 CF 的轉賬截圖](https://olzhy.github.io/static/images/uploads/2023/10/there-is-love-in-the-world-3.jpg#center)
 
 {{% center %}}（來自福建的陌生群友「CF」單獨加了我微信後轉來 200 元，我說以後有需要幫忙時您也跟我說一聲，他説你不必記得我，只要以後把這份愛心傳遞下去就好了）{{% /center %}}
 
