@@ -25,15 +25,15 @@ description: 為太太三姨家姨姐孩子籌款有感。
 
 下面僅附上幾個陌生朋友的捐贈截圖，以記憶在心。
 
-[在微信群發起捐款截圖](https://olzhy.github.io/static/images/uploads/2023/10/there-is-love-in-the-world-1.jpg#center)
+![在微信群發起捐款截圖](https://olzhy.github.io/static/images/uploads/2023/10/there-is-love-in-the-world-1.jpg#center)
 
 {{% center %}}（在我的一個微信群「上善若水 - 黃庭書院」發起了籌款）{{% /center %}}
 
-[來自廣西的陌生群友大海的轉賬截圖](https://olzhy.github.io/static/images/uploads/2023/10/there-is-love-in-the-world-2.jpg#center)
+![來自廣西的陌生群友大海的轉賬截圖](https://olzhy.github.io/static/images/uploads/2023/10/there-is-love-in-the-world-2.jpg#center)
 
 {{% center %}}（我和太太都在的一個「拼娃」群，一位來自的陌生群友「大海」給太太轉來 68 元）{{% /center %}}
 
-[來自福建的陌生群友的轉賬截圖](https://olzhy.github.io/static/images/uploads/2023/10/there-is-love-in-the-world-3.jpg#center)
+![來自福建的陌生群友的轉賬截圖](https://olzhy.github.io/static/images/uploads/2023/10/there-is-love-in-the-world-3.jpg#center)
 
 {{% center %}}（來自福建的陌生群友「CF」單獨加了我微信後轉來 200 元，我說以後有需要幫忙時您也跟我說，他説你不必記得我，只要有人需要幫助時盡力去做就可以了，非常感動）{{% /center %}}
 
