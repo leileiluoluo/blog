@@ -22,7 +22,6 @@ wip_template:
 
 - [赫赫文王](https://kqh.me/)
 - [程可八八](https://chenghouwen.com/)
-- [无色墨水](https://wuse.ink/)
 
 **正体字学习**
 
