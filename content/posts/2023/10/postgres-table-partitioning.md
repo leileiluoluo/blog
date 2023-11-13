@@ -135,7 +135,7 @@ CREATE TABLE log_history_2023_12 PARTITION OF log_history_2023
 CREATE INDEX ON log_history (logdate);
 ```
 
-_**注意：确保`postgresql.conf`配置文件中未禁用`enable_partition_pruning`配置参数。否则，查询将不会根据需要进行优化。**_
+_**注意：确保 `postgresql.conf` 配置文件中未禁用 `enable_partition_pruning` 配置参数。否则，查询将不会根据需要进行优化。**_
 
 ### 1.1 创建声明式分区
 
