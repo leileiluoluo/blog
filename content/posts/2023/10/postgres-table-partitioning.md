@@ -167,21 +167,34 @@ CREATE TABLE log_history_2024 PARTITION OF log_history
     FOR VALUES FROM ('2024-01-01') TO ('2025-01-01');
 ```
 
-另一种推荐的方案是：在分区结构之外创建新表，后续再将其附加为分区表的分区。这可以保证新数据插入分区表之前已进行过加载、检查和数据转换。而且，`ATTACH PARTITION`操作只需要分区表上的`SHARE UPDATE EXCLUSIVE`锁，而不是`CREATE TABLE ... PARTITION OF`需要的`ACCESS EXCLUSIVE`锁，所以对分区表的并发操作更加友好。`CREATE TABLE ... LIKE`选项有助于避免繁琐地重复父表的定义：
+另一种推荐的方案是：在分区结构之外创建新表，后续再将其附加为分区表的分区。这可以保证新数据插入分区表之前已进行过加载、检查和数据转换。而且，`ATTACH PARTITION`操作只需要分区表上的`SHARE UPDATE EXCLUSIVE`锁，而不是`CREATE TABLE ... PARTITION OF`需要的`ACCESS EXCLUSIVE`锁，所以对分区表的并发操作更加友好。
+
+创建新表，然后将其附加为分区表的分区示例如下：
 
 ```sql
+-- CREATE TABLE ... LIKE 命令可以避免繁琐地重复父表的定义
 CREATE TABLE log_history_2024
   (LIKE log_history INCLUDING DEFAULTS INCLUDING CONSTRAINTS);
 
+-- 在运行 ATTACH PARTITION 命令之前
+-- 建议在要附加的表上创建一个与预期分区约束一致的 CHECK 约束
+-- 这样，系统将能够跳过扫描
+-- 否则，ATTACH PARTITION 时，将会对该分区加 ACCESS EXCLUSIVE 锁来进行扫描
 ALTER TABLE log_history_2024 ADD CONSTRAINT logdate_check
    CHECK ( logdate >= DATE '2024-01-01' AND logdate < DATE '2025-01-01');
 
--- 也可能是一些其它的数据准备工作
+-- 然后进行 COPY 等数据准备工作
 \copy log_history_2024 from 'log_history_2024'
 
+-- 进行 PARTITION ATTACH
 ALTER TABLE log_history ATTACH PARTITION log_history_2024
     FOR VALUES FROM ('2024-01-01') TO ('2025-01-01');
+
+-- ATTACH PARTITION 完成后删除冗余的 CHECK 约束
+ALTER TABLE log_history_2024 DROP CONSTRAINT logdate_check;
 ```
+
+如果附加的表本身是分区表，则其每个子分区都将被递归锁定和扫描，直到找到合适的`CHECK`约束或到达叶子分区。
 
 ## 2 继承式分区
 
