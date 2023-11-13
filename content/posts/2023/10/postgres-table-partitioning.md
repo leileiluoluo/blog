@@ -58,6 +58,62 @@ PostgreSQL 允许以声明的方式进行表分区，被分割的表称为分区
 
 分区也可以是外部表，但需要保证外部表满足分区规则。此外，还有一些其它限制。
 
+### 1.1 创建声明式分区
+
+```sql
+CREATE TABLE log_history (
+    id              int NOT NULL,
+    content         text,
+    logdate         date NOT NULL
+);
+```
+
+```sql
+CREATE TABLE log_history (
+    id              int NOT NULL,
+    content         text,
+    logdate         date NOT NULL
+) PARTITION BY RANGE (logdate);
+```
+
+```sql
+CREATE TABLE log_history_2010 PARTITION OF log_history
+    FOR VALUES FROM ('2010-01-01') TO ('2011-01-01');
+
+CREATE TABLE log_history_2011 PARTITION OF log_history
+    FOR VALUES FROM ('2011-01-01') TO ('2012-01-01');
+
+CREATE TABLE log_history_2012 PARTITION OF log_history
+    FOR VALUES FROM ('2012-01-01') TO ('2013-01-01');
+
+...
+
+CREATE TABLE log_history_2022 PARTITION OF log_history
+    FOR VALUES FROM ('2022-01-01') TO ('2023-01-01');
+```
+
+```sql
+CREATE TABLE log_history_2023 PARTITION OF log_history
+    FOR VALUES FROM ('2023-01-01') TO ('2024-01-01')
+    PARTITION BY RANGE (log_date);
+```
+
+```sql
+CREATE TABLE log_history_2023_01 PARTITION OF log_history_2023
+    FOR VALUES FROM ('2023-01-01') TO ('2023-02-01');
+
+CREATE TABLE log_history_2023_02 PARTITION OF log_history_2023
+    FOR VALUES FROM ('2023-02-01') TO ('2023-03-01');
+
+CREATE TABLE log_history_2023_03 PARTITION OF log_history_2023
+    FOR VALUES FROM ('2023-03-01') TO ('2023-04-01');
+
+...
+
+CREATE TABLE log_history_2023_12 PARTITION OF log_history_2023
+    FOR VALUES FROM ('2023-12-01') TO ('2024-01-01');
+```
+
 ## 2 继承式分区
 
 > 参考资料
