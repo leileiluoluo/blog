@@ -60,6 +60,8 @@ PostgreSQL 允许以声明的方式进行表分区，被分割的表称为分区
 
 ### 1.1 创建声明式分区
 
+假定我们在为大型日志业务构建数据库表，其表结构可能是如下这个样子：
+
 ```sql
 CREATE TABLE log_history (
     id              int NOT NULL,
@@ -68,7 +70,14 @@ CREATE TABLE log_history (
 );
 ```
 
+假定日志的查询常常限定在一年里，越近的数据查询频率越高，越远的数据查询越少。那这样的话，可以使用表分区来实现我们的需求。
+
+步骤如下：
+
+**创建分区表**
+
 ```sql
+-- 这里使用了区间划分方式
 CREATE TABLE log_history (
     id              int NOT NULL,
     content         text,
@@ -76,7 +85,10 @@ CREATE TABLE log_history (
 ) PARTITION BY RANGE (logdate);
 ```
 
+**创建分区**
+
 ```sql
+-- 针对 2010 至 2022 年的数据，一年存一个分区，区间左闭右开
 CREATE TABLE log_history_2010 PARTITION OF log_history
     FOR VALUES FROM ('2010-01-01') TO ('2011-01-01');
 
@@ -92,13 +104,16 @@ CREATE TABLE log_history_2022 PARTITION OF log_history
     FOR VALUES FROM ('2022-01-01') TO ('2023-01-01');
 ```
 
+2023 年的数据比较新，使用频率比较高，所以若想对分区`log_history_2023`再划分子分区，可以这样做：
+
 ```sql
 CREATE TABLE log_history_2023 PARTITION OF log_history
     FOR VALUES FROM ('2023-01-01') TO ('2024-01-01')
-    PARTITION BY RANGE (log_date);
+    PARTITION BY RANGE (logdate);
 ```
 
 ```sql
+-- 按年划分后，再按月划分数据
 CREATE TABLE log_history_2023_01 PARTITION OF log_history_2023
     FOR VALUES FROM ('2023-01-01') TO ('2023-02-01');
 
@@ -113,6 +128,14 @@ CREATE TABLE log_history_2023_03 PARTITION OF log_history_2023
 CREATE TABLE log_history_2023_12 PARTITION OF log_history_2023
     FOR VALUES FROM ('2023-12-01') TO ('2024-01-01');
 ```
+
+所有分区建好后，可以在分区表创建索引，这会自动在每个分区上创建匹配的索引。
+
+```sql
+CREATE INDEX ON log_history (logdate);
+```
+
+_**注意：确保`postgresql.conf`配置文件中未禁用`enable_partition_pruning`配置参数。否则，查询将不会根据需要进行优化。**_
 
 ## 2 继承式分区
 
