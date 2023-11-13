@@ -156,6 +156,10 @@ ALTER TABLE log_history DETACH PARTITION log_history_2010;
 ALTER TABLE log_history DETACH PARTITION log_history_2010 CONCURRENTLY;
 ```
 
+第一种形式需要父表上的`ACCESS EXCLUSIVE`锁；第二种形式（添加`CONCURRENTLY`限定符允许分离操作）仅需要父表上的`SHARE UPDATE EXCLUSIVE`锁。
+
+这样，即可以在数据删除之前，对数据做一些清理前操作。如使用`COPY`、`pg_dump`等命令进行数据备份等。
+
 ## 2 继承式分区
 
 > 参考资料
