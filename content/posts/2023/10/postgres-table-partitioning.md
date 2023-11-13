@@ -141,6 +141,21 @@ _**注意：确保 `postgresql.conf` 配置文件中未禁用 `enable_partition_
 
 通常，最初定义表时建立的一组分区并不是一成不变的，一般后面会经常动态的增删分区。如定期删除旧数据分区、新增新数据分区。这时，分区的优点就会凸显，即操作分区结构会比物理的移动数据省事。
 
+删除旧数据最简单的方法是删除不再需要的分区：
+
+```sql
+DROP TABLE log_history_2010;
+```
+
+因为该种方式不会单独一条一条的删除记录，可以非常快速地一次性删除数百万条记录。但需注意，上述命令须从父表上获取`ACCESS EXCLUSIVE`锁。
+
+通常更推荐的做法是从分区表中删除分区，但保留将分区作为普通表，以及对其进行访问的权限。这有两种形式：
+
+```sql
+ALTER TABLE log_history DETACH PARTITION log_history_2010;
+ALTER TABLE log_history DETACH PARTITION log_history_2010 CONCURRENTLY;
+```
+
 ## 2 继承式分区
 
 > 参考资料
