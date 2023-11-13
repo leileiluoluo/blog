@@ -198,6 +198,22 @@ ALTER TABLE log_history_2024 DROP CONSTRAINT logdate_check;
 
 同样，如果分区表具有默认分区，则建议在默认分区上创建一个`CHECK`约束，以排除要附加分区的约束。如果不这样做，`ATTACH PARTITION`时会扫描默认分区以查看是否与要附加的分区有重叠的数据（此操作将在默认分区上加`ACCESS EXCLUSIVE`锁来执行）。如果默认分区本身是一个分区表，跟上面一样，其每个子分区都将以与附加表相同的方式进行递归检查。
 
+前面也演示过，可以直接在分区表上创建索引，其会自动应用于所有分区。这很方便，因为不仅现有分区会被索引，而且将来创建的任何分区也会被索引。有一个限制是，在创建此类分区索引时，不能使用`CONCURRENTLY`限定符。为了避免长时间的锁定时间，可以先对分区表使用`CREATE INDEX ON ONLY`命令来创建索引，该索引会被标记为无效，不会自动应用到分区上。然后使用`CONCURRENTLY`单独创建分区上的索引，然后使用`ALTER INDEX`将分区上的索引附加到父分区上的索引，待将所有分区的索引附加到父索引后，父索引将自动标记为有效。
+
+例如：
+
+```sql
+CREATE INDEX log_history_id_idx ON ONLY log_history (id);
+
+CREATE INDEX log_history_2024_id_idx
+    ON log_history_2024 (id);
+
+ALTER INDEX log_history_id_idx
+    ATTACH PARTITION log_history_2024_id_idx;
+
+...
+```
+
 ## 2 继承式分区
 
 > 参考资料
