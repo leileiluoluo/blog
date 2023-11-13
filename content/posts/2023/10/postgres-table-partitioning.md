@@ -214,6 +214,22 @@ ALTER INDEX log_history_id_idx
 ...
 ```
 
+此技术也同样适用于`UNIQUE`和`PRIMARY KEY`约束。
+
+例如：
+
+```sql
+ALTER TABLE ONLY log_history ADD UNIQUE (id, logdate);
+
+ALTER TABLE log_history_2024 ADD UNIQUE (id, logdate);
+
+-- 索引是在创建约束时隐式创建的
+ALTER INDEX log_history_id_logdate_key
+    ATTACH PARTITION log_history_2024_id_logdate_key;
+
+...
+```
+
 ## 2 继承式分区
 
 > 参考资料
