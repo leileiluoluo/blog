@@ -160,6 +160,29 @@ ALTER TABLE log_history DETACH PARTITION log_history_2010 CONCURRENTLY;
 
 这样，即可以在数据被删除之前，对数据做一些清理前操作。如使用`COPY`、`pg_dump`等命令进行数据备份等。
 
+同样，也可以为即将到来的新数据添加新分区：
+
+```sql
+CREATE TABLE log_history_2024 PARTITION OF log_history
+    FOR VALUES FROM ('2024-01-01') TO ('2025-01-01');
+```
+
+另一种推荐的方案是：在分区结构之外创建新表，后续再将其附加为分区表的分区。这可以保证新数据插入分区表之前已进行过加载、检查和数据转换。而且，`ATTACH PARTITION`操作只需要分区表上的`SHARE UPDATE EXCLUSIVE`锁，而不是`CREATE TABLE ... PARTITION OF`需要的`ACCESS EXCLUSIVE`锁，所以对分区表的并发操作更加友好。`CREATE TABLE ... LIKE`选项有助于避免繁琐地重复父表的定义：
+
+```sql
+CREATE TABLE log_history_2024
+  (LIKE log_history INCLUDING DEFAULTS INCLUDING CONSTRAINTS);
+
+ALTER TABLE log_history_2024 ADD CONSTRAINT logdate_check
+   CHECK ( logdate >= DATE '2024-01-01' AND logdate < DATE '2025-01-01');
+
+-- 也可能是一些其它的数据准备工作
+\copy log_history_2024 from 'log_history_2024'
+
+ALTER TABLE log_history ATTACH PARTITION log_history_2024
+    FOR VALUES FROM ('2024-01-01') TO ('2025-01-01');
+```
+
 ## 2 继承式分区
 
 > 参考资料
