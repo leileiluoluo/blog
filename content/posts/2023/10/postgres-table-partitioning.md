@@ -256,6 +256,18 @@ ALTER INDEX log_history_id_logdate_key
 
 ## 2 继承式分区
 
+### 2.1 创建分区
+
+### 2.2 分区维护
+
+### 2.3 注意事项
+
+## 3 分区裁剪
+
+## 4 分区与约束排除
+
+## 5 声明式分区的最佳实践
+
 > 参考资料
 >
 > [1] [5.11 Table Partitioning - Data Definition | PostgreSQL 16 Documentation - www.postgresql.org](https://www.postgresql.org/docs/16/ddl-partitioning.html)
