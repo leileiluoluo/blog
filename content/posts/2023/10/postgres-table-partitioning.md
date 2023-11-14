@@ -266,6 +266,120 @@ ALTER INDEX log_history_id_logdate_key
 
 ### 2.1 创建分区
 
+下面使用继承式分区的方法对`log_history`表进行分区。
+
+**创建根表**
+
+该表专用于子表继承，不含任何数据，没有任何`CHECK`约束，也没有索引或唯一约束。
+
+```sql
+CREATE TABLE log_history (
+    id              int NOT NULL,
+    content         text,
+    logdate         date NOT NULL
+);
+```
+
+**创建子表**
+
+下面创建多个子表，每个子表都继承自根表。通常，这些子表仅继承父表的列，不会额外添加列。正如声明式分区一样，这些子表都是一些普通表（或外部表）。同时，建表时，为子表添加互相不重叠的表约束，以定义子表应当存放的数据。
+
+```sql
+CREATE TABLE log_history_2010 (
+    CHECK ( logdate >= DATE '2010-01-01' AND logdate < DATE '2011-01-01' )
+) INHERITS (log_history);
+
+CREATE TABLE log_history_2011 (
+    CHECK ( logdate >= DATE '2011-01-01' AND logdate < DATE '2012-01-01' )
+) INHERITS (log_history);
+
+CREATE TABLE log_history_2012 (
+    CHECK ( logdate >= DATE '2012-01-01' AND logdate < DATE '2013-01-01' )
+) INHERITS (log_history);
+
+...
+
+CREATE TABLE log_history_2022 (
+    CHECK ( logdate >= DATE '2022-01-01' AND logdate < DATE '2023-01-01' )
+) INHERITS (log_history);
+```
+
+**为子表创建索引**
+
+对于每个子表，在键列上创建一个索引，以及需要的其它索引。
+
+```sql
+CREATE INDEX log_history_2010_logdate ON log_history_2010 (logdate);
+
+CREATE INDEX log_history_2011_logdate ON log_history_2011 (logdate);
+
+CREATE INDEX log_history_2012_logdate ON log_history_2012 (logdate);
+
+...
+
+CREATE INDEX log_history_2022_logdate ON log_history_2022 (logdate);
+```
+
+**创建触发器**
+
+我们希望执行`INSERT INTO log_history ...`时，数据自动重定向到对应的子表中，这可以通过为根表创建合适的触发器来实现：
+
+```sql
+-- 创建函数，来控制哪些数据插入哪个子表
+-- 须注意，每个 IF 条件须与子表的 CHECK 约束一一对应
+CREATE OR REPLACE FUNCTION log_history_insert_func()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF (NEW.logdate >= DATE '2010-01-01' AND
+         NEW.logdate < DATE '2011-01-01' ) THEN
+        INSERT INTO log_history_2010 VALUES (NEW.*);
+    ELSIF (NEW.logdate >= DATE '2011-01-01' AND
+            NEW.logdate < DATE '2012-01-01' ) THEN
+        INSERT INTO log_history_2011 VALUES (NEW.*);
+    ...
+    ELSIF (NEW.logdate >= DATE '2022-01-01' AND
+            NEW.logdate < DATE '2023-02-01' ) THEN
+        INSERT INTO log_history_2022 VALUES (NEW.*);
+    ELSE
+        RAISE EXCEPTION 'Date out of range. Please fix the log_history_insert_func()';
+    END IF;
+    RETURN NULL;
+END;
+$$
+LANGUAGE plpgsql;
+```
+
+```sql
+-- 创建触发器，在数据插入前调用如上函数
+CREATE TRIGGER insert_log_history_trigger
+    BEFORE INSERT ON log_history
+    FOR EACH ROW EXECUTE FUNCTION log_history_insert_func();
+```
+
+除了使用触发器以外，还可以通过为根表创建插入规则来实现：
+
+```sql
+CREATE RULE log_history_insert_2010 AS
+ON INSERT TO log_history WHERE
+    (logdate >= DATE '2010-01-01' AND logdate < DATE '2011-01-01')
+DO INSTEAD
+    INSERT INTO log_history_2010 VALUES (NEW.*);
+
+CREATE RULE log_history_insert_2011 AS
+ON INSERT TO log_history WHERE
+    (logdate >= DATE '2011-01-01' AND logdate < DATE '2012-01-01')
+DO INSTEAD
+    INSERT INTO log_history_2011 VALUES (NEW.*);
+
+...
+
+CREATE RULE log_history_insert_2022 AS
+ON INSERT TO log_history WHERE
+    (logdate >= DATE '2022-01-01' AND logdate < DATE '2023-01-01')
+DO INSTEAD
+    INSERT INTO log_history_2022 VALUES (NEW.*);
+```
+
 ### 2.2 分区维护
 
 ### 2.3 注意事项
