@@ -386,6 +386,40 @@ _**注意：确保 postgresql.conf 中的 constraint_exclusion 配置参数没�
 
 ### 2.2 分区维护
 
+要快速删除旧数据，只需删除对应的子表即可：
+
+```sql
+DROP TABLE log_history_2010;
+```
+
+要解除继承关系，但保留其自身作为普通表，可以使用：
+
+```sql
+ALTER TABLE log_history_2010 NO INHERIT log_history;
+```
+
+要添加新的子表来处理新数据，可以像前面创建原始子表一样，使用：
+
+```sql
+CREATE TABLE log_history_2023 (
+    CHECK (logdate >= DATE '2023-01-01' AND logdate < DATE '2024-01-01')
+) INHERITS (log_history);
+```
+
+或者，将新子表添加到继承结构之前，可以先创建并填充该子表。这样，可以提前加载、检查和转换数据。
+
+```sql
+CREATE TABLE log_history_2023
+  (LIKE log_history INCLUDING DEFAULTS INCLUDING CONSTRAINTS);
+
+ALTER TABLE log_history_2023 ADD CONSTRAINT log_history_check_2023
+   CHECK (logdate >= DATE '2023-01-01' AND logdate < DATE '2024-01-01');
+
+\copy log_history_2023 from 'log_history_2023'
+
+ALTER TABLE log_history_2023 INHERIT log_history;
+```
+
 ### 2.3 注意事项
 
 ## 3 分区裁剪
