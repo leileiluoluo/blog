@@ -497,7 +497,7 @@ Aggregate  (cost=476.00..476.01 rows=1 width=8)
 
 可以看到，未启用分区裁剪时，针对该`WHERE`查询，包括旧的分区在内的每个分区都会被扫描。
 
-接着，看一下启动分区裁剪的情况：
+接着，看一下启用分区裁剪的情况：
 
 ```sql
 SET enable_partition_pruning = on; -- 默认值
