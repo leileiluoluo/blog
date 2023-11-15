@@ -438,6 +438,94 @@ ALTER TABLE log_history_2023 INHERIT log_history;
 
 ## 3 分区裁剪
 
+分区裁剪是一种可以提高声明式分区表的查询性能的优化技术。举个例子：
+
+```sql
+SELECT count(*) FROM log_history WHERE logdate >= DATE '2010-01-01';
+```
+
+若没有分区裁剪，上述查询将扫描每个分区。启用分区裁剪后，查询规划器将检查每个分区的定义，若不包含`WHERE`条件指定的行，对应分区会从查询计划中裁剪掉。
+
+下面使用`EXPLAIN`命令看一下未启用分区裁剪的查询计划：
+
+```sql
+SET enable_partition_pruning = off;
+EXPLAIN SELECT count(*) FROM log_history WHERE logdate >= DATE '2023-01-01';
+```
+
+```text
+Aggregate  (cost=476.00..476.01 rows=1 width=8)
+  ->  Append  (cost=0.00..459.00 rows=6800 width=0)
+        ->  Seq Scan on log_history_2010 log_history_1  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+        ->  Seq Scan on log_history_2011 log_history_2  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+        ->  Seq Scan on log_history_2012 log_history_3  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+        ->  Seq Scan on log_history_2013 log_history_4  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+        ->  Seq Scan on log_history_2014 log_history_5  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+        ->  Seq Scan on log_history_2015 log_history_6  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+        ->  Seq Scan on log_history_2016 log_history_7  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+        ->  Seq Scan on log_history_2017 log_history_8  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+        ->  Seq Scan on log_history_2018 log_history_9  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+        ->  Seq Scan on log_history_2019 log_history_10  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+        ->  Seq Scan on log_history_2020 log_history_11  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+        ->  Seq Scan on log_history_2021 log_history_12  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+        ->  Seq Scan on log_history_2022 log_history_13  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+        ->  Seq Scan on log_history_2023_01 log_history_14  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+        ->  Seq Scan on log_history_2023_02 log_history_15  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+        ->  Seq Scan on log_history_2023_03 log_history_16  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+
+        ...
+
+        ->  Seq Scan on log_history_2024 log_history_17  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+```
+
+可以看到，未启用分区裁剪时，针对该`WHERE`查询，包括旧的分区在内的每个分区都会被扫描。
+
+接着，看一下启动分区裁剪的情况：
+
+```sql
+SET enable_partition_pruning = on; -- 默认值
+EXPLAIN SELECT count(*) FROM log_history WHERE logdate >= DATE '2023-01-01';
+```
+
+```text
+Aggregate  (cost=112.00..112.01 rows=1 width=8)
+  ->  Append  (cost=0.00..108.00 rows=1600 width=0)
+        ->  Seq Scan on log_history_2023_01 log_history_1  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+        ->  Seq Scan on log_history_2023_02 log_history_2  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+        ->  Seq Scan on log_history_2023_03 log_history_3  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+
+        ...
+
+        ->  Seq Scan on log_history_2024 log_history_4  (cost=0.00..25.00 rows=400 width=0)
+              Filter: (logdate >= '2023-01-01'::date)
+```
+
+可以看到，没必要扫描的分区都被裁剪掉了。
+
+需要注意，分区裁剪的依据是分区键的分区计算规则（隐式约束）而非索引，索引是用于优化扫描的范围。
+
+分区裁剪可能在规划期间进行，也可能在执行期间进行。
+
 ## 4 分区与约束排除
 
 ## 5 声明式分区的最佳实践
