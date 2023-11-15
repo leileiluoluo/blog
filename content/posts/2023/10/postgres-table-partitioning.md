@@ -441,7 +441,7 @@ ALTER TABLE log_history_2023 INHERIT log_history;
 分区裁剪是一种可以提高声明式分区表的查询性能的优化技术。举个例子：
 
 ```sql
-SELECT count(*) FROM log_history WHERE logdate >= DATE '2010-01-01';
+SELECT count(*) FROM log_history WHERE logdate >= DATE '2023-01-01';
 ```
 
 若没有分区裁剪，上述查询将扫描每个分区。启用分区裁剪后，查询计划器将检查每个分区的定义，若不包含`WHERE`条件指定的行，对应分区会从查询计划中裁剪掉。
