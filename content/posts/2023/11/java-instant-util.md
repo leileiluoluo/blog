@@ -64,7 +64,7 @@ Java 8 中新引入了一个 `Instant` 类来表示时间线上的一个点（�
 
 Java 8 中，需要借助 `DateTimeFormatter` 来实现 `Instant` 与 `String` 的互转。
 
-先看一个未考虑周全的错误示例。
+下面即是一个未考虑周全的错误示例。
 
 ### 2.1 错误示例
 
@@ -141,7 +141,7 @@ Caused by: java.time.DateTimeException: Unable to obtain LocalTime from Temporal
 	... 5 more
 ```
 
-这个异常信息说的不是很清楚，其实原因出在未给 `DateTimeFormatter` 设置月、日、时、分、秒的默认值；这样其在 `parse` 的时候不知如何处理缺省的值就会抛出 `DateTimeParseException` 异常。
+这个异常信息说的不是很清楚，其实原因出在未给 `DateTimeFormatter` 设置月、日、时、分、秒的默认值；这样，如果这些值缺省时，`DateTimeFormatter` 在 `parse` 的时候不知怎么处理这些值，就会抛出 `DateTimeParseException` 异常。
 
 此外，使用如上工具类的 `instant2Str` 方法进行 `Instant` 到 `String` 的转换时也会报错。
 
