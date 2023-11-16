@@ -68,7 +68,7 @@ Java 8 中，需要借助 `DateTimeFormatter` 来实现 `Instant` 与 `String` �
 
 ### 2.1 错误示例
 
-该工具类的 `str2Instant` 方法用于 `String` 到 `Instant` 的转换；`instant2Str` 方法用于 `Instant` 到 `String` 的转换。
+下面尝试封装一下 `Instant` 与 `String` 互转的工具类，因其存在一些问题，所以起名 `FatalInstantUtil`。该工具类的 `str2Instant` 方法用于 `String` 到 `Instant` 的转换；`instant2Str` 方法用于 `Instant` 到 `String` 的转换。
 
 ```java
 // 错误示例
@@ -105,7 +105,67 @@ public class FatalInstantUtil {
 }
 ```
 
+使用如上工具类的 `str2Instant` 方法进行 `String` 到 `Instant` 的转换时，如下写法都是可以正常执行的：
+
+```java
+str2Instant("2023-11-15 17:23:56", "yyyy-MM-dd HH:mm:ss");
+str2Instant("2023-11-15 17:23", "yyyy-MM-dd HH:mm");
+str2Instant("2023-11-15 17", "yyyy-MM-dd HH");
+```
+
+但如下写法会执行失败：
+
+```java
+str2Instant("2023-11-15", "yyyy-MM-dd");
+str2Instant("2023-11", "yyyy-MM");
+str2Instant("2023", "yyyy");
+```
+
+执行 `str2Instant("2023-11-15", "yyyy-MM-dd");` 时的报错信息如下：
+
+```text
+Exception in thread "main" java.time.format.DateTimeParseException: Text '2023-11-15' could not be parsed: Unable to obtain LocalDateTime from TemporalAccessor: {},ISO resolved to 2023-11-15 of type java.time.format.Parsed
+	at java.base/java.time.format.DateTimeFormatter.createError(DateTimeFormatter.java:2023)
+	at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:1958)
+	at java.base/java.time.LocalDateTime.parse(LocalDateTime.java:494)
+	at FatalInstantUtil.str2Instant(FatalInstantUtil.java:11)
+	at FatalInstantUtil.main(FatalInstantUtil.java:23)
+Caused by: java.time.DateTimeException: Unable to obtain LocalDateTime from TemporalAccessor: {},ISO resolved to 2023-11-15 of type java.time.format.Parsed
+	at java.base/java.time.LocalDateTime.from(LocalDateTime.java:463)
+	at java.base/java.time.format.Parsed.query(Parsed.java:241)
+	at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:1954)
+	... 3 more
+Caused by: java.time.DateTimeException: Unable to obtain LocalTime from TemporalAccessor: {},ISO resolved to 2023-11-15 of type java.time.format.Parsed
+	at java.base/java.time.LocalTime.from(LocalTime.java:433)
+	at java.base/java.time.LocalDateTime.from(LocalDateTime.java:459)
+	... 5 more
+```
+
+这个异常信息说的不是很清楚，其实原因出在未给 `DateTimeFormatter` 设置月、日、时、分、秒的默认值；这样其在 `parse` 的时候不知如何处理缺省的值就会抛出 `DateTimeParseException` 异常。
+
+此外，使用如上工具类的 `instant2Str` 方法进行 `Instant` 到 `String` 的转换时也会报错。
+
+如，执行 `instant2Str(Instant.now(), "yyyy-MM");` 时的报错信息如下：
+
+```text
+Exception in thread "main" java.time.temporal.UnsupportedTemporalTypeException: Unsupported field: YearOfEra
+	at java.base/java.time.Instant.getLong(Instant.java:604)
+	at java.base/java.time.format.DateTimePrintContext.getValue(DateTimePrintContext.java:308)
+	at java.base/java.time.format.DateTimeFormatterBuilder$NumberPrinterParser.format(DateTimeFormatterBuilder.java:2763)
+	at java.base/java.time.format.DateTimeFormatterBuilder$CompositePrinterParser.format(DateTimeFormatterBuilder.java:2402)
+	at java.base/java.time.format.DateTimeFormatter.formatTo(DateTimeFormatter.java:1849)
+	at java.base/java.time.format.DateTimeFormatter.format(DateTimeFormatter.java:1823)
+	at FatalInstantUtil.instant2Str(FatalInstantUtil.java:18)
+	at FatalInstantUtil.main(FatalInstantUtil.java:27)
+```
+
+这个异常信息说的也不是很清楚，其实原因出在未给 `DateTimeFormatter` 指定时区；这样其在 `format` 的时候不知道转换到哪个时区的格式。
+
+知道了异常出现的原因后，下面修正一下，看一下正确的示例。
+
 ### 2.2 正确示例
+
+修正后的正确示例代码如下：
 
 ```java
 // 正确示例
@@ -150,6 +210,24 @@ public class InstantUtil {
 
 }
 ```
+
+如上修正后的代码中：`str2Instant` 方法，使用了 `DateTimeFormatterBuilder` 来构造 `DateTimeFormatter`，其使用 `parseDefaulting` 来指定了月、日、时、分、秒的默认值，这样这些值缺省时，会使用指定的默认值来填充，就不会抛异常了。
+
+改造后的 `str2Instant` 方法，对于如下各种时间与格式的解析都没有问题了：
+
+```java
+str2Instant("2023-11-15 17:23:56.345", "yyyy-MM-dd HH:mm:ss.SSS");
+str2Instant("2023-11-15 17:23:56", "yyyy-MM-dd HH:mm:ss");
+str2Instant("2023-11-15 17:23", "yyyy-MM-dd HH:mm");
+str2Instant("2023-11-15 17", "yyyy-MM-dd HH");
+str2Instant("2023-11-15", "yyyy-MM-dd");
+str2Instant("2023-11", "yyyy-MM");
+str2Instant("2023", "yyyy");
+```
+
+如上修正后的 `instant2Str` 方法，为 `DateTimeFormatter` 指定了时区，这样 `Instant` 到 `String` 转换也不会抛异常了。
+
+至此，一个可用的 `Instant` 与 `String` 互转的工具类就实现好了。
 
 本文所涉及的全部代码已托管至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/instant-util-design/src)，欢迎关注或 Fork。
 
