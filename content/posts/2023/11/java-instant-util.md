@@ -15,7 +15,7 @@ keywords:
 description: 本文演示了如何在 Java 8 中设计一个 Instant 与 String 互转的工具类。
 ---
 
-本文首先将介绍在 Java 8 之前，传统的`Date`与`String`相互转换的工具类是怎么实现的；接着再探索在 Java 8 新引入`Instant`后，如何实现`Instant`与`String`的互转，以及新的工具类的实现。
+本文首先将介绍在 Java 8 之前，传统的 `Date` 与 `String` 相互转换的工具类是怎么实现的；接着再探索在 Java 8 新引入`Instant`后，如何实现`Instant`与`String`的互转，以及新的工具类的实现。
 
 ## 1 传统日期转换工具类设计
 
