@@ -15,7 +15,13 @@ keywords:
 description: 本文演示了如何在 Java 8 中设计一个 Instant 与 String 互转的工具类。
 ---
 
+本文首先将介绍在 Java 8 之前，传统的`Date`与`String`相互转换的工具类是怎么实现的；接着再探索在 Java 8 新引入`Instant`后，如何实现`Instant`与`String`的互转，以及新的工具类的实现。
+
 ## 1 传统日期转换工具类设计
+
+在 Java 8 之前，我们常使用`Date`来表示日期与时间。设计`Date`与`String`互转的工具类时，只要借助一下`SimpleDateFormat`，即可轻松的实现。
+
+示例代码如下：
 
 ```java
 import java.text.ParseException;
@@ -48,7 +54,13 @@ public class DateUtil {
 }
 ```
 
+可以看到，如上`DateUtil`工具类的`str2Date`与`date2Str`方法可以分别实现`String`与`Date`，以及`Date`与`String`的转换。
+
 ## 2 Java 8：Instant 与 String 转换工具类设计
+
+Java 8 中新引入了一个`Instant`类来表示时间线上的一个点（瞬间）。如何设计一个`Instant`与`String`互转的工具类呢？
+
+先看一个错误示例，然后再看一下修正后的正确示例。
 
 ### 2.1 错误示例
 
