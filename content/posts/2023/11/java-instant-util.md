@@ -159,7 +159,7 @@ Exception in thread "main" java.time.temporal.UnsupportedTemporalTypeException: 
 	at FatalInstantUtil.main(FatalInstantUtil.java:27)
 ```
 
-这个异常信息说的也不是很清楚，其实原因出在未给 `DateTimeFormatter` 指定时区；这样其在 `format` 的时候不知道转换到哪个时区的格式。
+这个异常信息说的也不是很清楚，其实原因出在未给 `DateTimeFormatter` 指定时区；这样其在 `format` 的时候不知道转换到哪个时区的格式就会抛出异常。
 
 知道了异常出现的原因后，下面修正一下，看一下正确的示例。
 
