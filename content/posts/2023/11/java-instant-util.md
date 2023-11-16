@@ -68,6 +68,8 @@ Java 8 中，需要借助 `DateTimeFormatter` 来实现 `Instant` 与 `String` �
 
 ### 2.1 错误示例
 
+该工具类的 `str2Instant` 方法用于 `String` 到 `Instant` 的转换；`instant2Str` 方法用于 `Instant` 到 `String` 的转换。
+
 ```java
 // 错误示例
 import java.time.Instant;
