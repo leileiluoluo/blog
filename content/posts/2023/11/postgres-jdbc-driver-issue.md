@@ -1,5 +1,5 @@
 ---
-title: PostgreSQL JDBC Driver 42.3.0 读取 BigDecimal 的 Bug
+title: PostgreSQL JDBC Driver 42.3.0 读取 BigDecimal 时发生抹 0 的问题
 author: olzhy
 type: post
 date: 2023-11-17T08:00:00+08:00
@@ -16,7 +16,7 @@ keywords:
   - Driver
   - BigDecimal
   - Bug
-description: PostgreSQL JDBC Driver 42.3.0 读取 BigDecimal 的 Bug。
+description: PostgreSQL JDBC Driver 42.3.0 读取 BigDecimal 时发生抹 0 的问题。
 ---
 
 ```text
