@@ -19,6 +19,13 @@ keywords:
 description: PostgreSQL JDBC Driver 42.3.0 读取 BigDecimal 的 Bug。
 ---
 
+```text
+JDK：Amazon Corretto 17.0.8
+Maven：3.9.2
+PostgreSQL Server：16.0
+PostgreSQL JDBC Driver：42.3.0
+```
+
 ```sql
 CREATE TABLE product (
     id int PRIMARY KEY,
