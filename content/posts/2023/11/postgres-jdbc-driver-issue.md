@@ -127,6 +127,8 @@ Actual   :2.00000000
 
 综上，本文发现了 PostgreSQL JDBC Driver 42.3.0 读取 BigDecimal 的 Bug，并对其进行了复现，最后提出了解决方案。
 
+本文所涉及的复现代码已托管至本人 [GitHub](https://github.com/olzhy/java-exercises/blob/main/postgres-jdbc-issue-reproducer/src/test/java/BigDecimalTest.java)。
+
 > 参考资料
 >
 > [1] [Upgrading postgres JDBC driver to 42.3.0 breaks big decimal read after 5 reads | GitHub - github.com/pgjdbc/pgjdbc](https://github.com/pgjdbc/pgjdbc/issues/2326)
