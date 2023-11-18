@@ -21,6 +21,8 @@ description: 本文发现了 PostgreSQL JDBC Driver 42.3.0 在读取 BigDecimal 
 
 使用 Java 原生方式访问 PostgreSQL 数据库时，偶然发现 JDBC Driver 42.3.0 读取 BigDecimal 时发生小数点前的 0 全部被抹掉的 Bug，特记录于此。
 
+<!--more-->
+
 引起 Bug 的 PostgreSQL JDBC Driver 42.3.0 Maven 依赖如下：
 
 ```xml
