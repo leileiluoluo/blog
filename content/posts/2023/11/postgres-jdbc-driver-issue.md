@@ -103,7 +103,7 @@ public class BigDecimalTest {
 }
 ```
 
-如上程序使用 Java 原生 `DriverManager.getConnection();` 方式获取了一个数据库连接；然后使用 `conn.prepareStatement(sql);` 来创建查询语句；然后对该语句使用 `stmt.executeQuery();` 执行 10 次，并使用 `rs.getBigDecimal("price");` 获取数据库值而进行断言。
+如上程序使用 Java 原生 `DriverManager.getConnection();` 方式获取了一个数据库连接；然后使用 `conn.prepareStatement(sql);` 来创建查询语句；然后对该语句使用 `stmt.executeQuery();` 执行 10 次，并使用 `rs.getBigDecimal("price");` 获取字段值而进行断言。
 
 执行时发现，在前 5 次读取都没有问题；而在第 6 次读取时，数值 `20000.00000000` 读出来后变成了 `2.00000000`。
 
