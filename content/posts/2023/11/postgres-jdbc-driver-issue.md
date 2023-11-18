@@ -16,7 +16,7 @@ keywords:
   - Driver
   - BigDecimal
   - Bug
-description: PostgreSQL JDBC Driver 42.3.0 读取 BigDecimal 时发生抹 0 的 Bug。
+description: 本文发现了 PostgreSQL JDBC Driver 42.3.0 在读取 BigDecimal 时发生抹 0 的 Bug，并对其进行了复现，最后提出了解决方案。
 ---
 
 使用 Java 原生方式访问 PostgreSQL 数据库时，偶然发现 JDBC Driver 42.3.0 读取 BigDecimal 时发生小数点前的 0 全部被抹掉的 Bug，特记录于此。
