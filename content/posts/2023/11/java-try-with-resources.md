@@ -108,7 +108,7 @@ java.lang.NullPointerException: Cannot invoke "java.io.FileReader.close()" becau
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 ```
 
-调试一下，发现因传入的文件路径不存在，首先会在 `try` 块内抛出 `FileNotFoundException`；进入 `finally` 块后，调用 `fr.close()` 时，发现 `fr` 其并未初始化完成，是 `null` 值，会抛出 `NullPointerException`；但最终只直接展示 `NullPointerException`，`FileNotFoundException` 被压制了。
+调试一下，发现因传入的文件路径不存在，首先会在 `try` 块内抛出 `FileNotFoundException`；进入 `finally` 块后，调用 `fr.close()` 时，发现 `fr` 并未初始化完成，是 `null` 值，会抛出 `NullPointerException`；但最终只直接展示 `NullPointerException`，`FileNotFoundException` 被压制了。
 
 如果想要获取被压制的异常，还需自行对最终异常进行捕获，并调用 `e.getSuppressed()` 来获取被压制的异常信息。
 
