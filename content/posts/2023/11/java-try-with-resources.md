@@ -169,6 +169,8 @@ public void testJava9ReadFileWithMultipleResources() throws IOException {
 
 下面就自定义一个 `AutoClosable` 资源的实现，然后对该自定义资源使用一下 `try-with-resources` 特性。
 
+示例代码如下：
+
 ```java
 static class MyResource implements AutoCloseable {
     @Override
@@ -189,6 +191,8 @@ public void testJava7CustomResourceUsage() {
     }
 }
 ```
+
+可以看到，实现 `AutoCloseable` 接口，只需要实现 `close` 接口即可，自定义资源与原生资源对 `try-with-resources` 特性的使用并无差别。
 
 本文所涉及的所有示例代码已托管至本人 [GitHub](https://github.com/olzhy/java-exercises/blob/main/try-with-resources-demo/src/test/java/TryWithResourcesTest.java)，欢迎关注或 Fork。
 
