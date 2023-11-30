@@ -56,7 +56,7 @@ public void testJava6ReadFileWithFinallyBlock() throws IOException {
 
 - 容易忘记关闭资源，从而引发内存泄漏；
 - 资源比较多的时候，代码嵌套层次较深，代码可读性不佳；
-- `try` 块与 `finally` 块同时发生异常时，存在异常压制问题。
+- try 块与 finally 块同时发生异常时，存在异常压制问题。
 
 下面就对这几个问题进行一一说明。
 
@@ -114,6 +114,10 @@ java.lang.NullPointerException: Cannot invoke "java.io.FileReader.close()" becau
 
 ## 3 Java 7：try-with-resources 自动资源关闭
 
+使用 Java 7 `try-with-resources` 特性可以省去手动关闭资源的操作，JVM 会在语句返回时，自动将资源进行关闭。
+
+示例代码如下：
+
 ```java
 // src/test/java/TryWithResourcesTest#testJava7ReadFileWithMultipleResources
 @Test
@@ -127,7 +131,64 @@ public void testJava7ReadFileWithMultipleResources() throws IOException {
 }
 ```
 
+可以看到，如上测试用例中，将 `FileReader` 与 `BufferedReader` 的声明与创建，放在了 `try` 括号内，这样 JVM 会负责在程序返回时，对资源 `close` 方法的自动调用。
+
 ## 4 Java 7：try-with-resources 自动资源关闭具备的优点
+
+改用 `try-with-resources` 后的几个优点：
+
+- 无须手动进行资源关闭，省去了忘记关闭时引发内存泄漏的几率；
+- try 括号内可以是一个资源，也可以是按分号分隔的多个资源，代码精简；
+- try-with-resources 块与不可见的资源关闭同时发生异常时，try-with-resources 块的异常会被抛出，而尝试关闭资源的异常将会被压制（这种异常压制方式与前面 `try-finally` 的处理机制正好相反，这种方式可能更符合我们的预期）。
+
+## 5 Java 9 对 try-with-resources 特性的增强
+
+从上面的例子可以看到，Java 7 使用 `try-with-resources` 时，资源的声明与创建必须在 `try-with-resources` 块内进行。
+
+而自 Java 9 起，资源的声明与创建可以移出到 `try-with-resources` 块外，而仅需将引用资源的变量放在 `try-with-resources` 块内即可。
+
+示例如下：
+
+```java
+// src/test/java/TryWithResourcesTest#testJava9ReadFileWithMultipleResources
+@Test
+public void testJava9ReadFileWithMultipleResources() throws IOException {
+    String filePath = this.getClass().getResource("test.txt").getPath();
+
+    FileReader fr = new FileReader(filePath);
+    BufferedReader br = new BufferedReader(fr);
+    try (fr; br) {
+        System.out.println(br.readLine());
+    }
+}
+```
+
+## 6 自定义 AutoClosable 资源的实现
+
+文章开头即提到，不仅是 Java 内置的资源（诸如 `InputStream`、`OutputStream` 与 `java.sql.Connection` 等）可以使用 `try-with-resources` 特性，只要是实现了 `AutoClosable` 接口的资源，都可以使用该特性。
+
+下面就自定义一个 `AutoClosable` 资源的实现，然后对该自定义资源使用一下 `try-with-resources` 特性。
+
+```java
+static class MyResource implements AutoCloseable {
+    @Override
+    public void close() {
+        System.out.println("my resource closed!");
+    }
+
+    public void doSomething() {
+        System.out.println("do something");
+    }
+}
+
+// src/test/java/TryWithResourcesTest#testJava7CustomResourceUsage
+@Test
+public void testJava7CustomResourceUsage() {
+    try (MyResource myResource = new MyResource()) {
+        myResource.doSomething();
+    }
+}
+```
 
 本文所涉及的所有示例代码已托管至本人 [GitHub](https://github.com/olzhy/java-exercises/blob/main/try-with-resources-demo/src/test/java/TryWithResourcesTest.java)，欢迎关注或 Fork。
 
