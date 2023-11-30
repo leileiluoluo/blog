@@ -114,7 +114,7 @@ java.lang.NullPointerException: Cannot invoke "java.io.FileReader.close()" becau
 
 ## 3 Java 7：try-with-resources 自动资源关闭
 
-使用 Java 7 `try-with-resources` 特性可以省去手动关闭资源的操作，JVM 会在语句返回时，自动将资源进行关闭。
+使用 Java 7 `try-with-resources` 特性可以省去编写手动关闭资源的代码，即 `try` 块内的语句执行完成时，资源将自动进行关闭。这其实是一个语法糖，使用该特性时，编译器会自动为我们添加调用 `close` 方法关闭资源的代码。
 
 示例代码如下：
 
@@ -131,15 +131,15 @@ public void testJava7ReadFileWithMultipleResources() throws IOException {
 }
 ```
 
-可以看到，如上测试用例中，将 `FileReader` 与 `BufferedReader` 的声明与创建，放在了 `try` 括号内，这样 JVM 会负责在程序返回时，对资源 `close` 方法的自动调用。
+可以看到，如上测试用例中，将 `FileReader` 与 `BufferedReader` 的声明与创建，放在了 `try` 括号内，这样即可以无需手动进行资源关闭了。
 
 ## 4 Java 7：try-with-resources 自动资源关闭具备的优点
 
 改用 `try-with-resources` 后的几个优点：
 
 - 无须手动进行资源关闭，省去了忘记关闭时引发内存泄漏的几率；
-- try 括号内可以是一个资源，也可以是按分号分隔的多个资源，代码精简；
-- try-with-resources 块与不可见的资源关闭同时发生异常时，try-with-resources 块的异常会被抛出，而尝试关闭资源的异常将会被压制（这种异常压制方式与前面 `try-finally` 的处理机制正好相反，这种方式可能更符合我们的预期）。
+- try 括号内可以是一个资源，也可以是按分号分隔的多个资源，代码精简，可读性好；
+- try-with-resources 块与不可见的资源关闭同时发生异常时，try-with-resources 块的异常会被抛出，而尝试关闭资源的异常会被压制（这种异常压制方式与前面 `try-finally` 的处理机制正好相反，这种方式可能更符合我们的预期）。
 
 ## 5 Java 9 对 try-with-resources 特性的增强
 
