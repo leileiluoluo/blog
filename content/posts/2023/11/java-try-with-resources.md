@@ -234,7 +234,7 @@ public void testJava7CustomResourceUsage() {
 }
 ```
 
-可以看到，实现 `AutoCloseable` 接口，只需要实现 `close` 方法即可，自定义资源与原生资源对 `try-with-resources` 特性的使用并无差别。
+可以看到，实现 `AutoCloseable` 接口，只需要实现 `close` 方法即可，自定义资源与内置资源在 `try-with-resources` 特性的使用上并无差别。
 
 综上，本文首先介绍了在 `try-with-resources` 特性引入前，资源的关闭是如何做的；然后介绍了 `try-with-resources` 特性如何使用，以及其带来的好处；最后介绍了 Java 9 对 `try-with-resources` 特性的增强以及自定义 `AutoClosable` 资源的实现。
 
