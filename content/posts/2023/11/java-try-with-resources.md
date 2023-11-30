@@ -72,7 +72,7 @@ public void testJava6ReadFileWithFinallyBlock() throws IOException {
 
 因 `try` 块与 `finally` 块内都有可能发生异常，那同时发生异常的时候，最终抛出的是哪个异常？
 
-我们可以对上面的代码稍微改一下，传一个不存在的文件地址，然后 `finally` 块内的资源关闭时没有进行 `null` 判断。
+我们可以对上面的代码稍微改一下：假设传一个不存在的文件地址，然后 `finally` 块内的资源进行手动关闭时也没有进行非 `null` 判断。
 
 代码如下：
 
