@@ -114,7 +114,7 @@ java.lang.NullPointerException: Cannot invoke "java.io.FileReader.close()" becau
 
 ## 3 Java 7：try-with-resources 自动资源关闭
 
-使用 Java 7 `try-with-resources` 特性可以省去编写手动关闭资源的代码，即 `try` 块内的语句执行完成时，资源将自动进行关闭。这其实是一个语法糖，使用该特性时，编译器会自动为我们添加调用 `close` 方法关闭资源的代码。
+使用 Java 7 `try-with-resources` 特性可以省去编写手动关闭资源的代码，即 `try` 块内的语句执行完成时，资源将自动进行关闭。
 
 示例代码如下：
 
@@ -132,6 +132,48 @@ public void testJava7ReadFileWithMultipleResources() throws IOException {
 ```
 
 可以看到，如上测试用例中，将 `FileReader` 与 `BufferedReader` 的声明与创建，放在了 `try` 括号内，这样即可以无需手动进行资源关闭了。
+
+这其实是一个语法糖，使用该特性时，编译器会自动为我们添加调用 `close` 方法关闭资源的代码。
+
+我们将生成的 `.class` 文件反编译一下，即可以看到编译器到底帮我们添加了哪些逻辑：
+
+```java
+@Test
+public void testJava7ReadFileWithMultipleResources() throws IOException {
+    String filePath = this.getClass().getResource("test.txt").getPath();
+    FileReader fr = new FileReader(filePath);
+
+    try {
+        BufferedReader br = new BufferedReader(fr);
+
+        try {
+            System.out.println(br.readLine());
+        } catch (Throwable var8) {
+            try {
+                br.close();
+            } catch (Throwable var7) {
+                var8.addSuppressed(var7);
+            }
+
+            throw var8;
+        }
+
+        br.close();
+    } catch (Throwable var9) {
+        try {
+            fr.close();
+        } catch (Throwable var6) {
+            var9.addSuppressed(var6);
+        }
+
+        throw var9;
+    }
+
+    fr.close();
+}
+```
+
+可以看到，编译器使用传统的 `try-finally` 写法贴心的为我们添加了资源关闭的代码，而且资源关闭的顺序是：`try` 括号内先声明的资源后关闭，后声明的资源先关闭。而且关闭资源时，若发生异常，其会将其压制，而抛出 `try-with-resources` 块内发生的异常。
 
 ## 4 Java 7：try-with-resources 自动资源关闭具备的优点
 
