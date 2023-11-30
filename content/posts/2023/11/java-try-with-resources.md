@@ -15,6 +15,8 @@ description:
 
 Java 7 中引入了 `try-with-resources` 特性来保证资源使用完毕后，自动进行关闭。任何实现了 `java.lang.AutoCloseable` 接口的类，都可以看作是资源，也都可以使用该特性。本文将详细介绍该特性的使用方法与注意事项。
 
+<!--more-->
+
 ## 1 传统的 try-finally 手动资源关闭
 
 Java 7 之前，资源使用完毕后，需要在 `finally` 块中手动对其进行关闭。
@@ -126,6 +128,8 @@ public void testJava7ReadFileWithMultipleResources() throws IOException {
 ```
 
 ## 4 Java 7：try-with-resources 自动资源关闭具备的优点
+
+本文所涉及的所有示例代码已托管至本人 [GitHub](https://github.com/olzhy/java-exercises/blob/main/try-with-resources-demo/src/test/java/TryWithResourcesTest.java)，欢迎关注或 Fork。
 
 > 参考资料
 >
