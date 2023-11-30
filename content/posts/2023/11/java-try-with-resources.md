@@ -137,7 +137,7 @@ public void testJava7ReadFileWithMultipleResources() throws IOException {
 
 改用 `try-with-resources` 后的几个优点：
 
-- 无须手动进行资源关闭，省去了忘记关闭时引发内存泄漏的几率；
+- 无须手动进行资源关闭，降低了忘记关闭时引发内存泄漏的几率；
 - try 括号内可以是一个资源，也可以是按分号分隔的多个资源，代码精简，可读性好；
 - try-with-resources 块与不可见的资源关闭同时发生异常时，try-with-resources 块的异常会被抛出，而尝试关闭资源的异常会被压制（这种异常压制方式与前面 `try-finally` 的处理机制正好相反，这种方式可能更符合我们的预期）。
 
