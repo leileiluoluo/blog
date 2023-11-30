@@ -10,7 +10,7 @@ tags:
   - Java
 keywords:
   - Java
-description:
+description: 本文首先介绍了在 try-with-resources 特性引入前，资源的关闭如何做的；然后介绍了 try-with-resources 特性如何使用，以及其带来的好处；最后介绍了 Java 9 对 try-with-resources 特性的增强以及自定义 AutoClosable 资源的实现。
 ---
 
 Java 7 中引入了 `try-with-resources` 特性来保证资源使用完毕后，自动进行关闭。任何实现了 `java.lang.AutoCloseable` 接口的类，都可以看作是资源，也都可以使用该特性。本文将详细介绍该特性的使用方法与注意事项。
@@ -193,6 +193,8 @@ public void testJava7CustomResourceUsage() {
 ```
 
 可以看到，实现 `AutoCloseable` 接口，只需要实现 `close` 接口即可，自定义资源与原生资源对 `try-with-resources` 特性的使用并无差别。
+
+综上，本文首先介绍了在 `try-with-resources` 特性引入前，资源的关闭如何做的；然后介绍了 `try-with-resources` 特性如何使用，以及其带来的好处；最后介绍了 Java 9 对 `try-with-resources` 特性的增强以及自定义 `AutoClosable` 资源的实现。
 
 本文所涉及的所有示例代码已托管至本人 [GitHub](https://github.com/olzhy/java-exercises/blob/main/try-with-resources-demo/src/test/java/TryWithResourcesTest.java)，欢迎关注或 Fork。
 
