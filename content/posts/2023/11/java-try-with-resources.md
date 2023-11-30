@@ -68,7 +68,7 @@ public void testJava6ReadFileWithFinallyBlock() throws IOException {
 
 对多个资源进行操作的时候，就可能会嵌套多个 `try-finally` 块，代码可读性会因此大大降低。
 
-### `try` 块与 `finally` 块同时发生异常时，存在异常压制问题
+### try 块与 finally 块同时发生异常时，存在异常压制问题
 
 因 `try` 块与 `finally` 块内都有可能发生异常，那同时发生异常的时候，最终抛出的是哪个异常？
 
