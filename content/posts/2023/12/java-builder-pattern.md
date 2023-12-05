@@ -12,12 +12,12 @@ keywords:
   - Java
   - 建造者
   - 模式
-description: Java 建造者模式（Builder Pattern）知多少？
+description: 本文首先看一下传统的伸缩性构造器模式与 JavaBeans 构造器模式在处理可选参数太多的情形时存在的问题，最后看一下建造者模式的设计思路，以及其带来的好处。
 ---
 
 因 Java 中没有命名参数的概念，当一个类的构造器可选参数太多的时候，代码可读性会变得很差。于是，建造者模式（Builder Pattern）应运而生。
 
-本文首先看一下传统的伸缩性构造器模式与 JavaBeans 模式存在的问题，最后看一下建造者模式的设计思路，以及其带来的好处。
+本文首先看一下传统的伸缩性构造器模式与 JavaBeans 构造器模式在处理可选参数太多的情形时存在的问题，最后看一下建造者模式的设计思路，以及其带来的好处。
 
 ## 1 伸缩性构造器模式
 
@@ -77,7 +77,7 @@ public class TelescopingConstructorPatternTest {
 }
 ```
 
-## 2 JavaBeans 模式
+## 2 JavaBeans 构造器模式
 
 ## 3 建造者模式
 
