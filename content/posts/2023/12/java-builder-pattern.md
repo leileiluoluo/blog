@@ -160,6 +160,10 @@ JavaBeans 构造器模式解决了伸缩式构造器模式存在的问题：对�
 
 ## 3 建造者模式
 
+下面介绍建造者模式（Builder Pattern），其兼具伸缩式模式的安全性与 JavaBeans 模式的可读性。其通过引入一个中间对象 Builder 来构造真正的对象，创建 Builder 时需要提供所有的必填参数；而对其它可选参数的设置则采用类似 `Setters` 的方式来进行；参数设置好后，最后调用一下 Builder 的 `build` 无参方法来一次性生成最终的不可变对象。
+
+下面即是 `RedisConfig` 采用建造者模式的实现代码：
+
 ```java
 import org.junit.jupiter.api.Test;
 
