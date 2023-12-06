@@ -79,11 +79,16 @@ public class TelescopingConstructorPatternTest {
 
     @Test
     public void testConstruction() {
-        RedisConfig config = new RedisConfig("localhost");
+        // 设置某个字段时，需要找到包含该字段的最短参数列表来进行设置
+        RedisConfig config = new RedisConfig("localhost", 6379, 100, 10, 60 * 1000 * 1000, false);
     }
 
 }
 ```
+
+针对可选参数太多的问题，伸缩式构造器模式是一个可用的方案，但用起来很蹩脚。比如这里需要将 `testOnBorrow` 设置为 `false`，就要找到包含该参数的最短参数列表来进行设置，哪怕该参数前面的值采用的都是默认值，我们也不得不对它们手动再设置一遍。
+
+此外，如果两个紧挨着的参数类型一样，还容易设置错，从而造成很严重的 Bug。
 
 ## 2 JavaBeans 构造器模式
 
