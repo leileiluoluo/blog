@@ -239,6 +239,8 @@ public class BuilderPatternTest {
 }
 ```
 
+本文所涉及的全部示例代码已托管至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/builder-pattern-demo/src/test/java)，欢迎关注或 Fork。
+
 > 参考资料
 >
 > [1] [Creating and Destroying Objects: Consider a builder when faced with many constructor parameters | Effective Java (3rd Edition), by Joshua Bloch](https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/)
