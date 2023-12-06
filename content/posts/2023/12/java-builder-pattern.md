@@ -243,6 +243,8 @@ public class BuilderPatternTest {
 }
 ```
 
+综上，本文探索了可选参数太多时应如何处理的问题。对比传统的伸缩式构造器模式、JavaBeans 构造器模式，以及新的建造者模式，发现建造者模式兼具安全性与可读性的优点，适合在日常编码中使用。
+
 本文所涉及的全部示例代码已托管至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/builder-pattern-demo/src/test/java)，欢迎关注或 Fork。
 
 > 参考资料
