@@ -25,7 +25,7 @@ description: 本文首先举了一个真实的例子，引出构造器可选参�
 
 ## 1 伸缩式构造器模式
 
-针对可选字段太多的情形，传统的方案即是采用伸缩式构造器模式。该模式首先会创建一个只包含所有必填字段的构造器，然后创建仅包含一个可选参数的构造器，进而创建包含两个可选参数的构造器，直至创建包含所有可选参数的构造器。
+针对可选参数太多的情形，传统的方案即是采用伸缩式构造器模式。该模式首先会创建一个只包含所有必填参数的构造器，然后创建仅包含一个可选参数的构造器，进而创建包含两个可选参数的构造器，直至创建包含所有可选参数的构造器。
 
 下面即是 `RedisConfig` 采用伸缩式构造器模式的实现代码：
 
@@ -96,6 +96,67 @@ RedisConfig config = new RedisConfig("localhost", 6379, 10, 100, 60 * 1000 * 100
 ```
 
 ## 2 JavaBeans 构造器模式
+
+解决可选参数太多的另一种方案是采用 JavaBeans 构造器模式。该模式仅包含一个空的构造器，其所有字段的设置均需通过调用 `Setters` 方法来进行。
+
+下面即是 `RedisConfig` 采用 JavaBeans 构造器模式的实现代码：
+
+```java
+import org.junit.jupiter.api.Test;
+
+public class JavaBeansPatternTest {
+
+    static class RedisConfig {
+        private String host; // 必填
+        private Integer port = 6379; // 可选，默认为 6379
+        private Integer maxTotal = 100; // 可选，默认为 100
+        private Integer maxIdle = 10; // 可选，默认为 10
+        private Integer maxWaitMillis = 60 * 1000 * 1000; // 可选，默认为 1 分钟
+        private Boolean testOnBorrow = true; // 可选，默认为 true
+
+        public RedisConfig() {
+        }
+
+        public void setHost(String host) {
+            this.host = host;
+        }
+
+        public void setPort(Integer port) {
+            this.port = port;
+        }
+
+        public void setMaxTotal(Integer maxTotal) {
+            this.maxTotal = maxTotal;
+        }
+
+        public void setMaxIdle(Integer maxIdle) {
+            this.maxIdle = maxIdle;
+        }
+
+        public void setMaxWaitMillis(Integer maxWaitMillis) {
+            this.maxWaitMillis = maxWaitMillis;
+        }
+
+        public void setTestOnBorrow(Boolean testOnBorrow) {
+            this.testOnBorrow = testOnBorrow;
+        }
+    }
+
+    @Test
+    public void testConstruction() {
+        RedisConfig config = new RedisConfig();
+        config.setHost("localhost");
+        config.setPort(6380);
+        config.setMaxTotal(200);
+        config.setMaxIdle(20);
+        config.setMaxWaitMillis(120 * 1000 * 1000);
+        config.setTestOnBorrow(false);
+    }
+
+}
+```
+
+JavaBeans 构造器模式解决了伸缩式构造器模式存在的问题：对一个字段进行设置时，无需对其前面的字段进行设置。但 JavaBeans 构造器模式又引入了别的问题：对象的构造由一次调用分散为多次调用，容易造成对象状态的不一致，从而引起问题。
 
 ## 3 建造者模式
 
