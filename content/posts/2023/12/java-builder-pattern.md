@@ -88,7 +88,12 @@ public class TelescopingConstructorPatternTest {
 
 针对可选参数太多的问题，伸缩式构造器模式是一个可用的方案，但用起来很蹩脚。比如这里需要将 `testOnBorrow` 设置为 `false`，就要找到包含该参数的最短参数列表来进行设置，哪怕该参数前面的值采用的都是默认值，我们也不得不对它们手动再设置一遍。
 
-此外，如果两个紧挨着的参数类型一样，还容易设置错，从而造成很严重的 Bug。
+此外，如果两个紧挨着的参数类型是一样的，稍不注意，就容易设置错，从而造成很严重的 Bug。
+
+```java
+// maxTotal 与 maxIdle 设置错了，容易引起问题
+RedisConfig config = new RedisConfig("localhost", 6379, 10, 100, 60 * 1000 * 1000, false);
+```
 
 ## 2 JavaBeans 构造器模式
 
