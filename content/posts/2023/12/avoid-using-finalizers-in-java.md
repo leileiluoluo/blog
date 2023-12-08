@@ -22,11 +22,11 @@ Java 中的 `finalize()` 方法是 `Object` 类自带的一个方法，因所有
 
 下面简单介绍一下垃圾收集器对 Finalizer 对象的处理逻辑：当垃圾收集器检测到一个对象不可达时（不被任何线程中的任何对象所引用），若其是一个普通对象（未重写 `finalize()` 方法的对象），无需额外处理，进行回收即可；而若其是一个 Finalizer 对象（重写了 `finalize()` 方法的对象），则处理逻辑会很复杂，其首先会被 JVM 线程放进 Finalizer 队列（此时，可被该对象访问的其它对象，即便已经不可达，也都要随其暂时保留），然后在后期的某个不确定的时刻，JVM 线程再次将其从队列中取出，并调用其 `finalize()` 方法，完成后，其才真正可被垃圾收集器所回收。
 
-下图演示了 Finalizer 对象自创建到销毁的整个生命周期：
+下图演示了 Finalizer 对象 `obj` 自创建到销毁的整个生命周期：
 
 ![Finalizer 对象的生命周期](https://olzhy.github.io/static/images/uploads/2023/12/java-lifetime-of-finalizable-object.svg#center)
 
-{{% center %}}（Finalizer 对象的生命周期）{{% /center %}}
+{{% center %}}（Finalizer 对象 `obj` 的生命周期）{{% /center %}}
 
 解释了垃圾收集器对 Finalizer 对象的处理逻辑，下面看一下为什么 Java 里不建议使用 Finalizer 呢？
 
