@@ -46,7 +46,7 @@ Java 中的 `finalize()` 方法是 `Object` 类自带的一个方法，因所有
 
   `finalize()` 是一个普通方法，任意代码都可以写在里边，这样也就可能会造成问题。在前面的 Finalizer 执行机制中介绍过，当垃圾收集器检测到一个 Finalizer 对象不可达时，该对象会被 JVM 线程放进 Finalizer 队列，可被该对象访问的其它对象，即便已经不可达，也都要随其暂时保留；而在后期的某个不确定的时刻，JVM 线程再次将 Finalizer 对象从队列中取出，并调用其 `finalize()` 方法时，该 Finalizer 对象可能会再次引用本已不可达的其它对象，这样这些被引用对象的释放就会成为问题。因 Finalizer 对象的 `finalize()` 方法最多仅会被 JVM 线程执行一次，而当这些被引用对象再次不可达时，`finalize()` 方法不会再次执行，它们也因此没有机会得到释放，从而造成内存保留问题。
 
-综上，本文介绍了 Finalizer 的执行机制并列举了其存在的问题，结论是除了对原生资源的清理，其它情形均无需对其使用。需要补充的是：Java 9 已将 `Object` 类的 `finalize()` 方法废弃，作为替代，引入了 Cleaner，虽然 Cleaner 比 Finalizer 强一点，类的所有者对其清理线程有一定的控制权，但 Cleaner 的执行仍由垃圾收集器所控制，所以 Finalizer 具有的无法保证何时执行的问题 Cleaner 同样具有，所以 Cleaner 同样不建议使用。
+综上，本文介绍了 Finalizer 的执行机制并列举了其存在的问题，结论是除了对原生资源的清理，其它情形均无需对其使用。需要补充的是：Java 9 已将 `Object` 类的 `finalize()` 方法废弃，作为替代，引入了 Cleaner，虽然 Cleaner 比 Finalizer 强一点，类的所有者对其清理线程有一定的控制权，但 Cleaner 的执行仍由垃圾收集器所控制，所以 Finalizer 具有的无法保证何时执行等问题 Cleaner 同样具有，所以 Cleaner 同样不建议使用。
 
 > 参考资料
 >
