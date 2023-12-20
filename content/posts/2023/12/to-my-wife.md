@@ -2,7 +2,7 @@
 title: 給太太的信
 author: olzhy
 type: post
-date: 2023-12-20T22:00:00+08:00
+date: 2023-12-20T08:00:00+08:00
 url: /posts/to-my-wife.html
 categories:
   - 随笔
