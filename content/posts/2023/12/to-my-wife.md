@@ -28,3 +28,7 @@ Zhener，你是世界上最好的太太，我心靜下來的時候，最心疼�
 我這次也下了決心了，不是說這次把你哄好就沒事了，那樣還會再回到以前，還會犯錯誤。我決定多會改好了，多會再跟你在一起，這樣才配得上你。
 
 [![2023 大連的雪](https://olzhy.github.io/static/images/uploads/2023/12/dalian-snow.jpg#center)](https://raw.githubusercontent.com/olzhy/blog-images/main/2023/dalian-snow.jpg)
+
+{{< line_break >}}
+
+2023 年 12 月 20 日於大連
