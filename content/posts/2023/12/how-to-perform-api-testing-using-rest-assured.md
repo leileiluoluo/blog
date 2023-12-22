@@ -212,6 +212,34 @@ assertThat(response.statusCode(), equalTo(200));
 assertThat(commitMessages, hasItem("rest assured demo"));
 ```
 
+集合聚集运算的写法与上述写法类似，下面演示一下 max 的使用：获取提交时间最近的记录，断言其提交信息为 `rest assured demo`。
+
+针对该测试场景，在 `.body()` 直接写表达式与使用 JsonPath 的写法分别如下：
+
+```java
+// src/test/java/com/example/tests/GitHubCommitAPITest.java#latestCommit
+.when()
+.get("/commits")
+.then()
+.statusCode(200)
+.body("max { it.commit.committer.date }.commit.message", equalTo("rest assured demo"));
+```
+
+```java
+// src/test/java/com/example/tests/GitHubCommitAPITest.java#latestCommitUsingJsonPath
+Response response = get("/commits")
+        .then()
+        .extract()
+        .response();
+
+String commitMessage = from(response.asString())
+        .getString("max { it.commit.committer.date }.commit.message");
+
+// assertions
+assertThat(response.statusCode(), equalTo(200));
+assertThat(commitMessage, equalTo("rest assured demo"));
+```
+
 > 参考资料
 >
 > [1] [Automate API Testing With Java And Rest Assured | Medium - medium.com](https://medium.com/@dhadiprasetyo/automate-api-testing-with-java-rest-assured-and-testng-ba48dd736e61)
