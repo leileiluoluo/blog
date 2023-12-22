@@ -47,6 +47,69 @@ REST Assured 采用类似 Gherkin 的语法来编写测试用例。
 
   断言期待的响应结果与实际的响应结果（如：HTTP 状态码、响应体、响应头等）是否一致。
 
+## 2 开始使用 REST Assured
+
+该部分以请求 GitHub REST API 为例，来演示 REST Assured 的使用。本文示例工程使用 Maven 管理，开始前需要在工程根目录 `pom.xml` 文件中添加如下依赖：
+
+```xml
+<!-- pom.xml -->
+<dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>rest-assured</artifactId>
+    <version>5.4.0</version>
+    <scope>test</scope>
+</dependency>
+```
+
+### 2.1 初步使用
+
+```shell
+curl -X GET \
+    -H 'Authorization: ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' \
+    https://api.github.com/repos/olzhy/java-exercises/branches?page=1&per_page=10
+
+[
+  {
+    "name": "main",
+    "commit": {
+      "sha": "b67608b1c12198caf78448c239f11bd39e9953cf",
+      "url": "https://api.github.com/repos/olzhy/java-exercises/commits/b67608b1c12198caf78448c239f11bd39e9953cf"
+    },
+    "protected": false
+  }
+]
+```
+
+```java
+// src/test/java/com/example/tests/GitHubBranchAPITest.java
+package com.example.tests;
+
+import org.junit.jupiter.api.Test;
+
+import static io.restassured.RestAssured.baseURI;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.hasItem;
+
+public class GitHubBranchAPITest {
+
+    @Test
+    public void listBranches() {
+        baseURI = "https://api.github.com/repos/olzhy/java-exercises";
+
+        given().header("Authorization", "Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+                .queryParam("page", 1)
+                .queryParam("per_page", 10)
+                .when()
+                .get("/branches")
+                .then()
+                .statusCode(200)
+                .body("$", hasItem(hasEntry("name", "main")));
+    }
+
+}
+```
+
 > 参考资料
 >
 > [1] [Automate API Testing With Java And Rest Assured | Medium - medium.com](https://medium.com/@dhadiprasetyo/automate-api-testing-with-java-rest-assured-and-testng-ba48dd736e61)
