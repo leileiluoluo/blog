@@ -134,7 +134,7 @@ public class GitHubBranchAPITest {
 }
 ```
 
-可以看到，如上测试代码使用了标准的 REST Assured 三段结构：Given 部分准备了请求头和查询参数；When 部分实际发起请求；Then 部分对响应结果进行断言。
+可以看到，如上测试代码使用了标准的 REST Assured 三段结构：Given 部分准备了请求头和查询参数；When 部分实际发起请求；Then 部分对响应结果进行断言。REST Assured 支持这种流式的写法进行参数设置及断言，代码看起来非常易于理解。
 
 ### 2.2 高级用法
 
