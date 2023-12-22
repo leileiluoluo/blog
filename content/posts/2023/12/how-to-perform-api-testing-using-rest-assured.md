@@ -13,7 +13,7 @@ keywords:
   - REST Assured
   - API 测试
   - Java
-description:
+description: REST Assured 是一个用于测试 RESTful API 的 Java 类库。本文以请求 GitHub REST API 为例，演示 REST Assured 的使用。
 ---
 
 REST Assured 是一个用于测试 RESTful API 的 Java 类库。其提供一种简单又直观的 DSL（Domain-Specific Language，领域特定语言）来编写测试用例。REST Assured 支持常见的 HTTP Method（如：GET、POST、PUT、DELETE、PATCH、OPTIONS），且可以很方便的与 TestNG、JUnit、Cucumber 等流行测试框架进行集成。
