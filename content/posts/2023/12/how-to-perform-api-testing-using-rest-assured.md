@@ -47,6 +47,8 @@ REST Assured 采用类似 Gherkin 的语法来编写测试用例。
 
   断言实际的响应结果与期望的响应结果（如：HTTP 状态码、响应体、响应头等）是否一致。
 
+了解了 REST Assured 的语法结构，就可以尝试对其进行使用了。
+
 ## 2 开始使用 REST Assured
 
 该部分以请求 GitHub REST API 为例，来演示 REST Assured 的使用。本文示例工程使用 Maven 管理，开始前需要在工程根目录 `pom.xml` 文件中添加 REST Assured 与 JUnit 依赖：
