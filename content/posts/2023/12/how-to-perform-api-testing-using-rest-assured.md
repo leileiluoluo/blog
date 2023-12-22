@@ -240,6 +240,8 @@ assertThat(response.statusCode(), equalTo(200));
 assertThat(commitMessage, equalTo("rest assured demo"));
 ```
 
+综上，本文以请求 GitHub REST API 为例，演示了 REST Assured 的使用。文中涉及的全部代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/rest-assured-demo/src/test/java/com/example/tests)，欢迎关注或 Fork。
+
 > 参考资料
 >
 > [1] [Automate API Testing With Java And Rest Assured | Medium - medium.com](https://medium.com/@dhadiprasetyo/automate-api-testing-with-java-rest-assured-and-testng-ba48dd736e61)
