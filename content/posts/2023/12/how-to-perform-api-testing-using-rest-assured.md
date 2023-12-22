@@ -29,6 +29,21 @@ REST Assured：5.4.0
 JUnit：5.10.1
 ```
 
+## 1 REST Assured 语法结构
+
+REST Assured 采用类似 Gherkin 的语法来编写测试用例。
+
+主要有三个部分：
+
+- Given（假定）- 假定一个测试场景
+  这一步主要会做一些 API 测试前的准备工作，如设置 Base URL、请求头、请求参数等。
+
+- When（当）- 当执行一个动作时
+  这一步会实际的执行请求操作，并拿到响应。
+
+- Then（那么）- 那么期待的结果是？
+  断言期待的响应结果与实际的响应结果（如：HTTP 状态码、响应体、响应头等）是否一致。
+
 > 参考资料
 >
 > [1] [Automate API Testing With Java And Rest Assured | Medium - medium.com](https://medium.com/@dhadiprasetyo/automate-api-testing-with-java-rest-assured-and-testng-ba48dd736e61)
