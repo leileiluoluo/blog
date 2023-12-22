@@ -72,7 +72,7 @@ REST Assured 采用类似 Gherkin 的语法来编写测试用例。
 
 ### 2.1 初步使用
 
-下面以请求 [GitHub List branches API](https://docs.github.com/en/rest/branches/branches?apiVersion=2022-11-28#list-branches) 为例，来演示 REST Assured 的初步使用。
+下面以请求 [GitHub 分支信息](https://docs.github.com/en/rest/branches/branches?apiVersion=2022-11-28#list-branches) 为例，来演示 REST Assured 的初步使用。
 
 如下为获取仓库 Branches 列表的 CURL 命令和响应结果：
 
@@ -133,6 +133,84 @@ public class GitHubBranchAPITest {
 ```
 
 可以看到，如上测试代码使用了标准的 REST Assured 三段结构：Given 部分准备了请求头和查询参数；When 部分实际发起请求；Then 部分对响应结果进行断言。
+
+### 2.2 高级用法
+
+**集合过滤与聚集运算**
+
+REST Assured 支持以类似 Groovy 闭包的方式来对集合进行过滤或聚集运算（支持 find、findAll、sum、max、min 等）。
+
+下面以请求 [GitHub 提交信息](https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#list-commits) 为例，来演示该特性的使用。
+
+如下为获取仓库 Commits 列表的 CURL 命令和响应结果：
+
+```shell
+curl -L \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/repos/olzhy/java-exercises/commits?page=1&per_page=10
+```
+
+```text
+[
+    {
+        "commit": {
+            "committer": {
+                "name": "Larry Yan",
+                "email": "olzhy@qq.com",
+                "date": "2023-12-22T06:39:38Z"
+            },
+            "message": "rest assured demo"
+        }
+    },
+    {
+        "commit": {
+            "committer": {
+                "name": "LeiLei Yan",
+                "email": "olzhy@qq.com",
+                "date": "2023-12-06T02:32:18Z"
+            },
+            "message": "builder pattern demo"
+        }
+    },
+    ...
+]
+```
+
+可以看到，响应体是一个数组。针对该数组，如果想根据提交人邮箱过滤出满足条件的记录（`commit.committer.email == 'olzhy@qq.com'`），然后断言这些记录中必有一条记录的提交信息（`commit.message`）是 `rest assured demo`，该怎么做呢？
+
+如下为实现代码（[GitHubCommitAPITest#filterCommits](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubCommitAPITest.java#L19)）的关键部分：
+
+```java
+// src/test/java/com/example/tests/GitHubCommitAPITest.java#filterCommits
+.when()
+.get("/commits")
+.then()
+.statusCode(200)
+.body("findAll { it.commit.committer.email.equals('olzhy@qq.com') }.commit.message", hasItem("rest assured demo"));
+```
+
+可以看到，REST Assured 的 `.body()` 断言语句支持传入一个类似于 Groovy 集合过滤的表达式来筛选记录并进行断言，写法非常精简，但表达能力很强。
+
+还有一种可选的写法是：先采用 JsonPath 来筛选数据，然后再进行断言。
+
+如下为使用 JsonPath 实现数据筛选（[GitHubCommitAPITest#filterCommitsUsingJsonPath](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubCommitAPITest.java#L35)）的关键部分：
+
+```java
+// src/test/java/com/example/tests/GitHubCommitAPITest.java#filterCommitsUsingJsonPath
+Response response = get("/commits")
+        .then()
+        .extract()
+        .response();
+
+List<String> commitMessages = from(response.asString())
+        .getList("findAll { it.commit.committer.email.equals('olzhy@qq.com') }.commit.message");
+
+// assertions
+assertThat(response.statusCode(), equalTo(200));
+assertThat(commitMessages, hasItem("rest assured demo"));
+```
 
 > 参考资料
 >
