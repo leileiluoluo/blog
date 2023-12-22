@@ -63,11 +63,19 @@ REST Assured 采用类似 Gherkin 的语法来编写测试用例。
 
 ### 2.1 初步使用
 
-```shell
-curl -X GET \
-    -H 'Authorization: ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' \
-    https://api.github.com/repos/olzhy/java-exercises/branches?page=1&per_page=10
+下面以请求 [GitHub List branches API](https://docs.github.com/en/rest/branches/branches?apiVersion=2022-11-28#list-branches) 为例，来演示 REST Assured 的初步使用。
 
+如下为获取仓库 Branches 列表的 CURL 命令和响应结果：
+
+```shell
+curl -L \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/repos/olzhy/java-exercises/branches?page=1&per_page=10
+```
+
+```text
 [
   {
     "name": "main",
@@ -80,10 +88,13 @@ curl -X GET \
 ]
 ```
 
+下面尝试使用 REST Assured 来编写一下针对该接口的测试用例：
+
 ```java
 // src/test/java/com/example/tests/GitHubBranchAPITest.java
 package com.example.tests;
 
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.baseURI;
@@ -97,18 +108,22 @@ public class GitHubBranchAPITest {
     public void listBranches() {
         baseURI = "https://api.github.com/repos/olzhy/java-exercises";
 
-        given().header("Authorization", "Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+        given().accept(ContentType.JSON)
+                .header("Authorization", "Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+                .header("X-GitHub-Api-Version", "2022-11-28")
                 .queryParam("page", 1)
                 .queryParam("per_page", 10)
                 .when()
                 .get("/branches")
                 .then()
-                .statusCode(200)
-                .body("$", hasItem(hasEntry("name", "main")));
+                .statusCode(200) // 断言状态码为 200
+                .body("$", hasItem(hasEntry("name", "main"))); // 断言响应体数组包含 {"name": "main"} 这一实体
     }
 
 }
 ```
+
+可以看到，如上测试代码使用了标准的 REST Assured 三段结构：Given 部分准备了请求头和查询参数；When 部分实际发起请求；Then 部分对响应结果进行断言。
 
 > 参考资料
 >
