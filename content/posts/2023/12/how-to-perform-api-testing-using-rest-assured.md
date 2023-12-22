@@ -49,7 +49,7 @@ REST Assured 采用类似 Gherkin 的语法来编写测试用例。
 
 ## 2 开始使用 REST Assured
 
-该部分以请求 GitHub REST API 为例，来演示 REST Assured 的使用。本文示例工程使用 Maven 管理，开始前需要在工程根目录 `pom.xml` 文件中添加如下依赖：
+该部分以请求 GitHub REST API 为例，来演示 REST Assured 的使用。本文示例工程使用 Maven 管理，开始前需要在工程根目录 `pom.xml` 文件中添加 REST Assured 与 JUnit 依赖：
 
 ```xml
 <!-- pom.xml -->
@@ -59,7 +59,16 @@ REST Assured 采用类似 Gherkin 的语法来编写测试用例。
     <version>5.4.0</version>
     <scope>test</scope>
 </dependency>
+
+<dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-api</artifactId>
+    <version>5.10.1</version>
+    <scope>test</scope>
+</dependency>
 ```
+
+依赖添加好后，即可以对 REST Assured 进行初步使用了。
 
 ### 2.1 初步使用
 
