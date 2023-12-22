@@ -136,7 +136,7 @@ public class GitHubBranchAPITest {
 
 ### 2.2 高级用法
 
-**响应体数组的过滤与聚集运算**
+**响应体数组的表达式过滤与聚集运算**
 
 REST Assured 支持以类似 Groovy 闭包的方式来对集合进行过滤或聚集运算（支持 find、findAll、sum、max、min 等）。
 
