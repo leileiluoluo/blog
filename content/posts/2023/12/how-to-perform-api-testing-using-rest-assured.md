@@ -214,7 +214,7 @@ assertThat(response.statusCode(), equalTo(200));
 assertThat(commitMessages, hasItem("rest assured demo"));
 ```
 
-集合聚集运算（max、min、sum 等）的写法与上述写法类似，下面演示一下 max 函数的使用：获取提交时间最近的记录，断言其提交信息为 `rest assured demo`。
+集合聚集运算（max、min、sum 等）的写法与上述写法类似，下面演示一下 max 函数的使用：获取提交时间最近的记录，并断言其提交信息为 `rest assured demo`。
 
 针对该测试场景，在 `.body()` 直接写表达式与使用 JsonPath 的写法分别如下：
 
