@@ -242,6 +242,97 @@ assertThat(response.statusCode(), equalTo(200));
 assertThat(commitMessage, equalTo("rest assured demo"));
 ```
 
+**响应体的泛型反序列化**
+
+REST Assured 的 `io.restassured.mapper.TypeRef` 类支持将响应体反序列化为一个泛型类型的集合。这样我们就可以将响应体映射为 Java Model 对象了，这样对接下来的取值与校验来说会非常的便捷。
+
+使用该特性时，需要在 `pom.xml` 文件引入 `jackson-databind` 依赖：
+
+```xml
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.16.0</version>
+    <scope>test</scope>
+</dependency>
+```
+
+下面还以请求「[GitHub 提交信息](https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#list-commits)」为例，来演示该特性的使用。
+
+如下为获取仓库 Commits 列表的响应结果：
+
+```text
+# https://api.github.com/repos/olzhy/java-exercises/commits?page=1&per_page=10
+[
+    {
+        "commit": {
+            "committer": {
+                "name": "Larry Yan",
+                "email": "olzhy@qq.com",
+                "date": "2023-12-22T06:39:38Z"
+            },
+            "message": "rest assured demo"
+        }
+    },
+    {
+        "commit": {
+            "committer": {
+                "name": "LeiLei Yan",
+                "email": "olzhy@qq.com",
+                "date": "2023-12-06T02:32:18Z"
+            },
+            "message": "builder pattern demo"
+        }
+    },
+    ...
+]
+```
+
+其是一个数组，我们定义一个 `CommitEntry` 类，来接收响应数据：
+
+```java
+// src/test/java/com/example/tests/model/CommitEntry.java
+package com.example.tests.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CommitEntry {
+
+    private Commit commit;
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Commit {
+        private Committer committer;
+        private String message;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Committer {
+        private String name;
+        private String email;
+        private String date;
+    }
+}
+```
+
+REST Assured 将响应体反序列化为 `List<CommitEntry>`，并对其中的值进行断言的代码（[GitHubCommitAPITest#filterCommitsUsingJsonPath](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubCommitAPITest.java#L104)））的关键部分如下：
+
+```java
+// src/test/java/com/example/tests/GitHubCommitAPITest.java#deserializeCommits
+
+// deserialization with generics
+List<CommitEntry> commits = get("/commits")
+        .then()
+        .statusCode(200)
+        .extract()
+        .as(new TypeRef<>() {});
+
+// assertions
+assertThat(commits, hasSize(10));
+assertThat(commits.get(0).getCommit().getMessage(), equalTo("rest assured demo"));
+```
+
 综上，本文以请求 GitHub REST API 为例，演示了 REST Assured 的使用。文中涉及的全部代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/rest-assured-demo/src/test/java/com/example/tests)，欢迎关注或 Fork。
 
 > 参考资料
