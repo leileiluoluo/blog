@@ -74,9 +74,9 @@ REST Assured 采用类似 Gherkin 的语法来编写测试用例。
 
 ## 3 REST Assured 初体验
 
-下面以请求「[GitHub 仓库的分支列表](https://docs.github.com/en/rest/branches/branches?apiVersion=2022-11-28#list-branches)」为例，来演示 REST Assured 的初步使用。
+下面以请求「[GitHub 仓库的分支列表](https://docs.github.com/en/rest/branches/branches?apiVersion=2022-11-28#list-branches)」为例，来初步体验一下 REST Assured。
 
-如下为获取仓库 Branches 列表的 CURL 命令和响应结果：
+如下为获取仓库分支列表的 CURL 命令和响应结果：
 
 ```shell
 curl -L \
@@ -134,17 +134,17 @@ public class GitHubBranchAPITest {
 }
 ```
 
-可以看到，如上测试代码使用了标准的 REST Assured 三段结构：Given 部分准备了请求头和查询参数；When 部分实际发起请求；Then 部分对响应结果进行断言。REST Assured 支持这种流式的写法进行参数设置及断言，代码看起来非常易于理解。
+可以看到，如上测试代码使用了标准的 REST Assured 三段结构：Given 部分准备了请求头和查询参数；When 部分实际发起请求；Then 部分对响应结果进行断言。REST Assured 支持这种流式的写法进行参数设置、响应发起与结果断言，代码看起来非常易于理解。
 
 ## 4 REST Assured 使用进阶
 
 ### 4.1 响应体的值提取方法
 
-我们知道，针对 JSON 响应结果，其是一个树形结构，如果想提取 JSON 结构中某个叶子节点的值，该怎么做呢？REST Assured 提供的方法非常便捷，只要点下去就可以了（如：`grandparent.parent.child.grandson`）。
+我们知道，针对 JSON 响应结果，其是一个树形结构，如果想提取 JSON 结构中某个叶子节点的值，该怎么做呢？REST Assured 提供的方法非常便捷，只要逐层点下去就可以了（如：`grandparent.parent.child.grandson`）。
 
 下面以请求「[GitHub 仓库的单个分支信息](https://docs.github.com/en/rest/branches/branches?apiVersion=2022-11-28#get-a-branch)」为例，来演示如何从响应体取值。
 
-如下为获取仓库单个 Branch 信息的 CURL 命令和响应结果：
+如下为获取仓库单个分支信息的 CURL 命令和响应结果：
 
 ```shell
 curl -L \
