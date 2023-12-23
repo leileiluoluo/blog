@@ -169,7 +169,7 @@ curl -L \
 
 如果我们想获取 `_links` 下的 `html`，以及 `protection` 下的 `enabled` 这两个值并进行断言，该怎么做呢？
 
-直接使用 `Response` 的 `path()` 方法、使用 `JsonPath` 对象来提取字段并进行断言的代码（[GitHubBranchAPITest#getBranch](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L19) 与 [GitHubBranchAPITest#getBranchUsingJsonPath](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L19)）的关键部分分别如下：
+直接使用 `Response` 的 `path()` 方法与使用 `JsonPath` 对象来提取字段并进行断言的代码（[GitHubBranchAPITest#getBranch](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L19) 与 [GitHubBranchAPITest#getBranchUsingJsonPath](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L19)）的关键部分分别如下：
 
 ```java
 // src/test/java/com/example/tests/GitHubBranchAPITest.java#getBranch
@@ -210,6 +210,55 @@ Boolean protectionEnabled = jsonPath.getBoolean("protection.enabled");
 // assertions
 assertThat(link, equalTo("https://github.com/olzhy/java-exercises/tree/main"));
 assertThat(protectionEnabled, equalTo(false));
+```
+
+此外，还可以将响应体反序列化为我们定义的 Java 对象，这样取值就是原生的 Java 操作了。
+
+如声明一个 `BranchEntity` Java 类：
+
+```java
+// src/test/java/com/example/tests/model/BranchEntity.java
+package com.example.tests.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class BranchEntity {
+
+    private String name;
+    @JsonProperty("_links")
+    private Links links;
+    private Protection protection;
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Links {
+        private String html;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Protection {
+        private Boolean enabled;
+    }
+}
+```
+
+然后将响应体反序列化为 `BranchEntity` 对象再进行断言（[GitHubBranchAPITest#getBranchUsingDeserialization](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L19)）：
+
+```java
+// src/test/java/com/example/tests/GitHubBranchAPITest.java#getBranchUsingDeserialization
+BranchEntity branchEntity = given()
+        .pathParam("branch", "main")
+        .when()
+        .get("/branches/{branch}")
+        .then()
+        .statusCode(200)
+        .extract()
+        .as(BranchEntity.class);
+
+// assertions
+assertThat(branchEntity.getLinks().getHtml(), equalTo("https://github.com/olzhy/java-exercises/tree/main"));
+assertThat(branchEntity.getProtection().getEnabled(), equalTo(false));
 ```
 
 **响应体数组的表达式过滤与聚集运算**
