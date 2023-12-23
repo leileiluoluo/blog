@@ -418,13 +418,13 @@ REST Assured 的 `io.restassured.mapper.TypeRef` 类支持将一个 JSON 数组�
 其是一个数组，我们定义一个 [CommitEntity](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/model/CommitEntity.java) 类，来接收响应数据：
 
 ```java
-// src/test/java/com/example/tests/model/CommitEntry.java
+// src/test/java/com/example/tests/model/CommitEntity.java
 package com.example.tests.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CommitEntry {
+public class CommitEntity {
 
     private Commit commit;
 
@@ -443,13 +443,13 @@ public class CommitEntry {
 }
 ```
 
-REST Assured 将响应体反序列化为 `List<CommitEntry>`，并对其中的值进行断言的代码（[GitHubCommitAPITest#deserializeCommits](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubCommitAPITest.java#L104)）的关键部分如下：
+REST Assured 将响应体反序列化为 `List<CommitEntity>`，并对其中的值进行断言的代码（[GitHubCommitAPITest#deserializeCommits](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubCommitAPITest.java#L104)）的关键部分如下：
 
 ```java
 // src/test/java/com/example/tests/GitHubCommitAPITest.java#deserializeCommits
 
 // deserialization with generics
-List<CommitEntry> commits = get("/commits")
+List<CommitEntity> commits = get("/commits")
         .then()
         .statusCode(200)
         .extract()
