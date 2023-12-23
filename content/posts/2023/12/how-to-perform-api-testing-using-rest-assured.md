@@ -2,7 +2,7 @@
 title: 如何使用 REST Assured 做 API 测试？
 author: olzhy
 type: post
-date: 2023-12-22T08:00:00+08:00
+date: 2023-12-23T08:00:00+08:00
 url: /posts/how-to-perform-api-testing-using-rest-assured.html
 categories:
   - 计算机
@@ -74,7 +74,7 @@ REST Assured 采用类似 Gherkin 的语法来编写测试用例。
 
 ### 2.1 初步使用
 
-下面以请求「[GitHub 分支信息](https://docs.github.com/en/rest/branches/branches?apiVersion=2022-11-28#list-branches)」为例，来演示 REST Assured 的初步使用。
+下面以请求「[GitHub 仓库的分支信息](https://docs.github.com/en/rest/branches/branches?apiVersion=2022-11-28#list-branches)」为例，来演示 REST Assured 的初步使用。
 
 如下为获取仓库 Branches 列表的 CURL 命令和响应结果：
 
@@ -138,11 +138,85 @@ public class GitHubBranchAPITest {
 
 ### 2.2 高级用法
 
+**响应体值提取**
+
+我们知道，针对 JSON 响应结果，其是一个树形结构，如果想提取 JSON 结构中某个叶子节点的值，该怎么做呢？REST Assured 提供的方法非常便捷，只要点下去就可以了（如：`grandparent.parent.child.grandson`）。
+
+下面以请求「[GitHub 仓库的单个分支信息](https://docs.github.com/en/rest/branches/branches?apiVersion=2022-11-28#get-a-branch)」为例，来演示如何从响应体取值。
+
+如下为获取仓库单个 Branch 信息的 CURL 命令和响应结果：
+
+```shell
+curl -L \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/repos/olzhy/java-exercises/branches/main
+```
+
+```text
+{
+  "name": "main",
+  "_links": {
+    "html": "https://github.com/olzhy/java-exercises/tree/main"
+  },
+  "protection": {
+    "enabled": false
+  },
+  ...
+}
+```
+
+如果我们想获取 `_links` 下的 `html`，以及 `protection` 下的 `enabled` 这两个值并进行断言，该怎么做呢？
+
+直接使用 `Response` 的 `path()` 方法、使用 `JsonPath` 对象来提取字段并进行断言的代码（[GitHubBranchAPITest#getBranch](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L19) 与 [GitHubBranchAPITest#getBranchUsingJsonPath](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L19)）的关键部分分别如下：
+
+```java
+// src/test/java/com/example/tests/GitHubBranchAPITest.java#getBranch
+Response response = given()
+        .pathParam("branch", "main")
+        .when()
+        .get("/branches/{branch}")
+        .then()
+        .statusCode(200)
+        .extract()
+        .response();
+
+// extract fields
+String link = response.path("_links.html");
+Boolean protectionEnabled = response.path("protection.enabled");
+
+// assertions
+assertThat(link, equalTo("https://github.com/olzhy/java-exercises/tree/main"));
+assertThat(protectionEnabled, equalTo(false));
+```
+
+```java
+// src/test/java/com/example/tests/GitHubBranchAPITest.java#getBranchUsingJsonPath
+String responseBody = given()
+        .pathParam("branch", "main")
+        .when()
+        .get("/branches/{branch}")
+        .then()
+        .statusCode(200)
+        .extract()
+        .asString();
+
+// extract fields
+JsonPath jsonPath = from(responseBody);
+String link = jsonPath.getString("_links.html");
+Boolean protectionEnabled = jsonPath.getBoolean("protection.enabled");
+
+// assertions
+assertThat(link, equalTo("https://github.com/olzhy/java-exercises/tree/main"));
+assertThat(protectionEnabled, equalTo(false));
+```
+
 **响应体数组的表达式过滤与聚集运算**
 
 REST Assured 支持以类似 Groovy 闭包的方式来对集合进行过滤或聚集运算（支持 find、findAll、sum、max、min 等）。
 
-下面以请求「[GitHub 提交信息](https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#list-commits)」为例，来演示该特性的使用。
+下面以请求「[GitHub 仓库提交信息](https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#list-commits)」为例，来演示该特性的使用。
 
 如下为获取仓库 Commits 列表的 CURL 命令和响应结果：
 
@@ -257,7 +331,7 @@ REST Assured 的 `io.restassured.mapper.TypeRef` 类支持将响应体反序列�
 </dependency>
 ```
 
-下面还以请求「[GitHub 提交信息](https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#list-commits)」为例，来演示该特性的使用。
+下面还以请求「[GitHub 仓库提交信息](https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#list-commits)」为例，来演示该特性的使用。
 
 如下为获取仓库 Commits 列表的响应结果：
 
