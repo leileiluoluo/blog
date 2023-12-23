@@ -227,7 +227,7 @@ assertThat(protectionEnabled, equalTo(false));
 </dependency>
 ```
 
-现在声明一个 `BranchEntity` Java 类：
+依赖引入后，现在声明一个 [BranchEntity](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/model/BranchEntity.java) Java 类：
 
 ```java
 // src/test/java/com/example/tests/model/BranchEntity.java
@@ -256,7 +256,7 @@ public class BranchEntity {
 }
 ```
 
-然后将响应体反序列化为 `BranchEntity` 对象再进行断言（[GitHubBranchAPITest#getBranchUsingDeserialization](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L19)）：
+然后将响应体反序列化为 `BranchEntity` 对象，然后再进行断言的代码（[GitHubBranchAPITest#getBranchUsingDeserialization](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L19)）如下：
 
 ```java
 // src/test/java/com/example/tests/GitHubBranchAPITest.java#getBranchUsingDeserialization
@@ -280,7 +280,7 @@ REST Assured 支持以类似 Groovy 闭包的方式来对集合进行过滤或�
 
 下面以请求「[GitHub 仓库的提交列表](https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#list-commits)」为例，来演示该特性的使用。
 
-如下为获取仓库 Commits 列表的 CURL 命令和响应结果：
+如下为获取仓库提交列表的 CURL 命令和响应结果：
 
 ```shell
 curl -L \
@@ -384,9 +384,9 @@ REST Assured 的 `io.restassured.mapper.TypeRef` 类支持将一个 JSON 数组�
 
 使用该反序列化特性，同样需要在 `pom.xml` 文件引入 `jackson-databind` 依赖。
 
-下面还以请求「[GitHub 仓库的提交信息](https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#list-commits)」为例，来演示该特性的使用。
+下面还以请求「[GitHub 仓库的提交列表](https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#list-commits)」为例，来演示该特性的使用。
 
-如下为获取仓库 Commits 列表的响应结果：
+如下为获取仓库的提交列表的响应结果：
 
 ```text
 # https://api.github.com/repos/olzhy/java-exercises/commits?page=1&per_page=10
@@ -415,7 +415,7 @@ REST Assured 的 `io.restassured.mapper.TypeRef` 类支持将一个 JSON 数组�
 ]
 ```
 
-其是一个数组，我们定义一个 `CommitEntry` 类，来接收响应数据：
+其是一个数组，我们定义一个 [CommitEntity](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/model/CommitEntity.java) 类，来接收响应数据：
 
 ```java
 // src/test/java/com/example/tests/model/CommitEntry.java
