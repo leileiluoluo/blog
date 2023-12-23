@@ -316,7 +316,7 @@ public class CommitEntry {
 }
 ```
 
-REST Assured 将响应体反序列化为 `List<CommitEntry>`，并对其中的值进行断言的代码（[GitHubCommitAPITest#filterCommitsUsingJsonPath](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubCommitAPITest.java#L104)））的关键部分如下：
+REST Assured 将响应体反序列化为 `List<CommitEntry>`，并对其中的值进行断言的代码（[GitHubCommitAPITest#deserializeCommits](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubCommitAPITest.java#L104)）的关键部分如下：
 
 ```java
 // src/test/java/com/example/tests/GitHubCommitAPITest.java#deserializeCommits
