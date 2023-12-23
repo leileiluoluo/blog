@@ -49,9 +49,9 @@ REST Assured 采用类似 Gherkin 的语法来编写测试用例。
 
 了解了 REST Assured 的语法结构，就可以尝试对其进行使用了。
 
-## 2 开始使用 REST Assured
+## 2 使用前的准备工作
 
-该部分以请求 GitHub REST API 为例，来演示 REST Assured 的使用。本文示例工程使用 Maven 管理，开始前需要在工程根目录 `pom.xml` 文件中添加 REST Assured 与 JUnit 依赖：
+本文示例工程使用 Maven 管理，开始前需要在工程根目录 `pom.xml` 文件中添加 REST Assured 与 JUnit 依赖：
 
 ```xml
 <!-- pom.xml -->
@@ -72,7 +72,7 @@ REST Assured 采用类似 Gherkin 的语法来编写测试用例。
 
 依赖添加好后，即可以对 REST Assured 进行初步使用了。
 
-### 2.1 初步使用
+## 3 REST Assured 初体验
 
 下面以请求「[GitHub 仓库的分支信息](https://docs.github.com/en/rest/branches/branches?apiVersion=2022-11-28#list-branches)」为例，来演示 REST Assured 的初步使用。
 
@@ -136,9 +136,9 @@ public class GitHubBranchAPITest {
 
 可以看到，如上测试代码使用了标准的 REST Assured 三段结构：Given 部分准备了请求头和查询参数；When 部分实际发起请求；Then 部分对响应结果进行断言。REST Assured 支持这种流式的写法进行参数设置及断言，代码看起来非常易于理解。
 
-### 2.2 高级用法
+## 4 REST Assured 使用进阶
 
-**响应体值提取**
+### 4.1 响应体值提取
 
 我们知道，针对 JSON 响应结果，其是一个树形结构，如果想提取 JSON 结构中某个叶子节点的值，该怎么做呢？REST Assured 提供的方法非常便捷，只要点下去就可以了（如：`grandparent.parent.child.grandson`）。
 
@@ -214,7 +214,18 @@ assertThat(protectionEnabled, equalTo(false));
 
 此外，还可以将响应体反序列化为我们定义的 Java 对象，这样取值就是原生的 Java 操作了。
 
-如声明一个 `BranchEntity` Java 类：
+使用反序列化特性时，需要在 `pom.xml` 文件引入 `jackson-databind` 依赖：
+
+```xml
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.16.0</version>
+    <scope>test</scope>
+</dependency>
+```
+
+现在声明一个 `BranchEntity` Java 类：
 
 ```java
 // src/test/java/com/example/tests/model/BranchEntity.java
@@ -261,7 +272,7 @@ assertThat(branchEntity.getLinks().getHtml(), equalTo("https://github.com/olzhy/
 assertThat(branchEntity.getProtection().getEnabled(), equalTo(false));
 ```
 
-**响应体数组的表达式过滤与聚集运算**
+### 4.2 响应体数组的表达式过滤与聚集运算
 
 REST Assured 支持以类似 Groovy 闭包的方式来对集合进行过滤或聚集运算（支持 find、findAll、sum、max、min 等）。
 
@@ -365,20 +376,11 @@ assertThat(response.statusCode(), equalTo(200));
 assertThat(commitMessage, equalTo("rest assured demo"));
 ```
 
-**响应体的泛型反序列化**
+### 4.3 数组响应体反序列化为 Collection
 
-REST Assured 的 `io.restassured.mapper.TypeRef` 类支持将响应体反序列化为一个泛型类型的集合。这样我们就可以将响应体映射为 Java Model 对象了，这样对接下来的取值与校验来说会非常的便捷。
+REST Assured 的 `io.restassured.mapper.TypeRef` 类支持将一个 JSON 数组响应体反序列化为一个 Java Collection，这样对接下来的取值与校验来说会非常的便捷。
 
-使用该特性时，需要在 `pom.xml` 文件引入 `jackson-databind` 依赖：
-
-```xml
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-databind</artifactId>
-    <version>2.16.0</version>
-    <scope>test</scope>
-</dependency>
-```
+使用该反序列化特性，同样需要在 `pom.xml` 文件引入 `jackson-databind` 依赖。
 
 下面还以请求「[GitHub 仓库提交信息](https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#list-commits)」为例，来演示该特性的使用。
 
