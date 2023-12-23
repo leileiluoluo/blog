@@ -18,7 +18,7 @@ description: REST Assured 是一个用于测试 RESTful API 的 Java 类库。�
 
 REST Assured 是一个用于测试 RESTful API 的 Java 类库。其提供一种简单又直观的 DSL（Domain-Specific Language，领域特定语言）来编写测试用例。REST Assured 支持常见的 HTTP 请求方法（如：GET、POST、PUT、DELETE、PATCH、OPTIONS 等），且可以很方便的与 TestNG、JUnit、Cucumber 等流行测试框架进行集成。
 
-本文将以请求 [GitHub REST API](https://docs.github.com/en/rest/authentication/endpoints-available-for-fine-grained-personal-access-tokens?apiVersion=2022-11-28) 为例来演示 REST Assured 的使用。
+本文将以请求「[GitHub REST API](https://docs.github.com/en/rest/authentication/endpoints-available-for-fine-grained-personal-access-tokens?apiVersion=2022-11-28)」为例来演示 REST Assured 的使用。
 
 下面列出写作本文时，用到的 JDK、Maven、REST Assured 与 JUnit 版本。
 
@@ -74,7 +74,7 @@ REST Assured 采用类似 Gherkin 的语法来编写测试用例。
 
 ### 2.1 初步使用
 
-下面以请求 [GitHub 分支信息](https://docs.github.com/en/rest/branches/branches?apiVersion=2022-11-28#list-branches) 为例，来演示 REST Assured 的初步使用。
+下面以请求「[GitHub 分支信息](https://docs.github.com/en/rest/branches/branches?apiVersion=2022-11-28#list-branches)」为例，来演示 REST Assured 的初步使用。
 
 如下为获取仓库 Branches 列表的 CURL 命令和响应结果：
 
@@ -142,7 +142,7 @@ public class GitHubBranchAPITest {
 
 REST Assured 支持以类似 Groovy 闭包的方式来对集合进行过滤或聚集运算（支持 find、findAll、sum、max、min 等）。
 
-下面以请求 [GitHub 提交信息](https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#list-commits) 为例，来演示该特性的使用。
+下面以请求「[GitHub 提交信息](https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#list-commits)」为例，来演示该特性的使用。
 
 如下为获取仓库 Commits 列表的 CURL 命令和响应结果：
 
