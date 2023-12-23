@@ -169,7 +169,7 @@ curl -L \
 
 如果我们想获取 `_links` 下的 `html`，以及 `protection` 下的 `enabled` 这两个值并进行断言，该怎么做呢？
 
-直接使用 `Response` 的 `path()` 方法与使用 `JsonPath` 对象来提取字段并进行断言的代码（[GitHubBranchAPITest#getBranch](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L19) 与 [GitHubBranchAPITest#getBranchUsingJsonPath](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L19)）的关键部分分别如下：
+可以直接使用 `Response` 的 `path()` 方法来提取字段，然后再进行断言。代码（[GitHubBranchAPITest#getBranch](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L19)）的关键部分如下：
 
 ```java
 // src/test/java/com/example/tests/GitHubBranchAPITest.java#getBranch
@@ -190,6 +190,8 @@ Boolean protectionEnabled = response.path("protection.enabled");
 assertThat(link, equalTo("https://github.com/olzhy/java-exercises/tree/main"));
 assertThat(protectionEnabled, equalTo(false));
 ```
+
+也可以借助 `JsonPath` 对象来提取字段，然后再进行断言。代码（[GitHubBranchAPITest#getBranchUsingJsonPath](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L19)）的关键部分如下：
 
 ```java
 // src/test/java/com/example/tests/GitHubBranchAPITest.java#getBranchUsingJsonPath
