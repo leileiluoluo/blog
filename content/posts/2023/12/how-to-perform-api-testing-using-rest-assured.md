@@ -138,7 +138,7 @@ public class GitHubBranchAPITest {
 
 ## 4 REST Assured 使用进阶
 
-### 4.1 响应体值提取
+### 4.1 响应体的值提取方法
 
 我们知道，针对 JSON 响应结果，其是一个树形结构，如果想提取 JSON 结构中某个叶子节点的值，该怎么做呢？REST Assured 提供的方法非常便捷，只要点下去就可以了（如：`grandparent.parent.child.grandson`）。
 
@@ -272,7 +272,7 @@ assertThat(branchEntity.getLinks().getHtml(), equalTo("https://github.com/olzhy/
 assertThat(branchEntity.getProtection().getEnabled(), equalTo(false));
 ```
 
-### 4.2 响应体数组的表达式过滤与聚集运算
+### 4.2 数组响应体的表达式过滤与聚集运算
 
 REST Assured 支持以类似 Groovy 闭包的方式来对集合进行过滤或聚集运算（支持 find、findAll、sum、max、min 等）。
 
