@@ -74,7 +74,7 @@ REST Assured 采用类似 Gherkin 的语法来编写测试用例。
 
 ## 3 REST Assured 初体验
 
-下面以请求「[GitHub 仓库的分支信息](https://docs.github.com/en/rest/branches/branches?apiVersion=2022-11-28#list-branches)」为例，来演示 REST Assured 的初步使用。
+下面以请求「[GitHub 仓库的分支列表](https://docs.github.com/en/rest/branches/branches?apiVersion=2022-11-28#list-branches)」为例，来演示 REST Assured 的初步使用。
 
 如下为获取仓库 Branches 列表的 CURL 命令和响应结果：
 
@@ -276,7 +276,7 @@ assertThat(branchEntity.getProtection().getEnabled(), equalTo(false));
 
 REST Assured 支持以类似 Groovy 闭包的方式来对集合进行过滤或聚集运算（支持 find、findAll、sum、max、min 等）。
 
-下面以请求「[GitHub 仓库提交信息](https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#list-commits)」为例，来演示该特性的使用。
+下面以请求「[GitHub 仓库的提交列表](https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#list-commits)」为例，来演示该特性的使用。
 
 如下为获取仓库 Commits 列表的 CURL 命令和响应结果：
 
@@ -382,7 +382,7 @@ REST Assured 的 `io.restassured.mapper.TypeRef` 类支持将一个 JSON 数组�
 
 使用该反序列化特性，同样需要在 `pom.xml` 文件引入 `jackson-databind` 依赖。
 
-下面还以请求「[GitHub 仓库提交信息](https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#list-commits)」为例，来演示该特性的使用。
+下面还以请求「[GitHub 仓库的提交信息](https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#list-commits)」为例，来演示该特性的使用。
 
 如下为获取仓库 Commits 列表的响应结果：
 
