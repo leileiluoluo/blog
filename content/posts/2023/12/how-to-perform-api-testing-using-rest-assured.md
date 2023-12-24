@@ -365,7 +365,7 @@ Headers: Accept=application/json
 
 如果我们不想每次都打印日志，只想在断言失败时才打印请求和响应日志，该怎么做呢？
 
-只要启用一下 REST Assured 自带的一个方法就可以了，示例如下（完整代码：[GitHubBranchAPITest#getBranchWithLogOnWhenValidationFails](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L119)）：）：
+只要启用一下 REST Assured 自带的一个方法就可以了，示例如下（完整代码：[GitHubBranchAPITest#getBranchWithLogOnWhenValidationFails](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L119)）：
 
 ```java
 // src/test/java/com/example/tests/GitHubBranchAPITest.java#getBranchWithLogOnWhenValidationFails
