@@ -567,6 +567,48 @@ assertThat(commits, hasSize(10));
 assertThat(commits.get(0).getCommit().getMessage(), equalTo("rest assured demo"));
 ```
 
+### 4.5 如何组装请求体数据？
+
+如何组装请求体数据呢？直接使用 Java 原生类型（如：`Map`、`List` 等）进行组装就可以，REST Assured 会帮我们进行序列化。
+
+下面以创建一个「[GitHub 仓库 Issue](https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#create-an-issue)」为例，来演示该特性的使用。
+
+创建一个仓库 Issue 的 CURL 命令如下：
+
+```shell
+curl -L \
+  -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/repos/olzhy/java-exercises/issues \
+  -d '{"title":"GitHub REST API Test","body":"Trying to raise a issue using REST API","assignees":["olzhy"],"labels":["bug"]}'
+```
+
+对应的 REST Assured 的测试代码（[GitHubIssueAPITest#createIssue](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubIssueAPITest.java#L17)）的关键部分如下：
+
+```java
+// src/test/java/com/example/tests/GitHubIssueAPITest.java#createIssue
+
+// request body
+Map<String, Object> requestBody = new HashMap<>();
+requestBody.put("title", "GitHub REST API Test");
+requestBody.put("body", "Trying to raise a issue using REST API");
+requestBody.put("assignees", List.of("olzhy"));
+requestBody.put("labels", List.of("bug"));
+
+given().accept(ContentType.JSON)
+        .contentType(ContentType.JSON)
+        .body(requestBody)
+        .when()
+        .post("/issues")
+        .then()
+        .statusCode(201)
+        .body("title", equalTo("GitHub REST API Test"));
+```
+
+可以看到，我们使用 Map 来拼装请求体数据，REST Assured 在发起请求时会帮我们将其转换为对应的 JSON。
+
 综上，本文以请求 GitHub REST API 为例，演示了 REST Assured 的使用。文中涉及的全部代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/rest-assured-demo/src/test/java/com/example/tests)，欢迎关注或 Fork。
 
 > 参考资料
