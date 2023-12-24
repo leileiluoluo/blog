@@ -134,7 +134,54 @@ public class GitHubBranchAPITest {
 }
 ```
 
-可以看到，如上测试代码使用了标准的 REST Assured 三段结构：Given 部分准备了请求头和查询参数；When 部分实际发起请求；Then 部分对响应结果进行断言。REST Assured 支持这种流式的写法进行参数设置、响应发起与结果断言，代码看起来非常易于理解。
+可以看到，如上测试代码使用了标准的 REST Assured 三段结构：Given 部分准备了请求头和查询参数；When 部分实际发起请求；Then 部分对响应结果进行断言。
+
+下面浅析一下上面这段代码：
+
+- baseURI
+
+  基础 URI，REST Assured 全局变量，设置了 Base URI 后，就不需要在每次发起请求时（`get("/branches")`）都使用全路径了。
+
+- accept()
+
+  表示接收的数据格式，该示例为 `application/json`。
+
+- header()
+
+  用于设置请求头，该示例需要设置两个请求头：`Authorization` 与 `X-GitHub-Api-Version`。
+
+- queryParam()
+
+  用于设置 URL 查询参数，该示例需要设置两个 URL 查询参数：`page` 与 `per_page`。
+
+- get()
+
+  表示使用何种 Method 发起请求，该示例中为 `GET`，其它可用的请求方法还有 `POST`、`PUT`、`PATCH`、`DELETE` 等。
+
+- statusCode()
+
+  用于断言返回的状态码与期望的是否一致，该示例中期望的状态码为 `200`。
+
+- body()
+
+  用于断言响应体是否满足期望的匹配规则，该示例中响应体是一个数组，使用 `$` 表达式表示要拿到这个 ROOT 节点，即这个数组，然后断言数组里包含片段 `{"name": "main"}`。
+
+可以看到，REST Assured 支持以这种流式的写法进行一系列的参数设置、响应发起与结果断言，代码看起来非常易于理解。
+
+如上是一个 GET 请求的示例，如果我们想发起一个 POST 请求，且请求参数是 FORM 形式（`ContentType: application/x-www-form-urlencoded`），该怎么做呢？
+
+跟您预想的一样，非常简单，只需要换成对应的方法就可以了：
+
+```java
+given().accept(ContentType.JSON)
+        .contentType(ContentType.URLENC) // application/x-www-form-urlencoded
+        .formParam("username", username)
+        .formParam("password", password)
+        .when()
+        .post("/login-form")
+        .then()
+        .statusCode(200);
+```
 
 ## 4 REST Assured 使用进阶
 
