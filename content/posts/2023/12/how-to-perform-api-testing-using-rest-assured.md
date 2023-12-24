@@ -460,6 +460,66 @@ assertThat(commits, hasSize(10));
 assertThat(commits.get(0).getCommit().getMessage(), equalTo("rest assured demo"));
 ```
 
+### 4.4 如何记录请求或响应日志？
+
+日志对于正确的发起请求或正确的编写断言语句来说非常有帮助。
+
+那么 REST Assured 如何打印请求日志或响应日志呢？请看下面一个示例（完整代码：[GitHubBranchAPITest#getBranchWithLog](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L104)）：
+
+```java
+// src/test/java/com/example/tests/GitHubBranchAPITest.java#getBranchWithLog
+given().log().all() // Log all request details
+        .pathParam("branch", "main")
+        .when()
+        .get("/branches/{branch}")
+        .then()
+        .log().body() // Log only the response body
+        .statusCode(200)
+        .body("_links.html", equalTo("https://github.com/olzhy/java-exercises/tree/main"));
+```
+
+上面的示例中，在请求单个分支信息时，要求打印请求的所有信息（包括：请求方法、URI、请求参数，请求头等），同时还要求打印响应的 Body 信息。
+
+执行一下，不管断言成功还是失败，都会打印所要求的信息：
+
+```text
+# 请求日志
+Request method:	GET
+Request URI: https://api.github.com/repos/olzhy/java-exercises/branches/main
+Path params: branch=main
+Headers: Accept=application/json
+				X-GitHub-Api-Version=2022-11-28
+
+# 响应体日志
+{
+    "name": "main",
+    "_links": {
+        "self": "https://api.github.com/repos/olzhy/java-exercises/branches/main",
+        "html": "https://github.com/olzhy/java-exercises/tree/main"
+    },
+    "protected": false,
+    ...
+}
+```
+
+如果我们不想每次都打印日志，只想在断言失败时才打印请求和响应日志，该怎么做呢？
+
+只要启用一下 REST Assured 自带的一个方法就可以了，示例如下（完整代码：[GitHubBranchAPITest#getBranchWithLogOnWhenValidationFails](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L104)）：）：
+
+```java
+// src/test/java/com/example/tests/GitHubBranchAPITest.java#getBranchWithLogOnWhenValidationFails
+
+// Log request and response details only when validation fails
+RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+
+given().pathParam("branch", "main")
+        .when()
+        .get("/branches/{branch}")
+        .then()
+        .statusCode(200)
+        .body("_links.html", equalTo("https://github.com/olzhy/java-exercises/tree/main"));
+```
+
 综上，本文以请求 GitHub REST API 为例，演示了 REST Assured 的使用。文中涉及的全部代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/rest-assured-demo/src/test/java/com/example/tests)，欢迎关注或 Fork。
 
 > 参考资料
