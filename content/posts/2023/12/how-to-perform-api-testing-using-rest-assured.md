@@ -216,7 +216,7 @@ curl -L \
 
 如果我们想获取 `_links` 下的 `html`，以及 `protection` 下的 `enabled` 这两个值并进行断言，该怎么做呢？
 
-可以直接使用 `Response` 的 `path()` 方法来提取字段，然后再进行断言。代码（[GitHubBranchAPITest#getBranch](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L19)）的关键部分如下：
+可以直接使用 `Response` 的 `path()` 方法来提取字段，然后再进行断言。代码（[GitHubBranchAPITest#getBranch](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L33)）的关键部分如下：
 
 ```java
 // src/test/java/com/example/tests/GitHubBranchAPITest.java#getBranch
@@ -238,7 +238,7 @@ assertThat(link, equalTo("https://github.com/olzhy/java-exercises/tree/main"));
 assertThat(protectionEnabled, equalTo(false));
 ```
 
-也可以借助 `JsonPath` 对象来提取字段，然后再进行断言。代码（[GitHubBranchAPITest#getBranchUsingJsonPath](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L19)）的关键部分如下：
+也可以借助 `JsonPath` 对象来提取字段，然后再进行断言。代码（[GitHubBranchAPITest#getBranchUsingJsonPath](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L57)）的关键部分如下：
 
 ```java
 // src/test/java/com/example/tests/GitHubBranchAPITest.java#getBranchUsingJsonPath
@@ -303,7 +303,7 @@ public class BranchEntity {
 }
 ```
 
-然后将响应体反序列化为 `BranchEntity` 对象，然后再进行断言的代码（[GitHubBranchAPITest#getBranchUsingDeserialization](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L19)）如下：
+然后将响应体反序列化为 `BranchEntity` 对象，然后再进行断言的代码（[GitHubBranchAPITest#getBranchUsingDeserialization](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L82)）如下：
 
 ```java
 // src/test/java/com/example/tests/GitHubBranchAPITest.java#getBranchUsingDeserialization
@@ -321,7 +321,67 @@ assertThat(branchEntity.getLinks().getHtml(), equalTo("https://github.com/olzhy/
 assertThat(branchEntity.getProtection().getEnabled(), equalTo(false));
 ```
 
-### 4.2 数组响应体的表达式过滤与聚集运算
+### 4.2 如何记录请求或响应日志？
+
+日志对于正确的发起请求或正确的编写断言语句来说非常有帮助。
+
+那么 REST Assured 如何打印请求日志或响应日志呢？请看下面一个示例（完整代码：[GitHubBranchAPITest#getBranchWithLog](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L102)）：
+
+```java
+// src/test/java/com/example/tests/GitHubBranchAPITest.java#getBranchWithLog
+given().log().all() // Log all request details
+        .pathParam("branch", "main")
+        .when()
+        .get("/branches/{branch}")
+        .then()
+        .log().body() // Log only the response body
+        .statusCode(200)
+        .body("_links.html", equalTo("https://github.com/olzhy/java-exercises/tree/main"));
+```
+
+上面的示例中，在请求单个分支信息时，要求打印请求的所有信息（包括：请求方法、URI、请求参数，请求头等），同时还要求打印响应的 Body 信息。
+
+执行一下，不管断言成功还是失败，都会打印所要求的信息：
+
+```text
+# 请求日志
+Request method:	GET
+Request URI: https://api.github.com/repos/olzhy/java-exercises/branches/main
+Path params: branch=main
+Headers: Accept=application/json
+				X-GitHub-Api-Version=2022-11-28
+
+# 响应体日志
+{
+    "name": "main",
+    "_links": {
+        "self": "https://api.github.com/repos/olzhy/java-exercises/branches/main",
+        "html": "https://github.com/olzhy/java-exercises/tree/main"
+    },
+    "protected": false,
+    ...
+}
+```
+
+如果我们不想每次都打印日志，只想在断言失败时才打印请求和响应日志，该怎么做呢？
+
+只要启用一下 REST Assured 自带的一个方法就可以了，示例如下（完整代码：[GitHubBranchAPITest#getBranchWithLogOnWhenValidationFails](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L119)）：）：
+
+```java
+// src/test/java/com/example/tests/GitHubBranchAPITest.java#getBranchWithLogOnWhenValidationFails
+
+// Log request and response details only when validation fails
+RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+
+given().pathParam("branch", "main")
+        .when()
+        .get("/branches/{branch}")
+        .then()
+        .statusCode(200)
+        .body("_links.html", equalTo("https://github.com/olzhy/java-exercises/tree/main"));
+```
+
+### 4.3 数组响应体的表达式过滤与聚集运算
 
 REST Assured 支持以类似 Groovy 闭包的方式来对集合进行过滤或聚集运算（支持 find、findAll、sum、max、min 等）。
 
@@ -365,7 +425,7 @@ curl -L \
 
 可以看到，响应体是一个数组。针对该数组，如果想根据提交人邮箱过滤出满足条件的记录（`commit.committer.email == 'olzhy@qq.com'`），然后断言这些记录中必有一条记录的提交信息（`commit.message`）是 `rest assured demo`，该怎么做呢？
 
-如下为实现代码（[GitHubCommitAPITest#filterCommits](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubCommitAPITest.java#L19)）的关键部分：
+如下为实现代码（[GitHubCommitAPITest#filterCommits](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubCommitAPITest.java#L20)）的关键部分：
 
 ```java
 // src/test/java/com/example/tests/GitHubCommitAPITest.java#filterCommits
@@ -380,7 +440,7 @@ curl -L \
 
 还有一种可选的写法是：先采用 JsonPath 来筛选数据，然后再进行断言。
 
-如下为使用 JsonPath 实现数据筛选（[GitHubCommitAPITest#filterCommitsUsingJsonPath](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubCommitAPITest.java#L35)）的关键部分：
+如下为使用 JsonPath 实现数据筛选（[GitHubCommitAPITest#filterCommitsUsingJsonPath](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubCommitAPITest.java#L36)）的关键部分：
 
 ```java
 // src/test/java/com/example/tests/GitHubCommitAPITest.java#filterCommitsUsingJsonPath
@@ -425,7 +485,7 @@ assertThat(response.statusCode(), equalTo(200));
 assertThat(commitMessage, equalTo("rest assured demo"));
 ```
 
-### 4.3 数组响应体反序列化为 Collection
+### 4.4 数组响应体反序列化为 Collection
 
 REST Assured 的 `io.restassured.mapper.TypeRef` 类支持将一个 JSON 数组响应体反序列化为一个 Java Collection，这样对接下来的取值与校验来说会非常的便捷。
 
@@ -490,7 +550,7 @@ public class CommitEntity {
 }
 ```
 
-REST Assured 将响应体反序列化为 `List<CommitEntity>`，并对其中的值进行断言的代码（[GitHubCommitAPITest#deserializeCommits](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubCommitAPITest.java#L104)）的关键部分如下：
+REST Assured 将响应体反序列化为 `List<CommitEntity>`，并对其中的值进行断言的代码（[GitHubCommitAPITest#deserializeCommits](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubCommitAPITest.java#L103)）的关键部分如下：
 
 ```java
 // src/test/java/com/example/tests/GitHubCommitAPITest.java#deserializeCommits
@@ -505,66 +565,6 @@ List<CommitEntity> commits = get("/commits")
 // assertions
 assertThat(commits, hasSize(10));
 assertThat(commits.get(0).getCommit().getMessage(), equalTo("rest assured demo"));
-```
-
-### 4.4 如何记录请求或响应日志？
-
-日志对于正确的发起请求或正确的编写断言语句来说非常有帮助。
-
-那么 REST Assured 如何打印请求日志或响应日志呢？请看下面一个示例（完整代码：[GitHubBranchAPITest#getBranchWithLog](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L104)）：
-
-```java
-// src/test/java/com/example/tests/GitHubBranchAPITest.java#getBranchWithLog
-given().log().all() // Log all request details
-        .pathParam("branch", "main")
-        .when()
-        .get("/branches/{branch}")
-        .then()
-        .log().body() // Log only the response body
-        .statusCode(200)
-        .body("_links.html", equalTo("https://github.com/olzhy/java-exercises/tree/main"));
-```
-
-上面的示例中，在请求单个分支信息时，要求打印请求的所有信息（包括：请求方法、URI、请求参数，请求头等），同时还要求打印响应的 Body 信息。
-
-执行一下，不管断言成功还是失败，都会打印所要求的信息：
-
-```text
-# 请求日志
-Request method:	GET
-Request URI: https://api.github.com/repos/olzhy/java-exercises/branches/main
-Path params: branch=main
-Headers: Accept=application/json
-				X-GitHub-Api-Version=2022-11-28
-
-# 响应体日志
-{
-    "name": "main",
-    "_links": {
-        "self": "https://api.github.com/repos/olzhy/java-exercises/branches/main",
-        "html": "https://github.com/olzhy/java-exercises/tree/main"
-    },
-    "protected": false,
-    ...
-}
-```
-
-如果我们不想每次都打印日志，只想在断言失败时才打印请求和响应日志，该怎么做呢？
-
-只要启用一下 REST Assured 自带的一个方法就可以了，示例如下（完整代码：[GitHubBranchAPITest#getBranchWithLogOnWhenValidationFails](https://github.com/olzhy/java-exercises/blob/main/rest-assured-demo/src/test/java/com/example/tests/GitHubBranchAPITest.java#L104)）：）：
-
-```java
-// src/test/java/com/example/tests/GitHubBranchAPITest.java#getBranchWithLogOnWhenValidationFails
-
-// Log request and response details only when validation fails
-RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-
-given().pathParam("branch", "main")
-        .when()
-        .get("/branches/{branch}")
-        .then()
-        .statusCode(200)
-        .body("_links.html", equalTo("https://github.com/olzhy/java-exercises/tree/main"));
 ```
 
 综上，本文以请求 GitHub REST API 为例，演示了 REST Assured 的使用。文中涉及的全部代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/rest-assured-demo/src/test/java/com/example/tests)，欢迎关注或 Fork。
