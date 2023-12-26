@@ -569,7 +569,7 @@ assertThat(commits.get(0).getCommit().getMessage(), equalTo("rest assured demo")
 
 ### 4.5 如何组装请求体数据？
 
-如何组装请求体数据呢？直接使用 Java 原生类型（如：`Map`、`List` 等）进行组装就可以，REST Assured 会帮我们进行序列化。
+如何组装请求体数据呢？直接使用 Java 原生类型（如：`Map`、`List` 等）进行组装就可以，REST Assured 会自动帮我们进行序列化（同样需要在 `pom.xml` 文件引入 `jackson-databind` 依赖）。
 
 下面以创建一个「[GitHub 仓库 Issue](https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#create-an-issue)」为例，来演示该特性的使用。
 
