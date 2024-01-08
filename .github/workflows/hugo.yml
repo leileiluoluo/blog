@@ -16,11 +16,15 @@ jobs:
         with:
           submodules: false
           fetch-depth: 0
+      - name: Run shell
+        run: |
+             ls -lht
+             find ./olzhy.github.io -type f | xargs sed -i "s#https://olzhy.github.io#https://leileiluoluo.com#g"
       - name: Publish Site
         uses: chabad360/hugo-gh-pages@master
         with:
           githubToken: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
-          cname: olzhy.github.io
+          cname: leileiluoluo.com
           branch: master
           repo: olzhy/olzhy.github.io
           hugoVersion: extended_0.81.0
