@@ -32,7 +32,7 @@ Maven：3.9.2
 Spring Boot：3.2.1
 ```
 
-开始前，需要在项目根目录 `pom.xml` 文件引入依赖 `spring-boot-starter-validation`：
+开始前，需要在项目根目录 `pom.xml` 文件引入 `spring-boot-starter-validation` 依赖：
 
 ```xml
 <!-- pom.xml -->
