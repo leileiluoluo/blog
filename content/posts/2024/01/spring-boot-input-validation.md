@@ -15,7 +15,7 @@ keywords:
   - 输入
   - 参数
   - 校验
-description: Spring Boot 如何使用 Validation 包进行参数校验。
+description: 本文探索 Spring Boot 如何使用 Validation 包进行参数校验，包括：标准注解的使用、校验异常的捕获与展示、分组校验功能的使用，以及自定义校验器的使用。
 ---
 
 Spring Boot 自带的 `spring-boot-starter-validation` 包支持以标准注解的方式进行输入参数校验。`spring-boot-starter-validation` 包主要引用了 `hibernate-validator` 包，其参数校验功能就是 `hibernate-validator` 包所提供的。
