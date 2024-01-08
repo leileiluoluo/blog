@@ -18,7 +18,29 @@ keywords:
 description: Spring Boot 如何使用 Validation 包进行参数校验。
 ---
 
-Spring Boot 自带的 `spring-boot-starter-validation` 包支持以标准注解的方式进行输入参数校验。`spring-boot-starter-validation` 包主要引用了 `hibernate-validator` 包，其参数校验功能就是`hibernate-validator` 包所提供的。
+Spring Boot 自带的 `spring-boot-starter-validation` 包支持以标准注解的方式进行输入参数校验。`spring-boot-starter-validation` 包主要引用了 `hibernate-validator` 包，其参数校验功能就是 `hibernate-validator` 包所提供的。
+
+本文即关注 `spring-boot-starter-validation` 包所涵盖的标准注解的使用、校验异常的捕获与展示、分组校验功能的使用，以及自定义校验器的使用。
+
+本文示例工程使用 Maven 管理。
+
+下面列出写作本文时所使用的 JDK、Maven 与 Spring Boot 的版本：
+
+```text
+JDK：Amazon Corretto 17.0.8
+Maven：3.9.2
+Spring Boot：3.2.1
+```
+
+开始前，需要在项目根目录 `pom.xml` 文件引入依赖 `spring-boot-starter-validation`：
+
+```xml
+<!-- pom.xml -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+```
 
 > 参考资料
 >
