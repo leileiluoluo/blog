@@ -42,6 +42,24 @@ Spring Boot：3.2.1
 </dependency>
 ```
 
+## 1 Validation 标准注解的使用
+
+下面列出 `spring-boot-starter-validation` 包中常用的字段校验注解。
+
+| 注解                                           | 作用字段类型                                     | 说明                                                           |
+| ---------------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------- |
+| `@Null`                                        | 任意类型                                         | 验证元素值为 `null`                                            |
+| `@NotNull`                                     | 任意类型                                         | 验证元素值不为 `null`，无法验证空字符串                        |
+| `@NotBlank`                                    | `CharSequence` 子类型                            | 验证元素值不为空（不为 `null` 且不为空字符串）                 |
+| `@NotEmpty`                                    | `CharSequence` 子类型、`Collection`、`Map`、数组 | 验证元素值不为 `null` 且不为空（字符串长度、集合大小不为 `0`） |
+| `@Min`                                         | 任何 `Number` 类型                               | 验证元素值大于等于 `@Min` 指定的值                             |
+| `@Max`                                         | 任何 `Number` 类型                               | 验证元素值小于等于 `@Max` 指定的值                             |
+| `@Digits(integer=整数位数, fraction=小数位数)` | 任何 `Number` 类型                               | 验证元素值的整数位数和小数位数上限                             |
+| `@Size`                                        | 字符串、`Collection`、`Map`、数组等              | 验证元素值的在指定区间之内，如字符长度、集合大小               |
+| `@Email`                                       | `CharSequence` 子类型                            | 验证元素值是电子邮件格式                                       |
+| `@Pattern(regexp=正则表达式)`                  | `CharSequence` 子类型                            | 验证元素值与指定的正则表达式匹配                               |
+| `@Valid`                                       | 任何非原子类型                                   | 指定递归验证关联的对象                                         |
+
 > 参考资料
 >
 > [1] [Validating Form Input | Spring - spring.io](https://spring.io/guides/gs/validating-form-input/)
