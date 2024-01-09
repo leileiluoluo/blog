@@ -215,6 +215,14 @@ curl -L \
 
 可以看到，如果有字段不满足校验规则时，会返回设定的错误信息。
 
+了解了 Validation 包中常用注解的使用方式，下面看一下校验错误的异常捕获与展示。
+
+## 2 校验错误的异常捕获与展示
+
+我们注意到，上面的例子中 `UserController` 的 `addUser` 方法使用一个额外的参数 `BindingResult` 来接收校验错误信息，然后根据需要展示给调用者。但这种处理方式有点太冗余了，每个请求方法都需要加这么一个参数并重新写一遍错误返回的逻辑。
+
+其实不加这个参数的话，若有校验错误，Spring Boot 框架会抛出一个 `MethodArgumentNotValidException`，。
+
 > 参考资料
 >
 > [1] [Validating Form Input | Spring - spring.io](https://spring.io/guides/gs/validating-form-input/)
