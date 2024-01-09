@@ -209,7 +209,7 @@ curl -L \
   -d '{"name": "Larry", "age": 18, "email": "larry@qq.com"}'
 ```
 
-```json
+```text
 // 400
 { "code": "validation_failed", "description": "phone can not be empty" }
 ```
@@ -292,7 +292,7 @@ curl -L \
   -d '{"name": "Larry", "age": 18, "email": "larry@qq.com"}'
 ```
 
-```json
+```text
 // 会返回 400 状态码，以及如下错误信息
 { "code": "validation_failed", "description": "phone can not be empty" }
 ```
