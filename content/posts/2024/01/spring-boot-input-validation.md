@@ -32,7 +32,9 @@ Maven：3.9.2
 Spring Boot：3.2.1
 ```
 
-开始前，需要在项目根目录 `pom.xml` 文件引入 `spring-boot-starter-validation` 依赖：
+本文以开发一个 User 的 RESTful API 为例来演示 Validation 包的使用。
+
+所以 `pom.xml` 文件除了需要引入 `spring-boot-starter-validation` 依赖外：
 
 ```xml
 <!-- pom.xml -->
@@ -41,6 +43,27 @@ Spring Boot：3.2.1
     <artifactId>spring-boot-starter-validation</artifactId>
 </dependency>
 ```
+
+还需要引入 `spring-boot-starter-web` 依赖：
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+
+为了省去 Model 类 Getters 与 Setters 的编写，本文还使用了 `lombok` 依赖：
+
+```xml
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <optional>true</optional>
+</dependency>
+```
+
+依赖准备好后，即可以尝试对 Validation 包进行使用了。
 
 ## 1 Validation 标准注解的使用
 
