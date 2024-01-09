@@ -280,6 +280,10 @@ public class UserController {
 }
 ```
 
+学会如何以统一的异常处理类来处理校验错误信息后，下面看一下如何使用分组校验功能。
+
+## 3 分组校验功能的使用
+
 > 参考资料
 >
 > [1] [Validating Form Input | Spring - spring.io](https://spring.io/guides/gs/validating-form-input/)
