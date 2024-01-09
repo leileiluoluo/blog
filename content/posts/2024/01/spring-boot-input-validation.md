@@ -87,9 +87,9 @@ Spring Boot：3.2.1
 
 下面就看一下如何使用这些注解。
 
-假设我们想设计一个新建 User 的 RESTful API，新建时 User 中有一些字段是有校验规则的（如：非空、满足某种规则等）。
+假设我们想编写一个创建 User 的 RESTful API，而创建 User 时，其中有一些字段是有校验规则的（如：非空、满足正则表达式等）。
 
-我们新建 User 时对应的 User Model 代码如下：
+下面即看一下使用了 Validation 注解的 User Model 代码：
 
 ```java
 // src/main/java/com/example/demo/model/User.java
@@ -120,7 +120,7 @@ public class User {
 }
 ```
 
-下面浅析一下 User Model 上每个字段的校验规则：
+下面浅析一下 User Model 中每个字段的校验规则：
 
 - name
 
@@ -196,6 +196,24 @@ public class UserController {
 
 }
 ```
+
+可以看到，`UserController` 的 `addUser` 方法使用了 `User` Model 来接收请求体，`User` Model 前使用了 `@Valid` 注解，该注解会对 `User` Model 中的字段根据注解设定的规则自动进行校验。此外，`addUser` 方法还有另外一个参数 `BindingResult`，该参数会捕获所有的字段校验错误信息，本文仅是将其中的第一个错误按照 `ErrorMessage` 格式返回了出来，没有任何错误信息则会返回 201 状态码。
+
+下面使用 CURL 命令测试一下这个接口：
+
+```shell
+curl -L \
+  -X POST \
+  -H "Content-Type: application/json" \
+  http://localhost:8080/users \
+  -d '{"name": "Larry", "age": 18, "email": "larry@qq.com"}'
+```
+
+```text
+{"code": "validation_failed","description": "phone can not be empty"}
+```
+
+可以看到，如果有字段不满足校验规则时，会返回设定的错误信息。
 
 > 参考资料
 >
