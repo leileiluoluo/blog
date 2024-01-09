@@ -47,6 +47,7 @@ Spring Boot：3.2.1
 还需要引入 `spring-boot-starter-web` 依赖：
 
 ```xml
+<!-- pom.xml -->
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-web</artifactId>
@@ -56,6 +57,7 @@ Spring Boot：3.2.1
 为了省去 Model 类 Getters 与 Setters 的编写，本文还使用了 `lombok` 依赖：
 
 ```xml
+<!-- pom.xml -->
 <dependency>
     <groupId>org.projectlombok</groupId>
     <artifactId>lombok</artifactId>
@@ -82,6 +84,118 @@ Spring Boot：3.2.1
 | `@Email`                                       | `CharSequence` 子类型                            | 验证元素值是电子邮件格式                                       |
 | `@Pattern(regexp=正则表达式)`                  | `CharSequence` 子类型                            | 验证元素值与指定的正则表达式匹配                               |
 | `@Valid`                                       | 任何非原子类型                                   | 指定递归验证关联的对象                                         |
+
+下面就看一下如何使用这些注解。
+
+假设我们想设计一个新建 User 的 RESTful API，新建时 User 中有一些字段是有校验规则的（如：非空、满足某种规则等）。
+
+我们新建 User 时对应的 User Model 代码如下：
+
+```java
+// src/main/java/com/example/demo/model/User.java
+package com.example.demo.model;
+
+import jakarta.validation.constraints.*;
+import lombok.Data;
+
+@Data
+public class User {
+
+    @NotBlank(message = "name can not be empty")
+    private String name;
+
+    @NotNull(message = "age can not be null")
+    @Min(value = 18, message = "age must be greater than 18")
+    @Max(value = 100, message = "age must be less than 100")
+    private Integer age;
+
+    @NotBlank(message = "email can not be empty")
+    @Email(message = "email invalid")
+    private String email;
+
+    @NotBlank(message = "phone can not be empty")
+    @Pattern(regexp = "^1[3-9][0-9]{9}$", message = "phone number invalid")
+    private String phone;
+
+}
+```
+
+下面浅析一下 User Model 上每个字段的校验规则：
+
+- name
+
+  其为字符串类型，使用了 `@NotBlank` 注解，要求非空。
+
+- age
+
+  其为整数类型，使用了 `@NotNull`、`@Min`、`@Max` 注解，要求非 `null`、且数值位于区间 `[18, 100]`。
+
+- email
+
+  其为字符串类型，使用了 `@NotBlank`、`@Email` 注解，要求非空且为 Email 格式。
+
+- phone
+
+  其为字符串类型，使用了 `@NotBlank`、`@Pattern` 注解，要求非空且为合法的国内手机号格式。
+
+下面看一下统一的错误返回 Model 类 `ErrorMessage` 的代码：
+
+```java
+// src/main/java/com/example/demo/model/ErrorMessage.java
+package com.example.demo.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class ErrorMessage {
+
+    private String code;
+    private String description;
+
+}
+```
+
+最后看一下 `UserController` 的代码：
+
+```java
+// src/main/java/com/example/demo/controller/UserController.java
+package com.example.demo.controller;
+
+import com.example.demo.model.ErrorMessage;
+import com.example.demo.model.User;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/users")
+public class UserController {
+
+    @PostMapping("")
+    public ResponseEntity<?> addUser(@RequestBody @Valid User user, BindingResult result) {
+        if (result.hasErrors()) {
+            List<ObjectError> allErrors = result.getAllErrors();
+            if (!allErrors.isEmpty()) {
+                ObjectError error = allErrors.get(0);
+                String description = error.getDefaultMessage();
+                return ResponseEntity.badRequest().body(new ErrorMessage("validation_failed", description));
+            }
+        }
+
+        // userService.addUser(user);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+}
+```
 
 > 参考资料
 >
