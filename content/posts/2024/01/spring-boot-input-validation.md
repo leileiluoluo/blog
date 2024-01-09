@@ -209,8 +209,9 @@ curl -L \
   -d '{"name": "Larry", "age": 18, "email": "larry@qq.com"}'
 ```
 
-```text
-{"code": "validation_failed","description": "phone can not be empty"}
+```json
+// 400
+{ "code": "validation_failed", "description": "phone can not be empty" }
 ```
 
 可以看到，如果有字段不满足校验规则时，会返回设定的错误信息。
@@ -280,7 +281,23 @@ public class UserController {
 }
 ```
 
-学会如何以统一的异常处理类来处理校验错误信息后，下面看一下如何使用分组校验功能。
+使用该种方式后，对于调用方来说，有校验错误时，效果与之前是一样的：
+
+```shell
+# 使用 CURL 命令新建一个 User（未提供 phone 参数）
+curl -L \
+  -X POST \
+  -H "Content-Type: application/json" \
+  http://localhost:8080/users \
+  -d '{"name": "Larry", "age": 18, "email": "larry@qq.com"}'
+```
+
+```json
+// 会返回 400 状态码，以及如下错误信息
+{ "code": "validation_failed", "description": "phone can not be empty" }
+```
+
+学会如何以统一的异常处理类来处理校验错误后，下面看一下如何使用分组校验功能。
 
 ## 3 分组校验功能的使用
 
