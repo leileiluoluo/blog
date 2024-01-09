@@ -221,7 +221,64 @@ curl -L \
 
 我们注意到，上面的例子中 `UserController` 的 `addUser` 方法使用一个额外的参数 `BindingResult` 来接收校验错误信息，然后根据需要展示给调用者。但这种处理方式有点太冗余了，每个请求方法都需要加这么一个参数并重新写一遍错误返回的逻辑。
 
-其实不加这个参数的话，若有校验错误，Spring Boot 框架会抛出一个 `MethodArgumentNotValidException`，。
+其实不加这个参数的话，若有校验错误，Spring Boot 框架会抛出一个 `MethodArgumentNotValidException`。所以简单一点的处理方式是：我们使用 `@RestControllerAdvice` 注解来将一个类标记为全局的异常处理类，针对 `MethodArgumentNotValidException`，只需要在这个异常处理类中统一处理一次就可以了。
+
+异常处理类 `MyExceptionHandler` 的代码如下：
+
+```java
+// src/main/java/com/example/demo/exception/MyExceptionHandler.java
+package com.example.demo.exception;
+
+import com.example.demo.model.ErrorMessage;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.List;
+
+@RestControllerAdvice
+public class MyExceptionHandler {
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ErrorMessage handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        List<ObjectError> allErrors = ex.getBindingResult().getAllErrors();
+        if (!allErrors.isEmpty()) {
+            ObjectError error = allErrors.get(0);
+            String description = error.getDefaultMessage();
+            return new ErrorMessage("validation_failed", description);
+        }
+        return new ErrorMessage("validation_failed", "validation failed");
+    }
+
+}
+```
+
+有了该异常处理类后，`UserController` 中即无需使用 `BindingResult` 来接收校验错误信息了：
+
+```java
+// src/main/java/com/example/demo/controller/UserController.java
+package com.example.demo.controller;
+
+...
+
+@RestController
+@RequestMapping("/users")
+public class UserController {
+
+    @PostMapping("")
+    public ResponseEntity<?> addUser(@RequestBody @Valid User user) {
+        // userService.addUser(user);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+}
+```
 
 > 参考资料
 >
