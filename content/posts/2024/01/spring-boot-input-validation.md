@@ -221,7 +221,7 @@ curl -L \
 
 我们注意到，上面的例子中 `UserController` 的 `addUser` 方法使用一个额外的参数 `BindingResult` 来接收校验错误信息，然后根据需要展示给调用者。但这种处理方式有点太冗余了，每个请求方法都需要加这么一个参数并重新写一遍错误返回的逻辑。
 
-其实不加这个参数的话，若有校验错误，Spring Boot 框架会抛出一个 `MethodArgumentNotValidException`。所以简单一点的处理方式是：我们使用 `@RestControllerAdvice` 注解来将一个类标记为全局的异常处理类，针对 `MethodArgumentNotValidException`，只需要在这个异常处理类中统一处理一次就可以了。
+其实不加这个参数的话，若有校验错误，Spring Boot 框架会抛出一个 `MethodArgumentNotValidException`。所以简单一点的处理方式是：使用 `@RestControllerAdvice` 注解来将一个类标记为全局的异常处理类，针对 `MethodArgumentNotValidException`，只需要在这个异常处理类中进行统一捕获、统一处理就可以了。
 
 异常处理类 `MyExceptionHandler` 的代码如下：
 
@@ -258,7 +258,7 @@ public class MyExceptionHandler {
 }
 ```
 
-有了该异常处理类后，`UserController` 中即无需使用 `BindingResult` 来接收校验错误信息了：
+有了该异常处理类后，`UserController` 的代码即可以变得很纯净：
 
 ```java
 // src/main/java/com/example/demo/controller/UserController.java
