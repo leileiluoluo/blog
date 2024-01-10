@@ -219,7 +219,7 @@ curl -L \
 
 如果 Model 类中有嵌套对象，该怎么做验证呢？只需要在对应的字段上加上 `@Valid` 注解就可以了。
 
-比如，`User` Model 中有一个字段为 `address`，其为 `Address` 对象，其代码如下：
+比如，`User` Model 中有一个字段为 `address`，其为 `Address` 对象，`Address` 类的代码如下：
 
 ```java
 // src/main/java/com/example/demo/model/Address.java
