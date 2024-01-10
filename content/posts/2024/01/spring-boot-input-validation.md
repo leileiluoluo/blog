@@ -384,6 +384,8 @@ public class UserController {
 
 可以看到，新增 User 接口与更新 User 接口使用了同一个 `User` Model；但新增使用的分组是 `User.Add.class`，更新使用的分组是 `User.Update.class`。
 
+**_注意：这里指定分组时用到了 `@Validated` 注解，而前面用到的是 `@Valid` 注解，这里简单解释一下两者的不同。`@Validated` 注解是 Spring 框架自带的，而 `@Valid` 注解是 `jakarta.validation` 包下的，`@Validated` 注解可以指定分组，而 `@Valid` 注解则没有这个功能。_**
+
 下面尝试在不提供 `id` 字段的情况下更新一下 User：
 
 ```shell
