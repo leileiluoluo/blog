@@ -217,6 +217,57 @@ curl -L \
 
 可以看到，如果有字段不满足校验规则时，会返回设定的错误信息。
 
+如果 Model 类中有嵌套对象，该怎么做验证呢？只需要在对应的字段上加上 `@Valid` 注解就可以了。
+
+比如，`User` Model 中有一个字段为 `address`，其为 `Address` 对象，其代码如下：
+
+```java
+// src/main/java/com/example/demo/model/Address.java
+package com.example.demo.model;
+
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
+
+@Data
+public class Address {
+
+    @NotNull(message = "province can not be null")
+    @Size(min = 2, max = 100, message = "province length should be in the range [10, 100]")
+    private String province;
+
+    @NotNull(message = "city can not be null")
+    @Size(min = 2, max = 100, message = "city length should be in the range [10, 100]")
+    private String city;
+
+    @NotNull(message = "street can not be null")
+    @Size(min = 10, max = 1000, message = "street length should be in the range [10, 1000]")
+    private String street;
+
+}
+```
+
+则 `User` Model 中，若想对 `address` 字段应用校验规则，则需要额外在该字段上加一个 `@Valid` 注解：
+
+```java
+// src/main/java/com/example/demo/model/User.java
+package com.example.demo.model;
+
+import jakarta.validation.constraints.*;
+import lombok.Data;
+
+@Data
+public class User {
+
+    ...
+
+    @Valid
+    @NotNull(message = "address can not be null")
+    private Address address;
+
+}
+```
+
 了解了 Validation 包中常用注解的使用方式，下面看一下校验错误的异常捕获与展示。
 
 ## 2 校验错误的异常捕获与展示
