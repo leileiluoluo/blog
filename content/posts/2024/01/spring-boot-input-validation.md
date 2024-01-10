@@ -81,6 +81,7 @@ Spring Boot：3.2.1
 | `@Max`                                         | 任何 `Number` 类型                               | 验证元素值小于等于 `@Max` 指定的值                             |
 | `@Digits(integer=整数位数, fraction=小数位数)` | 任何 `Number` 类型                               | 验证元素值的整数位数和小数位数上限                             |
 | `@Size`                                        | 字符串、`Collection`、`Map`、数组等              | 验证元素值的在指定区间之内，如字符长度、集合大小               |
+| `@Range`                                       | 数值类型                                         | 验证元素值在最小值和最大值之间                                 |
 | `@Email`                                       | `CharSequence` 子类型                            | 验证元素值是电子邮件格式                                       |
 | `@Pattern(regexp=正则表达式)`                  | `CharSequence` 子类型                            | 验证元素值与指定的正则表达式匹配                               |
 | `@Valid`                                       | 任何非原子类型                                   | 指定递归验证关联的对象                                         |
@@ -101,19 +102,19 @@ import lombok.Data;
 @Data
 public class User {
 
-    @NotBlank(message = "name can not be empty")
+    @NotNull(message = "name can not be null")
+    @Size(min = 2, max = 20, message = "name length should be in the range [2, 20]")
     private String name;
 
     @NotNull(message = "age can not be null")
-    @Min(value = 18, message = "age must be greater than 18")
-    @Max(value = 100, message = "age must be less than 100")
+    @Range(min = 18, max = 100, message = "age should be in the range [18, 100]")
     private Integer age;
 
-    @NotBlank(message = "email can not be empty")
+    @NotNull(message = "email can not be null")
     @Email(message = "email invalid")
     private String email;
 
-    @NotBlank(message = "phone can not be empty")
+    @NotNull(message = "phone can not be null")
     @Pattern(regexp = "^1[3-9][0-9]{9}$", message = "phone number invalid")
     private String phone;
 
@@ -124,19 +125,19 @@ public class User {
 
 - name
 
-  其为字符串类型，使用了 `@NotBlank` 注解，要求非空。
+  其为字符串类型，使用了 `@NotNull`、`@Size` 注解，表示这个字段为必填，且字符串长度应属于区间 `[2, 20]`。
 
 - age
 
-  其为整数类型，使用了 `@NotNull`、`@Min`、`@Max` 注解，要求非 `null`、且数值位于区间 `[18, 100]`。
+  其为整数类型，使用了 `@NotNull`、`@Range` 注解，表示这个字段为必填，且数值应属于区间 `[2, 20]`。
 
 - email
 
-  其为字符串类型，使用了 `@NotBlank`、`@Email` 注解，要求非空且为 Email 格式。
+  其为字符串类型，使用了 `@NotNull`、`@Email` 注解，表示这个字段为必填，且为 Email 格式。
 
 - phone
 
-  其为字符串类型，使用了 `@NotBlank`、`@Pattern` 注解，要求非空且为合法的国内手机号格式。
+  其为字符串类型，使用了 `@NotNull`、`@Pattern` 注解，表示这个字段为必填，且为合法的国内手机号格式。
 
 下面看一下统一的错误返回 Model 类 `ErrorMessage` 的代码：
 
@@ -211,7 +212,7 @@ curl -L \
 
 ```text
 // 400
-{ "code": "validation_failed", "description": "phone can not be empty" }
+{ "code": "validation_failed", "description": "phone can not be null" }
 ```
 
 可以看到，如果有字段不满足校验规则时，会返回设定的错误信息。
@@ -294,7 +295,7 @@ curl -L \
 
 ```text
 // 会返回 400 状态码，以及如下错误信息
-{ "code": "validation_failed", "description": "phone can not be empty" }
+{ "code": "validation_failed", "description": "phone can not be null" }
 ```
 
 学会如何以统一的异常处理类来处理校验错误后，下面看一下如何使用分组校验功能。
