@@ -302,6 +302,109 @@ curl -L \
 
 ## 3 分组校验功能的使用
 
+分组校验功能可以针对同一个 Model，为不同的场景应用不同的校验规则。
+
+下面我们尝试使用同一个 `User` Model 来同时接收新增和更新的请求数据，但为各个字段指定不同的分组来区别新增和更新时校验规则的不同。
+
+`User` Model 的代码如下：
+
+```java
+// src/main/java/com/example/demo/model/User.java
+package com.example.demo.model;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.groups.Default;
+import lombok.Data;
+import org.hibernate.validator.constraints.Range;
+
+@Data
+public class User {
+
+    @NotNull(message = "id can not be null", groups = Update.class)
+    private Long id;
+
+    @NotNull(message = "name can not be null", groups = Add.class)
+    @Size(min = 2, max = 20, message = "name length should be in the range [2, 20]")
+    private String name;
+
+    @NotNull(message = "age can not be null", groups = Add.class)
+    @Range(min = 18, max = 100, message = "age should be in the range [18, 100]")
+    private Integer age;
+
+    @NotNull(message = "email can not be null", groups = Add.class)
+    @Email(message = "email invalid")
+    private String email;
+
+    @NotNull(message = "phone can not be null", groups = Add.class)
+    @Pattern(regexp = "^1[3-9][0-9]{9}$", message = "phone number invalid")
+    private String phone;
+
+    public interface Add extends Default {
+    }
+
+    public interface Update extends Default {
+    }
+
+}
+```
+
+可以看到，我们在 `User` Model 中定义了两个分组：`Add` 与 `Update`。每个字段上都有一个 `@NotNull` 注解，但 `id` 字段的分组是 `Update.class`，其它字段的分组是 `Add.class`，其余注解则未指定分组（表示均适用）。意思是要求：在新增时，`name`、`age`、`email`、`phone` 为必填字段；在更新时，`id` 为必填字段；而且不论新增还是更新，只要提供了对应的字段，就需要满足对应字段的校验规则。
+
+下面看一下 `UserController` 的代码：
+
+```java
+// src/main/java/com/example/demo/controller/UserController.java
+package com.example.demo.controller;
+
+...
+
+@RestController
+@RequestMapping("/users")
+public class UserController {
+
+    @PostMapping("")
+    public ResponseEntity<?> addUser(@RequestBody @Validated(User.Add.class) User user) {
+        // userService.addUser(user);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PatchMapping("")
+    public ResponseEntity<?> updateUser(@RequestBody @Validated(User.Update.class) User user) {
+        // userService.updateUser(user);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+}
+```
+
+可以看到，新增 User 接口与更新 User 接口使用了同一个 `User` Model；但新增使用的分组是 `User.Add.class`，更新使用的分组是 `User.Update.class`。
+
+下面尝试在不提供 `id` 字段的情况下更新一下 User：
+
+```shell
+curl -L \
+  -X PATCH \
+  -H "Content-Type: application/json" \
+  http://localhost:8080/users \
+  -d '{"name": "Larry", "age": 18, "email": "larry@qq.com"}'
+```
+
+会返回如下错误：
+
+```text
+// 400
+{ "code": "validation_failed", "description": "id can not be null" }
+```
+
+介绍完分组校验功能的使用，下面看一下自定义校验器的使用。
+
+## 4 自定义校验器的使用
+
 > 参考资料
 >
 > [1] [Validating Form Input | Spring - spring.io](https://spring.io/guides/gs/validating-form-input/)
