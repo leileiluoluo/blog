@@ -90,7 +90,7 @@ Spring Boot：3.2.1
 
 假设我们想编写一个创建 User 的 RESTful API，而创建 User 时，其中有一些字段是有校验规则的（如：必填、满足字符串长度要求、满足电子邮件格式、满足正则表达式等）。
 
-下面即看一下使用了 Validation 注解的 User Model 代码：
+下面即看一下使用了 Validation 注解的 `User` Model 代码：
 
 ```java
 // src/main/java/com/example/demo/model/User.java
