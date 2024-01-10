@@ -458,6 +458,74 @@ curl -L \
 
 ## 4 自定义校验器的使用
 
+如果 Validation 包中自带的注解未能满足您的校验需求，则可以自定义一个注解并实现对应的校验逻辑。
+
+下面自定义了一个注解 `CustomValidation`，其代码如下：
+
+```java
+package com.example.demo.validation;
+
+...
+
+@Target({ElementType.FIELD, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Constraint(validatedBy = CustomValidator.class)
+public @interface CustomValidation {
+    String message() default "Invalid value";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
+}
+```
+
+如上代码中，`@Target` 指定了该注解的作用域，本例中，表示该注解可应用在方法或字段上；`@Retention` 指定该注解的存活期限，本例中，表示该注解在运行时可以使用；`@Constraint` 指定该注解的处理类。
+
+处理类 `CustomValidator` 用于编写自定义校验逻辑，其代码如下：
+
+```java
+package com.example.demo.validation;
+
+...
+
+public class CustomValidator
+        implements ConstraintValidator<CustomValidation, String> {
+    @Override
+    public void initialize(CustomValidation constraintAnnotation) {
+    }
+
+    @Override
+    public boolean isValid(String value, ConstraintValidatorContext context) {
+        return null != value && value.startsWith("ABC");
+    }
+}
+```
+
+可以看到，`CustomValidator` 实现了 `ConstraintValidator<CustomValidation, String>`，表示被标记字段是一个 `String` 类型；`initialize()` 方法用于校验器的初始化，可以根据需要访问注解上的各种属性；`isValid()` 方法可以拿到被校验的字段值，用于编写真正的校验逻辑。
+
+下面即在 `User` Model 中使用一下这个自定义注解：
+
+```java
+package com.example.demo.model;
+
+...
+
+@Data
+public class User {
+
+    @CustomValidation(message = "testField invalid")
+    private String testField;
+
+}
+```
+
+这样，当这个字段值不满足自定义校验规则时，就会抛出对应的错误：
+
+```text
+// 400
+{ "code": "validation_failed", "description": "testField invalid" }
+```
+
 综上，本文以示例代码的方式详细介绍了 `spring-boot-starter-validation` 包的使用。文中涉及的主要代码已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-validation-demo)，欢迎关注或 Fork。
 
 > 参考资料
