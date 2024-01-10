@@ -407,6 +407,8 @@ curl -L \
 
 ## 4 自定义校验器的使用
 
+综上，本文以示例代码的方式详细介绍了 `spring-boot-starter-validation` 包的使用。文中涉及的全部代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-validation-demo)，欢迎关注或 Fork。
+
 > 参考资料
 >
 > [1] [Validating Form Input | Spring - spring.io](https://spring.io/guides/gs/validating-form-input/)
