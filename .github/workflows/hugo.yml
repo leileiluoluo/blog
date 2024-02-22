@@ -20,7 +20,7 @@ jobs:
         uses: chabad360/hugo-gh-pages@master
         with:
           githubToken: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
-          cname: leileiluoluo.com
+          cname: olzhy.github.io
           branch: master
           repo: olzhy/olzhy.github.io
           hugoVersion: extended_0.81.0
