@@ -1,0 +1,55 @@
+---
+title: 如何使用 Spring JDBC 进行数据库操作
+author: olzhy
+type: post
+date: 2024-02-22T08:00:00+08:00
+url: /posts/spring-jdbc.html
+categories:
+  - 计算机
+tags:
+  - Spring
+  - Java
+keywords:
+  - Spring JDBC
+description: Spring JDBC。
+---
+
+Spring JDBC 是 Spring 框架提供的基于 Java JDBC 之上的一个用于操作关系型数据库的模块。
+
+其主要有如下几个功能：
+
+- 连接管理
+
+  负责数据库连接的管理，避免了手动获取与释放连接而造成资源泄漏。
+
+- 数据访问对象
+
+Spring JDBC 的包层级主要有：
+
+- core
+
+  包 `org.springframework.jdbc.core` 包含 Spring JDBC 的核心功能，核心类 `JdbcTemplate`、`SimpleJdbcInsert`、`SimpleJdbcCall` 与 `NamedParameterJdbcTemplate` 均位于其下。
+
+- datasource
+
+  包 `org.springframework.jdbc.datasource` 含有访问 `DataSource` 的工具类和 `DataSource` 的简单实现。
+
+- object
+
+  包 `org.springframework.jdbc.object` 含有访问关系型数据库（查询、更新、执行存储过程等）的各个可重用类，其以面向对象的方式来操作数据库并将结果返回为更加易用的 Java 对象。
+
+- support
+
+  包 `org.springframework.jdbc.support` 主要提供对 `SQLException` 的翻译和对包 `core` 和 `object` 的支持。JDBC 层抛出的异常（`SQLException`）将会被翻译为在 `org.springframework.dao` 中定义的异常（如：`DataAccessException`）。
+
+> 参考资料
+>
+> [1] [Spring Framework: Data Access with JDBC | Spring - spring.io](https://docs.spring.io/spring-framework/reference/6.1.3/data-access/jdbc.html)
+>
+> [2] [Spring JDBC Tutorial | Baeldung - www.baeldung.com](https://www.baeldung.com/spring-jdbc-jdbctemplate)
+>
+> [3] [Introduction to Spring Boot and JDBCTemplate | Medium - medium.com](https://medium.com/xgeeks/introduction-to-spring-boot-and-jdbctemplate-jdbc-template-13c84add2bea)
+>
+> [4] [Spring JdbcTemplate Example | DigitalOcean - www.digitalocean.com](https://www.digitalocean.com/community/tutorials/spring-jdbctemplate-example)
+>
+> [5] [Spring JdbcTemplate 使用实例 | 简书 - jianshu.com](https://www.jianshu.com/p/f0cbed671897)
