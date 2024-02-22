@@ -58,6 +58,14 @@ Spring JDBC 的包层级：
 
   `MappingSqlQuery`、`SqlUpdate` 和 `StoredProcedure` 分别用于查询、更新和存储过程定义，为操作数据库的可重用对象。
 
+## 1 Spring JDBC 基础用法
+
+### 1.1 JdbcTemplate 的使用
+
+### 1.2 NamedParameterJdbcTemplate 的使用
+
+### 1.3 SQLExceptionTranslator 的使用
+
 > 参考资料
 >
 > [1] [Spring Framework: Data Access with JDBC | Spring - spring.io](https://docs.spring.io/spring-framework/reference/6.1.3/data-access/jdbc.html)
