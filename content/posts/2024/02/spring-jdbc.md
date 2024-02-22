@@ -16,7 +16,7 @@ description: Spring JDBC。
 
 Spring JDBC 是 Spring 框架提供的基于 Java JDBC 之上的一个用于操作关系型数据库的模块。
 
-其主要有如下几个功能：
+Spring JDBC 的功能：
 
 - 连接管理
 
@@ -24,7 +24,7 @@ Spring JDBC 是 Spring 框架提供的基于 Java JDBC 之上的一个用于操�
 
 - 数据访问对象
 
-Spring JDBC 的包层级主要有：
+Spring JDBC 的包层级：
 
 - core
 
@@ -41,6 +41,28 @@ Spring JDBC 的包层级主要有：
 - support
 
   包 `org.springframework.jdbc.support` 主要提供对 `SQLException` 的翻译和对包 `core` 和 `object` 的支持。JDBC 层抛出的异常（`SQLException`）将会被翻译为在 `org.springframework.dao` 中定义的异常（如：`DataAccessException`）。
+
+使用 Spring JDBC 进行数据库访问：
+
+- JdbcTemplate
+
+  `JdbcTemplate` 是 Spring JDBC 提供的访问数据库的方式之一，是 Spring JDBC 中最基本、最底层的数据库访问实现方式。
+
+- NamedParameterJdbcTemplate
+
+  `NamedParameterJdbcTemplate` 对 `JdbcTemplate` 进行了包装，以代替 JDBC 的 `?` 占位符而进行带参数的 SQL 语句执行。
+
+- SimpleJdbcInsert 与 SimpleJdbcCall
+
+  `SimpleJdbcInsert` 与 `SimpleJdbcCall` 可以利用 JDBC 驱动提供的数据库元数据来简化 JDBC 操作。
+
+  `SimpleJdbcInsert` 提供一种基于数据库元数据的数据插入方法，可用于普通插入、插入时获取主键值和批处理。
+
+  `SimpleJdbcCall` 提供一种简单的存储过程执行方法。
+
+- 其它关系型数据库对象
+
+  `MappingSqlQuery`、`SqlUpdate` 和 `StoredProcedure` 分别用于查询、更新和存储过程定义，为操作数据库的可重用对象。
 
 > 参考资料
 >
