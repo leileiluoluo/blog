@@ -11,14 +11,14 @@ tags:
   - Java
 keywords:
   - Spring JDBC
-description: Spring JDBC。
+description: 本文介绍了 Spring JDBC 的各种特性，然后以 Java 示例代码的方式演示了 Spring JDBC 的使用。
 ---
 
 Spring JDBC 是 Spring 框架提供的一个基于 Java JDBC 之上的用于操作关系型数据库的模块。
 
 Spring JDBC 提供对数据库连接的管理、数据库访问、SQL 执行结果获取、事务支持和异常处理等功能。
 
-本文将基于本地搭建的 MySQL 数据库（版本为 8.1.0）为基础，以 Java 示例代码的方式来演示 Spring JDBC 的使用，示例工程是一个 Spring Boot 工程，使用 Maven 管理，下面列出本文示例工程所使用的 JDK、Maven、Spring Boot 与 Spring JDBC 的版本：
+本文将基于本地搭建的 MySQL 数据库（版本为 8.1.0），以 Java 示例代码的方式来演示 Spring JDBC 的使用，示例工程是一个 Spring Boot 工程，使用 Maven 管理，下面列出本文示例工程所使用的 JDK、Maven、Spring Boot 与 Spring JDBC 的版本：
 
 ```text
 JDK：Amazon Corretto 17.0.8
