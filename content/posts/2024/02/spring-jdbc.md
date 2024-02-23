@@ -11,10 +11,10 @@ tags:
   - Java
 keywords:
   - Spring JDBC
-description: 本文介绍了 Spring JDBC 的各种特性，然后以 Java 示例代码的方式演示了 Spring JDBC 的使用。
+description: 本文首先对 Spring JDBC 的基础知识进行了介绍，然后准备了一下测试数据与示例工程，最后以示例代码的方式演示了 Spring JDBC 的使用。
 ---
 
-Spring JDBC 是 Spring 框架提供的一个基于 Java JDBC 之上的用于操作关系型数据库的模块，其提供对数据库连接的管理、数据库访问、SQL 执行结果获取、事务支持和异常处理等功能。本文首先对 Spring JDBC 的基础知识进行介绍，然后以示例代码的方式来演示 Spring JDBC 的使用。
+Spring JDBC 是 Spring 框架提供的一个基于 Java JDBC 之上的用于操作关系型数据库的模块，其提供对数据库连接的管理、数据库访问、SQL 执行结果获取、事务支持和异常处理等功能。本文首先对 Spring JDBC 的基础知识进行介绍，然后准备一下测试数据与示例工程，最后以示例代码的方式来演示 Spring JDBC 的使用。
 
 ## 1 Spring JDBC 介绍
 
