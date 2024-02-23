@@ -94,7 +94,7 @@ spring:
     password: root
 ```
 
-这样，测试数据与示例工程脚手架就准备好了，对 Spring JDBC 进行使用之前，先介绍一下其基本概念。
+这样，测试数据与示例工程脚手架就准备好了。对 Spring JDBC 进行使用之前，先介绍一下 Spring JDBC 的包层级与 Spring JDBC 提供的几种数据库访问方式。
 
 ## 1 Spring JDBC 介绍
 
