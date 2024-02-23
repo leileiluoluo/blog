@@ -14,9 +14,57 @@ keywords:
 description: Spring JDBC。
 ---
 
-Spring JDBC 是 Spring 框架提供的基于 Java JDBC 之上的一个用于操作关系型数据库的模块。
+Spring JDBC 是 Spring 框架提供的一个基于 Java JDBC 之上的用于操作关系型数据库的模块。
 
-Spring JDBC 提供对数据库连接的管理（避免了手动获取与释放连接而造成资源泄漏）、数据库访问、SQL 执行结果获取、事务支持和异常处理等功能。
+Spring JDBC 提供对数据库连接的管理、数据库访问、SQL 执行结果获取、事务支持和异常处理等功能。
+
+本文将基于本地搭建的 MySQL 数据库（版本为 8.1.0）为基础，以 Java 示例代码的方式来演示 Spring JDBC 的使用，示例工程是一个 Spring Boot 工程，使用 Maven 管理，下面列出本文示例工程所使用的 JDK、Maven、Spring Boot 与 Spring JDBC 的版本：
+
+```text
+JDK：Amazon Corretto 17.0.8
+Maven：3.9.2
+Spring Boot：3.2.2
+Spring JDBC：6.1.3
+```
+
+本文示例工程（[spring-jdbc-demo](https://github.com/olzhy/java-exercises/tree/main/spring-jdbc-demo)）用到的依赖如下：
+
+```xml
+<!-- pom.xml -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-jdbc</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jdbc</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <optional>true</optional>
+</dependency>
+
+<!-- driver -->
+<dependency>
+    <groupId>com.mysql</groupId>
+    <artifactId>mysql-connector-j</artifactId>
+    <version>8.3.0</version>
+</dependency>
+
+<!-- test -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+</dependency>
+```
+
+## 1 Spring JDBC 介绍
 
 Spring JDBC 的包层级：
 
@@ -58,13 +106,13 @@ Spring JDBC 的包层级：
 
   `MappingSqlQuery`、`SqlUpdate` 和 `StoredProcedure` 分别用于查询、更新和存储过程定义，为操作数据库的可重用对象。
 
-## 1 Spring JDBC 基础用法
+## 1 Spring JDBC 核心功能使用
 
 ### 1.1 JdbcTemplate 的使用
 
 ### 1.2 NamedParameterJdbcTemplate 的使用
 
-### 1.3 SQLExceptionTranslator 的使用
+### 1.3 JdbcClient 的使用
 
 > 参考资料
 >
