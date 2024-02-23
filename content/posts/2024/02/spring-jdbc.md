@@ -200,7 +200,38 @@ public void deleteById(Integer id) {
 
 ### 2.2 NamedParameterJdbcTemplate 的使用
 
+`NamedParameterJdbcTemplate` 对 `JdbcTemplate` 进行了包装，以代替 JDBC `?` 占位符的方式而进行带参数的 SQL 语句执行。
+
+下面使用 `NamedParameterJdbcTemplate` 来实现按 name 参数查询 User 总数：
+
+```java
+// src/main/java/com/example/demo/dao/impl/UserDaoImpl.java
+@Override
+public Integer countByName(String name) {
+    String sql = "select count(*) from user where name = :name";
+    SqlParameterSource namedParameters = new MapSqlParameterSource("name", name);
+    return namedParameterJdbcTemplate.queryForObject(sql, namedParameters, Integer.class);
+}
+```
+
 ### 2.3 JdbcClient 的使用
+
+`JdbcTemplate` 与 `NamedParameterJdbcTemplate` 用起来依然觉得没那么方便？下面试一下封装了它们两个功能的更加易用的统一 API `JdbcClient` 的使用。
+
+使用 `JdbcClient` 将带参数的查询结果直接映射为 Java Model 类：
+
+```java
+// src/main/java/com/example/demo/dao/impl/UserDaoImpl.java
+@Override
+public User getById(Integer id) {
+    String sql = "select id, name, age, email, created_at from user where id = :id";
+    return jdbcClient.sql(sql)
+            .param("id", id)
+            .query(User.class).single();
+}
+```
+
+可以看到，相较 `JdbcTemplate`，使用 `JdbcClient` 时，无需实现字段的映射逻辑，直接指定 Java Model 即可获取结果；同时，参数的指定也比 `NamedParameterJdbcTemplate` 更加简单。
 
 > 参考资料
 >
