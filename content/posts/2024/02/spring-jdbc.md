@@ -140,13 +140,13 @@ Spring JDBC 的包层级：
 
 介绍完 Spring JDBC 的基本概念，下面即以示例代码的方式介绍一下其核心功能的使用。
 
-## 1 Spring JDBC 核心功能使用
+## 2 Spring JDBC 核心功能使用
 
-### 1.1 JdbcTemplate 的使用
+### 2.1 JdbcTemplate 的使用
 
-### 1.2 NamedParameterJdbcTemplate 的使用
+### 2.2 NamedParameterJdbcTemplate 的使用
 
-### 1.3 JdbcClient 的使用
+### 2.3 JdbcClient 的使用
 
 > 参考资料
 >
