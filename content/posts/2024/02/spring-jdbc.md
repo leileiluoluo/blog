@@ -138,11 +138,65 @@ Spring JDBC 的包层级：
 
   `MappingSqlQuery`、`SqlUpdate` 和 `StoredProcedure` 分别用于查询、更新和存储过程定义，为操作数据库的可重用对象。
 
-介绍完 Spring JDBC 的基本概念，下面即以示例代码的方式介绍一下其核心功能的使用。
+了解了 Spring JDBC 的包层级及其提供哪些功能后，下面即以示例代码的方式介绍一下其核心功能的使用。
 
 ## 2 Spring JDBC 核心功能使用
 
+该部分以封装一个 User 增删改查的 DAO 工具类（[UserDaoImpl](https://github.com/olzhy/java-exercises/blob/main/spring-jdbc-demo/src/main/java/com/example/demo/dao/impl/UserDaoImpl.java)）为例来演示 Spring JDBC 核心功能的使用。
+
 ### 2.1 JdbcTemplate 的使用
+
+`JdbcTemplate` 是 Spring JDBC 中被使用最多的一个类，其自动管理资源的创建和释放，可以使用其来执行 SQL 查询、SQL 更新或调用存储过程。
+
+下面演示如何使用 `JdbcTemplate` 查询 User 总数：
+
+```java
+// src/main/java/com/example/demo/dao/impl/UserDaoImpl.java
+@Override
+public Integer countAll() {
+    String sql = "select count(*) from user";
+    return jdbcTemplate.queryForObject(sql, Integer.class);
+}
+```
+
+使用 `JdbcTemplate` 查询 User 列表（这里的 Lambda 表达式是一个用于处理行字段映射的 `RowMapper<User>` 对象）：
+
+```java
+// src/main/java/com/example/demo/dao/impl/UserDaoImpl.java
+@Override
+public List<User> listAll() {
+    String sql = "select id, name, age, email, created_at from user";
+    return jdbcTemplate.query(sql, (rs, i) -> {
+        User user = new User();
+        user.setId(rs.getInt("id"));
+        user.setName(rs.getString("name"));
+        user.setAge(rs.getInt("age"));
+        user.setEmail(rs.getString("email"));
+        user.setCreatedAt(rs.getDate("created_at"));
+        return user;
+    });
+}
+```
+
+此外，还可以调用 `JdbcTemplate` 的 `update` 方法来进行更新和删除：
+
+```java
+// src/main/java/com/example/demo/dao/impl/UserDaoImpl.java
+@Override
+public void update(User user) {
+    String sql = "update user set name = ?, age = ?, email = ? where id = ?";
+    jdbcTemplate.update(sql, user.getName(), user.getAge(), user.getEmail(), user.getId());
+}
+```
+
+```java
+// src/main/java/com/example/demo/dao/impl/UserDaoImpl.java
+@Override
+public void deleteById(Integer id) {
+    String sql = "delete from user where id = ?";
+    jdbcTemplate.update(sql, id);
+}
+```
 
 ### 2.2 NamedParameterJdbcTemplate 的使用
 
