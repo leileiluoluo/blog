@@ -27,7 +27,27 @@ Spring Boot：3.2.2
 Spring JDBC：6.1.3
 ```
 
-本文示例工程（[spring-jdbc-demo](https://github.com/olzhy/java-exercises/tree/main/spring-jdbc-demo)）用到的依赖如下：
+开始前，需要在本地 MySQL 数据库执行如下 DDL 语句（包括：建库语句、建表语句和测试数据）：
+
+```sql
+CREATE DATABASE test DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+
+DROP TABLE IF EXISTS user;
+CREATE TABLE user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20) NOT NULL,
+    age INT NOT NULL,
+    email VARCHAR(20) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT '2024-01-01 00:00:00'
+);
+
+INSERT INTO user(name, age, email, created_at) VALUES
+    ('Larry', 18, 'larry@larry.com', now());
+    ('Jacky', 28, 'jacky@jacky.com', now()),
+    ('Lucy', 20, 'lucy@lucy.com', now());
+```
+
+本文示例工程 [spring-jdbc-demo](https://github.com/olzhy/java-exercises/tree/main/spring-jdbc-demo) 用到的依赖如下：
 
 ```xml
 <!-- pom.xml -->
@@ -63,6 +83,18 @@ Spring JDBC：6.1.3
     <scope>test</scope>
 </dependency>
 ```
+
+示例工程的 [application.yaml](https://github.com/olzhy/java-exercises/blob/main/spring-jdbc-demo/src/main/resources/application.yaml) 配置文件内容如下：
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root
+    password: root
+```
+
+这样，测试数据与示例工程脚手架就准备好了，对 Spring JDBC 进行使用之前，先介绍一下其基本概念。
 
 ## 1 Spring JDBC 介绍
 
@@ -105,6 +137,8 @@ Spring JDBC 的包层级：
 - 其它关系型数据库对象
 
   `MappingSqlQuery`、`SqlUpdate` 和 `StoredProcedure` 分别用于查询、更新和存储过程定义，为操作数据库的可重用对象。
+
+介绍完 Spring JDBC 的基本概念，下面即以示例代码的方式介绍一下其核心功能的使用。
 
 ## 1 Spring JDBC 核心功能使用
 
