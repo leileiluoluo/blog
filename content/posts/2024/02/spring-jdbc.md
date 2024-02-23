@@ -14,11 +14,59 @@ keywords:
 description: 本文介绍了 Spring JDBC 的各种特性，然后以 Java 示例代码的方式演示了 Spring JDBC 的使用。
 ---
 
-Spring JDBC 是 Spring 框架提供的一个基于 Java JDBC 之上的用于操作关系型数据库的模块，其提供对数据库连接的管理、数据库访问、SQL 执行结果获取、事务支持和异常处理等功能。本文将基于本地搭建的 MySQL 数据库（版本为 8.1.0），以 Java 示例代码的方式来演示 Spring JDBC 的使用。
+Spring JDBC 是 Spring 框架提供的一个基于 Java JDBC 之上的用于操作关系型数据库的模块，其提供对数据库连接的管理、数据库访问、SQL 执行结果获取、事务支持和异常处理等功能。本文首先对 Spring JDBC 的基础知识进行介绍，然后以示例代码的方式来演示 Spring JDBC 的使用。
+
+## 1 Spring JDBC 介绍
+
+Spring JDBC 的包层级：
+
+- core
+
+  包 `org.springframework.jdbc.core` 包含 Spring JDBC 的核心功能，核心类 `JdbcTemplate`、`SimpleJdbcInsert`、`SimpleJdbcCall` 与 `NamedParameterJdbcTemplate` 均位于其下。
+
+- datasource
+
+  包 `org.springframework.jdbc.datasource` 含有访问 `DataSource` 的工具类和 `DataSource` 的简单实现。
+
+- object
+
+  包 `org.springframework.jdbc.object` 含有访问关系型数据库（查询、更新、执行存储过程等）的各个可重用类，其以面向对象的方式来操作数据库并将结果返回为更加易用的 Java 对象。
+
+- support
+
+  包 `org.springframework.jdbc.support` 主要提供对 `SQLException` 的翻译和对包 `core` 和 `object` 的支持。JDBC 层抛出的异常（`SQLException`）将会被翻译为在 `org.springframework.dao` 中定义的异常（如：`DataAccessException`）。
+
+使用 Spring JDBC 进行数据库访问的方式：
+
+- JdbcTemplate
+
+  `JdbcTemplate` 是 Spring JDBC 提供的访问数据库的方式之一，是 Spring JDBC 中最基本、最底层的数据库访问实现方式。
+
+- NamedParameterJdbcTemplate
+
+  `NamedParameterJdbcTemplate` 对 `JdbcTemplate` 进行了包装，以代替 JDBC 的 `?` 占位符而进行带参数的 SQL 语句执行。
+
+- SimpleJdbcInsert 与 SimpleJdbcCall
+
+  `SimpleJdbcInsert` 与 `SimpleJdbcCall` 可以利用 JDBC 驱动提供的数据库元数据来简化 JDBC 操作。
+
+  `SimpleJdbcInsert` 提供一种基于数据库元数据的数据插入方式，可用于普通插入、插入时获取主键值和批处理。
+
+  `SimpleJdbcCall` 提供一种简单的存储过程执行方式。
+
+- 其它关系型数据库对象
+
+  `MappingSqlQuery`、`SqlUpdate` 和 `StoredProcedure` 分别用于查询、更新和存储过程定义，为操作数据库的可重用对象。
+
+了解了 Spring JDBC 的基础知识后，下面即要开始进行使用了。开始之前，准备一下测试数据，并对示例工程进行简单介绍。
+
+## 2 测试数据准备与示例工程介绍
 
 <!--more-->
 
-示例工程是一个 Spring Boot 工程，使用 Maven 管理，下面列出示例工程所使用的 JDK、Maven、Spring Boot 与 Spring JDBC 的版本：
+本文以一个使用 Maven 管理的 Spring Boot 工程为示例，结合本地搭建的 MySQL 数据库（版本为 8.1.0）来演示 Spring JDBC 的使用。
+
+下面列出示例工程所使用的 JDK、Maven、Spring Boot 与 Spring JDBC 的版本：
 
 ```text
 JDK：Amazon Corretto 17.0.8
@@ -27,7 +75,9 @@ Spring Boot：3.2.2
 Spring JDBC：6.1.3
 ```
 
-开始前，需要在本地 MySQL 数据库执行如下 DDL 语句（包括：建库语句、建表语句和测试数据）：
+### 2.1 准备测试数据
+
+在本地 MySQL 数据库执行如下 DDL 语句（包括：建库语句、建表语句和测试数据）：
 
 ```sql
 CREATE DATABASE test DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
@@ -46,6 +96,8 @@ INSERT INTO user(name, age, email, created_at) VALUES
     ('Jacky', 28, 'jacky@jacky.com', now()),
     ('Lucy', 20, 'lucy@lucy.com', now());
 ```
+
+### 2.2 示例工程介绍
 
 本文示例工程 [spring-jdbc-demo](https://github.com/olzhy/java-exercises/tree/main/spring-jdbc-demo) 用到的依赖如下：
 
@@ -94,57 +146,13 @@ spring:
     password: root
 ```
 
-这样，测试数据与示例工程脚手架就准备好了。对 Spring JDBC 进行使用之前，先介绍一下 Spring JDBC 的包层级与 Spring JDBC 提供的几种数据库访问方式。
+这样，测试数据与示例工程脚手架就准备好了。接下来即以示例代码的方式对 Spring JDBC 的使用进行介绍。
 
-## 1 Spring JDBC 介绍
-
-Spring JDBC 的包层级：
-
-- core
-
-  包 `org.springframework.jdbc.core` 包含 Spring JDBC 的核心功能，核心类 `JdbcTemplate`、`SimpleJdbcInsert`、`SimpleJdbcCall` 与 `NamedParameterJdbcTemplate` 均位于其下。
-
-- datasource
-
-  包 `org.springframework.jdbc.datasource` 含有访问 `DataSource` 的工具类和 `DataSource` 的简单实现。
-
-- object
-
-  包 `org.springframework.jdbc.object` 含有访问关系型数据库（查询、更新、执行存储过程等）的各个可重用类，其以面向对象的方式来操作数据库并将结果返回为更加易用的 Java 对象。
-
-- support
-
-  包 `org.springframework.jdbc.support` 主要提供对 `SQLException` 的翻译和对包 `core` 和 `object` 的支持。JDBC 层抛出的异常（`SQLException`）将会被翻译为在 `org.springframework.dao` 中定义的异常（如：`DataAccessException`）。
-
-使用 Spring JDBC 进行数据库访问的方式：
-
-- JdbcTemplate
-
-  `JdbcTemplate` 是 Spring JDBC 提供的访问数据库的方式之一，是 Spring JDBC 中最基本、最底层的数据库访问实现方式。
-
-- NamedParameterJdbcTemplate
-
-  `NamedParameterJdbcTemplate` 对 `JdbcTemplate` 进行了包装，以代替 JDBC 的 `?` 占位符而进行带参数的 SQL 语句执行。
-
-- SimpleJdbcInsert 与 SimpleJdbcCall
-
-  `SimpleJdbcInsert` 与 `SimpleJdbcCall` 可以利用 JDBC 驱动提供的数据库元数据来简化 JDBC 操作。
-
-  `SimpleJdbcInsert` 提供一种基于数据库元数据的数据插入方式，可用于普通插入、插入时获取主键值和批处理。
-
-  `SimpleJdbcCall` 提供一种简单的存储过程执行方式。
-
-- 其它关系型数据库对象
-
-  `MappingSqlQuery`、`SqlUpdate` 和 `StoredProcedure` 分别用于查询、更新和存储过程定义，为操作数据库的可重用对象。
-
-了解了 Spring JDBC 的包层级及其提供哪些功能后，下面即以示例代码的方式介绍一下其核心功能的使用。
-
-## 2 Spring JDBC 核心功能使用
+## 3 Spring JDBC 核心功能使用
 
 该部分以封装一个 User 增删改查的 DAO 工具类（[UserDaoImpl](https://github.com/olzhy/java-exercises/blob/main/spring-jdbc-demo/src/main/java/com/example/demo/dao/impl/UserDaoImpl.java)）为例来演示 Spring JDBC 核心功能的使用。
 
-### 2.1 JdbcTemplate 的使用
+### 3.1 JdbcTemplate 的使用
 
 `JdbcTemplate` 是 Spring JDBC 中被使用最多的一个类，其自动管理资源的创建和释放，可以使用其来执行 SQL 查询、SQL 更新或调用存储过程。
 
@@ -198,7 +206,7 @@ public void deleteById(Integer id) {
 }
 ```
 
-### 2.2 NamedParameterJdbcTemplate 的使用
+### 3.2 NamedParameterJdbcTemplate 的使用
 
 `NamedParameterJdbcTemplate` 对 `JdbcTemplate` 进行了包装，以代替 JDBC `?` 占位符的方式而进行带参数的 SQL 语句执行。
 
@@ -214,7 +222,7 @@ public Integer countByName(String name) {
 }
 ```
 
-### 2.3 JdbcClient 的使用
+### 3.3 JdbcClient 的使用
 
 `JdbcTemplate` 与 `NamedParameterJdbcTemplate` 用起来依然觉得没那么方便？下面试一下封装了它们两个功能的更加易用的统一 API `JdbcClient` 的使用。
 
