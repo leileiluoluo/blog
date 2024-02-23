@@ -62,8 +62,6 @@ Spring JDBC 的包层级：
 
 ## 2 测试数据准备与示例工程介绍
 
-<!--more-->
-
 本文以一个使用 Maven 管理的 Spring Boot 工程为示例，结合本地搭建的 MySQL 数据库（版本为 8.1.0）来演示 Spring JDBC 的使用。
 
 下面列出示例工程所使用的 JDK、Maven、Spring Boot 与 Spring JDBC 的版本：
