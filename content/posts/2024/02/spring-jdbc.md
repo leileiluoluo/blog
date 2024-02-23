@@ -231,7 +231,7 @@ public User getById(Integer id) {
 }
 ```
 
-可以看到，相较 `JdbcTemplate`，使用 `JdbcClient` 时，无需实现字段的映射逻辑，直接指定 Java Model 即可获取结果；同时，参数的指定也比 `NamedParameterJdbcTemplate` 更加简单。
+可以看到，相较 `JdbcTemplate`，使用 `JdbcClient` 时，无需实现字段的映射逻辑，直接指定对应的 Java Model 类即可获取结果；同时，参数的指定也比 `NamedParameterJdbcTemplate` 更加简单。
 
 > 参考资料
 >
