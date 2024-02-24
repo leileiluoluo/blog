@@ -396,6 +396,8 @@ public User getByIdUsingProcedure(Integer id) {
 }
 ```
 
+可以看到，使用 `SimpleJdbcCall` 调用存储过程亦非常简单，只需给对应的 `IN` 字段设值，调用后从 `OUT` 字段取值即可。
+
 综上，本文首先对 Spring JDBC 的基础知识进行了介绍，然后准备了一下测试数据与示例工程，最后以示例代码的方式演示了 Spring JDBC 的使用。文中涉及的所有示例代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-jdbc-demo)，欢迎关注或 Fork。
 
 > 参考资料
