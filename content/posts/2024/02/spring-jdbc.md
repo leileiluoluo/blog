@@ -228,6 +228,28 @@ public int[] batchUpdate(List<User> users) {
 }
 ```
 
+使用 `JdbcTemplate` 插入单个 User 并返回生成的 ID，该怎么写呢？
+
+```java
+@Override
+public Integer save(User user) {
+    String sql = "insert into user(name, age, email, created_at) values(?, ?, ?, now())";
+
+    KeyHolder keyHolder = new GeneratedKeyHolder();
+    jdbcTemplate.update(connection -> {
+        PreparedStatement ps = connection.prepareStatement(sql, new String[]{"id"});
+        ps.setString(1, user.getName());
+        ps.setInt(2, user.getAge());
+        ps.setString(3, user.getEmail());
+        return ps;
+    }, keyHolder);
+
+    Number id = keyHolder.getKey();
+    assert null != id;
+    return id.intValue();
+}
+```
+
 ### 3.2 NamedParameterJdbcTemplate 的使用
 
 `NamedParameterJdbcTemplate` 对 `JdbcTemplate` 进行了包装，以代替 JDBC `?` 占位符的方式而进行带参数的 SQL 语句执行。
