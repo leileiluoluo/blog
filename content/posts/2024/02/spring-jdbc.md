@@ -204,7 +204,7 @@ public void deleteById(Integer id) {
 }
 ```
 
-使用 `JdbcTemplate` 进行批量更新：
+使用 `JdbcTemplate` 对 User 列表进行批量更新：
 
 ```java
 // src/main/java/com/example/demo/dao/impl/UserDaoImpl.java
