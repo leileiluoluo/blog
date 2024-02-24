@@ -150,6 +150,27 @@ spring:
 
 该部分以封装一个 User 增删改查的 DAO 实现类（[UserDaoImpl.java](https://github.com/olzhy/java-exercises/blob/main/spring-jdbc-demo/src/main/java/com/example/demo/dao/impl/UserDaoImpl.java)）为例来演示 Spring JDBC 核心功能的使用。
 
+首先附上 User Model 类的代码：
+
+```java
+// src/main/java/com/example/demo/model/User.java
+package com.example.demo.model;
+
+import lombok.Data;
+import java.util.Date;
+
+@Data
+public class User {
+
+    private Integer id;
+    private String name;
+    private Integer age;
+    private String email;
+    private Date createdAt;
+
+}
+```
+
 ### 3.1 JdbcTemplate 的使用
 
 `JdbcTemplate` 是 Spring JDBC 中被使用最多的一个类，其自动管理资源的创建和释放，可以使用其来执行 SQL 查询、SQL 更新或调用存储过程。
