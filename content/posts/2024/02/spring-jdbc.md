@@ -398,7 +398,43 @@ public User getByIdUsingProcedure(Integer id) {
 
 可以看到，使用 `SimpleJdbcCall` 调用存储过程亦非常简单，只需给对应的 `IN` 字段设值，调用后从 `OUT` 字段取值即可。
 
-综上，本文首先对 Spring JDBC 的基础知识进行了介绍，然后准备了一下测试数据与示例工程，最后以示例代码的方式演示了 Spring JDBC 的使用。文中涉及的所有示例代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-jdbc-demo)，欢迎关注或 Fork。
+### 3.5 SQLExceptionTranslator 的使用
+
+Spring JDBC 自带的 `SQLExceptionTranslator`（默认的异常翻译实现类为 `SQLExceptionSubclassTranslator`）会将数据库层级的 `SQLException` 自动翻译为 Spring 框架层级的 `org.springframework.dao.DataAccessException`。
+
+下面写一个单元测试：调用 `userDao` 的 `update` 方法时，故意将 `age` 设置为 `null`，来尝试让该方法抛出异常。
+
+```java
+// src/test/java/com/example/demo/dao/UserDaoTest.java
+@Test
+public void testUpdateWithException() {
+    User user = new User();
+    user.setId(1);
+    user.setName("Larry");
+    user.setAge(null);
+    user.setEmail("larry@larry.com");
+
+    assertThrows(
+            DataIntegrityViolationException.class,
+            () -> userDao.update(user)
+    );
+}
+```
+
+对应的 SQL 语句与 MySQL 返回的原始错误如下：
+
+```sql
+-- [Code: 1048, SQL State: 23000] Column 'age' cannot be null
+UPDATE user
+SET name = 'Larry', age = null, email = 'larry@larry.com'
+WHERE id = 1;
+```
+
+而测试用例 `testUpdateWithException` 调用 `userDao` 的 `update` 方法抛出的异常为 `org.springframework.dao.DataIntegrityViolationException`（其为 `DataAccessException` 的子类），非数据库层级的 `SQLException`。这是因为 Spring JDBC 自带的 `SQLExceptionSubclassTranslator` 类帮助实现了常见错误的翻译。
+
+如果我们想根据 SQL 错误码自定义抛出的异常，则可以通过继承 `SQLErrorCodeSQLExceptionTranslator` 类并重写其 `doTranslate` 方法来实现。
+
+综上，本文首先对 Spring JDBC 的基础知识进行了介绍，然后准备了一下测试数据与示例工程，最后以示例代码的方式演示了 Spring JDBC 中各个数据访问核心类与自带翻译器的使用。文中涉及的所有示例代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-jdbc-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
