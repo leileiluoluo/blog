@@ -302,7 +302,7 @@ public int[] batchUpdateUsingNamedParameters(List<User> users) {
 
 ### 3.3 JdbcClient 的使用
 
-`JdbcTemplate` 与 `NamedParameterJdbcTemplate` 用起来依然觉得没那么方便？下面试一下封装了它们两个功能的更加易用的统一 API `JdbcClient` 的使用。
+`JdbcTemplate` 与 `NamedParameterJdbcTemplate` 用起来依然觉得没那么方便？下面试一下更易用的统一 API `JdbcClient` 的使用。
 
 使用 `JdbcClient` 将带参数的查询结果直接映射为 Java Model 类：
 
@@ -421,7 +421,7 @@ public void testUpdateWithException() {
 }
 ```
 
-对应的 SQL 语句与 MySQL 返回的原始错误如下：
+`userDao` 的 `update` 方法对应的 SQL 语句以及 MySQL 返回的原始错误如下：
 
 ```sql
 -- [Code: 1048, SQL State: 23000] Column 'age' cannot be null
