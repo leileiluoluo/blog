@@ -184,7 +184,7 @@ public List<User> listAll() {
 }
 ```
 
-此外，还可以调用 `JdbcTemplate` 的 `update` 方法来进行更新和删除：
+还可以调用 `JdbcTemplate` 的 `update` 方法来进行更新和删除：
 
 ```java
 // src/main/java/com/example/demo/dao/impl/UserDaoImpl.java
@@ -204,6 +204,30 @@ public void deleteById(Integer id) {
 }
 ```
 
+使用 `JdbcTemplate` 进行批量更新：
+
+```java
+// src/main/java/com/example/demo/dao/impl/UserDaoImpl.java
+@Override
+public int[] batchUpdate(List<User> users) {
+    return jdbcTemplate.batchUpdate(
+            "update user set name = ?, age = ?, email = ? where id = ?",
+            new BatchPreparedStatementSetter() {
+                public void setValues(PreparedStatement ps, int i) throws SQLException {
+                    User user = users.get(i);
+                    ps.setString(1, user.getName());
+                    ps.setInt(2, user.getAge());
+                    ps.setString(3, user.getEmail());
+                    ps.setInt(4, user.getId());
+                }
+
+                public int getBatchSize() {
+                    return users.size();
+                }
+            });
+}
+```
+
 ### 3.2 NamedParameterJdbcTemplate 的使用
 
 `NamedParameterJdbcTemplate` 对 `JdbcTemplate` 进行了包装，以代替 JDBC `?` 占位符的方式而进行带参数的 SQL 语句执行。
@@ -217,6 +241,18 @@ public Integer countByName(String name) {
     String sql = "select count(*) from user where name = :name";
     SqlParameterSource namedParameters = new MapSqlParameterSource("name", name);
     return namedParameterJdbcTemplate.queryForObject(sql, namedParameters, Integer.class);
+}
+```
+
+此外，还可以使用 `NamedParameterJdbcTemplate` 对上面的批量更新（`batchUpdate`）方法的实现进行简化：
+
+```java
+// src/main/java/com/example/demo/dao/impl/UserDaoImpl.java
+@Override
+public int[] batchUpdateUsingNamedParameters(List<User> users) {
+    return namedParameterJdbcTemplate.batchUpdate(
+            "update user set name = :name, age = :age, email = :email where id = :id",
+            SqlParameterSourceUtils.createBatch(users));
 }
 ```
 
