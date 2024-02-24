@@ -267,7 +267,7 @@ public Integer countByName(String name) {
 }
 ```
 
-此外，还可以使用 `NamedParameterJdbcTemplate` 对上面的批量更新（`batchUpdate`）方法的实现进行简化：
+此外，还可以使用 `NamedParameterJdbcTemplate` 对上面的批量更新（`batchUpdate`）方法进行简化：
 
 ```java
 // src/main/java/com/example/demo/dao/impl/UserDaoImpl.java
