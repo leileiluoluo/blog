@@ -204,7 +204,7 @@ public void deleteById(Integer id) {
 }
 ```
 
-使用 `JdbcTemplate` 对 User 列表进行批量更新：
+使用 `JdbcTemplate` 对 User 列表进行批量更新该怎么写呢？需要在调用 `JdbcTemplate` 的 `batchUpdate` 方法时传入一个 `BatchPreparedStatementSetter` 接口的实现：
 
 ```java
 // src/main/java/com/example/demo/dao/impl/UserDaoImpl.java
@@ -228,9 +228,10 @@ public int[] batchUpdate(List<User> users) {
 }
 ```
 
-使用 `JdbcTemplate` 插入单个 User 并返回生成的 ID，该怎么写呢？
+使用 `JdbcTemplate` 插入单个 User 并返回生成的 ID，该怎么写呢？需要在调用 `JdbcTemplate` 的 `update` 方法时传入一个 `KeyHolder` 对象。
 
 ```java
+// src/main/java/com/example/demo/dao/impl/UserDaoImpl.java
 @Override
 public Integer save(User user) {
     String sql = "insert into user(name, age, email, created_at) values(?, ?, ?, now())";
