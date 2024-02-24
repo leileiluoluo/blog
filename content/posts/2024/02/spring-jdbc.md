@@ -319,6 +319,83 @@ public User getById(Integer id) {
 
 可以看到，相较 `JdbcTemplate`，使用 `JdbcClient` 时，无需实现字段的映射逻辑，直接指定对应的 Java Model 类即可获取结果；同时，参数的指定也比 `NamedParameterJdbcTemplate` 更加简单。
 
+### 3.4 SimpleJdbcInsert 与 SimpleJdbcCall 的使用
+
+`SimpleJdbcInsert` 与 `SimpleJdbcCall` 分别用于数据的插入与存储过程的调用，此二者可通过 JDBC 驱动来获取数据库的元数据信息，所以在使用时可以省去一些配置。
+
+下面新建一个 `SimpleJdbcInsert` 实例，并使用其来插入单个 User 并返回生成的 ID：
+
+```java
+// src/main/java/com/example/demo/dao/impl/UserDaoImpl.java
+@PostConstruct
+public void initialize() {
+    simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
+            .withTableName("user")
+            .usingGeneratedKeyColumns("id");
+}
+
+@Override
+public Integer saveUsingSimpleInsert(User user) {
+    Map<String, Object> parameters = new HashMap<>(4);
+    parameters.put("name", user.getName());
+    parameters.put("age", user.getAge());
+    parameters.put("email", user.getEmail());
+    parameters.put("created_at", new Date());
+    Number id = simpleJdbcInsert.executeAndReturnKey(parameters);
+    return id.intValue();
+}
+```
+
+可以看到，我们在初始化 `SimpleJdbcInsert` 实例的时候仅指定了表名和 ID 列名，而在 `saveUsingSimpleInsert` 方法内也未编写 `INSERT` SQL 语句即可进行数据插入。
+
+下面看一个使用 `SimpleJdbcCall` 调用存储过程的示例。
+
+首先使用如下 SQL 语句新建一个存储过程（功能为根据 ID 查询 User）：
+
+```sql
+DELIMITER //
+
+CREATE PROCEDURE get_user_by_id (
+    IN user_id INT,
+    OUT user_name VARCHAR(20),
+    OUT user_age INT,
+    OUT user_email VARCHAR(20),
+    OUT user_created_at TIMESTAMP)
+BEGIN
+    SELECT name, age, email, created_at
+    INTO user_name, user_age, user_email, user_created_at
+    FROM user where id = user_id;
+END //
+
+DELIMITER ;
+```
+
+然后看一下初始化 `SimpleJdbcCall` 实例以及使用其调用存储过程 `get_user_by_id` 来查询 User 的示例：
+
+```java
+// src/main/java/com/example/demo/dao/impl/UserDaoImpl.java
+@PostConstruct
+public void initialize() {
+    simpleJdbcCall = new SimpleJdbcCall(dataSource)
+            .withProcedureName("get_user_by_id");
+}
+
+@Override
+public User getByIdUsingProcedure(Integer id) {
+    SqlParameterSource in = new MapSqlParameterSource()
+            .addValue("user_id", id);
+
+    Map<String, Object> out = simpleJdbcCall.execute(in);
+    User user = new User();
+    user.setId(id);
+    user.setName((String) out.get("user_name"));
+    user.setAge((Integer) out.get("user_age"));
+    user.setEmail((String) out.get("user_email"));
+    user.setCreatedAt((Date) out.get("user_created_at"));
+    return user;
+}
+```
+
 综上，本文首先对 Spring JDBC 的基础知识进行了介绍，然后准备了一下测试数据与示例工程，最后以示例代码的方式演示了 Spring JDBC 的使用。文中涉及的所有示例代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-jdbc-demo)，欢迎关注或 Fork。
 
 > 参考资料
