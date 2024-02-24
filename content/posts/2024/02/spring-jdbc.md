@@ -430,7 +430,7 @@ SET name = 'Larry', age = null, email = 'larry@larry.com'
 WHERE id = 1;
 ```
 
-而测试用例 `testUpdateWithException` 调用 `userDao` 的 `update` 方法抛出的异常为 `org.springframework.dao.DataIntegrityViolationException`（其为 `DataAccessException` 的子类），非数据库层级的 `SQLException`。这是因为 Spring JDBC 自带的 `SQLExceptionSubclassTranslator` 类帮助实现了常见错误的翻译。
+而测试用例 `testUpdateWithException` 调用 `userDao` 的 `update` 方法抛出的异常为 `org.springframework.dao.DataIntegrityViolationException`（其为 `DataAccessException` 的子类），非数据库层级的 `SQLException`。这是因为 Spring JDBC 自带的 `SQLExceptionSubclassTranslator` 类已帮助实现了常见 SQL 错误的翻译。
 
 如果我们想根据 SQL 错误码自定义抛出的异常，则可以通过继承 `SQLErrorCodeSQLExceptionTranslator` 类并重写其 `doTranslate` 方法来实现。
 
