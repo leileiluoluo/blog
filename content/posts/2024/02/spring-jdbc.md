@@ -1,5 +1,5 @@
 ---
-title: 如何使用 Spring JDBC 进行数据库操作？
+title: 如何使用 Spring JDBC 进行数据库访问？
 author: olzhy
 type: post
 date: 2024-02-22T08:00:00+08:00
