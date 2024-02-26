@@ -9,6 +9,7 @@ categories:
 tags:
   - Java
   - PostgreSQL
+  - Maven
 keywords:
   - Java
   - PostgreSQL
