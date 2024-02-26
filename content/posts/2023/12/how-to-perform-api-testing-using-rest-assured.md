@@ -9,7 +9,6 @@ categories:
 tags:
   - 自动化测试
   - Java
-  - Maven
 keywords:
   - REST Assured
   - API 测试

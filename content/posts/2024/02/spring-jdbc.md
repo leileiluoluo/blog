@@ -9,7 +9,6 @@ categories:
 tags:
   - Spring
   - Java
-  - Maven
 keywords:
   - Spring JDBC
 description: 本文首先对 Spring JDBC 的基础知识进行了介绍，然后准备了一下测试数据与示例工程，最后以示例代码的方式演示了 Spring JDBC 的使用。

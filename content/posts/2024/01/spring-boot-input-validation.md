@@ -9,7 +9,6 @@ categories:
 tags:
   - Spring
   - Java
-  - Maven
 keywords:
   - Spring Boot
   - Validation
