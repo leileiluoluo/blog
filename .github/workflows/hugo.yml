@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
@@ -26,6 +26,42 @@ jobs:
           hugoVersion: extended_0.81.0
           args: --minify
           siteDir: /github/workspace
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: false
+          fetch-depth: 0
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.81.0'
+          extended: true
+      - name: Hugo Build
+        run: |
+          hugo --minify
+      - name: Copy file via ssh key
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          source: './public'
+          target: '/tmp/leileiluoluo/'
+      - name: Start Service
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            mkdir -p /usr/share/nginx/html/leileiluoluo
+            cp -rf /tmp/leileiluoluo/public/* /usr/share/nginx/html/leileiluoluo
+            service nginx reload
   sync:
     needs: deploy
     runs-on: ubuntu-latest
