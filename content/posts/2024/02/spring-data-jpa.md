@@ -53,9 +53,9 @@ CREATE TABLE user (
 );
 
 INSERT INTO user(name, age, email, created_at, updated_at) VALUES
-    ('Larry', 18, 'larry@larry.com', now(), now()),
-    ('Jacky', 28, 'jacky@jacky.com', now(), now()),
-    ('Lucy', 20, 'lucy@lucy.com', now(), now());
+    ('Larry', 18, 'larry@larry.com', '2024-01-01 08:00:00', '2024-01-01 08:00:00'),
+    ('Jacky', 28, 'jacky@jacky.com', '2024-02-01 08:00:00', '2024-02-01 08:00:00'),
+    ('Lucy', 20, 'lucy@lucy.com', '2024-03-01 08:00:00', '2024-03-01 08:00:00');
 ```
 
 ### 1.2 示例工程介绍
