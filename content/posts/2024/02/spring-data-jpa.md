@@ -12,7 +12,7 @@ tags:
 keywords:
   - Spring Data
   - JPA
-description: 本文以示例代码的方式演示了 Spring Data JPA 的使用。
+description: 本文对 Spring Data JPA 进行了介绍，并以示例代码的方式演示了 Spring Data JPA 的使用。
 ---
 
 JPA（Jakarta Persistence API）是一种基于 ORM（Object-Relational Mapping，对象关系映射）技术的 Java EE 规范，用于在 Java 应用程序和关系型数据库之间持久化、访问和管理数据。JPA 规范提供了一系列注解和 API 用于将 Java 对象映射到数据库表、定义实体之间的关系以及执行数据库操作，从而简化了 Java 应用程序数据持久化层的开发。
