@@ -90,7 +90,7 @@ CREATE TABLE user (
 );
 
 INSERT INTO user(name, age, email, created_at) VALUES
-    ('Larry', 18, 'larry@larry.com', now());
+    ('Larry', 18, 'larry@larry.com', now()),
     ('Jacky', 28, 'jacky@jacky.com', now()),
     ('Lucy', 20, 'lucy@lucy.com', now());
 ```
