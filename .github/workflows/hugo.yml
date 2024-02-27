@@ -49,8 +49,8 @@ jobs:
           fetch-depth: 0
       - name: Run shell
         run: |
-             ls -lht
-             find . -type f | xargs sed -i "s#https://olzhy.github.io#https://leileiluoluo.com#g"
+          ls -lht
+          find . -type f | xargs sed -i "s#https://olzhy.github.io#https://leileiluoluo.com#g"
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
