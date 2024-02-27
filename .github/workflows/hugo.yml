@@ -26,6 +26,19 @@ jobs:
           hugoVersion: extended_0.81.0
           args: --minify
           siteDir: /github/workspace
+
+  sync:
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync to Gitee
+        uses: wearerequired/git-mirror-action@master
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
+        with:
+          source-repo: "git@github.com:olzhy/olzhy.github.io.git"
+          destination-repo: "git@gitee.com:olzhy/olzhy.github.io.git"
+
   deploy:
     runs-on: ubuntu-latest
     steps:
@@ -62,14 +75,3 @@ jobs:
             mkdir -p /usr/share/nginx/html/leileiluoluo
             cp -rf /tmp/leileiluoluo/public/* /usr/share/nginx/html/leileiluoluo
             service nginx reload
-  sync:
-    needs: deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Sync to Gitee
-        uses: wearerequired/git-mirror-action@master
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
-        with:
-          source-repo: "git@github.com:olzhy/olzhy.github.io.git"
-          destination-repo: "git@gitee.com:olzhy/olzhy.github.io.git"
