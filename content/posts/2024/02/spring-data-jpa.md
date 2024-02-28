@@ -101,9 +101,29 @@ spring:
     url: jdbc:mysql://localhost:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
     username: root
     password: root
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 ```
 
+主要配置了数据库连接信息，并开启了 SQL 语句的打印。
+
 这样，测试数据与示例工程脚手架就准备好了。接下来即以示例代码的方式对 Spring Data JPA 的主要功能进行介绍。
+
+## 2 初步使用 Spring Data JPA
+
+### 2.1 Repository 介绍
+
+要想使用 Spring Data JPA 的数据库访问能力，最直接的方法是定义一个 `Repository` 接口，然后让该接口扩展 `org.springframework.data.repository.Repository` 接口（或其衍生接口），并指定 Model 类和 ID 字段的类型。
+
+可以扩展哪些 `Repository` 接口呢？罗列如下：
+
+- `Repository`
+- `CrudRepository` 与 `ListCrudRepository`
+
+  `CrudRepository` 涵盖常用的增删改查方法，`ListCrudRepository` 与其类似，不同的是针对集合条目的返回，`CrudRepository` 使用的类型是 `Iterable<T>`，而 `ListCrudRepository` 使用的类型是 `List<T>`。
 
 文中涉及的所有示例代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-data-jpa-demo)，欢迎关注或 Fork。
 
