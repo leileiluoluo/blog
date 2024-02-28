@@ -121,9 +121,48 @@ spring:
 常见的可扩展 `Repository` 接口有哪些呢？它们之间有什么差别呢？罗列如下：
 
 - `Repository`
+
+  ```java
+  public interface Repository<T, ID> {
+  }
+  ```
+
 - `CrudRepository` 与 `ListCrudRepository`
 
-  `CrudRepository` 涵盖常用的增删改查方法，`ListCrudRepository` 与其类似，不同的是针对集合条目的返回，`CrudRepository` 使用的类型是 `Iterable<T>`，而 `ListCrudRepository` 使用的类型是 `List<T>`。
+  ```java
+  @NoRepositoryBean
+  public interface CrudRepository<T, ID> extends Repository<T, ID> {
+      <S extends T> S save(S entity);
+
+      <S extends T> Iterable<S> saveAll(Iterable<S> entities);
+
+      Optional<T> findById(ID id);
+
+      boolean existsById(ID id);
+
+      Iterable<T> findAll();
+
+      long count();
+
+      void deleteById(ID id);
+
+      // ...
+  }
+  ```
+
+  ```java
+  @NoRepositoryBean
+  public interface ListCrudRepository<T, ID> extends CrudRepository<T, ID> {
+      <S extends T> List<S> saveAll(Iterable<S> entities);
+
+      List<T> findAll();
+
+      List<T> findAllById(Iterable<ID> ids);
+  }
+  ```
+
+  `CrudRepository` 涵盖常用的增删改查方法。
+  `ListCrudRepository` 扩展自 `CrudRepository`，功能与 `CrudRepository` 类似，不同的是针对集合条目的返回，`CrudRepository` 使用的类型是 `Iterable<T>`，而 `ListCrudRepository` 使用的类型是 `List<T>`。
 
 文中涉及的所有示例代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-data-jpa-demo)，欢迎关注或 Fork。
 
