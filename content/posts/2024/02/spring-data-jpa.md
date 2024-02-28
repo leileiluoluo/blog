@@ -118,7 +118,7 @@ spring:
 
 要想使用 Spring Data JPA 的数据库访问能力，最直接的方法是定义一个 `Repository` 接口，然后让该接口扩展 `org.springframework.data.repository.Repository` 接口（或其衍生接口），并指定 Model 类和 ID 字段的类型。
 
-可以扩展哪些 `Repository` 接口呢？罗列如下：
+常见的可扩展 `Repository` 接口有哪些呢？它们之间有什么差别呢？罗列如下：
 
 - `Repository`
 - `CrudRepository` 与 `ListCrudRepository`
