@@ -198,7 +198,7 @@ spring:
 下面的示例为 `User` Model 定义了一个 `UserRepository` 来访问数据库，并让其扩展 `CrudRepository`，然后根据命名规则添加了一些额外的方法：
 
 ```java
-interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends CrudRepository<User, Long> {
   boolean existsByNameAndEmail(String name, String email);
 
   List<User> findByNameIgnoreCase(String name);
