@@ -232,7 +232,6 @@ public class User {
     private Integer age;
     private String email;
     private Date createdAt;
-    private Date updatedAt;
 }
 ```
 
@@ -274,7 +273,42 @@ public interface UserRepository extends Repository<User, Long> {
 
 然后在 `UserRepository` 接口内按照命名规则（支持：`find...By`、`exists...By`、`count...By` `delete...By`等）添加常用的增删改查方法。
 
-### 3.3 Repository 接口的使用
+### 3.3 使用 @Query 注解
+
+除了使用约定的命名规则添加常用方法外，还可以使用 `@Query` 注解进行查询：
+
+```java
+// src/main/java/com/example/demo/repository/UserRepository.java
+package com.example.demo.repository;
+
+public interface UserRepository extends Repository<User, Long> {
+    @Query("select u from User u where u.name = :name and u.age = :age")
+    User findByNameAndAge(@Param("name") String name, @Param("age") Integer age);
+
+    @Query("select u from User u where u.name = ?1 and u.age = ?2")
+    User findByNameAndAgeAnotherWay(String name, Integer age);
+}
+```
+
+### 3.4 使用 @Modifying 注解
+
+如果方法上的 `@Query` 语句需要更新数据库，则需要同时加上 `@Modifying` 注解。
+
+```java
+// src/main/java/com/example/demo/repository/UserRepository.java
+package com.example.demo.repository;
+
+public interface UserRepository extends Repository<User, Long> {
+    @Transactional
+    @Modifying
+    @Query("update User u set u.name = :name where u.id = :id")
+    void updateNameById(@Param("name") String name, @Param("id") Long id);
+}
+```
+
+您可能注意到如上代码还使用了一个 `@Transactional` 注解，其是用来开启事务支持的。
+
+### 3.5 对 Repository 接口进行测试
 
 下面编写一个单元测试类 [UserRepositoryTest.java](https://github.com/olzhy/java-exercises/blob/main/spring-data-jpa-demo/src/test/java/com/example/demo/repository/UserRepositoryTest.java)，即可对上面 `UserRepository` 接口中的方法进行测试了：
 
