@@ -195,8 +195,6 @@ spring:
   }
   ```
 
-我们在定义自己的 `Repository` 接口时，可以选择直接扩展基础 `Repository` 接口或扩展其派生接口，然后根据需要按照命名规则添加所需的方法，这样即拥有一个访问数据库的接口了。
-
 下面的示例为 `User` Model 定义了一个 `UserRepository` 来访问数据库，并让其扩展 `CrudRepository`，然后根据命名规则添加了一些额外的方法：
 
 ```java
