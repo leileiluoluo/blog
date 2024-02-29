@@ -207,9 +207,31 @@ spring:
         format_sql: true
 ```
 
-这样，测试数据与示例工程脚手架就准备好了。接下来即对 Spring Data JPA 进行使用。
+这样，测试数据与示例工程脚手架就准备好了。接下来即以示例代码的方式对 Spring Data JPA 进行使用。
 
 ## 3 Spring Data JPA 的使用
+
+### 3.1 定义 Model 类
+
+```java
+// src/main/java/com/example/demo/model/User.java
+package com.example.demo.model;
+
+@Data
+@Entity
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private Integer age;
+    private String email;
+    private Date createdAt;
+    private Date updatedAt;
+
+}
+```
 
 文中涉及的所有示例代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-data-jpa-demo)，欢迎关注或 Fork。
 
