@@ -344,7 +344,7 @@ public class UserRepositoryTest {
 }
 ```
 
-介绍完 Spring Data JPA 基础功能的使用，下面看一下 Spring Data JPA 高级功能的使用。
+介绍完 Spring Data JPA Repository 等基础功能的使用，下面看一下 Spring Data JPA 高级功能的使用。
 
 ## 4 Spring Data JPA 高级功能使用
 
