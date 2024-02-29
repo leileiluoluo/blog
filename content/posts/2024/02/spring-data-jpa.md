@@ -116,11 +116,15 @@ spring:
 
 ### 2.1 Repository 介绍
 
-要想使用 Spring Data JPA 的数据库访问能力，最直接的方法是定义一个 `Repository` 接口，然后让该接口扩展 `org.springframework.data.repository.Repository` 接口（或其衍生接口），并指定 Model 类和 ID 字段的类型。
+要想使用 Spring Data JPA 的数据库访问能力，最直接的方法是定义一个 `Repository` 接口（如：`UserRepository`），然后让该接口扩展 `org.springframework.data.repository.Repository` 接口（或其衍生接口），并指定对应的 Model 类和 ID 字段的类型。这样，即可以在定义的接口中按照命名规则来编写方法了，若扩展的是 `Repository` 接口的衍生接口（如：`CrudRepository`），则可以直接使用其里边提供的方法。
 
 常见的可扩展 `Repository` 接口有哪些呢？它们之间有什么差别呢？罗列如下：
 
 - `Repository`
+
+  Sping Data 提供的供数据库访问的核心基础接口。对该接口进行扩展并按照命名规则定义方法即可拥有数据库操作能力。
+
+  `Repository` 接口的定义如下：
 
   ```java
   public interface Repository<T, ID> {
@@ -128,6 +132,11 @@ spring:
   ```
 
 - `CrudRepository` 与 `ListCrudRepository`
+
+  `CrudRepository` 涵盖常用的增删改查方法。
+  `ListCrudRepository` 对 `CrudRepository` 进行了扩展，两者功能类似，不同的是针对集合条目的返回，`CrudRepository` 使用的类型是 `Iterable<T>`，而 `ListCrudRepository` 使用的类型是 `List<T>`。
+
+  `CrudRepository` 接口的定义如下：
 
   ```java
   @NoRepositoryBean
@@ -150,6 +159,8 @@ spring:
   }
   ```
 
+  `ListCrudRepository` 接口的定义如下：
+
   ```java
   @NoRepositoryBean
   public interface ListCrudRepository<T, ID> extends CrudRepository<T, ID> {
@@ -161,8 +172,46 @@ spring:
   }
   ```
 
-  `CrudRepository` 涵盖常用的增删改查方法。
-  `ListCrudRepository` 扩展自 `CrudRepository`，功能与 `CrudRepository` 类似，不同的是针对集合条目的返回，`CrudRepository` 使用的类型是 `Iterable<T>`，而 `ListCrudRepository` 使用的类型是 `List<T>`。
+- `PagingAndSortingRepository` 与 `ListPagingAndSortingRepository`
+
+  `PagingAndSortingRepository` 支持实体集合的分页与排序返回。
+  `ListPagingAndSortingRepository` 对 `PagingAndSortingRepository` 进行了扩展，两者功能类似，不同的是针对集合条目的返回，`PagingAndSortingRepository` 使用的类型是 `Iterable<T>`，而 `ListPagingAndSortingRepository` 使用的类型是 `List<T>`。
+
+  `PagingAndSortingRepository` 接口的定义如下：
+
+  ```java
+  @NoRepositoryBean
+  public interface PagingAndSortingRepository<T, ID> extends Repository<T, ID> {
+      Iterable<T> findAll(Sort sort);
+
+      Page<T> findAll(Pageable pageable);
+  }
+  ```
+
+  `ListPagingAndSortingRepository` 接口的定义如下：
+
+  ```java
+  @NoRepositoryBean
+  public interface ListPagingAndSortingRepository<T, ID> extends PagingAndSortingRepository<T, ID> {
+      List<T> findAll(Sort sort);
+  }
+  ```
+
+我们在定义自己的 `Repository` 接口时，可以选择直接扩展基础 `Repository` 接口或扩展其派生接口，然后根据需要按照命名规则添加所需的方法，这样即拥有一个访问数据库的接口了。
+
+下面的示例为 `User` Model 定义了一个 `UserRepository` 来访问数据库，并让其扩展 `CrudRepository`，然后根据命名规则添加了一些额外的方法：
+
+```java
+interface UserRepository extends CrudRepository<User, Long> {
+  boolean existsByNameAndEmail(String name, String email);
+
+  List<User> findByNameIgnoreCase(String name);
+
+  int countByName(String name);
+
+  int deleteByName(String name);
+}
+```
 
 文中涉及的所有示例代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-data-jpa-demo)，欢迎关注或 Fork。
 
