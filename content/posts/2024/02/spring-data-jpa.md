@@ -207,7 +207,7 @@ spring:
         format_sql: true
 ```
 
-这样，测试数据与示例工程脚手架就准备好了。接下来首先对即以示例代码的方式对 Spring Data JPA 的主要功能进行介绍。
+这样，测试数据与示例工程脚手架就准备好了。接下来即对 Spring Data JPA 进行使用。
 
 ## 3 Spring Data JPA 的使用
 
