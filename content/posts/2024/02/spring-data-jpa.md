@@ -93,7 +93,7 @@ INSERT INTO user(name, age, email, created_at, updated_at) VALUES
 </dependency>
 ```
 
-示例工程的 [application.yaml](https://github.com/olzhy/java-exercises/blob/main/spring-data-jpa-demo/src/main/resources/application.yaml) 配置文件内容如下：
+示例工程的 [application.yaml](https://github.com/olzhy/java-exercises/blob/main/spring-data-jpa-demo/src/main/resources/application.yaml) 配置文件内容如下（主要配置了数据库连接信息，并开启了 SQL 语句的打印）：
 
 ```yaml
 spring:
@@ -107,8 +107,6 @@ spring:
       hibernate:
         format_sql: true
 ```
-
-主要配置了数据库连接信息，并开启了 SQL 语句的打印。
 
 这样，测试数据与示例工程脚手架就准备好了。接下来即以示例代码的方式对 Spring Data JPA 的主要功能进行介绍。
 
