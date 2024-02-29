@@ -37,7 +37,7 @@ Hibernate Core：6.4.1.Final
 
 ### 1.1 准备测试数据
 
-在本地 MySQL 数据库执行如下 DDL 语句（包括：建库语句、建表语句和测试数据）：
+在本地 MySQL 数据库执行如下 DDL 语句（包括：建库语句、建表语句和测试数据）来准备测试数据：
 
 ```sql
 CREATE DATABASE test DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
