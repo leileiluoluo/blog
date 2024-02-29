@@ -246,20 +246,28 @@ package com.example.demo.repository;
 
 public interface UserRepository extends Repository<User, Long> {
 
+    // 根据 id 查询单个 User
     User findById(Long id);
 
+    // 分页排序查询 User 集合
     Page<User> findAll(Pageable pageable);
 
+    // 根据多个属性判断 User 是否存在
     boolean existsByNameAndEmail(String name, String email);
 
+    // 根据名称忽略大小写查询 User 集合
     List<User> findByNameIgnoreCase(String name);
 
+    // 根据名称查询 User 集合，并按照创建时间倒序返回
     List<User> findByNameOrderByCreatedAtDesc(String name);
 
+    // 新增或更新单个 User
     User save(User user);
 
-    void countByName(String name);
+    // 根据名称查询 User 总数
+    long countByName(String name);
 
+    // 根据 id 删除 User
     void deleteById(Long id);
 }
 ```
@@ -282,6 +290,7 @@ public class UserRepositoryTest {
 
     @Test
     public void testFindById() {
+        // 根据 id 查询单个 User
         User user = userRepository.findById(1L);
 
         assertNotNull(user);
@@ -290,6 +299,7 @@ public class UserRepositoryTest {
 
     @Test
     public void testFindAll() {
+        // pageNumber 为 1 （自 0 开始），pageSize 为 2，并按照 createdAt 倒序返回
         Pageable pageable = PageRequest.of(1, 2, Sort.by("createdAt").descending());
         Page<User> page = userRepository.findAll(pageable);
 
