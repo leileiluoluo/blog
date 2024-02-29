@@ -272,7 +272,7 @@ public interface UserRepository extends Repository<User, Long> {
 }
 ```
 
-接着，在 `UserRepository` 接口内按照命名规则（支持：`find...By`、`exists...By`、`count...By` `delete...By`等）添加常用的增删改查方法。
+然后在 `UserRepository` 接口内按照命名规则（支持：`find...By`、`exists...By`、`count...By` `delete...By`等）添加常用的增删改查方法。
 
 ### 3.3 Repository 接口的使用
 
