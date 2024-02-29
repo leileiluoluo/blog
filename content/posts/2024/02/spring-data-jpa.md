@@ -209,9 +209,13 @@ spring:
 
 这样，测试数据与示例工程脚手架就准备好了。接下来即以示例代码的方式对 Spring Data JPA 进行使用。
 
-## 3 Spring Data JPA 的使用
+## 3 Spring Data JPA 基础功能使用
+
+该部分以设计 User 的增删改查接口为例来演示 Spring Data JPA 基础功能的使用。
 
 ### 3.1 定义 Model 类
+
+首先需要定义一个 Model 类 [User.java](https://github.com/olzhy/java-exercises/blob/main/spring-data-jpa-demo/src/main/java/com/example/demo/model/User.java)：
 
 ```java
 // src/main/java/com/example/demo/model/User.java
@@ -229,11 +233,78 @@ public class User {
     private String email;
     private Date createdAt;
     private Date updatedAt;
-
 }
 ```
 
-文中涉及的所有示例代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-data-jpa-demo)，欢迎关注或 Fork。
+### 3.2 定义 Repository 接口
+
+接着定义一个仓库 [UserRepository.java](https://github.com/olzhy/java-exercises/blob/main/spring-data-jpa-demo/src/main/java/com/example/demo/repository/UserRepository.java) ，并让其扩展最基础的 `Repository` 接口：
+
+```java
+// src/main/java/com/example/demo/repository/UserRepository.java
+package com.example.demo.repository;
+
+public interface UserRepository extends Repository<User, Long> {
+
+    User findById(Long id);
+
+    Page<User> findAll(Pageable pageable);
+
+    boolean existsByNameAndEmail(String name, String email);
+
+    List<User> findByNameIgnoreCase(String name);
+
+    List<User> findByNameOrderByCreatedAtDesc(String name);
+
+    User save(User user);
+
+    void countByName(String name);
+
+    void deleteById(Long id);
+}
+```
+
+接着，在 `UserRepository` 接口内按照命名规则（支持：`find...By`、`exists...By`、`count...By` `delete...By`等）添加常用的增删改查方法。
+
+### 3.3 Repository 接口的使用
+
+下面编写一个单元测试类 [UserRepositoryTest.java](https://github.com/olzhy/java-exercises/blob/main/spring-data-jpa-demo/src/test/java/com/example/demo/repository/UserRepositoryTest.java)，即可对上面 `UserRepository` 接口中的方法进行测试了：
+
+```java
+// src/test/java/com/example/demo/repository/UserRepositoryTest.java
+package com.example.demo.repository;
+
+@SpringBootTest
+public class UserRepositoryTest {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Test
+    public void testFindById() {
+        User user = userRepository.findById(1L);
+
+        assertNotNull(user);
+        assertEquals("Larry", user.getName());
+    }
+
+    @Test
+    public void testFindAll() {
+        Pageable pageable = PageRequest.of(1, 2, Sort.by("createdAt").descending());
+        Page<User> page = userRepository.findAll(pageable);
+
+        assertEquals(1, page.getContent().size());
+    }
+
+    // ...
+}
+```
+
+介绍完 Spring Data JPA 基础功能的使用，下面看一下 Spring Data JPA 高级功能的使用。
+
+## 4 Spring Data JPA 高级功能使用
+
+文中示例工程中涉及的代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-data-jpa-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
