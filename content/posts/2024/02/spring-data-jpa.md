@@ -114,7 +114,7 @@ spring:
 
 ### 2.1 Repository 介绍
 
-要想使用 Spring Data JPA 的数据库访问能力，最直接的方法是定义一个 `Repository` 接口（如：`UserRepository`），然后让该接口扩展 `org.springframework.data.repository.Repository` 接口（或其衍生接口），并指定对应的 Model 类和 ID 字段的类型。这样，即可以在定义的接口中按照命名规则来编写方法了，若扩展的是 `Repository` 接口的衍生接口（如：`CrudRepository`），则可以直接使用其里边提供的方法。
+要想使用 Spring Data JPA 的数据库访问能力，最直接的方法是定义一个 `Repository` 接口（如：`UserRepository`），然后让该接口扩展 `org.springframework.data.repository.Repository` 接口，并指定对应的 Model 类和 ID 字段的类型，这样即可以在定义的接口中按照命名规则来编写方法了；此外，还可以让自定义接口扩展 `Repository` 接口的衍生接口（如：`CrudRepository`），这样可以直接使用其里边提供的方法。
 
 常见的可扩展 `Repository` 接口有哪些呢？它们之间有什么差别呢？罗列如下：
 
