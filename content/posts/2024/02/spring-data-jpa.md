@@ -209,9 +209,9 @@ spring:
 
 这样，测试数据与示例工程脚手架就准备好了。接下来即以示例代码的方式对 Spring Data JPA 进行使用。
 
-## 3 Spring Data JPA 基础功能使用
+## 3 Spring Data JPA Repository 的使用
 
-该部分以设计 User 的增删改查接口为例来演示 Spring Data JPA 基础功能的使用。
+该部分以设计 User 的增删改查接口为例来演示 Spring Data JPA Repository 的使用。
 
 ### 3.1 定义 Model 类
 
@@ -236,7 +236,7 @@ public class User {
 }
 ```
 
-### 3.2 定义 Repository 接口
+### 3.2 定义 Repository 接口并添加常用方法
 
 接着定义一个仓库 [UserRepository.java](https://github.com/olzhy/java-exercises/blob/main/spring-data-jpa-demo/src/main/java/com/example/demo/repository/UserRepository.java) ，并让其扩展最基础的 `Repository` 接口：
 
