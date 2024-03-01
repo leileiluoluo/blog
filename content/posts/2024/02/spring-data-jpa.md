@@ -273,7 +273,32 @@ public interface UserRepository extends Repository<User, Long> {
 }
 ```
 
-调用这些方法时其会自动生成 SQL 并组装成对应的返回结果。
+如上这些方法中，除 `Page<User> findAll(Pageable pageable);` 外，其它方法怎么传参，怎么使用，都一目了然。
+
+下面编写一个单元测试类 [UserRepositoryTest.java](https://github.com/olzhy/java-exercises/blob/main/spring-data-jpa-demo/src/test/java/com/example/demo/repository/UserRepositoryTest.java)，仅演示一下 `Page<User> findAll(Pageable pageable);` 方法的使用：
+
+```java
+// src/test/java/com/example/demo/repository/UserRepositoryTest.java
+package com.example.demo.repository;
+
+@SpringBootTest
+public class UserRepositoryTest {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Test
+    public void testFindAll() {
+        // 下面拼装一下 pageable 参数
+        // pageNumber 为 1 （自 0 开始），pageSize 为 2，并按照 createdAt 倒序返回
+        Pageable pageable = PageRequest.of(1, 2, Sort.by("createdAt").descending());
+        Page<User> page = userRepository.findAll(pageable);
+
+        // page.getContent() 返回类型为 List<User>
+        assertEquals(1, page.getContent().size());
+    }
+}
+```
 
 ### 3.3 使用 @Query 注解
 
@@ -461,7 +486,7 @@ public class UserServiceTest {
 }
 ```
 
-综上，本文首先对 Spring Data JPA 的基础知识进行了介绍，然后准备了一下测试数据与示例工程，最后以示例代码的方式演示了 Spring Data JPA 各种注解与特性的使用。文中示例工程涉及的代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-data-jpa-demo)，欢迎关注或 Fork。
+综上，本文首先对 Spring Data Repository 进行了介绍，然后准备了一下测试数据与示例工程，最后以示例代码的方式演示了 Spring Data JPA 各种注解与特性的使用。文中示例工程涉及的代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-data-jpa-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
