@@ -411,51 +411,7 @@ Specification<User> spec = (root, query, criteriaBuilder) -> {
 List<User> users = userRepository.findAll(spec);
 ```
 
-### 3.7 对 Repository 接口进行测试
-
-下面编写一个单元测试类 [UserRepositoryTest.java](https://github.com/olzhy/java-exercises/blob/main/spring-data-jpa-demo/src/test/java/com/example/demo/repository/UserRepositoryTest.java)，即可对上面 `UserRepository` 接口中的方法进行测试了：
-
-```java
-// src/test/java/com/example/demo/repository/UserRepositoryTest.java
-package com.example.demo.repository;
-
-@SpringBootTest
-public class UserRepositoryTest {
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Test
-    public void testFindById() {
-        // 根据 id 查询单个 User
-        User user = userRepository.findById(1L);
-
-        assertNotNull(user);
-        assertEquals("Larry", user.getName());
-    }
-
-    @Test
-    public void testFindAll() {
-        // pageNumber 为 1 （自 0 开始），pageSize 为 2，并按照 createdAt 倒序返回
-        Pageable pageable = PageRequest.of(1, 2, Sort.by("createdAt").descending());
-        Page<User> page = userRepository.findAll(pageable);
-
-        assertEquals(1, page.getContent().size());
-    }
-
-    @Test
-    public void testGetMd5EmailUsingProcedure() {
-        // 根据 id 查询 MD5 加密的 email
-        String md5Email = userRepository.getMd5EmailUsingProcedure(1L);
-
-        assertEquals("844ee4ade9b36ce52a49e9f7cf73157b", md5Email);
-    }
-
-    // ...
-}
-```
-
-### 3.8 @Transactional 注解的使用
+### 3.7 @Transactional 注解的使用
 
 `org.springframework.transaction.annotation.Transactional` 注解是用来支持事务的。事务是指一组数据库操作，这些操作要么全部执行成功，要么全部执行失败，如果其中任意一个操作失败，则所有操作都会被回滚到原始状态。
 
