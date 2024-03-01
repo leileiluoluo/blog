@@ -366,7 +366,51 @@ public interface UserRepository extends Repository<User, Long> {
 }
 ```
 
-### 3.6 对 Repository 接口进行测试
+### 3.6 使用 Specification 进行动态查询
+
+在实际业务场景中，我们可能需要根据条件动态生成查询语句。
+
+要想让某一 Repository 接口支持按 `Specification` 进行动态查询，需要让其扩展 `JpaSpecificationExecutor<T>` 接口：
+
+```java
+// src/main/java/com/example/demo/repository/UserRepository.java
+package com.example.demo.repository;
+public interface UserRepository extends Repository<User, Long>, JpaSpecificationExecutor<User> {
+}
+```
+
+如上代码即已使 `UserRepository` 支持指定 `Specification` 进行动态查询了。
+
+接下来，我们使用一下 `UserRepository` 从 `JpaSpecificationExecutor` 扩展来的方法 `List<T> findAll(Specification<T> spec);`，该方法需要一个 `Specification` 参数，该参数是一个接口，其定义如下：
+
+```java
+package org.springframework.data.jpa.domain;
+
+public interface Specification<T> {
+    Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder);
+}
+```
+
+可以看到，`Specification` 接口定义了一个 `toPredicate()` 方法，该方法接受一个 `Root<T>` 参数和一个 `CriteriaQuery<?>` 参数，并返回一个 `Predicate` 对象，表示最终拼好的查询条件。
+
+下面即新建一个 `Specification` 来生成一个 WHERE 条件：
+
+```java
+// 相当于：where age > 18 and name like '%La%';
+Specification<User> spec = (root, query, criteriaBuilder) -> {
+    Predicate ageGreaterThanCondition = criteriaBuilder.greaterThan(root.get("age"), 10);
+    Predicate nameLikeCondition = criteriaBuilder.like(root.get("name"), "%La%");
+    return criteriaBuilder.and(ageGreaterThanCondition, nameLikeCondition);
+};
+```
+
+最后，调用 `UserRepository` 的 `findAll(Specification<T> spec)` 方法并将 `Specification` 传入即可以获取到我们想查询的结果：
+
+```java
+List<User> users = userRepository.findAll(spec);
+```
+
+### 3.7 对 Repository 接口进行测试
 
 下面编写一个单元测试类 [UserRepositoryTest.java](https://github.com/olzhy/java-exercises/blob/main/spring-data-jpa-demo/src/test/java/com/example/demo/repository/UserRepositoryTest.java)，即可对上面 `UserRepository` 接口中的方法进行测试了：
 
