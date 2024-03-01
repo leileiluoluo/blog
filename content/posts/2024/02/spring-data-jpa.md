@@ -275,7 +275,7 @@ public interface UserRepository extends Repository<User, Long> {
 
 ### 3.3 使用 @Query 注解
 
-除了使用约定的命名规则添加常用方法外，还可以使用 `@Query` 注解进行查询：
+除了使用约定的命名规则添加常用方法外，还可以使用 `@Query` 注解自定义查询语句：
 
 ```java
 // src/main/java/com/example/demo/repository/UserRepository.java
@@ -316,7 +316,7 @@ public interface UserRepository extends Repository<User, Long> {
 }
 ```
 
-此外，我们还看到更新与删除方法使用了一个 `@Transactional` 注解，这是因为 Spring Data 的事务控制只对 Repository 开启了查询操作，写操作需要专门添加该注解才会放行。
+此外，我们看到方法上还使用了一个 `@Transactional` 注解，这是因为 Spring Data 的事务控制只对 Repository 开启了查询操作，写操作需要专门添加该注解才会放行。
 
 ### 3.5 调用存储过程
 
