@@ -12,18 +12,16 @@ tags:
 keywords:
   - Spring Data
   - JPA
-description: 本文对 Spring Data JPA 进行了介绍，并以示例代码的方式演示了 Spring Data JPA 的使用。
+description: 本文首先对 Spring Data Repository 进行了介绍；然后对测试数据进行了准备并对示例工程进行了介绍；最后以示例代码的方式演示了 Spring Data JPA 各个注解与功能的使用。
 ---
 
 JPA（Jakarta Persistence API）是一种基于 ORM（Object-Relational Mapping，对象关系映射）技术的 Java EE 规范，用于在 Java 应用程序和关系型数据库之间持久化、访问和管理数据。JPA 规范提供了一系列注解和 API 用于将 Java 对象映射到数据库表、定义实体之间的关系以及执行数据库操作，从而简化了 Java 应用程序数据持久化层的开发。
 
 Spring Data JPA 是 Spring 框架的一个模块，其通过提供仓库接口（Repository Interface）的方式进一步简化数据持久化层的开发。使用 Spring Data JPA 时，开发人员只需定义一个接口，并将该接口继承 Spring Data 的 Repository 接口，然后按照规范命名方法，那么 Spring Data JPA 就会根据方法名称自动生成对应的数据库查询语句。Spring Data JPA 还支持使用 `@Query` 注解自定义查询语句，以满足复杂的查询需求。此外，Spring Data JPA 还集成了 Spring Framework 的事务管理，且可以无缝与 Spring 框架的其它功能进行集成。
 
-本文首先会对 Spring Data JPA 的基础功能进行介绍；然后进行测试数据准备与示例工程介绍；最后以示例代码的方式来演示 Spring Data JPA 的使用。
+本文首先会对 Spring Data Repository 进行介绍；然后进行测试数据准备与示例工程介绍；最后以示例代码的方式来演示 Spring Data JPA 各个注解与功能的使用。
 
-## 1 Spring Data JPA 基础功能介绍
-
-### 1.1 Repository 介绍
+## 1 Spring Data Repository 介绍
 
 要想使用 Spring Data JPA 的数据库访问能力，最直接的方法是定义一个 `Repository` 接口（如：`UserRepository`），然后让该接口扩展 `org.springframework.data.repository.Repository` 接口，并指定对应的 Model 类和 ID 字段的类型，这样即可以在定义的接口中按照命名规则来编写方法了；此外，还可以让自定义接口扩展 `Repository` 接口的衍生接口（如：`CrudRepository`），这样可以直接使用其里边提供的方法。
 
