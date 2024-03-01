@@ -308,12 +308,43 @@ public interface UserRepository extends Repository<User, Long> {
     @Modifying
     @Query("update User u set u.name = :name where u.id = :id")
     void updateNameById(@Param("name") String name, @Param("id") Long id);
+
+    @Transactional
+    @Modifying
+    @Query("delete from User u where u.age > :age")
+    void deleteByAgeGreaterThan(@Param("age") Integer age);
 }
 ```
 
-您可能注意到如上代码还使用了一个 `@Transactional` 注解，其是用来开启事务支持的。
+可以看到更新与删除方法使用了一个 `@Transactional` 注解，其是用来开启事务支持的。
 
-### 3.5 对 Repository 接口进行测试
+### 3.5 调用存储过程
+
+首先使用如下 SQL 语句新建一个存储过程 `find_user_by_id`（功能为根据 ID 查询 User）：
+
+```sql
+DELIMITER //
+
+CREATE PROCEDURE find_user_by_id (
+    IN user_id INT,
+    OUT user_name VARCHAR(20),
+    OUT user_age INT,
+    OUT user_email VARCHAR(20),
+    OUT user_created_at TIMESTAMP)
+BEGIN
+    SELECT name, age, email, created_at
+    INTO user_name, user_age, user_email, user_created_at
+    FROM user where id = user_id;
+END //
+
+DELIMITER ;
+```
+
+```java
+
+```
+
+### 3.6 对 Repository 接口进行测试
 
 下面编写一个单元测试类 [UserRepositoryTest.java](https://github.com/olzhy/java-exercises/blob/main/spring-data-jpa-demo/src/test/java/com/example/demo/repository/UserRepositoryTest.java)，即可对上面 `UserRepository` 接口中的方法进行测试了：
 
