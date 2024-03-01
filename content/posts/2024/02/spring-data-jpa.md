@@ -207,9 +207,9 @@ spring:
 
 这样，测试数据与示例工程脚手架就准备好了。接下来即以示例代码的方式对 Spring Data JPA 进行使用。
 
-## 3 Spring Data JPA Repository 的使用
+## 3 Spring Data JPA 的使用
 
-该部分以设计 User 的增删改查接口为例来演示 Spring Data JPA Repository 的使用。
+该部分以设计 User 的增删改查接口为例来演示 Spring Data JPA 的使用。
 
 ### 3.1 定义 Model 类
 
@@ -232,6 +232,8 @@ public class User {
     private Date createdAt;
 }
 ```
+
+可以看到，我们使用 JPA 规范的 `@Entity` 注解将 User 标记为了实体类，然后将 `id` 属性标记为了主键并指定了生成策略。
 
 ### 3.2 定义 Repository 接口并添加常用方法
 
