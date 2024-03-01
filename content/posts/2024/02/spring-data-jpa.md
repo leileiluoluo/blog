@@ -368,7 +368,7 @@ public interface UserRepository extends Repository<User, Long> {
 
 ### 3.6 使用 Specification 进行动态查询
 
-在实际业务场景中，我们可能需要根据条件动态生成查询语句。
+在实际业务场景中，我们可能需要根据条件动态生成查询语句，`Specification` 即是用来动态拼装查询条件的。
 
 要想让某一 Repository 接口支持按 `Specification` 进行动态查询，需要让其扩展 `JpaSpecificationExecutor<T>` 接口：
 
@@ -382,7 +382,7 @@ public interface UserRepository extends Repository<User, Long>, JpaSpecification
 
 如上代码即已使 `UserRepository` 支持指定 `Specification` 进行动态查询了。
 
-接下来，我们使用一下 `UserRepository` 从 `JpaSpecificationExecutor` 扩展来的方法 `List<T> findAll(Specification<T> spec);`，该方法需要一个 `Specification` 参数，该参数是一个接口，其定义如下：
+接下来，我们使用一下 `UserRepository` 从 `JpaSpecificationExecutor` 扩展来的方法 `List<T> findAll(Specification<T> spec);`。该方法需要一个 `Specification` 参数，该参数是一个接口，其定义如下：
 
 ```java
 package org.springframework.data.jpa.domain;
