@@ -353,7 +353,7 @@ public class User {
 }
 ```
 
-然后，即可以在 `UserRepository` 上新建一个方法，并在其上加上 `@Procedure` 注解并设定 `name` 为刚刚使用 `@NamedStoredProcedureQuery` 配置元数据时设置的名称，那么该方法即可以当作普通方法进行使用了。
+然后，在 `UserRepository` 上新建一个方法，并在其上加上 `@Procedure` 注解并设定 `name` 为刚刚使用 `@NamedStoredProcedureQuery` 配置元数据时设置的名称，那么该方法在执行时即会调用存储过程。
 
 ```java
 // src/main/java/com/example/demo/repository/UserRepository.java
