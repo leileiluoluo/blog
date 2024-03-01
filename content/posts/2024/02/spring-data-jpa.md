@@ -320,7 +320,7 @@ public interface UserRepository extends Repository<User, Long> {
 
 ### 3.5 调用存储过程
 
-首先使用如下 SQL 语句新建一个存储过程 `find_user_by_id`（功能为根据 ID 查询 User）：
+首先使用如下 SQL 语句新建一个存储过程 `get_md5_email_by_id`（功能为根据 User ID 查询 Email 的 MD5 字符串）：
 
 ```sql
 DELIMITER //
