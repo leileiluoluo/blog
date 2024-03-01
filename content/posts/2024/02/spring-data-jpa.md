@@ -308,10 +308,15 @@ public interface UserRepository extends Repository<User, Long> {
     @Modifying
     @Query("update User u set u.name = :name where u.id = :id")
     void updateNameById(@Param("name") String name, @Param("id") Long id);
+
+    @Transactional
+    @Modifying
+    @Query("delete from User u where u.age > :age")
+    void deleteByAgeGreaterThan(@Param("age") Integer age);
 }
 ```
 
-您可能注意到如上代码还使用了一个 `@Transactional` 注解，其是用来开启事务支持的。
+可以看到更新与删除方法使用了一个 `@Transactional` 注解，其是用来开启事务支持的。
 
 ### 3.5 对 Repository 接口进行测试
 
