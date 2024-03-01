@@ -375,6 +375,7 @@ public interface UserRepository extends Repository<User, Long> {
 ```java
 // src/main/java/com/example/demo/repository/UserRepository.java
 package com.example.demo.repository;
+
 public interface UserRepository extends Repository<User, Long>, JpaSpecificationExecutor<User> {
 }
 ```
@@ -454,13 +455,69 @@ public class UserRepositoryTest {
 }
 ```
 
-介绍完 Repository 的使用，下面看一下稍微高级一点功能的使用。
+### 3.8 @Transactional 注解的使用
 
-## 4 Spring Data JPA 高级功能使用
+```java
+// src/main/java/com/example/demo/repository/UserRepository.java
+package com.example.demo.repository;
 
-### 4.1 使用 Specification 进行动态查询
+public interface UserRepository extends Repository<User, Long> {
+    @Transactional
+    @Modifying
+    @Query("update User u set u.name = :name where u.id = :id")
+    void updateNameById(@Param("name") String name, @Param("id") Long id);
 
-### 4.2 使用
+    @Transactional
+    @Modifying
+    @Query("delete from User u where u.age > :age")
+    void deleteByAgeGreaterThan(@Param("age") Integer age);
+
+    @Transactional
+    @Procedure(name = "User.getMd5EmailById")
+    String getMd5EmailUsingProcedure(@Param("user_id") Long id);
+
+}
+```
+
+```java
+// src/main/java/com/example/demo/service/UserServiceImpl.java
+package com.example.demo.service;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void deleteUserByAgeGreaterThanWithException(Integer age) {
+        userRepository.deleteByAgeGreaterThan(age);
+
+        throw new RuntimeException("transaction test");
+    }
+}
+```
+
+```java
+// src/test/java/com/example/demo/service/UserServiceTest.java
+package com.example.demo.service;
+
+@SpringBootTest
+public class UserServiceTest {
+
+    @Autowired
+    private UserService userService;
+
+    @Test
+    public void testDeleteUserByAgeGreaterThanWithException() {
+        assertThrows(
+                RuntimeException.class,
+                () -> userService.deleteUserByAgeGreaterThanWithException(1)
+        );
+    }
+}
+```
 
 文中示例工程中涉及的代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-data-jpa-demo)，欢迎关注或 Fork。
 
