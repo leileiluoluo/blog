@@ -143,7 +143,7 @@ CREATE DATABASE test DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
 DROP TABLE IF EXISTS user;
 CREATE TABLE user (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(20) NOT NULL,
     age INT NOT NULL,
     email VARCHAR(20) NOT NULL,
@@ -324,16 +324,13 @@ public interface UserRepository extends Repository<User, Long> {
 
 ```sql
 DELIMITER //
-
-CREATE PROCEDURE find_user_by_id (
-    IN user_id INT,
-    OUT user_name VARCHAR(20),
-    OUT user_age INT,
-    OUT user_email VARCHAR(20),
-    OUT user_created_at TIMESTAMP)
+DROP PROCEDURE IF EXISTS get_md5_email_by_id //
+CREATE PROCEDURE get_md5_email_by_id (
+    IN user_id BIGINT,
+    OUT md5_email VARCHAR(32))
 BEGIN
-    SELECT name, age, email, created_at
-    INTO user_name, user_age, user_email, user_created_at
+    SELECT md5(email)
+    INTO md5_email
     FROM user where id = user_id;
 END //
 
@@ -341,7 +338,25 @@ DELIMITER ;
 ```
 
 ```java
+// src/main/java/com/example/demo/model/User.java
+package com.example.demo.model;
 
+@Entity
+@NamedStoredProcedureQuery(name = "User.getMd5EmailById", procedureName = "get_md5_email_by_id", parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.OUT, type = String.class)})
+public class User {
+}
+```
+
+```java
+// src/main/java/com/example/demo/repository/UserRepository.java
+package com.example.demo.repository;
+
+public interface UserRepository extends Repository<User, Long> {
+    @Procedure(procedureName = "get_md5_email_by_id")
+    String getMd5EmailUsingProcedure(@Param("user_id") Long id);
+}
 ```
 
 ### 3.6 对 Repository 接口进行测试
