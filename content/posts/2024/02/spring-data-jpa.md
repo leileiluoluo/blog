@@ -287,8 +287,13 @@ public interface UserRepository extends Repository<User, Long> {
 
     @Query("select u from User u where u.name = ?1 and u.age = ?2")
     User findByNameAndAgeAnotherWay(String name, Integer age);
+
+    @Query(value = "select * from user where name = ?1 and age = ?2", nativeQuery = true)
+    User findByNameAndAgeWithNativeSQL(String name, Integer age);
 }
 ```
+
+`findByNameAndAge`、`findByNameAndAgeAnotherWay`、`findByNameAndAgeWithNativeSQL` 分别使用了指定参数名方式、占位符方式、原生 SQL 方式进行查询。
 
 ### 3.4 使用 @Modifying 注解
 
@@ -347,6 +352,10 @@ public class UserRepositoryTest {
 介绍完 Spring Data JPA Repository 等基础功能的使用，下面看一下 Spring Data JPA 高级功能的使用。
 
 ## 4 Spring Data JPA 高级功能使用
+
+### 4.1 使用 Specification 进行动态查询
+
+### 4.2 使用
 
 文中示例工程中涉及的代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-data-jpa-demo)，欢迎关注或 Fork。
 
