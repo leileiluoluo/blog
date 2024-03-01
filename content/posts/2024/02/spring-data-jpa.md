@@ -320,7 +320,7 @@ public interface UserRepository extends Repository<User, Long> {
 
 ### 3.5 调用存储过程
 
-首先使用如下 SQL 语句新建一个存储过程 `get_md5_email_by_id`（功能为根据 User ID 查询 Email 的 MD5 字符串）：
+首先使用如下 SQL 语句新建一个存储过程 `get_md5_email_by_id`：
 
 ```sql
 DELIMITER //
@@ -337,6 +337,10 @@ END //
 DELIMITER ;
 ```
 
+该存储过程的功能为根据 User ID 查询 Email 的 MD5 字符串。
+
+接着在 User Model 上使用 `@NamedStoredProcedureQuery` 注解配置该存储过程的元数据。
+
 ```java
 // src/main/java/com/example/demo/model/User.java
 package com.example.demo.model;
@@ -349,12 +353,15 @@ public class User {
 }
 ```
 
+然后，即可以在 `UserRepository` 上新建一个方法，并在其上加上 `@Procedure` 注解并指定名称，即可以使用了。
+
 ```java
 // src/main/java/com/example/demo/repository/UserRepository.java
 package com.example.demo.repository;
 
 public interface UserRepository extends Repository<User, Long> {
-    @Procedure(procedureName = "get_md5_email_by_id")
+    @Transactional
+    @Procedure(name = "User.getMd5EmailById")
     String getMd5EmailUsingProcedure(@Param("user_id") Long id);
 }
 ```
@@ -389,6 +396,14 @@ public class UserRepositoryTest {
         Page<User> page = userRepository.findAll(pageable);
 
         assertEquals(1, page.getContent().size());
+    }
+
+    @Test
+    public void testGetMd5EmailUsingProcedure() {
+        // 根据 id 查询 MD5 加密的 email
+        String md5Email = userRepository.getMd5EmailUsingProcedure(1L);
+
+        assertEquals("844ee4ade9b36ce52a49e9f7cf73157b", md5Email);
     }
 
     // ...
