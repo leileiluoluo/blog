@@ -237,7 +237,9 @@ public class User {
 
 ### 3.2 定义 Repository 接口并添加常用方法
 
-接着定义一个仓库 [UserRepository.java](https://github.com/olzhy/java-exercises/blob/main/spring-data-jpa-demo/src/main/java/com/example/demo/repository/UserRepository.java) ，并让其扩展最基础的 `Repository` 接口：
+接着定义一个仓库 [UserRepository.java](https://github.com/olzhy/java-exercises/blob/main/spring-data-jpa-demo/src/main/java/com/example/demo/repository/UserRepository.java) ，并让其扩展最基础的 `Repository` 接口。
+
+然后在 `UserRepository` 接口内按照命名规则（支持：`find...By`、`exists...By`、`count...By` `delete...By`等）添加常用的增删改查方法：
 
 ```java
 // src/main/java/com/example/demo/repository/UserRepository.java
@@ -271,7 +273,7 @@ public interface UserRepository extends Repository<User, Long> {
 }
 ```
 
-然后在 `UserRepository` 接口内按照命名规则（支持：`find...By`、`exists...By`、`count...By` `delete...By`等）添加常用的增删改查方法。调用这些方法时其会自动生成 SQL 并组装成对应的返回结果。
+调用这些方法时其会自动生成 SQL 并组装成对应的返回结果。
 
 ### 3.3 使用 @Query 注解
 
