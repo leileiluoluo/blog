@@ -316,7 +316,7 @@ public interface UserRepository extends Repository<User, Long> {
 }
 ```
 
-可以看到更新与删除方法使用了一个 `@Transactional` 注解，其是用来开启事务支持的。
+此外，我们还看到更新与删除方法使用了一个 `@Transactional` 注解，这是因为 Spring Data 的事务控制只对 Repository 开启了查询操作，写操作需要专门添加该注解才会放行。
 
 ### 3.5 调用存储过程
 
@@ -457,27 +457,9 @@ public class UserRepositoryTest {
 
 ### 3.8 @Transactional 注解的使用
 
-```java
-// src/main/java/com/example/demo/repository/UserRepository.java
-package com.example.demo.repository;
+`org.springframework.transaction.annotation.Transactional` 注解是用来支持事务的。事务是指一组数据库操作，这些操作要么全部执行成功，要么全部执行失败，如果其中任意一个操作失败，则所有操作都会被回滚到原始状态。
 
-public interface UserRepository extends Repository<User, Long> {
-    @Transactional
-    @Modifying
-    @Query("update User u set u.name = :name where u.id = :id")
-    void updateNameById(@Param("name") String name, @Param("id") Long id);
-
-    @Transactional
-    @Modifying
-    @Query("delete from User u where u.age > :age")
-    void deleteByAgeGreaterThan(@Param("age") Integer age);
-
-    @Transactional
-    @Procedure(name = "User.getMd5EmailById")
-    String getMd5EmailUsingProcedure(@Param("user_id") Long id);
-
-}
-```
+下面，尝试创建一个 `UserServiceImpl`，编写一个方法并引用 `UserRepository` 进行删除操作，但该方法在删除后抛出了异常：
 
 ```java
 // src/main/java/com/example/demo/service/UserServiceImpl.java
@@ -499,6 +481,8 @@ public class UserServiceImpl implements UserService {
 }
 ```
 
+因为我们在该方法上加了注解 `@Transactional(rollbackFor = Exception.class)`，那么调用该方法时，Spring 会检测到异常并进行回滚，所以不会真正的删除数据：
+
 ```java
 // src/test/java/com/example/demo/service/UserServiceTest.java
 package com.example.demo.service;
@@ -519,7 +503,7 @@ public class UserServiceTest {
 }
 ```
 
-文中示例工程中涉及的代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-data-jpa-demo)，欢迎关注或 Fork。
+综上，本文首先对 Spring Data JPA 的基础知识进行了介绍，然后准备了一下测试数据与示例工程，最后以示例代码的方式演示了 Spring Data JPA 各种注解与功能的使用。文中示例工程涉及的代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-data-jpa-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
