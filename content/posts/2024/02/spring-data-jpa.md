@@ -438,7 +438,7 @@ Specification<User> spec = (root, query, criteriaBuilder) -> {
 List<User> users = userRepository.findAll(spec);
 ```
 
-### 3.7 @Transactional 注解的使用
+### 3.7 使用 @Transactional 注解
 
 `org.springframework.transaction.annotation.Transactional` 注解是用来支持事务的。事务是指一组数据库操作，这些操作要么全部执行成功，要么全部执行失败，如果其中任意一个操作失败，则所有操作都会被回滚到原始状态。
 
