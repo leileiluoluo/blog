@@ -6,7 +6,7 @@ title = "磊磊落落"
 # theme
 theme = "northendlab-hugo"
 # post pagination
-paginate = "6"
+paginate = "10"
 # post excerpt
 summaryLength = "5"
 # disqus short name
@@ -69,28 +69,28 @@ link = "js/search.js"
 
 # main menu
 [[menu.main]]
+URL = "/categories/计算机/"
+name = "计算机"
+weight = 1
+
+[[menu.main]]
 URL = "/categories/随笔/"
 name = "随笔"
-weight = 1
+weight = 2
 
 [[menu.main]]
 URL = "/categories/读书/"
 name = "读书"
-weight = 2
+weight = 3
 
 [[menu.main]]
 URL = "/categories/观影/"
 name = "观影"
-weight = 3
+weight = 4
 
 [[menu.main]]
 URL = "/categories/练字/"
 name = "练字"
-weight = 4
-
-[[menu.main]]
-URL = "/categories/计算机/"
-name = "计算机"
 weight = 5
 
 # footer menu
