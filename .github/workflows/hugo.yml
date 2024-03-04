@@ -31,7 +31,7 @@ jobs:
         with:
           emptyCommits: false
         env:
-          github_token: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
+          personal_token: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
           external_repository: olzhy/olzhy.github.io
           publish_branch: master
           publish_dir: ./public
