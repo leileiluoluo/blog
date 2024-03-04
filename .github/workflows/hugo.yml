@@ -27,14 +27,14 @@ jobs:
         run: |
           hugo --minify
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v2.4.0
+        uses: peaceiris/actions-gh-pages@v3
         with:
           emptyCommits: false
         env:
-          GITHUB_TOKEN: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
-          EXTERNAL_REPOSITORY: olzhy/olzhy.github.io
-          PUBLISH_BRANCH: main
-          PUBLISH_DIR: ./public
+          github_token: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
+          external_repository: olzhy/olzhy.github.io
+          publish_branch: main
+          publish_dir: ./public
       - name: Copy file via ssh key
         uses: appleboy/scp-action@v0.1.4
         with:
