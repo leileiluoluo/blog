@@ -3,42 +3,9 @@ name: Github Actions for Hugo Deploy
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
-  publish:
-    runs-on: ubuntu-latest
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          submodules: false
-          fetch-depth: 0
-      - name: Publish Site
-        uses: chabad360/hugo-gh-pages@master
-        with:
-          githubToken: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
-          cname: olzhy.github.io
-          branch: master
-          repo: olzhy/olzhy.github.io
-          hugoVersion: extended_0.120.4
-          args: --minify
-          siteDir: /github/workspace
-
-  sync:
-    needs: publish
-    runs-on: ubuntu-latest
-    steps:
-      - name: Sync to Gitee
-        uses: wearerequired/git-mirror-action@master
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
-        with:
-          source-repo: "git@github.com:olzhy/olzhy.github.io.git"
-          destination-repo: "git@gitee.com:olzhy/olzhy.github.io.git"
-
   deploy:
     runs-on: ubuntu-latest
     steps:
@@ -54,7 +21,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: "0.120.4"
+          hugo-version: "0.123.7"
           extended: true
       - name: Hugo Build
         run: |
@@ -65,8 +32,8 @@ jobs:
           emptyCommits: false
         env:
           GITHUB_TOKEN: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
-          external_repository: olzhy/olzhy.github.io
-          PUBLISH_BRANCH: master
+          EXTERNAL_REPOSITORY: olzhy/olzhy.github.io
+          PUBLISH_BRANCH: main
           PUBLISH_DIR: ./public
       - name: Copy file via ssh key
         uses: appleboy/scp-action@v0.1.4
@@ -88,3 +55,15 @@ jobs:
             mkdir -p /usr/share/nginx/html/leileiluoluo
             cp -rf /tmp/leileiluoluo/public/* /usr/share/nginx/html/leileiluoluo
             service nginx reload
+
+  sync:
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync to Gitee
+        uses: wearerequired/git-mirror-action@master
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
+        with:
+          source-repo: "git@github.com:olzhy/olzhy.github.io.git"
+          destination-repo: "git@gitee.com:olzhy/olzhy.github.io.git"
