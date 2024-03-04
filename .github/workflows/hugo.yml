@@ -64,7 +64,7 @@ jobs:
         with:
           emptyCommits: false
         env:
-          ACTIONS_DEPLOY_KEY: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
           PUBLISH_BRANCH: master
           PUBLISH_DIR: /github/workspace
       - name: Copy file via ssh key
