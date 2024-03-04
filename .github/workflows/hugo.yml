@@ -23,7 +23,7 @@ jobs:
           cname: olzhy.github.io
           branch: master
           repo: olzhy/olzhy.github.io
-          hugoVersion: extended_0.123.7
+          hugoVersion: extended_0.120.4
           args: --minify
           siteDir: /github/workspace
 
@@ -54,7 +54,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: "0.123.7"
+          hugo-version: "0.120.4"
           extended: true
       - name: Hugo Build
         run: |
