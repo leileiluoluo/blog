@@ -59,6 +59,14 @@ jobs:
       - name: Hugo Build
         run: |
           hugo --minify
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v2.4.0
+        with:
+          emptyCommits: false
+        env:
+          ACTIONS_DEPLOY_KEY: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
+          PUBLISH_BRANCH: master
+          PUBLISH_DIR: /github/workspace
       - name: Copy file via ssh key
         uses: appleboy/scp-action@v0.1.4
         with:
