@@ -65,8 +65,9 @@ jobs:
           emptyCommits: false
         env:
           GITHUB_TOKEN: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
+          external_repository: olzhy/olzhy.github.io
           PUBLISH_BRANCH: master
-          PUBLISH_DIR: /github/workspace
+          PUBLISH_DIR: ./public
       - name: Copy file via ssh key
         uses: appleboy/scp-action@v0.1.4
         with:
