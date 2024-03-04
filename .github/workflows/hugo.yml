@@ -57,7 +57,7 @@ jobs:
             service nginx reload
 
   sync:
-    needs: publish
+    needs: deploy
     runs-on: ubuntu-latest
     steps:
       - name: Sync to Gitee
