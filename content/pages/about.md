@@ -12,7 +12,7 @@ wip_template:
 
 「大丈夫行事，当磊磊落落，如日月皎然。」——《晋书》
 
-大家好，我是浩然，一名软件开发工程师，我的博客「磊磊落落」建立于 2017 年，是我用于记录内心波澜，分享读书感想，思考人生哲学，关注社会百态，梳理计算机专业知识的纯原创站点。目前我在技术上主要关注：[Java](https://olzhy.github.io/tags/java/)、[Golang](https://olzhy.github.io/tags/golang/)、[Python](https://olzhy.github.io/tags/python/)、[前端开发](https://olzhy.github.io/tags/前端开发/)、[云原生](https://olzhy.github.io/tags/云原生/)、[架构设计](https://olzhy.github.io/tags/架构设计/)、[DevOps](https://olzhy.github.io/tags/devops/) 和 [自动化测试](https://olzhy.github.io/tags/自动化测试/)。
+大家好，我是浩然，一名软件开发工程师，我的博客「磊磊落落」建立于 2017 年，是我用于记录内心波澜，分享读书感想，思考人生哲学，关注社会百态，梳理计算机专业知识的纯原创站点。目前我在技术上主要关注：[Java](https://olzhy.github.io/tags/java/)、[Golang](https://olzhy.github.io/tags/golang/)、[Python](https://olzhy.github.io/tags/python/)、[前端开发](https://olzhy.github.io/tags/前端开发/)、[云原生](https://olzhy.github.io/tags/云原生/)、[架构设计](https://olzhy.github.io/tags/架构设计/)、[DevOps](https://olzhy.github.io/tags/devops/) 和[自动化测试](https://olzhy.github.io/tags/自动化测试/)。
 
 **许可证**
 
