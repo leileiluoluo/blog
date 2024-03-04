@@ -26,11 +26,11 @@ jobs:
       - name: Hugo Build
         run: |
           hugo --minify
-      - name: Deploy
+      - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           emptyCommits: false
-        env:
+        with:
           github_token: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
           external_repository: olzhy/olzhy.github.io
           publish_branch: master
