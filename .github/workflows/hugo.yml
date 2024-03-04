@@ -31,7 +31,7 @@ jobs:
         with:
           personal_token: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
           external_repository: olzhy/olzhy.github.io
-          publish_branch: main
+          publish_branch: master
           publish_dir: ./public
           allow_empty_commit: true
       - name: Copy file via ssh key
