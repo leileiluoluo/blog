@@ -35,6 +35,7 @@ jobs:
           external_repository: olzhy/olzhy.github.io
           publish_branch: main
           publish_dir: ./public
+          allow_empty_commit: true
       - name: Copy file via ssh key
         uses: appleboy/scp-action@v0.1.4
         with:
