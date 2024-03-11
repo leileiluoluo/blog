@@ -6,14 +6,14 @@ title = "磊磊落落"
 # theme
 theme = "northendlab-hugo"
 # post pagination
-paginate = "10"
+paginate = "6"
 # post excerpt
 summaryLength = "5"
 # disqus short name
 disqusShortname = "" # get your shortname form here : https://disqus.com
 
 [services.rss]
-    limit = 15
+    limit = 20
 
 # Author’s information
 [author]
