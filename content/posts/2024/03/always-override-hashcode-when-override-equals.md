@@ -16,9 +16,7 @@ keywords:
 description:
 ---
 
-`Object` 类是所有类的父类。
-
-`hashCode` 与 `equals` 方法均是 `Object` 类中定义的方法。其源码如下：
+`Object` 类是所有类的父类。`hashCode` 与 `equals` 均是 `Object` 类中定义的方法，其源码如下：
 
 ```java
 package java.lang;
