@@ -16,7 +16,7 @@ keywords:
 description:
 ---
 
-`Object` 类是所有类的父类。`hashCode` 与 `equals` 均是 `Object` 类中定义的方法，其源码如下：
+我们知道，Java 中 `Object` 类是所有类的父类，`hashCode` 与 `equals` 均是 `Object` 类中定义的方法。
 
 ```java
 package java.lang;
@@ -24,6 +24,10 @@ package java.lang;
 public class Object {
 
     /**
+     * Returns a hash code value for the object. This method is
+     * supported for the benefit of hash tables such as those provided by
+     * `java.util.HashMap`.
+     *
      * The general contract of `hashCode` is:
      *
      * a) Whenever it is invoked on the same object more than once during
@@ -46,11 +50,27 @@ public class Object {
     @IntrinsicCandidate
     public native int hashCode();
 
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @apiNote
+     * It is generally necessary to override the `hashCode` method whenever this
+     * method is overridden, so as to maintain the general contract for the `hashCode`
+     * method,  which states that equal objects must have equal hash codes.
+     */
     public boolean equals(Object obj) {
         return (this == obj);
     }
 }
 ```
+
+可以看到，`equals` 方法注释上 `@apiNote` 部分有这么一句话：「每当重写 `equals` 方法时，都需要重写 `hashCode` 方法，这样才没有破坏 `hashCode` 方法的通用约定，即：两个对象为 Equal 的话（调用 `equals` 方法为 `true`）， 那么这两个对象分别调用 `hashCode` 方法也需要返回相同的哈希值」。
+
+## 1 hashCode 方法的作用以及 hashCode 方法与 equals 方法的关系
+
+## 2 为什么重写 equals 方法时必须同时重写 hashCode 方法？
+
+`Object` 类是所有类的父类。`hashCode` 与 `equals` 均是 `Object` 类中定义的方法，其源码如下：
 
 > 参考资料
 >
