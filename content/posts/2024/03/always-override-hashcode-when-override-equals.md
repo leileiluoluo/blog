@@ -24,10 +24,10 @@ package java.lang;
  * Every class has {@code Object} as a superclass. All objects,
  * including arrays, implement the methods of this class.
  *
- * @see     java.lang.Class
  * @since   1.0
  */
 public class Object {
+
     /**
      * Returns a hash code value for the object. This method is
      * supported for the benefit of hash tables such as those provided by
@@ -61,7 +61,6 @@ public class Object {
      * @see     java.lang.Object#equals(java.lang.Object)
      * @see     java.lang.System#identityHashCode
      */
-    @IntrinsicCandidate
     public native int hashCode();
 
     /**
