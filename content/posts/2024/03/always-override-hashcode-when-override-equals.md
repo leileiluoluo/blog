@@ -1,5 +1,5 @@
 ---
-title: 为什么重写 equals 方法时必须同时重写 hashCode？
+title: Java：为什么重写 equals 时必须同时重写 hashCode？
 author: olzhy
 type: post
 date: 2024-03-12T08:00:00+08:00
