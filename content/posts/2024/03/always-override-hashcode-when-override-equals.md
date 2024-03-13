@@ -16,7 +16,9 @@ keywords:
 description:
 ---
 
-我们知道，Java 中 `Object` 类是所有类的父类，`hashCode` 与 `equals` 均是 `Object` 类中定义的方法。
+我们知道，Java 中 `Object` 类是所有类的父类，而 `hashCode` 是 `Object` 类中定义的方法，所以每个类都会默认拥有一个 `hashCode` 方法。
+
+如下为 `hashCode` 方法在 `Object` 类中的定义：
 
 ```java
 package java.lang;
@@ -64,13 +66,15 @@ public class Object {
 }
 ```
 
-`equals` 方法的注释上有这么一句话：「每当重写 `equals` 方法时，都需要重写 `hashCode` 方法，这样才没有破坏 `hashCode` 方法的通用约定，即：两个对象为 Equal 的话（调用 `equals` 方法为 `true`）， 那么这两个对象分别调用 `hashCode` 方法也需要返回相同的哈希值」。
+可以看到，`hashCode` 方法用于生成一个整数，其是一个原生方法且使用 `@IntrinsicCandidate` 注解修饰，表示其实现完全依赖于 JVM，不同的 JVM 可能有不同的实现，常见的实现有使用伪随机数等。
+
+为什么 `Object` 类中要定义一个 `hashCode` 方法呢？此外我们还注意到，`equals` 方法同样被定义在 `Object` 类中，这两个方法之间有什么关系呢？
 
 ## 1 hashCode 方法的作用以及 hashCode 方法与 equals 方法的关系
 
 ## 2 为什么重写 equals 方法时必须同时重写 hashCode 方法？
 
-`Object` 类是所有类的父类。`hashCode` 与 `equals` 均是 `Object` 类中定义的方法，其源码如下：
+`equals` 方法的注释上有这么一句话：「每当重写 `equals` 方法时，都需要重写 `hashCode` 方法，这样才没有破坏 `hashCode` 方法的通用约定，即：两个对象为 Equal 的话（调用 `equals` 方法为 `true`）， 那么这两个对象分别调用 `hashCode` 方法也需要返回相同的哈希值」。
 
 > 参考资料
 >
