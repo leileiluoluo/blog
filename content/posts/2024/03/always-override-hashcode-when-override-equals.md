@@ -72,6 +72,10 @@ public class Object {
 
 ## 1 hashCode 方法的作用以及 hashCode 方法与 equals 方法的关系
 
+Java 中，`hashCode` 方法主要是为了配合哈希表来使用的。
+
+哈希表是存储键值（Key Value）对数据的一种数据结构。其通过将键映射到表中一个位置来访问数据，以加快查找速度。这个映射函数被称为哈希函数（Hash Function）。
+
 ## 2 为什么重写 equals 方法时必须同时重写 hashCode 方法？
 
 `equals` 方法的注释上有这么一句话：「每当重写 `equals` 方法时，都需要重写 `hashCode` 方法，这样才没有破坏 `hashCode` 方法的通用约定，即：两个对象为 Equal 的话（调用 `equals` 方法为 `true`）， 那么这两个对象分别调用 `hashCode` 方法也需要返回相同的哈希值」。
