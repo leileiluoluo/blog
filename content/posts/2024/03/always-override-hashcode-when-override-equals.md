@@ -201,6 +201,8 @@ map.put(user2, true);
 System.out.println(map.size()); // 1
 ```
 
+综上，本文解释了为什么重写 `equals` 方法时必须同时重写 `hashCode` 方法的缘由，并且给出了示例代码。完整示例代码已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/hashcode-equals-demo)，欢迎关注或 Fork。
+
 > 参考资料
 >
 > [1] [Methods Common to All Objects: Always override hashCode when you override equals | Effective Java (3rd Edition), by Joshua Bloch](https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/)
