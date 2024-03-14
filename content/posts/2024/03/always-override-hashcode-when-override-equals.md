@@ -110,6 +110,8 @@ Java 中，`hashCode` 方法主要是为了配合哈希表来使用的。
 
 ## 3 如何重写 hashCode 方法？
 
+`hash=$val[0]*31^(n-1) + val[1]*31^(n-2) + ... + val[n-1]$`
+
 > 参考资料
 >
 > [1] [Methods Common to All Objects: Always override hashCode when you override equals | Effective Java (3rd Edition), by Joshua Bloch](https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/)
