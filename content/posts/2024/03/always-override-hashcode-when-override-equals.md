@@ -185,7 +185,7 @@ public class User {
 }
 ```
 
-`$\boldsymbol {hash} = \{val[0] \times 31^{(n-1)} + val[1] \times 31^{(n-2)} + ... + val[n-1]\}$`
+`$\boldsymbol {hash} = {val[0] \times 31^{(n-1)} + val[1] \times 31^{(n-2)} + ... + val[n-1]}$`
 
 ```java
 // 若重写了 User 类的 hashCode 与 equals 方法
