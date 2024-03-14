@@ -111,7 +111,95 @@ Java 中，`hashCode` 方法主要是为了配合哈希表来使用的。
 
 ## 3 如何重写 hashCode 方法？
 
+```java
+// src/test/java/com/example/demo/model/User.java
+package com.example.demo.model;
+
+public class User {
+    private final String name;
+    private final Integer age;
+    private final Gender gender;
+
+    public User(String name, Integer age, Gender gender) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+    }
+
+    public enum Gender {
+        MALE,
+        FEMALE
+    }
+}
+```
+
+```java
+// 若不重写 User 类的 hashCode 与 equals 方法
+User user1 = new User("Larry", 18, User.Gender.MALE);
+User user2 = new User("Larry", 18, User.Gender.MALE);
+
+System.out.println(user1.equals(user2)); // false
+System.out.println(user1.hashCode() == user2.hashCode()); // false
+
+Map<User, Boolean> map = new HashMap<>();
+map.put(user1, true);
+map.put(user2, true);
+System.out.println(map.size()); // 2
+```
+
+```java
+// src/test/java/com/example/demo/model/User.java
+package com.example.demo.model;
+
+import java.util.Objects;
+
+public class User {
+    // ...
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + Integer.hashCode(age);
+        result = 31 * result + gender.toString().hashCode();
+        return result;
+
+        // Another way: using Object.hash()
+        // return Objects.hash(name, age, gender);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (null == obj) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof User user)) {
+            return false;
+        }
+        return Objects.equals(user.name, name)
+                && Objects.equals(user.age, age)
+                && Objects.equals(user.gender, gender);
+    }
+}
+```
+
 `$\boldsymbol {hash} = \{val[0] \times 31^{(n-1)} + val[1] \times 31^{(n-2)} + ... + val[n-1]\}$`
+
+```java
+// 若重写了 User 类的 hashCode 与 equals 方法
+User user1 = new User("Larry", 18, User.Gender.MALE);
+User user2 = new User("Larry", 18, User.Gender.MALE);
+
+System.out.println(user1.equals(user2)); // true
+System.out.println(user1.hashCode() == user2.hashCode()); // true
+
+Map<User, Boolean> map = new HashMap<>();
+map.put(user1, true);
+map.put(user2, true);
+System.out.println(map.size()); // 1
+```
 
 > 参考资料
 >
