@@ -92,7 +92,7 @@ Java 中，`hashCode` 方法主要是为了配合哈希表来使用的。
 
 ## 2 为什么重写 equals 方法时必须同时重写 hashCode 方法？
 
-`equals` 方法的注释上有这么一句话：「每当重写 `equals` 方法时，都需要重写 `hashCode` 方法，这样才没有破坏 `hashCode` 方法的通用约定，即：两个对象为 Equal 的话（调用 `equals` 方法为 `true`）， 那么这两个对象分别调用 `hashCode` 方法也 ruo 需要返回相同的哈希值」。
+`equals` 方法的注释上有这么一句话：「每当重写 `equals` 方法时，都需要重写 `hashCode` 方法，这样才没有破坏 `hashCode` 方法的通用约定，即：两个对象为 Equal 的话（调用 `equals` 方法为 `true`）， 那么这两个对象分别调用 `hashCode` 方法也需要返回相同的哈希值」。
 
 > 参考资料
 >
