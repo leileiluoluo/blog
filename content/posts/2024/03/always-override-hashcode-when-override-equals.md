@@ -111,7 +111,7 @@ Java 中，`hashCode` 方法主要是为了配合哈希表来使用的。
 
 ## 3 如何重写 hashCode 方法？
 
-`hash=$val[0]*31^(n-1) + val[1]*31^(n-2) + ... + val[n-1]$`
+`$\boldsymbol {hash} = \{val[0] \times 31^{(n-1)} + val[1] \times 31^{(n-2)} + ... + val[n-1]\}$`
 
 > 参考资料
 >
