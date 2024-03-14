@@ -92,11 +92,19 @@ Java 中，`hashCode` 方法主要是为了配合哈希表来使用的。
 
 可以看到，借助哈希表实现去重集合的话，因首先会判断哈希值是否相等，只有不相等时才会调用 `equals` 方法，所以只要哈希算法足够好，分布够均匀，出现哈希冲突就会非常小，该集合的插入性能就会非常高效。
 
+可以看到 `hashCode` 一般与 `equals` 一起使用。两个对象作「相等」比较时，因判断 `hashCode` 是判断 `equals` 的先决条件，所以两者使用必须遵循一定的约束。`hashCode` 方法的注释上即说明了其与 `equals` 方法一起使用时需要遵循的三个通用约定：
+
+- 同一对象多次调用 `hashCode` 方法，必须返回相同的整数值；
+- 对于两个对象 `a` 和 `b`，若 `a.equals(b)`，则 `a.hashCode()` 与 `b.hashCode()` 必须相同；
+- 对于两个对象 `a` 和 `b`，若 `!a.equals(b)`，则 `a.hashCode()` 并不一定得与 `b.hashCode()` 不相同。
+
 知道了 `hashCode` 方法的作用以及 `hashCode` 方法与 `equals` 方法的关系后，下面探讨一下为什么重写 `equals` 方法时必须同时重写 `hashCode` 方法。
 
 ## 2 为什么重写 equals 方法时必须同时重写 hashCode 方法？
 
-`equals` 方法的注释上有这么一句话：「每当重写 `equals` 方法时，都需要重写 `hashCode` 方法，这样才没有破坏 `hashCode` 方法的通用约定，即：两个对象为 Equal 的话（调用 `equals` 方法为 `true`）， 那么这两个对象分别调用 `hashCode` 方法也需要返回相同的哈希值」。
+上面介绍了 `hashCode` 方法注释上列出的三个通用约定，`equals` 方法的注释上也有这么一句话：「每当重写 `equals` 方法时，都需要重写 `hashCode` 方法，这样才没有破坏 `hashCode` 方法的通用约定，即：两个对象为 Equal 的话（调用 `equals` 方法为 `true`）， 那么这两个对象分别调用 `hashCode` 方法也需要返回相同的哈希值」。
+
+所以只重写 `equals` 方法不重写 `hashCode` 方法的话，可能会造成两个对象调用 `equals` 方法为 `true`，而 `hashCode` 值不同的情形。这样即可能造成异常的行为。
 
 最后探讨一下如何重写 `hashCode` 方法。
 
