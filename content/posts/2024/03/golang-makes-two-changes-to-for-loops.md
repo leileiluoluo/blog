@@ -103,6 +103,8 @@ for _, i := range values {
 
 ## 2 支持对整数进行 range 遍历
 
+在 Go 1.22 版本之前， `for` 仅支持对 `array`（或 `slice`）、`string`、`map` 和 `channel` 类型进行 `range` 遍历。
+
 ```go
 // for_range_int_1_22.go
 func main() {
