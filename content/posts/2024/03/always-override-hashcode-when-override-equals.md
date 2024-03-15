@@ -157,7 +157,7 @@ map.put(user2, true);
 System.out.println(map.size()); // 2
 ```
 
-下面在尝试在 `User` 类中重写一下 `hashCode` 与 `equals` 方法：
+下面尝试在 `User` 类中重写一下 `hashCode` 与 `equals` 方法：
 
 ```java
 // src/test/java/com/example/demo/model/User.java
