@@ -91,9 +91,11 @@ Java 中，`hashCode` 方法主要是为了配合哈希表来使用的。
 - b) 与现有哈希值逐个进行比较，若不相等，则直接存入哈希表；
 - c) 若有相等的，再调用键对象的 `equals` 方法进行比较，若不 `Equal`，则存入哈希表（此两个对象哈希冲突，需要增加一个链表来存放对象的引用）；若 `Equal`，则不存入。
 
-可以看到，借助哈希表实现去重集合的话，因首先会判断哈希值是否相等，只有不相等时才会调用 `equals` 方法，所以只要哈希算法足够好，分布够均匀，出现哈希冲突就会非常小，该集合的插入性能就会非常高效。
+可以看到，借助哈希表实现去重集合的话，因首先会判断哈希值是否相等，只有不相等时才会调用 `equals` 方法，所以只要哈希算法足够好，就会省去很多 `equals` 方法的调用。
 
-可以看到 `hashCode` 一般与 `equals` 一起使用。两个对象作「相等」比较时，因判断 `hashCode` 是判断 `equals` 的先决条件，所以两者使用必须遵循一定的约束。`hashCode` 方法的注释上即说明了其与 `equals` 方法一起使用时需要遵循的三个通用约定：
+此外，哈希算法选用得当的话（理想的哈希算法是针对不同的对象，生成的哈希值可以均匀分布在整个 `int` 区间上，现实中是越接近越好），哈希表的检索效率会非常高，没有一次哈希冲突的话，检索记录的时间复杂度为 `O(1)`；最坏情况，`hashCode` 全部相等，存储结构完全变成了一个链表，那么检索记录的时间复杂度会变为 `O(N)`。
+
+总结该部分，我们可以看到：`hashCode` 一般与 `equals` 一起使用，两个对象作「相等」比较时，因判断 `hashCode` 是判断 `equals` 的先决条件，所以两者使用必须遵循一定的约束。`hashCode` 方法的注释上即说明了其与 `equals` 方法一起使用时需要遵循的三个通用约定：
 
 - 同一对象多次调用 `hashCode` 方法，必须返回相同的整数值；
 - 对于两个对象 `a` 和 `b`，若 `a.equals(b)`，则 `a.hashCode()` 与 `b.hashCode()` 必须相同；
@@ -110,6 +112,8 @@ Java 中，`hashCode` 方法主要是为了配合哈希表来使用的。
 最后探讨一下如何重写 `hashCode` 方法。
 
 ## 3 如何重写 hashCode 方法？
+
+下面定义了一个 `User` 类：
 
 ```java
 // src/test/java/com/example/demo/model/User.java
@@ -133,6 +137,12 @@ public class User {
 }
 ```
 
+该类有三个属性：`name`、`age` 和 `gender`。
+
+若不重写 `User` 类的 `hashCode` 与 `equals` 方法的话，则会使用 `Object` 类定义的默认实现，即：`hashCode` 是 JVM 生成的一个伪随机数，`equals` 比较的是两个引用的地址。
+
+下面测试代码新建了两个逻辑上「相等」的 `User` 对象：`user1` 与 `user2`，然后比较 `user1.equals(user2)` 与 `user1.hashCode() == user2.hashCode()`，发现结果均为 `false`；然后将此两个对象作为键放入 `HashMap` 后，查看 `HashMap` 的 `size`，结果 为 `2`，表示两个对象均被添加了进去。这及时不重写 `hashCode` 与 `equals` 方法发生的「异常」行为。
+
 ```java
 // 若不重写 User 类的 hashCode 与 equals 方法
 User user1 = new User("Larry", 18, User.Gender.MALE);
@@ -146,6 +156,8 @@ map.put(user1, true);
 map.put(user2, true);
 System.out.println(map.size()); // 2
 ```
+
+下面在尝试在 `User` 类中重写一下 `hashCode` 与 `equals` 方法：
 
 ```java
 // src/test/java/com/example/demo/model/User.java
@@ -185,7 +197,11 @@ public class User {
 }
 ```
 
+重写 `hashCode` 使用的算法如下：
+
 `$\boldsymbol {hash} = {val[0] \times 31^{(n-1)} + val[1] \times 31^{(n-2)} + ... + val[n-1]}$`
+
+该算法公式借用了 JDK 中 [String.hashCode()](<https://docs.oracle.com/en/java/javase/12/docs/api/java.base/java/lang/String.html#hashCode()>) 的实现逻辑：即按属性依次计算哈希结果，当前属性的哈希结果为上一个属性的哈希结果乘以 `31` 并加上当前属性的哈希值（`currentVal = 31 * previousVal + hash(currentPropertity)`），直至所有属性计算完毕，最终的结果即为对象的哈希值。至于为什么要乘以 `31` 呢？原因是在于：其是一个奇素数，可以更好的保留信息，若是偶数的话，乘一个偶数相当于移位，超出的话会丢失信息；此外乘以 `31` 会被现代虚拟机优化为移位和减法来实现（`31 * i == (i << 5) - i`），非常的高效。
 
 ```java
 // 若重写了 User 类的 hashCode 与 equals 方法
