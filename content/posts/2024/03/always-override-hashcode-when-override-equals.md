@@ -144,7 +144,7 @@ public class User {
 下面测试代码新建了两个逻辑上「相等」的 `User` 对象：`user1` 与 `user2`，然后比较 `user1.equals(user2)` 与 `user1.hashCode() == user2.hashCode()`，发现结果均为 `false`；然后将此两个对象作为键放入 `HashMap` 后，查看 `HashMap` 的 `size`，结果 为 `2`，表示两个对象均被添加了进去。这及时不重写 `hashCode` 与 `equals` 方法发生的「异常」行为。
 
 ```java
-// 若不重写 User 类的 hashCode 与 equals 方法
+// 不重写 User 类的 hashCode 与 equals 方法
 User user1 = new User("Larry", 18, User.Gender.MALE);
 User user2 = new User("Larry", 18, User.Gender.MALE);
 
@@ -197,14 +197,18 @@ public class User {
 }
 ```
 
-重写 `hashCode` 使用的算法如下：
+重写 `hashCode` 方法使用的算法如下：
 
 `$\boldsymbol {hash} = {val[0] \times 31^{(n-1)} + val[1] \times 31^{(n-2)} + ... + val[n-1]}$`
 
-该算法公式借用了 JDK 中 [String.hashCode()](<https://docs.oracle.com/en/java/javase/12/docs/api/java.base/java/lang/String.html#hashCode()>) 的实现逻辑：即按属性依次计算哈希结果，当前属性的哈希结果为上一个属性的哈希结果乘以 `31` 并加上当前属性的哈希值（`currentVal = 31 * previousVal + hash(currentPropertity)`），直至所有属性计算完毕，最终的结果即为对象的哈希值。至于为什么要乘以 `31` 呢？原因是在于：其是一个奇素数，可以更好的保留信息，若是偶数的话，乘一个偶数相当于移位，超出的话会丢失信息；此外乘以 `31` 会被现代虚拟机优化为移位和减法来实现（`31 * i == (i << 5) - i`），非常的高效。
+该算法公式借用了 JDK 中 [String.hashCode()](<https://docs.oracle.com/en/java/javase/12/docs/api/java.base/java/lang/String.html#hashCode()>) 的实现逻辑，即：按属性依次计算哈希结果，当前属性的哈希结果为上一个属性的哈希结果乘以 `31` 并加上当前属性的哈希值（`currentVal = 31 * previousVal + hash(currentPropertity)`），直至所有属性计算完毕，最终的结果即为对象的哈希值。至于为什么要乘以 `31` 呢？原因是在于：其是一个奇素数，可以更好的保留信息，若是偶数的话，乘一个偶数相当于移位，超出的话会丢失信息；此外乘以 `31` 会被现代虚拟机优化为移位和减法来实现（`31 * i == (i << 5) - i`），非常的高效。
+
+重写 `equals` 方法使用的逻辑非常简单，即：判断是否为 `User` 对象且所有字段是否一致。
+
+再次使用如下代码测试一下，发现 `user1.equals(user2)` 与 `user1.hashCode() == user2.hashCode()` 结果均为 `true`；调用 `HashMap` 的 `put` 方法将 `user1` 与 `user2` 均 `put` 后，`size` 为 `1`。
 
 ```java
-// 若重写了 User 类的 hashCode 与 equals 方法
+// 重写 User 类的 hashCode 与 equals 方法
 User user1 = new User("Larry", 18, User.Gender.MALE);
 User user2 = new User("Larry", 18, User.Gender.MALE);
 
