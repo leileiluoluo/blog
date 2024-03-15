@@ -203,7 +203,7 @@ public class User {
 
 该算法公式借用了 JDK 中「[String.hashCode()](<https://docs.oracle.com/en/java/javase/12/docs/api/java.base/java/lang/String.html#hashCode()>)」的实现逻辑，即：按属性依次计算哈希结果，当前属性的哈希结果为上一个属性的哈希结果乘以 `31` 并加上当前属性的哈希值（`currentVal = 31 * previousVal + hash(currentPropertity)`），直至所有属性计算完毕，最终的结果即为对象的哈希值。至于为什么要乘以 `31` 呢？原因是在于：其是一个奇素数，可以更好的保留信息，若是偶数的话，乘一个偶数相当于移位，超出的话会丢失信息；此外乘以 `31` 会被现代虚拟机优化为移位和减法来实现（`31 * i == (i << 5) - i`），非常的高效。此外还可以直接调用 `Objects.hash(prop1, prop2, prop3, ...)` 来获取一个哈希值。
 
-重写 `equals` 方法使用的逻辑非常简单，即：判断是否为 `User` 对象且所有字段是否一致。
+重写 `equals` 方法的逻辑非常简单，即：判断是否为 `User` 对象且所有字段是否一致。
 
 再次使用如下代码测试一下，发现 `user1.equals(user2)` 与 `user1.hashCode() == user2.hashCode()` 结果均为 `true`；调用 `HashMap` 的 `put` 方法将 `user1` 与 `user2` 均 `put` 后，`size` 为 `1`。这样即符合了我们的期望。
 
