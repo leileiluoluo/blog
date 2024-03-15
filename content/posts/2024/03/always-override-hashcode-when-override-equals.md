@@ -205,7 +205,7 @@ public class User {
 
 重写 `equals` 方法使用的逻辑非常简单，即：判断是否为 `User` 对象且所有字段是否一致。
 
-再次使用如下代码测试一下，发现 `user1.equals(user2)` 与 `user1.hashCode() == user2.hashCode()` 结果均为 `true`；调用 `HashMap` 的 `put` 方法将 `user1` 与 `user2` 均 `put` 后，`size` 为 `1`。
+再次使用如下代码测试一下，发现 `user1.equals(user2)` 与 `user1.hashCode() == user2.hashCode()` 结果均为 `true`；调用 `HashMap` 的 `put` 方法将 `user1` 与 `user2` 均 `put` 后，`size` 为 `1`。这样即符合了我们期望的结果。
 
 ```java
 // 重写 User 类的 hashCode 与 equals 方法
