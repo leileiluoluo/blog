@@ -141,7 +141,7 @@ public class User {
 
 若不重写 `User` 类的 `hashCode` 与 `equals` 方法的话，则会使用 `Object` 类定义的默认实现，即：`hashCode` 是 JVM 生成的一个伪随机数，`equals` 比较的是两个引用的地址。
 
-下面测试代码新建了两个逻辑上「相等」的 `User` 对象：`user1` 与 `user2`，然后比较 `user1.equals(user2)` 与 `user1.hashCode() == user2.hashCode()`，发现结果均为 `false`；然后将此两个对象作为键放入 `HashMap` 后，查看 `HashMap` 的 `size`，结果 为 `2`，表示两个对象均被添加了进去。这及时不重写 `hashCode` 与 `equals` 方法发生的「异常」行为。
+下面测试代码新建了两个逻辑上「相等」的 `User` 对象：`user1` 与 `user2`，然后比较 `user1.equals(user2)` 与 `user1.hashCode() == user2.hashCode()`，发现结果均为 `false`；然后将此两个对象作为键放入 `HashMap` 后，查看 `HashMap` 的 `size`，结果 为 `2`，表示两个对象均被添加了进去。这即是不重写 `hashCode` 与 `equals` 方法发生的「异常行为」。
 
 ```java
 // 不重写 User 类的 hashCode 与 equals 方法
