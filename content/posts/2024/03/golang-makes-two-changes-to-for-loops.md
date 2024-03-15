@@ -140,7 +140,7 @@ for _, i := range values {
 
 ## 2 支持对整数进行 range 遍历
 
-在 Go 1.22 版本之前， `for` 仅支持对 `array`（或 `slice`）、`string`、`map` 和 `channel` 类型进行 `range` 遍历，而 Go 1.22 新增了对整数的 `range` 遍历，这样对于打印一个连续数值序列的写法就变得简单多了。
+在 Go 1.22 版本之前， `for` 仅支持对 `array`（或 `slice`）、`string`、`map` 和 `channel` 类型进行 `range` 遍历，而 Go 1.22 支持了对整数的 `range` 遍历，这样对于打印一个连续数值序列的写法就变得简单多了。
 
 ```go
 // for_range_int_1_22.go
