@@ -114,6 +114,8 @@ func main() {
 }
 ```
 
+综上，本文罗列了 Golang 1.22 对 for 循环作的两处更新，并使用示例代码的方式演示了此两处更新的具体用法。完整示例代码已提交至本人 [GitHub](https://github.com/olzhy/go-exercises/tree/master/for_loops_changes)，欢迎关注或 Fork。
+
 > 参考资料
 >
 > [1] [Go 1.22 Release Notes | The Go Programming Language - go.dev](https://go.dev/doc/go1.22)
