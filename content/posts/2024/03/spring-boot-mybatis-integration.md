@@ -24,3 +24,5 @@ MyBatis 是一个适用于 Java 语言的持久层框架。MyBatis 支持以注�
 > 参考资料
 >
 > [1] MyBatis 3 Reference Documentation - [https://mybatis.org/mybatis-3/](https://mybatis.org/mybatis-3/)
+>
+> [2] What is MyBatis-Spring-Boot-Starter? - [https://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/](https://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/)
