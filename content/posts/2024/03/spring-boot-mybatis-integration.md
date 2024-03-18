@@ -231,7 +231,7 @@ public interface UserDaoMapper {
 
 ### 2.5 Mapper XML 配置文件
 
-下面即是本文最关键的部分，MyBatis Mapper 文件的配置。该文件用于配置上一部分 `UserDaoMapper` 接口中定义的各种方法的具体 SQL 语句以及接收数据的类型或对象。
+下面即是本文最关键的部分，MyBatis Mapper 文件的配置。该文件用于配置上一部分 `UserDaoMapper` 接口中定义的各种方法的具体 SQL 语句以及接收查询结果的类型或对象。
 
 `UserDaoMapper.xml` 的内容如下：
 
