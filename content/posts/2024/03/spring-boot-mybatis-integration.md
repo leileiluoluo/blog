@@ -227,11 +227,16 @@ public interface UserDaoMapper {
 }
 ```
 
-可以看到，我们针对 `User` 定义了分页列表查询（`list()`）、总数查询（`count()`）、单条查询（`getById()`），以及判断是否存在、搜索、保存、更新、删除等各种常用方法。
+可以看到，我们针对 `User` 定义了分页列表查询（`list`）、总数查询（`count`）、单条查询（`getById`）、根据邮箱判断是否存在（`existsByEmail`）、根据名称搜索（`searchByName`）、批量保存（`batchSave`）、更新（`update`）、单条删除（`deleteById`）等各种常用方法。
 
 ### 2.5 Mapper XML 配置文件
 
+下面即是本文最关键的部分，MyBatis Mapper 文件的配置。该文件用于配置上一部分 `UserDaoMapper` 接口中定义的各种方法的具体 SQL 语句以及接收数据的类型或对象。
+
+`UserDaoMapper.xml` 的内容如下：
+
 ```xml
+<!-- src/main/resources/mapper/UserDaoMapper.xml -->
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -333,7 +338,11 @@ public interface UserDaoMapper {
 </mapper>
 ```
 
+可以看到，我们在该配置文件中使用 `namespace` 指定了其是 `UserDaoMapper.java` 的实现。且对接口中定义的增、删、改、查方法分别使用标签 `<insert>`、`<delete>`、`<update>`、`<select>` 定义了具体的 SQL 语句。对于这些 SQL 语句，我们使用 `<sql>` 来抽取了共用的片段。此外还使用了 `<foreach>` 和 `<if>` 标签。
+
 ### 2.6 单元测试
+
+到目前为止，我们的数据库连接配置、查询接口、Mapper 配置均已编写好了。下面即对 `UserDaoMapper` 接口编写一个单元测试类来测试一下其功能：
 
 ```java
 package com.example.demo.dao;
@@ -449,7 +458,9 @@ public class UserDaoMapperTest {
 }
 ```
 
-完整示例工程已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-mybatis-integration-demo)，欢迎关注或 Fork。
+可以看到，`UserDaoMapper` 接口的各个方法提供的功能均运行正常，符合我们的预期。
+
+综上，我们完成了 Spring Boot 与 MyBatis 的集成，了解了 MyBatis 基础功能的使用。完整示例工程已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-mybatis-integration-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
