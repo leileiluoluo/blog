@@ -338,7 +338,7 @@ public interface UserDaoMapper {
 </mapper>
 ```
 
-可以看到，我们在该配置文件中使用 `namespace` 指定了其是 `UserDaoMapper.java` 的实现。且对接口中定义的增、删、改、查方法分别使用标签 `<insert>`、`<delete>`、`<update>`、`<select>` 定义了具体的 SQL 语句。对于这些 SQL 语句，我们使用 `<sql>` 来抽取了共用的片段。此外还使用了 `<foreach>` 和 `<if>` 标签。
+可以看到，我们在该配置文件中使用 `namespace` 指定了其是 `UserDaoMapper.java` 的实现。且对接口中定义的增、删、改、查方法分别使用标签 `<insert>`、`<delete>`、`<update>`、`<select>` 定义了具体的 SQL 语句。对于这些 SQL 语句，我们使用 `<sql>` 来抽取了共用的片段。此外还使用了 `<foreach>` 和 `<if>` 标签。此外，对于插入与批量插入我们还使用对应的配置（`useGeneratedKeys="true" keyProperty="id"`）实现了插入后自增 ID 的自动设置。
 
 ### 2.6 单元测试
 
