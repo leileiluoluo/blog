@@ -342,7 +342,7 @@ public interface UserDaoMapper {
 
 ### 2.6 单元测试
 
-到目前为止，我们的数据库连接配置、查询接口、Mapper 配置均已编写好了。下面即对 `UserDaoMapper` 接口编写一个单元测试类来测试一下其功能：
+到目前为止，我们的数据库连接配置、Model 类、查询接口、Mapper 配置均已编写好了。下面即对 `UserDaoMapper` 接口编写一个单元测试类来测试一下其功能：
 
 ```java
 // src/test/java/com/example/demo/dao/UserDaoMapperTest.java
