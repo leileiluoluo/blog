@@ -32,7 +32,11 @@ Spring Boot：3.2.3
 Mybatis Spring Boot Starter：3.0.3
 ```
 
+接下来，我们以实现 User 的增、删、改、查为例来探索 MyBatis 的使用。
+
 ## 1 准备测试数据
+
+首先，在本地 MySQL 数据库执行如下 SQL 来创建一个测试数据库、创建一个 `user` 表，并在 `user` 表插入 3 条测试数据：
 
 ```sql
 CREATE DATABASE test DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
@@ -57,9 +61,14 @@ INSERT INTO user(email, name, role, description, created_at, updated_at, deleted
 
 ## 2 开始使用 MyBatis
 
+测试数据准备好后，即可以尝试使用 MyBatis 了。
+
 ### 2.1 POM 依赖项
 
+如下为本文示例工程 `pom.xml` 的配置信息：
+
 ```xml
+<!-- pom.xml -->
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -128,9 +137,14 @@ INSERT INTO user(email, name, role, description, created_at, updated_at, deleted
 </project>
 ```
 
+可以看到，本工程基于 Java 17，使用的 Spring Boot 版本为 `3.2.3`，用到的依赖有 `spring-boot-starter-web`、`mybatis-spring-boot-starter`、`mysql-connector-j` 和 `lombok`。
+
 ### 2.2 application.yaml 配置
 
+如下为 `application.yaml` 文件的配置信息：
+
 ```yaml
+# src/main/resources/application.xml
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
@@ -143,9 +157,14 @@ logging:
     com.example.demo.dao.UserDaoMapper: DEBUG
 ```
 
+可以看到，我们使用了 Spring Boot 的标准配置方式来指定数据库的连接信息。针对 MyBatis 的配置部分，我们使用 `mybatis.mapper-locations` 指定了 MyBatis Mapper 文件的路径。此外，还将接下来要编写的 Mapper 接口的日志级别定义为了 `DEBUG`，以便在控制台打印对应的 SQL。
+
 ### 2.3 Java POJO 类
 
+如下为 User Model 类的内容：
+
 ```java
+// src/main/java/com/example/demo/model/User.java
 package com.example.demo.model;
 
 import lombok.Data;
@@ -172,9 +191,14 @@ public class User {
 }
 ```
 
+可以看到，我们为数据库表 `user` 新建了对应的 Model 类 `User.java`，该类中各个字段的含义与类型与前面的建表语句一一对应。
+
 ### 2.4 Mapper 接口
 
+接下来我们定义一个接口 `UserDaoMapper.java`，针对 `User` 的增、删、改、查方法均定义于其中：
+
 ```java
+// src/main/java/com/example/demo/dao/UserDaoMapper.java
 package com.example.demo.dao;
 
 import com.example.demo.model.User;
@@ -202,6 +226,8 @@ public interface UserDaoMapper {
     void deleteById(Long id);
 }
 ```
+
+可以看到，我们针对 `User` 定义了分页列表查询（`list()`）、总数查询（`count()`）、单条查询（`getById()`），以及判断是否存在、搜索、保存、更新、删除等各种常用方法。
 
 ### 2.5 Mapper XML 配置文件
 
