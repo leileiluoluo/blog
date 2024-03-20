@@ -26,11 +26,31 @@ description: 本文介绍了 Java 中对象克隆的相关知识，包括：对�
 
 - 实现 `Cloneable` 接口
 
-  这是一个标记接口，没有任何方法，只用于指示该类可以被克隆。
+  `Cloneable` 是一个标记接口，没有任何方法，实现了该接口，即表示该类可以被克隆。
+
+  `Cloneable` 接口的定义如下：
+
+  ```java
+  package java.lang;
+
+  public interface Cloneable {}
+  ```
 
 - 重写 `clone()` 方法
 
   重写 `Object` 类中定义的受保护 `clone()` 方法，并将其访问修饰符设置为 `public`。
+
+  `clone()` 方法在 `Object` 类中的定义如下：
+
+  ```java
+  package java.lang;
+
+  public class Object {
+
+      @IntrinsicCandidate
+      protected native Object clone() throws CloneNotSupportedException;
+  }
+  ```
 
 **_注意：Java 中针对对象克隆的这一设计存在一定的「缺陷」。一个类支持克隆需要实现 `Cloneable` 接口，但 `clone()` 方法却没定义在该接口中。所以，即便一个类在声明上实现了该接口，但无法强制它必须含有 `clone()` 方法。_**
 
