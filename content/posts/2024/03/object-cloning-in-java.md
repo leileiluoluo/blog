@@ -60,7 +60,7 @@ description: 本文介绍了 Java 中对象克隆的相关知识，包括：对�
 
 ## 1 尝试使用对象克隆
 
-下面新建一个 `House` 类，里边有名称（`name`）、大小（`size`）和冰箱（`refrigerator`）三个属性。该类实现了 `Cloneable` 接口并重写了 `Object` 的 `clone()` 方法。
+下面尝试新建一个房子（`House`）类，里边有名称（`name`）、大小（`size`）和冰箱（`refrigerator`）三个属性。该类实现了 `Cloneable` 接口并重写了 `Object` 的 `clone()` 方法。
 
 ```java
 public class House implements Cloneable {
@@ -84,27 +84,41 @@ public class House implements Cloneable {
     }
 
     public static class Refrigerator {
+        private String name;
+
+        public Refrigerator(String name) {
+            this.name = name;
+        }
     }
 
     public static void main(String[] args) {
-        House house1 = new House("Larry's House", 100, new Refrigerator());
+        House house1 = new House("Larry's House", 100, new Refrigerator("Larry's Refrigerator"));
 
         House house2 = house1.clone();
         house2.name = "Jacky's House";
         house2.size = 99;
+        house2.refrigerator.name = "Jacky's Refrigerator";
 
         System.out.println(house1); // House@404b9385
         System.out.println(house1.name); // Larry's House
         System.out.println(house1.size); // 100
         System.out.println(house1.refrigerator); // House$Refrigerator@6d311334
+        System.out.println(house1.refrigerator.name); // Jacky's Refrigerator
 
         System.out.println(house2); // House@682a0b20
         System.out.println(house2.name); // Jacky's House
         System.out.println(house2.size); // 99
         System.out.println(house2.refrigerator); // House$Refrigerator@6d311334
+        System.out.println(house2.refrigerator.name); // Jacky's Refrigerator
     }
 }
 ```
+
+可以看到，`House` 类重写 `clone()` 方法时，按照约定直接使用 `super.clone()` 返回一个该对象的克隆。
+
+在 `House` 类的 `main()` 方法进行测试时发现：针对原始对象 `house1`，使用 `house1.clone()` 获取到 `house1` 的克隆对象 `house2`。直接打印 `house1` 与 `house2`，发现 `hashCode` 不同，说明两者是不同的实例，但两者的各属性值一模一样。接着，`house2` 对 `name`、`size` 与 `refrigerator.name` 重新赋值后，发现前两个字段的改变不会影响到 `house1`，但 `refrigerator.name` 的改变却影响到了 `house1`。
+
+这是因为，调用 `super.clone()` 获取一个对象的克隆时，若属性是基础类型或不可变类型，其进行的是值拷贝。若属性是引用类型，进行的却是引用拷贝，所以该引用指向的还是同一个对象。
 
 ### 1.1 浅拷贝
 
