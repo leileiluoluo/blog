@@ -40,7 +40,7 @@ description: 本文介绍了 Java 中对象克隆的相关知识，包括：对�
 
 - 重写 `clone()` 方法
 
-  重写 `Object` 类中定义的受保护 `clone()` 方法，并将其访问修饰符设置为 `public`。
+  重写 `Object` 类中定义的受保护 `clone()` 方法，并将其访问修饰符设置为 `public`。而且按照约定，需要使用 `super.clone()` 调用 `Object` 的 `clone()` 方法来实现逐字段拷贝。
 
   `clone()` 方法在 `Object` 类中的定义如下：
 
@@ -60,9 +60,9 @@ description: 本文介绍了 Java 中对象克隆的相关知识，包括：对�
 
 ## 1 尝试使用对象克隆
 
-```java
-package com.example.demo.model;
+下面新建一个 `House` 类，里边有名称（`name`）、大小（`size`）和冰箱（`refrigerator`）三个属性。该类实现了 `Cloneable` 接口并重写了 `Object` 的 `clone()` 方法。
 
+```java
 public class House implements Cloneable {
     private String name;
     private Integer size;
