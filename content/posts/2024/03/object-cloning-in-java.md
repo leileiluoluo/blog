@@ -116,9 +116,9 @@ public class House implements Cloneable {
 
 可以看到，`House` 类重写 `clone()` 方法时，按照约定直接调用 `super.clone()` 来实现。
 
-在 `House` 类的 `main()` 方法进行测试时发现：针对原始对象 `house1`，使用 `house1.clone()` 获取到 `house1` 的克隆对象 `house2`。直接打印 `house1` 与 `house2`，发现 `hashCode` 不同，说明两者是不同的实例，但两者的各属性值一模一样。接着，`house2` 对 `name`、`size` 与 `refrigerator.name` 重新赋值后，发现前两个字段的改变不会影响到 `house1`，但 `refrigerator.name` 的改变却影响到了 `house1`。
+在 `House` 类的 `main()` 方法进行测试时发现：针对原始对象 `house1`，使用 `house1.clone()` 获取到了其克隆对象 `house2`。直接打印 `house1` 与 `house2`，发现 `hashCode` 不同，说明两者是不同的实例，但两者的各属性值均相同。接着，`house2` 对 `name`、`size` 与 `refrigerator.name` 重新赋值后，发现前两个字段的改变不会影响到 `house1`，但 `refrigerator.name` 的改变却影响到了 `house1`。
 
-这是因为，调用 `super.clone()` 获取一个对象的克隆时，若属性是基础类型或不可变类型，其进行的是值拷贝。若属性是引用类型，进行的却是引用拷贝，所以该引用指向的还是同一个对象。
+这是因为，调用 `super.clone()` 获取一个对象的克隆时，若属性是基础类型或不可变类型，其进行的是值拷贝。若属性是引用类型，进行的却是引用拷贝，所以指向的还是和原来一样的对象。
 
 ### 1.1 浅拷贝
 
