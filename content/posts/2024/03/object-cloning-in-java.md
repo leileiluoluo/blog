@@ -56,6 +56,60 @@ description: 本文介绍了 Java 中对象克隆的相关知识，包括：对�
 
 **_注意：Java 中针对对象克隆的这一设计存在一定的「缺陷」。一个类支持克隆需要实现 `Cloneable` 接口，但 `clone()` 方法却没定义在该接口中。所以，即便一个类在声明上实现了该接口，但无法强制它必须含有 `clone()` 方法。_**
 
+下面即尝试使用一下对象克隆。
+
+## 1 尝试使用对象克隆
+
+```java
+package com.example.demo.model;
+
+public class House implements Cloneable {
+    private String name;
+    private Integer size;
+    private Refrigerator refrigerator;
+
+    public House(String name, Integer size, Refrigerator refrigerator) {
+        this.name = name;
+        this.size = size;
+        this.refrigerator = refrigerator;
+    }
+
+    @Override
+    public House clone() {
+        try {
+            return (House) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static class Refrigerator {
+    }
+
+    public static void main(String[] args) {
+        House house1 = new House("Larry's House", 100, new Refrigerator());
+
+        House house2 = house1.clone();
+        house2.name = "Jacky's House";
+        house2.size = 99;
+
+        System.out.println(house1); // House@404b9385
+        System.out.println(house1.name); // Larry's House
+        System.out.println(house1.size); // 100
+        System.out.println(house1.refrigerator); // House$Refrigerator@6d311334
+
+        System.out.println(house2); // House@682a0b20
+        System.out.println(house2.name); // Jacky's House
+        System.out.println(house2.size); // 99
+        System.out.println(house2.refrigerator); // House$Refrigerator@6d311334
+    }
+}
+```
+
+### 1.1 浅拷贝
+
+### 1.2 深拷贝
+
 > 参考资料
 >
 > [1] Effective Java (3rd Edition): Override clone judiciously - [https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/](https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/)
