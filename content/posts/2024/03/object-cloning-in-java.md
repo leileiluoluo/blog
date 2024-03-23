@@ -245,6 +245,8 @@ House house2 = new House(house1);
 SerializationUtils.clone(T object);
 ```
 
+完整示例代码已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/object-clone-demo)，欢迎关注或 Fork。
+
 > 参考资料
 >
 > [1] Effective Java (3rd Edition): Override clone judiciously - [https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/](https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/)
