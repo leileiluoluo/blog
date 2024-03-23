@@ -193,6 +193,17 @@ public class House implements Cloneable {
 
 ### 2.2 序列化与反序列化
 
+### 2.3 框架工具类
+
+```java
+BeanUtils.cloneBean(Object obj);
+BeanUtils.copyProperties(T source, T target);
+```
+
+```java
+SerializationUtils.clone(T object);
+```
+
 > 参考资料
 >
 > [1] Effective Java (3rd Edition): Override clone judiciously - [https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/](https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/)
