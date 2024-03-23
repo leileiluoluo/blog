@@ -54,6 +54,8 @@ description: 本文介绍了 Java 中对象克隆的相关知识，包括：对�
   }
   ```
 
+  若不实现 `Cloneable` 接口，则调用 `super.clone()` 时会抛出 `CloneNotSupportedException`。
+
 **_注意：Java 中针对对象克隆的这一设计存在一定的「缺陷」。一个类支持克隆需要实现 `Cloneable` 接口，但 `clone()` 方法却没定义在该接口中。所以，即便一个类在声明上实现了该接口，但无法强制它必须含有 `clone()` 方法。_**
 
 下面即尝试使用一下对象克隆。
