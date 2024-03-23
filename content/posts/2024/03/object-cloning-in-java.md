@@ -199,7 +199,7 @@ public class House implements Cloneable {
 }
 ```
 
-这样，`house1` 的克隆 `house2` 对 `refrigerator.name` 重新赋值后即不会影响到 `house1` 了，这样即是实现了深拷贝。
+这样，`house1` 的克隆 `house2` 对 `refrigerator.name` 重新赋值后即不会影响到 `house1` 了，这样即实现了深拷贝。
 
 这时，`house1` 与 `house2` 指向的两个对象在内存中的示意图如下：
 
@@ -207,15 +207,23 @@ public class House implements Cloneable {
 
 但如果在冰箱类 `Refrigerator` 中新加一个苹果类（`Apple`）呢？即会出现与之前一样的问题。上面的代码只能实现到 `Refrigerator` 层的拷贝，而对于 `Apple` 又会是共享同一个对象。这样就需要我们重复如上的处理了（将 `Apple` 类也实现 `Cloneable` 接口并重写 `clone()` 方法，并改写 `Refrigerator` 类的 `clone()` 方法）。
 
-所以，使用原生克隆方式需要遵循一定的规则，并且对于对象嵌套的情形处理起来还有点繁琐。
+总结一下，使用原生克隆方式需要遵循一定的规则，并且对于对象嵌套的情形处理起来还有点繁琐。
 
 ## 2 其它实现方式
 
+原生的方式用起来比较麻烦？有没有其它的方式来实现对象克隆呢？
+
 ### 2.1 使用框架工具类
 
+Spring 框架自带的 `BeanUtils` 工具类可以帮助我们实现一个对象的逐字段拷贝。使用该工具类时，对应的类无需实现 `Cloneable` 接口，也无需重写 `clone()` 方法。
+
+下面即是 `BeanUtils` 工具类提供的可以实现 `source` 到 `target` 拷贝的方法：
+
 ```java
-BeanUtils.copyProperties(T source, T target);
+BeanUtils.copyProperties(Object source, Object target);
 ```
+
+使用时，需要添加如下 Maven 依赖：
 
 ```xml
 <dependency>
@@ -224,6 +232,8 @@ BeanUtils.copyProperties(T source, T target);
     <version>6.1.5</version>
 </dependency>
 ```
+
+使用 `BeanUtils.copyProperties()` 实现 `House` 对象拷贝的示例代码如下：
 
 ```java
 import org.springframework.beans.BeanUtils;
@@ -280,7 +290,11 @@ public class CopyableHouse {
 }
 ```
 
+可以看到，使用 `BeanUtils.copyProperties()` 可以实现我们期望的效果。
+
 ### 2.2 使用拷贝构造器
+
+另一种是我们提供一个拷贝构造器或一个静态工厂拷贝方法来自己实现对象的拷贝逻辑。
 
 ```java
 public class House {
@@ -305,9 +319,15 @@ House house2 = new House(house1);
 
 ### 2.3 使用序列化与反序列化
 
+还有一种方式是使用序列化与反序列化来实现对象的拷贝。即先将一个对象序列化到一个二进制文件，然后再将该对象反序列化出来，这样即是两个完全不同的实例。但要支持序列化，对应的类需要实现 `Serializable` 接口。此外，因为使用序列化与反序列化比较重，其性能不如原生的 `clone()` 方式。
+
+下面使用 `commons-lang3` 中的 `SerializationUtils` 工具类来实现对象的克隆。
+
 ```java
 SerializationUtils.clone(T object);
 ```
+
+其 Maven 依赖如下：
 
 ```xml
 <dependency>
@@ -316,6 +336,8 @@ SerializationUtils.clone(T object);
     <version>3.14.0</version>
 </dependency>
 ```
+
+使用 `SerializationUtils.clone()` 实现 `House` 对象拷贝的示例代码如下：
 
 ```java
 import org.apache.commons.lang3.SerializationUtils;
@@ -372,7 +394,9 @@ public class SerializableHouse implements Serializable {
 }
 ```
 
-完整示例代码已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/object-clone-demo)，欢迎关注或 Fork。
+可以看到，使用 `SerializationUtils.clone()` 克隆出的对象是与一个与原始对象字段值相同但字段地址不同的新对象，对其中的字段重新赋值也不会对原始对象造成影响，符合我们的期望。
+
+综上，本文介绍了 Java 中对象克隆的相关知识，包括对象克隆的概念、对象克隆的实现方式、浅拷贝与深拷贝、拷贝构造器等。此外还列出了一些适用的工具类来更便捷的帮助我们实现对象克隆。本文用于演示的所有完整代码已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/object-clone-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
