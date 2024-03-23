@@ -191,6 +191,27 @@ public class House implements Cloneable {
 
 ### 2.1 拷贝构造器
 
+```java
+public class House {
+    private String name;
+    private Integer size;
+    private Refrigerator refrigerator;
+
+    public House(House house) {
+        // ...
+    }
+
+    public static House newInstance(House house) {
+      // ...
+    }
+}
+```
+
+```java
+House house2 = new House(house1);
+// House house2 = House.newInstance(house1);
+```
+
 ### 2.2 序列化与反序列化
 
 ### 2.3 框架工具类
