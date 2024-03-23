@@ -394,7 +394,7 @@ public class SerializableHouse implements Serializable {
 }
 ```
 
-可以看到，使用 `SerializationUtils.clone()` 克隆出的对象是一个与原始对象字段值相同但字段地址不同的新对象，对其中的字段重新赋值也不会对原始对象造成影响，符合我们的期望。
+可以看到，使用 `SerializationUtils.clone()` 克隆出的对象是一个与原始对象字段值完全相同但字段地址不同的新对象，对其中的字段重新赋值也不会对原始对象造成影响，符合我们的期望。
 
 综上，本文介绍了 Java 中对象克隆的相关知识，包括对象克隆的概念、对象克隆的实现方式、浅拷贝与深拷贝、拷贝构造器等。此外还列出了一些适用的工具类来更便捷的帮助我们实现对象克隆。本文用于演示的所有完整代码已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/object-clone-demo)，欢迎关注或 Fork。
 
