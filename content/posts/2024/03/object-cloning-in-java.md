@@ -193,7 +193,14 @@ public class House implements Cloneable {
 
 ## 2 其它实现方式
 
-### 2.1 使用拷贝构造器
+### 2.1 使用框架工具类
+
+```java
+BeanUtils.cloneBean(Object obj);
+BeanUtils.copyProperties(T source, T target);
+```
+
+### 2.2 使用拷贝构造器
 
 ```java
 public class House {
@@ -216,14 +223,7 @@ House house2 = new House(house1);
 // House house2 = House.newInstance(house1);
 ```
 
-### 2.2 使用序列化与反序列化
-
-### 2.3 使用框架工具类
-
-```java
-BeanUtils.cloneBean(Object obj);
-BeanUtils.copyProperties(T source, T target);
-```
+### 2.3 使用序列化与反序列化
 
 ```java
 SerializationUtils.clone(T object);
