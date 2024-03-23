@@ -212,8 +212,70 @@ public class House implements Cloneable {
 ### 2.1 使用框架工具类
 
 ```java
-BeanUtils.cloneBean(Object obj);
 BeanUtils.copyProperties(T source, T target);
+```
+
+```xml
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-beans</artifactId>
+    <version>6.1.5</version>
+</dependency>
+```
+
+```java
+import org.springframework.beans.BeanUtils;
+
+public class CopyableHouse {
+    private String name;
+    private Integer size;
+    private Refrigerator refrigerator;
+
+    public CopyableHouse() {
+    }
+
+    public CopyableHouse(String name, Integer size, Refrigerator refrigerator) {
+        this.name = name;
+        this.size = size;
+        this.refrigerator = refrigerator;
+    }
+
+    public static class Refrigerator {
+        private String name;
+
+        public Refrigerator() {
+        }
+
+        public Refrigerator(String name) {
+            this.name = name;
+        }
+    }
+
+    public static void main(String[] args) {
+        Refrigerator refrigerator = new Refrigerator("Larry's Refrigerator");
+        CopyableHouse house1 = new CopyableHouse("Larry's House", 100, refrigerator);
+
+        CopyableHouse house2 = new CopyableHouse();
+        house2.refrigerator = new Refrigerator();
+        BeanUtils.copyProperties(house1, house2);
+
+        house2.name = "Jacky's House";
+        house2.size = 99;
+        house2.refrigerator.name = "Jacky's Refrigerator";
+
+        System.out.println(house1); // CopyableHouse@75828a0f
+        System.out.println(house1.name); // Larry's House
+        System.out.println(house1.size); // 100
+        System.out.println(house1.refrigerator); // CopyableHouse$Refrigerator@3abfe836
+        System.out.println(house1.refrigerator.name); // Larry's Refrigerator
+
+        System.out.println(house2); // CopyableHouse@2ff5659e
+        System.out.println(house2.name); // Jacky's House
+        System.out.println(house2.size); // 99
+        System.out.println(house2.refrigerator); // CopyableHouse$Refrigerator@77afea7d
+        System.out.println(house2.refrigerator.name); // Jacky's Refrigerator
+    }
+}
 ```
 
 ### 2.2 使用拷贝构造器
@@ -243,6 +305,69 @@ House house2 = new House(house1);
 
 ```java
 SerializationUtils.clone(T object);
+```
+
+```xml
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.14.0</version>
+</dependency>
+```
+
+```java
+import org.apache.commons.lang3.SerializationUtils;
+
+import java.io.Serial;
+import java.io.Serializable;
+
+public class SerializableHouse implements Serializable {
+    @Serial
+    private static final long serialVersionUID = -3606554850313928707L;
+
+    private String name;
+    private Integer size;
+    private Refrigerator refrigerator;
+
+    public SerializableHouse(String name, Integer size, Refrigerator refrigerator) {
+        this.name = name;
+        this.size = size;
+        this.refrigerator = refrigerator;
+    }
+
+    public static class Refrigerator implements Serializable {
+        @Serial
+        private static final long serialVersionUID = 7744295794434285806L;
+
+        private String name;
+
+        public Refrigerator(String name) {
+            this.name = name;
+        }
+    }
+
+    public static void main(String[] args) {
+        Refrigerator refrigerator = new Refrigerator("Larry's Refrigerator");
+        SerializableHouse house1 = new SerializableHouse("Larry's House", 100, refrigerator);
+
+        SerializableHouse house2 = SerializationUtils.clone(house1);
+        house2.name = "Jacky's House";
+        house2.size = 99;
+        house2.refrigerator.name = "Jacky's Refrigerator";
+
+        System.out.println(house1); // SerializableHouse@5e9f23b4
+        System.out.println(house1.name); // Larry's House
+        System.out.println(house1.size); // 100
+        System.out.println(house1.refrigerator); // SerializableHouse$Refrigerator@7e6cbb7a
+        System.out.println(house1.refrigerator.name); // Larry's Refrigerator
+
+        System.out.println(house2); // SerializableHouse@5b37e0d2
+        System.out.println(house2.name); // Jacky's House
+        System.out.println(house2.size); // 99
+        System.out.println(house2.refrigerator); // SerializableHouse$Refrigerator@4459eb14
+        System.out.println(house2.refrigerator.name); // Jacky's Refrigerator
+    }
+}
 ```
 
 完整示例代码已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/object-clone-demo)，欢迎关注或 Fork。
