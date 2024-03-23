@@ -122,6 +122,8 @@ public class House implements Cloneable {
 
 这是因为，调用 `super.clone()` 获取一个对象的克隆时默认进行的是「浅拷贝」。即其只是新建了一个新的实例，然后参考原始对象对克隆对象进行逐个字段赋值。所以，字段若是原始类型或是指向不可变对象的引用类型，进行的是值传递，该字段赋值后即和原来的字段没有任何关系了；若字段是指向可变对象的引用类型，进行的是引用传递，该字段赋值后指向的其实还是原来字段指向的对象。
 
+![浅拷贝](https://olzhy.github.io/static/images/uploads/2024/03/object-shallow-copy.svg#center)
+
 ### 1.2 深拷贝
 
 ```java
@@ -186,6 +188,8 @@ public class House implements Cloneable {
     }
 }
 ```
+
+![深拷贝](https://olzhy.github.io/static/images/uploads/2024/03/object-deep-copy.svg#center)
 
 ## 2 其它实现方式
 
