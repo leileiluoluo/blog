@@ -225,7 +225,7 @@ public class House {
     private Refrigerator refrigerator;
 
     public House(House house) {
-        // ...
+      // ...
     }
 
     public static House newInstance(House house) {
