@@ -203,6 +203,10 @@ public class House implements Cloneable {
 
 ![深拷贝](https://olzhy.github.io/static/images/uploads/2024/03/object-deep-copy.svg#center)
 
+但如果在冰箱类 `Refrigerator` 中新加一个苹果类（`Apple`）呢？即会出现与之前一样的问题。上面的代码只能实现到 `Refrigerator` 层的拷贝，而对于 `Apple` 又会是共享同一个对象。这样就需要我们重复如上的处理了（将 `Apple` 类也实现 `Cloneable` 接口并重写 `clone()` 方法，并改写 `Refrigerator` 类的 `clone()` 方法）。
+
+所以，使用原生克隆方式需要遵循一定的规则，并且对于对象嵌套的情形处理起来还有点繁琐。
+
 ## 2 其它实现方式
 
 ### 2.1 使用框架工具类
