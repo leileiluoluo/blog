@@ -101,7 +101,7 @@ public class LazyInitializationSingletonTest {
 }
 ```
 
-### 如何确保线程安全？
+### 1.1 如何确保线程安全？
 
 ```java
 public class ThreadSafeSingleton {
