@@ -151,6 +151,38 @@ public class ThreadSafeSingleton {
 
 为什么需要两次 `null` 检查呢？这是因为，两个线程同时进入第一个 `null` 检查时，首先拿到锁的线程会执行实例化逻辑，另一个线程会排队等待；而当第一个线程实例化完成时，锁会被释放，而第二个线程若不进行再一次的 `null` 检查，会再次进行实例化。而加上第二个 `null` 检查的话，就会直接跳出，而返回已实例化后的实例。
 
+介绍完单例的优点以及各种实现方式，下面看一下单例的缺点。若一个类的实现使用了某个单例类，则该类的 Mock 测试会变得很困难，因为单例类的 Mock 会变得很麻烦。
+
+## 2 单例类如何进行 Mock？
+
+使用反射并更改构造器的访问权限可以破坏单例类的设计，从而可以实例化出不同的实例。该种方法对之前提到的所有单例类的实现方式均有效。所以针对单例类的 Mock 也不是不能做。
+
+如下代码使用反射创建出了 `ThreadSafeSingleton` 单例类的另一个实例：
+
+```java
+import org.junit.jupiter.api.Test;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
+public class SingletonDestroyTest {
+    @Test
+    public void testTwoInstancesCreation() throws InvocationTargetException, InstantiationException, IllegalAccessException {
+        ThreadSafeSingleton singleton1 = ThreadSafeSingleton.getInstance();
+        ThreadSafeSingleton singleton2 = null;
+
+        Constructor<?>[] constructors = ThreadSafeSingleton.class.getDeclaredConstructors();
+        for (Constructor<?> constructor : constructors) {
+            constructor.setAccessible(true);
+            singleton2 = (ThreadSafeSingleton) constructor.newInstance();
+        }
+
+        System.out.println(singleton1);
+        System.out.println(singleton2);
+    }
+}
+```
+
 > 参考资料
 >
 > [1] Effective Java (3rd Edition): Enforce the singleton property with a private constructor or an enum type - [https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/](https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/)
