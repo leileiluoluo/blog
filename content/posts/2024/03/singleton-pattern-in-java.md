@@ -64,6 +64,8 @@ public class SingletonTest {
 
 ## 1 延迟实例化实现
 
+下面尝试一种延迟实例化的实现。
+
 ```java
 public class LazyInitializationSingleton {
     private static LazyInitializationSingleton INSTANCE = null;
@@ -79,6 +81,8 @@ public class LazyInitializationSingleton {
     }
 }
 ```
+
+如上代码中，`INSTANCE` 在声明时被定义为了 `null`，且对象的实例化逻辑被放到了 `getInstance()` 方法，这样只有在客户端主动获取时才会进行实例化。
 
 ```java
 public class LazyInitializationSingletonTest {
