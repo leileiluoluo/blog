@@ -18,25 +18,30 @@ keywords:
 description:
 ---
 
-Java 中的单例是指一个类在全局只有一个实例。
+Java 中的单例类是指一个类在 JVM（Java Virtual Machine，Java 虚拟机）中只存在一个实例，并且该类可以对外提供一个获取实例的全局访问点。
 
-实现一个单例通常需要将类的构造器变为私有，并提供一个获取实例的静态工厂方法。
+单例类的主要用途是确保在整个应用程序中只有一个实例存在，从而方便对共享资源、全局状态和单一功能的管理。我们有一些常用的 JDK 类就是单例类，如：`java.lang.Runtime`、`java.lang.System` 与 `java.sql.DriverManager` 等。
+
+<!--more-->
+
+实现一个单例类通常需要将类的构造器变为私有，并提供一个获取实例的静态工厂方法。
+
+下面即是一段实现单例类的示例代码：
 
 ```java
 public class Singleton {
-    private static Singleton INSTANCE;
+    private static final Singleton INSTANCE = new Singleton();
 
     private Singleton() {
     }
 
     public static Singleton getInstance() {
-        if (null == INSTANCE) {
-            INSTANCE = new Singleton();
-        }
         return INSTANCE;
     }
 }
 ```
+
+## 1 懒加载实现
 
 > 参考资料
 >
