@@ -110,7 +110,7 @@ public class ThreadSafeSingleton {
     private ThreadSafeSingleton() {
     }
 
-    public synchronized static ThreadSafeSingleton getInstance() {
+    public static ThreadSafeSingleton getInstance() {
         if (null == INSTANCE) {
             synchronized (ThreadSafeSingleton.class) {
                 if (null == INSTANCE) {
