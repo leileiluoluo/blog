@@ -84,7 +84,7 @@ public class LazyInitializationSingleton {
 
 如上代码中，`INSTANCE` 在声明时被定义为了 `null`，且对象的实例化逻辑被放到了 `getInstance()` 方法，这样只有在客户端主动获取时才会进行实例化。
 
-但该实现仅在单线程访问的情形下顺序获取实例不会有问题，当多个线程同时访问 `getInstance()` 方法时，有可能会获取到不同的实例。这是因为多线程情形下，有可能有多个线程同时到达 `if (null == INSTANCE)`，从而实例化出多个不同的实例。
+但该实现仅在单线程访问的情形下顺序获取实例时不会有问题，当多个线程同时访问 `getInstance()` 方法时，有可能会获取到不同的实例。这是因为多线程情形下，有可能有多个线程同时到达 `if (null == INSTANCE)`，从而实例化出多个不同的实例。
 
 如下测试代码中，10 个线程同时调用 `LazyInitializationSingleton.getInstance()` 获取实例时，有个别线程会打印出不同的 `hashCode`，表示不同的线程拿到了不同的实例。
 
