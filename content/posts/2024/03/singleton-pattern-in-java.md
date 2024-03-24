@@ -64,6 +64,35 @@ public class SingletonTest {
 
 ## 1 延迟实例化实现
 
+```java
+public class LazyInitializationSingleton {
+    private static LazyInitializationSingleton INSTANCE = null;
+
+    private LazyInitializationSingleton() {
+    }
+
+    public static LazyInitializationSingleton getInstance() {
+        if (null == INSTANCE) {
+            INSTANCE = new LazyInitializationSingleton();
+        }
+        return INSTANCE;
+    }
+}
+```
+
+```java
+public class LazyInitializationSingletonTest {
+    @Test
+    public void testMultiThreadedAccessing() {
+        for (int i = 0; i < 10; i++) {
+            new Thread(() -> {
+                System.out.println(LazyInitializationSingleton.getInstance());
+            }).start();
+        }
+    }
+}
+```
+
 > 参考资料
 >
 > [1] Effective Java (3rd Edition): Enforce the singleton property with a private constructor or an enum type - [https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/](https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/)
