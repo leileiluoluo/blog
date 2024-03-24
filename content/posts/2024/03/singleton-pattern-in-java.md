@@ -101,6 +101,28 @@ public class LazyInitializationSingletonTest {
 }
 ```
 
+### 如何确保线程安全？
+
+```java
+public class ThreadSafeSingleton {
+    private static ThreadSafeSingleton INSTANCE = null;
+
+    private ThreadSafeSingleton() {
+    }
+
+    public synchronized static ThreadSafeSingleton getInstance() {
+        if (null == INSTANCE) {
+            synchronized (ThreadSafeSingleton.class) {
+                if (null == INSTANCE) {
+                    INSTANCE = new ThreadSafeSingleton();
+                }
+            }
+        }
+        return INSTANCE;
+    }
+}
+```
+
 > 参考资料
 >
 > [1] Effective Java (3rd Edition): Enforce the singleton property with a private constructor or an enum type - [https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/](https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/)
