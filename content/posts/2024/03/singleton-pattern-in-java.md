@@ -103,6 +103,32 @@ public class LazyInitializationSingletonTest {
 
 ### 1.1 如何确保线程安全？
 
+针对如上实现，该如何确保线程安全呢？即多线程访问的情形下如何保证获取到的仍是同一个实例？
+
+下面给出了示例代码：
+
+```java
+public class ThreadSafeSingleton {
+    private static ThreadSafeSingleton INSTANCE = null;
+
+    private ThreadSafeSingleton() {
+    }
+
+    public static synchronized ThreadSafeSingleton getInstance() {
+        if (null == INSTANCE) {
+            INSTANCE = new ThreadSafeSingleton();
+        }
+        return INSTANCE;
+    }
+}
+```
+
+只要在 `getInstance()` 方法上加上 `synchronized` 关键字就可以了。这样即表示其是一个同步方法，多个线程必须顺序来调用 `getInstance()` 方法，这样即不会出现新建出多个实例的情形。但这个实现有点重，多线程情形下，每次访问都需要排队，降低了获取实例的性能。
+
+我们的目的是防止同时到达 `if` 条件的少数几个抢先的线程同时进行实例化，而实例化后的获取是不应该加锁的。
+
+下面的示例在 `getInstance()` 方法内使用了双重 `null` 检查加锁机制来确保实例化的线程安全。
+
 ```java
 public class ThreadSafeSingleton {
     private static ThreadSafeSingleton INSTANCE = null;
@@ -122,6 +148,8 @@ public class ThreadSafeSingleton {
     }
 }
 ```
+
+为什么需要两次 `null` 检查呢？这是因为，两个线程同时进入第一个 `null` 检查时，首先拿到锁的线程会执行实例化逻辑，另一个线程会排队等待；而当第一个线程实例化完成时，锁会被释放，而第二个线程若不进行再一次的 `null` 检查，会再次进行实例化。
 
 > 参考资料
 >
