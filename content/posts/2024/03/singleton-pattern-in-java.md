@@ -45,6 +45,8 @@ public class Singleton {
 
 如上这种实现方式最直截了当，`Singleton` 类的实例在类被加载时进行实例化，且仅会被实例化一次。实例化后其会被赋予给一个私有静态不可变变量。`Singleton` 类的构造器是私有的，客户端只能通过 `Singleton.getInstance()` 工厂方法来获取该类的实例，且不论是顺序多次获取还是多线程同时获取均只会返回同一个实例。
 
+如下测试代码新建了 10 个线程同时调用 `Singleton.getInstance()` 获取 `Singleton` 实例并进行打印，发现其哈希地址均是相同的（表示为同一个实例）。
+
 ```java
 public class SingletonTest {
     @Test
