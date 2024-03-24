@@ -127,7 +127,7 @@ public class ThreadSafeSingleton {
 
 我们的目的是防止同时到达 `if` 条件的少数几个抢先的线程同时进行实例化，而实例化后的获取是不应该加锁的。
 
-下面的示例在 `getInstance()` 方法内使用了双重 `null` 检查加锁机制来确保实例化的线程安全。
+下面的示例将 `getInstance()` 方法上的 `synchronized` 关键字去掉了，而改为使用双重 `null` 检查加锁机制来确保实例化的线程安全。
 
 ```java
 public class ThreadSafeSingleton {
