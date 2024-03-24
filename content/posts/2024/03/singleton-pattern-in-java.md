@@ -17,7 +17,25 @@ keywords:
 description:
 ---
 
-Java 中的单例是指一个类在全局只有一个实例。实现一个单例通常需要将构造器变为私有，并提供一个获取实例的静态方法。
+Java 中的单例是指一个类在全局只有一个实例。
+
+实现一个单例通常需要将类的构造器变为私有，并提供一个获取实例的静态工厂方法。
+
+```java
+public class Singleton {
+    private static Singleton INSTANCE;
+
+    private Singleton() {
+    }
+
+    public static Singleton getInstance() {
+        if (null == INSTANCE) {
+            INSTANCE = new Singleton();
+        }
+        return INSTANCE;
+    }
+}
+```
 
 > 参考资料
 >
