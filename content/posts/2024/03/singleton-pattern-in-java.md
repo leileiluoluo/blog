@@ -28,7 +28,7 @@ Java 中的单例类是指一个类在 JVM（Java Virtual Machine，Java 虚拟�
 
 实现一个单例类通常需要将类的构造器变为私有，并提供一个获取实例的静态工厂方法。
 
-下面即是一种最直接的实现一个单例类的方式：
+下面即是一种最直接的实现单例类的方式：
 
 ```java
 public class Singleton {
