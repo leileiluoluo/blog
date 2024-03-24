@@ -15,12 +15,14 @@ keywords:
   - 单例
   - 模式
   - Singleton
-description:
+description: 本文首先介绍了 Java 中单例类的概念，然后罗列了实现单例类的几种方式并分析了它们的优缺点。
 ---
 
 Java 中的单例类是指一个类在 JVM（Java Virtual Machine，Java 虚拟机）中只存在一个实例，并且该类可以对外提供一个获取实例的全局访问点。
 
 单例类的主要用途是确保在整个应用程序中只有一个实例存在，从而方便对共享资源、全局状态和单一功能的管理。我们有一些常用的 JDK 类就是单例类，如：`java.lang.Runtime`、`java.lang.System` 与 `java.sql.DriverManager` 等。
+
+本文将罗列实现单例类的几种方式，并分析它们的优缺点。
 
 <!--more-->
 
