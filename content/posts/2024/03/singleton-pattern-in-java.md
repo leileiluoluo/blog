@@ -258,7 +258,7 @@ public class ThreadSafeSingleton implements Serializable {
 }
 ```
 
-综上，本文介绍了 Java 中单例模式的概念和各种单例模式的实现，并比较了各种实现方式的优缺点，最会还介绍了破坏一个单例类的方法。本文涉及的所有示例代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/singleton-pattern-demo)，欢迎关注或 Fork。
+综上，本文介绍了 Java 中单例模式的概念和各种单例模式的实现，并比较了各种实现方式的优缺点，最会还介绍了破坏一个单例类的方法。本文涉及的所有示例代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/singleton-pattern-demo/src/test/java)，欢迎关注或 Fork。
 
 > 参考资料
 >
