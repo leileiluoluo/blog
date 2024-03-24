@@ -151,21 +151,21 @@ public class ThreadSafeSingleton {
 
 为什么需要两次 `null` 检查呢？这是因为，两个线程同时进入第一个 `null` 检查时，首先拿到锁的线程会执行实例化逻辑，另一个线程会排队等待；而当第一个线程实例化完成时，锁会被释放，而第二个线程若不进行再一次的 `null` 检查，会再次进行实例化。而加上第二个 `null` 检查的话，就会直接跳出，而返回已实例化后的实例。
 
-介绍完单例的优点以及各种实现方式，下面看一下单例的缺点。若一个类的实现使用了某个单例类，则该类的 Mock 测试会变得很困难，因为单例类的 Mock 会变得很麻烦。
+介绍完单例的优点以及各种实现方式，下面看一下单例的缺点。若一个类的实现使用了某个单例类，则该类的 Mock 测试会变得很困难。要想对单例类进行 Mock，就得想办法破坏其设计。
 
-## 2 单例类如何进行 Mock？
+## 2 如何破坏一个单例类？
 
-使用反射并更改构造器的访问权限可以破坏单例类的设计，从而可以实例化出不同的实例。该种方法对之前提到的所有单例类的实现方式均有效。所以针对单例类的 Mock 也不是不能做。
+### 2.1 使用反射
+
+使用反射并更改构造器的访问权限可以破坏单例类的设计，从而可以实例化出不同的实例。该种方法对之前提到的所有单例类的实现方式均有效。
 
 如下代码使用反射创建出了 `ThreadSafeSingleton` 单例类的另一个实例：
 
 ```java
-import org.junit.jupiter.api.Test;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public class SingletonDestroyTest {
+public class SingletonReflectionTest {
     @Test
     public void testTwoInstancesCreation() throws InvocationTargetException, InstantiationException, IllegalAccessException {
         ThreadSafeSingleton singleton1 = ThreadSafeSingleton.getInstance();
@@ -179,6 +179,69 @@ public class SingletonDestroyTest {
 
         System.out.println(singleton1);
         System.out.println(singleton2);
+    }
+}
+```
+
+如上代码，`singleton1` 与 `singleton2` 打印的 `hashCode` 不同，说明两者为不同的实例。
+
+### 2.2 使用序列化
+
+另一种破坏单例类的方法是将其序列化然后再反序列化，那么反序列化出来的实例与之前的是完全不同的。
+
+下面尝试将 `ThreadSafeSingleton` 类实现 `Serializable` 接口。
+
+```java
+public class ThreadSafeSingleton implements Serializable {
+    // ...
+}
+```
+
+如下测试代码将使用 `ThreadSafeSingleton.getInstance()` 获取到的实例 `singleton1` 进行序列化与反序列化，那么得到的新实例 `singleton2` 与 `singleton1` 是完全不同的。
+
+```java
+import org.junit.jupiter.api.Test;
+
+import java.io.*;
+
+public class SingletonSerializationTest {
+    @Test
+    public void testTwoInstancesCreation() throws IOException, ClassNotFoundException {
+        ThreadSafeSingleton singleton1 = ThreadSafeSingleton.getInstance();
+
+        // write object
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream oss = new ObjectOutputStream(bos);
+
+        oss.writeObject(singleton1);
+        oss.close();
+
+        // read object
+        ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
+        ObjectInputStream ois = new ObjectInputStream(bis);
+
+        ThreadSafeSingleton singleton2 = (ThreadSafeSingleton) ois.readObject();
+        ois.close();
+
+        // print
+        System.out.println(singleton1);
+        System.out.println(singleton2);
+    }
+}
+```
+
+如何确保序列化与反序列化不破坏单例类的特征呢？需要提供一个 `readResolve()` 方法，并在该方法直接返回原来的实例。这样反序列化方法 `readObject` 发现有该方法时，即会使用该方法提供的逻辑。这样即可保证反序列化也不会破坏单例的特性了。
+
+```java
+import java.io.Serial;
+import java.io.Serializable;
+
+public class ThreadSafeSingleton implements Serializable {
+    // ...
+
+    @Serial
+    private Object readResolve() {
+        return getInstance();
     }
 }
 ```
