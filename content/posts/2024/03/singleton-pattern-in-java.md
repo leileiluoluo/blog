@@ -9,6 +9,7 @@ categories:
   - 计算机
 tags:
   - Java
+  - 设计模式
 keywords:
   - Java
   - 单例
