@@ -65,7 +65,7 @@ wip_template:
 >
 > **2 满足条件，即可按照如下格式给我发送申请邮件**
 >
-> 我的邮箱：**[leileiluoluo(at)leileiluoluo.com](mailto:leileiluoluo@leileiluoluo.com)**
+> 我的邮箱：leileiluoluo(at)leileiluoluo.com
 >
 > 标题格式：`[友链交换申请] https://example.com/homepage`
 >

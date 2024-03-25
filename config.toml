@@ -15,15 +15,6 @@ disqusShortname = "" # get your shortname form here : https://disqus.com
 [services.rss]
     limit = 20
 
-# Author’s information
-[author]
-    # Name
-    name = "磊磊落落"
-    # Email
-    email = "leileiluoluo@leileiluoluo.com"
-    # Motto or introduction
-    motto = "磊磊落落"
-
 [outputs]
 home = ["HTML", "AMP", "RSS", "JSON", "SectionsAtom", "SectionsRSS"]
 
