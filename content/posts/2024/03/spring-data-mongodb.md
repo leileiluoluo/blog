@@ -2,7 +2,7 @@
 title: 如何使用 Spring Data MongoDB 访问 MongoDB？
 author: olzhy
 type: post
-date: 2024-03-25T08:00:00+08:00
+date: 2024-03-26T08:00:00+08:00
 url: /posts/spring-data-mongodb.html
 math: true
 categories:
