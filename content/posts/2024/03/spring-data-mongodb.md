@@ -1,5 +1,5 @@
 ---
-title: 如何使用 Spring Data MongoDB 访问 MongoDB？
+title: 如何使用 Spring Data MongoDB 访问 MongoDB 数据库？
 author: olzhy
 type: post
 date: 2024-03-26T08:00:00+08:00
@@ -18,7 +18,7 @@ keywords:
 description: 本文以一个使用 Maven 管理的 Spring Boot 工程为例，结合本地搭建的 MongoDB（版本为 7.0.7）演示了 Spring Data MongoDB 的使用。
 ---
 
-Spring Data MongoDB 是 Spring 框架提供的一个访问 MongoDB 的模块。
+Spring Data MongoDB 是 Spring 框架提供的一个访问 MongoDB 数据库的模块。
 
 本文以一个使用 Maven 管理的 Spring Boot 工程为例，结合本地搭建的 MongoDB（版本为 7.0.7）来演示 Spring Data MongoDB 的使用。
 
