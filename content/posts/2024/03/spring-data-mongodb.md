@@ -22,7 +22,7 @@ Spring Data MongoDB 是 Spring 框架提供的一个访问 MongoDB 数据库的�
 
 本文以一个使用 Maven 管理的 Spring Boot 工程为例，结合本地搭建的 MongoDB（版本为 7.0.7）来演示 Spring Data MongoDB 的使用。
 
-在 Spring Boot 中使用 Spring Data MongoDB，只需要引入一个 `spring-boot-starter-data-mongodb` 依赖即可，该依赖会负责将 Spring Data MongoDB 及相关依赖一并引入。
+在 Spring Boot 中使用 Spring Data MongoDB，只需要引入一个 `spring-boot-starter-data-mongodb` 依赖即可，该依赖会负责将 Spring Data MongoDB 及相关依赖一并引入，并已与 Spring Boot 进行了集成。
 
 如下为示例工程所使用的 JDK、Maven、Spring Boot 与 Spring Data MongoDB 的版本：
 
