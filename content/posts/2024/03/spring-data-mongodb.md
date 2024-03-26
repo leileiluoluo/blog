@@ -38,3 +38,5 @@ Spring Data MongoDB：4.2.4
 > [1] Spring: Spring Data MongoDB Reference Document - [https://docs.spring.io/spring-data/mongodb/reference/4.2.4/index.html](https://docs.spring.io/spring-data/mongodb/reference/4.2.4/index.html)
 >
 > [2] MongoDB: Spring Boot Integration With MongoDB Tutorial - [https://www.mongodb.com/compatibility/spring-boot](https://www.mongodb.com/compatibility/spring-boot)
+>
+> [3] DigitalOcean: Spring Boot MongoDB - [https://www.digitalocean.com/community/tutorials/spring-boot-mongodb](https://www.digitalocean.com/community/tutorials/spring-boot-mongodb)
