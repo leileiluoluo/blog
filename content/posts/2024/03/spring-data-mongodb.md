@@ -15,7 +15,7 @@ keywords:
   - Java
   - Spring Data
   - MongoDB
-description:
+description: 本文以一个使用 Maven 管理的 Spring Boot 工程为例，结合本地搭建的 MongoDB（版本为 7.0.7）演示了 Spring Data MongoDB 的使用。
 ---
 
 Spring Data MongoDB 是 Spring 框架提供的一个访问 MongoDB 的模块。
