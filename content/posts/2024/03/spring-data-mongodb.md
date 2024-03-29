@@ -191,7 +191,7 @@ public class User {
     private Boolean deleted;
 
     public enum Role {
-        ADMIN,·
+        ADMIN,
         EDITOR,
         VIEWER
     }
