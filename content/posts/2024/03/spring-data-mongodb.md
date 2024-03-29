@@ -33,7 +33,7 @@ Spring Boot：3.2.4
 Spring Data MongoDB：4.2.4
 ```
 
-```json
+```shell
 db.users.insertMany( [
     {
       _id: 1,
