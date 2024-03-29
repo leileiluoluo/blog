@@ -198,7 +198,7 @@ public class User {
 }
 ```
 
-可以看到，如上代码在类上使用了 `@Document` 注解，并指定了对应的集合为 `users`；对主键字段使用了 `@Id` 注解；并对与 MongoDB 集合中命名不一致的属性使用了 `@Field` 注解指定了实际的字段名。此外还使用 Lombok 的 `@Data` 注解自动生成了 `Setters` 和 `Getters`。
+可以看到，如上代码在类上使用了 `@Document` 注解，并指定了对应的 MongoDB 集合为 `users`；对主键字段使用了 `@Id` 注解；并对与 MongoDB 集合中命名不一致的属性使用了 `@Field` 注解指定了实际的字段名。此外还使用 Lombok 的 `@Data` 注解自动生成了 `Setters` 和 `Getters`。
 
 > 参考资料
 >
