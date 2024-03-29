@@ -33,6 +33,41 @@ Spring Boot：3.2.4
 Spring Data MongoDB：4.2.4
 ```
 
+```json
+db.users.insertMany( [
+    {
+      _id: 1,
+      email: "larry@larry.com",
+      name: "Larry",
+      role: "ADMIN",
+      description: "I am Larry",
+      created_at: ISODate("2024-01-01T08:00:00+08:00"),
+      updated_at: ISODate("2023-01-01T08:00:00+08:00"),
+      deleted: false
+    },
+    {
+      _id: 2,
+      email: "jacky@larry.com",
+      name: "Jacky",
+      role: "EDITOR",
+      description: "I am Jacky",
+      created_at: ISODate("2024-02-01T08:00:00+08:00"),
+      updated_at: ISODate("2023-02-01T08:00:00+08:00"),
+      deleted: false
+    },
+    {
+      _id: 3,
+      email: "lucy@larry.com",
+      name: "Lucy",
+      role: "VIEWER",
+      description: "I am Lucy",
+      created_at: ISODate("2024-03-01T08:00:00+08:00"),
+      updated_at: ISODate("2023-03-01T08:00:00+08:00"),
+      deleted: false
+    },
+] )
+```
+
 > 参考资料
 >
 > [1] Spring: Spring Data MongoDB Reference Document - [https://docs.spring.io/spring-data/mongodb/reference/4.2.4/index.html](https://docs.spring.io/spring-data/mongodb/reference/4.2.4/index.html)
