@@ -159,6 +159,47 @@ spring:
 
 ## 3 开始使用 Spring Data MongoDB
 
+### 3.1 Model 类编写
+
+首先需要编写一下 Model 类 `User.java`，其内容如下：
+
+```java
+// src/main/java/com/example/demo/model/User.java
+package com.example.demo.model;
+
+import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.util.Date;
+
+@Data
+@Document("users")
+public class User {
+
+    @Id
+    private String id;
+    private String email;
+    private String name;
+    private Role role;
+    private String description;
+    @Field("created_at")
+    private Date createdAt;
+    @Field("updated_at")
+    private Date updatedAt;
+    private Boolean deleted;
+
+    public enum Role {
+        ADMIN,·
+        EDITOR,
+        VIEWER
+    }
+}
+```
+
+可以看到，如上代码在类上使用了 `@Document` 注解，并指定了对应的集合为 `users`；并对与 MongoDB 集合中命名不一致的属性使用了 `@Field` 注解指定了实际的字段名。此外还使用 Lombok 的 `@Data` 注解自动生成了 `Setters` 和 `Getters`。
+
 > 参考资料
 >
 > [1] Spring: Spring Data MongoDB Reference Document - [https://docs.spring.io/spring-data/mongodb/reference/4.2.4/index.html](https://docs.spring.io/spring-data/mongodb/reference/4.2.4/index.html)
