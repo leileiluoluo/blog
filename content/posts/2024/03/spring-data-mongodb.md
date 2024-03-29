@@ -33,9 +33,9 @@ Spring Boot：3.2.4
 Spring Data MongoDB：4.2.4
 ```
 
-本文将以 User 的增、删、改、查为例来演示 Spring Data MongoDB 的使用。开始前先让我们准备一些测试数据。
+本文将以 User 的增、删、改、查为例来演示 Spring Data MongoDB 的使用。开始前先让我们准备一下测试数据。
 
-## 1 准备测试数据
+## 1 测试数据准备
 
 使用 MongoShell 连接本地 MongoDB 数据库 `mongodb://localhost:27017`。然后在 MongoShell 命令行执行如下语句来创建一个测试数据库 `test`，并在 `test` 库里创建一个集合 `users`，最后在 `users` 集合插入 3 条测试数据。
 
@@ -80,9 +80,84 @@ db.getCollection("users").insertMany(
 )
 ```
 
-```shell
+测试数据准备好后，下面看一下示例工程的依赖与配置。
 
+## 2 示例工程依赖与配置
+
+### 2.1 POM.xml 依赖项
+
+如下为示例工程 `spring-data-mongodb-demo` 的根目录文件 `pom.xml` 的内容，可以看到其使用的 `spring-boot-starter-parent` 的版本为 `3.2.4`，引入的依赖项有 3 个：`spring-boot-starter-web`、`spring-boot-starter-data-mongodb` 和 `lombok`。
+
+```xml
+<!-- pom.xml -->
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.4</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.example</groupId>
+    <artifactId>spring-data-mongodb-demo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
 ```
+
+### 2.2 application.yaml 配置
+
+如下为 `application.yaml` 文件的内容，可以看到该文件配置了本地 MongoDB 的连接信息。
+
+```yaml
+# src/main/resources/application.yaml
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: test
+```
+
+示例工程依赖和配置准备好后，即可以尝试对 Spring Data MongoDB 进行使用了。
+
+## 3 开始使用 Spring Data MongoDB
 
 > 参考资料
 >
