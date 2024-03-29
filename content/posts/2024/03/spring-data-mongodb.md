@@ -86,7 +86,7 @@ db.getCollection("users").insertMany(
 
 ### 2.1 POM.xml 依赖项
 
-如下为示例工程 `spring-data-mongodb-demo` 的根目录文件 `pom.xml` 的内容，可以看到其使用的 `spring-boot-starter-parent` 的版本为 `3.2.4`，引入的依赖项有 3 个：`spring-boot-starter-web`、`spring-boot-starter-data-mongodb` 和 `lombok`。
+如下为示例工程 `spring-data-mongodb-demo` 的根目录文件 `pom.xml` 的内容，可以看到其使用了 `spring-boot-starter-parent`，并引入了 3 项依赖项：`spring-boot-starter-web`、`spring-boot-starter-data-mongodb` 和 `lombok`。
 
 ```xml
 <!-- pom.xml -->
