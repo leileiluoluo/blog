@@ -33,8 +33,19 @@ Spring Boot：3.2.4
 Spring Data MongoDB：4.2.4
 ```
 
+本文将以 User 的增、删、改、查为例来演示 Spring Data MongoDB 的使用。开始前先让我们准备一些测试数据。
+
+## 1 准备测试数据
+
+使用 MongoShell 连接本地 MongoDB 数据库 `mongodb://localhost:27017`。然后在 MongoShell 命令行执行如下语句来创建一个测试数据库 `test`，并在 `test` 库里创建一个集合 `users`，最后在 `users` 集合插入 3 条测试数据。
+
 ```shell
-db.users.insertMany( [
+use test
+
+db.createCollection("users")
+
+db.getCollection("users").insertMany(
+  [
     {
       _id: 1,
       email: "larry@larry.com",
@@ -64,8 +75,13 @@ db.users.insertMany( [
       created_at: ISODate("2024-03-01T08:00:00+08:00"),
       updated_at: ISODate("2023-03-01T08:00:00+08:00"),
       deleted: false
-    },
-] )
+    }
+  ]
+)
+```
+
+```shell
+
 ```
 
 > 参考资料
