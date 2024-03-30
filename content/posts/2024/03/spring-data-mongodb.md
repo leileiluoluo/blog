@@ -260,7 +260,7 @@ public interface UserRepository extends MongoRepository<User, String> {
 }
 ```
 
-可以看到，我们只在 `UserRepository` 增加了一个 `findByName` 自定义方法。
+可以看到，我们只在 `UserRepository` 接口增加了一个 `findByName` 自定义方法。
 
 下面即在 `src/test/java` 文件夹下针对 `UserRepository` 编写一个单元测试类来对其提供的增、删、改、查方法进行测试。
 
