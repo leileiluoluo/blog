@@ -56,7 +56,7 @@ db.getCollection("users").insertMany(
       deleted: false
     },
     {
-      email: "jacky@larry.com",
+      email: "jacky@jacky.com",
       name: "Jacky",
       role: "EDITOR",
       description: "I am Jacky",
@@ -65,7 +65,7 @@ db.getCollection("users").insertMany(
       deleted: false
     },
     {
-      email: "lucy@larry.com",
+      email: "lucy@lucy.com",
       name: "Lucy",
       role: "VIEWER",
       description: "I am Lucy",
@@ -95,7 +95,7 @@ db.getCollection("users").find({})
   },
   {
     _id: ObjectId('6607d1e438537258779f990b'),
-    email: 'jacky@larry.com',
+    email: 'jacky@jacky.com',
     name: 'Jacky',
     role: 'EDITOR',
     description: 'I am Jacky',
@@ -105,7 +105,7 @@ db.getCollection("users").find({})
   },
   {
     _id: ObjectId('6607d1e438537258779f990c'),
-    email: 'lucy@larry.com',
+    email: 'lucy@lucy.com',
     name: 'Lucy',
     role: 'VIEWER',
     description: 'I am Lucy',
@@ -350,6 +350,68 @@ public class UserRepositoryTest {
 ```
 
 测试发现，包括自定义方法在内的各个增、删、改、查方法均是好用的。
+
+### 3.3 使用 MongoTemplate
+
+除了使用 `Repository` 来对 MongoDB 进行通用的增、删、改、查操作外，我们还可以使用更加灵活的 `MongoTemplate` 来对 MongoDB 进行操作。
+
+下面即为 `MongoTemplate` 编写一个单元测试类来对其提供的功能进行简单测试。
+
+```java
+// src/test/java/com/example/demo/dao/MongoTemplateTest.java
+package com.example.demo.dao;
+
+import com.example.demo.model.User;
+import com.mongodb.client.result.UpdateResult;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+public class MongoTemplateTest {
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
+    @Test
+    public void testFindAll() {
+        List<User> users = mongoTemplate.findAll(User.class);
+
+        assertFalse(users.isEmpty());
+    }
+
+    @Test
+    public void testFindByName() {
+        Query query = new Query(Criteria.where("name").is("Jacky"));
+        User user = mongoTemplate.findOne(query, User.class);
+
+        assertNotNull(user);
+        assertEquals("jacky@jacky.com", user.getEmail());
+    }
+
+    @Test
+    public void testUpdateEmailByName() {
+        Query query = new Query(Criteria.where("name").is("Jacky"));
+        Update update = new Update().set("email", "jacky2@jacky.com");
+
+        UpdateResult result = mongoTemplate.updateMulti(query, update, User.class);
+        assertEquals(1, result.getModifiedCount());
+    }
+
+}
+```
+
+可以看到，使用 `MongoTemplate` 时，我们可以新建一个 `Query` 对象来拼装任意复杂的查询条件，进而对 MongoDB 进行查询或更新。
+
+综上，本文以示例工程的方式演示了 Spring Data MongoDB 提供的两种 MongoDB 的访问方式（通过 `Repository` 和 `MongoTemplate`），总体来说该模块保持了 Spring Data 系列通用的数据库操作设计思路与实现模式，使用起来非常的直观简便。完整示例工程已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-data-mongodb-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
