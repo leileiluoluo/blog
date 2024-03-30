@@ -411,7 +411,7 @@ public class MongoTemplateTest {
 
 可以看到，使用 `MongoTemplate` 时，我们可以新建一个 `Query` 对象来拼装任意复杂的查询条件，进而对 MongoDB 进行查询或更新。
 
-综上，本文以示例工程的方式演示了 Spring Data MongoDB 提供的两种 MongoDB 的访问方式（通过 `Repository` 和 `MongoTemplate`），总体来说该模块保持了 Spring Data 系列通用的数据库操作设计思路与实现模式，使用起来非常的直观简便。完整示例工程已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-data-mongodb-demo)，欢迎关注或 Fork。
+综上，本文以示例工程的方式演示了 Spring Data MongoDB 提供的两种 MongoDB 的访问方式（通过定义 `Repository` 和使用 `MongoTemplate`），总体来说该模块保持了 Spring Data 系列通用的数据库操作设计思路与实现模式，使用起来非常的直观简便。完整示例工程已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-data-mongodb-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
