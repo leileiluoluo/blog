@@ -179,7 +179,7 @@ db.getCollection("users").find({})
 
 ### 2.2 application.yaml 配置
 
-如下为 `application.yaml` 文件的内容，可以看到该文件配置了本地 MongoDB 的连接信息，并开启 MongoDB 查询语句的打印。
+如下为 `application.yaml` 文件的内容，可以看到该文件配置了本地 MongoDB 的连接信息，并开启了 MongoDB 查询语句的打印。
 
 ```yaml
 # src/main/resources/application.yaml
