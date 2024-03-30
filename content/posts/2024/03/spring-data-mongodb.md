@@ -353,7 +353,7 @@ public class UserRepositoryTest {
 
 ### 3.3 使用 MongoTemplate
 
-除了使用 `Repository` 来对 MongoDB 进行通用的增、删、改、查操作外，我们还可以使用更加灵活的 `MongoTemplate` 来对 MongoDB 进行操作。
+除了通过定义 `Repository` 接口来对 MongoDB 进行通用的增、删、改、查操作外，我们还可以使用更加灵活的 `MongoTemplate` 来对 MongoDB 进行操作。
 
 下面即为 `MongoTemplate` 编写一个单元测试类来对其提供的功能进行简单测试。
 
