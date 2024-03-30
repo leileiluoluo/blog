@@ -242,7 +242,7 @@ public class User {
 
 ### 3.2 编写 Repository
 
-下面我们为 User Model 创建一个对应的 `Repository` 接口 `UserRepository`，并将其扩展 `MongoRepository` 接口。因 `MongoRepository` 接口已内置了常用的增、删、改、查方法，通常来说对我们已足够用了。此外，还支持在 `Repository` 接口中按照约定的命名规则添加自定义查询方法。
+下面我们为 User Model 创建一个对应的 `Repository` 接口 `UserRepository`，并将其扩展 `MongoRepository` 接口。`MongoRepository` 接口已内置了常用的增、删、改、查方法，通常来说我们无需自己编写任何方法，使用这些默认方法就满足需求了。但 Spring Data MongoDB 还支持在 `Repository` 接口中按照约定的命名规则添加自定义查询方法。
 
 ```java
 // src/main/java/com/example/demo/dao/UserRepository.java
