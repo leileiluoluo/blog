@@ -47,7 +47,6 @@ db.createCollection("users")
 db.getCollection("users").insertMany(
   [
     {
-      _id: 1,
       email: "larry@larry.com",
       name: "Larry",
       role: "ADMIN",
@@ -57,7 +56,6 @@ db.getCollection("users").insertMany(
       deleted: false
     },
     {
-      _id: 2,
       email: "jacky@larry.com",
       name: "Jacky",
       role: "EDITOR",
@@ -67,7 +65,6 @@ db.getCollection("users").insertMany(
       deleted: false
     },
     {
-      _id: 3,
       email: "lucy@larry.com",
       name: "Lucy",
       role: "VIEWER",
@@ -78,6 +75,45 @@ db.getCollection("users").insertMany(
     }
   ]
 )
+```
+
+查询一下，发现 3 条数据均已插入，且自动生成了 ID。
+
+```shell
+db.getCollection("users").find({})
+
+[
+  {
+    _id: ObjectId('6607d1e438537258779f990a'),
+    email: 'larry@larry.com',
+    name: 'Larry',
+    role: 'ADMIN',
+    description: 'I am Larry',
+    created_at: ISODate('2024-01-01T00:00:00.000Z'),
+    updated_at: ISODate('2023-01-01T00:00:00.000Z'),
+    deleted: false
+  },
+  {
+    _id: ObjectId('6607d1e438537258779f990b'),
+    email: 'jacky@larry.com',
+    name: 'Jacky',
+    role: 'EDITOR',
+    description: 'I am Jacky',
+    created_at: ISODate('2024-02-01T00:00:00.000Z'),
+    updated_at: ISODate('2023-02-01T00:00:00.000Z'),
+    deleted: false
+  },
+  {
+    _id: ObjectId('6607d1e438537258779f990c'),
+    email: 'lucy@larry.com',
+    name: 'Lucy',
+    role: 'VIEWER',
+    description: 'I am Lucy',
+    created_at: ISODate('2024-03-01T00:00:00.000Z'),
+    updated_at: ISODate('2023-03-01T00:00:00.000Z'),
+    deleted: false
+  }
+]
 ```
 
 测试数据准备好后，下面看一下示例工程的依赖与配置。
@@ -143,7 +179,7 @@ db.getCollection("users").insertMany(
 
 ### 2.2 application.yaml 配置
 
-如下为 `application.yaml` 文件的内容，可以看到该文件配置了本地 MongoDB 的连接信息。
+如下为 `application.yaml` 文件的内容，可以看到该文件配置了本地 MongoDB 的连接信息，并开启 MongoDB 查询语句的打印。
 
 ```yaml
 # src/main/resources/application.yaml
@@ -153,13 +189,17 @@ spring:
       host: localhost
       port: 27017
       database: test
+
+logging:
+  level:
+    org.springframework.data.mongodb.core: DEBUG
 ```
 
 示例工程依赖和配置准备好后，即可以尝试对 Spring Data MongoDB 进行使用了。
 
 ## 3 开始使用 Spring Data MongoDB
 
-### 3.1 Model 类编写
+### 3.1 编写 Model 类
 
 首先需要编写一下 Model 类 `User.java`，其代码如下：
 
@@ -199,6 +239,117 @@ public class User {
 ```
 
 可以看到，如上代码在类上使用了 `@Document` 注解，并指定了对应的 MongoDB 集合为 `users`；对主键字段使用了 `@Id` 注解；并对与 MongoDB 集合中命名不一致的属性使用了 `@Field` 注解指定了实际的字段名。此外还使用 Lombok 的 `@Data` 注解自动生成了 `Setters` 和 `Getters`。
+
+### 3.2 编写 Repository
+
+下面我们为 User Model 创建一个对应的 `Repository` 接口，该接口已内置了常用的增、删、改、查方法来直接供我们使用。此外，该接口还支持按照命名规则添加新的自定义查询方法。
+
+```java
+// src/main/java/com/example/demo/dao/UserRepository.java
+package com.example.demo.dao;
+
+import com.example.demo.model.User;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import java.util.List;
+
+public interface UserRepository extends MongoRepository<User, String> {
+
+    List<User> findByName(String name);
+
+}
+```
+
+可以看到，我们只在 `UserRepository` 增加了一个 `findByName` 自定义方法。
+
+下面即在 `src/test/java` 文件夹下针对 `UserRepository` 编写一个单元测试类来对其提供的增、删、改、查方法进行测试。
+
+```java
+// src/test/java/com/example/demo/dao/UserRepositoryTest.java
+package com.example.demo.dao;
+
+import com.example.demo.model.User;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+@SpringBootTest
+public class UserRepositoryTest {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Test
+    public void testCount() {
+        long count = userRepository.count();
+
+        assertEquals(3, count);
+    }
+
+    @Test
+    public void testFindAll() {
+        List<User> users = userRepository.findAll();
+
+        assertEquals(3, users.size());
+    }
+
+    @Test
+    public void testFindById() {
+        Optional<User> optional = userRepository.findById("6607d1e438537258779f990a");
+
+        assertTrue(optional.isPresent());
+        assertEquals("Larry", optional.get().getName());
+    }
+
+    @Test
+    public void testFindByName() {
+        List<User> users = userRepository.findByName("Larry");
+
+        assertEquals(1, users.size());
+        assertEquals("Larry", users.get(0).getName());
+    }
+
+    @Test
+    public void testSave() {
+        Date now = new Date();
+
+        User user = new User();
+        user.setEmail("linda@linda.com");
+        user.setName("Linda");
+        user.setRole(User.Role.EDITOR);
+        user.setDescription("I am Linda");
+        user.setCreatedAt(now);
+        user.setUpdatedAt(now);
+        user.setDeleted(false);
+
+        // save
+        userRepository.save(user);
+    }
+
+    @Test
+    public void testUpdate() {
+        User user = userRepository.findById("6607d1e438537258779f990a").get();
+        user.setName("Larry2");
+
+        userRepository.save(user);
+    }
+
+    @Test
+    public void testDelete() {
+        userRepository.deleteById("6607d1e438537258779f990a");
+    }
+
+}
+```
+
+测试发现，包括自定义方法在内的各个增、删、改、查方法均是好用的。
 
 > 参考资料
 >
