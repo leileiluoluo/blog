@@ -18,7 +18,7 @@ keywords:
 description: 本文以一个使用 Maven 管理的 Spring Boot 工程为例，结合本地搭建的 MongoDB（版本为 7.0.7）演示了 Spring Data MongoDB 的使用。
 ---
 
-Spring Data MongoDB 是 Spring 框架提供的一个访问 MongoDB 数据库的模块，该模块延续了 Spring Data 系列统一的数据库访问风格（通过定义 `Repository` 接口的方式），借助于该模块可以使 MongoDB 的访问变得简单又高效。
+Spring Data MongoDB 是 Spring 框架提供的一个访问 MongoDB 数据库的模块，该模块延续了 Spring Data 系列统一的数据库访问风格（通过 `Template` 的方式与定义 `Repository` 接口的方式），借助于该模块可以使 MongoDB 的访问变得简单又高效。
 
 本文以一个使用 Maven 管理的 Spring Boot 工程为例，结合本地搭建的 MongoDB（版本为 7.0.7）来演示 Spring Data MongoDB 的使用。
 
@@ -161,7 +161,7 @@ spring:
 
 ### 3.1 Model 类编写
 
-首先需要编写一下 Model 类 `User.java`，其内容如下：
+首先需要编写一下 Model 类 `User.java`，其代码如下：
 
 ```java
 // src/main/java/com/example/demo/model/User.java
