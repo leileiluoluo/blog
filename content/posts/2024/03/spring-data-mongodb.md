@@ -242,7 +242,7 @@ public class User {
 
 ### 3.2 编写 Repository
 
-下面我们为 User Model 创建一个对应的 `Repository` 接口，该接口已内置了常用的增、删、改、查方法来直接供我们使用。此外，该接口还支持按照命名规则添加新的自定义查询方法。
+下面我们为 User Model 创建一个对应的 `Repository` 接口 `UserRepository`，并将其扩展 `MongoRepository` 接口。因 `MongoRepository` 接口已内置了常用的增、删、改、查方法，通常来说对我们已足够用了。此外，还支持在 `Repository` 接口中按照约定的命名规则添加自定义查询方法。
 
 ```java
 // src/main/java/com/example/demo/dao/UserRepository.java
