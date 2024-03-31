@@ -158,6 +158,10 @@ enable = true
 [params.reward]
 enable = true
 
+# boyouquan
+[params.boyouquan]
+enable = true
+
 # comment
 [params.comment]
 enable = true
