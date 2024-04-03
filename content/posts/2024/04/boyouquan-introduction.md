@@ -65,3 +65,9 @@ Layer）和帮手层（Helper Layer）分别负责定时任务处理和页面表
 ![博友圈应用程序架构](https://olzhy.github.io/static/images/uploads/2024/04/boyouquan-application-architecture.svg#center)
 
 {{% center %}}（博友圈应用程序架构）{{% /center %}}
+
+### 3.2 服务部署架构
+
+![博友圈服务部署](https://olzhy.github.io/static/images/uploads/2024/04/boyouquan-deployment-architecture.svg#center)
+
+{{% center %}}（博友圈服务部署架构）{{% /center %}}
