@@ -59,7 +59,7 @@ description: 本文回顾了博友圈的建站初衷、并基于当前最新的�
 
 博友圈应用程序主要使用 Java 语言编写，是一个集前后台于一体的单体服务，使用了 Spring Boot + Thymeleaf + MyBatis 技术。其中，Spring Boot 负责请求处理和依赖注入，Thymeleaf 负责模板渲染，MyBatis 负责数据库访问。此外，应用程序的持久化数据存储使用的是 MariaDB。
 
-博友圈应用程序架构如下图所示，使用经典的三层架构模型：即表现层（Controller Layer）、业务逻辑层（Service Layer）、数据访问层（DAO Layer）。此外，辅助的调度器层（Scheduler
+博友圈应用程序架构如下图所示，使用了经典的三层架构：即表现层（Controller Layer）、业务逻辑层（Service Layer）、数据访问层（DAO Layer）。此外，辅助的调度器层（Scheduler
 Layer）和帮手层（Helper Layer）分别负责定时任务处理和页面表单等辅助检查功能。
 
 ![博友圈应用程序架构](https://olzhy.github.io/static/images/uploads/2024/04/boyouquan-application-architecture.svg#center)
@@ -68,6 +68,18 @@ Layer）和帮手层（Helper Layer）分别负责定时任务处理和页面表
 
 ### 3.2 服务部署架构
 
+博友圈服务的部署即是一个 Java 应用程序的部署。为了保持服务的高可用，应用程序顶层使用了 Nginx 来做反向代理，应用程序底层则需要连接 MariaDB 实例。
+
+博友圈服务部署架构如下图所示：
+
 ![博友圈服务部署](https://olzhy.github.io/static/images/uploads/2024/04/boyouquan-deployment-architecture.svg#center)
 
 {{% center %}}（博友圈服务部署架构）{{% /center %}}
+
+### 3.3 程序调试与启动
+
+关于程序如何在本地调式与启动，请参阅博友圈 GitHub 仓库（[github.com/olzhy/boyouquan](https://github.com/olzhy/boyouquan)）使用说明。
+
+博友圈程序源码已开源，有需求的朋友可以完全自由的使用，而仅需在网站的底部注明「本站使用博友圈（www.boyouquan.com）开源程序创建」即可。
+
+综上，本文介绍了博友圈的建站初衷、主要功能和技术架构。欢迎感兴趣的朋友在 GitHub 添加关注，也真诚欢迎来自全世界各地的中文独立博客博友圈们的加入！
