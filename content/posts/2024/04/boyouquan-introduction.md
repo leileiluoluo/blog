@@ -15,7 +15,7 @@ keywords:
 description: 本文回顾了博友圈的建站初衷、并基于当前最新的版本介绍了博友圈的主要功能和技术架构。
 ---
 
-我于去年 7 月份开发了一个独立博客收录网站 - 「[博友圈 - www.boyouquan.com](https://www.boyouquan.com)」，该网站建立至今已有 9 个月的时间，各项功能运行稳定，本文主要回顾一下该网站的建站初衷、介绍一下该网站的主要功能和技术架构。
+我于去年 7 月份开发了一个独立博客收录网站 - 「[博友圈 - www.boyouquan.com](https://www.boyouquan.com)」，该网站建立至今已有 9 个月的时间，各项功能运行稳定，本文主要回顾一下该网站的建站初衷，并基于当前最新的版本（[v1.10](https://github.com/olzhy/boyouquan/releases/tag/v1.10)）介绍一下该网站的主要功能和技术架构。
 
 <!--more-->
 
