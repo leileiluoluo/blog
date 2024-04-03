@@ -50,3 +50,7 @@ description: 本文回顾了博友圈的建站初衷、并基于当前最新的�
   「星球穿梭」页面支持随机跳转到一个博客。若某一博客添加了「星球穿梭」的链接，那么博友圈跳转到随机博客时也会携带发起者的网址。这个功能具有不错的互动性，对增加博客人气，推动博友互访具有一定的作用。
 
 ## 3 技术架构
+
+### 3.1 应用架构
+
+![博友圈应用架构](https://olzhy.github.io/static/images/uploads/2024/04/boyouquan-application-architecture.svg#center)
