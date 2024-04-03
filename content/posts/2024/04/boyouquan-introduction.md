@@ -61,8 +61,8 @@ description: 本文回顾了博友圈的建站初衷、并基于当前最新的�
 
 博友圈应用程序主要使用 Java 语言编写，是一个集前后台于一体的单体服务，使用了 Spring Boot + Thymeleaf + MyBatis 技术。其中，Spring Boot 负责请求处理和依赖注入，Thymeleaf 负责模板渲染，MyBatis 负责数据库访问。此外，应用程序的持久化数据存储使用的是 MariaDB。
 
-博友圈应用程序架构如下图所示，使用了经典的三层架构：即表现层（Controller Layer）、业务逻辑层（Service Layer）、数据访问层（DAO Layer）。此外，辅助的调度器层（Scheduler
-Layer）和帮手层（Helper Layer）分别负责定时任务处理和页面表单等辅助检查功能。
+博友圈应用程序架构如下图所示，自上而下使用了经典的三层架构：即表现层（Controller Layer）、业务逻辑层（Service Layer）、数据访问层（DAO Layer）。此外，附加的调度器层（Scheduler
+Layer）和帮手层（Helper Layer）则分别包含了一组定时任务和辅助工具类。
 
 ![博友圈应用程序架构](https://olzhy.github.io/static/images/uploads/2024/04/boyouquan-application-architecture.svg#center)
 
