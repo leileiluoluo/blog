@@ -15,7 +15,7 @@ keywords:
 description: 本文回顾了博友圈的建站初衷、并基于当前最新的版本介绍了博友圈的主要功能和技术架构。
 ---
 
-我于去年 7 月份开发了一个独立博客收录网站 -「[博友圈 - www.boyouquan.com](https://www.boyouquan.com)」，该网站建立至今已有 9 个月的时间，各项功能运行稳定，本文主要回顾一下该网站的建站初衷，并基于当前最新的版本（[v1.10](https://github.com/olzhy/boyouquan/releases/tag/v1.10)）介绍一下该网站的主要功能和技术架构。
+我于去年 7 月份开发了一个独立博客收录网站 ——「[博友圈 - www.boyouquan.com](https://www.boyouquan.com)」，该网站建立至今已有 9 个月的时间，各项功能运行稳定，本文主要回顾一下该网站的建站初衷，并基于当前最新的版本（[v1.10](https://github.com/olzhy/boyouquan/releases/tag/v1.10)）介绍一下该网站的主要功能和技术架构。
 
 <!--more-->
 
@@ -31,7 +31,7 @@ description: 本文回顾了博友圈的建站初衷、并基于当前最新的�
 
 博友圈有开放页面和后台控制页面两种页面。前者用于开放访问，后者用于后台管理。
 
-博友圈当前主要提供博客收录、文章聚合展示、博客详情展示和星球穿梭（随机跳转）功能，下面对各个功能进行简单介绍。
+博友圈当前主要提供博客收录、文章聚合展示、每月精选、博客详情展示和星球穿梭（随机跳转）功能，下面对各个功能进行简单介绍。
 
 - [博客收录](https://www.boyouquan.com/blogs)
 
@@ -40,6 +40,10 @@ description: 本文回顾了博友圈的建站初衷、并基于当前最新的�
 - [文章聚合展示](https://www.boyouquan.com/home)
 
   博友圈会每隔 1 小时轮询一次各个博客的 RSS 地址，发现新的文章，即会进行收录，并在首页「最新」进行展示。若后台将某篇文章设置为了推荐，则该篇文章会在首页「推荐」进行展示。
+
+- [每月精选](https://www.boyouquan.com/monthly-select)
+
+  考虑到首页聚合展示的文章更新的太快，一些有趣的文章可能会很快淹没，所以设置了「每月精选」页面。该页面会将每个月热度最高的 10 条推荐文章进行存档，方便感兴趣的朋友进行翻看。
 
 - [博客详情展示](https://www.boyouquan.com/blogs/leileiluoluo.com)
 
@@ -51,6 +55,13 @@ description: 本文回顾了博友圈的建站初衷、并基于当前最新的�
 
 ## 3 技术架构
 
-### 3.1 应用架构
+### 3.1 应用程序架构
 
-![博友圈应用架构](https://olzhy.github.io/static/images/uploads/2024/04/boyouquan-application-architecture.svg#center)
+博友圈应用程序主要使用 Java 语言编写，是一个集前后台于一体的单体服务，使用了 Spring Boot + Thymeleaf + MyBatis 技术。其中，Spring Boot 负责请求处理和依赖注入，Thymeleaf 负责模板渲染，MyBatis 负责数据库访问。此外，应用程序的持久化数据存储使用的是 MariaDB。
+
+博友圈应用程序架构如下图所示，使用经典的三层架构模型：即表现层（Controller Layer）、业务逻辑层（Service Layer）、数据访问层（DAO Layer）。此外，辅助的调度器层（Scheduler
+Layer）和帮手层（Helper Layer）分别负责定时任务处理和页面表单等辅助检查功能。
+
+![博友圈应用程序架构](https://olzhy.github.io/static/images/uploads/2024/04/boyouquan-application-architecture.svg#center)
+
+{{% center %}}（博友圈应用程序架构）{{% /center %}}
