@@ -20,7 +20,7 @@ wip_template:
 
 ### 邮箱
 
-技术交流、交换友链、商务合作等请使用如下邮箱与我联系。
+技术交流、友链交换、商务合作等请使用如下邮箱与我联系。
 
 leileiluoluo(at)leileiluoluo.com
 
