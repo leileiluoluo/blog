@@ -54,9 +54,23 @@
 
       <!-- comments -->
       {{ if .Site.Params.comment.enable }}
-      <script src="https://utteranc.es/client.js" repo="leileiluoluo/leileiluoluo.github.io" issue-term="pathname"
-        theme="github-light" crossorigin="anonymous" async>
-      </script>
+      <div class="col-lg-8 mx-auto block shadow">
+        <script src="https://giscus.app/client.js"
+          data-repo="leileiluoluo/leileiluoluo.github.io"
+          data-repo-id="R_kgDOJkLT8w"
+          data-category="General"
+          data-category-id="DIC_kwDOJkLT884CdtEh"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="preferred_color_scheme"
+          data-lang="zh-CN"
+          crossorigin="anonymous"
+          async>
+        </script>
+      </div>
       {{ end }}
     </div>
   </div>
