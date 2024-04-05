@@ -1,6 +1,6 @@
 ---
 title: Golang channel 使用小结
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-01-05T09:14:45+00:00
 url: /posts/golang-channels.html
@@ -269,7 +269,7 @@ func main() {
 }
 ```
 
-本文代码托管地址：<a href="https://github.com/olzhy/go-exercises/tree/master/channels" target="blank">https://github.com/olzhy/go-exercises/tree/master/channels</a>
+本文代码托管地址：<a href="https://github.com/leileiluoluo/go-exercises/tree/master/channels" target="blank">https://github.com/leileiluoluo/go-exercises/tree/master/channels</a>
 
 > 参考资料
 >

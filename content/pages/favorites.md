@@ -1,6 +1,6 @@
 ---
 title: 网址收藏
-author: olzhy
+author: leileiluoluo
 type: page
 url: /favorites
 wip_template:

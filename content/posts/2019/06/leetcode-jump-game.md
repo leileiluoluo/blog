@@ -1,6 +1,6 @@
 ---
 title: LeetCode 55 跳跃游戏
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-06-10T07:38:27+00:00
 url: /posts/leetcode-jump-game.html
@@ -49,7 +49,7 @@ tags:
 
 **3 Golang实现代码**
   
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/55_Jump_Game/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/55_Jump_Game/test.go)
 
 ```go
 func canJump(nums []int) bool {

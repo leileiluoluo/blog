@@ -1,6 +1,6 @@
 ---
 title: 摘錄：苦難的詛咒
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2024-01-16T08:00:00+08:00
 url: /posts/curse-of-suffering.html

@@ -1,6 +1,6 @@
 ---
 title: 人生的边界
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2015-07-25T04:37:49+00:00
 url: /posts/boundary-of-our-life.html

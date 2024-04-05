@@ -1,6 +1,6 @@
 ---
 title: Istio 安装使用
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-12-16T07:48:56+08:00
 url: /posts/istio-get-started.html
@@ -173,7 +173,7 @@ istio-ingressgateway   LoadBalancer   10.108.227.8   localhost     ...80:32008/T
 
 所以，对于本文所采用的 Docker Desktop K8s 本地部署环境来说，外部 IP 就是 localhost。采用`http://localhost/productpage`即可访问 Bookinfo 的 productpage 页面。
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/istio-bookinfo.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/istio-bookinfo.png#center)
 
 ### 4 Istio Dashboard 安装
 
@@ -200,7 +200,7 @@ $ istioctl dashboard kiali
 
 然后，查看`istio-demo` namespace 的应用拓扑图。
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/istio-kiali.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/istio-kiali.png#center)
 
 可以看到，调用关系一目了然，请求由 Istio Ingress Gateway 进来，首先访问 productpage，productpage 访问 details 获取图书详情，productpage 访问 reviews 获取评论，reviews 访问 ratings 获取图书评级。
 
@@ -214,7 +214,7 @@ $ istioctl dashboard jaeger
 
 左侧 Service 下拉菜单，选择`productpage.istio-demo`，从右面的 Traces 里点击 productpage，可以看到如下调用详情。
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/istio-jaeger.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/istio-jaeger.png#center)
 
 调用链以时间序横向展示，同样可以看到请求由 istio-ingressgateway 进来到达 productpage，productpage 调用 details 及 reviews，reviews 调用 ratings，每个调用的时间花费亦显示了出来。
 

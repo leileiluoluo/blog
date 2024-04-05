@@ -1,6 +1,6 @@
 ---
 title: 我有一个梦想
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2012-11-15T09:05:45+00:00
 url: /posts/dream.html

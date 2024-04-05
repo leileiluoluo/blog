@@ -1,6 +1,6 @@
 ---
 title: Go 1.13 数字表示、移位及分割
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-09-27T02:49:19+00:00
 url: /posts/go1dot13-number-literals.html

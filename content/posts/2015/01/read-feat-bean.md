@@ -1,6 +1,6 @@
 ---
 title: 读《缘豆儿》
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2015-01-19T08:00:37+00:00
 url: /posts/read-feat-bean.html

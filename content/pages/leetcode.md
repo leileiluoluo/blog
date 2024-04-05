@@ -1,6 +1,6 @@
 ---
 title: LeetCode 题目Golang实现汇总
-author: olzhy
+author: leileiluoluo
 type: page
 date: 2019-07-19T00:01:14+00:00
 url: /leetcode-golang-implementations
@@ -18,7 +18,7 @@ keywords:
 description: LeetCode题目Golang,Python实现汇总。
 ---
 
-GitHub: [github.com/olzhy/leetcode](https://github.com/olzhy/leetcode)
+GitHub: [github.com/leileiluoluo/leetcode](https://github.com/leileiluoluo/leetcode)
 
 | 题号 | 题目                                                                                                                               | 难度 | 实现                                                                                             |
 | ---- | ---------------------------------------------------------------------------------------------------------------------------------- | ---- | ------------------------------------------------------------------------------------------------ |

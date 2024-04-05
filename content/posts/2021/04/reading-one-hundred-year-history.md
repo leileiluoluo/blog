@@ -1,6 +1,6 @@
 ---
 title: 读《历史深处的民国》
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2021-04-14T11:38:36+08:00
 url: /posts/reading-one-hundred-year-history.html

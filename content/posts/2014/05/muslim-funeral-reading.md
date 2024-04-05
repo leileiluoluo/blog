@@ -1,6 +1,6 @@
 ---
 title: 读《穆斯林的葬礼》
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2014-05-02T08:13:49+00:00
 url: /posts/muslim-funeral-reading.html

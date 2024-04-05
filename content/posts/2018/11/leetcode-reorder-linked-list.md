@@ -1,6 +1,6 @@
 ---
 title: LeetCode 143 重排链表
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-11-17T14:25:38+00:00
 url: /posts/leetcode-reorder-linked-list.html
@@ -35,11 +35,11 @@ tags:
   
 2.2）两个指针分别从头至尾、从尾至头同时遍历该双向链表来建立所要求的顺序关系，直至汇合即完成重排。重排过程如下图所示。
 
-![](https://olzhy.github.io/static/images/uploads/2018/11/reorder-linked-list.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2018/11/reorder-linked-list.png)
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/143_Reorder_List/test.go" rel="noopener" target="_blank">https://github.com/olzhy/leetcode/blob/master/143_Reorder_List/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/143_Reorder_List/test.go" rel="noopener" target="_blank">https://github.com/leileiluoluo/leetcode/blob/master/143_Reorder_List/test.go</a>
 
 ```go
 type ListNode struct {  

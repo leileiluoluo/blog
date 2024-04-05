@@ -1,6 +1,6 @@
 ---
 title: 记青龙山之行
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-11-29T12:24:47+08:00
 url: /posts/qinglongshan.html

@@ -1,6 +1,6 @@
 ---
 title: 如何使用 Spring Data JPA 进行数据库访问？
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2024-02-26T08:00:00+08:00
 url: /posts/spring-data-jpa.html
@@ -157,7 +157,7 @@ INSERT INTO user(name, age, email, created_at, updated_at) VALUES
 
 ### 2.2 示例工程介绍
 
-本文示例工程 [spring-data-jpa-demo](https://github.com/olzhy/java-exercises/tree/main/spring-data-jpa-demo) 用到的依赖如下：
+本文示例工程 [spring-data-jpa-demo](https://github.com/leileiluoluo/java-exercises/tree/main/spring-data-jpa-demo) 用到的依赖如下：
 
 ```xml
 <!-- pom.xml -->
@@ -190,7 +190,7 @@ INSERT INTO user(name, age, email, created_at, updated_at) VALUES
 </dependency>
 ```
 
-示例工程的 [application.yaml](https://github.com/olzhy/java-exercises/blob/main/spring-data-jpa-demo/src/main/resources/application.yaml) 配置文件内容如下（主要配置了数据库连接信息，并开启了 SQL 语句的打印）：
+示例工程的 [application.yaml](https://github.com/leileiluoluo/java-exercises/blob/main/spring-data-jpa-demo/src/main/resources/application.yaml) 配置文件内容如下（主要配置了数据库连接信息，并开启了 SQL 语句的打印）：
 
 ```yaml
 spring:
@@ -213,7 +213,7 @@ spring:
 
 ### 3.1 定义 Model 类
 
-首先需要定义一个 Model 类 [User.java](https://github.com/olzhy/java-exercises/blob/main/spring-data-jpa-demo/src/main/java/com/example/demo/model/User.java)：
+首先需要定义一个 Model 类 [User.java](https://github.com/leileiluoluo/java-exercises/blob/main/spring-data-jpa-demo/src/main/java/com/example/demo/model/User.java)：
 
 ```java
 // src/main/java/com/example/demo/model/User.java
@@ -237,7 +237,7 @@ public class User {
 
 ### 3.2 定义 Repository 接口并添加常用方法
 
-接着定义一个仓库 [UserRepository.java](https://github.com/olzhy/java-exercises/blob/main/spring-data-jpa-demo/src/main/java/com/example/demo/repository/UserRepository.java) ，并让其扩展最基础的 `Repository` 接口。
+接着定义一个仓库 [UserRepository.java](https://github.com/leileiluoluo/java-exercises/blob/main/spring-data-jpa-demo/src/main/java/com/example/demo/repository/UserRepository.java) ，并让其扩展最基础的 `Repository` 接口。
 
 然后在 `UserRepository` 接口内按照命名规则（支持：`find...By`、`exists...By`、`count...By` `delete...By`等）添加常用的增删改查方法：
 
@@ -275,7 +275,7 @@ public interface UserRepository extends Repository<User, Long> {
 
 如上这些方法中，除 `Page<User> findAll(Pageable pageable);` 外，其它方法怎么传参，怎么使用，都一目了然。
 
-下面编写一个单元测试类 [UserRepositoryTest.java](https://github.com/olzhy/java-exercises/blob/main/spring-data-jpa-demo/src/test/java/com/example/demo/repository/UserRepositoryTest.java)，仅演示一下 `Page<User> findAll(Pageable pageable);` 方法的使用：
+下面编写一个单元测试类 [UserRepositoryTest.java](https://github.com/leileiluoluo/java-exercises/blob/main/spring-data-jpa-demo/src/test/java/com/example/demo/repository/UserRepositoryTest.java)，仅演示一下 `Page<User> findAll(Pageable pageable);` 方法的使用：
 
 ```java
 // src/test/java/com/example/demo/repository/UserRepositoryTest.java
@@ -486,7 +486,7 @@ public class UserServiceTest {
 }
 ```
 
-综上，本文首先对 Spring Data Repository 进行了介绍，然后准备了一下测试数据与示例工程，最后以示例代码的方式演示了 Spring Data JPA 各种注解与特性的使用。文中示例工程涉及的代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-data-jpa-demo)，欢迎关注或 Fork。
+综上，本文首先对 Spring Data Repository 进行了介绍，然后准备了一下测试数据与示例工程，最后以示例代码的方式演示了 Spring Data JPA 各种注解与特性的使用。文中示例工程涉及的代码均已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-data-jpa-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >

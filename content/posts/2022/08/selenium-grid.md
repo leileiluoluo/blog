@@ -1,6 +1,6 @@
 ---
 title: Selenium Grid 搭建及使用
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2022-08-30T08:48:31+08:00
 url: /posts/selenium-grid.html
@@ -23,7 +23,7 @@ Selenium 测试的主要组成部分有：测试代码、WebDriver、Grid（Sele
 
 当我们编写完 Selenium 测试用例在本地调试时，WebDriver 通过浏览器驱动直接与浏览器进行交互。这时，WebDriver、浏览器驱动和浏览器位于同一主机。这种最基本的交互方式如下图所示。
 
-![WebDriver与浏览器直接交互过程 - selenium.dev](https://olzhy.github.io/static/images/uploads/2022/08/selenium-basic-comms.png#center)
+![WebDriver与浏览器直接交互过程 - selenium.dev](https://leileiluoluo.github.io/static/images/uploads/2022/08/selenium-basic-comms.png#center)
 
 {{% center %}}（图片引自 [selenium.dev](https://www.selenium.dev/documentation/overview/components/)）{{% /center %}}
 
@@ -31,7 +31,7 @@ Selenium 测试的主要组成部分有：测试代码、WebDriver、Grid（Sele
 
 远程交互方式是指 WebDriver 通过 Grid（Selenium Server）来与浏览器（驱动）远程交互。这时，Grid 可以不与浏览器及其驱动位于同一主机，测试代码及 WebDriver 也可以不与 Grid 或浏览器位于同一主机。这种远程交互的方式如下图所示。
 
-![WebDriver与浏览器远程交互过程 - selenium.dev](https://olzhy.github.io/static/images/uploads/2022/08/selenium-remote-comms-server.png#center)
+![WebDriver与浏览器远程交互过程 - selenium.dev](https://leileiluoluo.github.io/static/images/uploads/2022/08/selenium-remote-comms-server.png#center)
 
 {{% center %}}（图片引自 [selenium.dev](https://www.selenium.dev/documentation/overview/components/)）{{% /center %}}
 
@@ -110,7 +110,7 @@ java -jar selenium-server-<version>.jar standalone
 
 Grid 启动完成后，打开网址`http://localhost:4444`可以看到可使用的所有浏览器类型以及会话的状态。
 
-![Selenium Grid UI](https://olzhy.github.io/static/images/uploads/2022/08/selenium-grid-ui.jpeg#center)
+![Selenium Grid UI](https://leileiluoluo.github.io/static/images/uploads/2022/08/selenium-grid-ui.jpeg#center)
 
 接着，对测试代码稍作修改（获取`browser`的方式替换为如下写法）即可成功运行。
 
@@ -143,7 +143,7 @@ java -jar selenium-server-<version>.jar node --port 6666
 
 启动完成后，从网址`http://localhost:4444`可以看到有两个可以使用的 Node。
 
-![Selenium Grid UI](https://olzhy.github.io/static/images/uploads/2022/08/selenium-grid-ui-2-nodes.jpeg#center)
+![Selenium Grid UI](https://leileiluoluo.github.io/static/images/uploads/2022/08/selenium-grid-ui-2-nodes.jpeg#center)
 
 测试代码使用 Grid 的方式不会因此发生变化，仍指向`http://localhost:4444`即可。
 
@@ -160,7 +160,7 @@ docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-chro
 
 新版 Grid 另一个非常便捷的功能是，直接在浏览器打开`http://localhost:7900`（密码为`secret`）即可看到运行测试的桌面。
 
-![Selenium Grid 运行桌面](https://olzhy.github.io/static/images/uploads/2022/08/selenium-grid-desktop.jpeg#center)
+![Selenium Grid 运行桌面](https://leileiluoluo.github.io/static/images/uploads/2022/08/selenium-grid-desktop.jpeg#center)
 
 测试代码同样只需将 RemoteWebDriver 地址指向`http://localhost:4444`即可运行。
 
@@ -219,13 +219,13 @@ docker run -d -p 5900:5900 --net grid -e SE_EVENT_BUS_HOST=selenium-hub \
 
 打开 VNC Viewer，键入`localhost:5900`后回车，输入密码（`secret`）后即可看到 Chrome Node 的桌面。
 
-![使用 VNC Viewer 查看 Selenium Grid 运行桌面](https://olzhy.github.io/static/images/uploads/2022/08/selenium-grid-desktop-vnc.jpeg#center)
+![使用 VNC Viewer 查看 Selenium Grid 运行桌面](https://leileiluoluo.github.io/static/images/uploads/2022/08/selenium-grid-desktop-vnc.jpeg#center)
 
 ### 4 使用 Kubernetes 描述文件的方式搭建 Grid
 
 拥有 Kubernetes 环境的话，在 Kubernetes 搭建好 Grid，会变得非常实用。这样，从 Kubernetes Ingress 暴露 Grid 的 URL 出来，可以供团队内的任何测试项目使用。自动化流水线的测试阶段也变得简单，无需准备测试用例运行环境，直接指向 Grid 的 URL 即可。
 
-本文基于 Docker Desktop 自带的 Kubernetes 环境，基于官方提供的 [Kubernetes 描述文件](https://github.com/kubernetes/examples/tree/master/staging/selenium) 稍作改动来搭建一个 Selenium Hub/Node 环境（修改后的 K8s Yaml 文件已整理至我的 [个人 GitHub 仓库](https://github.com/olzhy/kubernetes-exercises/tree/main/selenium)），然后开放 Grid Hub 的 URL 出来供测试项目使用，再开放一个 Chrome Node 的桌面 URL 出来供测试人员查看。
+本文基于 Docker Desktop 自带的 Kubernetes 环境，基于官方提供的 [Kubernetes 描述文件](https://github.com/kubernetes/examples/tree/master/staging/selenium) 稍作改动来搭建一个 Selenium Hub/Node 环境（修改后的 K8s Yaml 文件已整理至我的 [个人 GitHub 仓库](https://github.com/leileiluoluo/kubernetes-exercises/tree/main/selenium)），然后开放 Grid Hub 的 URL 出来供测试项目使用，再开放一个 Chrome Node 的桌面 URL 出来供测试人员查看。
 
 应用 Selenium Hub/Node `Deployment`及`Service` 描述文件。
 

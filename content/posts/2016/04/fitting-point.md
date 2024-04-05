@@ -1,6 +1,6 @@
 ---
 title: 契合点
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2016-04-23T04:18:49+00:00
 url: /posts/fitting-point.html

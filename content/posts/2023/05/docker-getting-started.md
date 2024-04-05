@@ -1,6 +1,6 @@
 ---
 title: Docker 初探
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-05-21T08:00:00+08:00
 url: /posts/docker-getting-started.html
@@ -18,7 +18,7 @@ keywords:
 description: 本文对 Docker 进行了初探，包括 Docker 概览、Docker 安装和 Docker 的初步使用。
 ---
 
-上文「[一文了解什么是容器](https://olzhy.github.io/posts/what-is-a-container.html)」介绍了容器的基本概念，本文接着介绍当前最流行的容器平台 Docker，并对其进行初步使用。
+上文「[一文了解什么是容器](https://leileiluoluo.github.io/posts/what-is-a-container.html)」介绍了容器的基本概念，本文接着介绍当前最流行的容器平台 Docker，并对其进行初步使用。
 
 ## 1 Docker 概览
 
@@ -52,7 +52,7 @@ Docker 提供工具和平台来管理容器的生命周期，包括:
 
 Docker 使用的是 C/S（客户端-服务器）架构。
 
-![Docker 架构](https://olzhy.github.io/static/images/uploads/2023/05/docker-architecture.svg#center)
+![Docker 架构](https://leileiluoluo.github.io/static/images/uploads/2023/05/docker-architecture.svg#center)
 
 {{% center %}}（Docker 架构 - 引用自 [Docker Documentation](https://docs.docker.com/get-started/overview/)）{{% /center %}}
 
@@ -151,7 +151,7 @@ docker run -dp 3000:3000 getting-started
 
 这样，浏览器访问`http://localhost:3000`即可以看到应用程序了：
 
-![待办列表示例应用程序](https://olzhy.github.io/static/images/uploads/2023/05/todo-list-empty.png#center)
+![待办列表示例应用程序](https://leileiluoluo.github.io/static/images/uploads/2023/05/todo-list-empty.png#center)
 
 此外，还可以使用`docker ps`命令来查看容器状态，使用`docker stop`命令来停止容器，以及对停止的容器使用`docker rm`来进行移除。
 

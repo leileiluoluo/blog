@@ -1,6 +1,6 @@
 ---
 title: LeetCode 508 高频子树和
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-08-24T15:11:02+00:00
 url: /posts/leetcode-most-frequent-subtree-sum.html
@@ -59,7 +59,7 @@ tags:
 
 **3 Golang实现代码**
   
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/508_Most_Frequent_Subtree_Sum/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/508_Most_Frequent_Subtree_Sum/test.go)
 
 ```go
 type TreeNode struct {

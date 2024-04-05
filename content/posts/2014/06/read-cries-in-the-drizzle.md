@@ -1,6 +1,6 @@
 ---
 title: 读《在细雨中呼喊》
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2014-06-08T08:03:35+00:00
 url: /posts/read-cries-in-the-drizzle.html

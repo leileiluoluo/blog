@@ -1,6 +1,6 @@
 ---
 title: PostgreSQL 数据定义相关知识总结
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-10-22T08:00:00+08:00
 url: /posts/postgres-ddl.html
@@ -808,15 +808,15 @@ SET search_path TO myschema;
 
 ## 9 表继承
 
-关于表继承的部分，可以参阅本人之前总结的一篇文章「[PostgreSQL 表继承使用详解](https://olzhy.github.io/posts/postgres-table-inheritance.html)」。
+关于表继承的部分，可以参阅本人之前总结的一篇文章「[PostgreSQL 表继承使用详解](https://leileiluoluo.github.io/posts/postgres-table-inheritance.html)」。
 
 ## 10 表分区
 
-关于表分区的部分，可以参阅本人之前总结的一篇文章「[PostgreSQL 表分区使用详解](https://olzhy.github.io/posts/postgres-table-partitioning.html)」。
+关于表分区的部分，可以参阅本人之前总结的一篇文章「[PostgreSQL 表分区使用详解](https://leileiluoluo.github.io/posts/postgres-table-partitioning.html)」。
 
 ## 11 外部数据
 
-关于外部数据的部分，可以参阅本人之前总结的一篇文章「[PostgreSQL 外部数据包装器 postgres_fdw 使用详解](https://olzhy.github.io/posts/postgres-foreign-data-wrappers.html)」。
+关于外部数据的部分，可以参阅本人之前总结的一篇文章「[PostgreSQL 外部数据包装器 postgres_fdw 使用详解](https://leileiluoluo.github.io/posts/postgres-foreign-data-wrappers.html)」。
 
 ## 12 其它数据库对象
 

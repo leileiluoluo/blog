@@ -1,6 +1,6 @@
 ---
 title: 人生几何
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2014-01-25T08:25:37+00:00
 url: /posts/how-much-our-life.html

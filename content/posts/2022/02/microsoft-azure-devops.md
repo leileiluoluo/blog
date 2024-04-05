@@ -1,6 +1,6 @@
 ---
 title: Azure DevOps 服务学习总结
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2022-02-20T10:36:52+08:00
 url: /posts/azure-devops-services.html
@@ -62,7 +62,7 @@ Azure Pipelines 支持绝大多数的开发语言与应用类型，支持多种�
 
 可以使用 YAML 文件`azure-pipelines.yml`来定义流水线。
 
-![](https://olzhy.github.io/static/images/uploads/2022/02/pipelines-image-yaml.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2022/02/pipelines-image-yaml.png#center)
 
 - 流水线与代码一起进行版本控制。它遵循相同的分支结构。您可以通过拉取请求（Pull Request）和分支构建策略中的代码审查（Code Review）来验证您的更改。
 - 通过修改每个分支下的 `azure-pipelines.yml` 文件来修改流水线。

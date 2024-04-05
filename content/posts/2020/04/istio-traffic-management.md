@@ -1,6 +1,6 @@
 ---
 title: Istio 流量管理初探
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-04-21T08:43:50+08:00
 url: /posts/istio-traffic-management.html

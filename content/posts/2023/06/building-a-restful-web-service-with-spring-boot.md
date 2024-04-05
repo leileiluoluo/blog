@@ -1,6 +1,6 @@
 ---
 title: 如何使用 Spring Boot 构建一个 RESTful Web 服务
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-06-04T08:00:00+08:00
 url: /posts/building-a-restful-web-service-with-spring-boot.html
@@ -18,7 +18,7 @@ keywords:
 description: 本文介绍如何使用 Spring Boot 构建一个 RESTful Web 服务，主要关注项目的结构、注解的使用和单元测试代码的编写，并由此探索 Spring Boot 的设计理念与使用方法。
 ---
 
-上文「[如何快速搭建一个 Spring Boot 项目](https://olzhy.github.io/posts/spring-boot-quick-start.html)」介绍了使用 Spring Initializr 搭建 Spring Boot 模板项目的方法。本文接着介绍如何使用 Spring Boot 构建一个 RESTful Web 服务，主要关注项目的结构、注解的使用和单元测试代码的编写，并由此探索 Spring Boot 的设计理念与使用方法。
+上文「[如何快速搭建一个 Spring Boot 项目](https://leileiluoluo.github.io/posts/spring-boot-quick-start.html)」介绍了使用 Spring Initializr 搭建 Spring Boot 模板项目的方法。本文接着介绍如何使用 Spring Boot 构建一个 RESTful Web 服务，主要关注项目的结构、注解的使用和单元测试代码的编写，并由此探索 Spring Boot 的设计理念与使用方法。
 
 本文实现的 RESTful Web 服务提供用户（User）的增删改查功能，内部使用 Java ArrayList 实现数据的存储。
 
@@ -426,7 +426,7 @@ public class UserControllerTest {
 
 可以看到，如上代码使用`MockMvc`实现了对`UserController`的单元测试。
 
-综上，本文完成了对 Spring Boot RESTful 服务的搭建，了解了 Spring Boot 常用注解的含义和使用方式。本文涉及的完整项目代码已托管至「[GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-restful-service-demo)」，欢迎关注或 Fork。
+综上，本文完成了对 Spring Boot RESTful 服务的搭建，了解了 Spring Boot 常用注解的含义和使用方式。本文涉及的完整项目代码已托管至「[GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-boot-restful-service-demo)」，欢迎关注或 Fork。
 
 > 参考资料
 >

@@ -1,6 +1,6 @@
 ---
 title: LeetCode 74 二维矩阵搜索
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-05-16T10:19:37+00:00
 url: /posts/leetcode-search-a-2d-matrix.html
@@ -93,7 +93,7 @@ func binarySearch(nums []int, target int) int {
 
 **4 算法Golang完整实现代码**
   
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/74_Search_A_2D_Matrix/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/74_Search_A_2D_Matrix/test.go)
 
 ```go
 func searchMatrix(matrix [][]int, target int) bool {

@@ -1,6 +1,6 @@
 ---
 title: LeetCode 3 求不含重复字符的最长子串
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-11-04T10:42:58+00:00
 url: /posts/leetcode-longest-substring-without-repeating-characters.html
@@ -57,7 +57,7 @@ tags:
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/3_Longest_Substring/test.go" rel="noopener" target="_blank">https://github.com/olzhy/leetcode/blob/master/3_Longest_Substring/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/3_Longest_Substring/test.go" rel="noopener" target="_blank">https://github.com/leileiluoluo/leetcode/blob/master/3_Longest_Substring/test.go</a>
 
 ```go
 func lengthOfLongestSubstring(s string) int {  

@@ -1,6 +1,6 @@
 ---
 title: 静下心来，开始自己的旅程
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2010-07-09T07:58:48+00:00
 url: /posts/new-journey.html

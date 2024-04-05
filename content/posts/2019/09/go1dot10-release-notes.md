@@ -1,6 +1,6 @@
 ---
 title: Go 1.10 Release Notes 要点整理
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-09-15T08:30:46+00:00
 url: /posts/go1dot10-release-notes.html

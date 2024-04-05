@@ -1,6 +1,6 @@
 ---
 title: 一文了解什么是容器
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-05-17T08:00:00+08:00
 url: /posts/what-is-a-container.html
@@ -18,7 +18,7 @@ description: 一文了解什么是容器，包括：为什么要使用容器？�
 
 正如运输行业使用集装箱作为标准单元来包装货物以快速装卸与运输一样，软件行业也在越来越多的使用容器作为标准单元来打包应用程序以简化应用程序的迁移。
 
-![现实生活中的集装箱](https://olzhy.github.io/static/images/uploads/2023/05/physical-containers.jpg#center)
+![现实生活中的集装箱](https://leileiluoluo.github.io/static/images/uploads/2023/05/physical-containers.jpg#center)
 
 {{% center %}}（现实生活中的集装箱 - 引用自 [Ridge Cloud](https://www.ridge.co/blog/what-are-containers/)）{{% /center %}}
 
@@ -38,7 +38,7 @@ description: 一文了解什么是容器，包括：为什么要使用容器？�
 
 虚拟化是一种将 RAM、CPU、磁盘或网络等系统单一资源虚拟化为多个资源的过程。容器（Containers）与虚拟机（Virtual Machines）都属于虚拟化技术且都具有类似的资源隔离和分配上的优势，但两者最主要的不同点是：容器仅将整个机器虚拟化到了操作系统层，而虚拟机则将其虚拟化到了硬件层。
 
-![容器与虚拟机对比](https://olzhy.github.io/static/images/uploads/2023/05/containers-vs-virtual-machines.png#center)
+![容器与虚拟机对比](https://leileiluoluo.github.io/static/images/uploads/2023/05/containers-vs-virtual-machines.png#center)
 
 {{% center %}}（容器与虚拟机在机器上的分层对比 - 引用自 [Atlassian](https://www.atlassian.com/microservices/cloud-computing/containers-vs-vms)）{{% /center %}}
 

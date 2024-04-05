@@ -1,6 +1,6 @@
 ---
 title: 使用 Docker 的几个最佳实践
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-05-28T08:00:00+08:00
 url: /posts/docker-development-best-practices.html
@@ -15,7 +15,7 @@ keywords:
 description: 本文总结了使用 Docker 的几个最佳实践，包括：镜像瘦身最佳实践、应用程序数据持久化最佳实践、镜像稳定性与安全性保障最佳实践，以及开发环境与生产环境差异化处理最佳实践。
 ---
 
-上文「[Docker 初探](https://olzhy.github.io/posts/docker-getting-started.html)」介绍了 Docker 的基本概念与使用方法，本文接着介绍使用 Docker 的几个最佳实践。
+上文「[Docker 初探](https://leileiluoluo.github.io/posts/docker-getting-started.html)」介绍了 Docker 的基本概念与使用方法，本文接着介绍使用 Docker 的几个最佳实践。
 
 ## 1 镜像瘦身最佳实践
 
@@ -33,7 +33,7 @@ description: 本文总结了使用 Docker 的几个最佳实践，包括：镜�
 
   例如：对于 Maven 管理的 Java 应用程序，可在`Dockerfile`中编写两个阶段。第一个阶段使用`maven`镜像，将 Java 源码编译为`jar`包或`war`包；第二个阶段使用`tomcat`镜像，将第一个阶段生成的`jar`包或`war`包拷贝到对应位置。这样的话，最终的镜像只有`tomcat`这个阶段的部分，不会包括编译阶段的环境或拉取的依赖包，只有运行必须的包和环境。
 
-  针对该场景，具体`Dockerfile`的编写请参考上文「[镜像构建最佳实践：利用多阶段构建减小镜像体积 - Docker 初探](https://olzhy.github.io/posts/docker-getting-started.html#36-镜像构建最佳实践)」。
+  针对该场景，具体`Dockerfile`的编写请参考上文「[镜像构建最佳实践：利用多阶段构建减小镜像体积 - Docker 初探](https://leileiluoluo.github.io/posts/docker-getting-started.html#36-镜像构建最佳实践)」。
 
 - 尝试减少镜像的层数
 

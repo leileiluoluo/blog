@@ -1,6 +1,6 @@
 ---
 title: Spring Boot 如何集成 MyBatis 进行数据库访问？
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2024-03-17T08:00:00+08:00
 url: /posts/spring-boot-mybatis-integration.html
@@ -19,7 +19,7 @@ description: 本文以一个使用 Maven 管理的 Spring Boot 工程为示例�
 ---
 
 MyBatis 是一个适用于 Java 语言的持久层框架。MyBatis 支持以注解或 XML 配置的方式来定义 SQL 查询，以及查询结果和 Java 对象的映射。MyBatis 相比于 Java 另一个流行持久层框架 JPA 来说（具体使用请参看「[如何使用 Spring Data JPA 进行数据库访问？
-](https://olzhy.github.io/posts/spring-data-jpa.html)」），最大的特点是 MyBatis 具有更灵活的 SQL 控制能力。
+](https://leileiluoluo.github.io/posts/spring-data-jpa.html)」），最大的特点是 MyBatis 具有更灵活的 SQL 控制能力。
 
 本文以一个使用 Maven 管理的 Spring Boot 工程为例，结合本地搭建的 MySQL 数据库（版本为 8.1.0）来演示 Spring Boot 与 MyBatis 的集成。
 
@@ -461,7 +461,7 @@ public class UserDaoMapperTest {
 
 可以看到，`UserDaoMapper` 接口的各个方法提供的功能均运行正常，符合我们的预期。
 
-综上，我们完成了 Spring Boot 与 MyBatis 的集成，了解了 MyBatis 基础功能的使用。完整示例工程已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-mybatis-integration-demo)，欢迎关注或 Fork。
+综上，我们完成了 Spring Boot 与 MyBatis 的集成，了解了 MyBatis 基础功能的使用。完整示例工程已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-boot-mybatis-integration-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >

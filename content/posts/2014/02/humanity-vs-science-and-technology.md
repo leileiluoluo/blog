@@ -1,6 +1,6 @@
 ---
 title: 人文与科技
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2014-02-19T08:22:22+00:00
 url: /posts/humanity-vs-science-and-technology.html

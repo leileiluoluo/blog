@@ -1,6 +1,6 @@
 ---
 title: 博友圈的建站初衷、主要功能和技术架构
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2024-04-03T08:00:00+08:00
 url: /posts/boyouquan-introduction.html
@@ -15,7 +15,7 @@ keywords:
 description: 本文回顾了博友圈的建站初衷、并基于当前最新的版本介绍了博友圈的主要功能和技术架构。
 ---
 
-我于去年 7 月份开发了一个独立博客收录网站 ——「[博友圈 - www.boyouquan.com](https://www.boyouquan.com)」，该网站建立至今已有 9 个月的时间，各项功能运行稳定，本文主要回顾一下该网站的建站初衷，并基于当前最新的版本（[v1.10](https://github.com/olzhy/boyouquan/releases/tag/v1.10)）介绍一下该网站的主要功能和技术架构。
+我于去年 7 月份开发了一个独立博客收录网站 ——「[博友圈 - www.boyouquan.com](https://www.boyouquan.com)」，该网站建立至今已有 9 个月的时间，各项功能运行稳定，本文主要回顾一下该网站的建站初衷，并基于当前最新的版本（[v1.10](https://github.com/leileiluoluo/boyouquan/releases/tag/v1.10)）介绍一下该网站的主要功能和技术架构。
 
 <!--more-->
 
@@ -70,7 +70,7 @@ description: 本文回顾了博友圈的建站初衷、并基于当前最新的�
 此外，附加的调度器层（Scheduler
 Layer）和帮手层（Helper Layer）则分别包含了一组定时任务和辅助工具类。
 
-![博友圈应用程序架构](https://olzhy.github.io/static/images/uploads/2024/04/boyouquan-application-architecture.svg#center)
+![博友圈应用程序架构](https://leileiluoluo.github.io/static/images/uploads/2024/04/boyouquan-application-architecture.svg#center)
 
 {{% center %}}（博友圈应用程序架构）{{% /center %}}
 
@@ -80,13 +80,13 @@ Layer）和帮手层（Helper Layer）则分别包含了一组定时任务和辅
 
 博友圈服务部署架构如下图所示：
 
-![博友圈服务部署](https://olzhy.github.io/static/images/uploads/2024/04/boyouquan-deployment-architecture.svg#center)
+![博友圈服务部署](https://leileiluoluo.github.io/static/images/uploads/2024/04/boyouquan-deployment-architecture.svg#center)
 
 {{% center %}}（博友圈服务部署架构）{{% /center %}}
 
 ### 3.3 程序设置与运行
 
-关于程序如何在本地设置与运行，请参阅博友圈 GitHub 仓库（[github.com/olzhy/boyouquan](https://github.com/olzhy/boyouquan)）使用说明。
+关于程序如何在本地设置与运行，请参阅博友圈 GitHub 仓库（[github.com/leileiluoluo/boyouquan](https://github.com/leileiluoluo/boyouquan)）使用说明。
 
 此外，博友圈程序源码已开源，有需求的朋友可以拿去完全自由的使用，而仅需在网站的底部注明「本站使用博友圈（www.boyouquan.com）开源程序创建」即可。
 

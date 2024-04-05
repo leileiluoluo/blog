@@ -1,6 +1,6 @@
 ---
 title: 如何快速搭建一个 Spring Boot 项目
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-06-03T08:00:00+08:00
 url: /posts/spring-boot-quick-start.html
@@ -41,7 +41,7 @@ Spring Boot 可以用最少的配置来快速创建一个独立的、生产级�
 - Java 选择 17
 - Dependencies 勾选 Spring Web
 
-![Spring Initializr](https://olzhy.github.io/static/images/uploads/2023/06/start-spring-io.png#center)
+![Spring Initializr](https://leileiluoluo.github.io/static/images/uploads/2023/06/start-spring-io.png#center)
 
 选好以后，点击「Generate」按钮即可以生成项目模板，将 zip 包下载到本地，解压以后即可以使用 IDE 打开了。
 
@@ -117,7 +117,7 @@ curl 'http://localhost:8080/hello?name=Larry'
 Hello Larry!
 ```
 
-综上，本文完成了对 Spring Boot 项目的快速搭建，可以看到 Spring Boot 项目非常的简单易用。本文涉及的完整项目代码已托管至「[GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-quick-start-demo)」，欢迎关注或 Fork。
+综上，本文完成了对 Spring Boot 项目的快速搭建，可以看到 Spring Boot 项目非常的简单易用。本文涉及的完整项目代码已托管至「[GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-boot-quick-start-demo)」，欢迎关注或 Fork。
 
 > 参考资料
 >

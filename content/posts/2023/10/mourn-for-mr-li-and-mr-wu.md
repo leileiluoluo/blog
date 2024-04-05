@@ -1,6 +1,6 @@
 ---
 title: 悼念兩位敬愛的人
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-10-29T08:00:00+08:00
 url: /posts/mourn-for-mr-li-and-mr-wu.html

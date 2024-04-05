@@ -1,6 +1,6 @@
 ---
 title: LeetCode 77 组合
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-07-16T06:55:25+00:00
 url: /posts/leetcode-combinations.html
@@ -37,7 +37,7 @@ b）再拿出下一个数，与之后的k-1个数的组合进行组合；
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/77_Combinations/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/77_Combinations/test.go)
 
 ```go
 func comb(begin, end, k int) [][]int {

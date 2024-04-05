@@ -1,6 +1,6 @@
 ---
 title: LeetCode 95 不同的二叉搜索树 II
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-07-18T12:44:22+00:00
 url: /posts/leetcode-unique-binary-search-trees-ii.html
@@ -62,7 +62,7 @@ x）当root为i时，root的左子树为包含begin...i-1的BST，右子树为�
 
 **3 Golang实现代码**
   
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/95_Unique_Binary_Search_Trees_II/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/95_Unique_Binary_Search_Trees_II/test.go)
 
 ```go
 type TreeNode struct {

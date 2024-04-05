@@ -1,6 +1,6 @@
 ---
 title: LeetCode 81 在旋转的排序数组搜索 II
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-07-29T05:53:22+00:00
 url: /posts/search-in-rotated-sorted-array-ii.html
@@ -55,7 +55,7 @@ d）若是旋转过的，说明数组的组成有两部分，较大的前半部�
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/81_Search_in_Rotated_Sorted_Array_II/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/81_Search_in_Rotated_Sorted_Array_II/test.go)
 
 ```go
 func search(nums []int, target int) bool {

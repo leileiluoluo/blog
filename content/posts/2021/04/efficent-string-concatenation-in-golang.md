@@ -1,6 +1,6 @@
 ---
 title: Golang 高效的字符串拼接方法
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2021-04-03T08:16:52+08:00
 url: /posts/efficent-string-concatenation-in-golang.html
@@ -143,7 +143,7 @@ func Join(elems []string, sep string) string {
 
 该基准测试将使用每种方法将一个字符串“s”，拼接 1000 次。
 
-[string_test.go](https://github.com/olzhy/go-exercises/blob/master/string_concatenation/string_test.go) 源码：
+[string_test.go](https://github.com/leileiluoluo/go-exercises/blob/master/string_concatenation/string_test.go) 源码：
 
 ```go
 package string_test
@@ -217,14 +217,14 @@ $ go test -benchmem -bench .
 
 goos: darwin
 goarch: amd64
-pkg: github.com/olzhy/test
+pkg: github.com/leileiluoluo/test
 cpu: Intel(R) Core(TM) i5-7360U CPU @ 2.30GHz
 BenchmarkConcat-4           7750            148143 ns/op          530274 B/op        999 allocs/op
 BenchmarkBuffer-4         161848              7151 ns/op            3248 B/op          6 allocs/op
 BenchmarkBuilder-4        212043              5406 ns/op            2040 B/op          8 allocs/op
 BenchmarkCopy-4           281827              4208 ns/op            1024 B/op          1 allocs/op
 PASS
-ok      github.com/olzhy/test   5.773s
+ok      github.com/leileiluoluo/test   5.773s
 ```
 
 可以看到内置 copy 函数与 strings.Builder 的方式是最高效的，bytes.Buffer 次之，原生拼接方式最低效。

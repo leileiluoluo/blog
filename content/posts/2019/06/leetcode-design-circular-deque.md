@@ -1,6 +1,6 @@
 ---
 title: LeetCode 641 设计循环双端队列
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-06-09T01:49:07+00:00
 url: /posts/leetcode-design-circular-deque.html
@@ -137,7 +137,7 @@ func (this *MyCircularDeque) IsFull() bool {
   
 双端队列只要记录链表的头指针和尾指针即可，这样查询或者插入非常效率。
   
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/641_Design_Circular_Deque/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/641_Design_Circular_Deque/test.go)
 
 ```go
 type node struct {

@@ -1,6 +1,6 @@
 ---
 title: 求字符串的有序全排列
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-11-06T12:51:53+00:00
 url: /posts/algorithm-permutation.html
@@ -86,8 +86,8 @@ func main() {
 ```
 goos: darwin  
 goarch: amd64  
-pkg: github.com/olzhy/test  
+pkg: github.com/leileiluoluo/test  
 BenchmarkGetPermutation-4              3         428508739 ns/op        180295040 B/op   4094906 allocs/op  
 PASS  
-ok      github.com/olzhy/test   2.602s
+ok      github.com/leileiluoluo/test   2.602s
 ```

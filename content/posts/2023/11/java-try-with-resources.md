@@ -1,6 +1,6 @@
 ---
 title: Java try-with-resources 特性详解
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-11-30T08:00:00+08:00
 url: /posts/java-try-with-resources.html
@@ -238,7 +238,7 @@ public void testJava7CustomResourceUsage() {
 
 综上，本文首先介绍了在 `try-with-resources` 特性引入前，资源的关闭是如何做的；然后介绍了 `try-with-resources` 特性如何使用，以及其带来的好处；最后介绍了 Java 9 对 `try-with-resources` 特性的增强以及自定义 `AutoClosable` 资源的实现。
 
-本文所涉及的所有示例代码已托管至本人 [GitHub](https://github.com/olzhy/java-exercises/blob/main/try-with-resources-demo/src/test/java/TryWithResourcesTest.java)，欢迎关注或 Fork。
+本文所涉及的所有示例代码已托管至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/blob/main/try-with-resources-demo/src/test/java/TryWithResourcesTest.java)，欢迎关注或 Fork。
 
 > 参考资料
 >

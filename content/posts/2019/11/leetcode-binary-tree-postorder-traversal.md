@@ -1,6 +1,6 @@
 ---
 title: LeetCode 145 二叉树后序遍历
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-11-16T01:31:35+00:00
 url: /posts/leetcode-binary-tree-postorder-traversal.html
@@ -53,7 +53,7 @@ b）重复a）直至左子树数组为空。
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/145_Binary_Tree_Postorder_Traversal/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/145_Binary_Tree_Postorder_Traversal/test.go)
 
 ```Golang
 func postorderTraversal(root *TreeNode) []int {

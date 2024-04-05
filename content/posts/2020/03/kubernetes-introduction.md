@@ -1,6 +1,6 @@
 ---
 title: Kubernetes 概览
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-03-01T00:51:33+00:00
 url: /posts/kubernetes-introduction.html
@@ -24,7 +24,7 @@ pod 是一组容器化组件的上层抽象。pod 是由一个或多个容器组
 这是由于 pod IP 地址是临时的，当 pod 重启后有可能发生变化。那一个 pod 的容器怎么访问另一个 pod 的容器呢？这可以通过访问另一个 pod 的 service 来解决，因 service 以一个特殊的 pod IP 地址持有到目标 pod 的引用。
 访问方式如下图所示，Pod1 内的容器 A 可以通过 Service2 访问到 Pod2 内的容器 C。
 
-![](https://olzhy.github.io/static/images/uploads/2020/03/kubernetes-pod-access.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/03/kubernetes-pod-access.png)
 
 pod 可以定义一个卷，该卷可以是本地磁盘，也可以是网络磁盘，以曝露给 pod 内的多个容器使用。这些卷是 Kubernetes `ConfigMap`的基础。
 
@@ -68,7 +68,7 @@ Kubernetes 的设计原则即是程序化创建，配置及管理 Kubernetes 集
 
 Kubernetes 遵循主从架构。架构图如下，其组件一部分用来管理 node，另一部分组成控制面板。
 
-![](https://olzhy.github.io/static/images/uploads/2020/03/kubernetes-architecture.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/03/kubernetes-architecture.png)
 
 **Kubernetes 控制面板**
 Kubernetes master 为集群主要控制单元，管理工作载荷及整个系统通信。Kubernetes 控制面板由多个组件组成，这些组件可以运行在同一个 master 节点上，也可以以高可用集群方式运行在多个 master 上。Kubernetes 的核心组件如下。

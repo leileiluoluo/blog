@@ -1,6 +1,6 @@
 ---
 title: LeetCode 413 等差数列切片
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-01-20T08:50:34+00:00
 url: /posts/leetcode-arithmetic-slices.html
@@ -82,7 +82,7 @@ func(slice int) int {
   
 综上，整个逻辑的实现代码为：
   
-<a href="https://github.com/olzhy/leetcode/blob/master/413_Arithmetic_Slices/test.go" rel="noopener" target="_blank">https://github.com/olzhy/leetcode/blob/master/413_Arithmetic_Slices/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/413_Arithmetic_Slices/test.go" rel="noopener" target="_blank">https://github.com/leileiluoluo/leetcode/blob/master/413_Arithmetic_Slices/test.go</a>
 
 ```go
 func numberOfArithmeticSlices(a []int) int {

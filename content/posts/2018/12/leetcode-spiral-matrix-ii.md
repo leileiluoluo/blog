@@ -1,6 +1,6 @@
 ---
 title: LeetCode 59 螺旋矩阵 II
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-12-16T11:27:15+00:00
 url: /posts/leetcode-spiral-matrix-ii.html
@@ -43,7 +43,7 @@ tags:
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/59_Spiral_Matrix_II/test.go" rel="noopener" target="_blank">https://github.com/olzhy/leetcode/blob/master/59_Spiral_Matrix_II/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/59_Spiral_Matrix_II/test.go" rel="noopener" target="_blank">https://github.com/leileiluoluo/leetcode/blob/master/59_Spiral_Matrix_II/test.go</a>
 
 ```go
 func generateMatrix(n int) [][]int {  

@@ -1,6 +1,6 @@
 ---
 title: WordPress站点Ansible Playbook自动化部署脚本
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-02-01T14:59:28+00:00
 url: /posts/wordpress-ansible-playbook-script.html

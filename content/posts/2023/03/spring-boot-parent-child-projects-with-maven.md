@@ -1,6 +1,6 @@
 ---
 title: 如何使用 Maven 搭建 Spring Boot 父子项目？
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-03-12T08:00:00+08:00
 url: /posts/spring-boot-parent-child-projects-with-maven.html
@@ -342,7 +342,7 @@ curl 'http://localhost:8080/hello?name=Larry'
 Hello Larry! 2023-03-13 16:31:23
 ```
 
-综上，本文探索了如何使用 Maven 来搭建 Spring Boot 父子项目，方便我们在搭建 Spring Boot 微服务时作参考。本文中涉及的父项目`starter-parent`与子项目`app-child`的完整代码已托管至 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-parent-child-maven-project)，欢迎关注或 Fork。
+综上，本文探索了如何使用 Maven 来搭建 Spring Boot 父子项目，方便我们在搭建 Spring Boot 微服务时作参考。本文中涉及的父项目`starter-parent`与子项目`app-child`的完整代码已托管至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-boot-parent-child-maven-project)，欢迎关注或 Fork。
 
 > 参考资料
 >

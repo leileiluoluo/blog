@@ -1,6 +1,6 @@
 ---
 title: 青春小感
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2012-09-30T07:58:48+00:00
 url: /posts/qingchuanxiaogan.html

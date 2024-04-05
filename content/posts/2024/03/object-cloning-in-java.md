@@ -1,6 +1,6 @@
 ---
 title: 深入理解 Java 中的对象克隆
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2024-03-20T08:00:00+08:00
 url: /posts/object-cloning-in-java.html
@@ -128,7 +128,7 @@ public class House implements Cloneable {
 
 针对如上示例代码，`house1` 与 `house2` 指向的两个对象在内存中的示意图如下：
 
-![浅拷贝](https://olzhy.github.io/static/images/uploads/2024/03/object-shallow-copy.svg#center)
+![浅拷贝](https://leileiluoluo.github.io/static/images/uploads/2024/03/object-shallow-copy.svg#center)
 
 ### 1.2 深拷贝
 
@@ -203,7 +203,7 @@ public class House implements Cloneable {
 
 这时，`house1` 与 `house2` 指向的两个对象在内存中的示意图如下：
 
-![深拷贝](https://olzhy.github.io/static/images/uploads/2024/03/object-deep-copy.svg#center)
+![深拷贝](https://leileiluoluo.github.io/static/images/uploads/2024/03/object-deep-copy.svg#center)
 
 但如果在冰箱类 `Refrigerator` 中新加一个苹果类（`Apple`）呢？即会出现与之前一样的问题。上面的代码只能实现到 `Refrigerator` 层的拷贝，而对于 `Apple` 又会是共享同一个对象。这样就需要我们重复如上的处理了（将 `Apple` 类也实现 `Cloneable` 接口并重写 `clone()` 方法，并改写 `Refrigerator` 类的 `clone()` 方法）。
 
@@ -396,7 +396,7 @@ public class SerializableHouse implements Serializable {
 
 可以看到，使用 `SerializationUtils.clone()` 克隆出的对象是一个与原始对象字段值完全相同但字段地址不同的新对象，对其中的字段重新赋值也不会对原始对象造成影响，符合我们的期望。
 
-综上，本文介绍了 Java 中对象克隆的相关知识，包括对象克隆的概念、对象克隆的实现方式、浅拷贝与深拷贝、拷贝构造器等。此外还列出了一些适用的工具类来更便捷的帮助我们实现对象克隆。本文用于演示的所有完整代码已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/object-clone-demo)，欢迎关注或 Fork。
+综上，本文介绍了 Java 中对象克隆的相关知识，包括对象克隆的概念、对象克隆的实现方式、浅拷贝与深拷贝、拷贝构造器等。此外还列出了一些适用的工具类来更便捷的帮助我们实现对象克隆。本文用于演示的所有完整代码已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/object-clone-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >

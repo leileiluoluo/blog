@@ -1,6 +1,6 @@
 ---
 title: LeetCode 889 以先序及后序遍历构建二叉树
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-11-17T01:03:54+00:00
 url: /posts/leetcode-construct-binary-tree-from-preorder-and-postorder-traversal.html
@@ -45,7 +45,7 @@ c）输入保证有解，对于有多个解的情形，返回任意一个即可�
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/889_Construct_Binary_Tree_from_Preorder_and_Postorder_Traversal/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/889_Construct_Binary_Tree_from_Preorder_and_Postorder_Traversal/test.go)
 
 ```Golang
 func constructFromPrePost(pre []int, post []int) *TreeNode {

@@ -1,6 +1,6 @@
 ---
 title: 原来命运如此无常
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2013-04-17T08:56:29+00:00
 url: /posts/destiny.html

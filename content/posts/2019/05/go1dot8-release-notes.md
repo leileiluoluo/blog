@@ -1,6 +1,6 @@
 ---
 title: Go 1.8 Release Notes 要点整理
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-05-03T01:04:48+00:00
 url: /posts/go1dot8-release-notes.html

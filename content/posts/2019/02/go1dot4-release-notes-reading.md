@@ -1,6 +1,6 @@
 ---
 title: Go 1.4 Release Notes 研读
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-02-11T06:34:31+00:00
 url: /posts/go1dot4-release-notes-reading.html

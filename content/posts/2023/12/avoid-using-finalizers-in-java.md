@@ -1,6 +1,6 @@
 ---
 title: Java 中为什么要避免使用 Finalizer？
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-12-06T08:00:00+08:00
 url: /posts/avoid-using-finalizers-in-java.html
@@ -14,7 +14,7 @@ keywords:
 description: 本文通过介绍 Finalizer 的执行机制以及罗列其在功能、性能上的各种问题来解释为什么要避免对其的使用。
 ---
 
-Java 中的 `finalize()` 方法是 `Object` 类自带的一个方法，因所有的类都继承自 `Object`，所以所有类都是 `Object` 的子类，我们在子类重写 `finalize()` 方法就可以说使用了 Finalizer，使用其的目的一般是希望做一些对象销毁前最终的资源释放操作。而上文「[Java try-with-resources 特性详解](https://olzhy.github.io/posts/java-try-with-resources.html)」里边介绍过，针对需要释放的资源，可以通过实现 `AutoClosable` 接口以及结合使用 `try-with-resources` 特性来实现。而 Finalizer，一般仅用于原生资源（非 Java 对象，不受 JVM 管理，一般通过调用原生方法来实现对其的释放）的释放这一个场景，除此之外，都应当避免对其的使用。
+Java 中的 `finalize()` 方法是 `Object` 类自带的一个方法，因所有的类都继承自 `Object`，所以所有类都是 `Object` 的子类，我们在子类重写 `finalize()` 方法就可以说使用了 Finalizer，使用其的目的一般是希望做一些对象销毁前最终的资源释放操作。而上文「[Java try-with-resources 特性详解](https://leileiluoluo.github.io/posts/java-try-with-resources.html)」里边介绍过，针对需要释放的资源，可以通过实现 `AutoClosable` 接口以及结合使用 `try-with-resources` 特性来实现。而 Finalizer，一般仅用于原生资源（非 Java 对象，不受 JVM 管理，一般通过调用原生方法来实现对其的释放）的释放这一个场景，除此之外，都应当避免对其的使用。
 
 本文目的即是通过介绍 Finalizer 的执行机制以及罗列其在功能、性能上的各种问题来解释为什么要避免对其的使用。
 
@@ -24,7 +24,7 @@ Java 中的 `finalize()` 方法是 `Object` 类自带的一个方法，因所有
 
 下图演示了 Finalizer 对象 `obj` 自创建到销毁的整个生命周期：
 
-![Finalizer 对象的生命周期](https://olzhy.github.io/static/images/uploads/2023/12/java-lifetime-of-finalizable-object.svg#center)
+![Finalizer 对象的生命周期](https://leileiluoluo.github.io/static/images/uploads/2023/12/java-lifetime-of-finalizable-object.svg#center)
 
 {{% center %}}（Finalizer 对象 `obj` 的生命周期）{{% /center %}}
 

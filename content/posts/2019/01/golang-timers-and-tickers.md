@@ -1,6 +1,6 @@
 ---
 title: Golang Timers Tickers 使用小结
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-01-07T03:44:55+00:00
 url: /posts/golang-timers-and-tickers.html
@@ -128,7 +128,7 @@ func main() {
 }
 ```
 
-本文代码托管地址：<a href="https://github.com/olzhy/go-exercises/tree/master/timers_and_tickers" target="blank">https://github.com/olzhy/go-exercises/tree/master/timers_and_tickers</a>
+本文代码托管地址：<a href="https://github.com/leileiluoluo/go-exercises/tree/master/timers_and_tickers" target="blank">https://github.com/leileiluoluo/go-exercises/tree/master/timers_and_tickers</a>
 
 > 参考资料
 >

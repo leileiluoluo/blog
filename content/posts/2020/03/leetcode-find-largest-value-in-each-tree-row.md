@@ -1,6 +1,6 @@
 ---
 title: LeetCode 515 寻找二叉树每层的最大值
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-03-08T00:51:33+00:00
 url: /posts/leetcode-find-largest-value-in-each-tree-row.html
@@ -40,7 +40,7 @@ tags:
 
 **3 Golang 实现代码**
 
-[https://github.com/olzhy/leetcode](https://github.com/olzhy/leetcode/blob/master/515_Find_Largest_Value_in_Each_Tree_Row/test.go)
+[https://github.com/leileiluoluo/leetcode](https://github.com/leileiluoluo/leetcode/blob/master/515_Find_Largest_Value_in_Each_Tree_Row/test.go)
 
 ```go
 func largestValues(root *TreeNode) []int {

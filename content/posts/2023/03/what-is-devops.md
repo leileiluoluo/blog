@@ -1,6 +1,6 @@
 ---
 title: 一文了解什么是 DevOps
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-03-02T08:00:00+08:00
 url: /posts/what-is-devops.html
@@ -25,7 +25,7 @@ description: 本文介绍 DevOps 的概念、生命周期及实践的原则，�
 
 我们知道 DevOps 一词是 Development 和 Operations 的组合。DevOps 大概起源于 2007 年，主要是为了解决传统开发与运维间沟通协作不畅的问题。传统的开发与运维分别属于不同的部门，两者有着不同的思维模式，彼此缺乏深入的沟通与了解。开发人员想让代码尽快的发布，运维人员想让系统尽可能的稳定，这种模式无法快速的交付需求，所以 DevOps 这种新的工作模式，文化变革应运而生。
 
-![DevOps 混乱之墙](https://olzhy.github.io/static/images/uploads/2023/03/devops-wall-of-confusion.jpeg#center)
+![DevOps 混乱之墙](https://leileiluoluo.github.io/static/images/uploads/2023/03/devops-wall-of-confusion.jpeg#center)
 
 {{% center %}}（图片引用自 [Kovair Blog](https://www.kovair.com/blog/the-battle-dev-vs-ops/)）{{% /center %}}
 
@@ -33,7 +33,7 @@ description: 本文介绍 DevOps 的概念、生命周期及实践的原则，�
 
 下图展示了 DevOps 生命周期的各个阶段，可以看到 DevOps 的生命周期大概由 8 个阶段组成，左侧是开发部分，右边是运维部分，是一个无限循环。
 
-![DevOps 生命周期](https://olzhy.github.io/static/images/uploads/2023/03/the-devops-lifecycle.png#center)
+![DevOps 生命周期](https://leileiluoluo.github.io/static/images/uploads/2023/03/the-devops-lifecycle.png#center)
 
 {{% center %}}（图片引用自 [Atlassian](https://www.atlassian.com/devops)）{{% /center %}}
 
@@ -101,7 +101,7 @@ DevOps 流水线是一组自动化的流程和工具，允许开发和运维人�
 
 下图演示了一个 DevOps 流水线大概长什么样，可以看到其包含代码提交后的构建、测试及部署等阶段。但业界没有一个标准的 DevOps 流水线，每个组织会根据自己的场景及技术栈来构建适合自己的流水线。
 
-![DevOps 流水线](https://olzhy.github.io/static/images/uploads/2023/03/devops-pipeline.png#center)
+![DevOps 流水线](https://leileiluoluo.github.io/static/images/uploads/2023/03/devops-pipeline.png#center)
 
 {{% center %}}（图片引用自 [Atlassian](https://www.atlassian.com/devops/devops-tools/devops-pipeline)）{{% /center %}}
 
@@ -111,7 +111,7 @@ DevSecOps 是一个将安全性集成到持续集成、持续交付和持续部�
 
 下图演示了如何在 DevOps 生命周期中注入安全。
 
-![DevSecOps 生命周期](https://olzhy.github.io/static/images/uploads/2023/03/devsecops-diagram.png#center)
+![DevSecOps 生命周期](https://leileiluoluo.github.io/static/images/uploads/2023/03/devsecops-diagram.png#center)
 
 {{% center %}}（图片引用自 [Atlassian](https://www.atlassian.com/devops/devops-tools/devsecops-tools)）{{% /center %}}
 

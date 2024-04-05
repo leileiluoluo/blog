@@ -1,6 +1,6 @@
 ---
 title: 在 VS Code 中使用 REST Client 扩展做 API 测试
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-10-05T08:00:00+08:00
 url: /posts/getting-started-with-vscode-extension-rest-client.html
@@ -25,18 +25,18 @@ VS Code 中有一个非常易用的、用于 API 测试的扩展，名为 REST C
 
 开始前，请确保已在 VS Code 中安装了 REST Client 扩展（安装非常简单，在 VS Code 的 Extensions 中搜索「REST Client」进行安装即可）。
 
-![REST Client 安装](https://olzhy.github.io/static/images/uploads/2023/10/vscode-extension-rest-client-installation.png#center)
+![REST Client 安装](https://leileiluoluo.github.io/static/images/uploads/2023/10/vscode-extension-rest-client-installation.png#center)
 
 ## 1 基础使用
 
-下面以调用 GitHub REST API 查询一个仓库（本文使用本人的一个公开仓库 [olzhy.github.io](https://github.com/olzhy/olzhy.github.io)）的 Issues 为例，来演示 REST Client 的基础使用。
+下面以调用 GitHub REST API 查询一个仓库（本文使用本人的一个公开仓库 [leileiluoluo.github.io](https://github.com/leileiluoluo/leileiluoluo.github.io)）的 Issues 为例，来演示 REST Client 的基础使用。
 
 欲在 VS Code 中使用 REST Client，只需新建一个文件，并将其以`.http`（或`.rest`）为扩展名即可。
 
-如下即为使用 REST Client 获取`olzhy.github.io`仓库前 10 条 Issues 的写法：
+如下即为使用 REST Client 获取`leileiluoluo.github.io`仓库前 10 条 Issues 的写法：
 
 ```text
-GET https://api.github.com/repos/olzhy/olzhy.github.io/issues
+GET https://api.github.com/repos/leileiluoluo/leileiluoluo.github.io/issues
     ?page=1
     &per_page=10
 Accept: application/vnd.github+json
@@ -46,14 +46,14 @@ Accept: application/vnd.github+json
 
 效果如下：
 
-![REST Client 基础使用](https://olzhy.github.io/static/images/uploads/2023/10/vscode-extension-rest-client-basic-usage.png#center)
+![REST Client 基础使用](https://leileiluoluo.github.io/static/images/uploads/2023/10/vscode-extension-rest-client-basic-usage.png#center)
 
 ## 2 将文件内容载入为请求体
 
 上面查询一个 GitHub 仓库的 Issues API 是一个 GET 请求，而对于诸如 POST 等需要 Body 的请求，可以采用如下写法：
 
 ```text
-POST https://api.github.com/repos/olzhy/olzhy.github.io/issues
+POST https://api.github.com/repos/leileiluoluo/leileiluoluo.github.io/issues
 Authorization: Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 {
@@ -62,12 +62,12 @@ Authorization: Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 }
 ```
 
-可以看到，上面演示的是一个针对仓库`olzhy.github.io`新建 Issue 的样例。相较于前面的 GET 请求，只需在 URL 和请求头下空出一行，填入请求体即可。
+可以看到，上面演示的是一个针对仓库`leileiluoluo.github.io`新建 Issue 的样例。相较于前面的 GET 请求，只需在 URL 和请求头下空出一行，填入请求体即可。
 
 请求体太长的话，也可以将其抽取到一个文件中，然后使用如下写法将文件内容载入为请求体即可：
 
 ```text
-POST https://api.github.com/repos/olzhy/olzhy.github.io/issues
+POST https://api.github.com/repos/leileiluoluo/leileiluoluo.github.io/issues
 Authorization: Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 <@ ./body.json
@@ -80,7 +80,7 @@ Authorization: Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 下面的示例即在一个文件中编写了三个请求（分别为：新建 Issue、获取刚刚新建的 Issue 和更新刚刚新建的 Issue），且后面的请求依赖前面的返回结果。
 
 ```text
-@baseUrl = https://api.github.com/repos/olzhy/olzhy.github.io
+@baseUrl = https://api.github.com/repos/leileiluoluo/leileiluoluo.github.io
 @accessToken = ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 # @name createIssue
@@ -173,7 +173,7 @@ Authorization: Bearer {{token}}
 
 效果如下：
 
-![REST Client 多环境配置与选择环境执行](https://olzhy.github.io/static/images/uploads/2023/10/vscode-extension-rest-client-multiple-environments.png#center)
+![REST Client 多环境配置与选择环境执行](https://leileiluoluo.github.io/static/images/uploads/2023/10/vscode-extension-rest-client-multiple-environments.png#center)
 
 综上，本文对 VS Code 扩展 REST Client 进行了探索，发现日常的一些简单的 API 测试场景使用它来做还是很适合的。
 

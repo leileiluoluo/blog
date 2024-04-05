@@ -1,6 +1,6 @@
 ---
 title: 读《穆》
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2014-04-28T08:15:43+00:00
 url: /posts/muslin-funeral.html

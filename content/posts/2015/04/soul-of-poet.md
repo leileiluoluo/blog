@@ -1,6 +1,6 @@
 ---
 title: 诗人的灵魂
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2015-04-30T04:40:06+00:00
 url: /posts/soul-of-poet.html

@@ -1,6 +1,6 @@
 ---
 title: 忙与闲
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2013-08-12T08:32:52+00:00
 url: /posts/busy-and-leisure.html

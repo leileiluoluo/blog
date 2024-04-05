@@ -1,6 +1,6 @@
 ---
 title: Golang struct slice排序
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-10-29T12:31:12+00:00
 url: /posts/golang-struct-slice-sorting.html

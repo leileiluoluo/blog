@@ -1,6 +1,6 @@
 ---
 title: LeetCode 60 求第k个排列
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-11-11T02:42:50+00:00
 url: /posts/leetcode-permutation-sequence.html

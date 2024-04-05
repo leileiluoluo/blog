@@ -1,6 +1,6 @@
 ---
 title: 人类的自由性与独立性
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2016-07-10T04:16:24+00:00
 url: /posts/freedom-and-independence-of-people.html

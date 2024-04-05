@@ -1,6 +1,6 @@
 ---
 title: Istio 流量管理之请求路由
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-12-21T08:37:43+08:00
 url: /posts/istio-request-routing.html
@@ -18,7 +18,7 @@ keywords:
 description: Istio流量管理之请求路由 (Request Routing of Istio Traffic Management)
 ---
 
-在上文“[Istio 安装使用](https://olzhy.github.io/posts/istio-get-started.html)”中，我们对 Istio 进行了安装，并对 Bookinfo 样例进行了部署测试。本文接着上文，对 Istio 流量管理中的请求路由进行概念学习及样例测试。
+在上文“[Istio 安装使用](https://leileiluoluo.github.io/posts/istio-get-started.html)”中，我们对 Istio 进行了安装，并对 Bookinfo 样例进行了部署测试。本文接着上文，对 Istio 流量管理中的请求路由进行概念学习及样例测试。
 
 我们知道，Istio 通过 Envoy 数据面拦截了所有服务实例的进出流量。这样基于 Istio 服务网格即可以实现诸多常规方式难以实现的流量管理策略，诸如灰度发布，A/B 测试，按比率分流等。
 
@@ -141,9 +141,9 @@ spec:
 
 ### 3 Bookinfo 样例请求路由配置
 
-在上文“[Istio 安装使用](https://olzhy.github.io/posts/istio-get-started.html)”中，我们知道如何部署 Bookinfo 样例应用。且知道 Bookinfo 由如下几个服务组成，除了 reviews 拥有 3 个版本外，其它服务均只有 1 个版本。reviews 的 v1 版本未有五星评价等级，v2 版本的五星评价等级展示颜色为黑色，v3 版本的五星评价等级展示颜色为红色。
+在上文“[Istio 安装使用](https://leileiluoluo.github.io/posts/istio-get-started.html)”中，我们知道如何部署 Bookinfo 样例应用。且知道 Bookinfo 由如下几个服务组成，除了 reviews 拥有 3 个版本外，其它服务均只有 1 个版本。reviews 的 v1 版本未有五星评价等级，v2 版本的五星评价等级展示颜色为黑色，v3 版本的五星评价等级展示颜色为红色。
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-withistio.svg#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/bookinfo-withistio.svg#center)
 
 而且，我们只使用如下命令部署了 Bookinfo 的各个服务，及使用 Gateway 与 Virtual Service 配置了简单的路由规则，指定 productpage 为统一的流量入口。
 
@@ -201,7 +201,7 @@ spec:
 
 未指定具体的路由规则前，productpage 请求各个服务时使用轮训策略，所以我们刷新 productpage 页面可以看到 Review 部分有时为黑色的五星评价等级，有时为红色的五星评价等级，有时无五星评价等级，即流量轮训了 reviews 服务的各个版本。
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/istio-bookinfo.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/istio-bookinfo.png#center)
 
 下面我们依照上述介绍，对 reviews 服务使用 Virtual Service 及 Destination Rule 配置不同的路由规则并进行验证测试。
 
@@ -270,7 +270,7 @@ $ kubectl apply -n istio-demo -f virtual-service-all-v1.yaml
 
 这时，我们刷新 productpage 页面多次会发现，Review 部分始终无五星评价等级。即说明所有访问 reviews 的流量都打到了 v1 版本。
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-v1.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-v1.png#center)
 
 下面我们看一下如何指定特定用户的访问流量打到特定的版本。
 
@@ -321,11 +321,11 @@ $ kubectl apply -n istio-demo -f virtual-service-reviews-jason-v2-v3.yaml
 
 这时，当我们使用 jason 账户登录，刷新 productpage 页面会发现，Review 部分始终显示黑色的五星评价等级（即 reviews 的 v2 版本）。
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-v2.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-v2.png#center)
 
 而不登录或使用其他账户登录时，Review 部分始终显示红色的五星评价等级（即 reviews 的 v3 版本）。
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-v3.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-v3.png#center)
 
 此即验证了 Istio 支持通过配置路由规则将特定用户的访问流量打到特定的版本，其原理是将特定用户标识通过前端一层层传下来，然后 Envoy 根据配置规则实现路由。
 
@@ -383,7 +383,7 @@ $ kubectl delete -n istio-demo virtual-service-reviews-90-10.yaml
 $ kubectl delete -n istio-demo destination-rule-reviews.yaml
 ```
 
-若想卸载 Bookinfo 应用或卸载 Istio，可以参看上文“[Istio 安装使用](https://olzhy.github.io/posts/istio-get-started.html)”。
+若想卸载 Bookinfo 应用或卸载 Istio，可以参看上文“[Istio 安装使用](https://leileiluoluo.github.io/posts/istio-get-started.html)”。
 
 总结本文，我们首先介绍了支持 Istio 流量管理的两个主要的资源 Virtual Service 及 Destination Rule，然后对 Bookinfo 样例使用 Virtual Service 及 Destination Rule 进行配置，测试了几个常用的流量转发场景。
 

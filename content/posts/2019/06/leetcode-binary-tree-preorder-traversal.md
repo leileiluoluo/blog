@@ -1,6 +1,6 @@
 ---
 title: LeetCode 144 二叉树先序遍历
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-06-06T10:43:01+00:00
 url: /posts/leetcode-binary-tree-preorder-traversal.html
@@ -45,7 +45,7 @@ tags:
 
 **3 Golang实现代码**
   
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/144_Binary_Tree_Preorder_Traversal/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/144_Binary_Tree_Preorder_Traversal/test.go)
 
 ```go
 func preorderTraversal(root *TreeNode) []int {

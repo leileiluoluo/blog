@@ -1,6 +1,6 @@
 ---
 title: 修炼内心
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2016-10-06T04:00:12+00:00
 url: /posts/cultivate-inner-heart.html

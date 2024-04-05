@@ -1,6 +1,6 @@
 ---
 title: LeetCode 911 在线选举
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-07-15T04:01:04+00:00
 url: /posts/leetcode-online-election.html
@@ -63,7 +63,7 @@ b）设当前最多票数为max，从尾至头遍历orders数组，若有票数�
 
 **3 Golang实现代码**
   
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/911_Online_Election/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/911_Online_Election/test.go)
 
 ```go
 type TopVotedCandidate struct {

@@ -1,6 +1,6 @@
 ---
 title: 修养与性格
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2016-04-23T00:20:19+00:00
 url: /posts/virtue-and-character.html

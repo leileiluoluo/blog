@@ -26,14 +26,14 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
-          external_repository: olzhy/olzhy.github.io
+          external_repository: leileiluoluo/leileiluoluo.github.io
           publish_branch: master
           publish_dir: ./public
           allow_empty_commit: true
       - name: Run shell
         run: |
           ls -lht
-          find . -type f | xargs sed -i "s#https://olzhy.github.io#https://leileiluoluo.com#g"
+          find . -type f | xargs sed -i "s#https://leileiluoluo.github.io#https://leileiluoluo.com#g"
       - name: Copy file via ssh key
         uses: appleboy/scp-action@v0.1.4
         with:
@@ -54,15 +54,3 @@ jobs:
             mkdir -p /usr/share/nginx/html/leileiluoluo
             cp -rf /tmp/leileiluoluo/public/* /usr/share/nginx/html/leileiluoluo
             service nginx reload
-
-  sync:
-    needs: deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Sync to Gitee
-        uses: wearerequired/git-mirror-action@master
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
-        with:
-          source-repo: "git@github.com:olzhy/olzhy.github.io.git"
-          destination-repo: "git@gitee.com:olzhy/olzhy.github.io.git"

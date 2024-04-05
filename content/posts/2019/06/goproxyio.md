@@ -1,6 +1,6 @@
 ---
 title: Golang模块代理goproxy.io源码研读
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-06-18T00:31:49+00:00
 url: /posts/goproxyio.html

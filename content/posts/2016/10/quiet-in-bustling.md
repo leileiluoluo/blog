@@ -1,6 +1,6 @@
 ---
 title: 热闹处有宁静
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2016-10-09T03:57:20+00:00
 url: /posts/quiet-in-bustling.html

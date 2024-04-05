@@ -1,6 +1,6 @@
 ---
 title: 写给将要结婚的两位初中同学（二保和袅袅）
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2012-11-01T09:37:16+00:00
 url: /posts/wish.html

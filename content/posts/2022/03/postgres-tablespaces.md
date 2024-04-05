@@ -1,6 +1,6 @@
 ---
 title: PostgreSQL 表空间使用详解
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2022-03-26T08:45:41+08:00
 url: /posts/postgres-tablespaces.html
@@ -35,7 +35,7 @@ PostgreSQL 中，一个表空间可供多个数据库使用；而一个数据库
 
 ### 2 默认表空间
 
-从前文[在 CentOS 上以源码安装 PostgreSQL](https://olzhy.github.io/posts/install-postgres-on-centos-from-source.html)知道，PostgreSQL 初始化时需要指定一个数据目录（`$PGDATA`），命令如下：
+从前文[在 CentOS 上以源码安装 PostgreSQL](https://leileiluoluo.github.io/posts/install-postgres-on-centos-from-source.html)知道，PostgreSQL 初始化时需要指定一个数据目录（`$PGDATA`），命令如下：
 
 ```shell
 $ initdb -D /usr/local/pgsql/data

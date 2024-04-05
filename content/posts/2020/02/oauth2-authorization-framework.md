@@ -1,6 +1,6 @@
 ---
 title: OAuth 2.0 授权框架梳理
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-02-10T04:57:37+00:00
 url: /posts/oauth2-authorization-framework.html
@@ -38,7 +38,7 @@ OAuth 定义了4个角色。
 
 如图1，看一下OAuth 2.0大致的授权流程。
 
-![](https://olzhy.github.io/static/images/uploads/2020/02/oauth2-1.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/02/oauth2-1.png)
 
 图1：OAuth 2.0大致授权流程（[引自RFC6749](https://tools.ietf.org/html/rfc6749)）
 
@@ -104,7 +104,7 @@ OAuth 2.0定义了4种授权类型：授权码（authorization code），隐式�
   
 下面参考图2，看一下更新令牌的使用。
 
-![](https://olzhy.github.io/static/images/uploads/2020/02/oauth2-2.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/02/oauth2-2.png)
 
 图2：更新失效的访问令牌（[引自RFC6749](https://tools.ietf.org/html/rfc6749)）
 

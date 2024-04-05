@@ -1,6 +1,6 @@
 ---
 title: 人
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2017-02-13T14:19:02+00:00
 url: /posts/people.html

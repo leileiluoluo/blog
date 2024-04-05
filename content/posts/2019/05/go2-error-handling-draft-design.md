@@ -1,6 +1,6 @@
 ---
 title: Go 2 错误处理设计草案预览
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-05-06T03:07:08+00:00
 url: /posts/go2-error-handling-draft-design.html

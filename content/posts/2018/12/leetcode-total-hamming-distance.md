@@ -1,6 +1,6 @@
 ---
 title: LeetCode 477 汉明距离总和
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-12-09T14:24:02+00:00
 url: /posts/leetcode-total-hamming-distance.html
@@ -67,7 +67,7 @@ func totalHammingDistance(nums []int) int {
   
 **3.2 golang代码实现**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/477_Total_Hamming_Distance/test.go" rel="noopener" target="_blank">https://github.com/olzhy/leetcode/blob/master/477_Total_Hamming_Distance/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/477_Total_Hamming_Distance/test.go" rel="noopener" target="_blank">https://github.com/leileiluoluo/leetcode/blob/master/477_Total_Hamming_Distance/test.go</a>
 
 ```go
 func totalHammingDistance(nums []int) int {  

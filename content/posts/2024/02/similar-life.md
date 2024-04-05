@@ -1,6 +1,6 @@
 ---
 title: 相似的人生
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2024-02-19T08:00:00+08:00
 url: /posts/similar-life.html

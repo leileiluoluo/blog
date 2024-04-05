@@ -1,6 +1,6 @@
 ---
 title: Power Platform 是什么？
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2022-11-16T08:00:00+08:00
 url: /posts/what-is-power-platform.html
@@ -25,7 +25,7 @@ Microsoft Power Platform 由 Power Apps、Power Automate、Power BI 和 Power Vi
 
 下面是 Power Platform 的概览图。
 
-![Power Platform 概览](https://olzhy.github.io/static/images/uploads/2022/11/microsoft-power-platform-overview.png#center)
+![Power Platform 概览](https://leileiluoluo.github.io/static/images/uploads/2022/11/microsoft-power-platform-overview.png#center)
 
 接下来，会对其几个主要的组成部分作一下简单介绍。
 
@@ -81,7 +81,7 @@ Power Platform 可以帮助企业更好的应对如上挑战。为什么呢？�
 
 这种使用融合开发模式的开发周期如下图所示：
 
-![应用开发周期](https://olzhy.github.io/static/images/uploads/2022/11/app-development-cycle.png#center)
+![应用开发周期](https://leileiluoluo.github.io/static/images/uploads/2022/11/app-development-cycle.png#center)
 
 说明：终端用户提出反馈后，先由平民开发做出原型，再由专业开发进行打磨，完成后再交给终端用户进行验证。如此循环往复来进行开发。
 

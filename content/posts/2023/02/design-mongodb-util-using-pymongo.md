@@ -1,6 +1,6 @@
 ---
 title: 使用 PyMongo 封装一个易用的 MongoDB 工具类
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-02-15T08:00:00+08:00
 url: /posts/design-mongodb-util-using-pymongo.html
@@ -240,7 +240,7 @@ Ran 6 tests in 0.008s
 OK
 ```
 
-综上，完成了对 PyMongo 的封装，实现了一个简单易用的 Python MongoDB 工具类并对其进行了测试。本文涉及的代码已托管至 [GitHub](https://github.com/olzhy/python-exercises/tree/main/mongodb-util)，欢迎关注或 Fork。
+综上，完成了对 PyMongo 的封装，实现了一个简单易用的 Python MongoDB 工具类并对其进行了测试。本文涉及的代码已托管至 [GitHub](https://github.com/leileiluoluo/python-exercises/tree/main/mongodb-util)，欢迎关注或 Fork。
 
 > 参考资料
 >

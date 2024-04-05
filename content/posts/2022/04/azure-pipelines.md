@@ -1,6 +1,6 @@
 ---
 title: Azure 流水线使用详解
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2022-04-12T14:19:33+08:00
 url: /posts/azure-pipelines.html
@@ -54,7 +54,7 @@ Azure 流水线定义文件与项目代码同属一个仓库，一同进行版�
 - 在工程根目录新建`azure-pipelines.yml`文件定义流水线步骤（编译、打包、发布及部署等）；
 - 当更新了代码并提交 PR 到指定的分支时，会自动触发 PR 阶段对应流水线中定义的步骤，完成后，检查运行结果；然后，决定是否合并 PR 到指定的分支，从而决定是否触发该分支对应的流水线步骤。
 
-![](https://olzhy.github.io/static/images/uploads/2022/04/azure-pipelines-image-yaml.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2022/04/azure-pipelines-image-yaml.png#center)
 
 下面就一步一步探索下 Azure 流水线的具体使用方法。
 
@@ -64,7 +64,7 @@ Azure 流水线定义文件与项目代码同属一个仓库，一同进行版�
 
 打开[Azure 流水线介绍页](https://azure.microsoft.com/en-us/services/devops/pipelines/)，然后点击`Start free`或`Start free with Github`，其会引导使用微软账号或 Github 账号来注册 Azure 流水线；完成后，需要创建一个 Azure DevOps 组织，创建好以后即可以用 URL 的方式进行访问了（如本文 Azure DevOps 组织地址为：https://dev.azure.com/olzhy）。组织建好后，其会引导创建一个项目，项目建好后，即可在其下看到有流水线。
 
-![](https://olzhy.github.io/static/images/uploads/2022/04/azure-pipelines-home.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2022/04/azure-pipelines-home.png#center)
 
 ### 1.2 创建第一条流水线
 
@@ -78,7 +78,7 @@ Azure 流水线定义文件与项目代码同属一个仓库，一同进行版�
   https://github.com/MicrosoftDocs/pipelines-java
   ```
 
-  我的 Github 地址为：[https://github.com/olzhy](https://github.com/olzhy)；Fork 完成后的仓库地址为：[https://github.com/olzhy/pipelines-java](https://github.com/olzhy/pipelines-java)。
+  我的 Github 地址为：[https://github.com/leileiluoluo](https://github.com/leileiluoluo)；Fork 完成后的仓库地址为：[https://github.com/leileiluoluo/pipelines-java](https://github.com/leileiluoluo/pipelines-java)。
 
   该工程是一个普通的 Java 工程，仅有一个样例代码文件（`Demo.java`）和一个单元测试文件（`MyTest.java`）。
 
@@ -129,15 +129,15 @@ Azure 流水线定义文件与项目代码同属一个仓库，一同进行版�
 
   流水线的运行结果如下图所示：
 
-  ![](https://olzhy.github.io/static/images/uploads/2022/04/azure-pipelines-result.png#center)
+  ![](https://leileiluoluo.github.io/static/images/uploads/2022/04/azure-pipelines-result.png#center)
 
   可以看到，日志最后打印说将测试结果发布到了一个地址，打开后发现，单元测试结果被自动发布到了 Azure DevOps 的另一个服务模块 Test Plan 下。
 
-  ![](https://olzhy.github.io/static/images/uploads/2022/04/auzre-pipelines-junit-test-report.png#center)
+  ![](https://leileiluoluo.github.io/static/images/uploads/2022/04/auzre-pipelines-junit-test-report.png#center)
 
 - 添加 Github 状态标识
 
-  将如下内容添加到工程根目录`README.md`文件最上面，并提交至仓库，即可在 Github 仓库上（[https://github.com/olzhy/pipelines-java](https://github.com/olzhy/pipelines-java)）看到流水线状态了。
+  将如下内容添加到工程根目录`README.md`文件最上面，并提交至仓库，即可在 Github 仓库上（[https://github.com/leileiluoluo/pipelines-java](https://github.com/leileiluoluo/pipelines-java)）看到流水线状态了。
 
   ```markdown
   [![Build Status](https://dev.azure.com/olzhy/test/_apis/build/status/olzhy.pipelines-java?branchName=master)](https://dev.azure.com/olzhy/test/_build/latest?definitionId=3&branchName=master)
@@ -228,7 +228,7 @@ pr:
 
 如想设置流水线启停策略或更改流水线文件（`azure-pipelines.yml`）路径，需要到流水线详情页上去改，这些关于流水线设置类的功能未在 YAML 文件中管理。
 
-![](https://olzhy.github.io/static/images/uploads/2022/04/azure-pipeline-settings.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2022/04/azure-pipeline-settings.png#center)
 
 此外，还可以为流水线添加错误处理器。
 
@@ -282,7 +282,7 @@ jobs:
 
 一条 Azure 流水线由多个 Stage 组成，一个 Stage 由多个 Job 组成，一个 Job（运行在 Agent 上） 由多个 Step 组成，Step 可以是 Script 或 Task。
 
-![](https://olzhy.github.io/static/images/uploads/2022/04/azure-pipelines-key-concepts-overview.svg#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2022/04/azure-pipelines-key-concepts-overview.svg#center)
 
 下面看一下 Azure 流水线常用到的几个术语：
 
@@ -1084,7 +1084,7 @@ Job 是顺序运行的一系列步骤。
         - script: echo building $(Build.BuildNumber) with ${{ parameters.image }}
   ```
 
-  ![](https://olzhy.github.io/static/images/uploads/2022/04/azure-pipelines-runtime-param-ui.png#center)
+  ![](https://leileiluoluo.github.io/static/images/uploads/2022/04/azure-pipelines-runtime-param-ui.png#center)
 
 - 使用 Azure Key Vault 密钥
 

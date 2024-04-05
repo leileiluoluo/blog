@@ -1,6 +1,6 @@
 ---
 title: LeetCode 94 二叉树中序遍历
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-07-26T12:15:21+08:00
 url: /posts/leetcode-binary-tree-inorder-traversal.html
@@ -39,13 +39,13 @@ description: LeetCode二叉树中序遍历，Golang实现。
 
 ### 2 解决思路
 
-![](https://olzhy.github.io/static/images/uploads/2020/07/leetcode-binary-tree-inorder-traversal.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/07/leetcode-binary-tree-inorder-traversal.png#center)
 
 参考上图，整体来看，本算法采用多条自左上到右下的线将树根和其左子树的连接“截断”，然后将根节点依次放入一个栈里，当最左下角的根节点已压栈后，然后开始依次出栈。这样的输出顺序即是中序遍历顺序。
 
 ### 3 Golang实现代码
 
-[https://github.com/olzhy](https://github.com/olzhy/leetcode/blob/master/94_Binary_Tree_Inorder_Traversal/test.go)
+[https://github.com/leileiluoluo](https://github.com/leileiluoluo/leetcode/blob/master/94_Binary_Tree_Inorder_Traversal/test.go)
 
 ```go
 func inorderTraversal(root *TreeNode) []int {

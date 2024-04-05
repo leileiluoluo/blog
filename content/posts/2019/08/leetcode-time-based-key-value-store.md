@@ -1,6 +1,6 @@
 ---
 title: LeetCode 981 基于时间的“键-值”存储
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-08-23T03:45:59+00:00
 url: /posts/leetcode-time-based-key-value-store.html
@@ -83,7 +83,7 @@ e）TimeMap.set及TimeMap.get函数在每个测试用例将被调用120000次。
 
 **3 Golang实现代码**
   
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/981_Time_Based_Key_Value_Store/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/981_Time_Based_Key_Value_Store/test.go)
 
 ```go
 type TimeMap struct {

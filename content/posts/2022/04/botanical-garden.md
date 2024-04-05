@@ -1,6 +1,6 @@
 ---
 title: 遊覽植物園
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2022-04-16T17:37:18+08:00
 url: /posts/botanical-garden.html
@@ -23,17 +23,17 @@ description: 游览植物园
 
 春天，萬物復蘇，一個個開始綻放的生命讓人心情開朗，生機勃勃。
 
-[![](https://olzhy.github.io/static/images/uploads/2022/04/botanical-garden-1.jpg#center)](http://static.leileiluoluo.com/2022/04/original-botanical-garden-1.jpg)
+[![](https://leileiluoluo.github.io/static/images/uploads/2022/04/botanical-garden-1.jpg#center)](http://static.leileiluoluo.com/2022/04/original-botanical-garden-1.jpg)
 
-[![](https://olzhy.github.io/static/images/uploads/2022/04/botanical-garden-2.jpg#center)](http://static.leileiluoluo.com/2022/04/original-botanical-garden-2.jpg)
+[![](https://leileiluoluo.github.io/static/images/uploads/2022/04/botanical-garden-2.jpg#center)](http://static.leileiluoluo.com/2022/04/original-botanical-garden-2.jpg)
 
-[![](https://olzhy.github.io/static/images/uploads/2022/04/botanical-garden-3.jpg#center)](http://static.leileiluoluo.com/2022/04/original-botanical-garden-3.jpg)
+[![](https://leileiluoluo.github.io/static/images/uploads/2022/04/botanical-garden-3.jpg#center)](http://static.leileiluoluo.com/2022/04/original-botanical-garden-3.jpg)
 
-[![](https://olzhy.github.io/static/images/uploads/2022/04/botanical-garden-4.jpg#center)](http://static.leileiluoluo.com/2022/04/original-botanical-garden-4.jpg)
+[![](https://leileiluoluo.github.io/static/images/uploads/2022/04/botanical-garden-4.jpg#center)](http://static.leileiluoluo.com/2022/04/original-botanical-garden-4.jpg)
 
-[![](https://olzhy.github.io/static/images/uploads/2022/04/botanical-garden-5.jpg#center)](http://static.leileiluoluo.com/2022/04/original-botanical-garden-5.jpg)
+[![](https://leileiluoluo.github.io/static/images/uploads/2022/04/botanical-garden-5.jpg#center)](http://static.leileiluoluo.com/2022/04/original-botanical-garden-5.jpg)
 
-[![](https://olzhy.github.io/static/images/uploads/2022/04/botanical-garden-6.jpg#center)](http://static.leileiluoluo.com/2022/04/original-botanical-garden-6.jpg)
+[![](https://leileiluoluo.github.io/static/images/uploads/2022/04/botanical-garden-6.jpg#center)](http://static.leileiluoluo.com/2022/04/original-botanical-garden-6.jpg)
 
 {{< line_break >}}
 

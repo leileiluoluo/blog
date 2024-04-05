@@ -1,6 +1,6 @@
 ---
 title: 读《风雅颂》
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2017-12-10T04:01:29+00:00
 url: /posts/reading-feng-ya-song.html

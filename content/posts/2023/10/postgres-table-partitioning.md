@@ -1,6 +1,6 @@
 ---
 title: PostgreSQL 表分区使用详解
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-10-21T08:00:00+08:00
 url: /posts/postgres-table-partitioning.html

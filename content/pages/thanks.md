@@ -1,6 +1,6 @@
 ---
 title: Thanks
-author: olzhy
+author: leileiluoluo
 type: page
 date: 2018-11-12T12:15:39+00:00
 url: /thanks

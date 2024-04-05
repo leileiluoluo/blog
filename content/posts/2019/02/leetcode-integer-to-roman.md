@@ -1,6 +1,6 @@
 ---
 title: LeetCode 12 整数转罗马数
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-02-19T09:07:58+00:00
 url: /posts/leetcode-integer-to-roman.html
@@ -88,7 +88,7 @@ c）C放在D(500)或M(1000)前，表示400或900。
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/12_Integer_To_Roman/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/12_Integer_To_Roman/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/12_Integer_To_Roman/test.go" target="_blank" rel="noopener">https://github.com/leileiluoluo/leetcode/blob/master/12_Integer_To_Roman/test.go</a>
 
 ```go
 var (

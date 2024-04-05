@@ -1,6 +1,6 @@
 ---
 title: LeetCode 71 简化路径
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-05-15T14:05:53+00:00
 url: /posts/leetcode-simplify-path.html
@@ -96,7 +96,7 @@ tags:
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/71_Simplify_Path/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/71_Simplify_Path/test.go)
 
 ```go
 func simplifyPath(path string) string {

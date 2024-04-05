@@ -1,6 +1,6 @@
 ---
 title: Web 开发入门
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2022-05-03T16:28:26+08:00
 url: /posts/getting-started-with-the-web.html
@@ -108,7 +108,7 @@ description: Web 开发入门，本文整理自“MDN Web 开发入门”，介�
 
   接下来，拿起纸和笔试着勾勒出网站的雏形（这个习惯很重要）。
 
-  ![手绘网站雏形 - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-drawing-scan.png#center)
+  ![手绘网站雏形 - developer.mozilla.org](https://leileiluoluo.github.io/static/images/uploads/2022/05/website-drawing-scan.png#center)
 
   _**小提示**：即使对于现实场景的复杂网站设计，设计团队也通常会先在纸上构思网站的轮廓。_
 
@@ -118,11 +118,11 @@ description: Web 开发入门，本文整理自“MDN Web 开发入门”，介�
 
   借助[『取色器』](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Colors/Color_picker_tool)选择喜欢的颜色（颜色采用 6 位十六进制代码表示，诸如`#660066`），并记录好。
 
-  ![Color Picker - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/color-picker.png#center)
+  ![Color Picker - developer.mozilla.org](https://leileiluoluo.github.io/static/images/uploads/2022/05/color-picker.png#center)
 
   借助[『谷歌图片』](https://www.google.com/imghp?gws_rd=ssl)找一张喜欢的图片（诸如`firefox-logo.png`），并保存好。
 
-  ![Google Images - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/updated-google-images-licensing.png#center)
+  ![Google Images - developer.mozilla.org](https://leileiluoluo.github.io/static/images/uploads/2022/05/updated-google-images-licensing.png#center)
 
   借助[『Google Fonts』](https://developers.google.com/fonts/docs/getting_started)寻找喜欢的字体，并记下来。
 
@@ -172,7 +172,7 @@ description: Web 开发入门，本文整理自“MDN Web 开发入门”，介�
 
   将`index.html`保存好后，使用浏览器打开，效果如下图所示：
 
-  ![Website Screenshot - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-screenshot.jpeg#center)
+  ![Website Screenshot - developer.mozilla.org](https://leileiluoluo.github.io/static/images/uploads/2022/05/website-screenshot.jpeg#center)
 
 ### 4 HTML 基础
 
@@ -192,7 +192,7 @@ HTML 是定义网页内容结构的一种标记语言。HTML 由一系列元素�
 
   下面剖析一下刚刚用到的段落元素。
 
-  ![Grumpy Cat Small - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/grumpy-cat-small.png#center)
+  ![Grumpy Cat Small - developer.mozilla.org](https://leileiluoluo.github.io/static/images/uploads/2022/05/grumpy-cat-small.png#center)
 
   可以看到，这个段落元素由开始标签、结束标签和内容这几个部分组成。
 
@@ -202,7 +202,7 @@ HTML 是定义网页内容结构的一种标记语言。HTML 由一系列元素�
 
   此外，元素还可以有属性。示例如下：
 
-  ![Grumpy Cat Attribute Small - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/grumpy-cat-attribute-small.png#center)
+  ![Grumpy Cat Attribute Small - developer.mozilla.org](https://leileiluoluo.github.io/static/images/uploads/2022/05/grumpy-cat-attribute-small.png#center)
 
   属性包含您不希望出现在实际内容中的额外元素信息。这里的`class`是属性名，`editor-note`是属性值，使用`class`属性可以控制元素的样式。
 
@@ -345,7 +345,7 @@ HTML 是定义网页内容结构的一种标记语言。HTML 由一系列元素�
 
 本小节的内容跟着一步步走下来，最终看到的页面如下图所示（比对下[`index.html`的源码](https://github.com/mdn/beginner-html-site/blob/gh-pages/index.html)）。
 
-![Finished Test Page - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/finished-test-page-small.jpeg#center)
+![Finished Test Page - developer.mozilla.org](https://leileiluoluo.github.io/static/images/uploads/2022/05/finished-test-page-small.jpeg#center)
 
 ### 5 CSS 基础
 
@@ -375,13 +375,13 @@ p {
 
 ③ 保存`index.html`，并再次使用浏览器打开，即可看到如下效果。
 
-![Website Screenshot Styled - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-screenshot-styled.jpeg#center)
+![Website Screenshot Styled - developer.mozilla.org](https://leileiluoluo.github.io/static/images/uploads/2022/05/website-screenshot-styled.jpeg#center)
 
 - CSS 规则集剖析
 
   下面剖析一下上面的 3 行 CSS 代码，以了解其运作机制。
 
-  ![CSS Declaration - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/css-declaration-small.png#center)
+  ![CSS Declaration - developer.mozilla.org](https://leileiluoluo.github.io/static/images/uploads/2022/05/css-declaration-small.png#center)
 
   整个结构称为一个规则集。主要有如下几个部分组成：
 
@@ -481,7 +481,7 @@ li {
 
 样式调整后的页面效果如下图所示：
 
-![Website Screenshot Styled - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-screenshot-font-small.jpeg#center)
+![Website Screenshot Styled - developer.mozilla.org](https://leileiluoluo.github.io/static/images/uploads/2022/05/website-screenshot-font-small.jpeg#center)
 
 **关于“框”的一切**
 
@@ -501,7 +501,7 @@ CSS 布局主要是基于“框”模型实现的。占用页面空间的每个�
 
 元素边框外的空白区域。
 
-![Box Model - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/box-model.png#center)
+![Box Model - developer.mozilla.org](https://leileiluoluo.github.io/static/images/uploads/2022/05/box-model.png#center)
 
 此外，本小节还会用到：`width`（元素宽度）、`background-color`（元素内容和`padding`的背景色）、`color`（元素内容的颜色）、`text-shadow`（元素内的文本的投影）与`display`（元素的显示模式）。
 
@@ -591,7 +591,7 @@ CSS 布局主要是基于“框”模型实现的。占用页面空间的每个�
 
 本小节的内容跟着一步步走下来，最终看到的页面如下图所示（比对下[`style.css`的源码](hhttps://github.com/mdn/beginner-html-site-styled/blob/gh-pages/styles/style.css)）。
 
-![Website Screenshot Final - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-screenshot-final.jpeg#center)
+![Website Screenshot Final - developer.mozilla.org](https://leileiluoluo.github.io/static/images/uploads/2022/05/website-screenshot-final.jpeg#center)
 
 ### 6 JavaScript 基础
 
@@ -622,7 +622,7 @@ myHeading.textContent = "Hello world!";
 
 这样，使用浏览器重新加载`index.html`页面，即会看到如下效果：
 
-![Hello World - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/hello-world.png#center)
+![Hello World - developer.mozilla.org](https://leileiluoluo.github.io/static/images/uploads/2022/05/hello-world.png#center)
 
 _**小提示**：将`<script>`元素放置在 HTML 文件底部的原因是由于浏览器按照文件中代码的先后顺序来读取代码，这样做是为了保证 HTML 加载完成后再加载 JavaScript。若将 JavaScript 放在待控制 HTML 的前面，就不会达到该效果。详情请参阅[『JavaScript 加载策略』](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript#script_loading_strategies)。_
 
@@ -831,7 +831,7 @@ _**小提示**：`querySelector()`方法及`textContent`属性均属 DOM（Docum
 
 本小节的内容跟着一步步走下来，最终看到的页面如下图所示（比对下[`main.js`的源码](https://github.com/mdn/beginner-html-site-scripted/blob/gh-pages/scripts/main.js)）。
 
-![Website Screenshot Scripted - developer.mozilla.org](https://olzhy.github.io/static/images/uploads/2022/05/website-screen-scripted.jpeg#center)
+![Website Screenshot Scripted - developer.mozilla.org](https://leileiluoluo.github.io/static/images/uploads/2022/05/website-screen-scripted.jpeg#center)
 
 ### 7 网站发布
 

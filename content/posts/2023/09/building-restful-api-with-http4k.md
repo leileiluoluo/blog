@@ -1,6 +1,6 @@
 ---
 title: 如何使用 Kotlin HTTP 工具包 http4k 构建 RESTful API 服务？
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-09-23T08:00:00+08:00
 url: /posts/building-restful-api-with-http4k.html
@@ -22,7 +22,7 @@ keywords:
 description: 本文以开发一个真实的 API 服务为例，演示了如何使用 http4k 开发 RESTful API。该项目使用 Gradle 作依赖管理，采用传统的 MVC 三层架构，使用 http4k 作 Controller 层的逻辑处理，无 DAO 层，无数据库操作，Service 层使用一个 List 来模拟数据的存储，支持 Swagger UI 的自动生成。全文主要有三个部分：模板项目搭建、业务代码编写，以及 API 测试与验证。
 ---
 
-上文「[如何使用 Spring Boot 和 Kotlin 构建 RESTful API 服务？](https://olzhy.github.io/posts/building-restful-api-with-spring-boot-and-kotlin.html)」介绍了 Kotlin 可以无缝借用现有 Java Web 框架来开发 API 服务。除此之外，还有一些 Web 工具包是直接使用 Kotlin 开发的，如 Ktor、http4k 等，用这些原生 Kotlin 工具包开发 API 服务则可以充分使用 Kotlin 的语法和函数式编程的特性。本文即专门探索一下如何使用 http4k 来开发 RESTful API 服务。
+上文「[如何使用 Spring Boot 和 Kotlin 构建 RESTful API 服务？](https://leileiluoluo.github.io/posts/building-restful-api-with-spring-boot-and-kotlin.html)」介绍了 Kotlin 可以无缝借用现有 Java Web 框架来开发 API 服务。除此之外，还有一些 Web 工具包是直接使用 Kotlin 开发的，如 Ktor、http4k 等，用这些原生 Kotlin 工具包开发 API 服务则可以充分使用 Kotlin 的语法和函数式编程的特性。本文即专门探索一下如何使用 http4k 来开发 RESTful API 服务。
 
 先看一下 http4k 是什么？
 
@@ -476,7 +476,7 @@ fun main() {
 
 启动后，浏览器打开`http://localhost:8080/swagger`，即可以看到自动生成的 Swagger UI。
 
-![Kotlin Swagger UI](https://olzhy.github.io/static/images/uploads/2023/09/http4k-swagger-ui.png#center)
+![Kotlin Swagger UI](https://leileiluoluo.github.io/static/images/uploads/2023/09/http4k-swagger-ui.png#center)
 
 ### 4.1 查询所有 User
 
@@ -594,7 +594,7 @@ curl -X DELETE http://localhost:8080/users/100
 
 综上，本文尝试使用 http4k 工具包开发了针对 User 增、删、改、查的通用 RESTful API，并进行了简单的测试，总体来看该包还是比较轻量，比较易于使用的。
 
-本文涉及的整个样例项目代码已托管至本人 [GitHub](https://github.com/olzhy/kotlin-exercises/tree/main/http4k-restful-service-demo)，欢迎关注或 Fork。
+本文涉及的整个样例项目代码已托管至本人 [GitHub](https://github.com/leileiluoluo/kotlin-exercises/tree/main/http4k-restful-service-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >

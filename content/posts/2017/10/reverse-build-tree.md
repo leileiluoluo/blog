@@ -1,6 +1,6 @@
 ---
 title: 根据遍历结果反向构建树
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2017-10-22T13:28:51+00:00
 url: /posts/reverse-build-tree.html

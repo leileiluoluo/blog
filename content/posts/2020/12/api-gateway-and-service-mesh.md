@@ -1,6 +1,6 @@
 ---
 title: API Gateway与Service Mesh有什么不同？
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-12-14T14:57:52+08:00
 url: /posts/api-gateway-and-service-mesh.html
@@ -23,7 +23,7 @@ description: API Gateway与Service Mesh有什么不同？(What's the difference 
 
 API Gateway一般是一个业务单元以“产品”的方式对外部客户或对内部其它业务单元进行API暴露的统一入口。其一般在网络模型的7层，使用独立于内部系统的中心化部署方式，作为一个Edge服务对外提供访问能力。
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/api-gateway-as-a-product.jpg#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/api-gateway-as-a-product.jpg#center)
 
 （图片引自[The difference between API Gateways and Service Mesh](https://www.cncf.io/blog/2020/03/06/the-difference-between-api-gateways-and-service-mesh/)）
 
@@ -43,9 +43,9 @@ API Gateway一般是一个业务单元以“产品”的方式对外部客户或
 
 ### 2 Service Mesh的使用场景
 
-由前文[“什么是服务网格？”](https://olzhy.github.io/posts/what-is-a-service-mesh.html)可知，服务网格解决的是系统内部服务与服务通信的问题。其采用分布式的Sidecar方式与服务实例一同部署，更关注的是内部系统的可信连接，安全通信及可观察能力。
+由前文[“什么是服务网格？”](https://leileiluoluo.github.io/posts/what-is-a-service-mesh.html)可知，服务网格解决的是系统内部服务与服务通信的问题。其采用分布式的Sidecar方式与服务实例一同部署，更关注的是内部系统的可信连接，安全通信及可观察能力。
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/service-mesh-arch.jpg#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/service-mesh-arch.jpg#center)
 
 （图片引自[The difference between API Gateways and Service Mesh](https://www.cncf.io/blog/2020/03/06/the-difference-between-api-gateways-and-service-mesh/)）
 
@@ -67,7 +67,7 @@ API Gateway一般是一个业务单元以“产品”的方式对外部客户或
 
 决定是否使用API Gateway的一个重要决策点是：是否有需求将内部API以中心化的方式作为一个“产品”来对外提供服务？
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/use-api-gateway-or-service-mesh.jpg#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/use-api-gateway-or-service-mesh.jpg#center)
 
 （图片引自[The difference between API Gateways and Service Mesh](https://www.cncf.io/blog/2020/03/06/the-difference-between-api-gateways-and-service-mesh/)）
 

@@ -1,6 +1,6 @@
 ---
 title: Istio 流量管理之故障注入
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-12-23T10:04:19+08:00
 url: /posts/istio-fault-injection.html
@@ -34,7 +34,7 @@ Istio 主要使用 Virtual Service 提供两种故障注入能力：响应延迟
 
 ### 1 响应延迟注入
 
-在上文“[Istio 流量管理之请求路由](https://olzhy.github.io/posts/istio-request-routing.html)”中，我们知道如何将特定用户的访问流量打到一个服务的一个版本，而将其余用户的访问流量打到另一个版本。这种“探针式的”路由配置对于在实际应用场景中作调试是非常有用的，因我们使用特定用户作调试不会影响到其他用户的正常使用。
+在上文“[Istio 流量管理之请求路由](https://leileiluoluo.github.io/posts/istio-request-routing.html)”中，我们知道如何将特定用户的访问流量打到一个服务的一个版本，而将其余用户的访问流量打到另一个版本。这种“探针式的”路由配置对于在实际应用场景中作调试是非常有用的，因我们使用特定用户作调试不会影响到其他用户的正常使用。
 
 首先，将默认 Destination Rule 配置一下。
 
@@ -147,7 +147,7 @@ spec:
 
 这时，使用 jason 账户登录 productpage 进行访问时，发现 Review 部分出错（Sorry, product reviews are currently unavailable for this book.）。
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-unavailable.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-unavailable.png#center)
 
 问题出现在哪里了呢？翻阅 productpage 的源码，发现这里将调用 reviews 的超时时间设置小了（超时时间为 3s，若失败则重试一次，所以总的超时时间为 6s）。
 
@@ -212,7 +212,7 @@ spec:
 
 使用 jason 账号登录 productpage 页面，发现 Review 部分显示 ratings 无法访问错误（Ratings service is currently unavailable）。
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-productpage-ratings-unavailable.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/bookinfo-productpage-ratings-unavailable.png#center)
 
 测试结束，使用如下命令删除临时路由即可。
 

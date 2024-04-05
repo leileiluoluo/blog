@@ -1,6 +1,6 @@
 ---
 title: 信
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2017-01-08T12:22:56+00:00
 url: /posts/letter.html

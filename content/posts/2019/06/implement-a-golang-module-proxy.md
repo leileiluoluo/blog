@@ -1,6 +1,6 @@
 ---
 title: 实现一个Golang Module Proxy
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-06-22T03:09:06+00:00
 url: /posts/implement-a-golang-module-proxy.html
@@ -18,11 +18,11 @@ tags:
   
 实现逻辑主要涉及这几块内容：
   
-- a）[main.go](https://github.com/olzhy/goproxy/blob/master/main.go)负责服务启动，服务优雅终止；
+- a）[main.go](https://github.com/leileiluoluo/goproxy/blob/master/main.go)负责服务启动，服务优雅终止；
   
-- b）[generate.sh](https://github.com/olzhy/goproxy/blob/master/generate.sh)负责将`$GOROOT`中的`internal`包拷贝至当前项目并替换引用路径；
+- b）[generate.sh](https://github.com/leileiluoluo/goproxy/blob/master/generate.sh)负责将`$GOROOT`中的`internal`包拷贝至当前项目并替换引用路径；
   
-c）[proxy.go](https://github.com/olzhy/goproxy/blob/master/pkg/proxy/proxy.go)核心逻辑部分，负责工作目录设定，路径检查，Module请求处理。
+c）[proxy.go](https://github.com/leileiluoluo/goproxy/blob/master/pkg/proxy/proxy.go)核心逻辑部分，负责工作目录设定，路径检查，Module请求处理。
   
 下面详细看一下这几部分的代码。
 
@@ -40,7 +40,7 @@ package main
 
 import (
     ...
-    "github.com/olzhy/goproxy/pkg/proxy"
+    "github.com/leileiluoluo/goproxy/pkg/proxy"
 )
 
 var port = flag.String("serverPort", ":8080", "server port")
@@ -75,7 +75,7 @@ cp -r $GOROOT/src/cmd/internal/sys ./internal/
 ...
 
 # replace import paths
-find . -type f -name "*.go" -exec sed -i '' 's#cmd/go/internal/#github.com/olzhy/goproxy/internal/#g' {} \; 
+find . -type f -name "*.go" -exec sed -i '' 's#cmd/go/internal/#github.com/leileiluoluo/goproxy/internal/#g' {} \; 
 ...
 ```
 
@@ -85,31 +85,31 @@ find . -type f -name "*.go" -exec sed -i '' 's#cmd/go/internal/#github.com/olzhy
   
 a）后缀为“`/@v/list`”
   
-如`GET github.com/olzhy/quote/@v/list`
+如`GET github.com/leileiluoluo/quote/@v/list`
   
 从请求路径截取mod名称，调用modfetch.Lookup函数返回所有可用版本。
   
 b）后缀为“`/@latest`”
   
-如`GET github.com/olzhy/quote/@latest`
+如`GET github.com/leileiluoluo/quote/@latest`
   
 从请求路径截取mod名称，调用modfetch.Lookup函数获取最近一次提交信息。
   
 c）后缀为“`.info`”
   
-如`GET github.com/olzhy/quote/@v/v1.0.0.info`
+如`GET github.com/leileiluoluo/quote/@v/v1.0.0.info`
   
 从请求路径截取mod及version信息，调用modfetch.Stat函数获取info。
   
 d）后缀为“`.mod`”
   
-如`GET github.com/olzhy/quote/@v/v1.0.0.mod`
+如`GET github.com/leileiluoluo/quote/@v/v1.0.0.mod`
   
 从请求路径截取mod及version信息，调用modfetch.GoMod函数获取mod内容。
   
 e）后缀为“`.zip`”
   
-如`GET github.com/olzhy/quote/@v/v1.0.0.zip`
+如`GET github.com/leileiluoluo/quote/@v/v1.0.0.zip`
   
 从请求路径截取mod及version信息，调用`modfetch.DownloadZip`函数获取zip文件路径名称并提供下载。
 
@@ -118,7 +118,7 @@ package proxy
 
 import (
     ...
-    "github.com/olzhy/goproxy/internal/modfetch"
+    "github.com/leileiluoluo/goproxy/internal/modfetch"
     ...
 )
 
@@ -191,10 +191,10 @@ func Proxy() http.HandlerFunc {
 }
 ```
 
-完整实现代码已提交至GitHub（[github.com/olzhy/goproxy](https://github.com/olzhy/goproxy)），欢迎大家关注。
+完整实现代码已提交至GitHub（[github.com/leileiluoluo/goproxy](https://github.com/leileiluoluo/goproxy)），欢迎大家关注。
   
 此外该服务已部署至服务器，欢迎大家使用[https://golangcenter.com](https://golangcenter.com)。
 
 > 参考资料
 >
-> [1]&nbsp;<a href="https://github.com/olzhy/goproxy" target="blank">https://github.com/olzhy/goproxy</a>
+> [1]&nbsp;<a href="https://github.com/leileiluoluo/goproxy" target="blank">https://github.com/leileiluoluo/goproxy</a>

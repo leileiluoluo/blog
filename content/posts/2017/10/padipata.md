@@ -1,6 +1,6 @@
 ---
 title: 修行
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2017-10-22T15:54:16+00:00
 url: /posts/padipata.html

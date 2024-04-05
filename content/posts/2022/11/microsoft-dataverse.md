@@ -1,6 +1,6 @@
 ---
 title: Microsoft Dataverse 基础
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2022-11-18T08:00:00+08:00
 url: /posts/microsoft-dataverse.html
@@ -17,7 +17,7 @@ keywords:
 description: Dataverse 基础。包含 Dataverse 的功能，Dataverse 中的表、表与表的关系、业务规则的设置及 Dataverse 环境与管理中心等几个方面。
 ---
 
-在上文[「Power Platform 是什么？」](https://olzhy.github.io/posts/what-is-power-platform.html)中，我们对 Microsoft Dataverse 是什么作过一个简单的介绍。
+在上文[「Power Platform 是什么？」](https://leileiluoluo.github.io/posts/what-is-power-platform.html)中，我们对 Microsoft Dataverse 是什么作过一个简单的介绍。
 
 本文会稍微深入的了解一下 Dataverse。
 
@@ -25,7 +25,7 @@ Dataverse 是一个云上的低代码数据服务，主要为 Power Apps、Power
 
 Dataverse 有什么功能呢？请看下图：
 
-![Dataverse 的功能](https://olzhy.github.io/static/images/uploads/2022/11/dataverse-diagram.png#center)
+![Dataverse 的功能](https://leileiluoluo.github.io/static/images/uploads/2022/11/dataverse-diagram.png#center)
 
 可以看到，Dataverse 提供安全控制、逻辑处理、数据处理、数据存储及与外部系统集成等诸多功能。下面分别看一下：
 
@@ -87,7 +87,7 @@ Dataverse 数据库中的表遵循通用数据模型标准（Common Data Model�
 
 若信用限额字段`Credit Limit`的值超过 100 万美元，则将信用限额 VP 审批人字段`Credit Limit VP Approver`设置为必填字段。
 
-![业务规则使用示例](https://olzhy.github.io/static/images/uploads/2022/11/business-rule.png#center)
+![业务规则使用示例](https://leileiluoluo.github.io/static/images/uploads/2022/11/business-rule.png#center)
 
 这样，在数据层应用业务规则，可以使得数据不论以何种方式访问（如在 Power Apps 或 Power Automate 中直接访问或通过 API 访问），都可以得到一致的控制。
 
@@ -101,7 +101,7 @@ Dataverse 数据库中的表遵循通用数据模型标准（Common Data Model�
 
 Power Platform 的多数管理任务都可以在 Power Platform 管理中心进行，页面如下图所示：
 
-![Power Platform 管理中心](https://olzhy.github.io/static/images/uploads/2022/11/admin.png#center)
+![Power Platform 管理中心](https://leileiluoluo.github.io/static/images/uploads/2022/11/admin.png#center)
 
 管理中心包括如下几个管理大项：
 

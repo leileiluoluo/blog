@@ -1,6 +1,6 @@
 ---
 title: 观《百鸟朝凤》
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-03-22T13:31:38+00:00
 url: /posts/hundreds-of-birds.html

@@ -1,6 +1,6 @@
 ---
 title: PostgreSQL JDBC Driver 42.3.0 读取 BigDecimal 时发生抹 0 的 Bug
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-11-17T08:00:00+08:00
 url: /posts/postgres-jdbc-driver-issue.html
@@ -129,7 +129,7 @@ Actual   :2.00000000
 
 综上，本文发现了 PostgreSQL JDBC Driver 42.3.0 读取 BigDecimal 的 Bug，并对其进行了复现，最后提出了解决方案。
 
-本文所涉及的复现代码已托管至本人 [GitHub](https://github.com/olzhy/java-exercises/blob/main/postgres-jdbc-issue-reproducer/src/test/java/BigDecimalTest.java)。
+本文所涉及的复现代码已托管至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/blob/main/postgres-jdbc-issue-reproducer/src/test/java/BigDecimalTest.java)。
 
 > 参考资料
 >

@@ -1,6 +1,6 @@
 ---
 title: Istio 流量管理之安全 Gateway
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2021-01-02T08:29:44+08:00
 url: /posts/istio-secure-gateways.html
@@ -18,7 +18,7 @@ keywords:
 description: Istio流量管理之安全Gateway (Secure Gateways of Istio Traffic Management)
 ---
 
-上文[“Istio 流量管理之 Ingress Gateway”](https://olzhy.github.io/posts/istio-ingress-gateways.html)介绍了如何使用 Gateway 将一个 7 层 HTTP 服务暴露给外部使用。本文将介绍如何为 Gateway 配置单向或双向 TLS 从而暴露一个安全的 HTTPS 服务给外部访问。关于 Istio 安装等环境准备，请参阅[“Istio 安装使用”](https://olzhy.github.io/posts/istio-get-started.html)。
+上文[“Istio 流量管理之 Ingress Gateway”](https://leileiluoluo.github.io/posts/istio-ingress-gateways.html)介绍了如何使用 Gateway 将一个 7 层 HTTP 服务暴露给外部使用。本文将介绍如何为 Gateway 配置单向或双向 TLS 从而暴露一个安全的 HTTPS 服务给外部访问。关于 Istio 安装等环境准备，请参阅[“Istio 安装使用”](https://leileiluoluo.github.io/posts/istio-get-started.html)。
 
 ### 1 部署 httpbin
 

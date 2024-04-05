@@ -1,6 +1,6 @@
 ---
 title: 在 CentOS 上以源码安装 PostgreSQL
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2021-05-13T17:44:42+08:00
 url: /posts/install-postgres-on-centos-from-source.html

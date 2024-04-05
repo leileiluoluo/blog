@@ -1,6 +1,6 @@
 ---
 title: LeetCode 34 在有序数组寻找元素的出现范围
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-07-23T02:41:39+00:00
 url: /posts/leetcode-find-first-and-last-position-of-element-in-sorted-array.html
@@ -41,7 +41,7 @@ tags:
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/34_Find_First_and_Last_Position_of_Element_in_Sorted_Array/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/34_Find_First_and_Last_Position_of_Element_in_Sorted_Array/test.go)
 
 ```go
 func searchRange(nums []int, target int) []int {

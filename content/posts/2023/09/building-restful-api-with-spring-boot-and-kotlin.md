@@ -1,6 +1,6 @@
 ---
 title: 如何使用 Spring Boot 和 Kotlin 构建 RESTful API 服务？
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-09-12T08:00:00+08:00
 url: /posts/building-restful-api-with-spring-boot-and-kotlin.html
@@ -49,7 +49,7 @@ Java：17
 Dependencies：Spring Web、MyBatis Framework 和 MySQL Driver
 ```
 
-![](https://olzhy.github.io/static/images/uploads/2023/09/start.spring.io.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2023/09/start.spring.io.png)
 
 然后，点击 GENERATE 会生成一个模板工程并下载到本地，解压后导入 IDE 即可看到这个模板工程的全貌了。
 
@@ -436,7 +436,7 @@ curl -X GET http://localhost:8080/users/
 
 综上，我们使用 Kotlin + Gradle + Spring Boot + MyBatis 搭建了一个样例 API 项目，并编写了业务代码，最后进行了测试，发现使用 Spring Boot 和 Kotlin 构建 RESTful API 服务还是比较简单可行的。
 
-本文涉及的整个样例项目代码已托管至本人 [GitHub](https://github.com/olzhy/kotlin-exercises/tree/main/spring-boot-restful-service-demo)，欢迎关注或 Fork。
+本文涉及的整个样例项目代码已托管至本人 [GitHub](https://github.com/leileiluoluo/kotlin-exercises/tree/main/spring-boot-restful-service-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >

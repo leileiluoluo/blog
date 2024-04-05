@@ -1,6 +1,6 @@
 ---
 title: 偶遇
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2017-01-09T11:22:56+00:00
 url: /posts/meet-by-chance.html

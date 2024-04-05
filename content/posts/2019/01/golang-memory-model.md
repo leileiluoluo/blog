@@ -1,6 +1,6 @@
 ---
 title: Golang 内存模型
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-01-25T02:53:17+00:00
 url: /posts/golang-memory-model.html

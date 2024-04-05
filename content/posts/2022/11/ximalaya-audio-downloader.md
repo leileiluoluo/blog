@@ -1,6 +1,6 @@
 ---
 title: 使用 Golang 实现喜马拉雅音频下载
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2022-11-12T08:00:00+08:00
 url: /posts/ximalaya-audio-downloader.html
@@ -34,7 +34,7 @@ description: 本文介绍如何使用 Golang 下载喜马拉雅音频。包括 A
 
 如下图所示，访问喜马拉雅的某个专辑时，从浏览器地址栏可以看到该专辑的 ID（本例中，248003 就是「张庆祥讲孟子」专辑的 ID）。
 
-![喜马拉雅专辑ID](https://olzhy.github.io/static/images/uploads/2022/11/xima-url.png#center)
+![喜马拉雅专辑ID](https://leileiluoluo.github.io/static/images/uploads/2022/11/xima-url.png#center)
 
 #### 获取音频的 API
 
@@ -48,7 +48,7 @@ description: 本文介绍如何使用 Golang 下载喜马拉雅音频。包括 A
 
 ### 2 Golang 实现
 
-实现音频下载的 Golang 代码已托管至本人 [GitHub](https://github.com/olzhy/ximalaya-downloader)。
+实现音频下载的 Golang 代码已托管至本人 [GitHub](https://github.com/leileiluoluo/ximalaya-downloader)。
 
 因实现逻辑简单，整个实现的代码也不到 200 行，下面只看一下 main 函数的逻辑。
 
@@ -117,7 +117,7 @@ downloaded! file: 张庆祥讲孟子/4.仁者无敌.m4a
 
 程序会在当前运行命令的文件夹下新建一个以该专辑命名的文件夹，并将该专辑下所有的音频逐条下载至该专辑文件夹下。下载结果如下图所示：
 
-![下载示例](https://olzhy.github.io/static/images/uploads/2022/11/xima-download.png#center)
+![下载示例](https://leileiluoluo.github.io/static/images/uploads/2022/11/xima-download.png#center)
 
 ### 4 m4a 如何转 mp3？
 
@@ -147,7 +147,7 @@ for f in *.m4a; do ffmpeg -i "$f" -codec:v copy -codec:a libmp3lame -q:a 2 after
 
 如上命令首先进入待转换的`m4a`音频文件所在文件夹，然后创建转换后的文件存储文件夹`after`，最后对所有的`m4a`文件使用`ffmpeg`将其转换为`mp3`格式并放至文件夹`after`。转换后的结果如下图所示：
 
-![转换后的结果截图](https://olzhy.github.io/static/images/uploads/2022/11/xima-after.png#center)
+![转换后的结果截图](https://leileiluoluo.github.io/static/images/uploads/2022/11/xima-after.png#center)
 
 有了这些更通用的 mp3 格式，即可在离线情况下在几乎任何可以播放音频的设备上随心去听这些音频了。
 

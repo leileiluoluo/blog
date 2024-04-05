@@ -1,6 +1,6 @@
 ---
 title: Golang 优雅的终止一个服务
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-06-11T08:26:04+00:00
 url: /posts/golang-shutdown-server-gracefully.html
@@ -152,7 +152,7 @@ exit status 1
 
 处理完成后，关闭 processed 通道，最后主 goroutine 退出。
 
-代码同时托管在 GitHub，欢迎关注（[github.com/olzhy/go-exercises](https://github.com/olzhy/go-exercises/blob/master/shutdown_server_gracefully/test.go)）。
+代码同时托管在 GitHub，欢迎关注（[github.com/leileiluoluo/go-exercises](https://github.com/leileiluoluo/go-exercises/blob/master/shutdown_server_gracefully/test.go)）。
 
 ```go
 var addr = flag.String("server addr", ":8080", "server address")

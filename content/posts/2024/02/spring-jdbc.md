@@ -1,6 +1,6 @@
 ---
 title: 如何使用 Spring JDBC 进行数据库访问？
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2024-02-22T08:00:00+08:00
 url: /posts/spring-jdbc.html
@@ -97,7 +97,7 @@ INSERT INTO user(name, age, email, created_at) VALUES
 
 ### 2.2 示例工程介绍
 
-本文示例工程 [spring-jdbc-demo](https://github.com/olzhy/java-exercises/tree/main/spring-jdbc-demo) 用到的依赖如下：
+本文示例工程 [spring-jdbc-demo](https://github.com/leileiluoluo/java-exercises/tree/main/spring-jdbc-demo) 用到的依赖如下：
 
 ```xml
 <!-- pom.xml -->
@@ -134,7 +134,7 @@ INSERT INTO user(name, age, email, created_at) VALUES
 </dependency>
 ```
 
-示例工程的 [application.yaml](https://github.com/olzhy/java-exercises/blob/main/spring-jdbc-demo/src/main/resources/application.yaml) 配置文件内容如下：
+示例工程的 [application.yaml](https://github.com/leileiluoluo/java-exercises/blob/main/spring-jdbc-demo/src/main/resources/application.yaml) 配置文件内容如下：
 
 ```yaml
 spring:
@@ -148,7 +148,7 @@ spring:
 
 ## 3 Spring JDBC 核心功能使用
 
-该部分以封装一个 User 增删改查的 DAO 实现类（[UserDaoImpl.java](https://github.com/olzhy/java-exercises/blob/main/spring-jdbc-demo/src/main/java/com/example/demo/dao/impl/UserDaoImpl.java)）为例来演示 Spring JDBC 核心功能的使用。
+该部分以封装一个 User 增删改查的 DAO 实现类（[UserDaoImpl.java](https://github.com/leileiluoluo/java-exercises/blob/main/spring-jdbc-demo/src/main/java/com/example/demo/dao/impl/UserDaoImpl.java)）为例来演示 Spring JDBC 核心功能的使用。
 
 首先附上 User Model 类的代码：
 
@@ -434,7 +434,7 @@ WHERE id = 1;
 
 如果我们想根据 SQL 错误码自定义抛出的异常，则可以通过继承 `SQLErrorCodeSQLExceptionTranslator` 类并重写其 `doTranslate` 方法来实现。
 
-综上，本文首先对 Spring JDBC 的基础知识进行了介绍，然后准备了一下测试数据与示例工程，最后以示例代码的方式演示了 Spring JDBC 中各个数据访问核心类与自带翻译器的使用。文中涉及的所有示例代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-jdbc-demo)，欢迎关注或 Fork。
+综上，本文首先对 Spring JDBC 的基础知识进行了介绍，然后准备了一下测试数据与示例工程，最后以示例代码的方式演示了 Spring JDBC 中各个数据访问核心类与自带翻译器的使用。文中涉及的所有示例代码均已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-jdbc-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >

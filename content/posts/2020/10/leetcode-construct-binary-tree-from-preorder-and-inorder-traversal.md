@@ -1,6 +1,6 @@
 ---
 title: LeetCode 105 以先序遍历及中序遍历构造二叉树
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-10-06T19:07:00+08:00
 url: /posts/leetcode-construct-binary-tree-from-preorder-and-inorder-traversal.html
@@ -58,7 +58,7 @@ inorder = [9,3,15,20,7]
 
 ### 3 Golang实现代码
 
-[https://github.com/olzhy](https://github.com/olzhy/leetcode/blob/master/105_Construct_Binary_Tree_from_Preorder_and_Inorder_Traversal/test.go)
+[https://github.com/leileiluoluo](https://github.com/leileiluoluo/leetcode/blob/master/105_Construct_Binary_Tree_from_Preorder_and_Inorder_Traversal/test.go)
 
 ```go
 func buildTree(preorder []int, inorder []int) *TreeNode {
@@ -84,7 +84,7 @@ func buildTree(preorder []int, inorder []int) *TreeNode {
 
 ### 4 Python实现代码
 
-[https://github.com/olzhy](https://github.com/olzhy/leetcode/blob/master/105_Construct_Binary_Tree_from_Preorder_and_Inorder_Traversal/test.py)
+[https://github.com/leileiluoluo](https://github.com/leileiluoluo/leetcode/blob/master/105_Construct_Binary_Tree_from_Preorder_and_Inorder_Traversal/test.py)
 
 ```python
 class Solution:

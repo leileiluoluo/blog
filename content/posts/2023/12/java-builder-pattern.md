@@ -1,6 +1,6 @@
 ---
 title: Java 建造者模式（Builder Pattern）知多少？
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-12-05T08:00:00+08:00
 url: /posts/java-builder-pattern.html
@@ -246,7 +246,7 @@ public class BuilderPatternTest {
 
 综上，本文探索了可选参数太多时应如何处理的问题。对比传统的伸缩式构造器模式、JavaBeans 构造器模式，以及新的建造者模式，发现前两者分别存在可读性差与安全性低的问题，而建造者模式兼具安全性高与可读性好的优点，更适合在日常编码中使用。
 
-本文所涉及的全部示例代码已托管至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/builder-pattern-demo/src/test/java)，欢迎关注或 Fork。
+本文所涉及的全部示例代码已托管至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/builder-pattern-demo/src/test/java)，欢迎关注或 Fork。
 
 > 参考资料
 >

@@ -1,6 +1,6 @@
 ---
 title: LeetCode 5 最长回文子串
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-02-21T01:41:53+00:00
 url: /posts/leetcode-longest-palindromic-substring.html
@@ -49,7 +49,7 @@ tags:
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/5_Longest_Palindromic_Substring/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/5_Longest_Palindromic_Substring/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/5_Longest_Palindromic_Substring/test.go" target="_blank" rel="noopener">https://github.com/leileiluoluo/leetcode/blob/master/5_Longest_Palindromic_Substring/test.go</a>
 
 ```go
 func longestPalindrome(s string) string {

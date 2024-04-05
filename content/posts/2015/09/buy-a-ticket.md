@@ -1,6 +1,6 @@
 ---
 title: 买票
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2015-09-02T04:33:06+00:00
 url: /posts/buy-a-ticket.html

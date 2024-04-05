@@ -1,6 +1,6 @@
 ---
 title: 关于爱国
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2015-02-14T07:58:48+00:00
 url: /posts/about-petriotism.html

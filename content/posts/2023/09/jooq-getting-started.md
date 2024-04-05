@@ -1,6 +1,6 @@
 ---
 title: Java 数据库操作工具包 jOOQ 初探
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-09-05T08:00:00+08:00
 url: /posts/jooq-getting-started.html
@@ -153,7 +153,7 @@ mvn clean generate-sources
 
 可以看到，代码被生成到了`src/main/java`文件夹下的`com.leileiluoluo.jooq.model.generated`包下。
 
-![](https://olzhy.github.io/static/images/uploads/2023/09/jooq-code-generation.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2023/09/jooq-code-generation.png)
 
 ## 3 jOOQ 初步使用
 
@@ -415,7 +415,7 @@ public class StudentDaoImpl implements StudentDao {
 
 综上，本文准备了一些测试数据，探索了 jOOQ 的代码生成和 SQL 构建能力，最后还思考了其与 Spring Boot 的集成。总体来看，jOOQ 还是比较易用的，是一个不错的 MyBatis 或 Hibernate 替代方案。
 
-此外，本文涉及的所有代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-jooq-integration-demo)，有兴趣的同学可以关注或 Fork。
+此外，本文涉及的所有代码均已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-boot-jooq-integration-demo)，有兴趣的同学可以关注或 Fork。
 
 > 参考资料
 >

@@ -1,6 +1,6 @@
 ---
 title: LeetCode 98 校验二叉搜索树
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-07-17T11:38:51+00:00
 url: /posts/leetcode-validate-binary-search-tree.html
@@ -63,7 +63,7 @@ c）左右子树均须是二叉搜索树。
 
 **3 Golang实现代码**
   
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/98_Validate_Binary_Search_Tree/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/98_Validate_Binary_Search_Tree/test.go)
 
 ```go
 func preOrderTraversal(root *TreeNode, preVal *int) bool {

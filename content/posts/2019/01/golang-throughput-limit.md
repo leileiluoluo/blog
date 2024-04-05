@@ -1,6 +1,6 @@
 ---
 title: Golang 使用channel作并发访问吞吐量限制
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-01-06T10:50:25+00:00
 url: /posts/golang-throughput-limit.html
@@ -123,7 +123,7 @@ handle req 3
 handle req 4
 ```
 
-本文代码托管地址：<a href="https://github.com/olzhy/go-exercises/tree/master/throughput_limit" target="blank">https://github.com/olzhy/go-exercises/tree/master/throughput_limit</a>
+本文代码托管地址：<a href="https://github.com/leileiluoluo/go-exercises/tree/master/throughput_limit" target="blank">https://github.com/leileiluoluo/go-exercises/tree/master/throughput_limit</a>
 
 > 参考资料
 >

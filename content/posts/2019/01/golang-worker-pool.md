@@ -1,6 +1,6 @@
 ---
 title: Golang worker pool 实现
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-01-08T06:48:23+00:00
 url: /posts/golang-worker-pool.html
@@ -166,7 +166,7 @@ result of task 2 is error
 result of task 0 is nil
 ```
 
-本文代码托管地址：<a href="https://github.com/olzhy/go-exercises/tree/master/worker_pool" target="blank">https://github.com/olzhy/go-exercises/tree/master/worker_pool</a>
+本文代码托管地址：<a href="https://github.com/leileiluoluo/go-exercises/tree/master/worker_pool" target="blank">https://github.com/leileiluoluo/go-exercises/tree/master/worker_pool</a>
 
 > 参考资料
 >

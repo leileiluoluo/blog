@@ -1,6 +1,6 @@
 ---
 title: 观《卧虎藏龙》
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-01-21T10:25:10+00:00
 url: /posts/see-crouching-tiger-hidden-dragon.html

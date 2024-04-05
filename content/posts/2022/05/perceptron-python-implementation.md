@@ -1,6 +1,6 @@
 ---
 title: 感知机算法及 Python 实现
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2022-05-01T10:59:05+08:00
 url: /posts/perceptron-python-implementation.html
@@ -26,7 +26,7 @@ description: 感知机 Perceptron 算法及 Python 实现。
 
 其可被抽象为下图所示模型：即一个神经元接收到来自 n 个其它神经元的输入信号；对这些输入信号，通过带权值的连接进行计算（各个连接线的权值与对应输入值相乘，然后进行累加），然后判断计算出来的累加值是否超过阈值（Threshold）；若等于或超过阈值，则输出 y 为 1，表示该神经元激活，否则输出 y 为 -1 表示该神经元抑制。
 
-![](https://olzhy.github.io/static/images/uploads/2022/05/perceptron.svg#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2022/05/perceptron.svg#center)
 
 所以，感知机模型可被描述为：
 
@@ -172,7 +172,7 @@ times: 3, xi: [1, 1], yi: -1, y_predict: -1, _w: [-8.0, 10.0, -6.0]
 
 因该样例的样本点是二维的，所以可将其表示为平面空间的点，权重向量为一条直线。寻找权重向量的过程如下图所示。
 
-![](https://olzhy.github.io/static/images/uploads/2022/05/perceptron-2d-example.gif#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2022/05/perceptron-2d-example.gif#center)
 
 ### 4 对 Iris 数据集进行训练及预测
 
@@ -256,7 +256,7 @@ predict label: -1, real: Iris-versicolor
 predict label: -1, real: Iris-versicolor
 ```
 
-综上，对感知机算法的原理作了学习与了解，并使用 Python 对其进行了实现及初步应用。本文代码已托管至[GitHub](https://github.com/olzhy/machine-learning/tree/main/perceptron)，欢迎 Fork。
+综上，对感知机算法的原理作了学习与了解，并使用 Python 对其进行了实现及初步应用。本文代码已托管至[GitHub](https://github.com/leileiluoluo/machine-learning/tree/main/perceptron)，欢迎 Fork。
 
 > 参考资料
 >

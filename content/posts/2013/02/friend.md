@@ -1,6 +1,6 @@
 ---
 title: 朋友啊，你的被动久了让我很受伤害
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2013-02-04T08:59:31+00:00
 url: /posts/friend.html

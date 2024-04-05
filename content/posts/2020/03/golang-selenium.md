@@ -1,6 +1,6 @@
 ---
 title: Golang 使用 Selenium 实现自动化测试初探
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-03-14T00:00:16+00:00
 url: /posts/golang-selenium.html
@@ -46,7 +46,7 @@ docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:3.141
 - TestSearch 即为测试搜索功能的函数：打开搜索页，输入关键字，点击搜索按钮，验证搜索结果，保存结果截图；
 - teardown 函数负责 driver 对象的资源释放。
 
-代码已托管至 GitHub：[https://github.com/olzhy/go-exercises](https://github.com/olzhy/go-exercises/tree/master/selenium/1.0)
+代码已托管至 GitHub：[https://github.com/leileiluoluo/go-exercises](https://github.com/leileiluoluo/go-exercises/tree/master/selenium/1.0)
 
 ```Golang
 package blog_test
@@ -169,7 +169,7 @@ $ go test -v
 === RUN   TestSearch
 --- PASS: TestSearch (46.40s)
 PASS
-ok  	github.com/olzhy/test	91.427s
+ok  	github.com/leileiluoluo/test	91.427s
 ```
 
 至此，我们已可以使用 Selenium 进行自动化测试了。
@@ -192,9 +192,9 @@ Selenium 给出一个指导原则——[页面对象模型](https://www.selenium
 
 blog_test.go 为总测试入口，pages 包下为各页面功能，所以搜索页面的定位标记及功能均封装在 search.go，这样，我们在 blog_test.go 写测试函数调用 pages 下的页面的方法即可进行断言。
 
-改进后的代码已托管至 GitHub：[https://github.com/olzhy/go-exercises](https://github.com/olzhy/go-exercises/tree/master/selenium/2.0)
+改进后的代码已托管至 GitHub：[https://github.com/leileiluoluo/go-exercises](https://github.com/leileiluoluo/go-exercises/tree/master/selenium/2.0)
 
-- 代码结构(github.com/olzhy/test)
+- 代码结构(github.com/leileiluoluo/test)
 
 ```shell
 $ tree
@@ -216,7 +216,7 @@ import (
 	"flag"
 	"testing"
 
-	"github.com/olzhy/test/pages"
+	"github.com/leileiluoluo/test/pages"
 	"github.com/tebeka/selenium"
 )
 

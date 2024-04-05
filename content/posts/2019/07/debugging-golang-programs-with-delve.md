@@ -1,6 +1,6 @@
 ---
 title: 使用delve调试Golang程序
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-07-09T10:30:31+00:00
 url: /posts/debugging-golang-programs-with-delve.html

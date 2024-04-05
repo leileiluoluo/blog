@@ -1,6 +1,6 @@
 ---
 title: 第一次考研失利，准备二战前的小感
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2011-05-03T07:58:48+00:00
 url: /posts/waiting-for-second-round.html

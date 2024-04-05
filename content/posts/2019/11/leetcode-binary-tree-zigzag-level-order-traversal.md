@@ -1,6 +1,6 @@
 ---
 title: LeetCode 103 二叉树Z字形层次遍历
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-11-21T11:26:31+00:00
 url: /posts/leetcode-binary-tree-zigzag-level-order-traversal.html
@@ -47,7 +47,7 @@ tags:
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/103_Binary_Tree_Zigzag_Level_Order_Traversal/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/103_Binary_Tree_Zigzag_Level_Order_Traversal/test.go)
 
 ```Golang
 func zigzagLevelOrder(root *TreeNode) [][]int {

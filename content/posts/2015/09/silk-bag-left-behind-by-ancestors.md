@@ -1,6 +1,6 @@
 ---
 title: 古人留给我们的锦囊
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2015-09-01T04:34:17+00:00
 url: /posts/silk-bag-left-behind-by-ancestors.html

@@ -1,6 +1,6 @@
 ---
 title: LeetCode 6 Z字形变换
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-12-20T08:27:55+00:00
 url: /posts/leetcode-zigzag-conversion.html
@@ -17,7 +17,7 @@ tags:
   
 给定字符串，以Z字形显示。如"PAYPALISHIRING"以给定行数为3的Z字形显示为：
   
-![](https://olzhy.github.io/static/images/uploads/2018/12/zigzag-conversion-eg1.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2018/12/zigzag-conversion-eg1.png)
   
 然后从左到右一行一行拼起来为："PAHNAPLSIIGYIR"。
 
@@ -37,7 +37,7 @@ tags:
 
 释义：
   
-![](https://olzhy.github.io/static/images/uploads/2018/12/zigzag-conversion-eg2.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2018/12/zigzag-conversion-eg2.png)
 
 题目出处：
   
@@ -47,7 +47,7 @@ tags:
   
 如下图所示：
 
-![](https://olzhy.github.io/static/images/uploads/2018/12/zigzag-conversion.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2018/12/zigzag-conversion.png)
   
 a）最顶部和最底部水平方向两字母之间最大间隔maxInterval为2 * (numRows-1)；
 
@@ -57,7 +57,7 @@ c) 根据此规律，可以构造字符串的Z字形显示结果。
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/6_ZigZag_Conversion/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/6_ZigZag_Conversion/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/6_ZigZag_Conversion/test.go" target="_blank" rel="noopener">https://github.com/leileiluoluo/leetcode/blob/master/6_ZigZag_Conversion/test.go</a>
 
 ```go
 func convert(s string, numRows int) string {

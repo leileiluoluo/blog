@@ -1,6 +1,6 @@
 ---
 title: Golang WebAssembly 初探
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-10-04T08:46:46+00:00
 url: /posts/golang-webassembly.html
@@ -198,7 +198,7 @@ $ goexec 'http.ListenAndServe(":8080", http.FileServer(http.Dir(".")))'
 
 运行结果如下图所示。
 
-![](https://olzhy.github.io/static/images/uploads/2019/10/wasm-calc.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2019/10/wasm-calc.png)
 
 ### 3 问题与展望
 

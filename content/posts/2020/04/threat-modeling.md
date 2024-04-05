@@ -1,6 +1,6 @@
 ---
 title: 威胁建模
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-04-19T17:57:50+08:00
 url: /posts/threat-modeling.html

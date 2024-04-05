@@ -1,6 +1,6 @@
 ---
 title: 一下午的暖暖阳光
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2014-03-23T08:19:25+00:00
 url: /posts/warm-sunshine-of-afternoon.html

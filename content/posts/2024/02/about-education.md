@@ -1,6 +1,6 @@
 ---
 title: 關於減負，關於教育
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2024-02-07T08:00:00+08:00
 url: /posts/about-education.html

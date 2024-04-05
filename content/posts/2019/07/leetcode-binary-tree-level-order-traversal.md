@@ -1,6 +1,6 @@
 ---
 title: LeetCode 102 二叉树层次遍历
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-07-26T08:33:44+00:00
 url: /posts/leetcode-binary-tree-level-order-traversal.html
@@ -51,7 +51,7 @@ tags:
 
 **3 Golang实现代码**
   
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/102_Binary_Tree_Level_Order_Traversal/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/102_Binary_Tree_Level_Order_Traversal/test.go)
 
 ```go
 type TreeNode struct {

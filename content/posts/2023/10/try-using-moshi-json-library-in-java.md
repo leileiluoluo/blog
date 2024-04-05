@@ -1,6 +1,6 @@
 ---
 title: 尝试在 Java 中使用 Moshi JSON 库
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-10-14T08:00:00+08:00
 url: /posts/try-using-moshi-json-library-in-java.html
@@ -321,7 +321,7 @@ public void testJSONArrayParsing() {
 
 可以看到，User List 与 JSON Array 的互相转换结果均是正确的。
 
-综上，本文探索了在 Java 中使用 Moshi 进行 JSON 序列化和反序列化的各种常见用法。文中所涉及的全部代码已托管至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/moshi-json-library-demo)，欢迎关注或 Fork。
+综上，本文探索了在 Java 中使用 Moshi 进行 JSON 序列化和反序列化的各种常见用法。文中所涉及的全部代码已托管至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/moshi-json-library-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >

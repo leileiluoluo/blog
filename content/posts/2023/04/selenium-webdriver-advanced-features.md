@@ -1,6 +1,6 @@
 ---
 title: Selenium WebDriver 高级特性使用
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-04-24T08:00:00+08:00
 url: /posts/selenium-webdriver-advanced-features.html
@@ -21,7 +21,7 @@ keywords:
 description: 本文以 Python 代码示例的方式介绍了 Selenium WebDriver 高级特性的使用，涉及页面加载策略、等待策略、元素定位与操作、浏览器操作。
 ---
 
-上文「[Selenium WebDriver 基础使用](https://olzhy.github.io/posts/selenium-webdriver.html)」介绍了 Selenium WebDriver 基础功能的使用；本文将接着介绍 Selenium WebDriver 高级特性的使用，涉及页面加载策略、等待策略、元素定位与操作、浏览器操作。
+上文「[Selenium WebDriver 基础使用](https://leileiluoluo.github.io/posts/selenium-webdriver.html)」介绍了 Selenium WebDriver 基础功能的使用；本文将接着介绍 Selenium WebDriver 高级特性的使用，涉及页面加载策略、等待策略、元素定位与操作、浏览器操作。
 
 本文涉及的所有示例程序均使用 Python 语言描述。此外，下面还列出了本文所使用的浏览器和 Selenium 版本信息。
 
@@ -68,7 +68,7 @@ Selenium WebDriver 的浏览器选项有三种页面加载策略可供选择，�
 
 下图将这两种方式组合到一起来看一下一个网页的生命周期：
 
-![网页生命周期](https://olzhy.github.io/static/images/uploads/2023/04/web-page-lifecycle.svg#center)
+![网页生命周期](https://leileiluoluo.github.io/static/images/uploads/2023/04/web-page-lifecycle.svg#center)
 
 可以看到，事件里的`DOMContentLoaded`对应`document.readyState`里的`interactive`；事件里的`load`对应`document.readyState`里的`complete`。
 
@@ -82,7 +82,7 @@ Selenium WebDriver 的浏览器选项有三种页面加载策略可供选择，�
 
 可以看到，当访问一个 URL 时，Selenium WebDriver 的默认策略是等待整个页面全部加载完成（除了使用`JavaScript`在`load`事件后再动态添加内容）。在编写自动化测试用例时，如果测试逻辑不依赖外部资源的加载，即可以将页面加载策略从默认选项`normal`改为`eager`或`none`来加速测试过程。
 
-更改 Selenium WebDriver 页面加载策略的示例 Python 代码（[page_load_strategy.py](https://github.com/olzhy/python-exercises/blob/main/selenium-advanced-features/page_load_strategy.py)）如下：
+更改 Selenium WebDriver 页面加载策略的示例 Python 代码（[page_load_strategy.py](https://github.com/leileiluoluo/python-exercises/blob/main/selenium-advanced-features/page_load_strategy.py)）如下：
 
 ```python
 from selenium import webdriver
@@ -99,7 +99,7 @@ driver.quit()
 
 通俗点讲，WebDriver 是一个告诉浏览器做什么的库。因 Web 页面具有一定的异步特性，且 WebDriver 不会实时跟踪 DOM 的状态；所以，有些情况下，定位元素时，可能会出现「no such element」错误。
 
-下面看一段代码（[no_such_element.py](https://github.com/olzhy/python-exercises/blob/main/selenium-advanced-features/no_such_element.py)）：
+下面看一段代码（[no_such_element.py](https://github.com/leileiluoluo/python-exercises/blob/main/selenium-advanced-features/no_such_element.py)）：
 
 ```python
 from selenium import webdriver
@@ -126,7 +126,7 @@ driver.quit()
 
 显式等待，即程序暂停执行直至传递的条件满足。显式等待非常适合被用来做 WebDriver 与 DOM 的状态同步。
 
-上面抛出「no such element」错误的代码（[no_such_element.py](https://github.com/olzhy/python-exercises/blob/main/selenium-advanced-features/no_such_element.py)）可使用显式等待的方式改造为（[explicit_wait.py](https://github.com/olzhy/python-exercises/blob/main/selenium-advanced-features/explicit_wait.py)）：
+上面抛出「no such element」错误的代码（[no_such_element.py](https://github.com/leileiluoluo/python-exercises/blob/main/selenium-advanced-features/no_such_element.py)）可使用显式等待的方式改造为（[explicit_wait.py](https://github.com/leileiluoluo/python-exercises/blob/main/selenium-advanced-features/explicit_wait.py)）：
 
 ```python
 from selenium import webdriver
@@ -156,7 +156,7 @@ driver.quit()
 
 隐式等待是告诉 WebDriver 在查找元素时，若不存在，即轮询 DOM 一段时间。其一般在新建 WebDriver 时设置，对整个会话有效。
 
-上面抛出「no such element」错误的代码（[no_such_element.py](https://github.com/olzhy/python-exercises/blob/main/selenium-advanced-features/no_such_element.py)）可使用隐式等待的方式改造为（[implicit_wait.py](https://github.com/olzhy/python-exercises/blob/main/selenium-advanced-features/implicit_wait.py)）：
+上面抛出「no such element」错误的代码（[no_such_element.py](https://github.com/leileiluoluo/python-exercises/blob/main/selenium-advanced-features/no_such_element.py)）可使用隐式等待的方式改造为（[implicit_wait.py](https://github.com/leileiluoluo/python-exercises/blob/main/selenium-advanced-features/implicit_wait.py)）：
 
 ```python
 from selenium import webdriver
@@ -219,7 +219,7 @@ driver.find_element(By.XPATH, '//input[@name="wd"]')
 
 如下为 Selenium 官网提供的一个「[Web 表单示例页面](https://www.selenium.dev/selenium/web/web-form.html)」：
 
-![Selenium Web 表单示例页面](https://olzhy.github.io/static/images/uploads/2023/04/selenium-web-form.jpeg#center)
+![Selenium Web 表单示例页面](https://leileiluoluo.github.io/static/images/uploads/2023/04/selenium-web-form.jpeg#center)
 
 可以看到，在该页面左侧部分`Text input`输入框下有一个`Password`输入框。
 
@@ -310,7 +310,7 @@ driver.refresh()
 
 可使用 Selenium WebDriver 来与三种原生的消息弹窗（Alert、Confirm 和 Prompt）交互。
 
-下面，先看一下用于演示这三种弹窗的 HTML 代码（[alerts-test.html](https://github.com/olzhy/python-exercises/blob/main/selenium-advanced-features/alerts-test.html)）：
+下面，先看一下用于演示这三种弹窗的 HTML 代码（[alerts-test.html](https://github.com/leileiluoluo/python-exercises/blob/main/selenium-advanced-features/alerts-test.html)）：
 
 ```html
 <!DOCTYPE html>
@@ -357,7 +357,7 @@ driver.refresh()
 </html>
 ```
 
-接着，看一下测试如上 HTML 页面三种弹窗的 Python 代码（[alerts_test.py](https://github.com/olzhy/python-exercises/blob/main/selenium-advanced-features/alerts_test.py)）：
+接着，看一下测试如上 HTML 页面三种弹窗的 Python 代码（[alerts_test.py](https://github.com/leileiluoluo/python-exercises/blob/main/selenium-advanced-features/alerts_test.py)）：
 
 ```python
 from unittest import TestCase

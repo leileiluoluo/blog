@@ -1,6 +1,6 @@
 ---
 title: Istio 流量管理之流量镜像
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-12-29T14:06:34+08:00
 url: /posts/istio-mirroring.html
@@ -22,7 +22,7 @@ description: Istio流量管理之流量镜像 (Mirroring of Istio Traffic Manage
 
 本文使用 httpbin 样例来做测试，首先部署两个版本的 httpbin 服务，然后将请求流量都打到 v1，最后使用流量镜像功能将打到 v1 的流量同时拷贝一份到 v2。
 
-关于 Istio 安装等环境准备，请参阅“[Istio 安装使用](https://olzhy.github.io/posts/istio-get-started.html)”。
+关于 Istio 安装等环境准备，请参阅“[Istio 安装使用](https://leileiluoluo.github.io/posts/istio-get-started.html)”。
 
 ### 1 httpbin 样例部署
 

@@ -1,6 +1,6 @@
 ---
 title: LeetCode 198 入室抢劫者
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-07-25T10:58:34+00:00
 url: /posts/leetcode-house-robber.html
@@ -51,7 +51,7 @@ tags:
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/198_House_Robber/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/198_House_Robber/test.go)
 
 ```go
 func recusiveRob(nums []int, len int, table map[int]int) int {

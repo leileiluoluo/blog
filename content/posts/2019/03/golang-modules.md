@@ -1,6 +1,6 @@
 ---
 title: Golang Modules
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-03-10T04:20:54+00:00
 url: /posts/golang-modules.html
@@ -26,19 +26,19 @@ $ cd /tmp/hello
 然后初始化一个新的Module：
 
 ```shell
-$ go mod init github.com/olzhy/hello
+$ go mod init github.com/leileiluoluo/hello
 ```
 
 输出：
 
 ```
-go: creating new go.mod: module github.com/olzhy/hello
+go: creating new go.mod: module github.com/leileiluoluo/hello
 ```
 
 go.mod内容为：
 
 ```
-module github.com/olzhy/hello
+module github.com/leileiluoluo/hello
 
 go 1.12
 ```
@@ -51,7 +51,7 @@ package main
 
 import (
     "fmt"
-    "github.com/olzhy/quote"
+    "github.com/leileiluoluo/quote"
 )
 
 func main() {
@@ -64,22 +64,22 @@ build一下：
 
 ```
 $ go build
-go: finding github.com/olzhy/quote latest
-go: downloading github.com/olzhy/quote v0.0.0-20190510033103-5cb7d4598cfa
-go: extracting github.com/olzhy/quote v0.0.0-20190510033103-5cb7d4598cfa
+go: finding github.com/leileiluoluo/quote latest
+go: downloading github.com/leileiluoluo/quote v0.0.0-20190510033103-5cb7d4598cfa
+go: extracting github.com/leileiluoluo/quote v0.0.0-20190510033103-5cb7d4598cfa
 ```
 
 go.mod内容为：
 
 ```
-module github.com/olzhy/hello
+module github.com/leileiluoluo/hello
 
 go 1.12
 
-require github.com/olzhy/quote v0.0.0-20190510033103-5cb7d4598cfa
+require github.com/leileiluoluo/quote v0.0.0-20190510033103-5cb7d4598cfa
 ```
 
-可以看到，其会从`https://github.com/olzhy/quote`的`master`分支拉取最新提交`5cb7d4598cfa`。
+可以看到，其会从`https://github.com/leileiluoluo/quote`的`master`分支拉取最新提交`5cb7d4598cfa`。
   
 该依赖工程非Module管理模式，其仅有两个文件：
 
@@ -92,19 +92,19 @@ README.md
 
 ```
 $ go get -u
-go: finding github.com/olzhy/quote v1.0.0
-go: downloading github.com/olzhy/quote v1.0.0
-go: extracting github.com/olzhy/quote v1.0.0
+go: finding github.com/leileiluoluo/quote v1.0.0
+go: downloading github.com/leileiluoluo/quote v1.0.0
+go: extracting github.com/leileiluoluo/quote v1.0.0
 ```
 
 查看go.mod内容为：
 
 ```
-module github.com/olzhy/hello
+module github.com/leileiluoluo/hello
 
 go 1.12
 
-require github.com/olzhy/quote v1.0.0
+require github.com/leileiluoluo/quote v1.0.0
 ```
 
 如下为使用Golang Module后的日常工作流。
@@ -150,10 +150,10 @@ Module是一组相关Go package的集合，其作为一个单独的单元来版�
 
 模块由一组源文件树在根目录定义一个go.mod文件，模块源码可以位于`GOPATH`之外，有如下原语`module`，`require`，`replace`，`exclude`。
   
-如下为`github.com/olzhy/hello`模块的go.mod文件示例内容：
+如下为`github.com/leileiluoluo/hello`模块的go.mod文件示例内容：
 
 ```
-module github.com/olzhy/hello
+module github.com/leileiluoluo/hello
 
 require (
     github.com/some/dependency v1.2.3

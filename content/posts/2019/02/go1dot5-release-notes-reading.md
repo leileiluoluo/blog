@@ -1,6 +1,6 @@
 ---
 title: Go 1.5 Release Notes 研读
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-02-18T08:58:57+00:00
 url: /posts/go1dot5-release-notes-reading.html

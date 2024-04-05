@@ -1,6 +1,6 @@
 ---
 title: Java 并发编程基础
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-06-07T08:00:00+08:00
 url: /posts/concurrent-programming-with-java.html
@@ -26,7 +26,7 @@ description: Java 并发编程基础，涉及并发与并行的区别、进程�
 
 下图展示了并发与并行在处理任务上的不同：
 
-![并发与并行对比](https://olzhy.github.io/static/images/uploads/2023/06/concurrency-vs-parallelism.jpg#center)
+![并发与并行对比](https://leileiluoluo.github.io/static/images/uploads/2023/06/concurrency-vs-parallelism.jpg#center)
 
 {{% center %}}（并发与并行对比 - 引用自 [Baeldung](https://www.baeldung.com/cs/concurrency-vs-parallelism)）{{% /center %}}
 

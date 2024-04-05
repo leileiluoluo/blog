@@ -1,6 +1,6 @@
 ---
 title: Go 1.7 Release Notes 要点整理
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-04-27T07:03:13+00:00
 url: /posts/go1dot7-release-notes.html
@@ -115,7 +115,7 @@ B=1
 B=2
 tear down
 PASS
-ok      github.com/olzhy/test   0.006s
+ok      github.com/leileiluoluo/test   0.006s
 ```
 
 采用如下命令可以指定运行TestSub*测试的A组测试。
@@ -130,7 +130,7 @@ A=1
 A=2
 tear down
 PASS
-ok      github.com/olzhy/test   0.005s
+ok      github.com/leileiluoluo/test   0.005s
 ```
 
 > 参考资料

@@ -1,6 +1,6 @@
 ---
 title: Go 1.6 Release Notes 要点整理
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-04-26T03:00:41+00:00
 url: /posts/go1dot6-release-notes.html
@@ -74,21 +74,21 @@ Write at 0x00c000080000 by goroutine 6:
   runtime.mapassign_fast64()
       /usr/local/go/src/runtime/map_fast64.go:92 +0x0
   main.main.func1()
-      /Users/larry/Documents/workspace/go/project/src/github.com/olzhy/test/test.go:13 +0x52
+      /Users/larry/Documents/workspace/go/project/src/github.com/leileiluoluo/test/test.go:13 +0x52
 
 Previous write at 0x00c000080000 by goroutine 5:
   runtime.mapassign_fast64()
       /usr/local/go/src/runtime/map_fast64.go:92 +0x0
   main.main.func1()
-      /Users/larry/Documents/workspace/go/project/src/github.com/olzhy/test/test.go:13 +0x52
+      /Users/larry/Documents/workspace/go/project/src/github.com/leileiluoluo/test/test.go:13 +0x52
 
 Goroutine 6 (running) created at:
   main.main()
-      /Users/larry/Documents/workspace/go/project/src/github.com/olzhy/test/test.go:12 +0xcd
+      /Users/larry/Documents/workspace/go/project/src/github.com/leileiluoluo/test/test.go:12 +0xcd
 
 Goroutine 5 (finished) created at:
   main.main()
-      /Users/larry/Documents/workspace/go/project/src/github.com/olzhy/test/test.go:12 +0xcd
+      /Users/larry/Documents/workspace/go/project/src/github.com/leileiluoluo/test/test.go:12 +0xcd
 ==================
 Found 1 data race(s)
 exit status 66

@@ -1,6 +1,6 @@
 ---
 title: LeetCode 1008 以先序遍历构建二叉搜索树
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-11-17T09:24:12+00:00
 url: /posts/leetcode-construct-binary-search-tree-from-preorder-traversal.html
@@ -57,7 +57,7 @@ c）递归调用构建函数，直至构建完成，返回整个二叉搜索树�
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/1008_Construct_Binary_Search_Tree_from_Preorder_Traversal/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/1008_Construct_Binary_Search_Tree_from_Preorder_Traversal/test.go)
 
 ```Golang
 func bstFromPreorder(preorder []int) *TreeNode {

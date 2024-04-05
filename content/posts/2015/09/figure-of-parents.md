@@ -1,6 +1,6 @@
 ---
 title: 父母的身影
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2015-09-19T00:31:25+00:00
 url: /posts/figure-of-parents.html

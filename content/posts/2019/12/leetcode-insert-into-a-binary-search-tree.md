@@ -1,6 +1,6 @@
 ---
 title: LeetCode 701 二叉搜索树插入
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-12-29T10:11:09+00:00
 url: /posts/leetcode-insert-into-a-binary-search-tree.html
@@ -67,7 +67,7 @@ tags:
 
 **3 Golang实现代码**
   
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/701_Insert_into_a_Binary_Search_Tree/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/701_Insert_into_a_Binary_Search_Tree/test.go)
 
 ```Golang
 func insertIntoBST(root *TreeNode, val int) *TreeNode {

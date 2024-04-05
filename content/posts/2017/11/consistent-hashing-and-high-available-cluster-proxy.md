@@ -1,6 +1,6 @@
 ---
 title: 一致性哈希算法与高可用集群代理
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2017-11-30T13:56:51+00:00
 url: /posts/consistent-hashing-and-high-available-cluster-proxy.html
@@ -25,11 +25,11 @@ tags:
 
 一致性哈希算法是将每个Node节点映射到同一个圆上。将各Node的key采用hash计算，可得到一个整数数组。将该数组排序后，首尾相连即是一个圆。如下图所示，Node的key分布在圆的不同弧段上。同理，若有一请求key，hash后落入该圆的某一弧段（下图三角点所示），顺时针方向寻得离其最近的节点即为其服务节点（下图Node2）。这样每个节点覆盖了圆上从上一节点到其本身的一段弧段区间。如某一节点失效，之前落入其弧段区间的请求即会顺时针移到与其相邻的节点（下图如Node2失效，之前落入Node3至Node2弧段的请求会落入Node1）。而未落入失效弧段区间的节点则不受影响（之前落入Node2至Node3弧段的请求，当Node2失效后不受影响）。增加节点的场景与此类似，新的节点承载一段新区间，这样，落入失效节点至新节点弧段的请求会被新节点所承载。
 
-![](https://olzhy.github.io/static/images/uploads/2017/11/consistent-hashing-003.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2017/11/consistent-hashing-003.png)
   
 在节点固定的情况下，为了增加节点在圆上分布的均匀性与分散性，可以设置节点的replicas（副本数）。下图将replicas设置为2，各节点承载的弧段范围已更加精细且于整体而言分布更加分散。所以适当调节replicas参数可以提高算法的均衡性。
 
-![](https://olzhy.github.io/static/images/uploads/2017/11/consistent-hashing-004.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2017/11/consistent-hashing-004.png)
 
 **2）Golang一致性哈希算法实现代码**
 
@@ -128,7 +128,7 @@ func hash(key string) int {
 
 从图可知，节点虽少（3个），但扩大副本量后，key的分布已具有一定的均匀性与分散性，外部key请求的最终落地节点于整体服务节点而言也是比较均匀的。
 
-![](https://olzhy.github.io/static/images/uploads/2017/11/consistent-hashing.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2017/11/consistent-hashing.png)
 
 **4）Golang高可用集群代理代码**
 

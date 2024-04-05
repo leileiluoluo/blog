@@ -1,6 +1,6 @@
 ---
 title: LeetCode 946 校验栈序列
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-06-08T15:20:40+00:00
 url: /posts/leetcode-validate-stack-sequences.html
@@ -67,7 +67,7 @@ c）若对popped的某次循环，pop与栈顶元素不相等且pushed序列已�
 
 **3 Golang实现代码**
   
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/946_Validate_Stack_Sequences/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/946_Validate_Stack_Sequences/test.go)
 
 ```go
 type stack struct {

@@ -1,6 +1,6 @@
 ---
 title: 忘记就意味着背叛
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2014-03-19T08:21:17+00:00
 url: /posts/fogetting-past-means-betrayal.html

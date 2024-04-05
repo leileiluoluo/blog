@@ -1,6 +1,6 @@
 ---
 title: LeetCode 73 矩阵置零
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-01-04T03:40:09+00:00
 url: /posts/leetcode-set-matrix-zeroes.html
@@ -95,7 +95,7 @@ c) 你可以设计一个常数空间的解决方案吗？
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/73_Set_Matrix_Zeroes/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/73_Set_Matrix_Zeroes/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/73_Set_Matrix_Zeroes/test.go" target="_blank" rel="noopener">https://github.com/leileiluoluo/leetcode/blob/master/73_Set_Matrix_Zeroes/test.go</a>
 
 ```go
 func setZeroes(matrix [][]int)  {  

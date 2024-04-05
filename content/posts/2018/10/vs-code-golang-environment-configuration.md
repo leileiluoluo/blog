@@ -1,6 +1,6 @@
 ---
 title: VS Code Golang环境搭建
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-10-27T12:53:55+00:00
 url: /posts/vs-code-golang-environment-configuration.html

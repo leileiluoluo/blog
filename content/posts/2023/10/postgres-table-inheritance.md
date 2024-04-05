@@ -1,6 +1,6 @@
 ---
 title: PostgreSQL 表继承使用详解
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-10-20T08:00:00+08:00
 url: /posts/postgres-table-inheritance.html

@@ -1,6 +1,6 @@
 ---
 title: LeetCode 856 括号的分值
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-11-03T15:07:17+00:00
 url: /posts/leetcode-score-of-parentheses.html
@@ -69,7 +69,7 @@ tags:
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/856_Score_Of_Parentheses/test.go" rel="noopener" target="_blank">https://github.com/olzhy/leetcode/blob/master/856_Score_Of_Parentheses/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/856_Score_Of_Parentheses/test.go" rel="noopener" target="_blank">https://github.com/leileiluoluo/leetcode/blob/master/856_Score_Of_Parentheses/test.go</a>
 
 ```go
 func scoreOfParentheses(s string) int {  

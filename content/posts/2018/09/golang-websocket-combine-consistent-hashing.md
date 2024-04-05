@@ -1,6 +1,6 @@
 ---
 title: Golang websocket结合一致性哈希算法构建高并发推送服务
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-09-02T04:08:45+00:00
 url: /posts/golang-websocket-combine-consistent-hashing.html
@@ -21,11 +21,11 @@ web应用中，常有业务状态需要实时更新的场景。如一个较长�
   
 本文采用golang实现一个长连接服务，对外提供两个接口，一个是基于http的rest消息发送接口，一个是基于websocket的cient接入接口，如下图所示。
 
-![](https://olzhy.github.io/static/images/uploads/2018/09/comet-api.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2018/09/comet-api.png)
   
 为使前端的接入更简单，从建立连接到用户关闭浏览器，中间前端无须发送消息来告知服务器client是否下线。我们将检测放在后台，后台采用定时心跳方式保持对client的监听，若心跳失败，则将该client剔除。如下图所示。
 
-![](https://olzhy.github.io/static/images/uploads/2018/09/comet-heartbeat.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2018/09/comet-heartbeat.png)
 
 **3 golang实现代码**
   
@@ -158,13 +158,13 @@ func (c *Client) Listen() {
 
 3.2 完整代码
   
-<a href="https://github.com/olzhy/comet" rel="noopener" target="_blank">https://github.com/olzhy/comet</a>
+<a href="https://github.com/leileiluoluo/comet" rel="noopener" target="_blank">https://github.com/leileiluoluo/comet</a>
 
 **4 一致性哈希包装**
   
 考虑到单服务的同时在线人数支持是有限的，所以在其上层用一致性哈希算法包装。这样同一user_id建立连接会打到同一台后台服务器，给此user_id发送消息也会打到同样的服务器。这样后台部署多个comet服务形成一个集群即可支撑高并发消息推送场景。如下图所示，最外层nginx挂接公网域名，对外提供基于wss的消息接收接口及基于http的消息发送接口。中间采用haproxy对user_id参数作一致性哈希转发，对同一user_id的操作会打到同一台comet server。底层扩展为多台comet server即可构建一个高并发的消息推送服务。
 
-![](https://olzhy.github.io/static/images/uploads/2018/09/comet-with-nginx-1.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2018/09/comet-with-nginx-1.png)
 
 &nbsp;
 

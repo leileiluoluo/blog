@@ -1,6 +1,6 @@
 ---
 title: Golang方法调用值拷贝与引用拷贝
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-10-28T05:27:29+00:00
 url: /posts/golang-method-calling-value-copy-or-reference-copy.html

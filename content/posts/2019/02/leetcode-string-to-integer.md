@@ -1,6 +1,6 @@
 ---
 title: LeetCode 8 字符串转整数
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-02-22T08:18:51+00:00
 url: /posts/leetcode-string-to-integer.html
@@ -83,7 +83,7 @@ b）假定运行环境存储整数范围属于[−231, 231−1]，即32位有符
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/8_String_To_Integer/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/8_String_To_Integer/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/8_String_To_Integer/test.go" target="_blank" rel="noopener">https://github.com/leileiluoluo/leetcode/blob/master/8_String_To_Integer/test.go</a>
 
 ```go
 const (

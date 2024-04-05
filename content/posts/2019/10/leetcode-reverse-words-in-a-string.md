@@ -1,6 +1,6 @@
 ---
 title: LeetCode 151 将字符串中的单词翻转
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-10-27T08:59:49+00:00
 url: /posts/leetcode-reverse-words-in-a-string.html
@@ -61,7 +61,7 @@ b）若i对应的当前字符非空格，则判断是否抵达头部，若抵达
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/151_Reverse_Words_in_a_String/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/151_Reverse_Words_in_a_String/test.go)
 
 ```Go
 func reverseWords(s string) string {

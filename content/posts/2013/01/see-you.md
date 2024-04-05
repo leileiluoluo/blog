@@ -1,6 +1,6 @@
 ---
 title: 从北楼看见你
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2013-01-14T09:00:54+00:00
 url: /posts/see-you.html

@@ -1,6 +1,6 @@
 ---
 title: Spring Boot 如何使用 Validation 包进行输入参数校验？
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2024-01-08T08:00:00+08:00
 url: /posts/spring-boot-input-validation.html
@@ -526,7 +526,7 @@ public class User {
 { "code": "validation_failed", "description": "testField invalid" }
 ```
 
-综上，本文以示例代码的方式详细介绍了 `spring-boot-starter-validation` 包的使用。文中涉及的主要代码已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/spring-boot-validation-demo)，欢迎关注或 Fork。
+综上，本文以示例代码的方式详细介绍了 `spring-boot-starter-validation` 包的使用。文中涉及的主要代码已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-boot-validation-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >

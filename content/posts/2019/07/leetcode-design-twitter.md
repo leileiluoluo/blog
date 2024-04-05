@@ -1,6 +1,6 @@
 ---
 title: LeetCode 355 设计推特
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-07-22T13:42:26+00:00
 url: /posts/leetcode-design-twitter.html
@@ -82,7 +82,7 @@ Unfollow：用用户a取消关注b，则将a从b的fans列表移除，还要从a
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/355_Design_Twitter/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/355_Design_Twitter/test.go)
 
 ```go
 type Twitter struct {

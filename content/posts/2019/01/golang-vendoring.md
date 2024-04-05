@@ -1,6 +1,6 @@
 ---
 title: Golang vendor文件夹使用
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-01-21T07:00:19+00:00
 url: /posts/golang-vendoring.html
@@ -128,7 +128,7 @@ b) 尽量将vendor依赖包结构扁平化，不要vendor套vendor。
   
 如下示例代码演示vendor扁平化使用。
   
-main.go位于$GOPATH/src/github.com/olzhy/test下。
+main.go位于$GOPATH/src/github.com/leileiluoluo/test下。
 
 ```
 package main
@@ -145,7 +145,7 @@ import (
 ...
 ```
 
-$GOPATH/src/github.com/olzhy/test目录树。
+$GOPATH/src/github.com/leileiluoluo/test目录树。
 
 ```
 ├─ main.go

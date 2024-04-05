@@ -1,6 +1,6 @@
 ---
 title: 如何对现代大型机（Mainframe）做 DevOps？
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-03-05T08:00:00+08:00
 url: /posts/devops-for-modern-mainframe.html

@@ -1,6 +1,6 @@
 ---
 title: LeetCode 19 移除链表末尾起第N个节点
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-02-23T10:45:31+00:00
 url: /posts/leetcode-remove-nth-node-from-end-of-list.html
@@ -39,7 +39,7 @@ tags:
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/19_Remove_Nth_Node_From_End_Of_List/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/19_Remove_Nth_Node_From_End_Of_List/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/19_Remove_Nth_Node_From_End_Of_List/test.go" target="_blank" rel="noopener">https://github.com/leileiluoluo/leetcode/blob/master/19_Remove_Nth_Node_From_End_Of_List/test.go</a>
 
 ```go
 func removeNthFromEnd(head *ListNode, n int) *ListNode {

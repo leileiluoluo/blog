@@ -1,6 +1,6 @@
 ---
 title: Istio 流量管理之 Ingress Gateway
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2021-01-01T08:07:25+08:00
 url: /posts/istio-ingress-gateways.html
@@ -20,7 +20,7 @@ description: Istio流量管理之Ingress Gateway (Ingress Gateways of Istio Traf
 
 Istio Ingress Gateway 是允许外部流量进入 Istio 服务网格的边缘服务。其比 Kubernetes Ingress 更具扩展性。且使用 Istio Ingress Gateway，使得 Istio 对于入口流量同样具有策略控制能力及可观察性。
 
-本文将使用 Istio 安装目录自带的 httpbin 样例来演示如何配置 Gateway 来实现外部访问。关于 Istio 安装等环境准备，请参阅“[Istio 安装使用](https://olzhy.github.io/posts/istio-get-started.html)”。
+本文将使用 Istio 安装目录自带的 httpbin 样例来演示如何配置 Gateway 来实现外部访问。关于 Istio 安装等环境准备，请参阅“[Istio 安装使用](https://leileiluoluo.github.io/posts/istio-get-started.html)”。
 
 ### 1 httpbin 样例部署
 

@@ -1,6 +1,6 @@
 ---
 title: Azure Database for PostgreSQL 学习总结
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2022-03-02T08:09:58+08:00
 url: /posts/azure-postgres.html
@@ -27,7 +27,7 @@ Azure Database for PostgreSQL 提供：
 - 丰富的监控和自动化特质；
 - 行业领先的支持体验。
 
-![](https://olzhy.github.io/static/images/uploads/2022/03/overview-what-is-azure-postgres.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2022/03/overview-what-is-azure-postgres.png#center)
 
 这些功能几乎不需要管理，所有功能无需额外费用即可提供。使您能够专注于应用程序开发并加快面市时间，而不是将宝贵的时间和资源花在管理虚拟机和基础架构上。
 
@@ -71,7 +71,7 @@ Azure Database for PostgreSQL 的单服务器部署：
 
   防火墙根据每个请求的原始 IP 地址来判断其是否有访问权限。您需要通过 Azure 门户或 Azure CLI 在 Server 端设置防火墙规则（允许的 IP 地址范围），同一逻辑服务器下的所有数据库都遵循这些规则。请使用订阅所有者或订阅贡献者创建防火墙规则。
 
-  ![](https://olzhy.github.io/static/images/uploads/2022/03/1-firewall-concept.png#center)
+  ![](https://leileiluoluo.github.io/static/images/uploads/2022/03/1-firewall-concept.png#center)
 
 您可以选择强制开启 TLS 来加强安全性。
 
@@ -113,7 +113,7 @@ PostgreSQL 超级用户权限分配给了 azure_superuser，属托管服务持�
 
 Azure Database for PostgreSQL 灵活服务器是一种完全托管的数据库服务，旨在为数据库管理功能和配置设置提供更精细的控制和灵活性。该服务提供了更多的灵活性和基于用户需求的服务器配置定制。灵活服务器架构允许用户将数据库引擎与客户端服务置于同一位置以降低延迟，在单个可用区及跨多个可用区选择高可用性。灵活服务器还提供更好的成本优化控制，能够启停您的服务器和可突发计算层，非常适合不需要持续完整计算容量的工作负载。该服务目前支持 PostgreSQL 11、12 和 13 社区版本。该服务目前在绝大多数 Azure 地域均可用。
 
-![](https://olzhy.github.io/static/images/uploads/2022/03/overview-flexible-server.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2022/03/overview-flexible-server.png#center)
 
 灵活服务器非常适合如下几种情况：
 
@@ -133,11 +133,11 @@ Azure Database for PostgreSQL 灵活服务器是一种完全托管的数据库�
 
 下图显示了 VM 和存储故障的过渡：
 
-![](https://olzhy.github.io/static/images/uploads/2022/03/overview-azure-postgres-flex-virtualmachine.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2022/03/overview-azure-postgres-flex-virtualmachine.png#center)
 
 如果配置了区域冗余高可用性，该服务将在同一 Azure 地域内的可用区域中预配和维护一个热备用服务器。源服务器上的数据变化同步复制到备服务器，保证数据零丢失。借助区域冗余高可用性，一旦触发了计划内或计划外的故障转移事件，备用服务器将立即上线处理请求事务。这允许服务在支持同一个 Region 内的多个可用性区域的故障中恢复，如下图所示。
 
-![](https://olzhy.github.io/static/images/uploads/2022/03/concepts-zone-redundant-high-availability-architecture.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2022/03/concepts-zone-redundant-high-availability-architecture.png#center)
 
 **使用托管维护窗口进行自动修补**
 
@@ -274,7 +274,7 @@ Table Colocation 意味着将相关信息一起存储在相同的节点上。这
 
 如果某行的分布列对应的值哈希运算后落在一个分片的哈希范围内，则将该行存储在该分片中。具有相同哈希范围的分片总是放在同一个节点上。具有相等分布列值的行始终位于同一节点的不同分片表上。
 
-![](https://olzhy.github.io/static/images/uploads/2022/03/colocation-shards.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2022/03/colocation-shards.png#center)
 
 考虑如下可能是 SaaS 多租户场景的 Web 分析系统用到的表：
 
@@ -343,7 +343,7 @@ GROUP BY page_id;
 
   运行这两个查询会查阅分散在各个节点上的分片中的数据。
 
-  ![](https://olzhy.github.io/static/images/uploads/2022/03/colocation-inefficient-queries.png#center)
+  ![](https://leileiluoluo.github.io/static/images/uploads/2022/03/colocation-inefficient-queries.png#center)
 
   之后，需要应用程序整合这两个步骤的结果。
 
@@ -383,7 +383,7 @@ GROUP BY page_id;
 
   由于对 tenant_id 进行过滤和连接，大规模（Citus）集群知道整个查询可以通过使用包含该特定租户数据的同位置分片集来响应。单个 PostgreSQL 节点可以在一个步骤中响应查询。
 
-  ![](https://olzhy.github.io/static/images/uploads/2022/03/colocation-better-query.png#center)
+  ![](https://leileiluoluo.github.io/static/images/uploads/2022/03/colocation-better-query.png#center)
 
   在某些情况下，必须修改查询和表模式以将租户 ID 包含在唯一约束和连接条件中。这种修改相对来说比较简单。
 

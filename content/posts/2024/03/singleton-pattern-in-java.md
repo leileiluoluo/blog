@@ -1,6 +1,6 @@
 ---
 title: 深入理解 Java 中的单例模式
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2024-03-24T08:00:00+08:00
 url: /posts/singleton-pattern-in-java.html
@@ -260,7 +260,7 @@ public enum SingletonEnum {
 }
 ```
 
-综上，本文介绍了 Java 中单例模式的概念和各种单例类的实现，并比较了各种实现方式的优缺点，然后还介绍了破坏一个单例类的方法，最后介绍了单例的终极实现方式 —— 单元素枚举类。本文涉及的所有示例代码均已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/singleton-pattern-demo/src/test/java)，欢迎关注或 Fork。
+综上，本文介绍了 Java 中单例模式的概念和各种单例类的实现，并比较了各种实现方式的优缺点，然后还介绍了破坏一个单例类的方法，最后介绍了单例的终极实现方式 —— 单元素枚举类。本文涉及的所有示例代码均已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/singleton-pattern-demo/src/test/java)，欢迎关注或 Fork。
 
 > 参考资料
 >

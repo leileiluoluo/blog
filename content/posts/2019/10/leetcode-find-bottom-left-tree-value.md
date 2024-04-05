@@ -1,6 +1,6 @@
 ---
 title: LeetCode 513 找出二叉树左下角节点的值
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-10-31T11:17:36+00:00
 url: /posts/leetcode-find-bottom-left-tree-value.html
@@ -55,7 +55,7 @@ tags:
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/513_Find_Bottom_Left_Tree_Value/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/513_Find_Bottom_Left_Tree_Value/test.go)
 
 ```Go
 func findBottomLeftValue(root *TreeNode) int {

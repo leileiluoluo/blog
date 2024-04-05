@@ -1,6 +1,6 @@
 ---
 title: LeetCode 451 以出现频次排序字符
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-10-30T12:27:55+00:00
 url: /posts/leetcode-sort-characters-by-frequency.html
@@ -50,7 +50,7 @@ c）将出现次数数组倒序排好，然后遍历该数组，针对每个出�
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/451_Sort_Characters_By_Frequency/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/451_Sort_Characters_By_Frequency/test.go)
 
 ```Go
 func frequencySort(s string) string {

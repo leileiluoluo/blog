@@ -1,6 +1,6 @@
 ---
 title: LeetCode 24 成对交换节点
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-02-24T10:39:25+00:00
 url: /posts/leetcode-swap-nodes-in-pairs.html
@@ -33,11 +33,11 @@ tags:
   
 如图所示，使用三个指针p、q、r指向三个相邻的节点，q.Next = p; p.Next = r.Next即完成一次交换。
   
-![](https://olzhy.github.io/static/images/uploads/2019/02/swap-nodes-in-pair.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2019/02/swap-nodes-in-pair.png)
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/24_Swap_Nodes_In_Pairs/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/24_Swap_Nodes_In_Pairs/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/24_Swap_Nodes_In_Pairs/test.go" target="_blank" rel="noopener">https://github.com/leileiluoluo/leetcode/blob/master/24_Swap_Nodes_In_Pairs/test.go</a>
 
 ```go
 func swapPairs(head *ListNode) *ListNode {

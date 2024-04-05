@@ -1,6 +1,6 @@
 ---
 title: 光明磊落，一身正气
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2013-03-21T08:54:47+00:00
 url: /posts/light.html

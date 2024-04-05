@@ -1,5 +1,5 @@
 ############################ Default configuration #########################
-baseURL = "https://olzhy.github.io/"
+baseURL = "https://leileiluoluo.github.io/"
 languageCode = "zh-cn"
 # site title 
 title = "磊磊落落"
@@ -186,7 +186,7 @@ link = "/tags/"
 title = "文章标签"
 [[params.social]]
 icon = "ti-github" # themify icon pack https://themify.me/themify-icons
-link = "https://github.com/olzhy"
+link = "https://github.com/leileiluoluo"
 title = "我的 GitHub"
 [[params.social]]
 icon = "ti-rss" # themify icon pack https://themify.me/themify-icons

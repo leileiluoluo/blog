@@ -1,6 +1,6 @@
 ---
 title: LeetCode 224 简单计算器
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-11-03T10:16:12+00:00
 url: /posts/leetcode-basic-calculator.html
@@ -59,7 +59,7 @@ tags:
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/224_Basic_Calculator/test.go" rel="noopener" target="_blank">https://github.com/olzhy/leetcode/blob/master/224_Basic_Calculator/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/224_Basic_Calculator/test.go" rel="noopener" target="_blank">https://github.com/leileiluoluo/leetcode/blob/master/224_Basic_Calculator/test.go</a>
 
 ```go
 func calc(chars []rune, start, end int) int {  

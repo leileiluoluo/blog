@@ -1,6 +1,6 @@
 ---
 title: 往事如烟
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2017-02-07T12:24:56+00:00
 url: /posts/past-like-wind.html

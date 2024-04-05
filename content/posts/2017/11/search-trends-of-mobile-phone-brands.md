@@ -1,6 +1,6 @@
 ---
 title: 手机品牌搜索走势图
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2017-11-28T13:42:49+00:00
 url: /posts/search-trends-of-mobile-phone-brands.html
@@ -58,7 +58,7 @@ if '__main__' == __name__:
 
 **3）结果输出**
 
-![](https://olzhy.github.io/static/images/uploads/2017/11/mobile-brands-search-trends.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2017/11/mobile-brands-search-trends.png)
 
 &nbsp;
 

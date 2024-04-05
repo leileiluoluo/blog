@@ -1,6 +1,6 @@
 ---
 title: 观《肖申克的救赎》
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-03-11T02:45:15+00:00
 url: /posts/watching-the-shawshank-redemption.html

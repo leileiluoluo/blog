@@ -1,6 +1,6 @@
 ---
 title: 古老城墙
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2015-12-01T00:24:32+00:00
 url: /posts/ancient-city-wall.html

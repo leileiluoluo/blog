@@ -1,6 +1,6 @@
 ---
 title: DP-900：Azure 数据基础第一部分之核心数据概念
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2022-10-24T16:30:00+08:00
 url: /posts/dp-900-part1-concepts.html
@@ -31,7 +31,7 @@ description: Azure 数据基础之核心数据概念。包括核心数据概念�
 
 例如，下图展示了 Customer 和 Product 数据实体的表格化表示。
 
-![数据实体的表格化表示](https://olzhy.github.io/static/images/uploads/2022/10/2-tabular-diagram.png#center)
+![数据实体的表格化表示](https://leileiluoluo.github.io/static/images/uploads/2022/10/2-tabular-diagram.png#center)
 
 结构化数据通常存储在数据库中，其中多个表可以通过使用关系模型中的键值来相互引用。
 
@@ -209,7 +209,7 @@ XML 使用括在尖括号 (`<../>`) 中的标签来定义元素和属性，示�
 
 关系型数据库通常用于存储和查询结构化数据。数据存储在代表实体的表中，例如客户、产品或销售订单。实体的每个实例都分配有一个唯一标识它的主键，这些键用于引用其它表中的实体实例。例如，可以在销售订单记录中引用客户的主键来指示哪个客户下的订单。使用键来引用数据实体可以使关系型数据库变得规范化，这可以避免重复值。例如，单个客户的详细信息仅存储一次，而不是针对客户下的每个销售订单都存储一次。这些表是使用基于 ANSI 标准的 SQL 语言 (Structured Query Language，结构化查询语言) 来管理和查询的，因此在多个数据库系统中是类似的。
 
-![关系型数据库](https://olzhy.github.io/static/images/uploads/2022/10/relational-database.png#center)
+![关系型数据库](https://leileiluoluo.github.io/static/images/uploads/2022/10/relational-database.png#center)
 
 #### 非关系型数据库
 
@@ -219,19 +219,19 @@ XML 使用括在尖括号 (`<../>`) 中的标签来定义元素和属性，示�
 
 - 键值数据库，其中每条记录都由唯一键和关联值组成，可以是任何格式。
 
-![键值存储](https://olzhy.github.io/static/images/uploads/2022/10/key-value-store.png#center)
+![键值存储](https://leileiluoluo.github.io/static/images/uploads/2022/10/key-value-store.png#center)
 
 - 文档数据库，这是一种特定形式的键值数据库，其中值是 JSON 文本（系统已对其进行了优化以解析和查询）。
 
-![文档数据库](https://olzhy.github.io/static/images/uploads/2022/10/document-store.png#center)
+![文档数据库](https://leileiluoluo.github.io/static/images/uploads/2022/10/document-store.png#center)
 
 - 列族数据库，它存储包含行和列的表格数据，但您可以将列划分为称为列族的组。每个列族包含一组逻辑上相关的列。
 
-![列族数据库](https://olzhy.github.io/static/images/uploads/2022/10/column-family-store.png#center)
+![列族数据库](https://leileiluoluo.github.io/static/images/uploads/2022/10/column-family-store.png#center)
 
 - 图数据库，将实体存储为具有连接的节点，以定义它们之间的关系。
 
-![图数据库](https://olzhy.github.io/static/images/uploads/2022/10/graph.png#center)
+![图数据库](https://leileiluoluo.github.io/static/images/uploads/2022/10/graph.png#center)
 
 ### 1.4 事务数据处理
 
@@ -239,7 +239,7 @@ XML 使用括在尖括号 (`<../>`) 中的标签来定义元素和属性，示�
 
 交易系统通常是大容量的，有时在一天内处理数百万笔交易。正在处理的数据必须可以非常快速地访问。事务系统执行的工作通常称为 OLTP (Online Transactional Processing，联机事务处理)。
 
-![事务处理](https://olzhy.github.io/static/images/uploads/2022/10/transactional-processing.png#center)
+![事务处理](https://leileiluoluo.github.io/static/images/uploads/2022/10/transactional-processing.png#center)
 
 OLTP 解决方案依赖于数据库系统，其中数据存储针对读取和写入操作进行了优化，以支持创建、检索、更新和删除数据记录（通常称为 CRUD 操作）的事务工作负载。这些操作使用了事务，以确保存储在数据库中数据的完整性。为此，OLTP 系统确保了支持所谓 ACID 语义的事务：
 
@@ -259,7 +259,7 @@ OLTP 系统通常用于支持处理业务数据的实时应用程序，通常称
 
 分析处理系统的具体细节可能因解决方案而异，但企业级分析系统的通用架构如下图所示：
 
-![分析处理](https://olzhy.github.io/static/images/uploads/2022/10/analytical-processing.png#center)
+![分析处理](https://leileiluoluo.github.io/static/images/uploads/2022/10/analytical-processing.png#center)
 
 - 数据文件可以存储在中央数据湖中以供分析。
 - 提取、转换和加载 (ETL) 过程将数据从文件和 OLTP 数据库复制到针对读取活动进行了优化的数据仓库中。通常，数据仓库模式会基于包含您要分析的数值（例如，销售额）的事实表，以及表示您要衡量它们的实体（例如，客户或产品）的相关维度表。

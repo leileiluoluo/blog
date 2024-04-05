@@ -1,6 +1,6 @@
 ---
 title: LeetCode 17 求电话号码的字母组合
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-11-07T13:22:54+00:00
 url: /posts/leetcode-letter-combinations-of-a-phone-number.html
@@ -17,7 +17,7 @@ tags:
   
 给定一个包含数字[2-9]的字符串（闭区间），求数字可以代表的所有可能的字母组合。数字与字母的映射关系与手机号码簿相同（如下图），注意数字1未映射任何字母。
 
-![](https://olzhy.github.io/static/images/uploads/2018/11/mapping-of-phone-number-and-letters.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2018/11/mapping-of-phone-number-and-letters.png)
 
 例子：
 
@@ -37,7 +37,7 @@ tags:
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/17_Letter_Combinations_Of_A_Phone_Number/test.go" rel="noopener" target="_blank">https://github.com/olzhy/leetcode/blob/master/17_Letter_Combinations_Of_A_Phone_Number/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/17_Letter_Combinations_Of_A_Phone_Number/test.go" rel="noopener" target="_blank">https://github.com/leileiluoluo/leetcode/blob/master/17_Letter_Combinations_Of_A_Phone_Number/test.go</a>
 
 ```go
 package main  

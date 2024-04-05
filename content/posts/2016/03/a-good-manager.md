@@ -1,6 +1,6 @@
 ---
 title: 一个好的管理者
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2016-03-12T04:21:39+00:00
 url: /posts/a-good-manager.html

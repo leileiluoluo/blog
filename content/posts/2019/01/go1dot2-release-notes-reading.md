@@ -1,6 +1,6 @@
 ---
 title: Go 1.2 Release Notes 研读
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-01-21T02:23:08+00:00
 url: /posts/go1dot2-release-notes-reading.html

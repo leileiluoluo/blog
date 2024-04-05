@@ -1,6 +1,6 @@
 ---
 title: 'LeetCode  338 计算二进制数中1的个数'
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-11-01T11:40:31+00:00
 url: /posts/leetcode-counting-binary-bits.html
@@ -76,7 +76,7 @@ func countBits(num int) []int {
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/338_Couting_Bits/test.go" rel="noopener" target="_blank">https://github.com/olzhy/leetcode/blob/master/338_Couting_Bits/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/338_Couting_Bits/test.go" rel="noopener" target="_blank">https://github.com/leileiluoluo/leetcode/blob/master/338_Couting_Bits/test.go</a>
 
 ```go
 func countBinaryOneInHexUnit(n int) int {  
@@ -141,8 +141,8 @@ $ go test -test.bench=".*"
 
 goos: darwin  
 goarch: amd64  
-pkg: github.com/olzhy/test  
+pkg: github.com/leileiluoluo/test  
 BenchmarkCountBits-4           1        4618146566 ns/op  
 PASS  
-ok      github.com/olzhy/test   4.670s  
+ok      github.com/leileiluoluo/test   4.670s  
 ```

@@ -1,6 +1,6 @@
 ---
 title: 《机器学习基石》课程学习笔记
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-06-23T05:25:30+00:00
 url: /posts/machine-learning-foundation-notes.html
@@ -68,7 +68,7 @@ tags:
 
 根据如上特征值进行匹配度计算。
 
-![](https://olzhy.github.io/static/images/uploads/2020/06/1-machine-learning-foundation-a-possible-ml-solution-for-recommender-system.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/06/1-machine-learning-foundation-a-possible-ml-solution-for-recommender-system.png#center)
 
 #### 1.4 学习的组成部分
 
@@ -76,7 +76,7 @@ tags:
 
 申请人信息如下：
 
-![](https://olzhy.github.io/static/images/uploads/2020/06/1-machine-learning-foundation-applicant-information.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/06/1-machine-learning-foundation-applicant-information.png#center)
 
 如何描述学习问题：
 * x为输入：申请人信息；
@@ -85,22 +85,22 @@ tags:
 * D为数据：训练样本，历史收集的数据；
 * g为假设函数：越接近f越好，即使用`$g:x \rightarrow y$`来衡量是否要发放信用卡。
 
-![](https://olzhy.github.io/static/images/uploads/2020/06/1-machine-learning-foundation-basic-notations-for-learning-problem.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/06/1-machine-learning-foundation-basic-notations-for-learning-problem.png#center)
 
 信用卡是否发放场景的学习过程：
 * 未知的目标函数产生了诸多历史数据；
 * 机器学习通过某种学习算法得到最终的假设函数g，我们期待g与f越接近越好。
 
-![](https://olzhy.github.io/static/images/uploads/2020/06/1-machine-learning-foundation-learning-flow-for-credit-approve.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/06/1-machine-learning-foundation-learning-flow-for-credit-approve.png#center)
 
 g为所有假设函数集合的一部分，机器学习算法即是从中找出最优的。
 机器学习模型即是基于数据将算法A与允许选择的假设H相结合，得出一个尽可能接近理想目标函数f的假设函数g。
 
-![](https://olzhy.github.io/static/images/uploads/2020/06/1-machine-learning-foundation-the-learning-model.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/06/1-machine-learning-foundation-the-learning-model.png#center)
 
 下面例子是找出歌曲推荐系统中的输入x，输出y，数据D，假设集合H，假设函数g：
 
-![](https://olzhy.github.io/static/images/uploads/2020/06/1-machine-learning-foundation-song-recommendation.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/06/1-machine-learning-foundation-song-recommendation.png#center)
 
 #### 1.5 机器学习及相关领域
 
@@ -126,46 +126,46 @@ g为所有假设函数集合的一部分，机器学习算法即是从中找出�
 
 申请人信息可用多维向量表示，每个维度有一个对应的权值，假设函数`$\operatorname{h}(x)$`为所有维度的权值与对应维度值乘积之和，超过某阈值则同意发放，否则拒绝发放。
 
-![](https://olzhy.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-a-simple-hypothesis-set.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-a-simple-hypothesis-set.png#center)
 
 如下推算说明可将阈值看作是第0维的部分。这样`$\operatorname{h}(x)$`可看作是第0维到第d维的权重与维度值的乘积之和。也可看作是`$\pmb w$`与`$\pmb x$`两个向量的乘积。
 
-![](https://olzhy.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-vector-form-of-perceptron-hypothesis.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-vector-form-of-perceptron-hypothesis.png#center)
 
 在二维空间`$\operatorname{h}(x)$`是一条直线，在多维空间`$\operatorname{h}(x)$`是一个超平面。感知器即是一个线性分类器。
 
-![](https://olzhy.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-perceptrons-in-r2.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-perceptrons-in-r2.png#center)
 
 #### 2.2 感知器学习算法
 
 感知器学习算法是一个针对数据不断改进的算法，可能需要多轮演算及调整才可能找到一条满足条件的分割线。对于第t轮演算，若在该轮的第n个点发现错判（该轮的某个点的`$y$`值本来应为+1但算成了-1，说明`$\pmb w$`向量与`$\pmb x$`向量的夹角太大，造成内积太小；反之，若该轮某个点的`$y$`值本应为-1但算成了+1，说明`$\pmb w$`向量与`$\pmb x$`向量的夹角太小，造成内积太大），则将下一轮的`$\pmb w$`向量置为`$\pmb w + y\pmb x$`来进行改进（若`$y$`为+1，则为`$\pmb w + \pmb x$`，表示将`$\pmb w$`向量与`$\pmb x$`向量的夹角调整的小一点；若`$y$`为-1，则为`$\pmb w - \pmb x$`，表示将`$\pmb w$`向量与`$\pmb x$`向量的夹角调整的大一点）。
 
-![](https://olzhy.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-perceptron-learning-algorithm.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-perceptron-learning-algorithm.png#center)
 
 该算法的实际运用中，可能需要多轮循环直至所有的点都满足条件。
 
-![](https://olzhy.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-practical-implementation-of-pla.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-practical-implementation-of-pla.png#center)
 
 下面演示一下该算法的演进过程：
 * 原始数据
 
-![](https://olzhy.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-0.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-0.png#center)
 
 * 第1轮：原点到`$x_1$`构成初始向量
 
-![](https://olzhy.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-1.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-1.png#center)
 
 * 第2轮：根据第1轮找到的法向量对应的直线对数据进行划分，发现`$x_9$`被错判（本是圈，被错判为叉），则对下一轮`$\pmb w$`进行调整（与`$x_9$`夹角小一点）
 
-![](https://olzhy.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-2.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-2.png#center)
 
 * 第3轮：根据第2轮找到的法向量对应的直线对数据进行划分，发现`$x_{14}$`被错判（本是叉，被错判为圈），则对下一轮`$\pmb w$`进行调整（与`$x_{14}$`夹角大一点）
 
-![](https://olzhy.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-3.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-3.png#center)
 
 * 以此类推，直至某一轮幸运的找到一条分割线。
 
-![](https://olzhy.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-finally.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/06/2-machine-learning-foundation-seeing-is-believing-finally.png#center)
 
 但感知器学习算法的问题是并不一定会找到演算停止的情形。
 

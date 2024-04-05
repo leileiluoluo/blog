@@ -1,6 +1,6 @@
 ---
 title: LeetCode 48 旋转图像
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-11-05T13:16:47+00:00
 url: /posts/leetcode-rotate-image.html
@@ -83,7 +83,7 @@ tags:
   
 1）如图所示，原始图如下图所示，要不分配额外空间，以最小的空间来作旋转，我们设定每次仅移动一位。
   
-![](https://olzhy.github.io/static/images/uploads/2018/11/rotate-image-raw.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2018/11/rotate-image-raw.png)
   
 2）一圈元素顺时针旋转90度的移动过程如下图左图所示，仅申请一个元素的存储单元tmp，作顺时针旋转时，我们每次仅移动一位。步骤如下。
   
@@ -105,11 +105,11 @@ tags:
   
 4）直至最里边一圈的元素均旋转完成，即得到整个图像的旋转。
 
-![](https://olzhy.github.io/static/images/uploads/2018/11/rotate-image-processing.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2018/11/rotate-image-processing.png)
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/48_Rotate_Image/test.go" rel="noopener" target="_blank">https://github.com/olzhy/leetcode/blob/master/48_Rotate_Image/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/48_Rotate_Image/test.go" rel="noopener" target="_blank">https://github.com/leileiluoluo/leetcode/blob/master/48_Rotate_Image/test.go</a>
 
 ```go
 func rotate(matrix [][]int) {  
@@ -168,8 +168,8 @@ func BenchmarkRotate(b *testing.B) {
 ```
 goos: darwin  
 goarch: amd64  
-pkg: github.com/olzhy/test  
+pkg: github.com/leileiluoluo/test  
 BenchmarkRotate-4     20000000                65.2 ns/op             0 B/op          0 allocs/op  
 PASS  
-ok      github.com/olzhy/test   1.383s
+ok      github.com/leileiluoluo/test   1.383s
 ```

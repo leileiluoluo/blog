@@ -1,6 +1,6 @@
 ---
 title: LeetCode 2 两数相加
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-02-20T03:35:44+00:00
 url: /posts/leetcode-add-two-numbers.html
@@ -39,7 +39,7 @@ tags:
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/2_Add_Two_Numbers/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/2_Add_Two_Numbers/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/2_Add_Two_Numbers/test.go" target="_blank" rel="noopener">https://github.com/leileiluoluo/leetcode/blob/master/2_Add_Two_Numbers/test.go</a>
 
 ```go
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {

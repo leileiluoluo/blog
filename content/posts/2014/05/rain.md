@@ -1,6 +1,6 @@
 ---
 title: 雨
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2014-05-22T08:06:02+00:00
 url: /posts/rain.html

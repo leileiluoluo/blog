@@ -1,6 +1,6 @@
 ---
 title: LeetCode 958 检查二叉树的完整性
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-07-21T14:33:04+00:00
 url: /posts/leetcode-check-completeness-of-a-binary-tree.html
@@ -65,7 +65,7 @@ tags:
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/958_Check_Completeness_Of_A_Binary_Tree/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/958_Check_Completeness_Of_A_Binary_Tree/test.go)
 
 ```go
 type TreeNode struct {

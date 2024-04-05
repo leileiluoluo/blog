@@ -1,6 +1,6 @@
 ---
 title: 2020 年終總結
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-12-24T08:13:42+08:00
 url: /posts/2020-summary.html

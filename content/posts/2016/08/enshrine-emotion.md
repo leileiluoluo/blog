@@ -1,6 +1,6 @@
 ---
 title: 珍藏情感
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2016-08-29T04:05:37+00:00
 url: /posts/enshrine-emotion.html

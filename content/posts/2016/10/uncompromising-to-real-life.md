@@ -1,6 +1,6 @@
 ---
 title: 对现实世界不妥协
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2016-10-08T03:58:54+00:00
 url: /posts/uncompromising-to-real-life.html

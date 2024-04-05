@@ -1,6 +1,6 @@
 ---
 title: 对比 SQL 来学习 MongoDB 的聚合操作
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-02-17T08:00:00+08:00
 url: /posts/mongodb-aggregation.html

@@ -1,6 +1,6 @@
 ---
 title: LeetCode 165 版本号比对
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-07-25T14:03:04+00:00
 url: /posts/leetcode-compare-version-numbers.html
@@ -67,7 +67,7 @@ i，j同时向右移动，找到一个以“.”分割的小版本则比较是�
 
 **3 Golang实现代码**
   
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/165_Compare_Version_Numbers/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/165_Compare_Version_Numbers/test.go)
 
 ```go
 func compareVersion(version1 string, version2 string) int {

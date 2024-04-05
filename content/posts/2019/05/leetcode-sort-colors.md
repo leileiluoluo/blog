@@ -1,6 +1,6 @@
 ---
 title: LeetCode 75 颜色排序
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-05-17T07:53:58+00:00
 url: /posts/leetcode-sort-colors.html
@@ -56,7 +56,7 @@ tags:
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/75_Sort_Colors/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/75_Sort_Colors/test.go)
 
 ```go
 func sortColors(nums []int) {

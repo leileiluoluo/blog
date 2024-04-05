@@ -1,6 +1,6 @@
 ---
 title: Go 1.13 Module使用说明
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-09-29T00:48:02+00:00
 url: /posts/go1dot13-using-go-modules.html
@@ -40,10 +40,10 @@ c) GO111MODULE=off
 
 go.mod 文件定义了当前模块的路径且列出了其所依赖的模块路径及版本。
 
-如下 go.mod 定义了 go.mod 所在的路径为 Module 根路径，且引用路径为`github.com/olzhy/test`。require 语句则声明了该模块依赖的两个包的指定版本（`golang.org/x/text v0.3.0`与`gopkg.in/yaml.v2 v2.1.0`）。
+如下 go.mod 定义了 go.mod 所在的路径为 Module 根路径，且引用路径为`github.com/leileiluoluo/test`。require 语句则声明了该模块依赖的两个包的指定版本（`golang.org/x/text v0.3.0`与`gopkg.in/yaml.v2 v2.1.0`）。
 
 ```
-module github.com/olzhy/test
+module github.com/leileiluoluo/test
 
 require (
 	golang.org/x/text v0.3.0
@@ -53,7 +53,7 @@ require (
 
 当然，go.mod 文件亦可指定要替换（replace）或要排除（exclude）的依赖包版本。
 
-创建 Module 仅须一条命令，如：`go mod init github.com/olzhy/test`。
+创建 Module 仅须一条命令，如：`go mod init github.com/leileiluoluo/test`。
 
 一旦 go.mod 文件存在，go 命令（诸如 go build、go test，甚至 go list）会自动加入新的依赖。
 

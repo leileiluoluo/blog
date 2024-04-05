@@ -1,6 +1,6 @@
 ---
 title: Java 8：如何设计一个 Instant 与 String 互转的工具类？
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-11-15T08:00:00+08:00
 url: /posts/java-instant-util.html
@@ -229,7 +229,7 @@ str2Instant("2023", "yyyy");
 
 至此，一个可用的 `Instant` 与 `String` 互转的工具类就实现好了。
 
-本文所涉及的全部代码已托管至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/instant-util-design/src)，欢迎关注或 Fork。
+本文所涉及的全部代码已托管至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/instant-util-design/src)，欢迎关注或 Fork。
 
 > 参考资料
 >

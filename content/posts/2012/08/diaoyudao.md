@@ -1,6 +1,6 @@
 ---
 title: 钓鱼岛背后，我们该思考、反省点什么？
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2012-08-30T07:58:48+00:00
 url: /posts/diaoyudao.html

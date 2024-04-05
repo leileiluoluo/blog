@@ -1,6 +1,6 @@
 ---
 title: 5 种常用的云迁移方法及其优缺点
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-03-04T08:00:00+08:00
 url: /posts/cloud-migration-approaches.html

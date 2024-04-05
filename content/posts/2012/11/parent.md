@@ -1,6 +1,6 @@
 ---
 title: 父亲
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2012-11-14T09:06:47+00:00
 url: /posts/parent.html

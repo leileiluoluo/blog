@@ -1,6 +1,6 @@
 ---
 title: Selenium 自动化测试最佳实践
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-05-10T08:00:00+08:00
 url: /posts/selenium-best-practices.html
@@ -20,7 +20,7 @@ keywords:
 description: 本文总结了 Selenium 自动化测试的最佳实践，即构建一个大型测试项目时分析需求的基本指导思想、编排测试代码的实践策略（页面对象模型）以及使用定位器的推荐顺序。
 ---
 
-前两篇文章「[Selenium WebDriver 基础使用](https://olzhy.github.io/posts/selenium-webdriver.html)」和「[Selenium WebDriver 高级特性使用](https://olzhy.github.io/posts/selenium-webdriver-advanced-features.html)」分别介绍了 Selenium WebDriver 的基础功能和高级功能的使用。这两篇文章更多的是从底层实现细节的角度去练习 Selenium WebDriver API 的使用。
+前两篇文章「[Selenium WebDriver 基础使用](https://leileiluoluo.github.io/posts/selenium-webdriver.html)」和「[Selenium WebDriver 高级特性使用](https://leileiluoluo.github.io/posts/selenium-webdriver-advanced-features.html)」分别介绍了 Selenium WebDriver 的基础功能和高级功能的使用。这两篇文章更多的是从底层实现细节的角度去练习 Selenium WebDriver API 的使用。
 
 本文将探讨「构建一个 Selenium 自动化测试项目的最佳实践是什么样的？」，该部分更多的是从上层设计与架构的角度自顶向下来思考一个大型测试项目的构建。包括：编码前有什么准备工作？有没有一个基本的指导思想。如何编排测试代码？如何根据情况使用适当的定位器？下面会一一讨论。
 
@@ -44,11 +44,11 @@ description: 本文总结了 Selenium 自动化测试的最佳实践，即构建
 
 下面是一个「[Selenium Web 表单示例页面](https://www.selenium.dev/selenium/web/web-form.html)」的自动化测试动图：
 
-![Selenium Web 表单示例页面](https://olzhy.github.io/static/images/uploads/2023/05/selenium-web-form.gif#center)
+![Selenium Web 表单示例页面](https://leileiluoluo.github.io/static/images/uploads/2023/05/selenium-web-form.gif#center)
 
 可以看到，该动图展示的自动化测试代码对表单页面进行了文本输入、密码输入、下拉框选项选择和日期输入，并点击了提交按钮，最后跳转至已提交页面。
 
-对应动图原始的 Python 测试代码（[original_form_test.py](https://github.com/olzhy/python-exercises/blob/main/selenium-best-practices/page-object-model/original_form_test.py)）如下：
+对应动图原始的 Python 测试代码（[original_form_test.py](https://github.com/leileiluoluo/python-exercises/blob/main/selenium-best-practices/page-object-model/original_form_test.py)）如下：
 
 ```python
 from unittest import TestCase
@@ -129,7 +129,7 @@ $ tree
 
 下面看一下优化后的代码。
 
-`Form`页面对象代码（[form.py](https://github.com/olzhy/python-exercises/blob/main/selenium-best-practices/page-object-model/form.py)）：
+`Form`页面对象代码（[form.py](https://github.com/leileiluoluo/python-exercises/blob/main/selenium-best-practices/page-object-model/form.py)）：
 
 ```python
 from selenium.webdriver.common.by import By
@@ -182,7 +182,7 @@ class Form:
         return FormTarget(self.driver)
 ```
 
-`FormTarget`页面对象代码（[form_target.py](https://github.com/olzhy/python-exercises/blob/main/selenium-best-practices/page-object-model/form_target.py)）：
+`FormTarget`页面对象代码（[form_target.py](https://github.com/leileiluoluo/python-exercises/blob/main/selenium-best-practices/page-object-model/form_target.py)）：
 
 ```python
 from selenium.webdriver.common.by import By
@@ -196,7 +196,7 @@ class FormTarget:
         return self.driver.find_element(By.ID, 'message').text
 ```
 
-使用如上两个页面对象后的测试代码（[optimized_form_test.py](https://github.com/olzhy/python-exercises/blob/main/selenium-best-practices/page-object-model/optimized_form_test.py)）：
+使用如上两个页面对象后的测试代码（[optimized_form_test.py](https://github.com/leileiluoluo/python-exercises/blob/main/selenium-best-practices/page-object-model/optimized_form_test.py)）：
 
 ```python
 from unittest import TestCase
@@ -238,11 +238,11 @@ class TestForm(TestCase):
 
 ## 3 如何根据情况使用适当的定位器？
 
-前文「[Selenium WebDriver 基础使用](https://olzhy.github.io/posts/selenium-webdriver-advanced-features.html#3-元素定位与操作)」中介绍了 Selenium 有 8 种基本的元素定位方法。而什么时候使用什么样的定位器呢？下面给出其最佳实践。
+前文「[Selenium WebDriver 基础使用](https://leileiluoluo.github.io/posts/selenium-webdriver-advanced-features.html#3-元素定位与操作)」中介绍了 Selenium 有 8 种基本的元素定位方法。而什么时候使用什么样的定位器呢？下面给出其最佳实践。
 
 `id 定位器`为首选定位方法，准确快速；若元素没有`id`，则使用`css 选择器`；此两种不可用，再选择`xpath 定位器`（相对前两种性能较差）；一般在页面上会有多个相同 tag 的元素，所以`tag 定位器`一般用于选择一组元素。
 
-综上，本文介绍了构建一个大型测试项目时分析需求的基本指导思想、编排测试代码的实践策略以及使用定位器的推荐顺序。本文涉及的所有代码均已上传至本人 [GitHub](https://github.com/olzhy/python-exercises/tree/main/selenium-best-practices/page-object-model)，欢迎关注。期待阅读完本文，我们对 Selenium 自动化测试从需求分析、编码实现到实现细节上都有了一个可以参考的规范。
+综上，本文介绍了构建一个大型测试项目时分析需求的基本指导思想、编排测试代码的实践策略以及使用定位器的推荐顺序。本文涉及的所有代码均已上传至本人 [GitHub](https://github.com/leileiluoluo/python-exercises/tree/main/selenium-best-practices/page-object-model)，欢迎关注。期待阅读完本文，我们对 Selenium 自动化测试从需求分析、编码实现到实现细节上都有了一个可以参考的规范。
 
 > 参考资料
 >

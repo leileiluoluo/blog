@@ -1,6 +1,6 @@
 ---
 title: 读《简爱》
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2013-01-11T09:02:21+00:00
 url: /posts/jane-eyre.html

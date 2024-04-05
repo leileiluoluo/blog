@@ -1,6 +1,6 @@
 ---
 title: LeetCode 61 旋转链表
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-04-24T07:57:15+00:00
 url: /posts/leetcode-rotate-list.html
@@ -63,7 +63,7 @@ tags:
   
 注意：Golang循环中，break Label与goto Label的区别，break的Label仅可用于循环，且需放在for循环前面，且跳到Label后不会再执行for循环里的代码；而goto的Label可用于循环，也可用于非循环，可以放在for循环前面，也可以放在for循环后面，当Label放在循环前面时，跳到Label后，还会继续执行Label后的代码。
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/61_Rotate_List/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/61_Rotate_List/test.go)
 
 ```go
 func rotateRight(head *ListNode, k int) *ListNode {

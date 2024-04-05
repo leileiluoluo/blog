@@ -1,6 +1,6 @@
 ---
 title: Istio 流量管理之流量转移
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-12-25T07:16:55+08:00
 url: /posts/istio-traffic-shifting.html
@@ -22,7 +22,7 @@ description: Istio流量管理之流量转移 (Traffic Shifting of Istio Traffic
 
 而使用 Istio，不用控制实例数，且可以更细粒度的控制流量打到各个版本的百分比，从而实现按比例将流量逐渐迁移到新版本来实现升级。
 
-下面使用 Bookinfo 样例看一下 Istio 的流量转移如何使用。我们知道 reviews 有三个版本，假定我们想从 v1 版本升级到 v3 版本。（关于 Istio 的安装及 Bookinfo 样例的部署，请参看上文“[Istio 安装使用](https://olzhy.github.io/posts/istio-get-started.html)”）
+下面使用 Bookinfo 样例看一下 Istio 的流量转移如何使用。我们知道 reviews 有三个版本，假定我们想从 v1 版本升级到 v3 版本。（关于 Istio 的安装及 Bookinfo 样例的部署，请参看上文“[Istio 安装使用](https://leileiluoluo.github.io/posts/istio-get-started.html)”）
 
 首先，配置默认的 Destination Rule。
 
@@ -64,7 +64,7 @@ spec:
 
 访问 productpage，刷新多次发现 Review 部分均无五星等级评价，说明配置已生效。
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-v1.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-v1.png#center)
 
 ### 2 逐步提升流量比例将 reviews 升级到 v3 版本
 
@@ -104,7 +104,7 @@ spec:
 
 这时，多次刷新 productpage，发现 Review 部分红色五星评价会时而出现。
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-v3.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-v3.png#center)
 
 下面，提升比例，将 100%的流量都打到 v3。
 

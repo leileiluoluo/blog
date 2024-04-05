@@ -1,6 +1,6 @@
 ---
 title: 不确定的东西
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2015-08-28T04:35:43+00:00
 url: /posts/something-uncertainly.html

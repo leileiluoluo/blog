@@ -1,6 +1,6 @@
 ---
 title: 作家是一个时代的记录者
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2017-02-13T12:17:03+00:00
 url: /posts/writer-is-chronicler.html

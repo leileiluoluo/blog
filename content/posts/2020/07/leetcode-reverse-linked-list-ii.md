@@ -1,6 +1,6 @@
 ---
 title: LeetCode 92 反转链表 II
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-07-25T10:00:10+08:00
 url: /posts/leetcode-reverse-linked-list-ii.html
@@ -37,7 +37,7 @@ description: LeetCode反转链表II，Golang实现。
 
 ### 3 Golang实现代码
 
-[https://github.com/olzhy](https://github.com/olzhy/leetcode/blob/master/92_Reverse_Linked_List_II/test.go)
+[https://github.com/leileiluoluo](https://github.com/leileiluoluo/leetcode/blob/master/92_Reverse_Linked_List_II/test.go)
 
 ```go
 func reverseBetween(head *ListNode, m int, n int) *ListNode {

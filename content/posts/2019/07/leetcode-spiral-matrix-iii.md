@@ -1,6 +1,6 @@
 ---
 title: LeetCode 885 螺旋矩阵 III
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-07-14T08:35:27+00:00
 url: /posts/leetcode-spiral-matrix-iii.html
@@ -45,7 +45,7 @@ d）0 <= c0 < C
   
 释义：
 
-![](https://olzhy.github.io/static/images/uploads/2019/07/spiral_matrix_iii_01.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2019/07/spiral_matrix_iii_01.png)
 
 例子2：
   
@@ -55,7 +55,7 @@ d）0 <= c0 < C
   
 释义：
 
-![](https://olzhy.github.io/static/images/uploads/2019/07/spiral_matrix_iii_02.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2019/07/spiral_matrix_iii_02.png)
 
 题目出处：[LeetCode](https://leetcode.com/problems/spiral-matrix-iii/)
 
@@ -77,7 +77,7 @@ c）循环退出即遍历完了所有的空间。
 
 **3 Golang实现代码**
   
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/885_Spiral_Matrix_III/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/885_Spiral_Matrix_III/test.go)
 
 ```go
 func min(a, b int) int {

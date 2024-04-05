@@ -1,6 +1,6 @@
 ---
 title: LeetCode 130 围起的区域
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-11-11T13:37:39+00:00
 url: /posts/leetcode-surrounded-regions.html
@@ -53,7 +53,7 @@ X O X X
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/130_Surrounded_Regions/test.go" rel="noopener" target="_blank">https://github.com/olzhy/leetcode/blob/master/130_Surrounded_Regions/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/130_Surrounded_Regions/test.go" rel="noopener" target="_blank">https://github.com/leileiluoluo/leetcode/blob/master/130_Surrounded_Regions/test.go</a>
 
 ```go
 // findOBoundaries return coordinates that value is 'O'  

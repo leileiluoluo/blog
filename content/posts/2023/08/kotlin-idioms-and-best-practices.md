@@ -1,6 +1,6 @@
 ---
 title: 对比 Java 学习 Kotlin 中的惯用写法与最佳实践
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-08-15T08:00:00+08:00
 url: /posts/kotlin-idioms-and-best-practices.html

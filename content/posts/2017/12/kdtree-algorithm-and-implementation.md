@@ -1,6 +1,6 @@
 ---
 title: k-d tree算法原理及实现
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2017-12-28T14:58:11+00:00
 url: /posts/kdtree-algorithm-and-implementation.html
@@ -47,17 +47,17 @@ k-d tree是每个节点均为k维数值点的二叉树，其上的每个节点�
   
 **d）** 构建(7,2)节点的右子树时，点集合(8,1)，(9,6)此时的切分维度也为`$y$`，中值为(9,6)作为分割平面，(8,1)挂在其左子树。至此k-d tree构建完成。
   
-![](https://olzhy.github.io/static/images/uploads/2017/12/kd-tree-building.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2017/12/kd-tree-building.png)
   
 上述的构建过程结合下图可以看出，构建一个k-d tree即是将一个二维平面逐步划分的过程。
   
-![](https://olzhy.github.io/static/images/uploads/2017/12/kd-tree-building-pic.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2017/12/kd-tree-building-pic.png)
   
 我们还可以结合下图（该图引自[维基百科](https://en.wikipedia.org/wiki/K-d_tree)），从三维空间来看一下k-d tree的构建及空间划分过程。
   
 首先，边框为红色的竖直平面将整个空间划分为两部分，此两部分又分别被边框为绿色的水平平面划分为上下两部分。最后此4个子空间又分别被边框为蓝色的竖直平面分割为两部分，变为8个子空间，此8个子空间即为叶子节点。
 
-![](https://olzhy.github.io/static/images/uploads/2017/12/3d-tree-space-patitioning.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2017/12/3d-tree-space-patitioning.png)
   
 如下为k-d tree的构建代码：
 
@@ -186,9 +186,9 @@ def delete(n, point, depth):
   
 **c）** 遍历完(5,4)的左右叶子节点，发现与当前最优距离相等，不更新最近邻。所以(3,5)的最近邻为(5,4)。
 
-![](https://olzhy.github.io/static/images/uploads/2017/12/nn-searching-in-2d-space.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2017/12/nn-searching-in-2d-space.png)
 
-![](https://olzhy.github.io/static/images/uploads/2017/12/nn-searching-in-kd-tree.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2017/12/nn-searching-in-kd-tree.png)
 
 如下为最近邻搜索代码：
   
@@ -235,7 +235,7 @@ plt.scatter([point[0]], [point[1]], c='r')
 plt.show()
 ```
 
-![](https://olzhy.github.io/static/images/uploads/2017/12/scikit-learn-kd-tree.png)
+![](https://leileiluoluo.github.io/static/images/uploads/2017/12/scikit-learn-kd-tree.png)
 
 > 参考资料
 >

@@ -1,6 +1,6 @@
 ---
 title: LeetCode 393 UTF-8编码校验
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-02-19T03:08:45+00:00
 url: /posts/leetcode-utf8-validation.html
@@ -62,7 +62,7 @@ b）对n字节字符，前n个bit位全为1，第n+1个bit位是0，然后接着
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/393_UTF8_Validation/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/393_UTF8_Validation/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/393_UTF8_Validation/test.go" target="_blank" rel="noopener">https://github.com/leileiluoluo/leetcode/blob/master/393_UTF8_Validation/test.go</a>
 
 ```go
 func validUtf8(data []int) bool {

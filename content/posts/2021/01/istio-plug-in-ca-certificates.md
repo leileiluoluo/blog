@@ -1,6 +1,6 @@
 ---
 title: Istio 证书管理之植入 CA 证书
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2021-01-10T18:27:31+08:00
 url: /posts/istio-plug-in-ca-certificates.html
@@ -19,7 +19,7 @@ description: Istio证书管理之植入CA证书 (Plug in CA Certificates of Isti
 
 本文介绍管理员如何使用根证书、签发证书及秘钥为 Istio 配置 CA（证书颁发机构）。Istio CA 使用由中间 CA 签发的私钥及证书，而中间 CA 由根 CA 签发。这样，Istio CA 即可为工作负载签发根证书及私钥。CA 层次结构图如下。
 
-![](https://olzhy.github.io/static/images/uploads/2021/01/ca-hierarchy.svg#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2021/01/ca-hierarchy.svg#center)
 
 图片引自([Plug in CA Certificates](https://istio.io/latest/docs/tasks/security/cert-management/plugin-ca-cert/))
 

@@ -1,6 +1,6 @@
 ---
 title: Go 1.11 Release Notes 要点整理
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-10-05T08:39:33+00:00
 url: /posts/go1dot11-release-notes.html

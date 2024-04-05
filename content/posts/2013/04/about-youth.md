@@ -1,6 +1,6 @@
 ---
 title: 致青春（写给ZJ的人人留言）
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2013-04-28T07:58:48+00:00
 url: /posts/about-youth.html

@@ -1,6 +1,6 @@
 ---
 title: LeetCode 56 合并区间
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-07-24T14:45:24+00:00
 url: /posts/leetcode-merge-intervals.html
@@ -79,7 +79,7 @@ i）第i个区间与其后i+1...n个区间比较，合并重叠的部分，并�
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/56_Merge_Intervals/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/56_Merge_Intervals/test.go)
 
 ```go
 func min(x, y int) int {

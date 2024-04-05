@@ -1,6 +1,6 @@
 ---
 title: PostgreSQL 基础知识在线练习
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2021-07-31T19:40:04+08:00
 url: /posts/postgres-exercises.html
@@ -77,7 +77,7 @@ CREATE TABLE cd.bookings (
 
 这三张表的关系如下图所示。
 
-![](https://olzhy.github.io/static/images/uploads/2021/07/schema-horizontal.svg#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2021/07/schema-horizontal.svg#center)
 
 介绍完数据集，下面就开始我们的练习吧。
 

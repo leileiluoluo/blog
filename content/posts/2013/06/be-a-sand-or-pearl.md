@@ -1,6 +1,6 @@
 ---
 title: 做沙子还是做珍珠
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2013-06-08T08:38:43+00:00
 url: /posts/be-a-sand-or-pearl.html

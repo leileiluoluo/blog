@@ -1,6 +1,6 @@
 ---
 title: 容器引擎 Podman 初探
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2021-09-07T14:59:12+08:00
 url: /posts/podman-getting-started.html
@@ -13,7 +13,7 @@ keywords:
 description: Podman初探 (Podman Getting Started)
 ---
 
-![](https://olzhy.github.io/static/images/uploads/2021/09/podman.svg#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2021/09/podman.svg#center)
 
 Podman，即 Pod Manager 的缩写，是一个无守护进程容器引擎，用于在 Linux 系统上开发、管理及运行 OCI 容器。
 

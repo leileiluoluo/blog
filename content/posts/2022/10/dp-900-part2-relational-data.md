@@ -1,6 +1,6 @@
 ---
 title: DP-900：Azure 数据基础第二部分之 Azure 中的关系型数据
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2022-10-27T16:07:00+08:00
 url: /posts/dp-900-part2-relational-data.html
@@ -29,7 +29,7 @@ description: Azure 中的关系型数据。包括基本的关系数据概念和 
 
 在关系型数据库中，您将来自现实世界的实体集合建模为表。实体可以是您要为其记录信息的任何事物；通常是重要的对象和事件。例如，在零售系统示例中，您可以为客户、产品、订单和订单中的行项目创建表。一个表包含多行，每一行代表一个实体的一个实例。
 
-![关系表](https://olzhy.github.io/static/images/uploads/2022/10/relational-tables.png#center)
+![关系表](https://leileiluoluo.github.io/static/images/uploads/2022/10/relational-tables.png#center)
 
 关系表是结构化数据的一种格式，表中的每一行都有相同的列；尽管在某些情况下，并非所有列都需要有值（如上图中的 MiddleName）。
 
@@ -48,13 +48,13 @@ description: Azure 中的关系型数据。包括基本的关系数据概念和 
 
 要了解规范化的核心原则，假设下表代表公司用来跟踪其销售的电子表格。
 
-![非规范化数据](https://olzhy.github.io/static/images/uploads/2022/10/unnormalized-data.png#center)
+![非规范化数据](https://leileiluoluo.github.io/static/images/uploads/2022/10/unnormalized-data.png#center)
 
 请注意，如上表中客户和产品详细信息对于所售出的每件商品都是重复的；并且客户姓名和邮政地址，以及产品名称和价格组合在同一个电子表格单元格中。
 
 现在让我们看看规范化如何改变数据的存储方式。
 
-![规范化后的数据](https://olzhy.github.io/static/images/uploads/2022/10/normalized-data.png#center)
+![规范化后的数据](https://leileiluoluo.github.io/static/images/uploads/2022/10/normalized-data.png#center)
 
 数据中表示的每个实体（客户、产品、销售订单和行条目）都存储在自己的表中，这些实体的每个离散属性都在自己的列中。
 
@@ -285,7 +285,7 @@ ON Product(Name);
 
 该索引创建了一个基于树的结构，数据库系统的查询优化器可以使用该结构根据指定的名称在 Product 表中快速查找行。
 
-![索引](https://olzhy.github.io/static/images/uploads/2022/10/index.png#center)
+![索引](https://leileiluoluo.github.io/static/images/uploads/2022/10/index.png#center)
 
 对于包含少量行的表，使用索引可能并不比简单地读取整个表并查找请求的行更有效（在这种情况下，查询优化器将忽略索引）。但是，当一个表有很多行时，索引可以显著提高查询的性能。
 

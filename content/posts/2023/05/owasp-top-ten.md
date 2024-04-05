@@ -1,6 +1,6 @@
 ---
 title: 什么是 OWASP Top 10？
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-05-15T08:00:00+08:00
 url: /posts/owasp-top-ten.html

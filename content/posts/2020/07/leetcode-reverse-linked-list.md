@@ -1,6 +1,6 @@
 ---
 title: LeetCode 206 反转链表
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-07-24T05:25:30+00:00
 url: /posts/leetcode-reverse-linked-list.html
@@ -41,7 +41,7 @@ description: LeetCode反转链表，Golang实现。
 
 使用循环方式实现的步骤为：
 
-![](https://olzhy.github.io/static/images/uploads/2020/07/leetcode-reverse-linked-list.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/07/leetcode-reverse-linked-list.png#center)
 
 + 1）p，q，r指向反转前三个连续的节点，q指向当前节点，p指向上一个节点，r指向下一个节点；
 + 2）接下来做反转，将q的Next指向p；
@@ -52,7 +52,7 @@ description: LeetCode反转链表，Golang实现。
 
 使用递归方式实现代码为：
 
-[https://github.com/olzhy](https://github.com/olzhy/leetcode/blob/master/206_Reverse_Linked_List/iterative.go)
+[https://github.com/leileiluoluo](https://github.com/leileiluoluo/leetcode/blob/master/206_Reverse_Linked_List/iterative.go)
 
 ```go
 func reverseList(head *ListNode) *ListNode {
@@ -74,7 +74,7 @@ func reverseList(head *ListNode) *ListNode {
   
 使用循环方式实现代码为：
 
-[https://github.com/olzhy](https://github.com/olzhy/leetcode/blob/master/206_Reverse_Linked_List/recursive.go)
+[https://github.com/leileiluoluo](https://github.com/leileiluoluo/leetcode/blob/master/206_Reverse_Linked_List/recursive.go)
 
 ```go
 func reverseList(head *ListNode) *ListNode {

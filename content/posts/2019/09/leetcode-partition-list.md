@@ -1,6 +1,6 @@
 ---
 title: LeetCode 86 分割链表
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-09-15T03:04:30+00:00
 url: /posts/leetcode-partition-list.html
@@ -37,7 +37,7 @@ tags:
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/86_Partition_List/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/86_Partition_List/test.go)
 
 ```go
 func partition(head *ListNode, x int) *ListNode {

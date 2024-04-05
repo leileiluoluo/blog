@@ -1,6 +1,6 @@
 ---
 title: Power Automate 初探
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2022-11-26T08:00:00+08:00
 url: /posts/power-automate.html
@@ -20,7 +20,7 @@ keywords:
 description: 本文会详细介绍一下 Power Automate 的概念和功能，并且尝试使用其去构建一些常用的自动化流程（包括定时任务流程、按钮触发流程和审批流程）。
 ---
 
-在上文[「Power Platform 是什么？」](https://olzhy.github.io/posts/what-is-power-platform.html)中，我们知道 Power Automate 是一个流程自动化工具，可以使用其来将重复性的工作进行自动化处理。
+在上文[「Power Platform 是什么？」](https://leileiluoluo.github.io/posts/what-is-power-platform.html)中，我们知道 Power Automate 是一个流程自动化工具，可以使用其来将重复性的工作进行自动化处理。
 
 本文会详细介绍一下 Power Automate 的概念和功能，并且尝试使用其去构建一些常用的自动化流程。
 
@@ -82,7 +82,7 @@ Action 有哪些类型呢？
 
 登录[「Power Automate」](https://make.powerapps.com/) 后，点击左侧菜单栏的「Templates」，可以看到有大量的模板可供使用。
 
-![流程模板](https://olzhy.github.io/static/images/uploads/2022/11/flow-templates.png#center)
+![流程模板](https://leileiluoluo.github.io/static/images/uploads/2022/11/flow-templates.png#center)
 
 下面使用模板「Save Office 365 email attachments to OneDrive for Business」来创建一个自动将邮件附件保存到「OneDrive for Business」的流程。
 
@@ -90,7 +90,7 @@ Action 有哪些类型呢？
 
 创建完成后，编辑流程，可以看到该流程有 Trigger 和 Action 两部分组成。
 
-![将邮件附件保存到 OneDrive 的流程](https://olzhy.github.io/static/images/uploads/2022/11/save-email-attachments-to-onedrive.png#center)
+![将邮件附件保存到 OneDrive 的流程](https://leileiluoluo.github.io/static/images/uploads/2022/11/save-email-attachments-to-onedrive.png#center)
 
 Trigger 条件为：「当收到了新邮件」。Action 的逻辑为：对邮件中的每个附件，在「OneDrive for Business」的「/Email attachments from Power Automate」文件夹下将其创建出来。
 
@@ -104,11 +104,11 @@ Trigger 条件为：「当收到了新邮件」。Action 的逻辑为：对邮�
 
 在弹出的对话框里可以设定任务名称、执行时间和频率，然后点击「Create」。
 
-![新建定时任务流程](https://olzhy.github.io/static/images/uploads/2022/11/recurring-flow.png#center)
+![新建定时任务流程](https://leileiluoluo.github.io/static/images/uploads/2022/11/recurring-flow.png#center)
 
 点击「Create」后即跳转到流程设计页面。在 Trigger「Recurrence」下新增「Get current weather」和「Send an email (V2)」两个 Action 并填写相关的字段。这样即实现了需要的功能。
 
-![定时任务流程设计](https://olzhy.github.io/static/images/uploads/2022/11/flow-send-weather-to-email.png#center)
+![定时任务流程设计](https://leileiluoluo.github.io/static/images/uploads/2022/11/flow-send-weather-to-email.png#center)
 
 #### 2.3 构建按钮触发流程
 
@@ -124,7 +124,7 @@ Trigger 条件为：「当收到了新邮件」。Action 的逻辑为：对邮�
 
 可以在需要审批操作的流程中加入该步骤，然后判断审批结果并执行后续的操作。
 
-![审批流程设计](https://olzhy.github.io/static/images/uploads/2022/11/approval-flow.png#center)
+![审批流程设计](https://leileiluoluo.github.io/static/images/uploads/2022/11/approval-flow.png#center)
 
 综上，我们完成了对 Power Automate 的初探。
 

@@ -1,6 +1,6 @@
 ---
 title: Golang 1.22 对 for 循环作了两处更新
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2024-03-15T08:00:00+08:00
 url: /posts/golang-makes-two-changes-to-for-loops.html
@@ -151,7 +151,7 @@ func main() {
 }
 ```
 
-综上，本文罗列了 Golang 1.22 对 for 循环作的两处更新，并使用示例代码的方式演示了此两处更新的具体用法。完整示例代码已提交至本人 [GitHub](https://github.com/olzhy/go-exercises/tree/master/for_loops_changes)，欢迎关注或 Fork。
+综上，本文罗列了 Golang 1.22 对 for 循环作的两处更新，并使用示例代码的方式演示了此两处更新的具体用法。完整示例代码已提交至本人 [GitHub](https://github.com/leileiluoluo/go-exercises/tree/master/for_loops_changes)，欢迎关注或 Fork。
 
 > 参考资料
 >

@@ -1,6 +1,6 @@
 ---
 title: LeetCode 91 解码方式
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-10-28T06:59:02+00:00
 url: /posts/leetcode-decode-ways.html
@@ -57,7 +57,7 @@ c）若为非'0'字符，则至少可以推进一位，解码总数先置为deco
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/91_Decode_Ways/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/91_Decode_Ways/test.go)
 
 ```Go
 func decode(s string, i int, table map[int]int) int {

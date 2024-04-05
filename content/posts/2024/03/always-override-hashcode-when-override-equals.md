@@ -1,6 +1,6 @@
 ---
 title: Java：为什么重写 equals 方法时必须同时重写 hashCode 方法？
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2024-03-12T08:00:00+08:00
 url: /posts/always-override-hashcode-when-override-equals.html
@@ -221,7 +221,7 @@ map.put(user2, true);
 System.out.println(map.size()); // 1
 ```
 
-综上，本文解释了为什么重写 `equals` 方法时必须同时重写 `hashCode` 方法的缘由，并且给出了示例代码。完整示例代码已提交至本人 [GitHub](https://github.com/olzhy/java-exercises/tree/main/hashcode-equals-demo)，欢迎关注或 Fork。
+综上，本文解释了为什么重写 `equals` 方法时必须同时重写 `hashCode` 方法的缘由，并且给出了示例代码。完整示例代码已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/hashcode-equals-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >

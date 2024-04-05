@@ -1,6 +1,6 @@
 ---
 title: Istio 流量管理之请求超时
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-12-27T16:41:03+08:00
 url: /posts/istio-request-timeouts.html
@@ -20,7 +20,7 @@ description: Istio流量管理之请求超时 (Request Timeouts of Istio Traffic
 
 可以使用 Istio 在路由中设置请求超时时间。下面使用 Bookinfo 样例测试一下。
 
-关于环境准备，请参阅“[Istio 安装使用](https://olzhy.github.io/posts/istio-get-started.html)”。
+关于环境准备，请参阅“[Istio 安装使用](https://leileiluoluo.github.io/posts/istio-get-started.html)”。
 
 本文，我们将使用 v2 版本的 reviews，然后为 ratings 注入响应延迟，最后修改 reviews 的超时时间来查看 productpage 的变化。
 
@@ -52,7 +52,7 @@ heredoc> EOF
 
 打开`http://$GATEWAY_URL/productpage`，刷新几次，Review 部分总是显示黑色五星评价，说明 reviews 已使用 v2 版本。
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/istio-bookinfo.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/istio-bookinfo.png#center)
 
 ### 1 源码浅析
 
@@ -62,7 +62,7 @@ heredoc> EOF
 productpage -> reviews -> ratings
 ```
 
-在上文“[Istio 流量管理之故障注入](https://olzhy.github.io/posts/istio-fault-injection.html)”中，我们翻阅过 productpage 及 reviews 的源码。reviews 调用 ratings v2 版本的超时时间为 10s；productpage 调用 reviews 的超时时间为 3s，且若调用失败会重试一次。
+在上文“[Istio 流量管理之故障注入](https://leileiluoluo.github.io/posts/istio-fault-injection.html)”中，我们翻阅过 productpage 及 reviews 的源码。reviews 调用 ratings v2 版本的超时时间为 10s；productpage 调用 reviews 的超时时间为 3s，且若调用失败会重试一次。
 
 [LibertyRestEndpoint.java#L132](https://github.com/istio/istio/blob/master/samples/bookinfo/src/reviews/reviews-application/src/main/java/application/rest/LibertyRestEndpoint.java#L132)
 
@@ -140,7 +140,7 @@ spec:
 
 再次刷新 productpage 页面，发现返回页面需要 1s，且报 reviews 无法访问错误。
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-timeout-debug.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/bookinfo-productpage-reviews-timeout-debug.png#center)
 
 这是因为 reviews 实际调用 ratings 完成后返回得需 2s，而现在 0.5 秒即超时了，productpage 接到超时响应后，又重试一次，所以 productpage 页面耗时 1s。
 

@@ -1,6 +1,6 @@
 ---
 title: 记忆中的秋收时节
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2015-10-03T04:28:46+00:00
 url: /posts/autumn-harvest-in-memory.html

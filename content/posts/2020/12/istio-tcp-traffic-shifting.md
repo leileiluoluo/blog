@@ -1,6 +1,6 @@
 ---
 title: Istio 流量管理之 TCP 流量转移
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-12-26T08:48:52+08:00
 url: /posts/istio-tcp-traffic-shifting.html
@@ -18,9 +18,9 @@ keywords:
 description: Istio流量管理之TCP流量转移 (TCP Traffic Shifting of Istio Traffic Management)
 ---
 
-在上文“[Istio 流量管理之流量转移](https://olzhy.github.io/posts/istio-traffic-shifting.html)”中，我们使用 Istio 为 7 层 HTTP 应用作了流量按比例分配测试。本文使用 Istio 自带的 tcp-echo 样例对 4 层 TCP 应用作一下测试。
+在上文“[Istio 流量管理之流量转移](https://leileiluoluo.github.io/posts/istio-traffic-shifting.html)”中，我们使用 Istio 为 7 层 HTTP 应用作了流量按比例分配测试。本文使用 Istio 自带的 tcp-echo 样例对 4 层 TCP 应用作一下测试。
 
-关于 Istio 安装等环境准备，请参阅“[Istio 安装使用](https://olzhy.github.io/posts/istio-get-started.html)”。
+关于 Istio 安装等环境准备，请参阅“[Istio 安装使用](https://leileiluoluo.github.io/posts/istio-get-started.html)”。
 
 ### 1 tcp-echo 源码解析
 

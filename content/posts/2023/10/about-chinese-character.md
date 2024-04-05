@@ -1,6 +1,6 @@
 ---
 title: 關於漢字
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2023-10-10T08:00:00+08:00
 url: /posts/about-chinese-character.html

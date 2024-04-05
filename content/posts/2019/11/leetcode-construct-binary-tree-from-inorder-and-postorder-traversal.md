@@ -1,6 +1,6 @@
 ---
 title: LeetCode 106 根据中序遍历与后序遍历构造二叉树
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-11-05T12:10:27+00:00
 url: /posts/leetcode-construct-binary-tree-from-inorder-and-postorder-traversal.html
@@ -43,7 +43,7 @@ tags:
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/106_Construct_Binary_Tree_from_Inorder_and_Postorder_Traversal/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/106_Construct_Binary_Tree_from_Inorder_and_Postorder_Traversal/test.go)
 
 ```Golang
 func buildTree(inorder []int, postorder []int) *TreeNode {

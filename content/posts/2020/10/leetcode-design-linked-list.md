@@ -1,6 +1,6 @@
 ---
 title: LeetCode 707 设计链表
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-10-05T12:09:28+08:00
 url: /posts/leetcode-design-linked-list.html
@@ -85,7 +85,7 @@ myLinkedList.get(1);              // return 3
 
 ### 3 Golang实现代码
 
-[https://github.com/olzhy](https://github.com/olzhy/leetcode/blob/master/707_Design_Linked_List/test.go)
+[https://github.com/leileiluoluo](https://github.com/leileiluoluo/leetcode/blob/master/707_Design_Linked_List/test.go)
 
 ```go
 // MyLinkedList is a struct of singly linked list
@@ -210,7 +210,7 @@ func (list *MyLinkedList) DeleteAtIndex(index int) {
 
 ### 4 Python实现代码
 
-[https://github.com/olzhy](https://github.com/olzhy/leetcode/blob/master/707_Design_Linked_List/test.py)
+[https://github.com/leileiluoluo](https://github.com/leileiluoluo/leetcode/blob/master/707_Design_Linked_List/test.py)
 
 ```python
 class Node:

@@ -1,6 +1,6 @@
 ---
 title: LeetCode 33 在旋转的有序数组搜索
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-07-21T10:25:10+00:00
 url: /posts/leetcode-search-in-rotated-sorted-array.html
@@ -54,7 +54,7 @@ tags:
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/33_Search_In_Rotated_Sorted_Array/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/33_Search_In_Rotated_Sorted_Array/test.go)
 
 ```go
 func search(nums []int, target int) int {

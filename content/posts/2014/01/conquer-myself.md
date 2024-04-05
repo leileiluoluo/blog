@@ -1,6 +1,6 @@
 ---
 title: 战胜自己
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2014-01-02T08:26:59+00:00
 url: /posts/conquer-myself.html

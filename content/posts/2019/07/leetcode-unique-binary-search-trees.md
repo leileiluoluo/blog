@@ -1,6 +1,6 @@
 ---
 title: LeetCode 96 不同的二叉搜索树
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-07-18T07:09:30+00:00
 url: /posts/leetcode-unique-binary-search-trees.html
@@ -71,7 +71,7 @@ x）root为i时，1...i-1这i-1个节点放左子树，i+1...n这n-i个节点放
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/96_Unique_Binary_Search_Trees/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/96_Unique_Binary_Search_Trees/test.go)
 
 ```go
 var table = make(map[int]int)

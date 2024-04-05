@@ -1,6 +1,6 @@
 ---
 title: 时代的牢笼
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2015-07-25T00:38:47+00:00
 url: /posts/cage-of-time.html

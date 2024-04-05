@@ -1,6 +1,6 @@
 ---
 title: 美
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2018-02-20T11:38:36+08:00
 url: /posts/beauty.html
@@ -38,7 +38,7 @@ description: 随笔《美》
 
 {{< line_break >}}
 
-![](https://olzhy.github.io/static/images/uploads/2018/02/handwriting-for-beauty.jpeg#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2018/02/handwriting-for-beauty.jpeg#center)
 
 {{< line_break >}}
 

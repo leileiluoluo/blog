@@ -1,6 +1,6 @@
 ---
 title: 关于好文字
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2014-02-18T08:24:12+00:00
 url: /posts/about-good-writing.html

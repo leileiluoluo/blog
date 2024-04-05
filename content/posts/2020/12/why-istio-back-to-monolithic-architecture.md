@@ -1,6 +1,6 @@
 ---
 title: 为什么 Istio 重回单体架构？
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-12-09T17:52:16+08:00
 url: /posts/why-istio-back-to-monolithic-architecture.html
@@ -43,7 +43,7 @@ description: 为什么Istio重回单体架构？(Why Istio back to monolithic ar
 
 Istio之前的总体架构如下图所示，与业内其它服务网格采用的架构类似，即分为数据面与控制面两部分。数据面由一组Proxy（或称Sidecar）组成，这些Proxy与服务的实例一同部署，代理了服务的所有进出流量。控制面部署在这些服务的外层，统一负责管理与控制数据面的Proxy。
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/istio-previous-arch.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/istio-previous-arch.png#center)
 
 （图片引用自[Istio as an Example of When Not to Do Microservices](https://blog.christianposta.com/microservices/istio-as-an-example-of-when-not-to-do-microservices/)）
 
@@ -65,7 +65,7 @@ Istio之前的总体架构如下图所示，与业内其它服务网格采用的
 
 下面即是回归单体后的Istio架构图，可以看到，原先被分割为多个微服务的控制面整合为了一个名为istiod的单体服务。这样即可让其安装，部署，使用，配置，维护，调试变得更简单，同时节省了资源开销。
 
-![](https://olzhy.github.io/static/images/uploads/2020/12/istiod.png#center)
+![](https://leileiluoluo.github.io/static/images/uploads/2020/12/istiod.png#center)
 
 （图片引用自[Istio as an Example of When Not to Do Microservices](https://blog.christianposta.com/microservices/istio-as-an-example-of-when-not-to-do-microservices/)）
 

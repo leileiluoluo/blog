@@ -1,6 +1,6 @@
 ---
 title: LeetCode 807 求保持城市现有天际线的最大增高
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-06-08T06:24:13+00:00
 url: /posts/leetcode-max-increase-to-keep-city-skyline.html
@@ -74,7 +74,7 @@ gridNew = [
 
 **3 Golang实现代码**
 
-[https://github.com/olzhy/](https://github.com/olzhy/leetcode/blob/master/807_Max_Increase_To_Keep_City_Skyline/test.go)
+[https://github.com/leileiluoluo/](https://github.com/leileiluoluo/leetcode/blob/master/807_Max_Increase_To_Keep_City_Skyline/test.go)
 
 ```go
 func min(x, y int) int {

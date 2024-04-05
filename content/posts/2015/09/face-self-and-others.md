@@ -1,6 +1,6 @@
 ---
 title: 正视自己，正视别人
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2015-09-19T04:30:00+00:00
 url: /posts/face-self-and-others.html

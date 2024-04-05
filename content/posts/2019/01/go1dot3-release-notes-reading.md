@@ -1,6 +1,6 @@
 ---
 title: Go 1.3 Release Notes 研读
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-01-24T01:22:30+00:00
 url: /posts/go1dot3-release-notes-reading.html

@@ -1,6 +1,6 @@
 ---
 title: LeetCode 93 还原IP地址
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-02-18T08:40:41+00:00
 url: /posts/leetcode-restore-ip-addresses.html
@@ -41,7 +41,7 @@ d）将a、b两步所得结果拼接为数组返回。
 
 **3 golang实现代码**
   
-<a href="https://github.com/olzhy/leetcode/blob/master/93_Restore_IP_Addresses/test.go" target="_blank" rel="noopener">https://github.com/olzhy/leetcode/blob/master/93_Restore_IP_Addresses/test.go</a>
+<a href="https://github.com/leileiluoluo/leetcode/blob/master/93_Restore_IP_Addresses/test.go" target="_blank" rel="noopener">https://github.com/leileiluoluo/leetcode/blob/master/93_Restore_IP_Addresses/test.go</a>
 
 ```go
 func restoreIpAddresses(s string) []string {

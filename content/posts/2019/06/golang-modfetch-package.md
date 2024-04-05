@@ -1,6 +1,6 @@
 ---
 title: Golang 模块获取包modfetch研读
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-06-12T07:22:36+00:00
 url: /posts/golang-modfetch-package.html
@@ -20,18 +20,18 @@ tags:
 
 ```
 $ go build
-go: finding github.com/olzhy/quote latest
-go: downloading github.com/olzhy/quote v0.0.0-20190510033103-5cb7d4598cfa
-go: extracting github.com/olzhy/quote v0.0.0-20190510033103-5cb7d4598cfa
+go: finding github.com/leileiluoluo/quote latest
+go: downloading github.com/leileiluoluo/quote v0.0.0-20190510033103-5cb7d4598cfa
+go: extracting github.com/leileiluoluo/quote v0.0.0-20190510033103-5cb7d4598cfa
 ```
 
 使用命令亦可查询最新可用版本:
 
 ```
 $ go get -u
-go: finding github.com/olzhy/quote v1.0.0
-go: downloading github.com/olzhy/quote v1.0.0
-go: extracting github.com/olzhy/quote v1.0.0
+go: finding github.com/leileiluoluo/quote v1.0.0
+go: downloading github.com/leileiluoluo/quote v1.0.0
+go: extracting github.com/leileiluoluo/quote v1.0.0
 ```
 
 这些均是因为内置命令已集成了模块查询、获取的能力。支撑模块获取的一个关键的包即是“cmd/go/internal/modfetch”，本文将研读一下该包的几个关键的接口、结构体及函数。
@@ -89,21 +89,21 @@ func Lookup(path string) (Repo, error)
     does not guarantee that the module has any defined versions.
 ```
 
-下面，我们使用其获取一下“[github.com/olzhy/quote](https://github.com/olzhy/quote)”这个Go Module的Repo信息。
+下面，我们使用其获取一下“[github.com/leileiluoluo/quote](https://github.com/leileiluoluo/quote)”这个Go Module的Repo信息。
   
-首先我的工作空间为workspace，在工作空间下，test.go文件位于`github.com/olzhy/test`下，目录结构为：
+首先我的工作空间为workspace，在工作空间下，test.go文件位于`github.com/leileiluoluo/test`下，目录结构为：
 
 ```
 workspace
  └ github.com
-     └ olzhy
+     └ leileiluoluo
          └ test
              └ test.go
 ```
 
-因modfetch包是internal包，不可直接引用，需将其拷贝至当前模块目录（`github.com/olzhy/test`）下，然后将codefetch包及其相关依赖拷贝进来，并将引用路径替换。
+因modfetch包是internal包，不可直接引用，需将其拷贝至当前模块目录（`github.com/leileiluoluo/test`）下，然后将codefetch包及其相关依赖拷贝进来，并将引用路径替换。
   
-shell脚本`github.com/olzhy/test/copy_replace.sh`内容如下：
+shell脚本`github.com/leileiluoluo/test/copy_replace.sh`内容如下：
 
 ```shell
 #!/bin/bash
@@ -140,14 +140,14 @@ cp -r $GOROOT/src/internal/singleflight ./internal/
 cp -r $GOROOT/src/internal/xcoff ./internal/
 
 # replace import paths
-find . -type f -name "*.go" -exec sed -i '' 's#cmd/go/internal/#github.com/olzhy/test/internal/#g' {} \; 
-find . -type f -name "*.go" -exec sed -i '' 's#cmd/internal/#github.com/olzhy/test/internal/#g' {} \; 
-find . -type f -name "*.go" -exec sed -i '' 's#internal/testenv#github.com/olzhy/test/internal/testenv#g' {} \; 
-find . -type f -name "*.go" -exec sed -i '' 's#internal/singleflight#github.com/olzhy/test/internal/singleflight#g' {} \; 
-find . -type f -name "*.go" -exec sed -i '' 's#internal/xcoff#github.com/olzhy/test/internal/xcoff#g' {} \;
+find . -type f -name "*.go" -exec sed -i '' 's#cmd/go/internal/#github.com/leileiluoluo/test/internal/#g' {} \; 
+find . -type f -name "*.go" -exec sed -i '' 's#cmd/internal/#github.com/leileiluoluo/test/internal/#g' {} \; 
+find . -type f -name "*.go" -exec sed -i '' 's#internal/testenv#github.com/leileiluoluo/test/internal/testenv#g' {} \; 
+find . -type f -name "*.go" -exec sed -i '' 's#internal/singleflight#github.com/leileiluoluo/test/internal/singleflight#g' {} \; 
+find . -type f -name "*.go" -exec sed -i '' 's#internal/xcoff#github.com/leileiluoluo/test/internal/xcoff#g' {} \;
 ```
 
-拷贝并替换完成后，我们在test.go（`github.com/olzhy/test/test.go`）使用一下modfetch.Lookup，代码如下：
+拷贝并替换完成后，我们在test.go（`github.com/leileiluoluo/test/test.go`）使用一下modfetch.Lookup，代码如下：
 
 ```go
 package main
@@ -157,8 +157,8 @@ import (
     "os"
     "path/filepath"
 
-    "github.com/olzhy/test/internal/modfetch"
-    "github.com/olzhy/test/internal/modfetch/codehost"
+    "github.com/leileiluoluo/test/internal/modfetch"
+    "github.com/leileiluoluo/test/internal/modfetch/codehost"
 )
 
 func main() {
@@ -167,7 +167,7 @@ func main() {
     // work dir is $GOPATH/pkg/mod/cache/vcs
     codehost.WorkRoot = filepath.Join(modfetch.PkgMod, "cache", "vcs")
 
-    repo, err := modfetch.Lookup("github.com/olzhy/quote")
+    repo, err := modfetch.Lookup("github.com/leileiluoluo/quote")
     if nil != err {
         panic(err)
     }
@@ -175,10 +175,10 @@ func main() {
 }
 ```
 
-使用modfetch.Lookup时需设置codehost.WorkRoot变量，即vcs下载的模块工作路径，一般为`$GOPATH/pkg/mod/cache/vcs`，如上代码获取“`github.com/olzhy/quote`”模块的最新提交信息，运行test.go，输出为：
+使用modfetch.Lookup时需设置codehost.WorkRoot变量，即vcs下载的模块工作路径，一般为`$GOPATH/pkg/mod/cache/vcs`，如上代码获取“`github.com/leileiluoluo/quote`”模块的最新提交信息，运行test.go，输出为：
 
 ```
-go: finding github.com/olzhy/quote latest
+go: finding github.com/leileiluoluo/quote latest
 &{v0.0.0-20190515022821-f8e0536df3d4 2019-05-15 02:28:21 +0000 UTC  } 
 ```
 
@@ -219,7 +219,7 @@ type RevInfo struct {
 func Stat(path, rev string) (*RevInfo, error)
 ```
 
-下面，我们使用其获取一下“`github.com/olzhy/quote`”这个Go Module版本v1.0.0的信息。
+下面，我们使用其获取一下“`github.com/leileiluoluo/quote`”这个Go Module版本v1.0.0的信息。
   
 test.go main函数如下：
 
@@ -230,7 +230,7 @@ func main() {
     // work dir is $GOPATH/pkg/mod/cache/vcs
     codehost.WorkRoot = filepath.Join(modfetch.PkgMod, "cache", "vcs")
 
-    stat, err := modfetch.Stat("github.com/olzhy/quote", "v1.0.0")
+    stat, err := modfetch.Stat("github.com/leileiluoluo/quote", "v1.0.0")
     if nil != err {
         panic(err)
     }
@@ -247,7 +247,7 @@ func main() {
 且若之前未获取过这个版本，其会将对应版本代码下载至$GOPATH/pkg/mod下。
 
 ```
-$ ls $GOPATH/pkg/mod/github.com/olzhy/
+$ ls $GOPATH/pkg/mod/github.com/leileiluoluo/
 quote@v1.0.0
 ```
 
@@ -265,7 +265,7 @@ func GoMod(path, rev string) ([]byte, error)
     resolution in Lookup if the result is already cached on local disk.
 ```
 
-下面，我们使用其获取一下“`github.com/olzhy/quote`”这个Module的go.mod内容。
+下面，我们使用其获取一下“`github.com/leileiluoluo/quote`”这个Module的go.mod内容。
   
 test.go main函数如下：
 
@@ -274,7 +274,7 @@ func main() {
     // mod dir is $GOPATH/pkg/mod
     modfetch.PkgMod = filepath.Join(os.Getenv("GOPATH"), "pkg", "mod")
 
-    mod, err := modfetch.GoMod("github.com/olzhy/quote", "v1.0.0")
+    mod, err := modfetch.GoMod("github.com/leileiluoluo/quote", "v1.0.0")
     if nil != err {
         panic(err)
     }
@@ -285,7 +285,7 @@ func main() {
 输出为：
 
 ```
-module github.com/olzhy/quote
+module github.com/leileiluoluo/quote
 ```
 
 即该模块go.mod的内容。
@@ -306,7 +306,7 @@ func DownloadZip(mod module.Version) (zipfile string, err error)
     returns the name of the zip file.
 ```
 
-下面，我们使用其下载“`github.com/olzhy/quote`”这个Module的在版本v1.0.0的zip文件。
+下面，我们使用其下载“`github.com/leileiluoluo/quote`”这个Module的在版本v1.0.0的zip文件。
   
 test.go main函数如下：
 
@@ -315,7 +315,7 @@ func main() {
     // mod dir is $GOPATH/pkg/mod
     modfetch.PkgMod = filepath.Join(os.Getenv("GOPATH"), "pkg", "mod")
 
-    zipfile, err := modfetch.DownloadZip(module.Version{Path: "github.com/olzhy/quote", Version: "v1.0.0"})
+    zipfile, err := modfetch.DownloadZip(module.Version{Path: "github.com/leileiluoluo/quote", Version: "v1.0.0"})
     if nil != err {
         panic(err)
     }
@@ -326,7 +326,7 @@ func main() {
 输出为：
 
 ```
-/Users/larry/Documents/workspace/pkg/mod/cache/download/github.com/olzhy/quote/@v/v1.0.0.zip
+/Users/larry/Documents/workspace/pkg/mod/cache/download/github.com/leileiluoluo/quote/@v/v1.0.0.zip
 ```
 
 > 参考资料

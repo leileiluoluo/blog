@@ -1,6 +1,6 @@
 ---
 title: Go 1.9 Release Notes 要点整理
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2019-06-05T07:25:32+00:00
 url: /posts/go1dot9-release-notes.html

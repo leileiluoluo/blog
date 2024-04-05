@@ -1,6 +1,6 @@
 ---
 title: Apache JMeter 初探
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2022-07-27T14:13:31+08:00
 url: /posts/apache-jmeter-introduction.html
@@ -143,7 +143,7 @@ jmeter --version
 
   修改后的 Thread Group 如下图所示。
 
-  ![Thread Group](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-thread-group.png#center)
+  ![Thread Group](https://leileiluoluo.github.io/static/images/uploads/2022/07/jmeter-thread-group.png#center)
 
 - 添加默认 HTTP 请求属性
 
@@ -159,7 +159,7 @@ jmeter --version
 
   配置后的 HTTP Request Defaults 如下图所示。
 
-  ![HTTP Request Defaults](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-http-request-defaults.png#center)
+  ![HTTP Request Defaults](https://leileiluoluo.github.io/static/images/uploads/2022/07/jmeter-http-request-defaults.png#center)
 
 - 添加 Cookie 支持
 
@@ -171,7 +171,7 @@ jmeter --version
 
   添加 HTTP Cookie Manager 后的 Test Plan 如下图所示。
 
-  ![HTTP Cookie Manager](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-http-cookie-manager.png#center)
+  ![HTTP Cookie Manager](https://leileiluoluo.github.io/static/images/uploads/2022/07/jmeter-http-cookie-manager.png#center)
 
 - 添加 HTTP 请求
 
@@ -185,13 +185,13 @@ jmeter --version
 
   第一个 HTTP Request 添加完后，如下图所示。
 
-  ![HTTP Request](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-http-request-home-page.png#center)
+  ![HTTP Request](https://leileiluoluo.github.io/static/images/uploads/2022/07/jmeter-http-request-home-page.png#center)
 
   再添加第二个：将 Name 字段填写为 “Changes”；将 Path 字段填写为 “/changes.html”。
 
   第二个 HTTP Request 添加完后，如下图所示。
 
-  ![HTTP Request](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-http-request-changes-page.png#center)
+  ![HTTP Request](https://leileiluoluo.github.io/static/images/uploads/2022/07/jmeter-http-request-changes-page.png#center)
 
 - 添加监听器以查看测试结果
 
@@ -201,13 +201,13 @@ jmeter --version
 
   添加 View Results Tree 后的 Test Plan 如下图所示。
 
-  ![View Results Tree](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-view-results-tree.png#center)
+  ![View Results Tree](https://leileiluoluo.github.io/static/images/uploads/2022/07/jmeter-view-results-tree.png#center)
 
-所有步骤已配置完成，最终的`jmx`文件（`build-web-test-plan.jmx`）已托管至 [本人 GitHub](https://github.com/olzhy/daily-exercises/blob/main/jmeter/build-web-test-plan.jmx)。
+所有步骤已配置完成，最终的`jmx`文件（`build-web-test-plan.jmx`）已托管至 [本人 GitHub](https://github.com/leileiluoluo/daily-exercises/blob/main/jmeter/build-web-test-plan.jmx)。
 
 点击 Start 即可在 GUI 端调试运行。运行结果如下图所示：
 
-![View Results Tree Result](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-view-results-tree-result.png#center)
+![View Results Tree Result](https://leileiluoluo.github.io/static/images/uploads/2022/07/jmeter-view-results-tree-result.png#center)
 
 可以在 View Results Tree 看到，一共发送了 20 次请求，点击某个请求可查看具体的采样结果和响应信息。
 
@@ -221,7 +221,7 @@ jmeter -n -t build-web-test-plan.jmx -l build-web-test-plan.jtl -e -o build-web
 
 执行完成后，打开报告文件夹（`build-web-test-plan.report`）的`index.html`文件，即可看到测试报告。效果如下图所示。
 
-![Report](https://olzhy.github.io/static/images/uploads/2022/07/jmeter-report.png#center)
+![Report](https://leileiluoluo.github.io/static/images/uploads/2022/07/jmeter-report.png#center)
 
 {{< line_break >}}
 

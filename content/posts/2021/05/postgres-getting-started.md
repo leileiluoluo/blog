@@ -1,6 +1,6 @@
 ---
 title: PostgreSQL 初探
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2021-05-21T15:14:46+08:00
 url: /posts/postgres-getting-started.html

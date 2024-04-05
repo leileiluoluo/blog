@@ -1,6 +1,6 @@
 ---
 title: Istio 流量管理之熔断
-author: olzhy
+author: leileiluoluo
 type: post
 date: 2020-12-28T08:23:19+08:00
 url: /posts/istio-circuit-breaking.html
@@ -22,7 +22,7 @@ description: Istio流量管理之熔断 (Circuit Breaking of Istio Traffic Manag
 
 因熔断设置针对的是具体的目标主机，所以 Istio 使用 Destination Rule 来进行配置。
 
-本文使用 Istio 自带的 httpbin 样例来设定熔断配置，然后使用 fortio 客户端模拟并发请求来触发熔断。关于 Istio 安装等环境准备，请参阅“[Istio 安装使用](https://olzhy.github.io/posts/istio-get-started.html)”。
+本文使用 Istio 自带的 httpbin 样例来设定熔断配置，然后使用 fortio 客户端模拟并发请求来触发熔断。关于 Istio 安装等环境准备，请参阅“[Istio 安装使用](https://leileiluoluo.github.io/posts/istio-get-started.html)”。
 
 ### 1 httpbin 样例部署
 
