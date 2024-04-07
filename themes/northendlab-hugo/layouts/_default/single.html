@@ -55,41 +55,8 @@
       <!-- comments -->
       {{ if .Site.Params.comment.enable }}
       <div class="col-lg-8 mx-auto block shadow">
-        <h3>评论</h3>
-        <div id="comment-loading" style="text-align: center; font-size: 14px;">
-          <img style="width: 52px" src="/static/images/site/mona-loading-default.gif"/>
-          <span>正在加载评论......</span>
-        </div>
-
-        <!-- loading control -->
-        <script>
-          function handleMessage(event) {
-            if (event.origin !== 'https://giscus.app') return;
-            if (!(typeof event.data === 'object' && event.data.giscus)) return;
-          
-            const commentLoading = document.getElementById('comment-loading');
-            commentLoading.style.display = 'none';
-          }
-          
-          window.addEventListener('message', handleMessage);
-        </script>
-
-        <!-- giscus -->
-        <script src="https://giscus.app/client.js"
-          data-repo="leileiluoluo/leileiluoluo.github.io"
-          data-repo-id="R_kgDOJkLT8w"
-          data-category="General"
-          data-category-id="DIC_kwDOJkLT884CdtEh"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="bottom"
-          data-theme="preferred_color_scheme"
-          data-lang="zh-CN"
-          crossorigin="anonymous"
-          async>
-        </script>
+        <!-- comments -->
+        {{ template "partials/comment.html" . }}
       </div>
       {{ end }}
     </div>
