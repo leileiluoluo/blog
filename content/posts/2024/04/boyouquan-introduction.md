@@ -4,7 +4,6 @@ author: leileiluoluo
 type: post
 date: 2024-04-03T08:00:00+08:00
 url: /posts/boyouquan-introduction.html
-math: true
 categories:
   - 计算机
 tags:

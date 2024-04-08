@@ -4,7 +4,6 @@ author: leileiluoluo
 type: post
 date: 2024-04-07T08:00:00+08:00
 url: /posts/comparable-and-comparator-in-java.html
-math: true
 categories:
   - 计算机
 tags:
