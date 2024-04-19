@@ -1,5 +1,5 @@
 ---
-title: 关于本站
+title: 关于本博
 author: leileiluoluo
 type: page
 date: 2017-10-23T02:05:07+00:00
