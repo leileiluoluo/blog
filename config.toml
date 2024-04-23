@@ -169,7 +169,7 @@ enable = true
 
 # baidu tongji
 [params.baidu_tongji]
-enable = true
+enable = false
 
 # related posts
 [params.related]
