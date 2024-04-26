@@ -24,6 +24,10 @@ HTML 中的小弹窗可用于通知、告警或接收用户输入。有的弹窗
 
 先看一下效果：
 
+![小弹窗示例](https://leileiluoluo.github.io/static/images/uploads/2024/04/popup-box.gif)
+
+这个小弹窗主要使用了 HTML 和 CSS，还额外用到一点 JavaScript，其完整代码如下：
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -87,6 +91,8 @@ HTML 中的小弹窗可用于通知、告警或接收用户输入。有的弹窗
   </body>
 </html>
 ```
+
+[在线查看效果](https://leileiluoluo.github.io/static/samples/2024/popup-box/popup-box.html)
 
 > 参考资料
 >
