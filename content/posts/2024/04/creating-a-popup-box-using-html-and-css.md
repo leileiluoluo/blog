@@ -122,7 +122,7 @@ HTML 中的小弹窗可用于通知、告警或接收用户输入。有的弹窗
 
 ### 1.2 HTML 部分
 
-初始时，页面只在左上角有一个「Open Popup」按钮，`popup` 块默认不显示（`display: none;`）。点击该按钮后，JavaScript 监听到按钮被点击，即会将 `popup.style.display` 设置为  `"block"`，这样弹窗就显示了（弹窗部分包含弹窗背景、弹窗、一个关闭按钮 X，一个标题和一句话）。当点击关闭按钮后，JavaScript 监听到按钮被点击，即会将 `popup.style.display` 设置为 `"none"`，这样就又回到初始状态了。
+初始时，页面只在左上角有一个「Open Popup」按钮，`popup` 块默认不显示（`display: none;`）。点击该按钮后，JavaScript 监听到按钮被点击，即会将 `popup.style.display` 设置为 `block`，这样弹窗就显示了（弹窗部分包含弹窗背景、弹窗、一个关闭按钮 X，一个标题和一句话）。当点击关闭按钮后，JavaScript 监听到按钮被点击，即会将 `popup.style.display` 设置为 `none`，这样就又回到初始状态了。
 
 ```html
 <button id="popupButton">Open Popup</button>
