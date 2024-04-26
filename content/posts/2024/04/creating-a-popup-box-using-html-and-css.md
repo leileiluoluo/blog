@@ -34,7 +34,7 @@ HTML 中的小弹窗可用于通知、告警或接收用户输入。有的弹窗
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Popup</title>
+    <title>Popup Box</title>
     <style>
       .popup {
         display: none;
