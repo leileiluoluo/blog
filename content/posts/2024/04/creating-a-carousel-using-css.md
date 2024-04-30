@@ -112,6 +112,8 @@ description: 本文关注如何在一个网页中使用纯 CSS 实现文字轮�
 
 [在线查看效果](https://leileiluoluo.github.io/static/samples/2024/popup-box/popup-box.html)
 
+本文完整示例代码已托管至我的 [GitHub](https://github.com/leileiluoluo/html-exercises/tree/main/carousel-sample)，欢迎关注或 Fork。
+
 > 参考资料
 >
 > [1] SegmentFault：文字轮播与图片轮播？CSS 不在话下 - [https://segmentfault.com/a/1190000041947673](https://segmentfault.com/a/1190000041947673)
