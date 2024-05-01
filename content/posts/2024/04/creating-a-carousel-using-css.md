@@ -195,28 +195,12 @@ description: 本文关注如何在一个网页中使用纯 CSS 实现文字轮�
   <body>
     <div class="container">
       <ul style="--s: 3">
-        <li>
-          <img
-            src="https://leileiluoluo.github.io/static/samples/2024/image-carousel/images/image-carousel-1.png"
-          />
-        </li>
-        <li>
-          <img
-            src="https://leileiluoluo.github.io/static/samples/2024/image-carousel/images/image-carousel-2.png"
-          />
-        </li>
-        <li>
-          <img
-            src="https://leileiluoluo.github.io/static/samples/2024/image-carousel/images/image-carousel-3.png"
-          />
-        </li>
+        <li><img src="https://leileiluoluo.github.io/static/samples/2024/image-carousel/images/image-carousel-1.png"></li>
+        <li><img src="https://leileiluoluo.github.io/static/samples/2024/image-carousel/images/image-carousel-2.png"></li>
+        <li><img src="https://leileiluoluo.github.io/static/samples/2024/image-carousel/images/image-carousel-3.png"></li>
 
         <!-- 将第一条数据补到末尾 -->
-        <li>
-          <img
-            src="https://leileiluoluo.github.io/static/samples/2024/image-carousel/images/image-carousel-1.png"
-          />
-        </li>
+        <li><img src="https://leileiluoluo.github.io/static/samples/2024/image-carousel/images/image-carousel-1.png"></li>
       </ul>
     </div>
   </body>
