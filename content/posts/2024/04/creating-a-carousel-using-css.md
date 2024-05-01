@@ -116,7 +116,7 @@ description: 本文关注如何在一个网页中使用纯 CSS 实现文字轮�
 
 一个水平方向的图片轮播效果如下：
 
-![图片轮播](https://leileiluoluo.github.io/static/images/uploads/2024/04/text-carousel.gif)
+![图片轮播](https://leileiluoluo.github.io/static/images/uploads/2024/04/image-carousel.gif)
 
 其完整代码如下：
 
