@@ -27,7 +27,7 @@ description: 本文关注如何在一个网页中使用纯 CSS 实现文字轮�
 
 文字轮播即是在水平方向或垂直方向无限循环展示一组文字。
 
-一个水平方向的文字轮播效果如下：
+一个垂直方向的文字轮播效果如下：
 
 ![文字轮播](https://leileiluoluo.github.io/static/images/uploads/2024/04/text-carousel.gif)
 
@@ -113,6 +113,12 @@ description: 本文关注如何在一个网页中使用纯 CSS 实现文字轮�
 [在线查看效果](https://leileiluoluo.github.io/static/samples/2024/text-carousel/text-carousel.html)
 
 ## 2 图片轮播
+
+一个水平方向的图片轮播效果如下：
+
+![图片轮播](https://leileiluoluo.github.io/static/images/uploads/2024/04/text-carousel.gif)
+
+其完整代码如下：
 
 ```html
 <!DOCTYPE html>
