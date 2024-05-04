@@ -58,7 +58,7 @@ description: 五一假期總結：同學來連，旅順太陽溝郊遊，旅順�
 
 {{% center %}}（東雞冠山 - 俄軍水泥堡壘內部）{{% /center %}}
 
-[![東雞冠山 - 俄軍水泥堡壘洞口](https://leileiluoluo.github.io/static/images/uploads/2024/05/dong-ji-guan-shan-6.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/dong-ji-guan-shan-5.jpeg)
+[![東雞冠山 - 俄軍水泥堡壘洞口](https://leileiluoluo.github.io/static/images/uploads/2024/05/dong-ji-guan-shan-5.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/dong-ji-guan-shan-5.jpeg)
 
 {{% center %}}（東雞冠山 - 俄軍水泥堡壘洞口）{{% /center %}}
 
