@@ -144,3 +144,4 @@ wip_template:
 **实用工具相关**
 
 - [在线 GIF 图片制作](https://ezgif.com/make/)
+- [在线 JPG 图片压缩](https://www.imgdiet.com/zh-CN/jpg-compress)
