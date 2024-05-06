@@ -88,7 +88,7 @@ public class Telephone implements Comparable<Telephone> {
 
 可以看到 `Telephone` 含有三个字段 `countryCode`、`areaCode` 和 `number`，分别为 `int`、`String`、`int` 类型。`Telephone` 类实现了 `Comparable` 接口，`compareTo` 方法的实现逻辑是使用 `Integer`、`String`、`Integer` 的 `compare` 方法依次对 `countryCode`、`areaCode` 和 `number` 进行比较。
 
-接下来，编写一个单元测试用例。准备一个 `Telephone` 对象数组，使用 `Arrays.sort()` 对其进行排序，并打印结果：
+接下来，编写一个单元测试用例 `ComparableTest`。准备一个 `Telephone` 对象数组，使用 `Arrays.sort()` 对其进行排序，并打印结果：
 
 ```java
 // src/test/java/ComparableTest.java
@@ -127,7 +127,113 @@ PhoneNumber{countryCode=86, areaCode=0411, number=66177118}
 
 可以看到，打印结果与我们在 `compareTo` 方法编写的排序规则一致。即先根据 `countryCode` 排序，然后根据 `areaCode` 进行排序，最后根据 `number` 进行排序。
 
+可以看到，实现 `Comparable` 接口表示拥有了一种默认的排序方式。如果想在不修改类本身的情况下使用多种排序规则该如何做呢？对于这种情况，`Comparator` 接口就派上用场了。
+
 ## 2 Comparator 接口
+
+Comparator 接口定义如下：
+
+```java
+package java.util;
+
+public interface Comparator<T> {
+  
+    int compare(T o1, T o2);
+}
+```
+
+实现其 `compare()` 方法须满足的通用约定与实现 `Comparable.compareTo()` 方法完全相同。
+
+使用 `Comparator` 接口时，对应的类无须实现任何接口。所以，`Telephone` 可以是一个普通的 POJO 类。
+
+```java
+// src/test/java/Telephone.java
+public class Telephone  {
+
+    private final int countryCode;
+    private final String areaCode;
+    private final int number;
+
+    public Telephone(int countryCode, String areaCode, int number) {
+        this.countryCode = countryCode;
+        this.areaCode = areaCode;
+        this.number = number;
+    }
+
+    public int getCountryCode() {
+        return countryCode;
+    }
+
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    @Override
+    public String toString() {
+        return "PhoneNumber{" +
+                "countryCode=" + countryCode +
+                ", areaCode=" + areaCode +
+                ", number=" + number +
+                '}';
+    }
+}
+```
+
+下面编写一个单元测试用例 `ComparatorTest`。同样准备一个 `Telephone` 对象数组，使用 `Arrays.sort()` 对其进行排序，注意需要新建一个 `Comparator` 接口的实现来指定排序规则（这次依次使用 `countryCode`、`areaCode` 和 `number` 来进行倒序排序），最后打印排序后的数组：
+
+```java
+// src/test/java/ComparatorTest.java
+import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class ComparatorTest {
+
+    @Test
+    public void testArraySort() {
+        Telephone[] telephones = new Telephone[]{
+                new Telephone(86, "010", 89150405),
+                new Telephone(86, "010", 56249829),
+                new Telephone(86, "0411", 66177118),
+                new Telephone(86, "0411", 39966686)
+        };
+
+        // sort arrays
+        Arrays.sort(telephones, new Comparator<Telephone>() {
+            @Override
+            public int compare(Telephone o1, Telephone o2) {
+                return Comparator.comparingInt(Telephone::getCountryCode)
+                        .thenComparing(Telephone::getAreaCode)
+                        .thenComparingInt(Telephone::getNumber)
+                        .compare(o2, o1);
+            }
+        });
+
+        // print
+        Arrays.stream(telephones).forEach(System.out::println);
+    }
+}
+```
+
+排序后的结果如下，满足预期：
+
+```text
+PhoneNumber{countryCode=86, areaCode=0411, number=66177118}
+PhoneNumber{countryCode=86, areaCode=0411, number=39966686}
+PhoneNumber{countryCode=86, areaCode=010, number=89150405}
+PhoneNumber{countryCode=86, areaCode=010, number=56249829}
+```
+
+## 3 小结
+
+`Comparable` 位于 `java.lang` 包下，`Comparator` 位于 `java.util` 下，所以 `Comparable` 接口是一个 Java 语言基础接口，而 `Comparator` 更像是一个工具类。我们可以将对应类实现 `Comparable` 接口来提供一种默认的排序方式。而 `Comparator` 接口内除了定义了一个 `compare` 方法外还提供了一组用于比较的静态方法，其更多是用于在不修改类本身的情况下进行自由排序。
+
+本文完整示例代码已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/comparable-and-comparator-demo/src/test/java)，欢迎关注或 Fork。
 
 > 参考资料
 >
