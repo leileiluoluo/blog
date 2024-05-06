@@ -14,12 +14,14 @@ keywords:
   - Comparator
   - 接口
   - 详解
-description: 本文主要介绍 Java 中 `Comparable` 与 `Comparator` 接口的使用场景及使用方法。
+description: 本文主要介绍 Java 中 Comparable 与 Comparator 接口的使用场景及使用方法。
 ---
 
 本文主要介绍 Java 中 `Comparable` 与 `Comparator` 接口的使用场景及使用方法。
 
 我们知道，要使类的对象支持排序，类需要实现 `Comparable` 接口。而 `Comparator` 接口允许在不修改类本身的情况下定义多种排序规则。所以两者均用于排序，但使用方式不同。
+
+## Comparable 接口
 
 `Comparable` 接口定义如下：
 
