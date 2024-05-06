@@ -131,13 +131,12 @@ PhoneNumber{countryCode=86, areaCode=0411, number=66177118}
 
 ## 2 Comparator 接口
 
-Comparator 接口定义如下：
+`Comparator` 接口定义如下：
 
 ```java
 package java.util;
 
 public interface Comparator<T> {
-  
     int compare(T o1, T o2);
 }
 ```
@@ -183,7 +182,7 @@ public class Telephone  {
 }
 ```
 
-下面编写一个单元测试用例 `ComparatorTest`。同样准备一个 `Telephone` 对象数组，使用 `Arrays.sort()` 对其进行排序，注意需要新建一个 `Comparator` 接口的实现来指定排序规则（这次依次使用 `countryCode`、`areaCode` 和 `number` 来进行倒序排序），最后打印排序后的数组：
+下面编写一个单元测试用例 `ComparatorTest`。同样准备一个 `Telephone` 对象数组，使用 `Arrays.sort()` 对其进行排序，注意这次需要传入一个 `Comparator` 接口的实现来指定排序规则（这次依次使用 `countryCode`、`areaCode` 和 `number` 进行倒序排序），最后打印排序后的数组：
 
 ```java
 // src/test/java/ComparatorTest.java
@@ -231,7 +230,7 @@ PhoneNumber{countryCode=86, areaCode=010, number=56249829}
 
 ## 3 小结
 
-`Comparable` 位于 `java.lang` 包下，`Comparator` 位于 `java.util` 下，所以 `Comparable` 接口是一个 Java 语言基础接口，而 `Comparator` 更像是一个工具类。我们可以将对应类实现 `Comparable` 接口来提供一种默认的排序方式。而 `Comparator` 接口内除了定义了一个 `compare` 方法外还提供了一组用于比较的静态方法，其更多是用于在不修改类本身的情况下进行自由排序。
+`Comparable` 位于 `java.lang` 包下，`Comparator` 位于 `java.util` 下，所以，`Comparable` 接口是一个 Java 语言基础接口，而 `Comparator` 更像是一个工具类。我们可以将对应类实现 `Comparable` 接口来提供一种默认的排序方式。而 `Comparator` 接口内除了定义了一个 `compare` 方法外还提供了一组用于比较的静态方法，其更多是用在不修改类本身的情况下进行按需排序。
 
 本文完整示例代码已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/comparable-and-comparator-demo/src/test/java)，欢迎关注或 Fork。
 
