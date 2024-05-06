@@ -33,9 +33,9 @@ public interface Comparable<T> {
 }
 ```
 
-`compareTo` 方法用于比较当前对象与指定对象的先后顺序，其可以返回正整数、0、负整数三种数值，分别表示当前对象大于、等于、小于指定对象。若一个类未实现 `Comparable` 接口，则使用 `Arrays.sort()` 或 `Collections.sort()` 对其对象集合进行排序时会抛出 `ClassCastException`。
+`compareTo()` 方法用于比较当前对象与指定对象的先后顺序，其可以返回正整数、0、负整数三种数值，分别表示当前对象大于、等于、小于指定对象。若一个类未实现 `Comparable` 接口，则使用 `Arrays.sort()` 或 `Collections.sort()` 对其对象集合进行排序时会抛出 `ClassCastException`。
 
-实现 `compareTo` 方法须满足如下几个通用约定（下面的 `sgn(表达式)` 为符号函数，表示表达式为正数、0、负数时返回 1、0、-1）：
+实现 `compareTo()` 方法须满足如下几个通用约定（下面的 `sgn(表达式)` 为符号函数，表示表达式为正数、0、负数时返回 1、0、-1）：
 
 - 须确保 `sgn(a.compareTo(b)) == -sgn(b.compareTo(a))`（且 `a.compareTo(b)` 抛出异常时，`b.compareTo(a)` 也须抛出异常）；
 
