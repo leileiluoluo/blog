@@ -45,6 +45,90 @@ public interface Comparable<T> {
 
 - 须尽量与 `equals` 结果保持一致，即若有 `a.compareTo(b) == 0`，则最好保证 `a.equals(b)`。
 
+下面即看一下 `Comparable` 接口的使用。
+
+我们自定义一个类 `Telephone`，并实现 `Comparable` 接口：
+
+```java
+// src/test/java/Telephone.java
+public class Telephone implements Comparable<Telephone> {
+
+    private final int countryCode;
+    private final String areaCode;
+    private final int number;
+
+    public Telephone(int countryCode, String areaCode, int number) {
+        this.countryCode = countryCode;
+        this.areaCode = areaCode;
+        this.number = number;
+    }
+
+    @Override
+    public int compareTo(Telephone o) {
+        int result = Integer.compare(countryCode, o.countryCode);
+        if (0 == result) {
+            result = String.CASE_INSENSITIVE_ORDER.compare(areaCode, o.areaCode);
+            if (0 == result) {
+                result = Integer.compare(number, o.number);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "PhoneNumber{" +
+                "countryCode=" + countryCode +
+                ", areaCode=" + areaCode +
+                ", number=" + number +
+                '}';
+    }
+}
+```
+
+可以看到 `Telephone` 含有三个字段 `countryCode`、`areaCode` 和 `number`，分别为 `int`、`String`、`int` 类型。`Telephone` 类实现了 `Comparable` 接口，`compareTo` 方法的实现逻辑是使用 `Integer`、`String`、`Integer` 的 `compare` 方法依次对 `countryCode`、`areaCode` 和 `number` 进行比较。
+
+接下来，编写一个单元测试用例。准备一个 `Telephone` 对象数组，使用 `Arrays.sort()` 对其进行排序，并打印结果：
+
+```java
+// src/test/java/ComparableTest.java
+import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+
+public class ComparableTest {
+
+    @Test
+    public void testArraySort() {
+        Telephone[] telephones = new Telephone[]{
+                new Telephone(86, "010", 89150405),
+                new Telephone(86, "010", 56249829),
+                new Telephone(86, "0411", 66177118),
+                new Telephone(86, "0411", 39966686)
+        };
+
+        // sort arrays
+        Arrays.sort(telephones);
+
+        // print
+        Arrays.stream(telephones).forEach(System.out::println);
+    }
+}
+```
+
+打印结果如下：
+
+```text
+PhoneNumber{countryCode=86, areaCode=010, number=56249829}
+PhoneNumber{countryCode=86, areaCode=010, number=89150405}
+PhoneNumber{countryCode=86, areaCode=0411, number=39966686}
+PhoneNumber{countryCode=86, areaCode=0411, number=66177118}
+```
+
+可以看到，打印结果与我们在 `compareTo` 方法编写的排序规则一致。即先根据 `countryCode` 排序，然后根据 `areaCode` 进行排序，最后根据 `number` 进行排序。
+
+## 2 Comparator 接口
+
 > 参考资料
 >
 > [1] Effective Java (3rd Edition): Consider Implementing Comparable - [https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/](https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/)
