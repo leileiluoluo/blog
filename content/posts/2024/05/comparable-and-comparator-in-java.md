@@ -43,7 +43,7 @@ public interface Comparable<T> {
 
 - 须确保等价性，即若 `a.compareTo(b) == 0`，则对所有 c，有 `sgn(a.compareTo(c)) == sgn(b.compareTo(c))`；
 
-- 须尽量与 `equals` 结果保持一致，即若有 `a.compareTo(b) == 0`，则最好保证 `a.equals(b)`。
+- 须尽量与 `equals()` 结果保持一致，即若有 `a.compareTo(b) == 0`，则最好保证 `a.equals(b)`。
 
 下面即看一下 `Comparable` 接口的使用。
 
@@ -86,7 +86,7 @@ public class Telephone implements Comparable<Telephone> {
 }
 ```
 
-可以看到 `Telephone` 含有三个字段 `countryCode`、`areaCode` 和 `number`，分别为 `int`、`String`、`int` 类型。`Telephone` 类实现了 `Comparable` 接口，`compareTo` 方法的实现逻辑是使用 `Integer`、`String`、`Integer` 的 `compare` 方法依次对 `countryCode`、`areaCode` 和 `number` 进行比较。
+可以看到 `Telephone` 含有三个字段 `countryCode`、`areaCode` 和 `number`，分别为 `int`、`String`、`int` 类型。`Telephone` 类实现了 `Comparable` 接口，`compareTo()` 方法的实现逻辑是使用 `Integer`、`String`、`Integer` 的 `compare` 方法依次对 `countryCode`、`areaCode` 和 `number` 进行比较。
 
 接下来，编写一个单元测试用例 `ComparableTest`。准备一个 `Telephone` 对象数组，使用 `Arrays.sort()` 对其进行排序，并打印结果：
 
