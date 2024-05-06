@@ -125,7 +125,7 @@ PhoneNumber{countryCode=86, areaCode=0411, number=39966686}
 PhoneNumber{countryCode=86, areaCode=0411, number=66177118}
 ```
 
-可以看到，打印结果与我们在 `compareTo` 方法编写的排序规则一致。即先根据 `countryCode` 排序，然后根据 `areaCode` 进行排序，最后根据 `number` 进行排序。
+可以看到，打印结果与我们在 `compareTo()` 方法编写的排序规则一致。即先根据 `countryCode` 排序，然后根据 `areaCode` 进行排序，最后根据 `number` 进行排序。
 
 可以看到，实现 `Comparable` 接口表示拥有了一种默认的排序方式。如果想在不修改类本身的情况下使用多种排序规则该如何做呢？对于这种情况，`Comparator` 接口就派上用场了。
 
