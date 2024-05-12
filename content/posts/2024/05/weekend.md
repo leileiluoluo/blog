@@ -94,9 +94,9 @@ description: 這週六沒放假，補五一的調休。今天週末，早上就�
 
 {{% center %}}（海邊的餐廳一角）{{% /center %}}
 
-[![洗好的櫻桃](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-16.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-16.jpg)
-
 晚上了，洗洗今早買的櫻桃，再將剩餘的蔥苗切一切拌個小蔥拌豆腐。
+
+[![洗好的櫻桃](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-16.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-16.jpg)
 
 {{% center %}}（洗好的櫻桃）{{% /center %}}
 
