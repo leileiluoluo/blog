@@ -30,7 +30,7 @@ description: 這週六沒放假，補五一的調休。今天週末，早上就�
 
 {{% center %}}（道路旁路燈杆上懸掛的裝飾花籃）{{% /center %}}
 
-有一塊道路的一側立着一個巨大的薛仁貴騎馬舞槍徵高麗的雕像，氣勢磅礴。想象着一千年前的這裏有我們的先人們保衛家國、戰馬嘶吼、將士殺敵的景象。
+有一塊道路的一側立着一個巨大的薛仁貴騎馬舞槍徵高麗的雕像，氣勢磅礴。想象着一千年前的這裏有我們的先人們保衛家國、戰馬嘶吼、英勇殺敵的景象。
 
 [![道路旁薛仁貴騎馬舞槍徵高麗的雕像](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-3.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-3.jpg)
 
