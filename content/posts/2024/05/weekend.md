@@ -17,70 +17,70 @@ description: 这周六没放假，补五一的调休。今天周末，早上就�
 
 <!--more-->
 
-[![道路旁的旅顺区政府大楼](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-1.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-1.jpeg)
+[![道路旁的旅顺区政府大楼](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-1.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-1.jpg)
 
 {{% center %}}（道路旁的旅顺区政府大楼）{{% /center %}}
 
-[![道路旁路灯上悬挂的装饰花篮](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-2.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-2.jpeg)
+[![道路旁路灯上悬挂的装饰花篮](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-2.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-2.jpg)
 
 {{% center %}}（道路旁路灯上悬挂的装饰花篮）{{% /center %}}
 
-[![道路旁立着一个巨大的薛仁贵骑马舞枪征高丽的雕像](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-3.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-3.jpeg)
+[![道路旁立着一个巨大的薛仁贵骑马舞枪征高丽的雕像](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-3.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-3.jpg)
 
 {{% center %}}（道路旁立着一个巨大的薛仁贵骑马舞枪征高丽的雕像）{{% /center %}}
 
-[![道路旁老农摆摊卖樱桃](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-4.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-4.jpeg)
+[![道路旁老农摆摊卖樱桃](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-4.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-4.jpg)
 
 {{% center %}}（道路旁老农摆摊卖樱桃）{{% /center %}}
 
-[![老农现摘的樱桃](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-5.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-5.jpeg)
+[![老农现摘的樱桃](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-5.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-5.jpg)
 
 {{% center %}}（老农现摘的樱桃）{{% /center %}}
 
-[![通往后山的小道](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-6.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-6.jpeg)
+[![通往后山的小道](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-6.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-6.jpg)
 
 {{% center %}}（通往后山的小道）{{% /center %}}
 
-[![后山上母亲当年帮忙开垦的一块地](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-7.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-7.jpeg)
+[![后山上母亲当年帮忙开垦的一块地](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-7.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-7.jpg)
 
 {{% center %}}（后山上母亲当年帮忙开垦的一块地）{{% /center %}}
 
-[![在地里种好了小葱](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-8.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-8.jpeg)
+[![在地里种好了小葱](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-8.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-8.jpg)
 
 {{% center %}}（在地里种好了小葱）{{% /center %}}
 
-[![眺望附近的大海](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-9.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-9.jpeg)
+[![眺望附近的大海](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-9.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-9.jpg)
 
 {{% center %}}（眺望附近的大海）{{% /center %}}
 
-[![海边的大型恐龙](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-10.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-10.jpeg)
+[![海边的大型恐龙](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-10.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-10.jpg)
 
 {{% center %}}（海边的大型恐龙）{{% /center %}}
 
-[![渔民的渔船](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-11.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-11.jpeg)
+[![渔民的渔船](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-11.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-11.jpg)
 
 {{% center %}}（渔民的渔船）{{% /center %}}
 
-[![清澈的大海](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-12.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-12.jpeg)
+[![清澈的大海](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-12.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-12.jpg)
 
 {{% center %}}（清澈的大海）{{% /center %}}
 
-[![有游客在海边拍照](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-13.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-13.jpeg)
+[![有游客在海边拍照](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-13.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-13.jpg)
 
 {{% center %}}（有游客在海边拍照）{{% /center %}}
 
-[![海边的浪潮](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-14.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-14.jpeg)
+[![海边的浪潮](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-14.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-14.jpg)
 
 {{% center %}}（海边的浪潮）{{% /center %}}
 
-[![海边的餐厅一角](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-15.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-15.jpeg)
+[![海边的餐厅一角](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-15.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-15.jpg)
 
 {{% center %}}（海边的餐厅一角）{{% /center %}}
 
-[![洗好的樱桃](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-16.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-16.jpeg)
+[![洗好的樱桃](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-16.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-16.jpg)
 
 {{% center %}}（洗好的樱桃）{{% /center %}}
 
-[![小葱拌豆腐](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-17.jpeg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-17.jpeg)
+[![小葱拌豆腐](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-17.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-17.jpg)
 
 {{% center %}}（小葱拌豆腐）{{% /center %}}
