@@ -121,6 +121,8 @@ public void openLoginURL() {
 
 执行完成后 Cucumber 会生成一个报告来展示每个场景执行成功或失败，从而验证软件是否满足需求。
 
+## 3 如何使用 Cucumber 进行 API 测试？
+
 > 参考资料
 >
 > [1] Cucumber Documentation: Guides - [https://cucumber.io/docs/guides/](https://cucumber.io/docs/guides/)
