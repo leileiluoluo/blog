@@ -108,7 +108,18 @@ Feature: 登录功能
     Then 用户成功登录系统
 ```
 
-Cucumber 支持为 Given-When-Then 对应的每个步骤编写相应的测试代码（称作 Step Definitions），执行完成后会生成一个报告来展示每个场景执行成功或失败，从而验证软件是否满足需求。
+Cucumber 支持为 Given-When-Then 对应的每个步骤编写相应的测试代码（称作 Step Definitions）。
+
+一段使用 Java 语言编写的 Step Definition 代码如下：
+
+```java
+@Given("用户打开登录页面")
+public void openLoginURL() {
+    driver.get(URLConstants.LOGIN_URL);
+}
+```
+
+执行完成后 Cucumber 会生成一个报告来展示每个场景执行成功或失败，从而验证软件是否满足需求。
 
 > 参考资料
 >
