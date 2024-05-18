@@ -8,6 +8,7 @@ categories:
   - 计算机
 tags:
   - 自动化测试
+  - Java
 keywords:
   - Cucumber
   - Java
