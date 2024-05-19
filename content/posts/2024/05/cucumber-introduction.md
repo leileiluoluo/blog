@@ -135,6 +135,8 @@ Maven：3.9.2
 Cucumber Java：7.17.0
 ```
 
+因 Cucumber 仅支持特性文件的编写与代码的黏合，具体的测试代码编写还需要借助相应的工具。本文对 API 测试所使用的工具包为 REST Assured（关于 REST Assured 的具体使用，请参看本人之前写的一篇文章「[如何使用 REST Assured 做 API 测试？](https://leileiluoluo.com/posts/how-to-perform-api-testing-using-rest-assured.html)」）。
+
 ### 3.1 项目结构
 
 该示例测试项目使用 Maven 管理，其结构如下：
