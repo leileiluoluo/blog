@@ -308,7 +308,9 @@ public class TestRunner {
 }
 ```
 
-可以看到，我们为该类加上了注解 `@RunWith(Cucumber.class)`，表示其执行由 Cucumber 来负责，此外还在该类上使用了注解 `@CucumberOptions` 指定了特性文件所在目录以及生成的测试结果 JSON 文件所在目录。
+可以看到，我们为该类加上了注解 `@RunWith(Cucumber.class)`，表示其执行由 Cucumber 来负责；还在该类上使用了注解 `@CucumberOptions` 指定了特性文件所在目录以及生成的测试结果 JSON 文件所在目录。
+
+静态 `setUp()` 方法负责设置全局的 REST Assured `baseURI`，这样在 Step Definitions 中发起请求时就不必写完整 URL 了。
 
 ### 3.5 执行测试与报告展示
 
