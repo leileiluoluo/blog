@@ -137,7 +137,7 @@ Cucumber Java：7.17.0
 
 因 Cucumber 仅支持特性文件的编写与代码的黏合，具体的测试代码编写还需要借助相应的工具。本文对 API 测试所使用的工具包为 REST Assured（关于 REST Assured 的具体使用，请参看本人之前写的一篇文章「[如何使用 REST Assured 做 API 测试？](https://leileiluoluo.com/posts/how-to-perform-api-testing-using-rest-assured.html)」）。
 
-### 3.1 项目结构
+### 3.1 项目结构与 Maven 依赖
 
 该示例测试项目使用 Maven 管理，其结构如下：
 
@@ -146,7 +146,7 @@ cucumber-api-test-demo
 ├─ src/test
 │   ├─ java
 │   │    └─ com.example.tests
-│   |       ├─ stepdefins
+│   |       ├─ stepdefs
 │   |       │   └─ CreateIssueStep.java
 │   |       ├─ utils
 │   |       │   └─ ConfigUtil.java
@@ -157,6 +157,62 @@ cucumber-api-test-demo
 │       └─ config.properties
 └─ pom.xml
 ```
+
+可以看到，Cucumber 特性描述文件位于 `src/test/resources/features` 文件夹下，源码位于 `src/test/java/com/example/tests` 文件夹下。`TestRunner.java` 为程序的入口文件；`utils` 包下的 `ConfigUtil.java` 为配置文件工具类；`stepdefs` 包下的 Java 类负责对 `features` 目录下的各个特性文件中定义的步骤作具体实现。
+
+该示例项目用到的依赖如下：
+
+```xml
+<dependencies>
+    <!-- cucumber -->
+    <dependency>
+        <groupId>io.cucumber</groupId>
+        <artifactId>cucumber-java</artifactId>
+        <version>${cucumber.version}</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>io.cucumber</groupId>
+        <artifactId>cucumber-junit</artifactId>
+        <version>${cucumber.version}</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- rest assured -->
+    <dependency>
+        <groupId>io.rest-assured</groupId>
+        <artifactId>rest-assured</artifactId>
+        <version>${rest-assured.version}</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- jackson-databind -->
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.17.1</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- cucumber reporting -->
+    <dependency>
+        <groupId>net.masterthought</groupId>
+        <artifactId>cucumber-reporting</artifactId>
+        <version>5.8.0</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- junit -->
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
+
+可以看到，除了使用 Cucumber 的两个核心包 `cucumber-java`、`cucumber-junit` 以及 JUnit 5 外，还使用 `rest-assured` 作 API 的请求发起与响应收集，使用 `jackson-databind` 作 `rest-assured` 的请求体 JSON 序列化，使用 `cucumber-reporting` 作 HTML 报告生成。
 
 ### 3.2 Features 文件
 
