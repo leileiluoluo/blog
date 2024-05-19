@@ -127,6 +127,14 @@ public void openLoginURL() {
 
 下面以测试 [GitHub Issues API](https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#create-an-issue) 为例来演示如何使用 Cucumber 进行 API 测试。
 
+示例工程所使用的 JDK、Maven 与 Cucumber 版本如下：
+
+```text
+JDK：Amazon Corretto 17.0.7
+Maven：3.9.2
+Cucumber Java：7.17.0
+```
+
 ### 3.1 项目结构
 
 该示例测试项目使用 Maven 管理，其结构如下：
