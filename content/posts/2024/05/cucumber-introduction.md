@@ -1,5 +1,5 @@
 ---
-title: 如何使用 Cucumber 进行 API 测试和 UI 测试？
+title: Cucumber 是什么？如何使用 Cucumber 进行 API 测试？
 author: leileiluoluo
 type: post
 date: 2024-05-18T18:00:00+08:00
@@ -13,12 +13,12 @@ keywords:
   - Cucumber
   - Java
   - 自动化测试
-description: 本文对支持 BDD 的自动化测试工具 Cucumber 进行初探。首先会对 BDD 进行介绍，接着对 Cucumber 中用到的概念进行介绍，最后以样例的方式演示如何使用 Cucumber 进行 API 测试，以及如何使用 Cucumber 进行 UI 测试，演示代码使用 Java 语言编写。
+description: 本文对支持 BDD 的自动化测试工具 Cucumber 进行初探。首先会对 BDD 进行介绍，接着对 Cucumber 中用到的概念进行介绍，最后以样例的方式演示如何使用 Cucumber 进行 API 测试，演示代码使用 Java 语言编写。
 ---
 
 Cucumber 是一个支持 BDD（Behaviour-Driven Development，行为驱动开发）的自动化测试工具。
 
-本文首先会对 BDD 进行介绍，接着对 Cucumber 中用到的概念进行介绍，最后以样例的方式演示如何使用 Cucumber 进行 API 测试，以及如何使用 Cucumber 进行 UI 测试，演示代码使用 Java 语言编写。
+本文首先会对 BDD 进行介绍，接着对 Cucumber 中用到的概念进行介绍，最后以样例的方式演示如何使用 Cucumber 进行 API 测试，演示代码使用 Java 语言编写。
 
 ## 1 何为 BDD？
 
@@ -121,7 +121,106 @@ public void openLoginURL() {
 
 执行完成后 Cucumber 会生成一个报告来展示每个场景执行成功或失败，从而验证软件是否满足需求。
 
+介绍完 BDD 与 Cucumber 的基础知识后，下面尝试使用 Cucumber 进行一下 API 测试。
+
 ## 3 如何使用 Cucumber 进行 API 测试？
+
+下面以测试 [GitHub Issues API](https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#create-an-issue) 为例来演示如何使用 Cucumber 进行 API 测试。
+
+### 3.1 项目结构
+
+该示例测试项目使用 Maven 管理，其结构如下：
+
+```text
+cucumber-api-test-demo
+├─ src/test
+│   ├─ java
+│   │    └─ com.example.tests
+│   |       ├─ stepdefins
+│   |       │   └─ CreateIssueStep.java
+│   |       ├─ utils
+│   |       │   └─ ConfigUtil.java
+│   |       └─ TestRunner.java
+│   └─ resources
+│       ├─ features
+│       │   └─ github-issues.feature
+│       └─ config.properties
+└─ pom.xml
+```
+
+### 3.2 Features 文件
+
+```text
+# src/test/resources/features/github-issues.feature
+Feature: GitHub Issues API 测试
+
+  Scenario: 新增一个 Issue
+    Given 新增一个标题为 "Cucumber API Test" 的 Issue
+    Then 响应码为 201，响应体中的 Issue 标题为 "Cucumber API Test"
+```
+
+### 3.3 Step Definitions 源码文件
+
+```java
+// src/test/java/com/example/tests/stepdefs/CreateIssueStep.java
+package com.example.tests.stepdefs;
+
+// ...
+
+public class CreateIssueStep {
+
+    private int statusCode;
+    private String responseBody;
+
+    @Given("新增一个标题为 {string} 的 Issue")
+    public void createAnIssue(String title) {
+        // request
+        Map<String, Object> requestBody = prepareRequestBody(title);
+
+        // response
+        Response response = given().contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("Authorization", "Bearer " + ConfigUtil.getProperty("GITHUB_TOKEN"))
+                .body(requestBody)
+                .post("/issues")
+                .then()
+                .extract().response();
+
+        // extract
+        this.statusCode = response.getStatusCode();
+        this.responseBody = response.asString();
+    }
+
+    @Then("响应码为 {int}，响应体中的 Issue 标题为 {string}")
+    public void responseShouldBeValid(int statusCode, String title) {
+        // extract fields
+        String issueTitle = from(responseBody).getString("title");
+
+        // assertions
+        assertThat(statusCode, equalTo(this.statusCode));
+        assertThat(title, equalTo(issueTitle));
+    }
+
+    private Map<String, Object> prepareRequestBody(String title) {
+        Map<String, Object> requestBody = new HashMap<>();
+        requestBody.put("title", title);
+        requestBody.put("body", "test");
+        return requestBody;
+    }
+}
+```
+
+### 3.4 执行测试与报告展示
+
+```shell
+mvn clean verify
+```
+
+```text
+target/cucumer-report-html
+```
+
+[cucumber-api-test-demo 测试报告](https://leileiluoluo.github.io/static/images/uploads/2024/05/cucumber-api-test-report.png)
 
 > 参考资料
 >
