@@ -130,7 +130,7 @@ public void openLoginURL() {
 示例工程所使用的 JDK、Maven 与 Cucumber 版本如下：
 
 ```text
-JDK：Amazon Corretto 17.0.7
+JDK：BellSoft Liberica 17.0.7
 Maven：3.9.2
 Cucumber Java：7.17.0
 ```
@@ -237,3 +237,9 @@ target/cucumer-report-html
 > 参考资料
 >
 > [1] Cucumber Documentation: Guides - [https://cucumber.io/docs/guides/](https://cucumber.io/docs/guides/)
+>
+> [2] 百度百科：行为驱动开发 - [https://baike.baidu.com/item/行为驱动开发](https://baike.baidu.com/item/行为驱动开发)
+>
+> [3] 磊磊落落：如何使用 REST Assured 做 API 测试？ - [https://leileiluoluo.com/posts/how-to-perform-api-testing-using-rest-assured.html](https://leileiluoluo.com/posts/how-to-perform-api-testing-using-rest-assured.html)
+>
+> [4] GitHub Docs: REST API endpoints for issues - [https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28](https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28)
