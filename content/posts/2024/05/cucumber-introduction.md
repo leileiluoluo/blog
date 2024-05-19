@@ -216,6 +216,8 @@ cucumber-api-test-demo
 
 ### 3.2 Features 文件
 
+该示例工程针对 GitHub Issues API 的测试只有一个场景：新增一个 Issue。`github-issues.feature` 特性文件内容如下：
+
 ```text
 # src/test/resources/features/github-issues.feature
 Feature: GitHub Issues API 测试
@@ -225,7 +227,11 @@ Feature: GitHub Issues API 测试
     Then 响应码为 201，响应体中的 Issue 标题为 "Cucumber API Test"
 ```
 
+可以看到，针对「新增一个 Issue」的场景，我们使用 `Given` 来设定条件并发起请求，使用 `Then` 来验证响应结果。
+
 ### 3.3 Step Definitions 源码文件
+
+如下为 `github-issues.feature` 特性文件所列步骤对应的 Java 源码：
 
 ```java
 // src/test/java/com/example/tests/stepdefs/CreateIssueStep.java
@@ -276,7 +282,11 @@ public class CreateIssueStep {
 }
 ```
 
+可以看到，我们为特性文件中对应步骤的实现方法加上了关键字 `@Given`、`@Then`，然后在 `@Given` 方法中使用 REST Assured 组装和发起请求，在 `@Then` 方法中校验了响应结果。
+
 ### 3.4 程序启动文件
+
+下面为该测试项目的启动文件：
 
 ```java
 // src/test/java/com/example/tests/TestRunner.java
@@ -298,19 +308,31 @@ public class TestRunner {
 }
 ```
 
+可以看到，我们为该类加上了注解 `@RunWith(Cucumber.class)`，表示其执行由 Cucumber 来负责，此外还在该类上使用了注解 `@CucumberOptions` 指定了特性文件所在目录以及生成的测试结果 JSON 文件所在目录。
+
 ### 3.5 执行测试与报告展示
+
+测试用例编写完成后，可以使用如下 Maven 命令执行测试：
 
 ```shell
 mvn clean verify
 ```
 
+其会在如下文件夹生成 HTML 测试报告：
+
 ```text
 target/cucumer-report-html
 ```
 
+使用浏览器打开，效果如下：
+
 ![cucumber-api-test-demo 测试报告](https://leileiluoluo.github.io/static/images/uploads/2024/05/cucumber-api-test-report.png)
 
+可以看到，我们在特性文件中定义的各个步骤都运行正常，测试通过。
+
 ## 4 小结
+
+本文为 Cucumber 的初探。因 Cucumber 为一个支持 BDD 的测试工具，本文首先介绍了 BDD 的基本概念，接着介绍了 Cucumber 的基础知识，最后以测试一个 GitHub API 为例演示了 Cucumber 的具体使用。
 
 本文完整示例工程已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/cucumber-api-test-demo)，欢迎关注或 Fork。
 
