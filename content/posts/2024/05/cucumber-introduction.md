@@ -220,7 +220,11 @@ mvn clean verify
 target/cucumer-report-html
 ```
 
-[cucumber-api-test-demo 测试报告](https://leileiluoluo.github.io/static/images/uploads/2024/05/cucumber-api-test-report.png)
+![cucumber-api-test-demo 测试报告](https://leileiluoluo.github.io/static/images/uploads/2024/05/cucumber-api-test-report.png)
+
+## 4 小结
+
+本文完整示例工程已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/cucumber-api-test-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
