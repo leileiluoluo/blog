@@ -218,7 +218,29 @@ public class CreateIssueStep {
 }
 ```
 
-### 3.4 执行测试与报告展示
+### 3.4 程序启动文件
+
+```java
+// src/test/java/com/example/tests/TestRunner.java
+package com.example.tests;
+
+// ...
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        features = "src/test/resources/features",
+        plugin = {"json:target/cucumber.json"}
+)
+public class TestRunner {
+
+    @BeforeClass
+    public static void setUp() {
+        baseURI = ConfigUtil.getProperty("GITHUB_BASE_URI");
+    }
+}
+```
+
+### 3.5 执行测试与报告展示
 
 ```shell
 mvn clean verify
