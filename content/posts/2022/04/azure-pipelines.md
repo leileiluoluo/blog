@@ -8,6 +8,7 @@ categories:
   - 计算机
 tags:
   - DevOps
+  - Azure
 keywords:
   - Azure
   - 流水线
