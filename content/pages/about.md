@@ -34,6 +34,10 @@ leileiluoluo(at)leileiluoluo.com
 
 本博客的技术文章会同步分发到如下各个平台，欢迎您在对应的平台关注我！
 
-- 知乎：[https://www.zhihu.com/people/leileiluoluo.com](https://www.zhihu.com/people/leileiluoluo.com)
 - 掘金：[https://juejin.cn/user/3054882885469577](https://juejin.cn/user/3054882885469577)
+
+- 知乎：[https://www.zhihu.com/people/leileiluoluo.com](https://www.zhihu.com/people/leileiluoluo.com)
+
+- 简书：[https://www.jianshu.com/u/c70eff939d9d](https://www.jianshu.com/u/c70eff939d9d)
+
 - CSDN：[https://blog.csdn.net/leileiluoluo](https://blog.csdn.net/leileiluoluo)
