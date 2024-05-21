@@ -194,14 +194,6 @@ cucumber-api-test-demo
         <scope>test</scope>
     </dependency>
 
-    <!-- cucumber reporting -->
-    <dependency>
-        <groupId>net.masterthought</groupId>
-        <artifactId>cucumber-reporting</artifactId>
-        <version>5.8.0</version>
-        <scope>test</scope>
-    </dependency>
-
     <!-- junit -->
     <dependency>
         <groupId>org.junit.jupiter</groupId>
@@ -212,7 +204,17 @@ cucumber-api-test-demo
 </dependencies>
 ```
 
-可以看到，除了使用 Cucumber 的两个核心包 `cucumber-java`、`cucumber-junit` 以及 JUnit 5 外，还使用 `rest-assured` 作 API 的请求发起与响应收集，使用 `jackson-databind` 作 `rest-assured` 的请求体 JSON 序列化，使用 `cucumber-reporting` 作 HTML 报告生成。
+可以看到，除了使用 Cucumber 的两个核心包 `cucumber-java`、`cucumber-junit` 以及 JUnit 5 外，还使用 `rest-assured` 作 API 的请求发起与响应收集，使用 `jackson-databind` 作 `rest-assured` 的请求体 JSON 序列化。
+
+此外，还使用一个插件 `maven-cucumber-reporting` 来作 HTML 报告生成。
+
+```xml
+<plugin>
+    <groupId>net.masterthought</groupId>
+    <artifactId>maven-cucumber-reporting</artifactId>
+    <version>5.8.1</version>
+</plugin>
+```
 
 ### 3.2 Features 文件
 
