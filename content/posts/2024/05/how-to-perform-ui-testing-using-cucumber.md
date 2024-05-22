@@ -145,6 +145,88 @@ cucumber-ui-test-demo
 </plugin>
 ```
 
+介绍完工程的整体结构，以及各个文件夹或包的用途，下面逐一介绍一下该工程的几个主要文件或类的功能。
+
+## 2 特性文件
+
+如下为 Cucumber 特性描述文件 `github-issues.feature` 的内容：
+
+```text
+Feature: GitHub Issues UI 测试
+
+  Scenario: 新增一个 Issue
+    Given 登录到 GitHub
+    When 打开 Issues 页面并新增一个标题为 "Cucumber UI Test" 的 Issue
+    Then Issue 新增成功且标题为 "Cucumber UI Test"
+```
+
+可以看到，该文件只定义了一个场景：新增一个 Issue。`Given` 步骤为准备阶段，新建 Issue 前需要登录到 GitHub；`When` 步骤为实际的操作阶段，即打开页面并新建一个指定标题的 Issue；`Then` 步骤为验证阶段，即验证 Issue 新增成功且标题为指定的标题。
+
+## 3 Step Definitions 类
+
+Step Definition 类 `LoginStep.java` 的内容如下：
+
+```java
+package com.example.tests.stepdefs;
+
+import com.example.tests.pages.LoginPage;
+import com.example.tests.utils.WebDriverFactory;
+import io.cucumber.java.en.Given;
+
+public class LoginStep {
+    private final LoginPage loginPage;
+
+    public LoginStep() {
+        loginPage = new LoginPage(WebDriverFactory.getWebDriver());
+    }
+
+    @Given("登录到 GitHub")
+    public void login() {
+        loginPage.login();
+    }
+}
+```
+
+可以看到，该类的逻辑非常简单，负责 `github-issues.feature` 特性文件中 `Given` 部分的实现，即新建 `LoginPage` 类，并调用其 `login()` 方法进行登录。
+
+Step Definition 类 `CreateIssueStep.java` 的内容如下：
+
+```java
+package com.example.tests.stepdefs;
+
+import com.example.tests.pages.IssuesPage;
+import com.example.tests.utils.WebDriverFactory;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+import static org.hamcrest.CoreMatchers.startsWith;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+public class CreateIssueStep {
+    private final IssuesPage issuesPage;
+
+    public CreateIssueStep() {
+        issuesPage = new IssuesPage(WebDriverFactory.getWebDriver());
+    }
+
+    @When("打开 Issues 页面并新增一个标题为 {string} 的 Issue")
+    public void createIssue(String title) {
+        // open issues page
+        issuesPage.open();
+
+        // create issue
+        issuesPage.createIssue(title);
+    }
+
+    @Then("Issue 新增成功且标题为 {string}")
+    public void checkTitle(String title) {
+        assertThat(issuesPage.getTitle(), startsWith(title));
+    }
+}
+```
+
+该类的逻辑同样很简单，负责 `github-issues.feature` 特性文件中 `When` 部分和 `Then` 部分的实现。`When` 部分首先调用了 `IssuesPage` 实例的 `open()` 方法打开了 Issue 页面，接着调用了其 `createIssue()` 方法新建了 Issue。`Then` 部分负责校验，即新建完成后页面的标题是否与指定的一致。
+
 ![在页面创建 GitHub Issue 的实现效果](https://leileiluoluo.github.io/static/images/uploads/2024/05/report-for-creating-github-issue-using-cucumber.png)
 
 ## 4 小结
