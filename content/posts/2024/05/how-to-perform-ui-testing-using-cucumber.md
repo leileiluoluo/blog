@@ -18,11 +18,9 @@ keywords:
 description: 本文以在页面创建 GitHub Issue 为例探索如何使用 Cucumber Java 进行 UI（浏览器）测试。本文使用的浏览器测试工具为 Selenium，实现语言为 Java，工程使用 Maven 管理。
 ---
 
-上文「[Cucumber 是什么？如何使用 Cucumber Java 进行 API 测试？](https://leileiluoluo.github.io/posts/cucumber-introduction.html)」介绍了 Cucumber 中的基本概念，并以实例的方式演示了如何使用 Cucumber Java 进行 API 测试。
+上文「[Cucumber 是什么？如何使用 Cucumber Java 进行 API 测试？](https://leileiluoluo.github.io/posts/cucumber-introduction.html)」介绍了 Cucumber 中的基本概念，并以实例的方式演示了如何使用 Cucumber Java 进行 API 测试。本文基于此，以在页面创建 GitHub Issue 为例进一步探索如何使用 Cucumber Java 进行 UI（浏览器）测试。示例工程实现语言为 Java，使用的浏览器测试工具为 Selenium，工程使用 Maven 管理。
 
-本文基于此，以在页面创建 GitHub Issue 为例进一步探索如何使用 Cucumber Java 进行 UI（浏览器）测试。示例工程实现语言为 Java，使用的浏览器测试工具为 Selenium，工程使用 Maven 管理。
-
-此外，示例工程所使用的 JDK、Maven 与 Cucumber 版本如下：
+示例工程所使用的 JDK、Maven 与 Cucumber 版本如下：
 
 ```text
 JDK：BellSoft Liberica 17.0.7
@@ -124,3 +122,5 @@ cucumber-ui-test-demo
 > 参考资料
 >
 > [1] Cucumber Documentation: Browser Automation - [https://cucumber.io/docs/guides/browser-automation/?lang=java](https://cucumber.io/docs/guides/browser-automation/?lang=java)
+>
+> [2] 磊磊落落：Selenium WebDriver 基础使用 - [https://leileiluoluo.com/posts/selenium-webdriver.html](https://leileiluoluo.com/posts/selenium-webdriver.html)
