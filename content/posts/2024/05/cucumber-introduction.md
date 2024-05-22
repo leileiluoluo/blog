@@ -1,5 +1,5 @@
 ---
-title: Cucumber 是什么？如何使用 Cucumber 进行 API 测试？
+title: Cucumber 是什么？如何使用 Cucumber Java 进行 API 测试？
 author: leileiluoluo
 type: post
 date: 2024-05-18T18:00:00+08:00
@@ -13,12 +13,12 @@ keywords:
   - Cucumber
   - Java
   - 自动化测试
-description: 本文对支持 BDD 的自动化测试工具 Cucumber 进行初探。首先会对 BDD 进行介绍，接着对 Cucumber 中用到的概念进行介绍，最后以样例的方式演示如何使用 Cucumber 进行 API 测试，演示代码使用 Java 语言编写。
+description: 本文对支持 BDD 的自动化测试工具 Cucumber 进行初探。首先会对 BDD 进行介绍，接着对 Cucumber 中用到的概念进行介绍，最后以样例的方式演示如何使用 Cucumber Java 进行 API 测试。
 ---
 
 Cucumber 是一个支持 BDD（Behaviour-Driven Development，行为驱动开发）的自动化测试工具。
 
-本文首先会对 BDD 进行介绍，接着对 Cucumber 中用到的概念进行介绍，最后以样例的方式演示如何使用 Cucumber 进行 API 测试，演示代码使用 Java 语言编写。
+本文首先会对 BDD 进行介绍，接着对 Cucumber 中用到的概念进行介绍，最后以样例的方式演示如何使用 Cucumber Java 进行 API 测试。
 
 ## 1 何为 BDD？
 
