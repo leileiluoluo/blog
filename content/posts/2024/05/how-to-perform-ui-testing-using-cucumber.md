@@ -164,7 +164,7 @@ Feature: GitHub Issues UI 测试
 
 ## 3 Step Definitions 类
 
-Step Definition 类 `LoginStep.java` 的内容如下：
+`stepdefs` 包用于放置特性文件中各个步骤对应的实现。该包下的 `LoginStep.java` 类的内容如下：
 
 ```java
 package com.example.tests.stepdefs;
@@ -227,9 +227,178 @@ public class CreateIssueStep {
 
 该类的逻辑同样很简单，负责 `github-issues.feature` 特性文件中 `When` 部分和 `Then` 部分的实现。`When` 部分首先调用了 `IssuesPage` 实例的 `open()` 方法打开了 Issue 页面，接着调用了其 `createIssue()` 方法新建了 Issue。`Then` 部分负责校验，即新建完成后页面的标题是否与指定的一致。
 
+## 4 页面对象类
+
+`pages` 包用于放置页面对象类，负责调用 Selenium 进行真正的浏览器操作。该包下的 `LoginPage.java` 类的内容如下：
+
+```java
+package com.example.tests.pages;
+
+import com.example.tests.utils.ConfigUtil;
+import com.example.tests.utils.GoogleAuthenticatorUtil;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class LoginPage {
+    private static final String LOGIN_URL = "https://github.com/login";
+
+    private static final By USERNAME_ELEM = By.xpath("//input[@name='login']");
+    private static final By PASSWORD_ELEM = By.xpath("//input[@name='password']");
+    private static final By SIGN_IN_BUTTON = By.xpath("//input[@name='commit']");
+    private static final By TOTP_ELEM = By.xpath("//input[@name='app_otp']");
+
+    private final WebDriver driver;
+
+    public LoginPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public void login() {
+        // open login url
+        driver.get(LOGIN_URL);
+
+        // input username & password
+        driver.findElement(USERNAME_ELEM).sendKeys(ConfigUtil.getProperty("GITHUB_USERNAME"));
+        driver.findElement(PASSWORD_ELEM).sendKeys(ConfigUtil.getProperty("GITHUB_PASSWORD"));
+
+        // click "Sign in" button
+        driver.findElement(SIGN_IN_BUTTON).click();
+
+        // input Authentication code
+        int code = GoogleAuthenticatorUtil.getTotpCode(ConfigUtil.getProperty("GITHUB_TOTP_SECRET"));
+        driver.findElement(TOTP_ELEM).sendKeys("" + code);
+    }
+}
+```
+
+可以看到，该类包含了登录页面的属性与行为。页面元素被定义为了属性，而方法表示该页面具备的行为。`login()` 方法包含了完整的 GitHub 登录行为：即包含打开登录页面、输入用户名和密码、点击登录按钮、输入鉴权码几个连续的动作。
+
+`IssuesPage` 类的内容如下：
+
+```java
+package com.example.tests.pages;
+
+import com.example.tests.utils.ConfigUtil;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+public class IssuesPage {
+    private static final String ISSUES_URL = "/issues";
+
+    private static final By CREATE_ISSUE_BUTTON = By.partialLinkText("New issue");
+    private static final By INPUT_TITLE_ELEM = By.xpath("//input[@id='issue_title']");
+    private static final By SUBMIT_BUTTON = By.xpath("//button[contains(text(), 'Submit new issue')]");
+
+    private final WebDriver driver;
+
+    public IssuesPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public void open() {
+        driver.get(ConfigUtil.getProperty("GITHUB_REPO") + ISSUES_URL);
+
+        new WebDriverWait(driver, Duration.ofMinutes(1)).until(ExpectedConditions.elementToBeClickable(CREATE_ISSUE_BUTTON));
+    }
+
+    public void createIssue(String title) {
+        driver.findElement(CREATE_ISSUE_BUTTON).click();
+
+        new WebDriverWait(driver, Duration.ofMinutes(1)).until(ExpectedConditions.visibilityOfElementLocated(INPUT_TITLE_ELEM));
+        driver.findElement(INPUT_TITLE_ELEM).sendKeys(title);
+
+        driver.findElement(SUBMIT_BUTTON).click();
+    }
+
+    public String getTitle() {
+        return driver.getTitle();
+    }
+}
+```
+
+该类有三个方法：`open()`，打开 Issues 页面；`createIssue()`，创建 Issue；`getTitle()`，获取当前页面标题。均是基于 Selenium WebDriver 的页面打开或元素操作。
+
+## 5 Hooks 类
+
+Cucumber 提供多个注解用于在步骤执行前或执行后添加额外的逻辑。本示例工程即使用了 `@AfterStep` 注解来为每一步执行完成后对页面进行截图。
+
+```java
+package com.example.tests.hooks;
+
+import com.example.tests.utils.WebDriverFactory;
+import io.cucumber.java.AfterStep;
+import io.cucumber.java.Scenario;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+
+public class ScreenshotHook {
+    @AfterStep
+    public void attachScreenshot(Scenario scenario) {
+        WebDriver driver = WebDriverFactory.getWebDriver();
+        byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        scenario.attach(screenshot, "image/png", driver.getCurrentUrl());
+    }
+}
+```
+
+如上 `ScreenshotHook` 类的 `attachScreenshot()` 方法在每一步执行完成后进行了页面截图，并将图片附加到了最终报告对应的各个步骤里。
+
+## 6 工具类
+
+前面已介绍过 `utils` 包下的三个工具类 `ConfigUtil.java`、`GoogleAuthenticatorUtil.java` 与 `WebDriverFactory.java` 分别用于读取配置信息、生成双因子鉴权码与 Selenium `WebDriver` 的统一获取，这里就不再展开介绍了。
+
+## 7 程序入口类
+
+下面介绍一下本示例工程的入口 `TestRunner.java`，其内容如下：
+
+```java
+package com.example.tests;
+
+import com.example.tests.utils.WebDriverFactory;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import org.junit.AfterClass;
+import org.junit.runner.RunWith;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        features = "src/test/resources/features",
+        plugin = {"json:target/cucumber.json"}
+)
+public class TestRunner {
+    @AfterClass
+    public static void closeWebDriver() {
+        WebDriverFactory.closeWebDriver();
+    }
+}
+```
+
+可以看到该类基于 JUnit 5，使用 `@RunWith` 注解指定了程序以 Cucumber 提供的运行器运行。使用 `@CucumberOptions` 注解指定了特性文件位置和生成的报告 JSON 文件位置。此外，还需注意，该类含有一个方法 `closeWebDriver()`，使用 `@AfterClass` 注解修饰，表示在程序运行完毕后，关闭浏览器。
+
+## 8 工程运行与报告查看
+
+因本示例工程使用的是 Chrome 浏览器，运行前，请确保您的机器含有 Chrome 浏览器，并且安装了对应的 ChromeDriver（请使用「[这个地址]()」下载对应您浏览器版本的 Chrome Driver，并将其解压地址配置到系统环境变量）。
+
+本示例工程可以直接在 Intellij IDEA 中运行或使用如下 Maven 命名运行：
+
+```shell
+mvn clean verify
+```
+
+运行效果为文章开头的动图。
+
+运行完成后，会在 `target/cucumer-report-html` 文件夹生成 HTML 测试报告。打开后，效果如下：
+
 ![在页面创建 GitHub Issue 的实现效果](https://leileiluoluo.github.io/static/images/uploads/2024/05/report-for-creating-github-issue-using-cucumber.png)
 
-## 4 小结
+可以看到，对应特性文件中各个步骤的运行状态与页面截图均会在其中详细展示。
+
+## 9 小结
 
 本文完整示例工程已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/cucumber-ui-test-demo)，欢迎关注或 Fork。
 
