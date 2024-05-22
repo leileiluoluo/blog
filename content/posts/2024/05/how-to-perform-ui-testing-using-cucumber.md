@@ -382,7 +382,7 @@ public class TestRunner {
 
 ## 8 工程运行与报告查看
 
-因本示例工程使用的是 Chrome 浏览器，运行前，请确保您的机器含有 Chrome 浏览器，并且安装了对应的 ChromeDriver（请使用「[这个地址]()」下载对应您浏览器版本的 Chrome Driver，并将其解压地址配置到系统环境变量）。
+因本示例工程使用的是 Chrome 浏览器，运行前，请确保您的机器含有 Chrome 浏览器，并且安装了对应的 ChromeDriver（请使用「[这个地址](https://developer.chrome.com/docs/chromedriver/downloads)」下载对应您浏览器版本的 Chrome Driver，并将其解压地址配置到系统环境变量）。
 
 本示例工程可以直接在 Intellij IDEA 中运行或使用如下 Maven 命名运行：
 
@@ -399,6 +399,8 @@ mvn clean verify
 可以看到，对应特性文件中各个步骤的运行状态与页面截图均会在其中详细展示。
 
 ## 9 小结
+
+本文以在页面创建 GitHub Issue 为例探索了如何使用 Cucumber Java 进行 UI（浏览器）测试。
 
 本文完整示例工程已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/cucumber-ui-test-demo)，欢迎关注或 Fork。
 
