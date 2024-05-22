@@ -135,7 +135,7 @@ cucumber-ui-test-demo
 </dependencies>
 ```
 
-同样，还使用一个插件 `maven-cucumber-reporting` 来作 HTML 报告生成。
+同样，还使用一个插件 `maven-cucumber-reporting` 来生成 HTML 报告。
 
 ```xml
 <plugin>
