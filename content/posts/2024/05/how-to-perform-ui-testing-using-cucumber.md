@@ -15,6 +15,7 @@ keywords:
   - Java
   - 自动化测试
   - UI
+  - 浏览器
 description: 本文以在页面创建 GitHub Issue 为例探索如何使用 Cucumber Java 进行 UI（浏览器）测试。本文使用的浏览器测试工具为 Selenium，实现语言为 Java，工程使用 Maven 管理。
 ---
 
@@ -65,7 +66,7 @@ cucumber-ui-test-demo
 
 - 包 `stepdefs`
 
-  该包用于放置 Step Definitions 实现类，即 Cumcumber 特性文件中定义的各个步骤对应的 Java 实现。`LoginStep.java` 负责登录相关步骤的实现，`CreateIssueStep.java` 负责创建 Issues 相关步骤的实现。注意，该示例工程做了分层设计，具体 Selenium 操作浏览器的逻辑未在该包下实现，而是统一放置于 `pages` 包下，该包下的类只负责调用 `pages` 包下相应的实现。
+  该包用于放置 Step Definitions 实现类，即 Cucumber 特性文件中定义的各个步骤对应的 Java 实现。`LoginStep.java` 负责登录相关步骤的实现，`CreateIssueStep.java` 负责创建 Issues 相关步骤的实现。注意，该示例工程做了分层设计，具体 Selenium 操作浏览器的逻辑未在该包下实现，而是统一放置于 `pages` 包下，该包下的类只负责调用 `pages` 包下相应的实现。
 
 - 包 `pages`
 
@@ -135,7 +136,7 @@ cucumber-ui-test-demo
 </dependencies>
 ```
 
-可以看到，除了引入 JUnit、Cucumber 和 Selenium 几个主要依赖外，还引入 `googleauth` 来做双因子验证码生成。
+可以看到，除了引入 JUnit、Cucumber 和 Selenium 几个主要依赖外，还引入了 `googleauth` 来做双因子验证码生成。
 
 同样，还使用一个插件 `maven-cucumber-reporting` 来生成 HTML 报告。
 
@@ -147,7 +148,7 @@ cucumber-ui-test-demo
 </plugin>
 ```
 
-介绍完工程的整体结构，以及各个文件夹或包的用途，下面逐一介绍一下该工程的几个主要文件或类的功能。
+介绍完工程的整体结构以及各个文件夹或包的用途后，下面逐一介绍一下该工程的几个主要文件或类的功能。
 
 ## 2 特性文件
 
@@ -189,7 +190,7 @@ public class LoginStep {
 }
 ```
 
-可以看到，该类的逻辑非常简单，负责 `github-issues.feature` 特性文件中 `Given` 部分的实现，即新建 `LoginPage` 类，并调用其 `login()` 方法进行登录。
+可以看到，该类的逻辑非常简单，负责 `github-issues.feature` 特性文件中 `Given` 部分的实现，即新建 `LoginPage` 对象，并调用其 `login()` 方法进行登录。
 
 Step Definition 类 `CreateIssueStep.java` 的内容如下：
 
@@ -227,11 +228,11 @@ public class CreateIssueStep {
 }
 ```
 
-该类的逻辑同样很简单，负责 `github-issues.feature` 特性文件中 `When` 部分和 `Then` 部分的实现。`When` 部分首先调用了 `IssuesPage` 实例的 `open()` 方法打开了 Issue 页面，接着调用了其 `createIssue()` 方法新建了 Issue。`Then` 部分负责校验，即新建完成后页面的标题是否与指定的一致。
+该类的逻辑同样很简单，负责 `github-issues.feature` 特性文件中 `When` 部分和 `Then` 部分的实现。`When` 部分首先调用了 `IssuesPage` 对象的 `open()` 方法来打开 Issue 页面，接着调用了该对象的 `createIssue()` 方法来新建 Issue。`Then` 部分负责校验，即新建完成后页面的标题是否与指定的一致。
 
 ## 4 页面对象类
 
-`pages` 包用于放置页面对象类，负责调用 Selenium 进行真正的浏览器操作。该包下的 `LoginPage.java` 类的内容如下：
+`pages` 包用于放置页面对象类，页面对象类负责调用 Selenium 进行真正的浏览器操作。该包下的 `LoginPage.java` 类的内容如下：
 
 ```java
 package com.example.tests.pages;
@@ -322,11 +323,11 @@ public class IssuesPage {
 }
 ```
 
-该类有三个方法：`open()`，打开 Issues 页面；`createIssue()`，创建 Issue；`getTitle()`，获取当前页面标题。均是基于 Selenium WebDriver 的页面打开或元素操作。
+该类有三个方法：`open()`，打开 Issues 页面；`createIssue()`，创建 Issue；`getTitle()`，获取当前页面标题。均是基于 Selenium WebDriver 的页面操作或元素操作。
 
 ## 5 Hooks 类
 
-Cucumber 提供多个注解用于在步骤执行前或执行后添加额外的逻辑。本示例工程即使用了 `@AfterStep` 注解来为每一步执行完成后对页面进行截图。
+Cucumber 提供多个注解用于在步骤执行前或执行后添加额外的逻辑。本示例工程即使用了 `@AfterStep` 注解来为 Scenario 中的每一步执行完成后对页面进行截图。
 
 ```java
 package com.example.tests.hooks;
@@ -348,7 +349,7 @@ public class ScreenshotHook {
 }
 ```
 
-如上 `ScreenshotHook` 类的 `attachScreenshot()` 方法在每一步执行完成后进行了页面截图，并将图片附加到了最终报告对应的各个步骤里。
+如上 `ScreenshotHook` 类的 `attachScreenshot()` 方法在每一步执行完成后进行了页面截图，并将图片附加到了最终报告对应的步骤里。
 
 ## 6 工具类
 
@@ -380,7 +381,7 @@ public class TestRunner {
 }
 ```
 
-可以看到该类基于 JUnit 5，使用 `@RunWith` 注解指定了程序以 Cucumber 提供的运行器运行。使用 `@CucumberOptions` 注解指定了特性文件位置和生成的报告 JSON 文件位置。此外，还需注意，该类含有一个方法 `closeWebDriver()`，使用 `@AfterClass` 注解修饰，表示在程序运行完毕后，关闭浏览器。
+可以看到，该类基于 JUnit 5，使用 `@RunWith` 注解指定了程序以 Cucumber 提供的运行器运行。使用 `@CucumberOptions` 注解指定了特性文件位置和生成的 JSON 结果文件位置。此外，还需注意，该类含有一个方法 `closeWebDriver()`，使用 `@AfterClass` 注解修饰，表示在所有用例执行完毕后，关闭浏览器。
 
 ## 8 工程运行与报告查看
 
@@ -402,7 +403,7 @@ mvn clean verify
 
 ## 9 小结
 
-本文以在页面创建 GitHub Issue 为例探索了如何使用 Cucumber Java 进行 UI（浏览器）测试。
+本文以在页面创建 GitHub Issue 为例探索了如何使用 Cucumber Java 进行 UI（浏览器）测试。主要涉及测试工程的结构设计以及 Cucumber 与 Selenium 的集成。
 
 本文完整示例工程已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/cucumber-ui-test-demo)，欢迎关注或 Fork。
 
