@@ -146,11 +146,11 @@ cucumber-api-test-demo
 ├─ src/test
 │   ├─ java
 │   │    └─ com.example.tests
-│   |       ├─ stepdefs
-│   |       │   └─ CreateIssueStep.java
-│   |       ├─ utils
-│   |       │   └─ ConfigUtil.java
-│   |       └─ TestRunner.java
+│   │       ├─ stepdefs
+│   │       │   └─ CreateIssueStep.java
+│   │       ├─ utils
+│   │       │   └─ ConfigUtil.java
+│   │       └─ TestRunner.java
 │   └─ resources
 │       ├─ features
 │       │   └─ github-issues.feature

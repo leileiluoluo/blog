@@ -41,19 +41,19 @@ cucumber-ui-test-demo
 ├─ src/test
 │   ├─ java
 │   │    └─ com.example.tests
-│   |       ├─ stepdefs
-|   |       │   ├─ LoginStep.java
-│   |       │   └─ CreateIssueStep.java
-│   |       ├─ pages
-|   |       │   ├─ LoginPage.java
-│   |       │   └─ IssuesPage.java
-│   |       ├─ utils
-|   |       │   ├─ GoogleAuthenticatorUtil.java
-│   |       │   └─ WebDriverFactory.java
-│   |       │   └─ ConfigUtil.java
-│   |       ├─ hooks
-│   |       │   └─ ScreenshotHook.java
-│   |       └─ TestRunner.java
+│   │       ├─ stepdefs
+│   │       │   ├─ LoginStep.java
+│   │       │   └─ CreateIssueStep.java
+│   │       ├─ pages
+│   │       │   ├─ LoginPage.java
+│   │       │   └─ IssuesPage.java
+│   │       ├─ utils
+│   │       │   ├─ GoogleAuthenticatorUtil.java
+│   │       │   └─ WebDriverFactory.java
+│   │       │   └─ ConfigUtil.java
+│   │       ├─ hooks
+│   │       │   └─ ScreenshotHook.java
+│   │       └─ TestRunner.java
 │   └─ resources
 │       ├─ features
 │       │   └─ github-issues.feature
@@ -134,6 +134,8 @@ cucumber-ui-test-demo
     </dependency>
 </dependencies>
 ```
+
+可以看到，除了引入 JUnit、Cucumber 和 Selenium 几个主要依赖外，还引入 `googleauth` 来做双因子验证码生成。
 
 同样，还使用一个插件 `maven-cucumber-reporting` 来生成 HTML 报告。
 
