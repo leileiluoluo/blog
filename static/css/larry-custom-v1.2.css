@@ -109,7 +109,7 @@ a.navbar-brand::selection {
 }
 
 .content code {
-  background-color: #afb8c133 !important;
+  background-color: #f0f3f3 !important;
   padding: 4px 4px !important;
   border: 0px !important;
   font-size: 14px;
@@ -122,16 +122,16 @@ a.navbar-brand::selection {
 }
 
 .content .highlight pre {
-  border: 1px solid #ced4da;
-  background-color: #f6f8fa !important;
+  background-color: #f0f3f3 !important;
 }
 
 .content pre {
+  background: #f0f3f3 !important;
   border: 1px solid #ced4da;
 }
 
 .content pre code {
-  background: 0 0 !important;
+  background: #f0f3f3 !important;
   padding: 0px 0px !important;
   /* color: #24292f !important; */
   font-size: 13px;
