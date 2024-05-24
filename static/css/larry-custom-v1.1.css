@@ -122,6 +122,7 @@ a.navbar-brand::selection {
 }
 
 .content .highlight pre {
+  border: 1px solid #ced4da;
   background-color: #f6f8fa !important;
 }
 
