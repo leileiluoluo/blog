@@ -126,6 +126,10 @@ a.navbar-brand::selection {
   background-color: #f6f8fa !important;
 }
 
+.content pre {
+  border: 1px solid #ced4da;
+}
+
 .content pre code {
   background: 0 0 !important;
   padding: 0px 0px !important;
