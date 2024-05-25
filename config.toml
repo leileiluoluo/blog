@@ -41,7 +41,7 @@ link = "css/bootstrap.min.css"
 [[params.plugins.css]]
 link = "css/themify-icons.css"
 [[params.plugins.css]]
-link = "css/larry-custom.css"
+link = "css/larry-custom-v1.2.css"
 
 # js plugins
 [[params.plugins.js]]
@@ -196,6 +196,8 @@ title = "网站 RSS"
 
 # markup
 [markup]
+  [markup.highlight]
+    style = 'github'
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
