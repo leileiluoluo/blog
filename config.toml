@@ -197,7 +197,7 @@ title = "网站 RSS"
 # markup
 [markup]
   [markup.highlight]
-    style = 'github'
+    style = 'monokailight'
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
