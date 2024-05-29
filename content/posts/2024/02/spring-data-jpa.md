@@ -445,8 +445,8 @@ List<User> users = userRepository.findAll(spec);
 下面，尝试创建一个 `UserServiceImpl`，编写一个方法并引用 `UserRepository` 进行删除操作，但该方法在删除后抛出了异常：
 
 ```java
-// src/main/java/com/example/demo/service/UserServiceImpl.java
-package com.example.demo.service;
+// src/main/java/com/example/demo/service/impl/UserServiceImpl.java
+package com.example.demo.service.impl;
 
 @Service
 public class UserServiceImpl implements UserService {
