@@ -8,13 +8,15 @@ url: /sponsor
 
 **如果我的文章确实帮助到了您，您可以对我进行随喜打赏，以表示对我的支持！**
 
+{{% center %}}（微信赞赏码）{{% /center %}}
+
 {{< rawhtml >}}
-<img src="/static/images/self/wechat.png" style="width: 240px; height: 240px" />
+<img src="https://leileiluoluo.github.io/static/images/self/wechat.png" style="box-shadow: none; width: 240px; height: 240px" />
 {{< /rawhtml >}}
 
 ---
 
-{{% spoiler "感谢您的打赏，我会努力写更多有价值的文章！" %}}
+{{% spoiler "感谢您的打赏，我会努力写出更多有价值的文章！" %}}
 
 ### 2023 年
 
