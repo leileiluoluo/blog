@@ -2,19 +2,19 @@
 title: 随喜打赏
 author: leileiluoluo
 type: page
-date: 2024-05-30T10:35:42+00:00
+date: 2024-05-30T10:35:42+08:00
 url: /sponsor
 ---
 
-**如果我的文章确实帮助到了您，您可以对我进行随喜打赏，感谢您的大力支持！**
+**如果我的文章确实帮助到了您，您可以对我进行随喜打赏，以表示对我的支持！**
 
-| 微信                                                                  | 支付宝                                                                  |
-| --------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| ![微信](https://leileiluoluo.github.io/static/images/self/wechat.png) | ![支付宝](https://leileiluoluo.github.io/static/images/self/alipay.png) |
+{{< rawhtml >}}
+<img src="/static/images/self/wechat.png" style="width: 240px; height: 240px" />
+{{< /rawhtml >}}
 
 ---
 
-谢谢您的打赏，我会努力写出更多有价值的文章！
+{{% spoiler "感谢您的打赏，我会努力写更多有价值的文章！" %}}
 
 ### 2023 年
 
@@ -43,3 +43,5 @@ url: /sponsor
 - 11 月 12 日：微信用户「A\*e」打赏
 - 11 月 12 日： 微信用户「\*n」打赏
 - 11 月 4 日：微信用户「\*珍」打赏
+
+{{% /spoiler %}}
