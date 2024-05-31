@@ -146,6 +146,19 @@ public class WebDriverFactory {
 
 ## 3 使用 PicoContainer 进行依赖注入
 
+想在 Cucumber Java 中使用 PicoContainer 进行依赖注入？在原来的基础上引入如下依赖即可：
+
+```xml
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-picocontainer</artifactId>
+    <version>${cucumber.version}</version>
+    <scope>test</scope>
+</dependency>
+```
+
+下面，看看如何对上述代码进行改造，从而使用 PicoContainer 提供的依赖注入功能。
+
 上一步 `LoginPage` 类的代码改为使用 PicoContainer 后，可以改造为如下这个样子：
 
 ```java
