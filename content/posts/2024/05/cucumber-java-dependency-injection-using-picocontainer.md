@@ -23,6 +23,8 @@ description: 本文主要介绍 Cucumber Java 与依赖注入框架 PicoContaine
 
 上文「[如何使用 Cucumber Java 进行 UI 测试？](https://leileiluoluo.github.io/posts/how-to-perform-ui-testing-using-cucumber.html)」以在 GitHub 页面上创建 Issue 为例演示了 Cucumber Java 与 Selenium 的集成，以及 UI 测试工程的搭建及测试用例的编写。您可能注意到，上文演示的测试工程未使用依赖注入工具，对象的创建均是使用最原生的 `new` 方式来实现的。这对于大型工程来说，会显得非常笨拙。本文主要介绍 Cucumber Java 与依赖注入框架 PicoContainer 的集成，本文将对上文的测试工程进行改造，将所有手动创建对象的地方都交由 PicoContainer 来自动实现。
 
+本文改造后的完整测试工程已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/cucumber-picocontainer-demo)，欢迎关注或 Fork。
+
 > 参考资料
 >
 > [1] Cucumber Documentation: Dependency Injection - [https://cucumber.io/docs/cucumber/state/?lang=java#dependency-injection](https://cucumber.io/docs/cucumber/state/?lang=java#dependency-injection)
