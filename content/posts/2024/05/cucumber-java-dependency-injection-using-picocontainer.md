@@ -32,7 +32,7 @@ description: 本文主要介绍 Cucumber Java 与依赖注入框架 PicoContaine
 
 而我们知道，Cucumber 的 Step Definition 类的生命周期是与场景一一绑定的，即执行一个新的场景时，对应的 Step Definition 类也会被重新创建。这样，多个场景间是不会有 Step Definition 类重用问题或信息泄露问题的。而使用 PicoContainer 在 Step Definition 类使用构造方法注入的普通 Java 对象也是跟随场景的执行和结束而自动创建和销毁的，所以非常适合用来做场景内的状态共享。
 
-下面看一下上文中的一个未使用依赖注入的 Step Definition 类。
+下面回顾一下上文中的几个关键的类，以及手动创建对象的方式。
 
 ## 2 手动对象创建
 
