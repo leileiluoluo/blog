@@ -30,9 +30,9 @@ description: 本文主要介绍 Cucumber Java 与依赖注入框架 PicoContaine
 
 依赖注入不止是解决繁琐的对象手动创建问题。我们在编写 Cucumber 特性文件（`xxx.feature`）时，一个文件可包含多个场景（Scenario），而多个场景间或一个场景内的多个步骤（Step）间，可能需要共享状态（State）。如果使用类的静态属性共享这些状态，可能会造成信息的泄露（因静态属性在 JVM 运行的整个生命周期里都是全局可见的）。
 
-而我们知道，Cucumber 的 Step Definition 类的生命周期是与场景一一绑定的，即执行一个新的场景时，对应的 Step Definition 类也会被重新创建。这样，多个场景间是不会有 Step Definition 类重用问题或信息泄露问题的。而使用 PicoContainer 在 Step Definition 类使用构造方法注入的普通 Java 对象也是跟随场景的执行和结束而自动创建和销毁的，所以非常适合用来做场景内的状态共享。
+而我们知道，Cucumber 的 Step Definition 类的生命周期是与场景一一绑定的，即执行一个新的场景时，对应的 Step Definition 类也会被重新创建。这样，多个场景间是不会有 Step Definition 类的实例重用问题或信息泄露问题的。而使用 PicoContainer 在 Step Definition 类使用构造方法注入的普通 Java 对象也是跟随场景的执行和结束而自动创建和销毁的，所以非常适合用来做场景内的状态共享。
 
-下面回顾一下上文中的几个关键的类，以及手动创建对象的方式。
+下面回顾一下上文测试工程中的几个关键的类，以及手动创建对象的方式。
 
 ## 2 手动对象创建
 
@@ -47,7 +47,7 @@ Feature: GitHub Issues UI 测试
     Then Issue 新增成功且标题为 "Cucumber UI Test"
 ```
 
-其中，`登录到 GitHub` 这一步对应的 Java Step Definition 代码如下：
+其中，`登录到 GitHub` 这一步对应的 Step Definition Java 代码如下：
 
 ```java
 // 改造前
@@ -142,11 +142,11 @@ public class WebDriverFactory {
 
 这样我们即可在 `LoginStep` 中，使用 `new LoginPage(WebDriverFactory.getWebDriver())` 传入 `WebDriver` 来新建 `LoginPage` 对象。
 
-可以看到，自己负责对象的创建还是比较繁琐的。那么引入 PicoContainer 框架后，这几个类会有什么变化？
+可以看到，自己负责对象的创建还是比较繁琐的。那么引入 PicoContainer 框架后，这几个类需要作什么改动呢？
 
 ## 3 使用 PicoContainer 进行依赖注入
 
-想在 Cucumber Java 中使用 PicoContainer 进行依赖注入？在原来的基础上引入如下依赖即可：
+想在 Cucumber Java 中使用 PicoContainer 进行依赖注入，需要在原来的基础上引入如下依赖：
 
 ```xml
 <dependency>
@@ -159,7 +159,7 @@ public class WebDriverFactory {
 
 下面，看看如何对上述代码进行改造，从而使用 PicoContainer 提供的依赖注入功能。
 
-上一步 `LoginPage` 类的代码改为使用 PicoContainer 后，可以改造为如下这个样子：
+`LoginStep` 类可以改造为如下这个样子：
 
 ```java
 // 改造后
@@ -182,9 +182,9 @@ public class LoginStep {
 }
 ```
 
-可以看到，针对 `LoginStep` 类，只要新建一个带 `LoginPage` 参数的构造方法即可。
+可以看到，针对 `LoginStep` 类，只要增加一个带 `LoginPage` 参数的构造方法即可。
 
-`LoginPage` 类改造后的代码如下：
+`LoginPage` 类可以改造为如下这个样子：
 
 ```java
 // 改造后
@@ -202,7 +202,7 @@ public class LoginPage {
 }
 ```
 
-可以看到，其后构造方法与之前类型，但将依赖 `WebDriver`，改为了依赖 `LazyWebDriver`。先看看 `LazyWebDriver` 的代码，然后就知道什么原因了。
+可以看到，其构造方法与之前类似，但将之前依赖 `WebDriver` 改为了依赖 `LazyWebDriver`。先看看 `LazyWebDriver` 的代码，然后就知道什么原因了。
 
 `LazyWebDriver` 的代码如下：
 
@@ -253,13 +253,13 @@ public class LazyWebDriver implements WebDriver, Disposable {
 
 可以看到，`LazyWebDriver` 同样是负责 Selenium `WebDriver` 的获取。其同时实现了 `WebDriver` 接口与 `Disposable` 接口。`Disposable` 是 PicoContainer 自带的一个接口，实现该接口的 `dispose()` 方法，可以在程序结束前执行一些操作（这里用来做 `WebDriver` 的关闭）。
 
-可以看到，我们使用 PicoContainer 只需将依赖声明为构造方法参数即可。下面简述一下 PicoContainer 进行依赖注入的过程。
+可以看到，我们使用 PicoContainer 时，只需将类的依赖声明为构造方法参数即可。下面简述一下 PicoContainer 进行依赖注入的过程。
 
-因我们的依赖关系是：`LoginStep` -> `LoginPage` -> `LazyWebDriver`。`LazyWebDriver` 默认会拥有一个无参构造方法，PicoContainer 在需要时，会自动对其进行创建；接着参考 `LoginPage` 的构造方法，传入 `LazyWebDriver` 对象并新建 `LoginPage` 实例；最后参考 `LoginStep` 的构造方法，传入 `LoginPage` 对象并新建 `LoginStep` 实例。
+因在本例中，我们的依赖关系是：`LoginStep` -> `LoginPage` -> `LazyWebDriver`。`LazyWebDriver` 默认会拥有一个无参构造方法，PicoContainer 会自动对其进行创建；接着参考 `LoginPage` 的构造方法，传入 `LazyWebDriver` 对象并新建 `LoginPage` 实例；最后参考 `LoginStep` 的构造方法，传入 `LoginPage` 对象并新建 `LoginStep` 实例。
 
 ## 4 本文小结
 
-本文基于上文「如何使用 Cucumber Java 进行 UI 测试？」所演示的测试工程，介绍其手动创建对象所存在的不足。然后引入依赖注入的概念，接着对上文工程进行改造，介绍了 PicoContainer 的工作机制及使用方法。
+本文基于上文「如何使用 Cucumber Java 进行 UI 测试？」所演示的测试工程，介绍其手动创建对象所存在的不足。然后引入依赖注入的概念，接着对上文工程进行改造，介绍了 PicoContainer 的使用方法及工作机制。
 
 本文改造后的完整测试工程已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/cucumber-picocontainer-demo)，欢迎关注或 Fork。
 
