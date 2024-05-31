@@ -75,6 +75,7 @@ public class LoginStep {
 `LoginPage` 类的代码如下：
 
 ```java
+// 改造前
 package com.example.tests.pages;
 
 import com.example.tests.utils.ConfigUtil;
@@ -119,6 +120,7 @@ public class LoginPage {
 我们设计了一个工厂类来负责 `WebDriver` 的新建，其代码如下：
 
 ```java
+// 改造前
 package com.example.tests.utils;
 
 import org.openqa.selenium.WebDriver;
@@ -171,6 +173,7 @@ public class LoginStep {
 `LoginPage` 类改造后的代码如下：
 
 ```java
+// 改造后
 package com.example.tests.pages;
 
 // ...
@@ -190,6 +193,7 @@ public class LoginPage {
 `LazyWebDriver` 的代码如下：
 
 ```java
+// 改造后
 package com.example.tests.driver;
 
 import org.openqa.selenium.By;
