@@ -46,7 +46,7 @@ Feature: GitHub Issues UI 测试
     Then Issue 新增成功且标题为 "Cucumber UI Test"
 ```
 
-其中，`登录到 GitHub` 这一步对应的 Java 实现代码如下：
+其中，`登录到 GitHub` 这一步对应的 Java Step Definition 代码如下：
 
 ```java
 // 改造前
@@ -70,9 +70,76 @@ public class LoginStep {
 }
 ```
 
-可以看到，该步骤依赖一个 `LoginPage` 对象，其使用原生 Java `new` 关键字创建（`new LoginPage(WebDriverFactory.getWebDriver()`）。
+可以看到，该步骤依赖一个 `LoginPage` 对象，其创建需要传入一个 `WebDriver` 对象。
 
-引入 PicoContainer 框架后，这段代码会有什么变化？`LoginPage` 对象又如何进行自动注入呢？
+`LoginPage` 类的代码如下：
+
+```java
+package com.example.tests.pages;
+
+import com.example.tests.utils.ConfigUtil;
+import com.example.tests.utils.GoogleAuthenticatorUtil;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class LoginPage {
+    private static final String LOGIN_URL = "https://github.com/login";
+
+    private static final By USERNAME_ELEM = By.xpath("//input[@name='login']");
+    private static final By PASSWORD_ELEM = By.xpath("//input[@name='password']");
+    private static final By SIGN_IN_BUTTON = By.xpath("//input[@name='commit']");
+    private static final By TOTP_ELEM = By.xpath("//input[@name='app_otp']");
+
+    private final WebDriver driver;
+
+    public LoginPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public void login() {
+        // open login url
+        driver.get(LOGIN_URL);
+
+        // input username & password
+        driver.findElement(USERNAME_ELEM).sendKeys(ConfigUtil.getProperty("GITHUB_USERNAME"));
+        driver.findElement(PASSWORD_ELEM).sendKeys(ConfigUtil.getProperty("GITHUB_PASSWORD"));
+
+        // click "Sign in" button
+        driver.findElement(SIGN_IN_BUTTON).click();
+
+        // input Authentication code
+        int code = GoogleAuthenticatorUtil.getTotpCode(ConfigUtil.getProperty("GITHUB_TOTP_SECRET"));
+        driver.findElement(TOTP_ELEM).sendKeys("" + code);
+    }
+}
+```
+
+可以看到，其仅有一个带 `WebDriver` 参数的构造方法。
+
+我们设计了一个工厂类来负责 `WebDriver` 的新建，其代码如下：
+
+```java
+package com.example.tests.utils;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class WebDriverFactory {
+    private static final WebDriver driver = new ChromeDriver();
+
+    public static WebDriver getWebDriver() {
+        return driver;
+    }
+
+    public static void closeWebDriver() {
+        driver.close();
+    }
+}
+```
+
+这样我们即可在 `LoginStep` 中，使用 `new LoginPage(WebDriverFactory.getWebDriver())` 传入 `WebDriver` 来新建 `LoginPage` 对象。
+
+可以看到，自己负责对象的创建还是比较繁琐的。那么引入 PicoContainer 框架后，这几个类会有什么变化？
 
 ## 3 使用 PicoContainer 进行依赖注入
 
@@ -99,7 +166,82 @@ public class LoginStep {
 }
 ```
 
-可以看到，我们只需在 `LoginStep` 类中新建一个带 `LoginPage` 参数的构造方法即可，仅此而已。PicoContainer 即会参考 `LoginPage` 的构造方法对其进行自动创建，然后自动注入到 `LoginStep`。
+可以看到，针对 `LoginStep` 类，只要新建一个带 `LoginPage` 参数的构造方法即可。
+
+`LoginPage` 类改造后的代码如下：
+
+```java
+package com.example.tests.pages;
+
+// ...
+public class LoginPage {
+    // ...
+    private final LazyWebDriver driver;
+
+    public LoginPage(LazyWebDriver driver) {
+        this.driver = driver;
+    }
+    // ...
+}
+```
+
+可以看到，其后构造方法与之前类型，但将依赖 `WebDriver`，改为了依赖 `LazyWebDriver`。先看看 `LazyWebDriver` 的代码，然后就知道什么原因了。
+
+`LazyWebDriver` 的代码如下：
+
+```java
+package com.example.tests.driver;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.picocontainer.Disposable;
+
+import java.util.List;
+import java.util.Set;
+
+public class LazyWebDriver implements WebDriver, Disposable {
+    private WebDriver delegate = null;
+
+    public WebDriver getDelegate() {
+        if (null == delegate) {
+            delegate = new ChromeDriver();
+        }
+        return delegate;
+    }
+
+    @Override
+    public void get(String url) {
+        getDelegate().get(url);
+    }
+
+    @Override
+    public WebElement findElement(By by) {
+        return getDelegate().findElement(by);
+    }
+
+    @Override
+    public void dispose() {
+        System.out.println("Closing WebDriver");
+        if (null != delegate) {
+            delegate.quit();
+        }
+    }
+
+    // ...
+}
+```
+
+可以看到，`LazyWebDriver` 同样是负责 Selenium `WebDriver` 的获取。其同时实现了 `WebDriver` 接口与 `Disposable` 接口。`Disposable` 是 PicoContainer 自带的一个接口，实现该接口的 `dispose()` 方法，可以在程序结束前执行一些操作（这里用来做 `WebDriver` 的关闭）。
+
+可以看到，我们使用 PicoContainer 只需将依赖声明为构造方法参数即可。下面简述一下 PicoContainer 进行依赖注入的过程。
+
+因我们的依赖关系是：`LoginStep` -> `LoginPage` -> `LazyWebDriver`。`LazyWebDriver` 默认会拥有一个无参构造方法，PicoContainer 在需要时，会自动对其进行创建；接着参考 `LoginPage` 的构造方法，传入 `LazyWebDriver` 对象并新建 `LoginPage` 实例；最后参考 `LoginStep` 的构造方法，传入 `LoginPage` 对象并新建 `LoginStep` 实例。
+
+## 4 本文小结
+
+本文基于上文「如何使用 Cucumber Java 进行 UI 测试？」所演示的测试工程，介绍其手动创建对象所存在的不足。然后引入依赖注入的概念，接着对上文工程进行改造，介绍了 PicoContainer 的工作机制及使用方法。
 
 本文改造后的完整测试工程已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/cucumber-picocontainer-demo)，欢迎关注或 Fork。
 
