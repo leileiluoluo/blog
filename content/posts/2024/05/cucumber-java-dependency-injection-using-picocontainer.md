@@ -9,6 +9,7 @@ categories:
 tags:
   - 自动化测试
   - Java
+  - Selenium
 keywords:
   - Cucumber
   - 依赖注入
