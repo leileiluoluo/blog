@@ -41,7 +41,7 @@ link = "css/bootstrap.min.css"
 [[params.plugins.css]]
 link = "css/themify-icons.css"
 [[params.plugins.css]]
-link = "css/larry-custom-v1.2.css"
+link = "css/larry-custom-v1.3.css"
 
 # js plugins
 [[params.plugins.js]]
