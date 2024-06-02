@@ -251,6 +251,65 @@ public class ApplicationConf {
 
 ## 4 stepdefs 包
 
+Selenium 特性文件对应的 Step Definition 实现类均位于该包下。
+
+对应特性文件 `Given` 步骤，用于 GitHub 登录的实现类 `LoginStep.java` 的内容如下：
+
+```java
+// src/test/java/com/example/tests/stepdefs/LoginStep.java
+package com.example.tests.stepdefs;
+
+import com.example.tests.conf.CucumberSpringIntegrationTest;
+import com.example.tests.pages.LoginPage;
+import io.cucumber.java.en.Given;
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class LoginStep extends CucumberSpringIntegrationTest {
+    @Autowired
+    private LoginPage loginPage;
+
+    @Given("登录到 GitHub")
+    public void login() {
+        loginPage.login();
+    }
+}
+```
+
+可以看到，其继承了上面定义的 `CucumberSpringIntegrationTest` 父类，并且使用 `@Autowired` 注解注入了 `LoginPage` 依赖，并调用了 `LoginPage` 的 `login()` 方法。
+
+对应特性文件 `When` 与 `Then` 步骤，用于打开页面、新增 Issue 与校验 Issue 标题的实现类 `CreateIssueStep` 的内容如下：
+
+```java
+package com.example.tests.stepdefs;
+
+import com.example.tests.conf.CucumberSpringIntegrationTest;
+import com.example.tests.pages.CreateIssuePage;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import static org.hamcrest.CoreMatchers.startsWith;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+public class CreateIssueStep extends CucumberSpringIntegrationTest {
+    @Autowired
+    private CreateIssuePage issuesPage;
+
+    @When("打开 Issues 页面并新增一个标题为 {string} 的 Issue")
+    public void createIssue(String title) {
+        // create issue
+        issuesPage.createIssue(title);
+    }
+
+    @Then("Issue 新增成功且标题为 {string}")
+    public void checkTitle(String title) {
+        assertThat(issuesPage.getTitle(), startsWith(title));
+    }
+}
+```
+
+其同样继承了 `CucumberSpringIntegrationTest` 父类，并且使用 `@Autowired` 注解注入了 `CreateIssuePage` 依赖。
+
 ## 5 pages 包
 
 ## 6 hooks 包
