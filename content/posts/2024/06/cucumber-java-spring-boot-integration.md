@@ -280,6 +280,7 @@ public class LoginStep extends CucumberSpringIntegrationTest {
 对应特性文件 `When` 与 `Then` 步骤，用于打开页面、新增 Issue 与校验 Issue 标题的实现类 `CreateIssueStep` 的内容如下：
 
 ```java
+// src/test/java/com/example/tests/stepdefs/CreateIssueStep.java
 package com.example.tests.stepdefs;
 
 import com.example.tests.conf.CucumberSpringIntegrationTest;
@@ -312,9 +313,105 @@ public class CreateIssueStep extends CucumberSpringIntegrationTest {
 
 ## 5 pages 包
 
-## 6 hooks 包
+该包用于放置页面对象类，页面对象类拥有页面的元素与行为，页面元素被定义为了属性，页面行为被定义为了方法。
 
-## 7 utils 包
+对应 GitHub 登录页面的 `LoginPage` 的内容如下：
+
+```java
+// src/test/java/com/example/tests/pages/LoginPage.java
+package com.example.tests.pages;
+
+import com.example.tests.conf.ApplicationConf;
+import com.example.tests.utils.GoogleAuthenticatorUtil;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class LoginPage {
+    private static final String LOGIN_URL = "https://github.com/login";
+
+    private static final By USERNAME_ELEM = By.xpath("//input[@name='login']");
+    private static final By PASSWORD_ELEM = By.xpath("//input[@name='password']");
+    private static final By SIGN_IN_BUTTON = By.xpath("//input[@name='commit']");
+    private static final By TOTP_ELEM = By.xpath("//input[@name='app_otp']");
+
+    @Autowired
+    private ApplicationConf applicationConf;
+    @Autowired
+    private WebDriver driver;
+
+    public void login() {
+        // open login url
+        driver.get(LOGIN_URL);
+
+        // input username & password
+        driver.findElement(USERNAME_ELEM).sendKeys(applicationConf.getGithubUsername());
+        driver.findElement(PASSWORD_ELEM).sendKeys(applicationConf.getGithubPassword());
+
+        // click "Sign in" button
+        driver.findElement(SIGN_IN_BUTTON).click();
+
+        // input Authentication code
+        int code = GoogleAuthenticatorUtil.getTotpCode(applicationConf.getGithubTotpSecret());
+        driver.findElement(TOTP_ELEM).sendKeys("" + code);
+    }
+}
+```
+
+可以看到，其使用了 `@Component` 注解将其实例化交给了 Spring 容器，使用 `@Autowired` 注解引入了所需的依赖。
+
+对应 Issue 创建的 `CreateIssuePage` 的内容如下：
+
+```java
+// src/test/java/com/example/tests/pages/CreateIssuePage.java
+package com.example.tests.pages;
+
+import com.example.tests.conf.ApplicationConf;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.time.Duration;
+
+@Component
+public class CreateIssuePage {
+    private static final String CREATE_ISSUE_URL = "/issues/new";
+
+    private static final By INPUT_TITLE_ELEM = By.xpath("//input[@id='issue_title']");
+    private static final By SUBMIT_BUTTON = By.xpath("//button[contains(text(), 'Submit new issue')]");
+
+    @Autowired
+    private ApplicationConf applicationConf;
+    @Autowired
+    private WebDriver driver;
+
+    public void createIssue(String title) {
+        // open issue creation URL
+        driver.get(applicationConf.getGithubRepo() + CREATE_ISSUE_URL);
+
+        new WebDriverWait(driver, Duration.ofMinutes(1)).until(ExpectedConditions.visibilityOfElementLocated(INPUT_TITLE_ELEM));
+
+        // input title
+        driver.findElement(INPUT_TITLE_ELEM).sendKeys(title);
+
+        // submit
+        driver.findElement(SUBMIT_BUTTON).click();
+    }
+
+    public String getTitle() {
+        return driver.getTitle();
+    }
+}
+```
+
+其同样使用了 `@Component` 注解与 `@Autowired` 注解。
+
+至此，我们已将该测试工程主要的包及其下的文件作了介绍，其它诸如 `hooks` 与 `utils` 包，分别负责管理 Cucumber 钩子与 Java 工具类。我们分别在这两个包下放置了一个用于每个步骤执行后的页面截图钩子与 Google Authentication 验证码生成工具类，想看这两个类源码的同学可以参考文末提供的链接自行查看，这里就不再赘述了。
 
 ## 8 DummyApplication 类
 
