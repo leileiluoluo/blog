@@ -177,7 +177,7 @@ Feature: GitHub Issues UI 测试
     Then Issue 新增成功且标题为 "Cucumber UI Test"
 ```
 
-可以看到，其使用 Gerkin 语言描述了如何在 GitHub 新增一个 Issue。
+可以看到，其使用 Gherkin 语言描述了如何在 GitHub 新增一个 Issue。
 
 ## 3 conf 包
 
