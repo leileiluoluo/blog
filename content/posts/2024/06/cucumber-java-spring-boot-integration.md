@@ -360,9 +360,9 @@ public class LoginPage {
 }
 ```
 
-可以看到，其使用了 `@Component` 注解将其实例化交给了 Spring 容器，使用 `@Autowired` 注解引入了所需的依赖。
+可以看到，其使用了 `@Component` 注解将其实例化交给了 Spring 容器，并使用 `@Autowired` 注解引入了所需的依赖。
 
-对应 Issue 创建的 `CreateIssuePage` 的内容如下：
+对应 Issue 创建页面的 `CreateIssuePage` 的内容如下：
 
 ```java
 // src/test/java/com/example/tests/pages/CreateIssuePage.java
@@ -455,13 +455,15 @@ public class TestRunner {
 }
 ```
 
+其指定了运行方式、特性文件位置与 JSON 报告位置。
+
 ## 8 工程运行与报告展示
 
-若您使用 IntelliJ IDEA 编辑器打开的该测试工程，则直接在 `TestRunner.java` 文件右键运行即可，其运行效果如下：
+若您使用 IntelliJ IDEA 编辑器打开的该测试工程，则直接在 `TestRunner.java` 文件点击右键进行 DEBUG 即可，其运行效果如下：
 
 ![在 IntelliJ IDEA 中运行测试工程](https://leileiluoluo.github.io/static/images/uploads/2024/06/cucumber-java-spring-boot-integration-demo-running-in-idea.png)
 
-最终运行效果与前文「[如何使用 Cucumber Java 进行 UI 测试？](https://leileiluoluo.github.io/posts/how-to-perform-ui-testing-using-cucumber.html)」中示例工程的运行效果无异：
+浏览器自动化测试效果与前文「[如何使用 Cucumber Java 进行 UI 测试？](https://leileiluoluo.github.io/posts/how-to-perform-ui-testing-using-cucumber.html)」中示例工程的运行效果无异：
 
 ![在页面创建 GitHub Issue 的实现效果](https://leileiluoluo.github.io/static/images/uploads/2024/05/creating-github-issue-using-cucumber.gif)
 
@@ -471,15 +473,13 @@ public class TestRunner {
 mvn clean verify
 ```
 
-运行完成后，在 `target/cucumer-report-html` 文件夹生成 HTML 报告效果如下：
+运行完成后，会在 `target/cucumer-report-html` 文件夹下生成 HTML 报告，打开后的效果如下：
 
 ![在页面创建 GitHub Issue 的 HTML 报告](https://leileiluoluo.github.io/static/images/uploads/2024/05/report-for-creating-github-issue-using-cucumber.png)
 
 ## 9 小结
 
-本文以登录 GitHub 并在页面创建 Issue 为测试场景，以示例工程的方式演示了 Cucumber 与 Spring Boot 的集成。
-
-完整测试工程已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/cucumber-spring-boot-integration-demo)，欢迎关注或 Fork。
+本文以登录 GitHub 并在页面创建 Issue 为测试场景，以示例工程的方式演示了 Cucumber 与 Spring Boot 的集成。完整测试工程已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/cucumber-spring-boot-integration-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
