@@ -19,7 +19,7 @@ keywords:
   - Java
   - Selenium
   - 自动化测试
-description: 尽管 PicoContainer 比较轻量，也是 Cucumber 官方推荐的依赖注入工具，但在 Java 技术栈，Spring 或 Spring Boot 框架才是主流，除了提供依赖注入功能外，其还提供更加丰富且实用的功能（如灵活的配置、数据库连接、轻松集成其它组件等），本文即以示例工程的方式演示 Cucumber 与 Spring Boot 的集成。示例工程实现语言为 Java，使用的浏览器测试工具为 Selenium，工程使用 Maven 管理。
+description: 尽管 PicoContainer 比较轻量，也是 Cucumber 官方推荐的依赖注入工具，但在 Java 技术栈，Spring 或 Spring Boot 框架才是主流，除了提供依赖注入功能外，其还提供诸多其它实用功能（如灵活的配置、方便的数据库连接、易用的组件集成方法等），所以探索 Cucumber 与 Spring Boot 的集成很有必要。本文即接着前面的两篇文章，同样以登录 GitHub 并在页面创建 Issue 为测试场景，以示例工程的方式演示 Cucumber 与 Spring Boot 的集成，示例工程实现语言为 Java，使用的浏览器测试工具为 Selenium，工程使用 Maven 管理。
 ---
 
 前面我们在「[如何使用 Cucumber Java 进行 UI 测试？](https://leileiluoluo.github.io/posts/how-to-perform-ui-testing-using-cucumber.html)」一文中，以登录 GitHub 并在页面创建 Issue 为例介绍了 Cucumber 与 Selenium 的集成，但其中的示例工程未使用依赖注入工具，所有对象的新建均是使用原生 `new` 关键字来实现的。接着，我们在上文「[如何在 Cucumber Java 中使用 PicoContainer 进行依赖注入？](https://leileiluoluo.github.io/posts/cucumber-java-dependency-injection-using-picocontainer.html)」介绍了在 Cucumber 中使用 PicoContainer 进行依赖注入的方法。尽管 PicoContainer 比较轻量，也是 Cucumber 官方推荐的依赖注入工具，但在 Java 技术栈，Spring 或 Spring Boot 框架才是主流，除了提供依赖注入功能外，其还提供诸多其它实用功能（如灵活的配置、方便的数据库连接、易用的组件集成方法等），所以探索 Cucumber 与 Spring Boot 的集成很有必要。本文即接着前面的两篇文章，同样以登录 GitHub 并在页面创建 Issue 为测试场景，以示例工程的方式演示 Cucumber 与 Spring Boot 的集成，示例工程实现语言为 Java，使用的浏览器测试工具为 Selenium，工程使用 Maven 管理。
