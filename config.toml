@@ -85,6 +85,11 @@ URL = "/categories/练字/"
 name = "练字"
 weight = 5
 
+[[menu.main]]
+URL = "/about"
+name = "关于"
+weight = 6
+
 # footer menu
 [[menu.footer]]
 URL = "/sponsor"
