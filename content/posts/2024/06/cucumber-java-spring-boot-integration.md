@@ -67,7 +67,7 @@ cucumber-spring-boot-integration-demo
 
 下面简述一下各个包、类及文件夹的作用：
 
-`conf` 包用于放置各种配置类；`stepdefs` 包用于放置 Cucumber 特性描述文件的实现类；`pages` 包用于放置页面对象类，负责支撑 `stepdefs` 中的各个 Step；`utils` 包用于放置 Java 工具类，用于 GitHub 登录的双因子验证码获取工具类即位于此；`hooks` 包用于放置各种 Cucumber 钩子，钩子可以在场景（Scenario）执行前后或场景中的 Step 执行前后加入一些额外的逻辑，为场景中的每个步骤执行后进行页面截图的钩子即位于此；`DummyApplication.java` 类为一个空的 Spring Boot 工程启动类；`TestRunner.java` 为测试用例执行入口；`resources/features` 文件夹用于放置 Cucumber 特性描述文件；`resources/application.yaml` 为工程的配置文件。
+`conf` 包用于放置各种配置类；`stepdefs` 包用于放置 Cucumber 特性描述文件的实现，这些实现称作 Step Definition 类；`pages` 包用于放置页面对象类，负责支撑 `stepdefs` 中的各个 Step；`utils` 包用于放置 Java 工具类，用于 GitHub 登录的双因子验证码获取工具类即位于此；`hooks` 包用于放置各种 Cucumber 钩子，钩子可以在场景（Scenario）执行前后或场景中的 Step 执行前后加入一些额外的逻辑，为场景中的每个步骤执行后进行页面截图的钩子即位于此；`DummyApplication.java` 类为一个空的 Spring Boot 工程启动类；`TestRunner.java` 为测试用例执行入口；`resources/features` 文件夹用于放置 Cucumber 特性描述文件；`resources/application.yaml` 为工程的配置文件。
 
 该测试工程是一个 Spring Boot 工程，需要引入如下 Parent：
 
@@ -161,6 +161,109 @@ cucumber-spring-boot-integration-demo
     <version>5.8.1</version>
 </plugin>
 ```
+
+介绍完工程的整体结构与 Maven 依赖，下面就一一介绍下该工程的 Cucumber 特性文件、包和类。
+
+## 2 Cucumber 特性文件
+
+Cucumber 特性文件 `github-issues.feature` 的内容如下：
+
+```text
+Feature: GitHub Issues UI 测试
+
+  Scenario: 新增一个 Issue
+    Given 登录到 GitHub
+    When 打开 Issues 页面并新增一个标题为 "Cucumber UI Test" 的 Issue
+    Then Issue 新增成功且标题为 "Cucumber UI Test"
+```
+
+可以看到，其使用 Gerkin 语言描述了如何在 GitHub 新增一个 Issue。
+
+## 3 conf 包
+
+我们将配置相关的类都置于该包下。
+
+欲将 Cucumber 与 Spring Boot 集成，则每个 Step Definition 类须看作是一个可以单独运行的 Spring Boot 测试类，需要使用 `@SpringBootTest` 注解修饰。本文设置了一个 `@SpringBootTest` 父类 `CucumberSpringIntegrationTest.java`，所有 Step Definition 类继承该类即可。
+
+`CucumberSpringIntegrationTest.java` 的内容如下：
+
+```java
+// src/test/java/com/example/tests/conf/CucumberSpringIntegrationTest.java
+package com.example.tests.conf;
+
+import com.example.tests.DummyApplication;
+import io.cucumber.spring.CucumberContextConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@CucumberContextConfiguration
+@SpringBootTest(classes = DummyApplication.class)
+public class CucumberSpringIntegrationTest {
+}
+```
+
+集成了 Spring 框架后，所有 Bean 已交由 Spring 容器管理。因此，Selenium WebDriver 的实例化也变得非常简单，只要设置一个配置类，将对应的实例获取方法标记 `@Bean` 注解即可。
+
+`WebDriverBean.java` 即负责 WebDriver 实例的获取，其内容如下：
+
+```java
+// src/test/java/com/example/tests/conf/WebDriverBean.java
+package com.example.tests.conf;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class WebDriverBean {
+    @Bean
+    public WebDriver webDriver() {
+        return new ChromeDriver();
+    }
+}
+```
+
+使用了 Spring Boot 后，文件的读取也变得异常简单，无须再自行进行文件读取与解析，只需使用对应的注解即可。
+
+`ApplicationConf.java` 即用于读取 `application.yaml` 配置文件中的各个变量，其内容如下：
+
+```java
+// src/test/java/com/example/tests/conf/ApplicationConf.java
+package com.example.tests.conf;
+
+import lombok.Getter;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+
+@Getter
+@Configuration
+public class ApplicationConf {
+    @Value("${github.repo}")
+    private String githubRepo;
+    @Value("${github.username}")
+    private String githubUsername;
+    @Value("${github.password}")
+    private String githubPassword;
+    @Value("${github.totp-secret}")
+    private String githubTotpSecret;
+}
+```
+
+## 4 stepdefs 包
+
+## 5 pages 包
+
+## 6 hooks 包
+
+## 7 utils 包
+
+## 8 DummyApplication 类
+
+## 9 TestRunner 类
+
+## 10 工程运行与报告展示
+
+## 11 小结
 
 本文完整测试工程已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/cucumber-spring-boot-integration-demo)，欢迎关注或 Fork。
 
