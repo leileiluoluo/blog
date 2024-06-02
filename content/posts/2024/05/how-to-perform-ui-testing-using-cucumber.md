@@ -399,7 +399,7 @@ mvn clean verify
 
 运行完成后，会在 `target/cucumer-report-html` 文件夹生成 HTML 测试报告。打开后，效果如下：
 
-![在页面创建 GitHub Issue 的实现效果](https://leileiluoluo.github.io/static/images/uploads/2024/05/report-for-creating-github-issue-using-cucumber.png)
+![在页面创建 GitHub Issue 的 HTML 报告](https://leileiluoluo.github.io/static/images/uploads/2024/05/report-for-creating-github-issue-using-cucumber.png)
 
 可以看到，对应特性文件中各个步骤的运行状态与页面截图均会在其中详细展示。
 

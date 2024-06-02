@@ -413,15 +413,79 @@ public class CreateIssuePage {
 
 至此，我们已将该测试工程主要的包及其下的文件作了介绍，其它诸如 `hooks` 与 `utils` 包，分别负责管理 Cucumber 钩子与 Java 工具类。我们分别在这两个包下放置了一个用于每个步骤执行后的页面截图钩子与 Google Authentication 验证码生成工具类，想看这两个类源码的同学可以参考文末提供的链接自行查看，这里就不再赘述了。
 
-## 8 DummyApplication 类
+## 6 DummyApplication 类
 
-## 9 TestRunner 类
+因该工程是一个 Spring Boot 工程，其启动需要依赖一个入口类。
 
-## 10 工程运行与报告展示
+为此，我们添加了一个空的启动类 `DummyApplication.java`，其内容如下：
 
-## 11 小结
+```java
+// src/test/java/com/example/tests/DummyApplication.java
+package com.example.tests;
 
-本文完整测试工程已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/cucumber-spring-boot-integration-demo)，欢迎关注或 Fork。
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class DummyApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(DummyApplication.class, args);
+    }
+}
+```
+
+## 7 TestRunner 类
+
+Cucumber 测试用例执行入口类 `TestRunner.java` 的内容如下：
+
+```java
+// src/test/java/com/example/tests/TestRunner.java
+package com.example.tests;
+
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import org.junit.runner.RunWith;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        features = "src/test/resources/features",
+        plugin = {"json:target/cucumber.json"}
+)
+public class TestRunner {
+}
+```
+
+## 8 工程运行与报告展示
+
+若您使用 IntelliJ IDEA 编辑器打开的该测试工程，则直接在 `TestRunner.java` 文件右键运行即可。
+
+![在 IntelliJ IDEA 中运行测试工程](https://leileiluoluo.github.io/static/images/uploads/2024/06/cucumber-java-spring-boot-integration-demo-running-in-idea.png)
+
+{{% center %}}（在 IntelliJ IDEA 中运行测试工程）{{% /center %}}
+
+若使用的是命令行，则使用如下 Maven 命令运行即可：
+
+```shell
+mvn clean verify
+```
+
+最终运行效果与前文「[如何使用 Cucumber Java 进行 UI 测试？](https://leileiluoluo.github.io/posts/how-to-perform-ui-testing-using-cucumber.html)」中示例工程的运行效果无异。
+
+![在页面创建 GitHub Issue 的实现效果](https://leileiluoluo.github.io/static/images/uploads/2024/05/creating-github-issue-using-cucumber.gif)
+
+{{% center %}}（测试工程运行效果）{{% /center %}}
+
+运行完成后，在 `target/cucumer-report-html` 文件夹生成 HTML 报告效果如下：
+
+![在页面创建 GitHub Issue 的 HTML 报告](https://leileiluoluo.github.io/static/images/uploads/2024/05/report-for-creating-github-issue-using-cucumber.png)
+
+{{% center %}}（测试工程生成的 HTML 报告）{{% /center %}}
+
+## 9 小结
+
+本文以登录 GitHub 并在页面创建 Issue 为测试场景，以示例工程的方式演示了 Cucumber 与 Spring Boot 的集成。
+
+完整测试工程已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/cucumber-spring-boot-integration-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
