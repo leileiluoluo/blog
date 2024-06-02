@@ -152,6 +152,16 @@ cucumber-spring-boot-integration-demo
 
 可以看到，该工程主要依赖了 Spring Boot、Cucumber 与 Selenium。
 
+此外，还依赖一个生成 HTML 报告的插件 `maven-cucumber-reporting`：
+
+```xml
+<plugin>
+    <groupId>net.masterthought</groupId>
+    <artifactId>maven-cucumber-reporting</artifactId>
+    <version>5.8.1</version>
+</plugin>
+```
+
 本文完整测试工程已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/cucumber-spring-boot-integration-demo)，欢迎关注或 Fork。
 
 > 参考资料
