@@ -69,6 +69,19 @@ cucumber-spring-boot-integration-demo
 
 `conf` 包用于放置各种配置类；`stepdefs` 包用于放置 Cucumber 特性描述文件的实现类；`pages` 包用于放置页面对象类，负责支撑 `stepdefs` 中的各个 Step；`utils` 包用于放置 Java 工具类，用于 GitHub 登录的双因子验证码获取工具类即位于此；`hooks` 包用于放置各种 Cucumber 钩子，钩子可以在场景（Scenario）执行前后或场景中的 Step 执行前后加入一些额外的逻辑，为场景中的每个步骤执行后进行页面截图的钩子即位于此；`DummyApplication.java` 类为一个空的 Spring Boot 工程启动类；`TestRunner.java` 为测试用例执行入口；`resources/features` 文件夹用于放置 Cucumber 特性描述文件；`resources/application.yaml` 为工程的配置文件。
 
+该测试工程是一个 Spring Boot 工程，需要引入如下 Parent：
+
+```xml
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.3.0</version>
+    <relativePath/>
+</parent>
+```
+
+用到的依赖如下：
+
 ```xml
 <dependencies>
     <!-- spring boot -->
@@ -136,6 +149,8 @@ cucumber-spring-boot-integration-demo
     </dependency>
 </dependencies>
 ```
+
+可以看到，该工程主要依赖了 Spring Boot、Cucumber 与 Selenium。
 
 本文完整测试工程已提交至本人 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/cucumber-spring-boot-integration-demo)，欢迎关注或 Fork。
 
