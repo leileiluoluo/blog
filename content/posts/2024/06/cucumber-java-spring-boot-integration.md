@@ -24,7 +24,7 @@ description: 尽管 PicoContainer 比较轻量，也是 Cucumber 官方推荐的
 
 前面我们在「[如何使用 Cucumber Java 进行 UI 测试？](https://leileiluoluo.github.io/posts/how-to-perform-ui-testing-using-cucumber.html)」一文中，以登录 GitHub 并在页面创建 Issue 为例介绍了 Cucumber 与 Selenium 的集成，但其中的示例工程未使用依赖注入工具，所有对象的新建均是使用原生 `new` 关键字来实现的。接着，我们在上文「[如何在 Cucumber Java 中使用 PicoContainer 进行依赖注入？](https://leileiluoluo.github.io/posts/cucumber-java-dependency-injection-using-picocontainer.html)」介绍了在 Cucumber 中使用 PicoContainer 进行依赖注入的方法。尽管 PicoContainer 比较轻量，也是 Cucumber 官方推荐的依赖注入工具，但在 Java 技术栈，Spring 或 Spring Boot 框架才是主流，除了提供依赖注入功能外，其还提供诸多其它实用功能（如灵活的配置、方便的数据库连接、易用的组件集成方法等），所以探索 Cucumber 与 Spring Boot 的集成很有必要。本文即接着前面的两篇文章，同样以登录 GitHub 并在页面创建 Issue 为测试场景，以示例工程的方式演示 Cucumber 与 Spring Boot 的集成，示例工程实现语言为 Java，使用的浏览器测试工具为 Selenium，工程使用 Maven 管理。
 
-下面列出示例工程所使用的 JDK、Maven、Spring Boot 与 Cucumber 的版本：
+开始前，让我们列出该示例工程所使用的 JDK、Maven、Spring Boot 与 Cucumber 的版本：
 
 ```text
 JDK：BellSoft Liberica 17.0.7
@@ -34,6 +34,8 @@ Cucumber Java：7.18.0
 ```
 
 ## 1 工程结构与 Maven 依赖
+
+该测试工程的结构如下：
 
 ```text
 cucumber-spring-boot-integration-demo
@@ -62,6 +64,10 @@ cucumber-spring-boot-integration-demo
 │       └─ application.yaml
 └─ pom.xml
 ```
+
+下面简述一下各个包、类及文件夹的作用：
+
+`conf` 包用于放置各种配置类；`stepdefs` 包用于放置 Cucumber 特性描述文件的实现类；`pages` 包用于放置页面对象类，负责支撑 `stepdefs` 中的各个 Step；`utils` 包用于放置 Java 工具类，用于 GitHub 登录的双因子验证码获取工具类即位于此；`hooks` 包用于放置各种 Cucumber 钩子，钩子可以在场景（Scenario）执行前后或场景中的 Step 执行前后加入一些额外的逻辑，为场景中的每个步骤执行后进行页面截图的钩子即位于此；`DummyApplication.java` 类为一个空的 Spring Boot 工程启动类；`TestRunner.java` 为测试用例执行入口；`resources/features` 文件夹用于放置 Cucumber 特性描述文件；`resources/application.yaml` 为工程的配置文件。
 
 ```xml
 <dependencies>
