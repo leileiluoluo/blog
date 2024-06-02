@@ -461,15 +461,15 @@ public class TestRunner {
 
 ![在 IntelliJ IDEA 中运行测试工程](https://leileiluoluo.github.io/static/images/uploads/2024/06/cucumber-java-spring-boot-integration-demo-running-in-idea.png)
 
+最终运行效果与前文「[如何使用 Cucumber Java 进行 UI 测试？](https://leileiluoluo.github.io/posts/how-to-perform-ui-testing-using-cucumber.html)」中示例工程的运行效果无异：
+
+![在页面创建 GitHub Issue 的实现效果](https://leileiluoluo.github.io/static/images/uploads/2024/05/creating-github-issue-using-cucumber.gif)
+
 若使用的是命令行，则使用如下 Maven 命令运行即可：
 
 ```shell
 mvn clean verify
 ```
-
-最终运行效果与前文「[如何使用 Cucumber Java 进行 UI 测试？](https://leileiluoluo.github.io/posts/how-to-perform-ui-testing-using-cucumber.html)」中示例工程的运行效果无异：
-
-![在页面创建 GitHub Issue 的实现效果](https://leileiluoluo.github.io/static/images/uploads/2024/05/creating-github-issue-using-cucumber.gif)
 
 运行完成后，在 `target/cucumer-report-html` 文件夹生成 HTML 报告效果如下：
 
