@@ -116,18 +116,9 @@ a.navbar-brand::selection {
   color: #e8505b !important
 }
 
-.content .highlight pre code {
-  padding: 0px 0px !important;
-  /* color: #93a1a1 !important; */
-}
-
-.content .highlight pre {
-  background-color: #f0f3f3 !important;
-}
-
 .content pre {
   background: #f0f3f3 !important;
-  border: 1px solid #a1aab3;
+  border: 1px solid #dbdede;
 }
 
 .content pre code {
