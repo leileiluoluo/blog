@@ -9,8 +9,6 @@ theme = "northendlab-hugo"
 paginate = "6"
 # post excerpt
 summaryLength = "5"
-# disqus short name
-disqusShortname = "" # get your shortname form here : https://disqus.com
 enableRobotsTXT = true
 
 [services.rss]
@@ -140,7 +138,7 @@ enable = true
 ####################### banner #######################################
 [params.banner]
 enable = true
-bgImage = "static/images/site/flower.jpeg" # reference https://www.hdwallpaper.nu/beautiful-flowers-wallpapers/
+bgImage = "static/images/site/mountain.jpg" # reference https://www.hdwallpaper.nu/beautiful-flowers-wallpapers/
 # background site https://unsplash.com/s/photos/blog-background
 title = ""
 image = ""
