@@ -205,7 +205,9 @@ public class LoginPage extends PageComponent {
 }
 ```
 
-可以看到，该类继承了 Serenity 的 `PageComponent` 类，`PageComponent` 类对 Selenium 做了封装，使得针对页面元素的操作变得更加简单。`LoginPage` 页面对象类包含了 GitHub 登录页面的属性与行为。页面元素被定义为了属性，而方法表示该页面具有的行为。`login()` 方法包含了完整的 GitHub 登录行为：即包含打开登录页面、输入用户名和密码、点击登录按钮、输入鉴权码几个连续的动作。
+可以看到，该类继承了 Serenity 的 `PageComponent` 类，`PageComponent` 类对 Selenium 做了封装，使得针对页面元素的操作变得更加简单。当我们使用 `PageComponent` 类中提供的方法对浏览器进行操作时，其会将使用 `@Managed` 管理的 WebDriver 自动注入。
+
+`LoginPage` 页面对象类包含了 GitHub 登录页面的属性与行为。页面元素被定义为了属性，而方法表示该页面具有的行为。`login()` 方法包含了完整的 GitHub 登录行为：即包含打开登录页面、输入用户名和密码、点击登录按钮、输入鉴权码几个连续的动作。
 
 `CreateIssuePage` 类的内容如下：
 
