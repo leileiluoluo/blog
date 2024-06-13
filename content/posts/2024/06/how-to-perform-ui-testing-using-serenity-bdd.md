@@ -92,12 +92,6 @@ serenity-bdd-ui-test-demo
         <version>${serenity-bdd.version}</version>
         <scope>test</scope>
     </dependency>
-    <dependency>
-        <groupId>net.serenity-bdd</groupId>
-        <artifactId>serenity-screenplay-webdriver</artifactId>
-        <version>${serenity-bdd.version}</version>
-        <scope>test</scope>
-    </dependency>
 
     <!-- google authenticator -->
     <dependency>
@@ -127,7 +121,7 @@ serenity-bdd-ui-test-demo
 
 可以看到，除了引入主要依赖 JUnit 5 和 Serenity BDD 外，还引入了 `googleauth` 来做 Google Authentication 验证码生成，引入了 `logback-classic` 来做日志打印。
 
-还引入插件 `maven-compiler-plugin` 来做代码编译，引入插件 `serenity-maven-plugin` 来生成 HTML 报告。
+此外，还引入了插件 `maven-compiler-plugin` 来做代码编译，引入了插件 `serenity-maven-plugin` 来生成 HTML 报告。
 
 ```xml
 <plugins>
@@ -205,9 +199,9 @@ public class LoginPage extends PageComponent {
 }
 ```
 
-可以看到，该类继承了 Serenity 的 `PageComponent` 类，`PageComponent` 类对 Selenium 做了封装，使得针对页面元素的操作变得更加简单。当我们使用 `PageComponent` 类中提供的方法对浏览器进行操作时，其会将使用 `@Managed` 管理的 WebDriver 自动注入。
+可以看到，该类继承了 Serenity 的 `PageComponent` 类，`PageComponent` 类对 Selenium 做了封装，使得针对页面元素的操作变得更加简单。当我们使用 `PageComponent` 类中提供的方法（如：`openUrl()`、`$(xxx).sendKeys()`）对浏览器进行操作时，其会自动注入并调用由 `@Managed` 管理的 WebDriver（在 `WebDriverConf.java` 中配置）。
 
-`LoginPage` 页面对象类包含了 GitHub 登录页面的属性与行为。页面元素被定义为了属性，而方法表示该页面具有的行为。`login()` 方法包含了完整的 GitHub 登录行为：即包含打开登录页面、输入用户名和密码、点击登录按钮、输入鉴权码几个连续的动作。
+`LoginPage` 页面对象类包含了 GitHub 登录页面的属性与行为。页面元素被定义为了属性，而方法表示该页面具有的行为。`login()` 方法包含了完整的 GitHub 登录行为：即包含打开登录页面、输入用户名和密码、点击登录按钮、输入验证码几个连续的动作。
 
 `CreateIssuePage` 类的内容如下：
 
@@ -240,11 +234,11 @@ public class CreateIssuePage extends PageComponent {
 }
 ```
 
-该类包含了 Issue 创建页面的属性与行为，其方法 `createIssue()` 负责打开 Issue 创建页面，输入标题，并点击提交按钮。
+可以看到，该类包含了 Issue 创建页面的属性与行为，其方法 `createIssue()` 负责打开 Issue 创建页面，输入标题，并点击提交按钮。
 
 ## 3 配置类与工具类
 
-`conf` 包下的配置类 `WebDriverConf.java` 负责 Selenium WebDriver 的配置，其内容如下：
+`conf` 包下的 `WebDriverConf.java` 配置类负责全局 Selenium WebDriver 的配置，其内容如下：
 
 ```java
 // src/test/java/com/example/tests/conf/WebDriverConf.java
@@ -325,7 +319,7 @@ GITHUB_REPO=https://github.com/leileiluoluo/java-exercises
 
 ## 4 单元测试类
 
-下面介绍一下 GitHub Issue 测试用例的入口 `GitHubIssueTest.java`，其内容如下：
+下面介绍一下 GitHub Issue 测试用例的入口类 `GitHubIssueTest.java`，其内容如下：
 
 ```java
 // src/test/java/com/example/tests/GitHubIssueTest.java
@@ -363,11 +357,13 @@ public class GitHubIssueTest {
 }
 ```
 
-可以看到，其是一个 JUnit 5 单元测试类，类上标记了 `@ExtendWith(SerenityJUnit5Extension.class)` 注解，表示其使用了 Serenity JUnit 5 扩展。`testIssueCreation()` 方法标记了 JUnit 5 `@Test` 注解，表示其为一个单元测试方法；在该方法中先后调用 `loginPage.login()` 和 `createIssuePage.createIssue(title)` 方法来进行登录和创建 Issue；最后断言创建 Issue 后的页面标题是否与所指定的标题一致。注意断言语句被包在了 `Serenity.reportThat()` 方法中，该方法可以将断言结果与页面截图附加到最终报告中。
+可以看到，其是一个 JUnit 5 单元测试类，类上标记了 `@ExtendWith(SerenityJUnit5Extension.class)` 注解，表示其使用了 Serenity JUnit 5 扩展。
+
+`testIssueCreation()` 方法标记了 JUnit 5 `@Test` 注解，表示其为一个单元测试方法；在该方法中先后调用 `loginPage.login()` 和 `createIssuePage.createIssue(title)` 方法来进行登录和创建 Issue；最后断言创建 Issue 后的页面标题是否与所指定的标题一致。注意断言语句被包在了 `Serenity.reportThat()` 方法中，该方法可以将断言结果与页面截图附加到最终报告中。
 
 ## 5 工程运行与报告查看
 
-因本示例工程使用的是 Chrome 浏览器，运行前，请确保您的机器含有 Chrome 浏览器，并且安装了对应的 ChromeDriver（请使用「[这个地址](https://developer.chrome.com/docs/chromedriver/downloads)」下载对应您浏览器版本的 Chrome Driver，并将其解压地址配置到系统环境变量）。
+因本示例工程使用的是 Chrome 浏览器，运行前，请确保您的机器含有 Chrome 浏览器，且安装好对应的 ChromeDriver（请使用「[这个地址](https://developer.chrome.com/docs/chromedriver/downloads)」下载对应您浏览器版本的 Chrome Driver，并将其解压地址配置到系统环境变量），若没有安装，则 Serenity 会在运行时自动下载与浏览器匹配的 ChromeDriver。
 
 本示例工程可以直接在 Intellij IDEA 中运行，也可以在命名行键入如下命令运行：
 
@@ -380,6 +376,8 @@ mvn clean verify
 ![Serenity 生成的 HTML 报告](https://leileiluoluo.github.io/static/images/uploads/2024/06/serenity-bdd-ui-test-report.png)
 
 ## 6 小结
+
+本文以登录 GitHub 并在页面创建 Issue 为测试场景，演示了如何使用 Serenity BDD、JUnit 5 和 Selenium 来进行 Web UI 测试。
 
 本文完整示例工程已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/serenity-bdd-ui-test-demo)，欢迎关注或 Fork。
 
