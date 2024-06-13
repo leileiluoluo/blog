@@ -347,7 +347,7 @@ public class GitHubIssueTest {
 }
 ```
 
-可以看到，其是一个 JUnit 5 单元测试类，类上使用了 `@ExtendWith(SerenityJUnit5Extension.class)` 注解。
+可以看到，其是一个 JUnit 5 单元测试类，类上标记了 `@ExtendWith(SerenityJUnit5Extension.class)` 注解，表示其使用了 Serenity JUnit 5 扩展。`testIssueCreation()` 方法标记了 JUnit 5 `@Test` 注解，表示其为一个单元测试方法；在该方法中先后调用 `loginPage.login()` 和 `createIssuePage.createIssue(title)` 方法来进行登录和创建 Issue；最后断言创建 Issue 后的页面标题是否与所指定的标题一致。注意断言语句被包在了 `Serenity.reportThat()` 方法中，该方法可以将断言结果与页面截图附加到最终报告中。
 
 ## 5 工程运行与报告查看
 
