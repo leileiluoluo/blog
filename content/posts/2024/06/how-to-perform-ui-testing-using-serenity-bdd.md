@@ -257,6 +257,8 @@ public class WebDriverConf {
 }
 ```
 
+可以看到，我们使用 Serenity 中的注解 `@Managed` 标记了 Selenium WebDriver 属性，表示由 Serenity 管理 WebDriver 的生命周期（若本地未安装 WebDriver，其会自动下载与我们本地浏览器对应的 WebDriver；运行结束后，其会自动调用 WebDriver 的关闭方法来关闭浏览器）。
+
 `utils` 包下的工具类 `GoogleAuthenticatorUtil.java` 用于 Google Authenticator Code 的生成，其内容如下：
 
 ```java
@@ -274,7 +276,9 @@ public class GoogleAuthenticatorUtil {
 }
 ```
 
-`utils` 包下的工具类 `ConfigUtil.java` 用于配置文件的读取，其内容如下：
+可以看到，我们借助 `googleauth` 包，在该工具类中提供了一个可以根据 Secret 来生成 6 位验证码的公共静态方法。
+
+`utils` 包下的另一个工具类 `ConfigUtil.java` 用于配置文件的读取，其内容如下：
 
 ```java
 // src/test/java/com/example/tests/utils/ConfigUtil.java
@@ -305,6 +309,16 @@ public class ConfigUtil {
         return PROPERTIES.getProperty(key);
     }
 }
+```
+
+其会读取我们在 `src/test/resources/config.properties` 文件中配置的各个变量：
+
+```text
+# src/test/resources/config.properties
+GITHUB_USERNAME=leileiluoluo
+GITHUB_PASSWORD=xxxxxx
+GITHUB_TOTP_SECRET=xxxxxx
+GITHUB_REPO=https://github.com/leileiluoluo/java-exercises
 ```
 
 ## 4 单元测试类
