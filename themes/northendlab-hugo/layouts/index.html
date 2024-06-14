@@ -2,7 +2,7 @@
 
 <!-- banner -->
 {{ if .Site.Params.banner.enable }}
-  <section class="banner bg-cover" style="background-image: url('{{ .Site.Params.banner.bgImage | relURL }}');">
+  <section class="banner bg-cover" style="background-image: url('{{ .Site.Params.banner.bgImage | relURL }}'); background-position: 10% 40%;">
     <img src="{{ .Site.Params.banner.image | relURL }}" class="img-fluid illustration" alt="">
     <div class="container">
       <div class="row">
