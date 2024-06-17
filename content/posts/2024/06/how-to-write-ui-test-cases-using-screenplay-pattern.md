@@ -20,7 +20,7 @@ keywords:
 description: 本文首先会介绍 Screenplay 模式的基本概念；接着，以登录 GitHub 并在页面创建 Issue 为测试场景，来分析该场景中的操作者与行为分别对应 Screenplay 模式中的哪个部分；最后，针对该测试场景，使用 Serenity BDD 测试框架来编写满足 Screenplay 模式的测试用例。
 ---
 
-Screenplay 模式是一个用于软件测试的设计模式，本文探索如何使用 Screenplay 模式编写 Web UI 测试用例？
+Screenplay 模式是一个用于软件测试的设计模式，本文探索如何使用 Screenplay 模式编写 Web UI 测试用例。
 
 本文首先会介绍 Screenplay 模式的基本概念；接着，以登录 GitHub 并在页面创建 Issue 为测试场景，来分析该场景中的操作者与行为分别对应 Screenplay 模式中的哪个部分；最后，针对该测试场景，使用 Serenity BDD 测试框架来编写满足 Screenplay 模式的测试用例。
 
@@ -36,13 +36,13 @@ Serenity BDD：4.1.20
 
 ## 1 什么是 Screenplay 模式？
 
-Screenplay 模式（Screenplay Pattern，剧本模式）是一个用于软件测试（特别是用于验收测试）中的设计模式。使用该模式可以帮助我们创建易于维护、可重用和可读性强的测试脚本。其核心概念与原则如下：
+Screenplay 模式（Screenplay Pattern，剧本模式）是一个用于软件测试（特别是验收测试）的设计模式。使用该模式可以帮助我们创建易于维护、重用性强和可读性强的测试脚本。其核心概念与原则如下：
 
 ### 1.1 核心概念
 
 - 演员（Actors）
 
-  代表与被测系统交互的用户或角色，使用具备的「能力（Abilities）」来执行任务，类似于真实用户与系统交互的方式。
+  代表与被测系统交互的用户或角色，其使用具备的「能力（Abilities）」来执行任务，类似于真实用户与系统交互的方式。
 
   例如：一个演员可能是一个电商网站的「用户」，执行登录、搜索商品、添加商品到购物车和下单等操作。
 
@@ -79,6 +79,358 @@ Screenplay 模式（Screenplay Pattern，剧本模式）是一个用于软件测
   测试以叙述风格编写，使其更容易理解。它们通常像剧本或故事一样，改善了与非技术利益相关者（Stakeholders）的沟通。
 
 由此可见，Screenplay 模式是一个强大的验收测试编写方法，尤其适用于复杂应用程序，借助其可以使得测试用例的可重用性、可维护性和可读性得到较大的提升。
+
+## 2 测试场景分析
+
+本文测试场景为：登录 GitHub 并在页面创建 Issue。
+
+- 演员（Actors）
+
+  使用浏览器「登录 GitHub 并在页面创建 Issue」的用户，如 `Larry`。
+
+- 任务（Tasks）
+
+  两个任务：「登录 GitHub」、「创建 Issue」，使用交互来实现。
+
+- 交互（Interactions）
+
+  「登录 GitHub」包含的交互：打开登录 URL、输入用户名、输入密码、点击登录按钮和输入验证码；「创建 Issue」包含的交互：打开 Issue 创建 URL、输入标题和点击提交按钮。
+
+- 问题（Questions）
+
+  `IssueTitle`：创建完 Issue 后，获取页面标题。供断言语句来判断其与所输入的标题是否一致。
+
+## 3 编写测试代码
+
+### 3.1 项目结构与 Maven 依赖
+
+该示例工程结构如下：
+
+```text
+serenity-bdd-screenplay-ui-test-demo
+├─ src/test
+│   ├─ java
+│   │    └─ com.example.tests
+│   │       ├─ tasks
+│   │       │   ├─ Login.java
+│   │       │   └─ CreateIssue.java
+│   │       ├─ questions
+│   │       │   └─ IssueTitle.java
+│   │       ├─ utils
+│   │       │   ├─ GoogleAuthenticatorUtil.java
+│   │       │   └─ ConfigUtil.java
+│   │       └─ GitHubIssueTest.java
+│   └─ resources
+│       └─ config.properties
+└─ pom.xml
+```
+
+```xml
+<dependencies>
+    <!-- serenity bdd -->
+    <dependency>
+        <groupId>net.serenity-bdd</groupId>
+        <artifactId>serenity-core</artifactId>
+        <version>${serenity-bdd.version}</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>net.serenity-bdd</groupId>
+        <artifactId>serenity-screenplay</artifactId>
+        <version>${serenity-bdd.version}</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>net.serenity-bdd</groupId>
+        <artifactId>serenity-screenplay-webdriver</artifactId>
+        <version>${serenity-bdd.version}</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>net.serenity-bdd</groupId>
+        <artifactId>serenity-junit5</artifactId>
+        <version>${serenity-bdd.version}</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- google authenticator -->
+    <dependency>
+        <groupId>com.warrenstrange</groupId>
+        <artifactId>googleauth</artifactId>
+        <version>1.5.0</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- logback -->
+    <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>1.5.6</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- junit 5 -->
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
+
+```xml
+<plugins>
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+            <source>17</source>
+            <target>17</target>
+        </configuration>
+    </plugin>
+    <plugin>
+        <groupId>net.serenity-bdd.maven.plugins</groupId>
+        <artifactId>serenity-maven-plugin</artifactId>
+        <version>${serenity-bdd.version}</version>
+        <executions>
+            <execution>
+                <id>serenity-reports</id>
+                <phase>post-integration-test</phase>
+                <goals>
+                    <goal>aggregate</goal>
+                </goals>
+            </execution>
+        </executions>
+        <dependencies>
+            <dependency>
+                <groupId>net.serenity-bdd</groupId>
+                <artifactId>serenity-single-page-report</artifactId>
+                <version>${serenity-bdd.version}</version>
+            </dependency>
+        </dependencies>
+    </plugin>
+</plugins>
+```
+
+### 3.2 Task 类
+
+```java
+// src/test/java/com/example/tests/tasks/Login.java
+package com.example.tests.tasks;
+
+import com.example.tests.utils.GoogleAuthenticatorUtil;
+import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.actions.Open;
+import org.openqa.selenium.By;
+
+public class Login implements Task {
+    private static final String LOGIN_URL = "https://github.com/login";
+
+    private static final By USERNAME_ELEM = By.xpath("//input[@name='login']");
+    private static final By PASSWORD_ELEM = By.xpath("//input[@name='password']");
+    private static final By SIGN_IN_BUTTON = By.xpath("//input[@name='commit']");
+    private static final By TOTP_ELEM = By.xpath("//input[@name='app_otp']");
+
+    private final String username;
+    private final String password;
+    private final String secret;
+
+    public Login(String username, String password, String secret) {
+        this.username = username;
+        this.password = password;
+        this.secret = secret;
+    }
+
+    @Override
+    public <T extends Actor> void performAs(T actor) {
+        int code = GoogleAuthenticatorUtil.getTotpCode(secret);
+
+        actor.attemptsTo(
+                Open.url(LOGIN_URL),
+                Enter.theValue(username).into(USERNAME_ELEM),
+                Enter.theValue(password).into(PASSWORD_ELEM),
+                Click.on(SIGN_IN_BUTTON),
+                Enter.theValue("" + code).into(TOTP_ELEM)
+        );
+    }
+}
+```
+
+```java
+// src/test/java/com/example/tests/tasks/CreateIssue.java
+package com.example.tests.tasks;
+
+import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.actions.Open;
+import org.openqa.selenium.By;
+
+public class CreateIssue implements Task {
+    private static final String CREATE_ISSUE_URL = "/issues/new";
+
+    private static final By INPUT_TITLE_ELEM = By.xpath("//input[@id='issue_title']");
+    private static final By SUBMIT_BUTTON = By.xpath("//button[contains(text(), 'Submit new issue')]");
+
+    private final String githubRepoURL;
+    private final String title;
+
+    public CreateIssue(String githubRepoURL, String title) {
+        this.githubRepoURL = githubRepoURL;
+        this.title = title;
+    }
+
+    @Override
+    public <T extends Actor> void performAs(T actor) {
+        String createIssueURL = githubRepoURL + CREATE_ISSUE_URL;
+
+        actor.attemptsTo(
+                Open.url(createIssueURL),
+                Enter.theValue(title).into(INPUT_TITLE_ELEM),
+                Click.on(SUBMIT_BUTTON)
+        );
+    }
+}
+```
+
+### 3.3 Question 类
+
+```java
+// src/test/java/com/example/tests/questions/IssueTitle.java
+package com.example.tests.questions;
+
+import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Question;
+import net.serenitybdd.screenplay.questions.page.TheWebPage;
+
+public class IssueTitle implements Question<String> {
+    @Override
+    public String answeredBy(Actor actor) {
+        return TheWebPage.title().answeredBy(actor);
+    }
+}
+```
+
+### 3.4 工具类
+
+```java
+// src/test/java/com/example/tests/utils/ConfigUtil.java
+package com.example.tests.utils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+public class ConfigUtil {
+
+    private static final String FILE_NAME = "/config.properties";
+
+    private static final Properties PROPERTIES = new Properties();
+
+    static {
+        loadProperties();
+    }
+
+    private static void loadProperties() {
+        try (InputStream is = ConfigUtil.class.getResourceAsStream(FILE_NAME)) {
+            PROPERTIES.load(is);
+        } catch (IOException e) {
+            throw new RuntimeException("config.properties load failed", e);
+        }
+    }
+
+    public static String getProperty(String key) {
+        return PROPERTIES.getProperty(key);
+    }
+}
+```
+
+```java
+// src/test/java/com/example/tests/utils/GoogleAuthenticatorUtil.java
+package com.example.tests.utils;
+
+import com.warrenstrange.googleauth.GoogleAuthenticator;
+
+public class GoogleAuthenticatorUtil {
+
+    private static final GoogleAuthenticator authenticator = new GoogleAuthenticator();
+
+    public static int getTotpCode(String secret) {
+        return authenticator.getTotpPassword(secret);
+    }
+}
+```
+
+### 3.5 单元测试类
+
+```java
+// src/test/java/com/example/tests/GitHubIssueTest.java
+package com.example.tests;
+
+import com.example.tests.questions.IssueTitle;
+import com.example.tests.tasks.CreateIssue;
+import com.example.tests.tasks.Login;
+import com.example.tests.utils.ConfigUtil;
+import net.serenitybdd.core.Serenity;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.annotations.CastMember;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+import static org.hamcrest.Matchers.startsWith;
+
+@ExtendWith(SerenityJUnit5Extension.class)
+public class GitHubIssueTest {
+
+    @CastMember(name = "Larry")
+    private Actor larry;
+
+    @Test
+    @DisplayName("Test GitHub issue creation")
+    public void testIssueCreation() {
+        // read variables from config file
+        String username = ConfigUtil.getProperty("GITHUB_USERNAME");
+        String password = ConfigUtil.getProperty("GITHUB_PASSWORD");
+        String secret = ConfigUtil.getProperty("GITHUB_TOTP_SECRET");
+        String githubRepoURL = ConfigUtil.getProperty("GITHUB_REPO_URL");
+
+        // issue title
+        String title = "Serenity Screenplay UI Test";
+
+        // login & create issue
+        larry.attemptsTo(
+                new Login(username, password, secret),
+                new CreateIssue(githubRepoURL, title)
+        );
+
+        // assert
+        Serenity.reportThat("Check title",
+                () -> larry.should(seeThat(new IssueTitle(), startsWith(title)))
+        );
+    }
+}
+```
+
+### 3.6 工程运行与报告查看
+
+```shell
+mvn clean verify
+```
+
+![Serenity 生成的 HTML 报告](https://leileiluoluo.github.io/static/images/uploads/2024/06/serenity-bdd-screenplay-ui-test-report.png)
+
+## 4 小结
+
+本文完整示例工程已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/serenity-bdd-screenplay-ui-test-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
