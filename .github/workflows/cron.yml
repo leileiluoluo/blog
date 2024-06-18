@@ -2,7 +2,7 @@ name: Github Actions for Pages Synchronization
 
 on:
   schedule:
-    - cron: "0 9 * * *"
+    - cron: "0 16 * * *"
 
 jobs:
   deploy:
