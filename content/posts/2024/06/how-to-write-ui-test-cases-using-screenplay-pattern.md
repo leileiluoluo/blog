@@ -82,7 +82,7 @@ Screenplay 模式（Screenplay Pattern，剧本模式）是一个用于软件测
 
 ## 2 测试场景分析
 
-本文测试场景为：登录 GitHub 并在页面创建 Issue。
+本文测试场景为：登录 GitHub 并在页面创建 Issue。下面分析一下该测试场景，将其与 Screenplay 模式中的各个部分进行映射。
 
 - 演员（Actors）
 
