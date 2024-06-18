@@ -228,7 +228,7 @@ serenity-bdd-screenplay-ui-test-demo
 
 Task 类负责调用交互（页面操作）来实现一个个业务操作。
 
-`Login.java` 类为封装了 GitHub 登录相关的操作，其代码如下：
+`Login.java` 类封装了 GitHub 登录相关的操作，其代码如下：
 
 ```java
 // src/test/java/com/example/tests/tasks/Login.java
@@ -277,7 +277,7 @@ public class Login implements Task {
 
 可以看到，该类实现了 Serenity Screenplay 的 Task 接口，实现了 `performAs()` 方法。该类用到的一些页面元素被定义为了属性，`performAs()` 方法为 Actor 具备的能力。在 `performAs()` 方法中，调用 `actor.attemptsTo()` 方法进行了 URL 打开、用户名输入、密码输入、登录按钮点击和验证码输入操作。
 
-`CreateIssue.java` 类为封装了创建 Issue 相关的操作，其代码如下：
+`CreateIssue.java` 类封装了创建 Issue 相关的操作，其代码如下：
 
 ```java
 // src/test/java/com/example/tests/tasks/CreateIssue.java
@@ -317,7 +317,7 @@ public class CreateIssue implements Task {
 }
 ```
 
-该类同样实现了 Task 接口，重写了 `performAs()` 方法。在 `performAs()` 方法中，进行了 URL 打开、Issue 标题输入、提交按钮点击操作。
+该类同样实现了 Task 接口的 `performAs()` 方法。在 `performAs()` 方法中，进行了 URL 打开、Issue 标题输入、提交按钮点击操作。
 
 ### 3.3 Question 类
 
@@ -341,7 +341,7 @@ public class IssueTitle implements Question<String> {
 }
 ```
 
-可以看到，该类实现了 Screenplay 的 `Question` 类，并实现了 `answeredBy()` 方法。
+可以看到，该类实现了 Screenplay 的 `Question` 类及其 `answeredBy()` 方法。
 
 ### 3.4 工具类
 
@@ -454,7 +454,7 @@ public class GitHubIssueTest {
 }
 ```
 
-可以看到，该类是一个标准的 JUnit 5 单元测试类，使用了 `SerenityJUnit5Extension.class` 来执行。我们使用 `@CastMember(name = "Larry")` 注解设定执行操作的 Actor 为 `larry`，然后在 `testIssueCreation()` 测试方法中：首先获取了配置文件中的各个变量；然后使用 `larry.attemptsTo()` 方法调用了 `Login` 和 `CreateIssue` 两个 Task；最后 `larry.should()` 断言了 Issue 标题并计入到报告中。
+可以看到，该类是一个标准的 JUnit 5 单元测试类，使用了 `SerenityJUnit5Extension.class` 来执行。我们使用 `@CastMember(name = "Larry")` 注解设定执行操作的 Actor 为 `larry`，然后在 `testIssueCreation()` 测试方法中：首先获取了配置文件中的各个变量；然后使用 `larry.attemptsTo()` 方法调用了 `Login` 和 `CreateIssue` 两个 Task；最后使用 `larry.should()` 方法断言了 Issue 标题并将结果计入到了报告中。
 
 ### 3.6 工程运行与报告查看
 
@@ -470,7 +470,7 @@ mvn clean verify
 
 ## 4 小结
 
-本文介绍了 Screenplay 模式的基本概念，并以登录 GitHub 并在页面创建 Issue 为测试场景，演示了 如何使用 Serenity BDD 测试框架来编写满足 Screenplay 模式的测试用例。可以看到使用该模式，代码的确很精简、各个类职责分明，具有很好的重用性和可读性。
+本文介绍了 Screenplay 模式的基本概念，并以登录 GitHub 并在页面创建 Issue 为测试场景，演示了如何使用 Serenity BDD 测试框架来编写满足 Screenplay 模式的测试用例。可以看到，使用该模式，代码的确很精简、各个类职责分明，具有很好的重用性和可读性。
 
 本文完整示例工程已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/serenity-bdd-screenplay-ui-test-demo)，欢迎关注或 Fork。
 
