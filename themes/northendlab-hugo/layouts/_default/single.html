@@ -32,10 +32,12 @@
           {{- end -}}
 
           <!-- license -->
+          {{ if ne .Params.Type "page" }}
           <div class="license">
             <i class="ti-info-alt"></i>
             <div class="info">该博客文章由作者通过「<a href="https://creativecommons.org/licenses/by/4.0/deed.zh">知识共享署名 4.0 许可证</a>」进行授权。</div>
           </div>
+          {{ end }}
         </div>
       </div>
       
