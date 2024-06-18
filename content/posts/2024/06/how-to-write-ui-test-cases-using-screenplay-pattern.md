@@ -22,11 +22,11 @@ description: 本文首先会介绍 Screenplay 模式的基本概念；接着，�
 
 Screenplay 模式是一个用于软件测试的设计模式，本文探索如何使用 Screenplay 模式编写 Web UI 测试用例。
 
-本文首先会介绍 Screenplay 模式的基本概念；接着，以登录 GitHub 并在页面创建 Issue 为测试场景，来分析该场景中的操作者与行为分别对应 Screenplay 模式中的哪个部分；最后，针对该测试场景，使用 Serenity BDD 测试框架来编写满足 Screenplay 模式的测试用例。
+本文首先会介绍 Screenplay 模式的基本概念；接着，以登录 GitHub 并在页面创建 Issue 为测试场景，来分析该场景中的操作者与行为分别对应 Screenplay 模式中的哪个部分；最后，针对该测试场景，使用 Serenity BDD 测试框架来编写满足 Screenplay 模式的测试用例，示例工程使用 Maven 管理。
 
 <!--more-->
 
-示例工程所使用的 JDK、Maven 与 Serenity BDD 版本如下：
+下面列出示例工程所使用的 JDK、Maven 与 Serenity BDD 版本：
 
 ```text
 JDK：Amazon Corretto 17.0.8
@@ -100,11 +100,13 @@ Screenplay 模式（Screenplay Pattern，剧本模式）是一个用于软件测
 
   `IssueTitle`：创建完 Issue 后，获取页面标题。供断言语句来判断其与所输入的标题是否一致。
 
+测试场景分析完毕后，下面即尝试使用 Serenity BDD 框架中携带的 Screenplay 模块来编写一下测试代码。
+
 ## 3 编写测试代码
 
 ### 3.1 项目结构与 Maven 依赖
 
-该示例工程结构如下：
+针对「登录 GitHub 并在页面创建 Issue」测试场景，使用 Screenplay 模式的测试工程的目录结构如下：
 
 ```text
 serenity-bdd-screenplay-ui-test-demo
@@ -124,6 +126,10 @@ serenity-bdd-screenplay-ui-test-demo
 │       └─ config.properties
 └─ pom.xml
 ```
+
+可以看到，该工程有三个包，分别为：`tasks`、`questions` 和 `utils`。其中，`tasks` 包对应 Screenplay 模式中的任务；`questions` 包对应 Screenplay 模式中的问题；`utils` 用于放置工具类。此外，`GitHubIssueTest.java` 文件为 JUnit 5 标准单元测试文件，也是该测试用例的入口；`resources/config.properties` 文件为配置文件，用于存放待测试 GitHub 仓库的地址和密钥信息。
+
+下面，看一下该工程用到的依赖：
 
 ```xml
 <dependencies>
@@ -179,6 +185,10 @@ serenity-bdd-screenplay-ui-test-demo
 </dependencies>
 ```
 
+可以看到，该工程主要依赖 Serenity BDD 框架。此外，依赖 `googleauth` 包进行验证码获取；依赖 `logback` 进行日志记录；依赖 `JUnit 5` 进行测试用例执行与断言语句编写。
+
+最后，看一下该工程用到了两个插件：`maven-compiler-plugin` 负责工程的编译；`serenity-maven-plugin` 负责报告的生成。
+
 ```xml
 <plugins>
     <plugin>
@@ -215,6 +225,10 @@ serenity-bdd-screenplay-ui-test-demo
 ```
 
 ### 3.2 Task 类
+
+Task 类负责调用交互（页面操作）来实现一个个业务操作。
+
+`Login.java` 类为封装了 GitHub 登录相关的操作，其代码如下：
 
 ```java
 // src/test/java/com/example/tests/tasks/Login.java
@@ -261,6 +275,10 @@ public class Login implements Task {
 }
 ```
 
+可以看到，该类实现了 Serenity Screenplay 的 Task 接口，实现了 `performAs()` 方法。该类用到的一些页面元素被定义为了属性，`performAs()` 方法为 Actor 具备的能力。在 `performAs()` 方法中，调用 `actor.attemptsTo()` 方法进行了 URL 打开、用户名输入、密码输入、登录按钮点击和验证码输入操作。
+
+`CreateIssue.java` 类为封装了创建 Issue 相关的操作，其代码如下：
+
 ```java
 // src/test/java/com/example/tests/tasks/CreateIssue.java
 package com.example.tests.tasks;
@@ -299,7 +317,13 @@ public class CreateIssue implements Task {
 }
 ```
 
+该类同样实现了 Task 接口，重写了 `performAs()` 方法。在 `performAs()` 方法中，进行了 URL 打开、Issue 标题输入、提交按钮点击操作。
+
 ### 3.3 Question 类
+
+Question 类对应 Screenplay 中的问题，供后面的断言语句使用。
+
+在 Issue 创建完成后，用于获取 Issue 标题的 `IssueTitle` 类的代码如下：
 
 ```java
 // src/test/java/com/example/tests/questions/IssueTitle.java
@@ -317,7 +341,13 @@ public class IssueTitle implements Question<String> {
 }
 ```
 
+可以看到，该类实现了 Screenplay 的 `Question` 类，并实现了 `answeredBy()` 方法。
+
 ### 3.4 工具类
+
+该工程用到两个工具类：`ConfigUtil.java` 和 `GoogleAuthenticatorUtil.java`，分别用于配置文件读取和 Google 验证码生成。
+
+`ConfigUtil.java` 的代码如下：
 
 ```java
 // src/test/java/com/example/tests/utils/ConfigUtil.java
@@ -351,6 +381,8 @@ public class ConfigUtil {
 }
 ```
 
+`GoogleAuthenticatorUtil.java` 的代码如下：
+
 ```java
 // src/test/java/com/example/tests/utils/GoogleAuthenticatorUtil.java
 package com.example.tests.utils;
@@ -368,6 +400,8 @@ public class GoogleAuthenticatorUtil {
 ```
 
 ### 3.5 单元测试类
+
+下面介绍一下该测试用例的入口类 `GitHubIssueTest.java`，其代码如下：
 
 ```java
 // src/test/java/com/example/tests/GitHubIssueTest.java
@@ -420,15 +454,23 @@ public class GitHubIssueTest {
 }
 ```
 
+可以看到，该类是一个标准的 JUnit 5 单元测试类，使用了 `SerenityJUnit5Extension.class` 来执行。我们使用 `@CastMember(name = "Larry")` 注解设定执行操作的 Actor 为 `larry`，然后在 `testIssueCreation()` 测试方法中：首先获取了配置文件中的各个变量；然后使用 `larry.attemptsTo()` 方法调用了 `Login` 和 `CreateIssue` 两个 Task；最后 `larry.should()` 断言了 Issue 标题并计入到报告中。
+
 ### 3.6 工程运行与报告查看
+
+直接在 Intellij IDEA 中右键运行 `GitHubIssueTest.java` 或使用如下命令运行测试用例：
 
 ```shell
 mvn clean verify
 ```
 
+运行完成后，会在 `target/site/serenity` 文件夹生成 HTML 报告，其效果如下：
+
 ![Serenity 生成的 HTML 报告](https://leileiluoluo.github.io/static/images/uploads/2024/06/serenity-bdd-screenplay-ui-test-report.png)
 
 ## 4 小结
+
+本文介绍了 Screenplay 模式的基本概念，并以登录 GitHub 并在页面创建 Issue 为测试场景，演示了 如何使用 Serenity BDD 测试框架来编写满足 Screenplay 模式的测试用例。可以看到使用该模式，代码的确很精简、各个类职责分明，具有很好的重用性和可读性。
 
 本文完整示例工程已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/serenity-bdd-screenplay-ui-test-demo)，欢迎关注或 Fork。
 
