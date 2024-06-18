@@ -184,6 +184,17 @@ h1 {
   font-size: 14px !important;
 }
 
+.content-footer .license {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.content-footer .license .info {
+  margin-left: 4px;
+  font-size: 14px;
+}
+
 /* toc style */
 .toc {
   position: fixed;
