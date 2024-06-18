@@ -127,7 +127,7 @@ serenity-bdd-screenplay-ui-test-demo
 └─ pom.xml
 ```
 
-可以看到，该工程有三个包，分别为：`tasks`、`questions` 和 `utils`。其中，`tasks` 包对应 Screenplay 模式中的任务；`questions` 包对应 Screenplay 模式中的问题；`utils` 用于放置工具类。此外，`GitHubIssueTest.java` 文件为 JUnit 5 标准单元测试文件，也是该测试用例的入口；`resources/config.properties` 文件为配置文件，用于存放待测试 GitHub 仓库的地址和密钥信息。
+可以看到，该工程有三个包，分别为：`tasks`、`questions` 和 `utils`。其中，`tasks` 包对应 Screenplay 模式中的任务；`questions` 包对应 Screenplay 模式中的问题；`utils` 包用于放置工具类。此外，`GitHubIssueTest.java` 文件为 JUnit 5 标准单元测试文件，也是该测试用例的入口；`resources/config.properties` 文件为配置文件，用于存放登录 GitHub 时用到的密钥信息。
 
 下面，看一下该工程用到的依赖：
 
@@ -341,7 +341,7 @@ public class IssueTitle implements Question<String> {
 }
 ```
 
-可以看到，该类实现了 Screenplay 的 `Question` 类及其 `answeredBy()` 方法。
+可以看到，该类实现了 Screenplay 的 `Question` 接口及其 `answeredBy()` 方法。
 
 ### 3.4 工具类
 
@@ -454,7 +454,7 @@ public class GitHubIssueTest {
 }
 ```
 
-可以看到，该类是一个标准的 JUnit 5 单元测试类，使用了 `SerenityJUnit5Extension.class` 来执行。我们使用 `@CastMember(name = "Larry")` 注解设定执行操作的 Actor 为 `larry`，然后在 `testIssueCreation()` 测试方法中：首先获取了配置文件中的各个变量；然后使用 `larry.attemptsTo()` 方法调用了 `Login` 和 `CreateIssue` 两个 Task；最后使用 `larry.should()` 方法断言了 Issue 标题并将结果计入到了报告中。
+可以看到，该类是一个标准的 JUnit 5 单元测试类，使用 `SerenityJUnit5Extension.class` 来执行。我们使用 `@CastMember(name = "Larry")` 注解设定执行操作的 Actor 为 `larry`，然后在 `testIssueCreation()` 测试方法中：首先获取了配置文件中的各个变量；然后使用 `larry.attemptsTo()` 方法调用了 `Login` 和 `CreateIssue` 两个 Task；最后使用 `larry.should()` 方法断言了 Issue 标题并将结果计入到了报告中。
 
 ### 3.6 工程运行与报告查看
 
