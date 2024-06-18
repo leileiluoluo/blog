@@ -187,7 +187,7 @@ serenity-bdd-screenplay-ui-test-demo
 
 可以看到，该工程主要依赖 Serenity BDD 框架。此外，依赖 `googleauth` 包进行验证码获取；依赖 `logback` 进行日志记录；依赖 `JUnit 5` 进行测试用例执行与断言语句编写。
 
-最后，看一下该工程用到了两个插件：`maven-compiler-plugin` 负责工程的编译；`serenity-maven-plugin` 负责报告的生成。
+最后，看一下该工程用到的两个插件：`maven-compiler-plugin` 负责工程的编译；`serenity-maven-plugin` 负责报告的生成。
 
 ```xml
 <plugins>
