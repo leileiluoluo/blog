@@ -22,14 +22,6 @@ jobs:
       - name: Hugo Build
         run: |
           hugo --minify
-      - name: Publish to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          personal_token: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
-          external_repository: leileiluoluo/leileiluoluo.github.io
-          publish_branch: master
-          publish_dir: ./public
-          allow_empty_commit: true
       - name: Run shell
         run: |
           ls -lht

@@ -1,0 +1,31 @@
+name: Github Actions for Pages Synchronization
+
+on:
+  schedule:
+    - cron: "0 9 * * *"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: false
+          fetch-depth: 0
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.123.7"
+          extended: true
+      - name: Hugo Build
+        run: |
+          hugo --minify
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.ENPUBLIC_GITHUB_TOKEN }}
+          external_repository: leileiluoluo/leileiluoluo.github.io
+          publish_branch: master
+          publish_dir: ./public
+          allow_empty_commit: true
