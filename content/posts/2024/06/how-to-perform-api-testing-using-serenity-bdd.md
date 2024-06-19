@@ -34,7 +34,7 @@ Serenity BDD：4.1.20
 测试工程目录结构如下：
 
 ```text
-serenity-bdd-ui-test-demo
+serenity-bdd-api-test-demo
 ├─ src/test
 │   ├─ java
 │   │    └─ com.example.tests
@@ -48,7 +48,7 @@ serenity-bdd-ui-test-demo
 └─ pom.xml
 ```
 
-该工程的结构非常简单：`actions` 包用于放置一组动作类，该类的方法可使用 `@Given`、`@When` 和 `@Then` 注解来标记，分别进行准备、执行和断言；`utils` 包用于放置工具类；`resources/config.properties` 为工程的配置文件，用于存放待测试仓库基础 URL 和 GitHub Token。
+该工程的目录结构非常简单：`actions` 包用于放置一组动作类，该类的方法可使用 `@Given`、`@When` 和 `@Then` 注解来标记，分别进行准备、执行和断言；`utils` 包用于放置工具类；`resources/config.properties` 为工程的配置文件，用于存放待测试仓库基础 URL 和 GitHub Token。
 
 测试工程用到的依赖如下：
 
@@ -90,15 +90,15 @@ serenity-bdd-ui-test-demo
 </dependency>
 ```
 
-其中 Serenity BDD 为主要的依赖，包含了 Serenity 基础功能、REST Assured 和与 JUnit 5 集成的部分；其次还引用了 LogBack 和 JUnit 5 依赖，分别用于日志打印和单元测试执行。
+可以看到，Serenity BDD 为主要的依赖，包含了 Serenity 基础功能、REST Assured，以及 Serenity 和 JUnit 5 集成的相关模块；其次，还引用了 Logback 和 JUnit 5 依赖，分别用于日志打印和单元测试执行。
 
 除了如上依赖外，还在 `pom.xml` 文件引用了两个插件：`maven-compiler-plugin` 和 `serenity-maven-plugin`，分别用于工程编译和测试报告生成。
 
-下面对代码的关键部分解析解释。
+下面对代码的关键部分进行解释。
 
 ## 1 Action 类
 
-我们将对应 BDD 中 `@Given`、`@When` 和 `@Then` 部分的逻辑封装到了 Action 类当中。`CreateIssueAction.java` 类即负责 Issue 创建相关的各种操作。
+我们将对应 BDD 中 `@Given`、`@When` 和 `@Then` 部分的逻辑封装到了 Action 类当中。`CreateIssueAction.java` 即负责 Issue 创建相关的各种操作。
 
 ```java
 // src/test/java/com/example/tests/actions/CreateIssueAction.java
@@ -160,7 +160,9 @@ public class CreateIssueAction extends UIInteractions {
 }
 ```
 
-可以看到，`CreateIssueAction` 类继承了 Serenity 的 `UIInteractions` 类，该类虽然在命名上带了 UI，但不表示操作 UI 的类才可以继承，其实该类除了具有操作 UI 的能力外，还具有操作 API 的能力。
+可以看到，`CreateIssueAction` 类继承了 Serenity 的 `UIInteractions` 类，`UIInteractions` 类虽然在命名上带了 UI，但不表示其仅用于 UI 交互操作，其除了具有操作 UI 的能力外，还具有操作 API 的能力。
+
+`CreateIssueAction` 类的 `createIssue()` 方法标注了 `@Given` 注解，内部使用 REST Assured 发起了 Issue 创建请求并记录了响应结果；`responseShouldBeValid()` 方法标注了 `@Then` 注解，负责获取响应体返回的标题并进行断言。
 
 ## 2 单元测试类
 
