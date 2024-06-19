@@ -458,7 +458,7 @@ public class GitHubIssueTest {
 
 ### 3.6 工程运行与报告查看
 
-直接在 Intellij IDEA 中右键运行 `GitHubIssueTest.java` 或使用如下命令运行测试用例：
+直接在 IntelliJ IDEA 中右键运行 `GitHubIssueTest.java` 或使用如下命令运行测试用例：
 
 ```shell
 mvn clean verify

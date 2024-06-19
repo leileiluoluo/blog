@@ -365,7 +365,7 @@ public class GitHubIssueTest {
 
 因本示例工程使用的是 Chrome 浏览器，运行前，请确保您的机器含有 Chrome 浏览器，且安装好对应的 ChromeDriver（请使用「[这个地址](https://developer.chrome.com/docs/chromedriver/downloads)」下载对应您浏览器版本的 Chrome Driver，并将其解压地址配置到系统环境变量），若没有安装，则 Serenity 会在运行时自动下载与浏览器匹配的 ChromeDriver。
 
-本示例工程可以直接在 Intellij IDEA 中运行，也可以在命名行键入如下命令运行：
+本示例工程可以直接在 IntelliJ IDEA 中运行，也可以在命名行键入如下命令运行：
 
 ```shell
 mvn clean verify

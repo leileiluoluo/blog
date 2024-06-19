@@ -94,9 +94,11 @@ serenity-bdd-api-test-demo
 
 除了如上依赖外，还在 `pom.xml` 文件引用了两个插件：`maven-compiler-plugin` 和 `serenity-maven-plugin`，分别用于工程编译和测试报告生成。
 
-下面对代码的关键部分进行解释。
+下面对代码的关键部分进行分析。
 
-## 1 Action 类
+## 2 代码分析
+
+### 2.1 Action 类
 
 我们将对应 BDD 中 `@Given`、`@When` 和 `@Then` 部分的逻辑封装到了 Action 类当中。`CreateIssueAction.java` 即负责 Issue 创建相关的各种操作。
 
@@ -164,7 +166,7 @@ public class CreateIssueAction extends UIInteractions {
 
 `CreateIssueAction` 类的 `createIssue()` 方法标注了 `@Given` 注解，内部使用 REST Assured 发起了 Issue 创建请求并记录了响应结果；`responseShouldBeValid()` 方法标注了 `@Then` 注解，负责获取响应体返回的标题并进行断言。
 
-## 2 单元测试类
+### 2.2 单元测试类
 
 测试用例的入口为普通的 JUnit 5 单元测试类，一个测试类可以包含一组相关的测试。
 
@@ -201,6 +203,26 @@ public class GitHubIssueTest {
 ```
 
 可以看到，该类使用 `@ExtendWith(SerenityJUnit5Extension.class)` 注解修饰，表示其启动由 Serenity JUnit5 扩展来负责；然后在 `setUp()` 方法设置了基础 URI；在测试方法 `testIssueCreation()` 调用了 `createIssueAction` 创建了 Issue 并断言了结果。
+
+## 3 程序运行及报告查看
+
+本示例工程可以直接在 IntelliJ IDEA 中运行，也可以在命名行键入如下命令运行：
+
+```shell
+mvn clean verify
+```
+
+运行完成后，会在 `target/site/serenity` 文件夹生成 HTML 测试报告。打开后，效果如下：
+
+![Serenity 生成的 HTML 报告](https://leileiluoluo.github.io/static/images/uploads/2024/06/serenity-bdd-api-test-report.png)
+
+可以看到，报告展示的信息非常详细，包含了每个步骤的执行情况，并针对发起 API 请求的步骤，记录了请求 URL、请求体和响应体等信息。
+
+## 4 小结
+
+综上，本文以创建 GitHub Issue 为测试场景，介绍了使用 Serenity BDD 与 REST Assured 进行 API 测试的方法。
+
+本文完整示例工程已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/serenity-bdd-api-test-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
