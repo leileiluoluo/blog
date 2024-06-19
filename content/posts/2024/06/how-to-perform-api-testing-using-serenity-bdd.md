@@ -94,6 +94,106 @@ serenity-bdd-ui-test-demo
 
 除了如上依赖外，还在 `pom.xml` 文件引用了两个插件：`maven-compiler-plugin` 和 `serenity-maven-plugin`，分别用于工程编译和测试报告生成。
 
+下面对代码的关键部分解析解释。
+
+## 1 Action 类
+
+我们将对应 BDD 中 `@Given`、`@When` 和 `@Then` 部分的逻辑封装到了 Action 类当中。`CreateIssueAction.java` 类即负责 Issue 创建相关的各种操作。
+
+```java
+// src/test/java/com/example/tests/actions/CreateIssueAction.java
+package com.example.tests.actions;
+
+import com.example.tests.utils.ConfigUtil;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import net.serenitybdd.core.steps.UIInteractions;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static io.restassured.path.json.JsonPath.from;
+import static net.serenitybdd.rest.SerenityRest.given;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+
+public class CreateIssueAction extends UIInteractions {
+    private int statusCode;
+    private String responseBody;
+
+    @Given("新增一个标题为 {0} 的 Issue")
+    public void createIssue(String title) {
+        // request
+        Map<String, Object> requestBody = prepareRequestBody(title);
+
+        // response
+        Response response = given().contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("Authorization", "Bearer " + ConfigUtil.getProperty("GITHUB_TOKEN"))
+                .body(requestBody)
+                .post("/issues")
+                .then()
+                .extract().response();
+
+        // extract
+        this.statusCode = response.getStatusCode();
+        this.responseBody = response.asString();
+    }
+
+    @Then("响应码为 {0}，响应体中的 Issue 标题为 {1}")
+    public void responseShouldBeValid(int statusCode, String title) {
+        // extract fields
+        String issueTitle = from(responseBody).getString("title");
+
+        // assertions
+        assertThat(statusCode, equalTo(this.statusCode));
+        assertThat(title, equalTo(issueTitle));
+    }
+
+    private Map<String, Object> prepareRequestBody(String title) {
+        Map<String, Object> requestBody = new HashMap<>();
+        requestBody.put("title", title);
+        return requestBody;
+    }
+}
+```
+
+可以看到，`CreateIssueAction` 类继承了 Serenity 的 `UIInteractions` 类，该类虽然在命名上带了 UI，但不表示操作 UI 的类才可以继承，其实该类除了具有操作 UI 的能力外，还具有操作 API 的能力。
+
+## 2 单元测试类
+
+```java
+// src/test/java/com/example/tests/GitHubIssueTest.java
+package com.example.tests;
+
+import com.example.tests.actions.CreateIssueAction;
+import com.example.tests.utils.ConfigUtil;
+import io.restassured.RestAssured;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+@ExtendWith(SerenityJUnit5Extension.class)
+public class GitHubIssueTest {
+    private CreateIssueAction createIssueAction;
+
+    @BeforeAll
+    public static void setUp() {
+        RestAssured.baseURI = ConfigUtil.getProperty("GITHUB_BASE_URI");
+    }
+
+    @Test
+    public void testIssueCreation() {
+        String title = "Serenity API Test";
+        createIssueAction.createIssue(title);
+        createIssueAction.responseShouldBeValid(201, title);
+    }
+}
+```
+
 > 参考资料
 >
 > [1] Serenity BDD: Your First API Test - [https://serenity-bdd.github.io/docs/tutorials/rest](https://serenity-bdd.github.io/docs/tutorials/rest)
