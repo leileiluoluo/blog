@@ -166,6 +166,10 @@ public class CreateIssueAction extends UIInteractions {
 
 ## 2 单元测试类
 
+测试用例的入口为普通的 JUnit 5 单元测试类，一个测试类可以包含一组相关的测试。
+
+负责测试 Issue 创建的部分被放置在了 `GitHubIssueTest` 类中，其代码如下：
+
 ```java
 // src/test/java/com/example/tests/GitHubIssueTest.java
 package com.example.tests;
@@ -195,6 +199,8 @@ public class GitHubIssueTest {
     }
 }
 ```
+
+可以看到，该类使用 `@ExtendWith(SerenityJUnit5Extension.class)` 注解修饰，表示其启动由 Serenity JUnit5 扩展来负责；然后在 `setUp()` 方法设置了基础 URI；在测试方法 `testIssueCreation()` 调用了 `createIssueAction` 创建了 Issue 并断言了结果。
 
 > 参考资料
 >
