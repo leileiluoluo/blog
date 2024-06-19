@@ -21,7 +21,7 @@ description: 本文介绍使用 Serenity BDD 与 REST Assured 进行 API 测试�
 
 REST Assured 是一个非常易用的、用于测试 RESTful API 的 Java 类库，之前专门介绍过其使用方法（[如何使用 REST Assured 做 API 测试？](https://leileiluoluo.github.io/posts/how-to-perform-api-testing-using-rest-assured.html)），本文不再对 REST Assured 的基础进行赘述，而仅关注 Serenity BDD 与 REST Assured 的集成。
 
-本文针对的测试场景是：调用 GitHub REST API 创建一个 Issue，测试工程使用 Maven 管理。
+本文针对的测试场景是：[调用 GitHub REST API 创建一个 Issue](https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#create-an-issue)，测试工程使用 Maven 管理。
 
 下面列出测试工程所使用的 JDK、Maven 与 Serenity BDD 的版本：
 
