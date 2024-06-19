@@ -48,7 +48,7 @@ serenity-bdd-api-test-demo
 └─ pom.xml
 ```
 
-该工程的目录结构非常简单：`actions` 包用于放置一组动作类，该类的方法可使用 `@Given`、`@When` 和 `@Then` 注解来标记，分别进行准备、执行和断言；`utils` 包用于放置工具类；`resources/config.properties` 为工程的配置文件，用于存放待测试仓库基础 URL 和 GitHub Token。
+该工程的目录结构非常简单：`actions` 包用于放置一组动作类，该类的方法可使用 `@Given`、`@When` 和 `@Then` 注解来标记，分别进行准备、执行和断言；`utils` 包用于放置工具类，其下的 `ConfigUtil.java` 用于读取配置文件中的变量；`resources/config.properties` 为工程的配置文件，存放了待测试仓库基础 URL 和 GitHub Token。
 
 测试工程用到的依赖如下：
 
