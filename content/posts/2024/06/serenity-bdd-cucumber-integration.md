@@ -59,6 +59,12 @@ serenity-bdd-cucumber-integration-demo
 └─ pom.xml
 ```
 
+可以看到该工程主要有 `pages`、`stepdefs` 和 `utils` 这几个包，分别用于放置页面对象类、步骤定义（Step Definition）类和工具类。
+
+`CucumberTestSuite` 类为该测试工程执行的入口。
+
+`resources` 文件夹下的 `features` 子文件夹用于放置 Cucumber Gherkin 特性文件；`serenity.conf` 文件为 Serenity 的配置文件，可用于配置 Selenium 浏览器类型、启动模式等；`config.properties` 文件为工程的配置文件，我们在其中放置了 GitHub 仓库地址、登录秘钥等信息。
+
 该示例工程用到的依赖如下：
 
 ```xml
@@ -108,6 +114,8 @@ serenity-bdd-cucumber-integration-demo
     </dependency>
 </dependencies>
 ```
+
+可以看到，该工程引用了 Serenity 核心模块 `serenity-core`，以及 Serenity 与 Cucumber 集成的模块 `serenity-cucumber`。此外，还引用了用于 Google Authenticator 验证码生成的 `googleauth` 包、用于日志打印的 `logback-classic` 包，以及用于测试套件执行的 `junit-platform-suite` 和 `cucumber-junit-platform-engine` JUnit 5 相关模块。
 
 该示例工程用到的插件如下：
 
