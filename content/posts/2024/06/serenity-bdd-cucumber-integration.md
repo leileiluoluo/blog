@@ -360,7 +360,9 @@ public class CucumberTestSuite {
 
 ## 3 测试用例执行与报告查看
 
-可以在使用如下命令运行 `CucumberTestSuite` 类：
+因本工程的运行使用的是 Chrome 浏览器，请在运行前确保本地已安装最新的 ChromeDriver。
+
+这样即可以在命令行使用如下命令运行 `CucumberTestSuite` 类了：
 
 ```shell
 mvn clean verify
@@ -369,6 +371,8 @@ mvn clean verify
 运行完成后，会在 `target/site/serenity` 文件夹生成 HTML 测试报告。打开后，效果如下：
 
 ![Serenity 生成的 HTML 报告](https://leileiluoluo.github.io/static/images/uploads/2024/06/serenity-bdd-cucumber-integration-ui-test-report.png)
+
+可以看到，特性文件中的每个步骤的标题与详情（执行结果和页面截图）都展示到了报告上。
 
 ## 4 小结
 
