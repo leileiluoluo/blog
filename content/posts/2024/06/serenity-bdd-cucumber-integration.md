@@ -327,7 +327,7 @@ public class CreateIssueStep {
 }
 ```
 
-该类使用 `issuesPage` 来实现 Issue 的创建与结果的断言。
+该类调用 `issuesPage` 来实现 Issue 的创建与结果的断言。
 
 ### 2.4 测试入口类
 
