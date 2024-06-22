@@ -235,7 +235,7 @@ public class LoginPage extends PageObject {
 }
 ```
 
-可以看到，该类继承了 Serenity 的 `PageObject` 类，这样既可以更方便的使用诸如 Selenium WebDriver 等 UI 操作组件。此外，该类还根据页面对象模型的要求，将页面元素定位器定义为了属性，将页面具备的行为定义为了方法（如：调用 `login()` 方法来进行 GitHub 登录）。
+可以看到，该类继承了 Serenity 的 `PageObject` 类，这样即可以方便的使用诸如 Selenium WebDriver 等 UI 操作组件。此外，该类还根据页面对象模型的要求，将页面元素定位器定义为了属性，将页面具备的行为定义为了方法（如：调用 `login()` 方法来进行 GitHub 登录）。
 
 `IssuesPage` 类的内容如下：
 
