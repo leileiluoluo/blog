@@ -63,7 +63,7 @@ serenity-bdd-cucumber-integration-demo
 
 `CucumberTestSuite` 类为该测试工程执行的入口。
 
-`resources` 文件夹下的 `features` 子文件夹用于放置 Cucumber Gherkin 特性文件；`serenity.conf` 文件为 Serenity 的配置文件，可用于配置 Selenium 浏览器类型、启动模式等；`config.properties` 文件为工程的配置文件，我们在其中放置了 GitHub 仓库地址、登录秘钥等信息。
+`resources` 文件夹下的 `features` 子文件夹用于放置 Cucumber 特性文件（Gherkin 语言描述）；`serenity.conf` 文件为 Serenity 的配置文件，可用于配置 Selenium 浏览器类型、启动模式等；`config.properties` 文件为工程的配置文件，我们在其中放置了 GitHub 仓库地址、登录秘钥等信息。
 
 该示例工程用到的依赖如下：
 
@@ -173,6 +173,8 @@ serenity-bdd-cucumber-integration-demo
     </plugin>
 </plugins>
 ```
+
+其中，`maven-compiler-plugin` 用于工程的编译；`maven-failsafe-plugin` 用于测试套件的执行；`serenity-maven-plugin` 用于测试报告的生成。
 
 ## 2 主要文件与代码分析
 
