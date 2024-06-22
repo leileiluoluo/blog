@@ -63,7 +63,7 @@ serenity-bdd-cucumber-integration-demo
 
 `CucumberTestSuite` 类为该测试工程执行的入口。
 
-`resources` 文件夹下的 `features` 子文件夹用于放置 Cucumber 特性文件（Gherkin 语言描述）；`serenity.conf` 文件为 Serenity 的配置文件，可用于配置 Selenium 浏览器类型、启动模式等；`config.properties` 文件为工程的配置文件，我们在其中放置了 GitHub 仓库地址、登录秘钥等信息。
+`resources` 文件夹下的 `features` 子文件夹用于放置 Cucumber 特性文件（Gherkin 语法描述）；`serenity.conf` 文件为 Serenity 的配置文件，可用于配置 Selenium 浏览器类型、启动模式等；`config.properties` 文件为工程的配置文件，我们在其中放置了 GitHub 仓库地址、登录秘钥等信息。
 
 该示例工程用到的依赖如下：
 
@@ -180,6 +180,10 @@ serenity-bdd-cucumber-integration-demo
 
 ### 2.1 特性文件
 
+Cucumber 特性文件使用 Gherkin 语法描述，一个特性文件可包含多个相关的场景（Scenario）。一个场景中使用 Given、When、Then 来分别设置初始条件、执行操作、断言结果。
+
+本工程用于测试 GitHub Issue 的特性文件 `github-issues.feature` 的内容如下：
+
 ```text
 # resources/features/github-issues.feature
 Feature: GitHub Issues UI 测试
@@ -191,6 +195,10 @@ Feature: GitHub Issues UI 测试
 ```
 
 ### 2.2 页面对象类
+
+本工程使用了针对 Web UI 测试常用的设计模式 —— 页面对象模型（Page Object Model）。本工程将页面对象相关的类放到了 `pages` 包下，其中 `LoginPage` 对应登录页面，`IssuesPage` 对应 Issues 页面。
+
+`LoginPage` 类的内容如下：
 
 ```java
 // src/test/java/com/example/tests/pages/LoginPage.java
@@ -227,6 +235,10 @@ public class LoginPage extends PageObject {
 }
 ```
 
+可以看到，该类继承了 Serenity 的 `PageObject` 类，这样既可以更方便的使用诸如 Selenium WebDriver 等 UI 操作组件。此外，该类还根据页面对象模型的要求，将页面元素定位器定义为了属性，将页面具备的行为定义为了方法（如：调用 `login()` 方法来进行 GitHub 登录）。
+
+`IssuesPage` 类的内容如下：
+
 ```java
 // src/test/java/com/example/tests/pages/IssuesPage.java
 package com.example.tests.pages;
@@ -259,7 +271,13 @@ public class IssuesPage extends PageObject {
 }
 ```
 
+可以看到，该类也继承了 Serenity 的 `PageObject` 类，提供了一个 `createIssue()` 方法来创建 Issue。
+
 ### 2.3 Step Definition 类
+
+Step Definition 类位于 `stepdefs` 包下，是一些与特性文件对应的胶水类。
+
+对应 `github-issues.feature` 文件 `Given` 部分的实现被放置到了 `LoginStep` 类中：
 
 ```java
 // src/test/java/com/example/tests/stepdefs/LoginStep.java
@@ -277,6 +295,10 @@ public class LoginStep {
     }
 }
 ```
+
+可以看到，该类非常简单，直接调用 `loginPage` 来实现 GitHub 登录。
+
+对应 `github-issues.feature` 文件 `When` 和 `Then` 部分的实现被放置到了 `CreateIssueStep` 类中：
 
 ```java
 // src/test/java/com/example/tests/stepdefs/CreateIssueStep.java
@@ -305,7 +327,13 @@ public class CreateIssueStep {
 }
 ```
 
+该类使用 `issuesPage` 来实现 Issue 的创建与结果的断言。
+
 ### 2.4 测试入口类
+
+本测试工程的执行使用了 JUnit 5 单元测试框架来驱动。
+
+入口类 `CucumberTestSuite` 的内容如下：
 
 ```java
 // src/test/java/com/example/tests/CucumberTestSuite.java
@@ -326,7 +354,13 @@ public class CucumberTestSuite {
 }
 ```
 
+可以看到，该类使用了一些 JUnit 5 相关的注解来标记，分别指定了执行引擎、资源文件位置、报告并行生成插件配置等部分。
+
+除了这些主要的代码类或配置文件外，还有一个 `utils` 包拥有 `GoogleAuthenticatorUtil.java` 和 `ConfigUtil` 两个文件，分别用于 Google Authenticator 验证码生成和 `resources/config.properties` 配置文件读取，此二者的源码就不再列出了。
+
 ## 3 测试用例执行与报告查看
+
+可以在使用如下命令运行 `CucumberTestSuite` 类：
 
 ```shell
 mvn clean verify
@@ -338,7 +372,7 @@ mvn clean verify
 
 ## 4 小结
 
-本文完整示例工程已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/serenity-bdd-cucumber-integration-demo)，欢迎关注或 Fork。
+综上，本文借助「登录 GitHub 并创建 Issue」测试场景演示了 Serenity BDD 与 Cucumber 的集成。完整示例工程已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/serenity-bdd-cucumber-integration-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
