@@ -354,9 +354,9 @@ public class CucumberTestSuite {
 }
 ```
 
-可以看到，该类使用了一些 JUnit 5 相关的注解来标记，分别指定了执行引擎、资源文件位置、报告并行生成插件配置等部分。
+可以看到，该类使用了一些 JUnit 5 相关的注解来标记，指定了执行引擎、资源文件位置、报告并行生成插件等部分。
 
-除了这些主要的代码类或配置文件外，还有一个 `utils` 包拥有 `GoogleAuthenticatorUtil.java` 和 `ConfigUtil` 两个文件，分别用于 Google Authenticator 验证码生成和 `resources/config.properties` 配置文件读取，此二者的源码就不再列出了。
+除了这些主要的代码类或配置文件外，还有一个 `utils` 包拥有 `GoogleAuthenticatorUtil` 和 `ConfigUtil` 两个类，分别用于 Google Authenticator 验证码生成和 `resources/config.properties` 配置文件读取，此二者的源码就不在这里列出了。
 
 ## 3 测试用例执行与报告查看
 
