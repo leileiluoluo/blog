@@ -23,6 +23,12 @@
           {{ .Content }}
         </div>
         <div class="content-footer">
+          <!-- weixinhao -->
+          {{ if .Site.Params.weixinhao.enable }}
+            {{ template "partials/weixinhao.html" . }}
+          {{ end }}
+          
+          <!-- tags -->
           {{ with .Params.tags -}}
           <div class="post-tags">
             {{ range . -}}
@@ -44,13 +50,6 @@
       <!-- related -->
       {{ if .Site.Params.related.enable }}
       {{ template "partials/related.html" . }}
-      {{ end }}
-
-       <!-- weixinhao -->
-      {{ if .Site.Params.weixinhao.enable }}
-      <div class="col-lg-8 mx-auto block shadow">
-        {{ template "partials/weixinhao.html" . }}
-      </div>
       {{ end }}
 
       <!-- reward -->
