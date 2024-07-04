@@ -46,9 +46,16 @@
       {{ template "partials/related.html" . }}
       {{ end }}
 
+       <!-- weixinhao -->
+      {{ if .Site.Params.weixinhao.enable }}
+      <div class="col-lg-8 mx-auto block shadow">
+        {{ template "partials/weixinhao.html" . }}
+      </div>
+      {{ end }}
+
+      <!-- reward -->
       {{ if .Site.Params.reward.enable }}
       <div class="col-lg-8 mx-auto block shadow">
-        <!-- reward -->
         {{ template "partials/reward.html" . }}
       </div>
       {{ end }}

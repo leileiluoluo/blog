@@ -158,6 +158,10 @@ link = "https://gethugothemes.com/shop/"
 [params.indexTags]
 enable = true
 
+# weixinhao
+[params.weixinhao]
+enable = true
+
 # reward
 [params.reward]
 enable = false

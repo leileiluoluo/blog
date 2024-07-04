@@ -34,6 +34,8 @@ leileiluoluo(at)leileiluoluo.com
 
 本博客的技术文章会同步分发到如下各个平台，欢迎您在对应的平台关注我！
 
+- 微信公众号：[磊磊落落](https://leileiluoluo.github.io/static/images/self/weixinhao.jpg)
+
 - 掘金：[https://juejin.cn/user/3054882885469577](https://juejin.cn/user/3054882885469577)
 
 - 知乎：[https://www.zhihu.com/people/leileiluoluo.com](https://www.zhihu.com/people/leileiluoluo.com)
