@@ -14,7 +14,7 @@ keywords:
 description: Go 1.18 加入了对泛型的支持。本文首先介绍了泛型的基本概念，然后使用切片反转和对象排序两个示例演示了泛型的使用。
 ---
 
-Go 1.18 加入了对泛型的支持。本文将使用切片反转和对象排序两个示例来演示泛型的使用。
+Go 1.18 加入了对泛型的支持。本文将使用切片反转和对象排序两个示例场景来演示泛型的使用。
 
 开始前，我们先了解一下泛型的基本概念。
 
@@ -24,9 +24,132 @@ Go 1.18 加入了对泛型的支持。本文将使用切片反转和对象排序
 
 泛型最大的优势是提高了代码的重用性和类型安全性。通过泛型，可以编写出更加通用的类和方法，这些代码可以用于多种类型，从而省去了为每种类型都编写重复代码的情形。
 
+接下来以切片反转和对象排序两个示例场景来演示泛型的使用。
+
 ## 2 切片反转
 
+下面以反转切片中的元素为例来演示泛型的使用。
+
+### 2.1 使用泛型前
+
+如果我们想对 `int` 切片进行反转，其实现可以是下面这样：
+
+```go
+func ReverseInts(a []int) {
+    for i, j := 0, len(a)-1; i < j; {
+        a[i], a[j] = a[j], a[i]
+        i++
+        j--
+    }
+}
+```
+
+```go
+// 调用 ReverseInts() 函数对 int 切片进行反转
+ints := []int{1, 2, 3, 4, 5}
+ReverseInts(ints)
+fmt.Println(ints) // [5 4 3 2 1]
+```
+
+如果我们想对 `string` 切片进行反转，其实现与上述对 `int` 切片进行反转代码几乎一模一样（仅参数类型不同）：
+
+```go
+func ReverseStrings(a []string) {
+    for i, j := 0, len(a)-1; i < j; {
+        a[i], a[j] = a[j], a[i]
+        i++
+        j--
+    }
+}
+```
+
+```go
+// 调用 ReverseStrings() 函数对 string 切片进行反转
+strings := []string{"a", "b", "c", "d", "e"}
+ReverseStrings(strings)
+fmt.Println(strings) // [e d c b a]
+```
+
+除此之外，如果我们想对自定义结构体（`student`）切片进行反转，该如何做呢？
+
+```go
+type student struct {
+    id   int
+    name string
+}
+```
+
+其实现同样与上述代码同样几乎一模一样：
+
+```go
+func ReverseStudents(a []student) {
+    for i, j := 0, len(a)-1; i < j; {
+        a[i], a[j] = a[j], a[i]
+        i++
+        j--
+    }
+}
+```
+
+```go
+// 调用 ReverseStudents() 函数对 student 切片进行反转
+students := []student{
+    {id: 1, name: "Larry"},
+    {id: 2, name: "Jacky"},
+    {id: 3, name: "Alice"},
+    {id: 4, name: "Lucy"},
+    {id: 5, name: "Cindy"},
+}
+ReverseStudents(students)
+fmt.Println(students) // [{5 Cindy} {4 Lucy} {3 Alice} {2 Jacky} {1 Larry}]
+```
+
+所以，我们不禁要问：是否有一种泛型方式的写法，支持对任意类型的切片进行反转？
+
+### 2.2 使用泛型后
+
+当然是有的，借助 Go 1.18 对泛型的支持，可以使用如下写法来对任意类型的切片进行反转：
+
+```go
+func Reverse[T any](a []T) {
+    for i, j := 0, len(a)-1; i < j; {
+        a[i], a[j] = a[j], a[i]
+        i++
+        j--
+    }
+}
+```
+
+```go
+// 调用支持泛型的 Reverse() 函数对 float64 切片进行反转
+floats := []float64{1.03, 2.25, 3.38, 4.49, 5.52}
+Reverse(floats)
+fmt.Println(floats) // [5.52 4.49 3.38 2.25 1.03]
+
+// 调用支持泛型的 Reverse() 函数对 string 切片进行反转
+strings := []string{"a", "b", "c", "d", "e"}
+Reverse(strings)
+fmt.Println(strings) // [e d c b a]
+
+// 调用支持泛型的 Reverse() 函数对 student 切片进行反转
+students := []student{
+    {id: 1, name: "Larry"},
+    {id: 2, name: "Jacky"},
+    {id: 3, name: "Alice"},
+    {id: 4, name: "Lucy"},
+    {id: 5, name: "Cindy"},
+}
+Reverse(students)
+fmt.Println(students) // [{5 Cindy} {4 Lucy} {3 Alice} {2 Jacky} {1 Larry}]
+```
+
 ## 3 对象排序
+
+### 3.1 使用泛型前
+
+### 3.2 使用泛型后
+
+## 4 小结
 
 > 参考资料
 >
