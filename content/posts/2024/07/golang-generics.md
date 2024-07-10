@@ -51,7 +51,7 @@ func ReverseInts(a []int) {
 实现逻辑是：
 
 - 声明两个变量 `i` 和 `j`，初始时分别指向切片中的首元素和尾元素；
-- 在满足 `i < j` 的情况下，交换首尾元素，并重新将 `i` 和 `j` 分别指向首元素的后一个元素和尾元素的前一个元素；
+- 在满足 `i < j` 的情况下，交换首尾元素，交换后重新将 `i` 和 `j` 分别指向首元素的后一个元素和尾元素的前一个元素；
 - 重复上一步，直至 `i >= j`，则所有元素交换完毕，整个切片完成反转。
 
 在 `main()` 函数中调用 `ReverseInts()` 函数对 `int` 切片进行反转的示例代码如下：
@@ -62,9 +62,9 @@ ReverseInts(ints)
 fmt.Println(ints) // [5 4 3 2 1]
 ```
 
-结果满足预期。
+输出结果满足预期。
 
-如果我们想对 `string` 切片进行反转，其实现与上述对 `int` 切片进行反转代码几乎一模一样（仅参数类型不同）：
+如果我们想对 `string` 切片进行反转，其实现与上述对 `int` 切片进行反转的代码几乎一模一样（仅参数类型不同）：
 
 ```go
 func ReverseStrings(a []string) {
@@ -76,14 +76,15 @@ func ReverseStrings(a []string) {
 }
 ```
 
+在 `main()` 函数中调用 `ReverseStrings()` 函数对 `string` 切片进行反转的示例代码如下：
+
 ```go
-// 调用 ReverseStrings() 函数对 string 切片进行反转
 strings := []string{"a", "b", "c", "d", "e"}
 ReverseStrings(strings)
 fmt.Println(strings) // [e d c b a]
 ```
 
-除此之外，如果我们想对自定义结构体（`student`）切片进行反转，该如何做呢？
+除此之外，如果我们想对自定义结构体（如下面的 `student`）切片进行反转，该如何做呢？
 
 ```go
 type student struct {
@@ -92,7 +93,7 @@ type student struct {
 }
 ```
 
-其实现同样与上述代码同样几乎一模一样：
+其实现同样与前面的代码几乎完全一样：
 
 ```go
 func ReverseStudents(a []student) {
@@ -133,9 +134,9 @@ func Reverse[T any](a []T) {
 }
 ```
 
-可以看到，与普通函数不同的是，如上 `Reverse()` 函数名后紧跟着一个使用中括号围起的类型参数（`[T any]`），该类型参数使用 `any` 约束，表示其可以为任意类型（`any` 为 `interface{}` 的别名，其定义为：`type any = interface{}`）；参数列表仅有一个参数 `a []T`，因 `T` 已在类型参数中定义，所以该参数 `a` 表示可以是一个任意类型的切片。
+可以看到，与普通函数不同的是，如上 `Reverse()` 函数名后紧跟着一个使用中括号围起的类型参数（`[T any]`），该类型参数使用 `any` 约束，表示其可以为任意类型（`any` 为 `interface{}` 的别名，其定义为：`type any = interface{}`）；参数列表仅有一个参数 `a []T`，因 `T` 已在类型参数中定义，所以该参数 `a` 表示是一个任意类型的切片。
 
-这样，在 `main` 方法中，即可以调用 `Reverse()` 函数来对任意类型的切片进行反转：
+这样，在 `main` 方法中，即可以调用 `Reverse()` 函数来对任意类型的切片进行反转了：
 
 ```go
 // 调用支持泛型的 Reverse() 函数对 float64 切片进行反转
@@ -160,7 +161,7 @@ Reverse(students) // Reverse[student](floats)
 fmt.Println(students) // [{5 Cindy} {4 Lucy} {3 Alice} {2 Jacky} {1 Larry}]
 ```
 
-需要注意的是，调用泛型函数时可以使用方括号显式指定类型参数的类型，如：`Reverse[float64](floats)`、`Reverse[string](strings)` 和 `Reverse[student](students)`，这样编译器即可以将类型参数替换为指定的类型。但一般情况下，我们在调用时可以将其省略（如：`Reverse(floats)`、`Reverse(strings)` 和 `Reverse(students)`），因 Go 通常是可以在编译期将类型参数的类型自行推断出来的。
+需要注意的是，调用泛型函数时可以使用方括号显式指定类型参数的类型，如：`Reverse[float64](floats)`、`Reverse[string](strings)` 和 `Reverse[student](students)`，这样编译器即可以将类型参数替换为指定的类型。但一般情况下，在调用时可以将其省略（如：`Reverse(floats)`、`Reverse(strings)` 和 `Reverse(students)`），这是因为 Go 通常是可以在编译期将类型参数的类型自行推断出来的。
 
 ## 3 对象排序
 
