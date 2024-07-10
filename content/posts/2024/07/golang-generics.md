@@ -120,15 +120,19 @@ func Reverse[T any](a []T) {
 }
 ```
 
+可以看到，与普通函数不同的是，如上 `Reverse()` 函数名后紧跟着一个使用中括号围起的类型参数（`[T any]`），该类型参数使用 `any` 约束，表示其可以为任意类型（`any` 为 `interface{}` 的别名，其定义为：`type any = interface{}`）；参数列表仅有一个参数 `a []T`，因 `T` 已在类型参数中定义，所以该参数 `a` 表示可以是一个任意类型的切片。
+
+这样，在 `main` 方法中，即可以调用 `Reverse()` 函数来对任意类型的切片进行反转：
+
 ```go
 // 调用支持泛型的 Reverse() 函数对 float64 切片进行反转
 floats := []float64{1.03, 2.25, 3.38, 4.49, 5.52}
-Reverse(floats)
+Reverse(floats) // Reverse[float64](floats)
 fmt.Println(floats) // [5.52 4.49 3.38 2.25 1.03]
 
 // 调用支持泛型的 Reverse() 函数对 string 切片进行反转
 strings := []string{"a", "b", "c", "d", "e"}
-Reverse(strings)
+Reverse(strings) // Reverse[string](floats)
 fmt.Println(strings) // [e d c b a]
 
 // 调用支持泛型的 Reverse() 函数对 student 切片进行反转
@@ -139,9 +143,11 @@ students := []student{
     {id: 4, name: "Lucy"},
     {id: 5, name: "Cindy"},
 }
-Reverse(students)
+Reverse(students) // Reverse[student](floats)
 fmt.Println(students) // [{5 Cindy} {4 Lucy} {3 Alice} {2 Jacky} {1 Larry}]
 ```
+
+需要注意的是，调用泛型函数时可以使用方括号显式指定类型参数的类型，如：`Reverse[float64](floats)`、`Reverse[string](strings)` 和 `Reverse[student](students)`，这样编译器即可以将类型参数替换为指定的类型。但一般情况下，我们在调用时可以将其省略（如：`Reverse(floats)`、`Reverse(strings)` 和 `Reverse(students)`），因 Go 通常是可以在编译期将类型参数的确切类型推断出来的。
 
 ## 3 对象排序
 
