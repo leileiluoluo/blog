@@ -147,7 +147,7 @@ Reverse(students) // Reverse[student](floats)
 fmt.Println(students) // [{5 Cindy} {4 Lucy} {3 Alice} {2 Jacky} {1 Larry}]
 ```
 
-需要注意的是，调用泛型函数时可以使用方括号显式指定类型参数的类型，如：`Reverse[float64](floats)`、`Reverse[string](strings)` 和 `Reverse[student](students)`，这样编译器即可以将类型参数替换为指定的类型。但一般情况下，我们在调用时可以将其省略（如：`Reverse(floats)`、`Reverse(strings)` 和 `Reverse(students)`），因 Go 通常是可以在编译期将类型参数的确切类型推断出来的。
+需要注意的是，调用泛型函数时可以使用方括号显式指定类型参数的类型，如：`Reverse[float64](floats)`、`Reverse[string](strings)` 和 `Reverse[student](students)`，这样编译器即可以将类型参数替换为指定的类型。但一般情况下，我们在调用时可以将其省略（如：`Reverse(floats)`、`Reverse(strings)` 和 `Reverse(students)`），因 Go 通常是可以在编译期将类型参数的类型自行推断出来的。
 
 ## 3 对象排序
 
