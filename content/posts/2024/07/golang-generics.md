@@ -282,7 +282,7 @@ func (s sortable[T]) Swap(i, j int) {
 }
 ```
 
-这样，即可以在 `main()` 函数中使用泛型函数 `Sort()` 对任意基础类型进行排序了：
+这样，即可以在 `main()` 函数中使用泛型函数 `Sort()` 来对任意基础类型进行排序了：
 
 ```go
 ints := []int{1, 3, 2, 5, 4}
@@ -304,7 +304,7 @@ fmt.Println(strings) // [a b c d e]
 
 刚刚我们针对基础类型，使用泛型化的实现方式对其切片进行排序时，可以看到 `Less(i, j int) bool` 方法的实现为 `s[i] < s[j]`。而因 Go 没有操作符重载，所以 `Less(i, j int) bool` 方法仅对支持小于号运算符的基础类型适用，因此上述实现方式也无法适用到自定义结构体类型。
 
-为了解决 `Less(i, j int) bool` 如何实现的问题，我们需要为自定义结构体类型定义一个公共接口 `Comparable`：
+为了解决 `Less(i, j int) bool` 方法如何实现的问题，我们需要为自定义结构体类型定义一个公共接口 `Comparable`：
 
 ```go
 type Comparable[T any] interface {
@@ -312,7 +312,7 @@ type Comparable[T any] interface {
 }
 ```
 
-该接口是一个泛型接口，提供一个 `CompareTo(T) int` 方法来表示当前对象与传入对象的先后顺序（结果为正数表示当前对象靠后，为负数表示当前对象靠前，为 0 表示顺序相同），支持任意类型来使用。
+该接口是一个泛型接口，提供一个 `CompareTo(T) int` 方法来判断当前对象与传入对象的先后顺序（结果为正数表示当前对象靠后，为负数表示当前对象靠前，为 0 表示顺序一致），支持任意类型来使用。
 
 这样，实现了该接口的自定义结构体类型均可以使用如下泛型方法进行排序：
 
@@ -322,7 +322,7 @@ func Sort[T Comparable[T]](a []T) {
 }
 ```
 
-同样，为泛型切片 `[]T` 定义别名 `sortable`，并为 `sortable[T]` 实现 `Len() int`、`Less(i, j int) bool` 和 `Swap(i, j int)` 方法的代码不能省略（特别注意下 `Less` 方法的实现）：
+同样，为泛型切片 `[]T` 定义别名 `sortable`，并为 `sortable[T]` 实现 `Len() int`、`Less(i, j int) bool` 和 `Swap(i, j int)` 方法的代码不能省略（特别注意下 `Less()` 方法的实现）：
 
 ```go
 type sortable[T Comparable[T]] []T
