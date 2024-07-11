@@ -165,7 +165,7 @@ fmt.Println(students) // [{5 Cindy} {4 Lucy} {3 Alice} {2 Jacky} {1 Larry}]
 
 ## 3 对象排序
 
-接下来再借用对象排序这个常见的场景来演示泛型的使用。我们首先分别针对基础类型对象和自定义对象在没有泛型前如何实现排序，然后探索引入泛型后如何实现两者的通用化排序。
+接下来再借用对象排序这个常见的场景来演示泛型的使用。我们首先分别针对基础类型对象和自定义类型对象看一下在没有泛型前如何实现排序，然后探索引入泛型后如何实现两者的通用化排序。
 
 ### 3.1 使用泛型前
 
@@ -173,7 +173,7 @@ fmt.Println(students) // [{5 Cindy} {4 Lucy} {3 Alice} {2 Jacky} {1 Larry}]
 
 #### 基础类型
 
-针对基础类型切片，没有泛型前，要对切片中的元素进行排序时，需要分别调用对应类型的函数来实现。
+针对基础类型切片，没有泛型前，要对切片中的元素进行排序时，需要分别调用 `sort` 包中对应类型的函数来实现。
 
 示例代码如下：
 
@@ -194,8 +194,6 @@ sort.Strings(strings)
 fmt.Println(strings) // [a b c d e]
 ```
 
-可以看到，`sort` 包为各个基础类型分别增加对应的函数来实现排序会产生较多的冗余代码。
-
 #### 自定义结构体类型
 
 若是自定义结构体类型（如下面的 `student`），由其组成的切片该如何实现排序呢？
@@ -207,7 +205,7 @@ type student struct {
 }
 ```
 
-要实现排序，该类型切片需要实现 `Len() int`、`Less(i, j int) bool`、`Swap(i, j int)` 三个方法：
+要实现排序，该类型切片需要实现 `Len() int`、`Less(i, j int) bool` 和 `Swap(i, j int)` 三个方法：
 
 ```go
 type sortable []student
@@ -239,11 +237,13 @@ sort.Sort(sortable(students))
 fmt.Println(students) // [{1 Larry} {2 Lucy} {3 Jacky}]
 ```
 
-介绍完在没有泛型特性前基础类型切片和自定义结构体类型切片实现排序的方法后，下面介绍引入泛型后，如何对它们分别进行通用化改造。
+介绍完在没有泛型特性前基础类型切片和自定义结构体类型切片实现排序的方法后，下面介绍一下引入泛型后，如何对它们分别进行通用化改造。
 
 ### 3.2 使用泛型后
 
 #### 基础类型
+
+我们想设计一个泛型化的通用排序函数 `Sort()` 来支持对常用基础类型的切片进行排序：
 
 ```go
 func Sort[T Ordered](a []T) {
@@ -251,11 +251,20 @@ func Sort[T Ordered](a []T) {
 }
 ```
 
+该函数类型参数使用的约束为 `Ordered`，其定义如下：
+
 ```go
 type Ordered interface {
-    ~int | ~float64 | ~string
+    ~int | ~int8 | ~int16 | ~int32 | ~int64 |
+    ~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~uintptr |
+    ~float32 | ~float64 |
+    ~string
 }
 ```
+
+可以看到，其支持 Go 标准库中几乎所有支持排序的基础类型（`~type` 表示支持 `type` 类型及其衍生类型）。
+
+然后对泛型切片 `[]T` 起一个别名 `sortable`，并为 `sortable[T]` 实现 `Len() int`、`Less(i, j int) bool` 和 `Swap(i, j int)` 方法：
 
 ```go
 type sortable[T Ordered] []T
@@ -273,6 +282,8 @@ func (s sortable[T]) Swap(i, j int) {
 }
 ```
 
+这样，即可以在 `main()` 函数中使用泛型函数 `Sort()` 对任意基础类型进行排序了：
+
 ```go
 ints := []int{1, 3, 2, 5, 4}
 Sort(ints)
@@ -287,7 +298,13 @@ Sort(strings)
 fmt.Println(strings) // [a b c d e]
 ```
 
+可以看到，泛型化的排序方法使用起来更加统一、简便。
+
 #### 自定义结构体类型
+
+刚刚我们针对基础类型，使用泛型化的实现方式对其切片进行排序时，可以看到 `Less(i, j int) bool` 方法的实现为 `s[i] < s[j]`。而因 Go 没有操作符重载，所以 `Less(i, j int) bool` 方法仅对支持小于号运算符的基础类型适用，因此上述实现方式也无法适用到自定义结构体类型。
+
+为了解决 `Less(i, j int) bool` 如何实现的问题，我们需要为自定义结构体类型定义一个公共接口 `Comparable`：
 
 ```go
 type Comparable[T any] interface {
@@ -295,11 +312,17 @@ type Comparable[T any] interface {
 }
 ```
 
+该接口是一个泛型接口，提供一个 `CompareTo(T) int` 方法来表示当前对象与传入对象的先后顺序（结果为正数表示当前对象靠后，为负数表示当前对象靠前，为 0 表示顺序相同），支持任意类型来使用。
+
+这样，实现了该接口的自定义结构体类型均可以使用如下泛型方法进行排序：
+
 ```go
 func Sort[T Comparable[T]](a []T) {
     sort.Sort(sortable[T](a))
 }
 ```
+
+同样，为泛型切片 `[]T` 定义别名 `sortable`，并为 `sortable[T]` 实现 `Len() int`、`Less(i, j int) bool` 和 `Swap(i, j int)` 方法的代码不能省略（特别注意下 `Less` 方法的实现）：
 
 ```go
 type sortable[T Comparable[T]] []T
@@ -317,7 +340,21 @@ func (s sortable[T]) Swap(i, j int) {
 }
 ```
 
+这样，任意一个自定义结构体，在实现了 `Comparable` 接口后，即可以使用我们设计的通用排序方法了：
+
 ```go
+type student struct {
+    id   int
+    name string
+}
+
+func (s student) CompareTo(other student) int {
+    return s.id - other.id
+}
+```
+
+```go
+// 在 main() 函数中使用泛型函数 Sort() 对自定义对象 students 进行排序
 students := []student{
     {id: 1, name: "Larry"},
     {id: 3, name: "Jacky"},
@@ -326,7 +363,7 @@ students := []student{
 
 Sort(students)
 
-fmt.Println(students)
+fmt.Println(students) // [{1 Larry} {2 Lucy} {3 Jacky}]
 ```
 
 ## 4 小结
