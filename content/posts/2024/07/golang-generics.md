@@ -205,7 +205,7 @@ type student struct {
 }
 ```
 
-要实现排序，该类型切片需要实现 `Len() int`、`Less(i, j int) bool` 和 `Swap(i, j int)` 三个方法：
+要实现排序，该类型切片需要实现 `sort.Interface` 接口中定义的三个方法 `Len() int`、`Less(i, j int) bool` 和 `Swap(i, j int)`：
 
 ```go
 type sortable []student
