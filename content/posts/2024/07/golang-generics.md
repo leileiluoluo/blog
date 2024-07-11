@@ -331,7 +331,7 @@ fmt.Println(students)
 
 ## 4 小结
 
-综上，本文首先介绍了泛型的基本概念，然后以切片反转和对象排序两个示例场景演示了 Go 泛型的使用。本文涉及的全部示例代码已提交至 [https://github.com/leileiluoluo/go-exercises/tree/master/generics](https://github.com/leileiluoluo/go-exercises/tree/master/generics)，欢迎关注或 Fork。
+综上，本文首先介绍了泛型的基本概念，然后以切片反转和对象排序两个示例场景演示了 Go 泛型的使用。本文涉及的全部示例代码已提交至 [GitHub](https://github.com/leileiluoluo/go-exercises/tree/master/generics)，欢迎关注或 Fork。
 
 > 参考资料
 >
