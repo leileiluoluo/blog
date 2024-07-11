@@ -136,7 +136,7 @@ func Reverse[T any](a []T) {
 
 可以看到，与普通函数不同的是，如上 `Reverse()` 函数名后紧跟着一个使用中括号围起的类型参数（`[T any]`），该类型参数使用 `any` 约束，表示其可以为任意类型（`any` 为 `interface{}` 的别名，其定义为：`type any = interface{}`）；参数列表仅有一个参数 `a []T`，因 `T` 已在类型参数中定义，所以该参数 `a` 表示是一个任意类型的切片。
 
-这样，在 `main` 方法中，即可以调用 `Reverse()` 函数来对任意类型的切片进行反转了：
+这样，在 `main()` 函数中，即可以调用 `Reverse()` 函数来对任意类型的切片进行反转了：
 
 ```go
 // 调用支持泛型的 Reverse() 函数对 float64 切片进行反转
@@ -165,11 +165,173 @@ fmt.Println(students) // [{5 Cindy} {4 Lucy} {3 Alice} {2 Jacky} {1 Larry}]
 
 ## 3 对象排序
 
+接下来再借用对象排序这个常见的场景来演示泛型的使用。我们首先分别针对基础类型对象和自定义对象在没有泛型前如何实现排序，然后探索引入泛型后如何实现两者的通用化排序。
+
 ### 3.1 使用泛型前
+
+我们可以借助 Go 标准库的 `sort` 包来对对象切片进行排序。
+
+#### 基础类型
+
+针对基础类型切片，没有泛型前，要对切片中的元素进行排序时，需要分别调用对应类型的函数来实现。
+
+示例代码如下：
+
+```go
+// 调用 sort.Ints() 函数对 int 切片进行排序
+ints := []int{1, 3, 2, 5, 4}
+sort.Ints(ints)
+fmt.Println(ints) // [1 2 3 4 5]
+
+// 调用 sort.Float64s() 函数对 float64 切片进行排序
+floats := []float64{1.30, 3.20, 2.10, 5.40, 4.50}
+sort.Float64s(floats)
+fmt.Println(floats) // [1.3 2.1 3.2 4.5 5.4]
+
+// 调用 sort.Strings() 函数对 string 切片进行排序
+strings := []string{"a", "e", "b", "d", "c"}
+sort.Strings(strings)
+fmt.Println(strings) // [a b c d e]
+```
+
+可以看到，`sort` 包为各个基础类型分别增加对应的函数来实现排序会产生较多的冗余代码。
+
+#### 自定义结构体类型
+
+若是自定义结构体类型（如下面的 `student`），由其组成的切片该如何实现排序呢？
+
+```go
+type student struct {
+    id   int
+    name string
+}
+```
+
+要实现排序，该类型切片需要实现 `Len() int`、`Less(i, j int) bool`、`Swap(i, j int)` 三个方法：
+
+```go
+type sortable []student
+
+func (s sortable) Len() int {
+    return len(s)
+}
+
+func (s sortable) Less(i, j int) bool {
+    return s[i].id < s[j].id
+}
+
+func (s sortable) Swap(i, j int) {
+    s[i], s[j] = s[j], s[i]
+}
+```
+
+这样，即可在 `main()` 函数中调用 `sort.Sort()` 函数对 `student` 切片进行排序了：
+
+```go
+students := []student{
+    {id: 1, name: "Larry"},
+    {id: 3, name: "Jacky"},
+    {id: 2, name: "Lucy"},
+}
+
+sort.Sort(sortable(students))
+
+fmt.Println(students) // [{1 Larry} {2 Lucy} {3 Jacky}]
+```
+
+介绍完在没有泛型特性前基础类型切片和自定义结构体类型切片实现排序的方法后，下面介绍引入泛型后，如何对它们分别进行通用化改造。
 
 ### 3.2 使用泛型后
 
+#### 基础类型
+
+```go
+func Sort[T Ordered](a []T) {
+    sort.Sort(sortable[T](a))
+}
+```
+
+```go
+type Ordered interface {
+    ~int | ~float64 | ~string
+}
+```
+
+```go
+type sortable[T Ordered] []T
+
+func (s sortable[T]) Len() int {
+    return len(s)
+}
+
+func (s sortable[T]) Less(i, j int) bool {
+    return s[i] < s[j]
+}
+
+func (s sortable[T]) Swap(i, j int) {
+    s[i], s[j] = s[j], s[i]
+}
+```
+
+```go
+ints := []int{1, 3, 2, 5, 4}
+Sort(ints)
+fmt.Println(ints) // [1 2 3 4 5]
+
+floats := []float64{1.30, 3.20, 2.10, 5.40, 4.50}
+Sort(floats)
+fmt.Println(floats) // [1.3 2.1 3.2 4.5 5.4]
+
+strings := []string{"a", "e", "b", "d", "c"}
+Sort(strings)
+fmt.Println(strings) // [a b c d e]
+```
+
+#### 自定义结构体类型
+
+```go
+type Comparable[T any] interface {
+    CompareTo(T) int
+}
+```
+
+```go
+func Sort[T Comparable[T]](a []T) {
+    sort.Sort(sortable[T](a))
+}
+```
+
+```go
+type sortable[T Comparable[T]] []T
+
+func (s sortable[T]) Len() int {
+    return len(s)
+}
+
+func (s sortable[T]) Less(i, j int) bool {
+    return s[i].CompareTo(s[j]) < 0
+}
+
+func (s sortable[T]) Swap(i, j int) {
+    s[i], s[j] = s[j], s[i]
+}
+```
+
+```go
+students := []student{
+    {id: 1, name: "Larry"},
+    {id: 3, name: "Jacky"},
+    {id: 2, name: "Lucy"},
+}
+
+Sort(students)
+
+fmt.Println(students)
+```
+
 ## 4 小结
+
+综上，本文首先介绍了泛型的基本概念，然后以切片反转和对象排序两个示例场景演示了 Go 泛型的使用。本文涉及的全部示例代码已提交至 [https://github.com/leileiluoluo/go-exercises/tree/master/generics](https://github.com/leileiluoluo/go-exercises/tree/master/generics)，欢迎关注或 Fork。
 
 > 参考资料
 >
