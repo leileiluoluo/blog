@@ -100,6 +100,10 @@ public boolean addAll(Collection<? extends E> c) {
 
 相较于对既有类进行继承，使用组合可以解除对既有类实现细节的依赖。
 
+下面即对上述使用继承实现的 `InstrumentHashSet` 改用组合和转发来实现，然后分析一下改造后带来的好处。
+
+首先新建一个可重用转发类 `ForwardingSet`，并将其实现 `Set` 接口：
+
 ```java
 // src/test/java/ForwardingSet.java
 import java.util.Collection;
@@ -180,6 +184,10 @@ public class ForwardingSet<E> implements Set<E> {
 }
 ```
 
+可以看到，其未自行实现任何方法，而是持有一个 `Set<E> set` 属性，然后调用其来实现所有 `Set` 接口中定义的方法。
+
+然后，新建一个包装类 `InstrumentSet`：
+
 ```java
 // src/test/java/InstrumentSet.java
 import java.util.Collection;
@@ -218,6 +226,12 @@ public class InstrumentSet<E> extends ForwardingSet<E> {
     }
 }
 ```
+
+可以看到，其继承了 `ForwardingSet`，并重写了 `add()` 和 `addAll()` 方法。
+
+这样，在 `main()` 方法中对 `InstrumentSet` 进行实例化，并调用其 `addAll()` 方法新增 3 个元素后，再调用 `getAddCount()` 方法时会准确返回新增元素的个数。
+
+使用该种方式，即无须关注 `Set` 内部的实现细节，其内部实现发生变化也不会影响到我们的功能。
 
 ## 4 如何判断该用组合还是该用继承？
 
