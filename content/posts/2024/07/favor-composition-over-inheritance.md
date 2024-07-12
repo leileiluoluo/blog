@@ -223,6 +223,12 @@ public class InstrumentSet<E> extends ForwardingSet<E> {
 
 判断该用组合还是该用继承的一个一般原则是：在两个类确实满足「是一个」的关系（如：`Cat` 是一个 `Animal`）时，建议使用继承，否则建议使用组合。
 
+设计一个被用于继承的类是一份「相对艰巨」的工作：必须在文档上详细说明可覆盖类的使用范式，并且在该类的整个声明周期都应遵循该范式。
+
+## 5 小结
+
+本文围绕几个关于组合与继承的问题解释了「组合优于继承」的原因。全部示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/inheritance-and-composition-demo)，欢迎关注或 Fork。
+
 > 参考资料
 >
 > [1] Effective Java (3rd Edition): Favor composition over inheritance - [https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/](https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/)
