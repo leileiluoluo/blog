@@ -94,7 +94,7 @@ public boolean addAll(Collection<? extends E> c) {
 
 因 `add()` 方法已被子类 `InstrumentHashSet` 所重写，实际调用时会调用到子类的 `add()` 方法，所以 `addCount` 被重复计数。
 
-所以，使用继承需要非常小心，要知道父类对应方法的实现细节。
+所以，使用继承需要非常小心，要充分了解所重写父类方法的内部实现细节才可以下手。
 
 ## 3 组合有哪些优势？
 
