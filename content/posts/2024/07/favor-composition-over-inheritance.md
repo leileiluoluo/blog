@@ -35,7 +35,7 @@ description: 面向对象编程中有一条经典的设计原则：组合优于�
 
 可以看一个《Effective Java》中举得例子：比如我们想做一个类，除了具备 `HashSet` 的全部功能外，还需要能够查询 `HashSet` 自创建以来一共增加了多少个元素。
 
-如下是通过继承 `HashSet` 来实现该类（InstrumentHashSet）功能的代码：
+如下是通过继承 `HashSet` 来实现该类（`InstrumentHashSet`）功能的代码：
 
 ```java
 // src/test/java/InstrumentHashSet.java
@@ -186,7 +186,7 @@ public class ForwardingSet<E> implements Set<E> {
 
 可以看到，其未自行实现任何方法，而是持有一个 `Set<E> set` 属性，然后调用其来实现所有 `Set` 接口中定义的方法。
 
-然后，新建一个包装类 `InstrumentSet`：
+然后，新建一个包装类 `InstrumentSet` 来提供我们所需的功能：
 
 ```java
 // src/test/java/InstrumentSet.java
@@ -227,7 +227,7 @@ public class InstrumentSet<E> extends ForwardingSet<E> {
 }
 ```
 
-可以看到，其继承了 `ForwardingSet`，并重写了 `add()` 和 `addAll()` 方法。
+可以看到，`InstrumentSet` 继承了 `ForwardingSet`，并重写了 `add()` 和 `addAll()` 方法。
 
 这样，在 `main()` 方法中对 `InstrumentSet` 进行实例化，并调用其 `addAll()` 方法新增 3 个元素后，再调用 `getAddCount()` 方法时会准确返回新增元素的个数。
 
@@ -235,9 +235,9 @@ public class InstrumentSet<E> extends ForwardingSet<E> {
 
 ## 4 如何判断该用组合还是该用继承？
 
-判断该用组合还是该用继承的一个一般原则是：在两个类确实满足「是一个」的关系（如：`Cat` 是一个 `Animal`）时，建议使用继承，否则建议使用组合。
+判断该用组合还是该用继承的一个一般原则是：在两个类确实满足「是一个」的关系（如：`Cat` 是一个 `Animal`）时，建议使用继承；否则建议使用组合。
 
-设计一个被用于继承的类是一份「相对艰巨」的工作：必须在文档上详细说明可覆盖类的使用范式，并且在该类的整个声明周期都应遵循该范式。
+设计一个被用于继承的类是一份「相对艰巨」的工作：必须在文档上详细说明可覆盖类的使用范式，并且在该类的整个生命周期都不应该破坏暴露出去的范式。
 
 ## 5 小结
 
