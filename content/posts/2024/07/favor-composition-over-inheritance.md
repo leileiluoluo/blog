@@ -98,6 +98,8 @@ public boolean addAll(Collection<? extends E> c) {
 
 ## 3 组合有哪些优势？
 
+相较于对既有类进行继承，使用组合可以解除对既有类实现细节的依赖。
+
 ```java
 // src/test/java/ForwardingSet.java
 import java.util.Collection;
@@ -218,6 +220,8 @@ public class InstrumentSet<E> extends ForwardingSet<E> {
 ```
 
 ## 4 如何判断该用组合还是该用继承？
+
+继承只有在两个类确实满足「是一个」的关系（如：`Cat` 是一个 `Animal`）时才建议使用，除此之外，均应该使用组合。
 
 > 参考资料
 >
