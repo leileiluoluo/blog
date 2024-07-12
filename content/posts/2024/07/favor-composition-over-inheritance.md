@@ -29,6 +29,73 @@ description: 面向对象编程中有一条经典的设计原则：组合优于�
 
 ## 2 为什么不推荐使用继承？
 
+因为继承破坏了封装性，即继承会在子类和父类之间创建一种耦合关系，子类的实现可能依赖于父类的实现细节。一旦父类改变，子类也可能需要作相应的调整，增加了代码的脆弱性和维护成本。
+
+再者，如果继承的层次太深，会将代码变得复杂、易错且难以理解。
+
+可以看一个《Effective Java》中举得例子：比如我们想做一个类，除了具备 `HashSet` 的全部功能外，还需要能够查询 `HashSet` 自创建以来一共增加了多少个元素。
+
+如下是通过继承 `HashSet` 来实现该类（InstrumentHashSet）功能的代码：
+
+```java
+// src/test/java/InstrumentHashSet.java
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+
+public class InstrumentHashSet<E> extends HashSet<E> {
+    private int addCount = 0;
+
+    public InstrumentHashSet() {
+        super();
+    }
+
+    @Override
+    public boolean add(E e) {
+        addCount++;
+        return super.add(e);
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        addCount += c.size();
+        return super.addAll(c);
+    }
+
+    public int getAddCount() {
+        return addCount;
+    }
+
+    public static void main(String[] args) {
+        InstrumentHashSet<String> set = new InstrumentHashSet<>();
+        set.addAll(List.of("a", "b", "c"));
+
+        System.out.println(set.getAddCount()); // 6
+    }
+}
+```
+
+可以看到，`InstrumentHashSet` 类声明了一个 `addCount` 变量来记录新增元素的总数，且提供一个 `getAddCount()` 方法来供调用者获取该数值。此外，因 `HashSet` 类有两个方法可以用来新增元素，所以我们在子类中重写了这两个方法。
+
+然后，在 `main()` 方法中对 `InstrumentHashSet` 进行实例化，并调用其 `addAll()` 方法来添加一个拥有 3 个元素的集合，打印 `getAddCount()` 后发现结果与预期不一致（期待是 3，结果却是 6）。
+
+为什么呢？这是因为父类 `HashSet` 中的 `addAll()` 方法通过循环调用 `add()` 方法来实现元素的添加。
+
+```java
+// java.util.AbstractCollection
+public boolean addAll(Collection<? extends E> c) {
+    boolean modified = false;
+    for (E e : c)
+        if (add(e))
+            modified = true;
+    return modified;
+}
+```
+
+因 `add()` 方法已被子类 `InstrumentHashSet` 所重写，实际调用时会调用到子类的 `add()` 方法，所以 `addCount` 被重复计数。
+
+所以，使用继承需要非常小心，要知道父类对应方法的实现细节。
+
 ## 3 组合有哪些优势？
 
 ## 4 如何判断该用组合还是该用继承？
