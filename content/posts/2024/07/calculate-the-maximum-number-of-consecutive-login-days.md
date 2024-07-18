@@ -49,7 +49,7 @@ description: 本文针对算法题目「从登录日志中计算各个用户的�
 
 **结果解释：**
 
-用户 1001 的最长连续登录天数为 4，即自 `2023-02-01` 到 `2023-02-04`：
+用户 1001 的最长连续登录天数为 4，即自 `2023-02-01` 到 `2023-02-04` 连续登录了 4 天：
 
 ```text
 1001 2023-02-01
@@ -58,7 +58,7 @@ description: 本文针对算法题目「从登录日志中计算各个用户的�
 1001 2023-02-04
 ```
 
-用户 1002 的最长连续登录天数为 5，即自 `2023-02-04` 到 `2023-02-08`：
+用户 1002 的最长连续登录天数为 5，即自 `2023-02-04` 到 `2023-02-08` 连续登录了 5 天：
 
 ```text
 1002 2023-02-04
@@ -162,7 +162,7 @@ public class Solution {
 
   接下来在 `main()` 方法调用 `forEach`，针对每个用户 ID，将其对应的登录日期 `TreeSet` 转换为一个 `List`，然后将该登陆日期 `List` 传入 `getMaxConsecutiveDays()` 方法来获取最长的连续天数。
 
-  `getMaxConsecutiveDays()` 使用了动态规划算法来计算最长的连续天数。即使用 `maxConsecutiveDays` 和 `candidateMaxConsecutiveDays` 两个变量来表示当前计算到的最长连续天数和可能的最长连续天数，初始时都为 1；然后自第二个元素起，若当前日期与上一个日期连续，则 `candidateMaxConsecutiveDays++`，否则 `candidateMaxConsecutiveDays` 重新置为 1，最后判断一下 `candidateMaxConsecutiveDays` 是否比 `maxConsecutiveDays` 大，若是，则将 `maxConsecutiveDays` 重新设置，这样循环计算到最后一个元素后得到的 `maxConsecutiveDays` 值即为最终的最长连续天数。
+  `getMaxConsecutiveDays()` 使用了动态规划算法来计算最长的连续天数。即使用 `maxConsecutiveDays` 和 `candidateMaxConsecutiveDays` 两个变量来表示当前计算到的最长连续天数和可能的最长连续天数，初始时都为 1；然后自第二个元素起，若当前日期与上一个日期连续，则 `candidateMaxConsecutiveDays++`，否则 `candidateMaxConsecutiveDays` 重新置为 1，最后判断一下 `candidateMaxConsecutiveDays` 是否比 `maxConsecutiveDays` 大，若是，则将 `maxConsecutiveDays` 重新设置，这样循环计算到最后一个元素时得到的 `maxConsecutiveDays` 值即为最终的最长连续天数。
 
   注意：`getMaxConsecutiveDays()` 方法中使用了 `getDurationDays()` 方法来获取两个日期是否连续。
 
