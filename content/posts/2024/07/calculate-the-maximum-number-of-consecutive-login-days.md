@@ -49,7 +49,17 @@ description: 本文针对算法题目「从登录日志中计算各个用户的�
 
 ## 2 解题思路
 
+**数据读取与存储**
+
+我们首先需要使用对应的工具包将日志文件 `login.log` 中的内容进行逐行读取，然后在读取的过程中按照不同的用户 ID 来将登录日期（登录时间可以忽略）存储到各自的集合里边。而且这个集合最好是去重的且是排序的，以方便后续的计算。
+
+**数据计算**
+
+该部分针对上一步生成的每一个用户 ID 对应的去过重且排好序的登录日期集合进行计算，即使用一种动态规划算法从一串登录日期中计算出最长的连续天数。
+
 ## 3 Java 实现
+
+针对如上解题思路，对应的 Java 实现代码如下：
 
 ```java
 import java.io.IOException;
@@ -122,3 +132,19 @@ public class Solution {
 
 }
 ```
+
+- 数据读取与存储
+
+  如上代码的 `main()` 方法使用 `Scanner` 对 `login.log` 文件中的内容进行逐行读取。然后针对每一行，使用空格将三段信息进行分割，然后取第一段的用户 ID 和第二段的登录日期，并将结果存储到 `Map<String, Set<String>>` 数据结构中（用户 ID 为键，登录日期 `Set` 为值。注意该 `Set` 使用的实现是 `TreeSet`，不仅可以保证去重，还可以保证顺序）。
+
+- 数据计算
+
+  接下来在 `main()` 方法调用 `forEach`，针对每个用户 ID，将其对应的登录日期 `TreeSet` 转换为一个 `List`，然后将该登陆日期 `List` 传入 `getMaxConsecutiveDays()` 方法来获取最长的连续天数。
+
+  `getMaxConsecutiveDays()` 使用了动态规划算法来计算最长的连续天数。即使用 `maxConsecutiveDays` 和 `candidateMaxConsecutiveDays` 两个变量来表示当前计算到的最长连续天数和可能的最长连续天数，初始时都为 1；然后自第二个元素起，若当前日期与上一个日期连续，则 `candidateMaxConsecutiveDays++`，否则 `candidateMaxConsecutiveDays` 重新置为 1，最后判断一下 `candidateMaxConsecutiveDays` 是否比 `maxConsecutiveDays` 大，若是，则将 `maxConsecutiveDays` 重新设置，这样循环计算到最后一个元素后得到的 `maxConsecutiveDays` 值即为最终的最长连续天数。
+
+  注意：`getMaxConsecutiveDays()` 方法中使用了 `getDurationDays()` 方法来获取两个日期是否连续。
+
+## 4 小结
+
+本文首先介绍了算法题目「从登录日志中计算各个用户的最长连续登录天数」的题目要求，然后分析了解决该题目的思路，最后列出了对应的 Java 实现。完整代码已托管至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/max-consecutive-days-algorithm)，欢迎关注或 Fork。
