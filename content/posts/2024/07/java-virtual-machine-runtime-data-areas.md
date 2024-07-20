@@ -69,3 +69,5 @@ Java 虚拟机运行时数据区域指的是在 Java 字节码运行期间，Jav
 > [1] The Java Virtual Machine Specification: Run-Time Data Areas - [https://docs.oracle.com/javase/specs/jvms/se22/html/jvms-2.html#jvms-2.5](https://docs.oracle.com/javase/specs/jvms/se22/html/jvms-2.html#jvms-2.5)
 >
 > [2] 周志明.(2019). 深入理解 Java 虚拟机(第 3 版). 机械工业出版社, 北京. - [https://item.jd.com/12607299.html](https://item.jd.com/12607299.html)
+>
+> [3] CSDN 博客：JVM 的运行时内存区域划分详细讲解 - [https://blog.csdn.net/qq_39939541/article/details/131795626](https://blog.csdn.net/qq_39939541/article/details/131795626)
