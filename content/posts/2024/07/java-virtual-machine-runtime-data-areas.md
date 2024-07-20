@@ -23,6 +23,8 @@ Java 虚拟机运行时数据区域指的是在 Java 字节码运行期间，Jav
 
 其中一些数据区域是随着 Java 虚拟机的启动和终止而创建和销毁的，另一些数据区域是线程专有的，即随着线程的创建和销毁而创建和销毁。
 
+![运行时数据区域划分](https://leileiluoluo.github.io/static/images/uploads/2024/07/java-virtual-machine-runtime-data-areas.svg#center)
+
 本文即关注这些数据区域是如何划分的，然后重点对栈和堆在分配和功用上进行一下对比。
 
 ## 1 运行时数据区域划分
