@@ -149,6 +149,8 @@ Java 虚拟机运行时数据区域指的是在 Java 字节码运行期间，Jav
 
 总的来讲，栈和堆在内存管理、分配方式、内存空间、内存分配速度、对象生命周期、内存碎片和内存使用等方面存在明显的差异。了解栈和堆的特点和用途，有助于更合理地使用内存，提高程序的性能和稳定性。
 
+综上，本文首先介绍了 Java 虚拟机运行时数据区域是如何划分的，然后对其中的两块区域（栈和堆）从各个维度进行了对比。
+
 > 参考资料
 >
 > [1] The Java Virtual Machine Specification: Run-Time Data Areas - [https://docs.oracle.com/javase/specs/jvms/se22/html/jvms-2.html#jvms-2.5](https://docs.oracle.com/javase/specs/jvms/se22/html/jvms-2.html#jvms-2.5)
