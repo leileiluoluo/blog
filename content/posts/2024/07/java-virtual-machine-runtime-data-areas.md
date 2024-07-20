@@ -66,6 +66,8 @@ Java 虚拟机运行时数据区域指的是在 Java 字节码运行期间，Jav
 
 为了更好地回收内存以及更快地分配内存，堆又通常会被分为如下几个区域：
 
+![堆的划分](https://leileiluoluo.github.io/static/images/uploads/2024/07/java-virtual-machine-runtime-data-areas-heap.svg#center)
+
 - 新生代（Young Generation）
   新生代分 Eden 空间和 Survivor 空间。新创建的对象首先被分配到 Eden 空间。当 Eden 空间满时，部分存活的对象会被移动到 Survivor 空间。Survivor 空间分为两个大小相等的区域，一般称为 From 区和 To 区。存活时间较长的对象会被复制到 To 区，同时年龄增加。经过多次垃圾回收之后，仍然存活的对象会被移动到老年代。
 
