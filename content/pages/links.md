@@ -34,7 +34,7 @@ Golang 中文社区，活跃度极高的 Go 语言问答社区。
 
 **[Java 突击队](http://www.susan.net.cn/)**
 
-包含 Java 技术栈的方方面面。
+快速提升 Java 技术的神奇网站，涵盖 Java 技术栈的方方面面。
 
 ---
 
