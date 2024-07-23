@@ -313,6 +313,26 @@ public class InterfaceWithDefaultMethodsTest {
 
 上面的代码中，`Animal` 接口拥有一个抽象方法 `greeting()`、一个默认方法 `firstMeet()` 和一个静态方法 `sleep()`，除抽象方法外，其它两个方法均拥有自己的实现。`Animal` 接口的实现类 `Cat` 和 `Dog` 必须实现其抽象方法 `greeting()`，而无须实现其默认方法 `firstMeet()`。对于其静态方法 `sleep()`，与类的静态方法无异，直接使用类名方式调用即可。
 
+## 5 Stream API
+
+Java 8 新添加的 Stream API 提供了一种更简洁和强大的处理集合数据的方式。使用 Stream API，我们可以对集合数据进行一系列的流水线操作（如：筛选、映射、过滤和排序等）来高效地处理数据。
+
+Stream API 性能很好，因为其求值是惰性的，即其操作分中间操作（`filter`、`map`、`distinct`、`sorted`、`limit`、`skip` 等）和终端操作（`forEach`、`collect`、`reduce`、`count` 等），而只有在调用终端操作时才会真正执行所有的中间操作链。
+
+下面即是一个使用 `List` Stream 的例子：
+
+```java
+// src/main/java/StreamAPITest.java#main
+List<String> languages = List.of("java", "golang", "python", "php", "javascript");
+languages.stream()
+        .filter(lang -> lang.length() < 8)
+        .map(String::toUpperCase)
+        .sorted()
+        .forEach(System.out::println);
+```
+
+可以看到，我们针对一个 `List<String>` 的 `stream()`，作了过滤、映射、排序，最后调用 `forEach()` 作了打印。
+
 > 参考资料
 >
 > [1] Oracle: What's New in JDK 8? - [https://www.oracle.com/java/technologies/javase/8-whats-new.html](https://www.oracle.com/java/technologies/javase/8-whats-new.html)
