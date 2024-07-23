@@ -116,6 +116,8 @@ public interface Runnable {
 
 接着，在 `main()` 方法的后两步，我们针对自定义的函数式接口 `MyInterface`，也分别使用匿名内部类和 Lambda 表达式的方式创建了其实例。可以看到使用了 Lambda 表达式后代码变得更加简洁和紧凑。
 
+除了 `Runnable` 接口外，自 Java 8 起，诸多接口（如：`java.util.function.Predicate`、`java.util.Comparator`、`java.io.FileFilter` 等）均已标记为 `@FunctionalInterface` 接口。因此，针对这些接口的使用均可以换为对应 Lambda 表达式的写法。
+
 > 参考资料
 >
 > [1] Oracle: What's New in JDK 8? - [https://www.oracle.com/java/technologies/javase/8-whats-new.html](https://www.oracle.com/java/technologies/javase/8-whats-new.html)
