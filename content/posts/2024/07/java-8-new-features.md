@@ -333,6 +333,8 @@ languages.stream()
 
 可以看到，我们针对一个 `List<String>` 的 `stream()`，作了过滤、映射、排序，最后调用 `forEach()` 作了打印。
 
+综上，我们速览了 Java 8 引入的一些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-8-new-features-demo/src/main/java)，欢迎关注或 Fork。
+
 > 参考资料
 >
 > [1] Oracle: What's New in JDK 8? - [https://www.oracle.com/java/technologies/javase/8-whats-new.html](https://www.oracle.com/java/technologies/javase/8-whats-new.html)
