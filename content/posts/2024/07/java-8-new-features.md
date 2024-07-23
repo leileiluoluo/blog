@@ -333,6 +333,38 @@ languages.stream()
 
 可以看到，我们针对一个 `List<String>` 的 `stream()`，作了过滤、映射、排序，最后调用 `forEach()` 作了打印。
 
+## 6 Base64 工具类
+
+Base64 算法是一种常用的编码方法，它可以将任意的二进制数据转换成纯文本字符串的形式，使得二进制数据可以在文本协议中传输或存储。
+
+在 Java 8 之前，我们需要依赖第三方库来实现 Base64 编码解码。为了能够提供一个标准的、更加安全的方法来进行 Base64 的编码和解码操作，使得开发者们不再需要依赖外部库，Java 8 添加了标准的 Base64 工具类。
+
+下面即看一下该工具类如何使用：
+
+```java
+// src/main/java/Base64Test.java
+import java.util.Base64;
+
+public class Base64Test {
+
+    public static void main(String[] args) {
+        String text = "java8";
+        String encoded = Base64.getEncoder().encodeToString(text.getBytes());
+        System.out.println(encoded); // amF2YTg=
+        byte[] decoded = Base64.getDecoder().decode(encoded);
+        System.out.println(new String(decoded)); // java8
+
+        String url = "https://leileiluoluo.com/posts/java-8-new-features.html";
+        String urlEncoded = Base64.getUrlEncoder().encodeToString(url.getBytes());
+        System.out.println(urlEncoded); // aHR0cHM6Ly9sZWlsZWlsdW9sdW8uY29tL3Bvc3RzL2phdmEtOC1uZXctZmVhdHVyZXMuaHRtbA==
+        byte[] urlDecoded = Base64.getUrlDecoder().decode(urlEncoded);
+        System.out.println(new String(urlDecoded)); // https://leileiluoluo.com/posts/java-8-new-features.html
+    }
+}
+```
+
+可以看到，需要对文本或 URL 进行 Base64 编码、解码时，需要先拿到对应的 `Encoder` 或 `Decoder`，然后调用其 `encode()` 或 `decode()` 方法即可实现编码、解码工作。
+
 综上，我们速览了 Java 8 引入的一些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-8-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
