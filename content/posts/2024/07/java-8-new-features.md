@@ -251,6 +251,63 @@ public static String getOrderAddressUsingOptional(Order order) {
 
 所以，在 Java 8 引入 `Optional` 类后，我们可以对可空对象进行包装，从而避免空指针的发生，也可以借助`Optional` 类提供的链式方法编写出更加紧凑的代码。
 
+## 4 支持在接口添加默认方法
+
+在 Java 8 之前，接口中定义的变量必须是 `public static final` 的，定义的方法必须是 `public abstract` 的。我们知道，接口的设计需要「深思熟虑」，因为在接口中新增一个方法，需要对它的所有实现类都进行修改，对于实现类比较多的情况，涉及的工作量非常巨大。
+
+为了解决这个问题，Java 8 支持在接口添加默认方法（即支持在接口中添加具有默认实现的方法，使用 `default` 关键字定义），其使得接口可以包含方法的实现，而不仅仅是抽象方法的定义。
+
+默认方法允许接口在不破坏实现类的情况下进行演进。这对于标准化库的维护和扩展非常有用，因为可以为接口添加新的方法来满足新的需求，而不会影响已有的实现。同时，默认方法使得接口可以通过通用方法实现，这可以减少代码的重复性，提供了代码的可维护性，这时的接口就有点像抽象类了。
+
+此外，Java 8 还支持在接口中定义静态方法，非常适用于被用作工具方法的场景。
+
+下面即是一个在接口中定义默认方法和静态方法的例子：
+
+```java
+public class InterfaceWithDefaultMethodsTest {
+
+    public interface Animal {
+        String greeting();
+
+        default void firstMeet(String someone) {
+            System.out.println(greeting() + "，" + someone);
+        }
+
+        static void sleep() {
+            System.out.println("呼呼呼");
+        }
+    }
+
+    public static class Cat implements Animal {
+        @Override
+        public String greeting() {
+            return "喵喵喵";
+        }
+    }
+
+    public static class Dog implements Animal {
+        @Override
+        public String greeting() {
+            return "汪汪汪";
+        }
+    }
+
+    public static void main(String[] args) {
+        Animal cat = new Cat();
+        System.out.println(cat.greeting()); // 喵喵喵
+        cat.firstMeet("主人"); // 喵喵喵，主人
+
+        Animal dog = new Dog();
+        System.out.println(dog.greeting()); // 汪汪汪
+        dog.firstMeet("主人"); // 汪汪汪，主人
+
+        Animal.sleep(); // 呼呼呼
+    }
+}
+```
+
+上面的代码中，`Animal` 接口拥有一个抽象方法 `greeting()`、一个默认方法 `firstMeet()` 和一个静态方法 `sleep()`，除抽象方法外，其它两个方法均拥有自己的实现。`Animal` 接口的实现类 `Cat` 和 `Dog` 必须实现 `Animal` 接口的抽象方法 `greeting()`，而无须实现其默认方法 `firstMeet()`。对于静态方法 `sleep()`，与类的静态方法无异，直接使用类名方式调用即可。
+
 > 参考资料
 >
 > [1] Oracle: What's New in JDK 8? - [https://www.oracle.com/java/technologies/javase/8-whats-new.html](https://www.oracle.com/java/technologies/javase/8-whats-new.html)
