@@ -180,6 +180,7 @@ Java 8 引入一个新的 `Optional` 类，主要用于解决饱受诟病的 `Nu
 下面使用一个简单的例子看一下 `Optional` 是如何使用的：
 
 ```java
+// src/main/java/OptionalTest.java#main
 Optional<String> optional = Optional.of("hello"); // Optional.ofNullable(null);
 if (optional.isPresent()) {
     String message = optional.get();
@@ -198,6 +199,7 @@ if (optional.isPresent()) {
 下面的示例代码包含两个类：`Order` 与 `Customer`，两者是一种嵌套关系，即 `Order` 中有一个 `Customer`，`Customer` 中有一个 `address` 字段。
 
 ```java
+// src/main/java/OptionalTest.java
 class Order {
     private final Customer customer;
 
@@ -226,6 +228,7 @@ class Customer {
 如果我们想编写一个方法来获取 `Order` 的 `address` 信息，常规的包含 `null` 检查的写法可以是下面这个样子：
 
 ```java
+// src/main/java/OptionalTest.java
 public static String getOrderAddress(Order order) {
     if (null == order
             || null == order.getCustomer()
@@ -239,6 +242,7 @@ public static String getOrderAddress(Order order) {
 如果换作使用 `Optional` 类来包装并进行链式操作呢？写法会变成下面的样子：
 
 ```java
+// src/main/java/OptionalTest.java
 public static String getOrderAddressUsingOptional(Order order) {
     return Optional.ofNullable(order)
             .map(Order::getCustomer)
@@ -264,6 +268,7 @@ public static String getOrderAddressUsingOptional(Order order) {
 下面即是一个在接口中定义默认方法和静态方法的例子：
 
 ```java
+// src/main/java/InterfaceWithDefaultMethodsTest.java
 public class InterfaceWithDefaultMethodsTest {
 
     public interface Animal {
@@ -306,7 +311,7 @@ public class InterfaceWithDefaultMethodsTest {
 }
 ```
 
-上面的代码中，`Animal` 接口拥有一个抽象方法 `greeting()`、一个默认方法 `firstMeet()` 和一个静态方法 `sleep()`，除抽象方法外，其它两个方法均拥有自己的实现。`Animal` 接口的实现类 `Cat` 和 `Dog` 必须实现 `Animal` 接口的抽象方法 `greeting()`，而无须实现其默认方法 `firstMeet()`。对于静态方法 `sleep()`，与类的静态方法无异，直接使用类名方式调用即可。
+上面的代码中，`Animal` 接口拥有一个抽象方法 `greeting()`、一个默认方法 `firstMeet()` 和一个静态方法 `sleep()`，除抽象方法外，其它两个方法均拥有自己的实现。`Animal` 接口的实现类 `Cat` 和 `Dog` 必须实现其抽象方法 `greeting()`，而无须实现其默认方法 `firstMeet()`。对于其静态方法 `sleep()`，与类的静态方法无异，直接使用类名方式调用即可。
 
 > 参考资料
 >
