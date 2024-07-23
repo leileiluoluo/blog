@@ -118,6 +118,61 @@ public interface Runnable {
 
 除了 `Runnable` 接口外，自 Java 8 起，诸多接口（如：`java.util.function.Predicate`、`java.util.Comparator`、`java.io.FileFilter` 等）均已标记为 `@FunctionalInterface` 接口。因此，针对这些接口的使用均可以换为对应 Lambda 表达式的写法。
 
+## 2 新的日期时间 API
+
+因旧的日期相关的 API（诸如：`java.util.Date`、`java.util.Calendar`、`java.text.SimpleDateFormat` 等）存在非线程安全、类可变以及时区转换不够灵活等问题，Java 8 重新设计了日期时间 API（统一放在 `java.time` 包下），以更好地支持日期和时间的计算、格式化、解析和比较等操作。此外，`java.time` 包还提供了对日历系统的支持，包括对 `ISO-8601` 日历系统的全面支持。
+
+下面列出 `java.time` 包中一些主要的类和接口：
+
+- `Instant`：表示时间线上的一个点，即一个瞬间，是一个不可变类，可以精确到纳秒级别。可以用在忽略时区的情况下进行时间的表示、计算和比较。
+- `LocalDate`：表示不包含时间信息的日期（如：年、月、日），不包含时区信息，也是一个不可变类。
+- `LocalTime`：表示不包含日期信息的时间（如：时、分、秒），不包含时区信息，同为不可变类。
+- `LocalDateTime`：表示日期和时间，不包含时区信息，同为不可变类。
+- `ZonedDateTime`：表示包含时区信息的日期和时间，同为不可变类。
+- `Duration`：表示时间间隔（如：几小时、几分钟、几秒），不可变类。
+- `Period`：表示日期间隔（如：几年、几月、几日），不可变类。
+- `DateTimeFormatter`：用于日期和时间的格式化和解析，不可变类。
+- `ZoneId`：表示时区。
+- `ZoneOffset`：表示时区偏移量，不可变类。
+
+下面使用一个简单的示例来演示新的日期时间 API 的使用：
+
+```java
+// src/main/java/DateTimeAPITest.java
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.util.concurrent.TimeUnit;
+
+public class DateTimeAPITest {
+
+    public static void main(String[] args) throws InterruptedException {
+        // 使用 Instant 和 Duration 计算时间差
+        Instant start = Instant.now();
+        TimeUnit.SECONDS.sleep(1);
+        Instant end = Instant.now();
+        System.out.println(Duration.between(start, end).toSeconds()); // 1
+
+        // 使用 LocalDate 计算下个月的今天，并使用 Period 计算两个日期的间隔月数
+        LocalDate localDate = LocalDate.now();
+        LocalDate localDateNextMonth = localDate.plusMonths(1);
+        System.out.println(localDateNextMonth); // 2024-08-23
+        Period period = Period.between(localDate, localDateNextMonth);
+        System.out.println(period.getMonths()); // 1
+
+        // 打印当前时区，获取当前 ZonedDateTime 并使用 DateTimeFormatter 格式化后进行打印；然后转换为洛杉矶 ZonedDateTime 并进行格式化和打印
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        ZoneId currentTimeZone = ZoneId.systemDefault();
+        System.out.println(currentTimeZone); // "Asia/Shanghai"
+        ZonedDateTime shanghaiZonedDateTime = ZonedDateTime.now();
+        System.out.println(shanghaiZonedDateTime.format(formatter)); // 2024-07-23 13:08:15
+        ZonedDateTime losangelesZonedDateTime = shanghaiZonedDateTime.withZoneSameInstant(ZoneId.of("America/Los_Angeles"));
+        System.out.println(losangelesZonedDateTime.format(formatter)); // 2024-07-22 22:08:15
+    }
+}
+```
+
+可以看到，Java 8 新的日期时间 API 对于日期时间的获取、计算、格式化、时区转换等都有很好的支持。
+
 > 参考资料
 >
 > [1] Oracle: What's New in JDK 8? - [https://www.oracle.com/java/technologies/javase/8-whats-new.html](https://www.oracle.com/java/technologies/javase/8-whats-new.html)
