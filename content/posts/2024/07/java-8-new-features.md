@@ -365,6 +365,63 @@ public class Base64Test {
 
 可以看到，需要对文本或 URL 进行 Base64 编码、解码时，需要先拿到对应的 `Encoder` 或 `Decoder`，然后调用其 `encode()` 或 `decode()` 方法即可实现编码、解码工作。
 
+## 7 方法引用和构造器引用
+
+Java 8 引入的方法引用可以进一步简化 Lambda 表达式的编写。方法引用的本质是可以提供一种简洁的方式引用类或者实例的方法（包括构造器方法），引用格式为：`类名::方法名`、`实例名::方法名`。
+
+下面看一下我们在前面介绍 Stream API 时用到的一个例子：
+
+```java
+// src/main/java/MethodReferenceTest.java#main
+List<String> languages = List.of("java", "golang", "python", "php", "javascript");
+languages.stream()
+        .map(String::toUpperCase)
+        .forEach(System.out::println);
+```
+
+可以看到，上述 `main()` 方法中对 `languages` 列表中的元素进行了流式操作，即对每一个元素进行大写字母转换后进行了打印。这里的 `String::toUpperCase` 与 `System.out::println` 均为方法引用。
+
+而不使用方法引用的话，这段代码该怎么写呢？可以是下面这个样子：
+
+```java
+List<String> languages = List.of("java", "golang", "python", "php", "javascript");
+languages.stream()
+        .map((lang) -> lang.toUpperCase())
+        .forEach((lang) -> System.out.println(lang));
+```
+
+但并不是所有的 Lambda 表达式都有对应的方法引用简写方式，可否将 Lambda 表达式写法转换为方法引用写法是有限制的。限制是：Lambda 表达式中仅有一个方法调用，且方法引用的目标方法的参数数量、参数类型以及返回类型必须与函数接口的要求完全匹配。
+
+方法引用支持的方法不仅可以是静态方法、实例方法，还可以是构造方法（引用格式为：`类名::new`），甚至还支持数组引用（引用格式为：`Type[]::new`）。
+
+下面看一段示例代码：
+
+```java
+// src/main/java/MethodReferenceTest.java
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class MethodReferenceTest {
+
+    static class Language {
+        private final String name;
+
+        public Language(String name) {
+            this.name = name;
+        }
+    }
+
+    public static void main(String[] args) {
+        List<String> languages = List.of("java", "golang", "python", "php", "javascript");
+        Language[] languageArray = languages.stream()
+                .map(Language::new)
+                .toArray(Language[]::new);
+    }
+}
+```
+
+上面代码中的 `map(Language::new).toArray(Language[]::new)` 即使用了构造方法引用和数组引用。
+
 综上，我们速览了 Java 8 引入的一些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-8-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
