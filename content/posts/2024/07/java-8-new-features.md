@@ -173,6 +173,84 @@ public class DateTimeAPITest {
 
 可以看到，Java 8 新的日期时间 API 对于日期时间的获取、计算、格式化、时区转换等都有很好的支持。
 
+## 3 Optional 类
+
+Java 8 引入一个新的 `Optional` 类，主要用于解决饱受诟病的 `NullPointerException` 问题。`java.util.Optional<T>` 类是一个容器类，其可以保存一个泛型的值 `T`，`T` 可以是一个非空 Java 对象，也可以是 `null`。
+
+下面使用一个简单的例子看一下 `Optional` 是如何使用的：
+
+```java
+Optional<String> optional = Optional.of("hello"); // Optional.ofNullable(null);
+if (optional.isPresent()) {
+    String message = optional.get();
+    System.out.println(message);
+} else {
+    System.out.println("message is null");
+}
+```
+
+可以看到，`Optional` 类可以对真实的对象进行包装。`Optional` 中的值可以是一个非 `null` 值，也可以是一个 `null` 值。因 `Optional` 构造方法是私有的，创建 `Optional` 对象时可以使用 `Optional.of()` 或 `Optional.ofNullable()` 工厂方法来实现。使用 `Optional.of()` 方法创建对象时，传入的值不可以为 `null`（否则会抛出 `NullPointerException`），而使用 `Optional.ofNullable()` 方法创建对象时，传入的值可以为 `null`。
+
+在使用 `Optional` 类时，可以先通过其 `isPresent()` 方法判断值是否存在，如果存在则可以通过 `get()` 方法获取该值，这样即避免了 `NullPointerException` 的发生。
+
+`Optional` 类除了可以避免 `NullPointerException` 的发生外，还支持一系列链式写法，从而使代码更加简洁紧凑。
+
+下面的示例代码包含两个类：`Order` 与 `Customer`，两者是一种嵌套关系，即 `Order` 中有一个 `Customer`，`Customer` 中有一个 `address` 字段。
+
+```java
+class Order {
+    private final Customer customer;
+
+    public Order(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Customer getCustomer() {
+        return this.customer;
+    }
+}
+
+class Customer {
+    private final String address;
+
+    public Customer(String address) {
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return this.address;
+    }
+}
+```
+
+如果我们想编写一个方法来获取 `Order` 的 `address` 信息，常规的包含 `null` 检查的写法可以是下面这个样子：
+
+```java
+public static String getOrderAddress(Order order) {
+    if (null == order
+            || null == order.getCustomer()
+            || null == order.getCustomer().getAddress()) {
+        throw new RuntimeException("Invalid Order");
+    }
+    return order.getCustomer().getAddress();
+}
+```
+
+如果换作使用 `Optional` 类来包装并进行链式操作呢？写法会变成下面的样子：
+
+```java
+public static String getOrderAddressUsingOptional(Order order) {
+    return Optional.ofNullable(order)
+            .map(Order::getCustomer)
+            .map(Customer::getAddress)
+            .orElseThrow(() -> new RuntimeException("Invalid Order"));
+}
+```
+
+可以看到，使用 `Optional` 类后，代码变为了一行，且更加直观明了。
+
+所以，在 Java 8 引入 `Optional` 类后，我们可以对可空对象进行包装，从而避免空指针的发生，也可以借助`Optional` 类提供的链式方法编写出更加紧凑的代码。
+
 > 参考资料
 >
 > [1] Oracle: What's New in JDK 8? - [https://www.oracle.com/java/technologies/javase/8-whats-new.html](https://www.oracle.com/java/technologies/javase/8-whats-new.html)
