@@ -323,19 +323,34 @@ Java 8 新添加的 Stream API 提供了一种更简洁和强大的处理集合�
 
 Stream API 性能很好，因为其求值是惰性的，即其操作分中间操作（`filter`、`map`、`distinct`、`sorted`、`limit`、`skip` 等）和终端操作（`forEach`、`collect`、`reduce`、`count` 等），而只有在调用终端操作时才会真正执行所有的中间操作链。
 
-下面即是一个使用 `List` Stream 的例子：
+下面看一下使用 Stream API 的例子：
 
 ```java
-// src/main/java/StreamAPITest.java#main
-List<String> languages = List.of("java", "golang", "python", "php", "javascript");
-languages.stream()
-        .filter(lang -> lang.length() < 8)
-        .map(String::toUpperCase)
-        .sorted()
-        .forEach(System.out::println);
+// src/main/java/StreamAPITest.java
+import java.util.List;
+import java.util.stream.IntStream;
+
+public class StreamAPITest {
+
+    public static void main(String[] args) {
+        // 生成一个 [1, 2, ..., 100] 的数组，然后对每个元素求平方后进行求和
+        long sum = IntStream.rangeClosed(0, 100)
+                .mapToLong(num -> (long) num * num)
+                .sum();
+        System.out.println(sum);
+
+        // 对 List 进行过滤、映射、排序后进行打印
+        List<String> languages = List.of("java", "golang", "python", "php", "javascript");
+        languages.stream()
+                .filter(lang -> lang.length() < 8)
+                .map(String::toUpperCase)
+                .sorted()
+                .forEach(System.out::println);
+    }
+}
 ```
 
-可以看到，我们针对一个 `List<String>` 的 `stream()`，作了过滤、映射、排序，最后调用 `forEach()` 作了打印。
+可以看到，第一个例子生成了一个 `[1, 100]` 的 `IntStream`，然后对该 `IntStream` 使用 `mapToLong()` 对每个元素进行了求平方并转型为了 `long` 类型，最后计算了所有元素的总和；第二个例子针对一个 `List<String>` 的 `stream()`，作了过滤、映射、排序后调用 `forEach()` 作了打印。
 
 ## 6 Base64 工具类
 
