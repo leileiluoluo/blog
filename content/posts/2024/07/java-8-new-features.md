@@ -443,6 +443,70 @@ public static void main(String[] args) {
 
 上述代码中，`languages` List 的参数被标记为 `@Nonnull`，试图在该 List 加入一个 `null` 值时会有编译器错误。同理，`printLength()` 方法的参数也被标记为 `@NonNull`，试图传入一个 `null` 值时也会报编译器错误。
 
+## 9 类型推断
+
+Java 8 引入了针对 Lambda 表达式的参数类型推断，使得在大多数情况下可以省略参数类型的显式声明。
+
+看一段示例代码：
+
+```java
+// src/main/java/TypeInferenceTest.java#main
+List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
+names.sort((o1, o2) -> o1.compareTo(o2)); // names.sort((String o1, String o2) -> o1.compareTo(o2));
+```
+
+上述代码对 `names` List 进行排序时，传入的 Lambda 表达式为 `(o1, o2) -> o1.compareTo(o2)` 而非 `(String o1, String o2) -> o1.compareTo(o2)`，这是因为编译器会自动推断参数的类型，从而可以省略参数类型的显式声明。
+
+## 10 可重复注解 @Repeatable
+
+在 Java 8 中，引入了 `@Repeatable` 注解用于支持注解的多次标记。这个特性允许我们在同一个目标上多次使用同一种注解，而无需使用容器注解来包装多个注解实例。
+
+如在 Java 8 之前，在一个类上对一个注解进行多次标记是不允许的：
+
+```java
+@PropertySource("classpath:config.properties")
+@PropertySource("classpath:application.properties")
+public class PropertyConfig {
+}
+```
+
+为解决该问题，我们必须定义一个注解的容器：
+
+```java
+public @interface PropertySources {
+
+  PropertySource[] value();
+}
+```
+
+然后使用容器注解来进行标记：
+
+```java
+@PropertySources({
+  @PropertySource("classpath:config.properties"),
+  @PropertySource("classpath:application.properties")
+})
+public class PropertyConfig {
+}
+```
+
+而借助 Java 8 引入的 `@Repeatable` 注解，我们可以轻而易举的解决这个问题：
+
+```java
+@Repeatable(PropertySource.class) // 声明可重复注解
+public @interface PropertySource {
+}
+```
+
+这样，加了 `@Repeatable` 注解的 `@PropertySource` 即可供我们重复使用了：
+
+```java
+@PropertySource("classpath:config.properties")
+@PropertySource("classpath:application.properties")
+public class PropertyConfig {
+}
+```
+
 综上，我们速览了 Java 8 引入的一些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-8-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
