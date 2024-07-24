@@ -16,6 +16,10 @@ description: 我们知道 Java 8 是 Java 发布历史上一个里程碑式的�
 
 我们知道 Java 8 是 Java 发布历史上一个里程碑式的版本，哪怕现在 Java 的最新版本已发展到 22，但仍有相当一部分企业在使用 Java 8，可以说 Java 8 是后续 Java 新版本得以快速迭代的基石。本文即重点回顾 Java 8 引入的那些主要特性。
 
+![Java 8 主要新特性脑图](https://leileiluoluo.github.io/static/images/uploads/2024/07/java-8-new-features.svg)
+
+{{% center %}}（Java 8 主要新特性脑图）{{% /center %}}
+
 ## 1 Lambda 表达式
 
 Lambda 表达式是 Java 8 引入的一个重要特性，其允许将代码块看作普通方法参数一样来进行传递。同时，Lambda 表达式使得匿名类的写法变得更加简洁。
