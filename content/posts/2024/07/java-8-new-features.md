@@ -422,6 +422,27 @@ public class MethodReferenceTest {
 
 上面代码中的 `map(Language::new).toArray(Language[]::new)` 即使用了构造方法引用和数组引用。
 
+## 8 类型注解
+
+Java 8 之前，注解仅可以标记在类、方法、字段上。为了便于注解用于增强代码分析、编译期检查等场景的能力，Java 8 引入了类型注解，即使其不仅能应用于声明，还能应用于任何使用类型的地方。
+
+看一段示例代码：
+
+```java
+private static void printLength(@NonNull String str) {
+    System.out.println(str.length());
+}
+
+public static void main(String[] args) {
+    List<@Nonnull String> languages = new ArrayList<>();
+    languages.add(null); //  Adding 'null' element to parameter annotated as @NotNull
+
+    printLength(null); // Passing 'null' argument to parameter annotated as @NotNull
+}
+```
+
+上述代码中，`languages` List 的参数被标记为 `@Nonnull`，试图在该 List 加入一个 `null` 值时会有编译器错误。同理，`printLength()` 方法的参数也被标记为 `@NonNull`，试图传入一个 `null` 值时也会报编译器错误。
+
 综上，我们速览了 Java 8 引入的一些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-8-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
