@@ -2,7 +2,7 @@
 title: Java 9 主要引入了哪些新特性？
 author: leileiluoluo
 type: post
-date: 2024-08-01T20:00:00+08:00
+date: 2024-08-01T19:00:00+08:00
 url: /posts/java-9-new-features.html
 categories:
   - 计算机
