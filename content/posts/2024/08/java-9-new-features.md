@@ -87,6 +87,55 @@ Java 9 引入了 JShell，其是一个 REPL（Read-Eval-Print Loop）工具。RE
 
   上述示例中，键入 `System.` 后，敲 Tab 键会提示所有可用方法。按上下箭头符号也会列出历史输入过的命令。
 
+## 3 try-with-resources 增强
+
+Java 9 对 try-with-resources 特性作了增强。我们知道，try-with-resources 特性是在 Java 7 引入的，主要用于确保资源（实现了 AutoCloseable 接口）使用后的自动关闭。而在 Java 7 之前，资源的关闭是需要开发者在 finally 块中显式进行的。
+
+基于 Java 7 使用 try-with-resources 特性时，资源的创建与变量的声明都需要放在 try 圆括号内进行；而基于 Java 9 使用 try-with-resources 特性时，资源的创建与变量的声明可以在 try-with-resources 语句之前进行，只需将已声明的资源变量放在 try 圆括号内即可（注意：这些变量必须是 `final` 变量或者等效于 `final` 的变量才可以）。
+
+下面即以一个示例来对照两个版本在使用上的不同：
+
+```java
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class TryWithResourcesTest {
+
+    public static void testJava7ReadFileWithMultipleResources() throws IOException {
+        String filePath = TryWithResourcesTest.class.getResource("test.txt").getPath();
+
+        try (FileReader fr = new FileReader(filePath);
+             BufferedReader br = new BufferedReader(fr)) {
+            System.out.println(br.readLine());
+        }
+    }
+
+    public static void testJava9ReadFileWithMultipleResources() throws IOException {
+        String filePath = TryWithResourcesTest.class.getResource("test.txt").getPath();
+
+        FileReader fr = new FileReader(filePath);
+        BufferedReader br = new BufferedReader(fr);
+        try (fr; br) {
+            System.out.println(br.readLine());
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        // java 7
+        testJava7ReadFileWithMultipleResources();
+
+        // java 9
+        testJava9ReadFileWithMultipleResources();
+    }
+}
+```
+
+上述示例尝试读取一个文本文件，并打印其内容。`testJava7ReadFileWithMultipleResources()` 方法使用了 Java 7 中的写法，资源的创建与变量的声明均须放在 try 圆括号内；而 `testJava9ReadFileWithMultipleResources()` 方法使用了 Java 9 中的增强型写法，资源的创建与声明放在了 try-with-resources 语句之前，try 圆括号内只需放变量即可。
+
+关于 try-with-resources 特性的前世今生，请参看本人之前的一篇文章「[Java try-with-resources 特性详解
+](https://leileiluoluo.github.io/posts/java-try-with-resources.html)」。
+
 > 参考资料
 >
 > [1] Oracle: What's New in JDK 9? - [https://docs.oracle.com/javase/9/whatsnew/](https://docs.oracle.com/javase/9/whatsnew/)
