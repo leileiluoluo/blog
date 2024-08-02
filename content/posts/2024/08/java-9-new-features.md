@@ -96,6 +96,7 @@ Java 9 对 try-with-resources 特性作了增强。我们知道，try-with-resou
 下面即以一个示例来对照两个版本在使用上的不同：
 
 ```java
+// src/main/java/TryWithResourcesTest.java
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -138,7 +139,52 @@ public class TryWithResourcesTest {
 
 ## 4 支持在接口中定义私有方法
 
-我们知道，在 Java 8 之前，接口中定义的方法必须是 `public abstract` 的。而在 Java 8 时，接口中可以定义默认方法了，但默认方法间若有重复代码该怎么办？Java 9 中支持定义私有方法即是用于解决该问题的。
+我们知道，在 Java 8 之前，接口中定义的方法必须是 `public abstract` 的。而在 Java 8 时，接口中可以定义非 `abstract` 的默认方法了，但默认方法间若有重复代码该怎么办？Java 9 支持定义私有方法即是用于解决该问题的。接口的私有方法（或静态私有方法）可以被接口的默认方法（或静态方法）调用，但不能被接口的实现类直接访问或继承。
+
+下面使用一个示例演示接口私有方法的使用：
+
+```java
+// src/main/java/PrivateInterfaceMethodsTest.java
+public class PrivateInterfaceMethodsTest {
+
+    public interface MyInterface {
+        void abstractMethod();
+
+        default void defaultMethod() {
+            int result = privateMethod();
+            System.out.println("Result: " + result);
+        }
+
+        static void staticMethod() {
+            int result = privateStaticMethod();
+            System.out.println("Result: " + result);
+        }
+
+        private int privateMethod() {
+            return 28;
+        }
+
+        private static int privateStaticMethod() {
+            return 39;
+        }
+    }
+
+    public static void main(String[] args) {
+        MyInterface myInterface = new MyInterface() {
+            @Override
+            public void abstractMethod() {
+                System.out.println("Abstract Method Implemented!");
+            }
+        };
+
+        myInterface.abstractMethod(); // Abstract Method Implemented!
+        myInterface.defaultMethod(); // Result: 28
+        MyInterface.staticMethod(); // Result: 39
+    }
+}
+```
+
+上述示例中，`privateMethod()` 是一个私有实例方法，被默认方法 `defaultMethod()` 调用；`privateStaticMethod()` 是一个私有静态方法，被静态方法 `staticMethod()` 调用；而 `abstractMethod()` 方法是一个抽象方法，需要被实现。
 
 > 参考资料
 >
