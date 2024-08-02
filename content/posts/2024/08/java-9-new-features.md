@@ -229,7 +229,7 @@ public class CollectionFactoryMethodsTest {
 }
 ```
 
-如上示例中，分别使用 Java 8 和 Java 9 的写法演示了只读 List、Set 和 Map 的创建。对于这些只读集合，调用任何可以改变集合元素的方法（如：`add()`、`remove()`、`replaceAll()`、`clear()` 等），都会抛出 `UnsupportedOperationException`。
+如上示例中，分别使用 Java 8 和 Java 9 的写法演示了只读 List、Set 和 Map 的创建。对于这些只读集合，调用任何可以改变集合的方法（如：`add()`、`remove()`、`replaceAll()`、`clear()` 等），都会抛出 `UnsupportedOperationException`。
 
 综上，我们速览了 Java 9 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-9-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
