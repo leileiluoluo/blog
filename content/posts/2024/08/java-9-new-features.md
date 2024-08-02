@@ -136,6 +136,10 @@ public class TryWithResourcesTest {
 关于 try-with-resources 特性的前世今生，请参看本人之前写的一篇文章「[Java try-with-resources 特性详解
 ](https://leileiluoluo.github.io/posts/java-try-with-resources.html)」。
 
+## 4 支持在接口中定义私有方法
+
+我们知道，在 Java 8 之前，接口中定义的方法必须是 `public abstract` 的。而在 Java 8 时，接口中可以定义默认方法了，但默认方法间若有重复代码该怎么办？Java 9 中支持定义私有方法即是用于解决该问题的。
+
 > 参考资料
 >
 > [1] Oracle: What's New in JDK 9? - [https://docs.oracle.com/javase/9/whatsnew/](https://docs.oracle.com/javase/9/whatsnew/)
