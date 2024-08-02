@@ -133,7 +133,7 @@ public class TryWithResourcesTest {
 
 上述示例尝试读取一个文本文件，并打印其内容。`testJava7ReadFileWithMultipleResources()` 方法使用了 Java 7 中的写法，资源的创建与变量的声明均须放在 try 圆括号内；而 `testJava9ReadFileWithMultipleResources()` 方法使用了 Java 9 中的增强型写法，资源的创建与声明放在了 try-with-resources 语句之前，try 圆括号内只需放置资源变量即可。
 
-关于 try-with-resources 特性的前世今生，请参看本人之前的一篇文章「[Java try-with-resources 特性详解
+关于 try-with-resources 特性的前世今生，请参看本人之前写的一篇文章「[Java try-with-resources 特性详解
 ](https://leileiluoluo.github.io/posts/java-try-with-resources.html)」。
 
 > 参考资料
