@@ -69,7 +69,7 @@ Java 9 引入了 JShell，其是一个 REPL（Read-Eval-Print Loop）工具。RE
 
   上述示例，声明了一个接收 `String` 参数的方法 `greet()`，然后作了调用。
 
-- Tab 补全和历史记录
+- Tab 补全和历史记录查看
 
   JShell 支持 Tab 补全和历史命令查看，提高了输入效率：
 
