@@ -186,6 +186,8 @@ public class PrivateInterfaceMethodsTest {
 
 上述示例中，`privateMethod()` 是一个私有实例方法，被默认方法 `defaultMethod()` 调用；`privateStaticMethod()` 是一个私有静态方法，被静态方法 `staticMethod()` 调用；而 `abstractMethod()` 方法是一个抽象方法，需要被实现。
 
+综上，我们速览了 Java 9 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-9-new-features-demo/src/main/java)，欢迎关注或 Fork。
+
 > 参考资料
 >
 > [1] Oracle: What's New in JDK 9? - [https://docs.oracle.com/javase/9/whatsnew/](https://docs.oracle.com/javase/9/whatsnew/)
