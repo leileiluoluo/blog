@@ -188,11 +188,11 @@ public class PrivateInterfaceMethodsTest {
 
 ## 5 集合的实用静态工厂方法
 
-Java 9 在集合接口 `List`、`Set` 和 `Map` 上的增加了几个静态工厂方法，用于创建一个拥有少量元素集合的不可变实例。
+Java 9 在集合接口 `List`、`Set` 和 `Map` 上增加了几个实用静态工厂方法，用于创建一个拥有少量元素的集合，且该集合是不可变的。
 
-而在 Java 9 之前，我们要想创建一个拥有少量元素的不可变 List 或 Set，需要先使用 `Arrays.asList()` 方法来创建一个 List，然后再将该 List 传入工具方法 `Collections.unmodifiableXXX()` 中才可以实现需求。
+在 Java 9 之前，我们要想创建一个拥有少量元素的不可变 List 或 Set，需要先使用 `Arrays.asList()` 方法来创建一个 List，然后再将该 List 传入工具方法 `Collections.unmodifiableXXX()` 中才可以实现需求。
 
-而对于 Java 9 的话，只需要调用对应集合的 `of()` 工厂方法就可以实现同样的需求。
+而在 Java 9 的话，只需要调用对应集合的 `of()` 工厂方法就可以实现同样的需求。
 
 看一下具体示例：
 
@@ -229,7 +229,7 @@ public class CollectionFactoryMethodsTest {
 }
 ```
 
-如上示例，分别使用 Java 8 和 Java 9 的写法演示了只读 List、Set 和 Map 的创建。对于这些只读集合，调用任何可以改变集合元素的方法（如：`add()`、`remove()`、`replaceAll()`、`clear()` 等），都会抛出 `UnsupportedOperationException`。
+如上示例中，分别使用 Java 8 和 Java 9 的写法演示了只读 List、Set 和 Map 的创建。对于这些只读集合，调用任何可以改变集合元素的方法（如：`add()`、`remove()`、`replaceAll()`、`clear()` 等），都会抛出 `UnsupportedOperationException`。
 
 综上，我们速览了 Java 9 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-9-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
