@@ -87,7 +87,7 @@ Java 9 引入了 JShell，其是一个 REPL（Read-Eval-Print Loop）工具。RE
 
   上述示例中，键入 `System.` 后，敲 Tab 键会提示所有可用方法。按上下箭头符号也会列出历史输入过的命令。
 
-## 3 try-with-resources 增强
+## 3 try-with-resources 特性增强
 
 Java 9 对 try-with-resources 特性作了增强。我们知道，try-with-resources 特性是在 Java 7 引入的，主要用于确保资源（实现了 AutoCloseable 接口）使用后的自动关闭。而在 Java 7 之前，资源的关闭是需要开发者在 finally 块中显式进行的。
 
