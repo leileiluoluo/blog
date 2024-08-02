@@ -186,6 +186,51 @@ public class PrivateInterfaceMethodsTest {
 
 上述示例中，`privateMethod()` 是一个私有实例方法，被默认方法 `defaultMethod()` 调用；`privateStaticMethod()` 是一个私有静态方法，被静态方法 `staticMethod()` 调用；而 `abstractMethod()` 方法是一个抽象方法，需要被实现。
 
+## 5 集合的实用静态工厂方法
+
+Java 9 在集合接口 `List`、`Set` 和 `Map` 上的增加了几个静态工厂方法，用于创建一个拥有少量元素集合的不可变实例。
+
+而在 Java 9 之前，我们要想创建一个拥有少量元素的不可变 List 或 Set，需要先使用 `Arrays.asList()` 方法来创建一个 List，然后再将该 List 传入工具方法 `Collections.unmodifiableXXX()` 中才可以实现需求。
+
+而对于 Java 9 的话，只需要调用对应集合的 `of()` 工厂方法就可以实现同样的需求。
+
+看一下具体示例：
+
+```java
+import java.util.*;
+
+public class CollectionFactoryMethodsTest {
+
+    public static void main(String[] args) {
+        // Java 8: creating an unmodifiable list
+        List<String> names = Arrays.asList("a", "b", "c");
+        names = Collections.unmodifiableList(names);
+
+        // Java 9: creating an unmodifiable list
+        List<String> names2 = List.of("Larry", "Lucy", "Jacky");
+
+        // Java 8: creating an unmodifiable set
+        Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3));
+        numbers = Collections.unmodifiableSet(numbers);
+
+        // Java 9: creating an unmodifiable set
+        Set<Integer> numbers2 = Set.of(1, 2, 3);
+
+        // Java 8: creating an unmodifiable map
+        Map<String, Integer> nameAgeMap = new HashMap<>();
+        nameAgeMap.put("Larry", 18);
+        nameAgeMap.put("Lucy", 28);
+        nameAgeMap.put("Jacky", 29);
+        nameAgeMap = Collections.unmodifiableMap(nameAgeMap);
+
+        // Java 9: creating an unmodifiable map
+        Map<String, Integer> nameAgeMap2 = Map.of("Larry", 18, "Lucy", 28, "Jacky", 29);
+    }
+}
+```
+
+如上示例，分别使用 Java 8 和 Java 9 的写法演示了只读 List、Set 和 Map 的创建。对于这些只读集合，调用任何可以改变集合元素的方法（如：`add()`、`remove()`、`replaceAll()`、`clear()` 等），都会抛出 `UnsupportedOperationException`。
+
 综上，我们速览了 Java 9 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-9-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
