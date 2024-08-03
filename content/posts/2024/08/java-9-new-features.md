@@ -285,7 +285,7 @@ public class StreamEnhancementsTest {
 }
 ```
 
-上述示例中，首先对 `ofNullable()` 作了使用，然后对 `takeWhile()` 和 `dropWhile()` 作了使用，最后对照 Java 8 与 Java 9 对 `iterate()` 作了使用。
+上述示例中，首先对 `ofNullable()` 的使用作了演示，然后对 `takeWhile()` 和 `dropWhile()` 的使用作了演示，最后对照 Java 8 与 Java 9 对 `iterate()` 的使用作了演示。
 
 综上，我们速览了 Java 9 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-9-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
