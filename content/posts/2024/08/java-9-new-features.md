@@ -337,6 +337,66 @@ public class OptionalEnhancementsTest {
 
 上述示例中，首先演示了 `or()` 方法的使用；然后使用 `stream()` 方法将 Optional 对象转换为了一个包含单个元素的 Stream，又转换为了一个 List；最后演示了 `ifPresentOrElse()` 方法的使用。
 
+## 8 Process API 增强
+
+Java 9 引入了一些重要的改进来增强 Process API，使其更易于管理外部进程。以下是几个主要的改进点：
+
+- 新增 ProcessHandle 接口
+
+  引入了 `ProcessHandle` 接口，用于代表操作系统中的一个进程。通过 `ProcessHandle`，可以轻松地获取进程的 PID（进程标识符）、父进程、子进程以及其它信息。
+
+- 获取所有进程的流式 API
+
+  引入了 `ProcessHandle.allProcesses()` 方法，返回一个 `Stream<ProcessHandle>`，可以用来遍历当前系统中所有的进程，进而对它们进行管理和监控。
+
+- 方便的进程管理方法
+
+  `ProcessHandle` 接口提供了一系列方法来管理进程，如 `destroy()`、`destroyForcibly()`、`isAlive()` 等，使得与外部进程的交互更加直观和简便。
+
+- 支持处理进程的异步操作
+
+  引入了异步方法，如 `onExit()` 和 `onKill()`，允许在进程终止或被杀死时异步处理。这种方式避免了传统的轮询检查进程状态的需要，提升了效率。
+
+下面看一个示例：
+
+```java
+public class ProcessAPITest {
+
+    public static void main(String[] args) {
+        // 获取当前进程的信息
+        ProcessHandle currentProcess = ProcessHandle.current();
+        System.out.println("当前进程 PID: " + currentProcess.pid());
+        System.out.println("当前进程是否存活: " + currentProcess.isAlive());
+        System.out.println("当前进程信息: " + currentProcess.info());
+
+        // 遍历所有进程并打印信息
+        ProcessHandle.allProcesses().forEach(process -> {
+            System.out.println("PID: " + process.pid());
+            System.out.println("命令: " + process.info().command().orElse("未知"));
+            System.out.println("启动时间: " + process.info().startInstant().orElse(null));
+            System.out.println("------------------------");
+        });
+
+        // 异步处理进程退出事件
+        ProcessHandle handle = ProcessHandle.of(currentProcess.pid()).orElseThrow(() -> new IllegalArgumentException("无效的进程 ID"));
+        handle.onExit().thenAccept(process -> {
+            System.out.println("进程 " + process.pid() + " 已退出");
+        });
+
+        // 销毁指定进程
+        ProcessHandle processHandle = ProcessHandle.of(currentProcess.pid()).orElseThrow(() -> new IllegalArgumentException("无效的进程 ID"));
+        boolean destroyed = processHandle.destroy(); // processHandle.destroyForcibly();
+        if (destroyed) {
+            System.out.println("进程 " + currentProcess.pid() + " 已被销毁");
+        } else {
+            System.out.println("无法销毁进程 " + currentProcess.pid());
+        }
+    }
+}
+```
+
+如上示例中，首先获取了当前进程的各种信息；然后使用 `ProcessHandle.allProcesses()` 获取了所有的进程并打印了相关信息；接着使用 `onExit()` 方法，添加了进程退出时的异步处理逻辑；最后使用 `destroy()` 方法尝试销毁进程。
+
 综上，我们速览了 Java 9 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-9-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
