@@ -197,6 +197,7 @@ Java 9 在集合接口 `List`、`Set` 和 `Map` 上增加了几个实用静态�
 看一下具体示例：
 
 ```java
+// src/main/java/CollectionFactoryMethodsTest.java
 import java.util.*;
 
 public class CollectionFactoryMethodsTest {
@@ -230,6 +231,61 @@ public class CollectionFactoryMethodsTest {
 ```
 
 如上示例中，分别使用 Java 8 和 Java 9 的写法演示了只读 List、Set 和 Map 的创建。对于这些只读集合，调用任何可以改变集合的方法（如：`add()`、`remove()`、`replaceAll()`、`clear()` 等），都会抛出 `UnsupportedOperationException`。
+
+## 6 Stream API 增强
+
+我们知道，Stream API 是在 Java 8 引入的，其提供了一种简洁而强大的集合数据处理方式。Java 9 对 Stream API 作了一些增强，主要新增了 `ofNullable()`、`takeWhile()` 和 `dropWhile()` 这几个方法，并且提供了 `iterate()` 方法的重载版本。
+
+`ofNullable()` 工厂方法用于创建一个其中只包含一个可空元素的 Stream。该方法的主要目的是简化处理可能包含 `null` 值的集合时的逻辑，以便避免显式地检查和过滤 `null` 值。
+
+`takeWhile()` 和 `dropWhile()` 这两个方法允许根据谓词条件从流中选择或删除元素，直到遇到第一个不满足条件的元素。这两个方法用于处理流中靠前的元素，而不必处理整个流，为处理 Stream 提供了更多的灵活性。
+
+`iterate()` 方法在 Java 8 中创建的是一个无限流，其元素由给定的初始值和一个生成下一个元素的函数产生，为了可以将流终止，我们需要使用一些限制性的函数（如 `limit()`）来操作。而在 Java 9 中，为了限制该无序流的长度，增加了一个谓词参数（`Predicate<? super T> hasNext`）。
+
+下面看一下这几个方法的使用样例：
+
+```java
+// src/main/java/StreamEnhancementsTest.java
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class StreamEnhancementsTest {
+
+    public static void main(String[] args) {
+        // ofNullable() 使用样例
+        String name = null;
+        List<String> names = Stream.ofNullable(name)
+                .collect(Collectors.toList());
+        System.out.println(names); // []
+
+        // takeWhile() 使用样例
+        List<Integer> numbers = Stream.of(1, 2, 3, 4, 3, 2, 1)
+                .takeWhile(num -> num < 4)
+                .collect(Collectors.toList());
+        System.out.println(numbers); // [1, 2, 3]
+
+        // dropWhile() 使用样例
+        List<Integer> numbers2 = Stream.of(1, 2, 3, 4, 3, 2, 1)
+                .dropWhile(num -> num < 4)
+                .collect(Collectors.toList());
+        System.out.println(numbers2); // [4, 3, 2, 1]
+
+        // iterate() 使用样例，Java 8 版本
+        List<Integer> oddNumbers = Stream.iterate(1, v -> v + 2)
+                .limit(5)
+                .collect(Collectors.toList());
+        System.out.println(oddNumbers); // [1, 3, 5, 7, 9]
+
+        // iterate() 使用样例，Java 9 版本
+        List<Integer> oddNumbers2 = Stream.iterate(1, v -> v < 10, v -> v + 2)
+                .collect(Collectors.toList());
+        System.out.println(oddNumbers2); // [1, 3, 5, 7, 9]
+    }
+}
+```
+
+上述示例中，首先对 `ofNullable()` 作了使用，然后对 `takeWhile()` 和 `dropWhile()` 作了使用，最后对照 Java 8 与 Java 9 对 `iterate()` 作了使用。
 
 综上，我们速览了 Java 9 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-9-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
