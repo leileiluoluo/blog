@@ -287,6 +287,56 @@ public class StreamEnhancementsTest {
 
 上述示例中，首先对 `ofNullable()` 的使用作了演示，然后对 `takeWhile()` 和 `dropWhile()` 的使用作了演示，最后对照 Java 8 与 Java 9 对 `iterate()` 的使用作了演示。
 
+## 7 Optional 类的增强
+
+Optional 类是 Java 8 引入的一个用于安全处理潜在 `null` 值的封装类。Java 9 对 Optional 类作了一些改进，以提供更多的实用方法和增强功能。下面是 Java 9 对 Optional 类的一些改进点：
+
+- or() 方法的重载
+
+  `or()` 方法现在支持 `Supplier` 函数接口，用于提供 `Optional` 中对象为空情况下的备选值。
+
+- stream()方法
+
+  新增的 `stream()` 方法用于将 `Optional` 对象转换为一个包含单个元素的 Stream。如果 Optional 对象有值，则返回一个包含该值的 Stream，否则返回一个空 Stream。
+
+- ifPresentOrElse()方法
+
+  新增的 `ifPresentOrElse()` 方法用于在 Optional 对象有值时执行一个操作，否则执行一个备选操作。这样可以避免使用传统的 `if-else` 语句来处理 Optional 对象的值。
+
+下面看一个示例：
+
+```java
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+public class OptionalEnhancementsTest {
+
+    public static void main(String[] args) {
+        // 使用 or() 方法设置备选值
+        Optional<String> optional = Optional.empty();
+        String result = optional.or(() -> Optional.of("Default value"))
+                .orElse("Other value");
+        System.out.println(result); // Default value
+
+        // 使用 stream() 方法将 Optional 转换为 Stream
+        List<String> names = Optional.of("Larry")
+                .stream()
+                .collect(Collectors.toList());
+        System.out.println(names); // [Larry]
+
+        // 使用 ifPresentOrElse() 方法执行操作
+        Optional.empty()
+                .ifPresentOrElse(
+                        value -> System.out.println("Value: " + value),
+                        () -> System.out.println("No value is present")
+                ); // No value present
+    }
+}
+```
+
+上述示例中，首先演示了 `or()` 方法的使用；然后使用 `stream()` 方法将 Optional 对象转换为了一个包含单个元素的 Stream，又转换为了一个 List；最后演示了 `ifPresentOrElse()` 方法的使用。
+
 综上，我们速览了 Java 9 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-9-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
