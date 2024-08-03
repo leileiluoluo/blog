@@ -399,6 +399,46 @@ public class ProcessAPITest {
 
 如上示例中，首先获取了当前进程的各种信息；然后使用 `ProcessHandle.allProcesses()` 获取了所有的进程并打印了相关信息；接着使用 `onExit()` 方法，添加了进程退出时的异步处理逻辑；最后使用 `destroy()` 方法尝试销毁进程。
 
+## 9 改进的钻石操作符
+
+Java 9 对钻石操作符的类型推断作了改进，特别是在嵌套泛型的情况下，使其更加灵活和智能。
+
+下面看一段示例代码：
+
+```java
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class DiamondOperatorTest {
+
+    public static void main(String[] args) {
+        // Java 8 以前，需要显式指定泛型参数
+        List<String> list1 = new ArrayList<String>();
+
+        // 在 Java 8 中，可以使用钻石操作符进行推断
+        List<String> list2 = new ArrayList<>();
+
+        // 在 Java 8 中，无法在匿名内部类中使用钻石操作符
+        // 而在 Java 9 中则可以
+        Runnable runnable2 = new Runnable() {
+            @Override
+            public void run() {
+                List<String> list = new ArrayList<>(); // 自动推断为 ArrayList<String>
+                list.add("Java 9");
+                System.out.println("Inside Runnable: " + list);
+            }
+        };
+
+        // 在 Java 9 中更复杂的嵌套泛型也能正确推断
+        Map<String, List<Map<Integer, String>>> complexMap = new HashMap<>();
+    }
+}
+```
+
+如上示例演示了 Java 9 改进的钻石操作符针对匿名内部类、复杂嵌套泛型结构时，依然能够对泛型类型作出准确推断，使得钻石操作符的使用场景得到扩展，也使得代码更加简洁和易读。
+
 综上，我们速览了 Java 9 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-9-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
