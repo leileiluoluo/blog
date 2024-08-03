@@ -526,6 +526,55 @@ public class PropertyConfig {
 }
 ```
 
+## 11 实用并发工具的扩展
+
+Java 8 对 `java.util.concurrent` 包下的并发工具类做了一些扩展，以提供更强大、更灵活的并发编程能力。
+
+### CompletableFuture
+
+CompletableFuture 是一种用于异步编程的强大工具，其提供了一种方便的方式（回调、组合、转换等）来管理多个异步操作的结果。
+
+下面简单看一下 `ComplatableFuture` 类的使用：
+
+```java
+// src/main/java/CompletableFutureTest.java
+import java.util.concurrent.*;
+
+public class CompletableFutureTest {
+
+    public static void main(String[] args) {
+        // 使用 CompletableFuture 进行异步计算
+        CompletableFuture<Integer> future1 = CompletableFuture.supplyAsync(() -> {
+            try {
+                // 模拟耗时操作
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return 42;
+        });
+
+        CompletableFuture<Integer> future2 = CompletableFuture.supplyAsync(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return 100;
+        });
+
+        // 使用 CompletableFuture 处理异步计算结果，这里需要两个任务都完成
+        CompletableFuture<Integer> allFutures = CompletableFuture.allOf(future1, future2)
+                .thenApply(result -> future1.join() + future2.join());
+
+        // 等待所有任务完成
+        System.out.println(allFutures.join());
+    }
+}
+```
+
+上述示例中，首先使用 `CompletableFuture` 创建了两个异步任务 `future1 和 future2`，然后使用 `CompletableFuture.allOf(future1, future2);` 等待两个任务并发执行完成后调用 `thenApply()` 获取两个任务的合并结果，最后在主线程使用 `join()` 方法等待所有任务执行完成。
+
 综上，我们速览了 Java 8 引入的一些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-8-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
