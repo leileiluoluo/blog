@@ -573,7 +573,51 @@ public class CompletableFutureTest {
 }
 ```
 
-上述示例中，首先使用 `CompletableFuture` 创建了两个异步任务 `future1 和 future2`，然后使用 `CompletableFuture.allOf(future1, future2);` 等待两个任务并发执行完成后调用 `thenApply()` 获取两个任务的合并结果，最后在主线程使用 `join()` 方法等待所有任务执行完成。
+上述示例中，首先使用 `CompletableFuture` 创建了两个异步任务 `future1` 和 `future2`，然后使用 `CompletableFuture.allOf(future1, future2);` 等待两个任务并发执行完成后调用 `thenApply()` 获取两个任务的合并结果，最后在主线程使用 `join()` 方法等待所有任务执行完成。
+
+### LongAdder 与 DoubleAdder
+
+`LongAdder` 与 `DoubleAdder` 类是对 `AtomicLong` 和 `AtomicDouble` 类的改进，提供了更高的并发性能。`LongAdder` 与 `DoubleAdder` 类通过分解内部计数器，将更新操作分散到多个变量上，减少了竞争和锁争用。
+
+看一个示例：
+
+```java
+// src/main/java/AdderTest.java
+import java.util.concurrent.atomic.DoubleAdder;
+import java.util.concurrent.atomic.LongAdder;
+
+public class AdderTest {
+
+    public static void main(String[] args) throws InterruptedException {
+        LongAdder longAdder = new LongAdder();
+        DoubleAdder doubleAdder = new DoubleAdder();
+
+        // 启动一个线程循环自增 100 次
+        Thread thread = new Thread(() -> {
+            for (int i = 0; i < 100; i++) {
+                longAdder.increment();
+                doubleAdder.add(0.5);
+            }
+        });
+        thread.start();
+
+        // 在主线程循环自增 100 次
+        for (int i = 0; i < 100; i++) {
+            longAdder.increment();
+            doubleAdder.add(0.5);
+        }
+
+        // 等待 thread 执行完成
+        thread.join();
+
+        // 打印自增结果
+        System.out.println(longAdder.sum()); // 200
+        System.out.println(doubleAdder.sum()); // 100.0
+    }
+}
+```
+
+上述示例中，首先创建了 `LongAdder` 与 `DoubleAdder` 实例，然后分别在一个新线程、主线程并发「循环自增 100 次」，打印结果，发现最后的 `sum` 值准确无误。
 
 综上，我们速览了 Java 8 引入的一些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-8-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
