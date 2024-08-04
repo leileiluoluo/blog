@@ -437,6 +437,45 @@ public class DiamondOperatorTest {
 
 如上示例演示了 Java 9 改进的钻石操作符针对匿名内部类、复杂嵌套泛型结构时，依然能够对泛型类型作出准确推断，使得钻石操作符的使用场景得到扩展，也使得代码更加简洁和易读。
 
+## 10 改进的 @Deprecated 注解
+
+Java 9 对 `@Deprecated` 注解作了一些改进，主要集中在如何标记和使用过时元素的增强上：
+
+- forRemoval 参数
+
+  用于指示被标记为过时的元素是否计划在未来的版本中被移除，默认为 `false`。
+
+- since 参数
+
+  用于指定从哪个版本开始该元素被标记为过时，默认值为空字符串。
+
+这些改进使得 `@Deprecated` 注解更加丰富，有助于开发者更好地管理和维护代码库中的过时元素。
+
+请看一个示例：
+
+```java
+// src/main/java/DeprecatedAnnotationTest.java
+public class DeprecatedAnnotationTest {
+
+    @Deprecated(since = "9", forRemoval = true)
+    public static void method1() {
+        // 旧的方法实现
+    }
+
+    @Deprecated(since = "10") // forRemoval = false
+    public static void method2() {
+        // 废弃的方法实现
+    }
+
+    public static void main(String[] args) {
+        DeprecatedAnnotationTest.method1();
+        DeprecatedAnnotationTest.method2();
+    }
+}
+```
+
+如上示例演示了 `@Deprecated` 注解中，`forRemoval` 参数与 `since` 参数的使用。
+
 综上，我们速览了 Java 9 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-9-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
