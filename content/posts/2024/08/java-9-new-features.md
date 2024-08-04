@@ -593,7 +593,7 @@ public class DeprecatedAnnotationTest {
 
 如上示例演示了 `@Deprecated` 注解中，`forRemoval` 参数与 `since` 参数的使用。
 
-综上，我们速览了 Java 9 引入的那些主要特性。用于演示模块系统特性所使用的完整代码已提交至 [java-9-module-usage-demo](https://github.com/leileiluoluo/java-exercises/tree/main/java-9-module-usage-demo)，其它特性对应的完整示例代码也已提交至 [java-9-new-features-demo](https://github.com/leileiluoluo/java-exercises/tree/main/java-9-new-features-demo/src/main/java)，欢迎关注或 Fork。
+综上，我们速览了 Java 9 引入的那些主要特性。用于演示模块系统特性所使用的完整代码已提交至 [java-9-module-usage-demo](https://github.com/leileiluoluo/java-exercises/tree/main/java-9-module-usage-demo)，其它特性对应的完整示例代码已提交至 [java-9-new-features-demo](https://github.com/leileiluoluo/java-exercises/tree/main/java-9-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
 >
