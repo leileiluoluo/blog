@@ -14,6 +14,12 @@ keywords:
 description: 本文重点回顾 Java 9 引入的那些主要特性。
 ---
 
+本文重点回顾 Java 9 引入的那些特性。
+
+![Java 9 主要新特性脑图](https://leileiluoluo.github.io/static/images/uploads/2024/08/java-9-new-features.svg)
+
+{{% center %}}（Java 9 主要新特性脑图）{{% /center %}}
+
 ## 1 模块系统
 
 Java 9 引入的一个最主要的特性就是模块系统（全称为 Java 平台模块系统，Java Platform Module System）。根据官方的定义，模块是一个命名的、自描述的代码和数据集合。模块系统会在编译时和运行时之间新加一个可选的链接时，在该阶段可以将一组模块组装为一个自定义的运行时镜像。
@@ -287,7 +293,7 @@ public class StreamEnhancementsTest {
 
 上述示例中，首先对 `ofNullable()` 的使用作了演示，然后对 `takeWhile()` 和 `dropWhile()` 的使用作了演示，最后对照 Java 8 与 Java 9 对 `iterate()` 的使用作了演示。
 
-## 7 Optional 类的增强
+## 7 Optional 类增强
 
 Optional 类是 Java 8 引入的一个用于安全处理潜在 `null` 值的封装类。Java 9 对 Optional 类作了一些改进，以提供更多的实用方法和增强功能。下面是 Java 9 对 Optional 类的一些改进点：
 
