@@ -24,6 +24,115 @@ description: 本文重点回顾 Java 9 引入的那些主要特性。
 
 Java 9 引入的一个最主要的特性就是模块系统（全称为 Java 平台模块系统，Java Platform Module System）。根据官方的定义，模块是一个命名的、自描述的代码和数据集合。模块系统会在编译时和运行时之间新加一个可选的链接时，在该阶段可以将一组模块组装为一个自定义的运行时镜像。
 
+模块系统中的几个核心概念：
+
+- 模块（Module）
+
+  模块是模块化系统的基本单元。它是一个逻辑上独立的代码单元，包括类、接口、资源和 `module-info.java` 文件。每个模块都有一个唯一的名称，如：`java.base`、`com.example.myapp` 等。
+
+- 模块路径（Module Path）
+
+  模块路径是一组包含模块的路径，用于在运行时指定应用程序所需的模块。类似于类路径，但只用于模块。
+
+- 模块依赖性（Module Dependencies）
+
+  在 `module-info.java` 文件中，可以使用 `requires` 关键字声明模块所需的依赖。
+
+- 模块导出（Module Exporting）
+
+  在 `module-info.java` 文件中，可以使用 `exports` 关键字声明哪些包可以被其它模块访问，这有助于控制包的可见性。
+
+引入模块系统有下面几个缘由：
+
+- 显式管理依赖
+
+  模块化系统需要我们明确声明模块之间的依赖关系，减少了传统类路径（classpath）上的混乱和不稳定性。每个模块都需要显示声明自己需暴露的 `package`，而自己所依赖的和自己内部使用的 `package`，则不会暴露，也不会被外部依赖，这有助于保护内部实现，防止不应该公开的部分被外部模块访问。依赖的模块也需要显示引入需要依赖的 `package`。
+
+- 更好地安全性
+
+  模块化系统可以提供更严格的可见性控制，防止私有实现被不应访问的模块访问，从而增强了应用程序的安全性。代码真正意义上可以按照作者的设计思路进行公开和隐藏，同时也限制了反射的滥用，更好的保护了那些不建议被外部直接使用或过时的内部类。
+
+- 标准化
+
+  模块化引入了标准化的方式来组织和管理代码。显式的声明暴露的内容，可以让第三方库的开发者更好地管理自己的内部实现逻辑和内部类。
+
+- 自定义最小运行时镜像
+
+  Java 因为其向后兼容的原则，不会轻易对其内容进行删除，包含的陈旧过时的技术也越来越多，导致 JDK 变得越来越臃肿。而 Java 9 的显示依赖管理使得加载最小所需模块成为了可能，我们可以选择只加载必须的 JDK 模块，抛弃如 `java.awt`, `javax.swing`, `java.applet` 等这些用不到的模块。这种机制，大大的减少了运行 Java 环境所需要的内存资源，在对于嵌入式系统开发或其他硬件资源受限的场景下的开发非常有用。
+
+- 更加适合大型应用程序管理与更好的性能
+
+  对于大型应用程序而言，模块化系统提供更好的组织结构，减少了复杂性，使开发者能够更轻松地管理和扩展应用程序。
+
+  通过减少不必要的类路径搜索和提供更紧凑的部署单元，模块化系统也有助于提高应用程序的性能。
+
+下面使用一个示例来演示模块的使用：
+
+假设我们有两个模块 `module-1` 与 `module-2`，`module-2` 需要依赖 `module-1`，两模块的目录结构分别为：
+
+```text
+module-1
+├─ src/main
+│  └─ java
+│     ├─ com.leileiluoluo.module1
+│     │  ├─ model
+│     │  │  └─ User.java
+│     │  └─ util
+│     │     └─ AgeUtil.java
+│     └─ module-info.java
+└─ pom.xml
+```
+
+```text
+module-2
+├─ src/main
+│  └─ java
+│     ├─ com.leileiluoluo.module1
+│     │  ├─ ModuleTest.java
+│     └─ module-info.java
+└─ pom.xml
+```
+
+我们在 `module-1` 中定义了两个 `package`：`com.leileiluoluo.module1.util` 和 `com.leileiluoluo.module1.model`。假如我们只想将 Model 类暴露出去供其它模块使用，Util 类仅作为内部使用，则其 `module-info.java` 文件可以使用如下方式定义：
+
+```java
+// module-1: src/main/java/module-info.java
+module leileiluoluo.module1 {
+    exports com.leileiluoluo.module1.model;
+}
+```
+
+因 `module-2` 需要使用 `module-1` 的 Model 类，其 `module-info.java` 文件可以使用如下方式定义：
+
+```java
+// module-2: src/main/java/module-info.java
+module leileiluoluo.module2 {
+    requires leileiluoluo.module1;
+}
+```
+
+这样，即可以在 `module-2` 中使用 `module-1` 暴露的内容了。
+
+```java
+// module-2: src/main/java/com/leileiluoluo/module2/ModuleTest.java
+package com.leileiluoluo.module2;
+
+import com.leileiluoluo.module1.model.User;
+
+public class ModuleTest {
+
+    public static void main(String[] args) {
+        User user = new User("Larry", 28);
+
+        System.out.println("name: " + user.getName());
+        System.out.println("age: " + user.getAge());
+        System.out.println("group: " + user.getAgeGroup());
+    }
+}
+```
+
+这里仅演示了一种比较简单的使用方式，在实际项目中的使用情况会比较复杂，需要我们在工作过程中不断地去探索。
+
 ## 2 JShell
 
 Java 9 引入了 JShell，其是一个 REPL（Read-Eval-Print Loop）工具。REPL 是一个交互式编程环境，允许用户输入命令或表达式，然后进行评估并打印结果。这种环境已在解释型编程语言（如：Python、Ruby、JavaScript 等）中得到广泛应用，其即时反馈的特征对于 Java 语言的初学者、原型设计者或新特性探索人员非常有帮助，但其只适合简单代码片段的执行与测试，并不能取代 IDE。
