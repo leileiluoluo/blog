@@ -111,7 +111,7 @@ module leileiluoluo.module2 {
 }
 ```
 
-这样，即可以在 `module-2` 中使用 `module-1` 暴露的内容了。
+这样，即可以在 `module-2` 中使用 `module-1` 暴露的 Model 类了，对于 `module-1` 未暴露的其它类（如 Util 类），则完全不可见。
 
 ```java
 // module-2: src/main/java/com/leileiluoluo/module2/ModuleTest.java
