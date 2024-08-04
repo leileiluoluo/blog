@@ -133,6 +133,8 @@ public class ModuleTest {
 
 这里仅演示了一种比较简单的使用方式，在实际项目中的使用情况会比较复杂，需要我们在工作过程中不断地去探索。
 
+两个模块的完整代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-9-module-usage-demo)。
+
 ## 2 JShell
 
 Java 9 引入了 JShell，其是一个 REPL（Read-Eval-Print Loop）工具。REPL 是一个交互式编程环境，允许用户输入命令或表达式，然后进行评估并打印结果。这种环境已在解释型编程语言（如：Python、Ruby、JavaScript 等）中得到广泛应用，其即时反馈的特征对于 Java 语言的初学者、原型设计者或新特性探索人员非常有帮助，但其只适合简单代码片段的执行与测试，并不能取代 IDE。
@@ -591,7 +593,7 @@ public class DeprecatedAnnotationTest {
 
 如上示例演示了 `@Deprecated` 注解中，`forRemoval` 参数与 `since` 参数的使用。
 
-综上，我们速览了 Java 9 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-9-new-features-demo/src/main/java)，欢迎关注或 Fork。
+综上，我们速览了 Java 9 引入的那些主要特性。用于演示模块系统特性所使用的完整代码已提交至 [java-9-module-usage-demo](https://github.com/leileiluoluo/java-exercises/tree/main/java-9-module-usage-demo)，其它特性对应的完整示例代码也已提交至 [java-9-new-features-demo](https://github.com/leileiluoluo/java-exercises/tree/main/java-9-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
 >
