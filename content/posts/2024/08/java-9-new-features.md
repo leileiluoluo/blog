@@ -406,6 +406,7 @@ Java 9 对钻石操作符的类型推断作了改进，特别是在嵌套泛型�
 下面看一段示例代码：
 
 ```java
+// src/main/java/DiamondOperatorTest.java
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -422,13 +423,10 @@ public class DiamondOperatorTest {
 
         // 在 Java 8 中，无法在匿名内部类中使用钻石操作符
         // 而在 Java 9 中则可以
-        Runnable runnable2 = new Runnable() {
-            @Override
-            public void run() {
-                List<String> list = new ArrayList<>(); // 自动推断为 ArrayList<String>
-                list.add("Java 9");
-                System.out.println("Inside Runnable: " + list);
-            }
+        Runnable runnable = () -> {
+            List<String> list = new ArrayList<>(); // 自动推断为 ArrayList<String>
+            list.add("Java 9");
+            System.out.println("Inside Runnable: " + list);
         };
 
         // 在 Java 9 中更复杂的嵌套泛型也能正确推断
