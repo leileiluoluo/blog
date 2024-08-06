@@ -33,9 +33,9 @@ public class LocalVariableTypeReferenceTest {
 
     public static void main(String[] args) {
         // 在基础类型变量声明、泛型类型变量声明中使用 var
-        var num2 = 10; // int num = 10;
-        var message2 = "Hello World!"; // String message = "Hello World!";
-        var list2 = new ArrayList<Map<String, List<Integer>>>(); // List<Map<String, List<Integer>>> list = new ArrayList<>();
+        var num = 10; // int num = 10;
+        var message = "Hello World!"; // String message = "Hello World!";
+        var list = new ArrayList<Map<String, List<Integer>>>(); // List<Map<String, List<Integer>>> list = new ArrayList<>();
 
         // 在普通 for 循环中使用 var
         for (var i = 0; i < 10; i++) {
