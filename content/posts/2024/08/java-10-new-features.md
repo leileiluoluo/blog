@@ -66,14 +66,42 @@ public class LocalVariableTypeReferenceTest {
 
 总的来说，局部变量类型推断可以让 Java 开发者在不损失类型安全的前提下编写出更为简洁的代码，但局部变量类型推断只当用在简单表达式或类型明确的情形，对于复杂表达式的情形，显式类型声明可以使代码更具可读性。
 
+## 2 应用程序类数据共享
+
+类数据共享（Class-Data Sharing）是在 Java 1.5 引入的，其允许将一组类预处理为共享存档文件，然后可以在运行时对其进行内存映射以缩短启动时间。当多个 JVM 实例共享同一个存档文件时，它还可以减少动态内存占用。
+
+不同于 Java 1.5 的类数据共享针对的是系统类库和通用 JVM 实例之间的共享优化，Java 10 引入的应用程序类数据共享（Application Class-Data Sharing）针对的是应用程序级别的类数据共享。它允许同一应用程序的多个 Java 运行时实例之间共享特定于该应用程序的类数据和资源，以进一步优化启动时间和内存占用。
+
+默认情况下，仅为 JVM 的引导类加载器（Bootstrap Class Loader）启用了应用程序类数据共享。指定了 `-XX:+UseAppCDS` 命令行选项后即可为系统类加载器、平台类加载器和其它用户定义的类加载器启用类数据共享。
+
+下面即演示一下应用程序类数据共享特性的使用：
+
+```shell
+# 确定要存档的类
+java -Xshare:off -XX:+UseAppCDS -XX:DumpLoadedClassList=myapp.lst \
+    -cp myapp.jar MyApp
+
+# 创建存档文件
+java -Xshare:dump -XX:+UseAppCDS -XX:SharedClassListFile=myapp.lst \
+    -XX:SharedArchiveFile=myapp.jsa -cp myapp.jar
+
+# 使用存档文件
+java -Xshare:on -XX:+UseAppCDS -XX:SharedArchiveFile=myapp.jsa \
+    -cp myapp.jar MyApp
+```
+
+可以看到，如上示例共有三个步骤：第一步负责确定要存档的类，使用 `-XX:DumpLoadedClassList` 参数指定了要生成的共享类列表文件；第二步负责创建共享存档文件，使用 `-XX:SharedClassListFile` 参数指定了前一步生成的共享类列表文件，并使用 `-XX:SharedArchiveFile` 参数指定了要生成的共享存档文件；第三步负责使用存档文件，在应用程序启动时，使用 `-XX:SharedArchiveFile` 参数指定了前一步生成的共享归档文件，这样 JVM 将加载归档文件中预定义的类数据，而不需要重新解析和加载相同的类文件，加速了应用程序的启动过程并减少内存占用。
+
 > 参考资料
 >
-> [1] Consolidated JDK 10 Release Notes - [https://www.oracle.com/java/technologies/javase/10all-relnotes.html](https://www.oracle.com/java/technologies/javase/10all-relnotes.html)
+> [1] Oracle: Consolidated JDK 10 Release Notes - [https://www.oracle.com/java/technologies/javase/10all-relnotes.html](https://www.oracle.com/java/technologies/javase/10all-relnotes.html)
 >
-> [2] Java SE 10 (18.3) (JSR 383) Final Release Specification - [https://cr.openjdk.org/~iris/se/10/latestSpec/](https://cr.openjdk.org/~iris/se/10/latestSpec/)
+> [2] OpenJDK: JDK 10 - [https://openjdk.org/projects/jdk/10/](https://openjdk.org/projects/jdk/10/)
 >
-> [3] JEP 286: Local-Variable Type Inference - [https://openjdk.org/jeps/286](https://openjdk.org/jeps/286)
+> [3] OpenJDK: Java SE 10 (18.3) (JSR 383) Final Release Specification - [https://cr.openjdk.org/~iris/se/10/latestSpec/](https://cr.openjdk.org/~iris/se/10/latestSpec/)
 >
-> [4] 掘金：一口气读完 Java 8 ~ Java 21 所有新特性 - [https://juejin.cn/post/7315730050577006592](https://juejin.cn/post/7315730050577006592)
+> [4] OpenJDK: JEP 286: Local-Variable Type Inference - [https://openjdk.org/jeps/286](https://openjdk.org/jeps/286)
 >
-> [5] 掘金：JDK 8 - JDK 17 新特性总结 - [https://juejin.cn/post/7250734439709048869](https://juejin.cn/post/7250734439709048869)
+> [5] 掘金：一口气读完 Java 8 ~ Java 21 所有新特性 - [https://juejin.cn/post/7315730050577006592](https://juejin.cn/post/7315730050577006592)
+>
+> [6] 掘金：JDK 8 - JDK 17 新特性总结 - [https://juejin.cn/post/7250734439709048869](https://juejin.cn/post/7250734439709048869)
