@@ -92,6 +92,12 @@ java -Xshare:on -XX:+UseAppCDS -XX:SharedArchiveFile=myapp.jsa \
 
 可以看到，如上示例共有三个步骤：第一步负责确定要存档的类，使用 `-XX:DumpLoadedClassList` 参数指定了要生成的共享类列表文件；第二步负责创建共享存档文件，使用 `-XX:SharedClassListFile` 参数指定了前一步生成的共享类列表文件，并使用 `-XX:SharedArchiveFile` 参数指定了要生成的共享存档文件；第三步负责使用存档文件，在应用程序启动时，使用 `-XX:SharedArchiveFile` 参数指定了前一步生成的共享归档文件，这样 JVM 将加载归档文件中预定义的类数据，而不需要重新解析和加载相同的类文件，加速了应用程序的启动过程并减少内存占用。
 
+## 3 JDK 仓库由多个合并为了一个
+
+Java 10 将原先分散管理的多个 Mercurial JDK 源码仓库合并为了一个 Git 仓库，并托管在了 GitHub 上。在此之前，每个主要的 JDK 组件（如 HotSpot、JDK、jaxp 等）都拥有一个单独的 Mercurial 仓库。这样要做一个整体更新时，非常的不方便，需要针对各个仓库做出修改。而合并后的 Git 仓库在人员协作方面、管理方面就方便多了。
+
+此外，这也为社区开发人员提交 Bug、贡献 PR、参与讨论提供了方便。JDK 库的合并是 JDK 10 中一个重要的基础设施变更，对于 JDK 的开发者和维护者来说具有重要的影响，为未来 JDK 的高效发布提供了基础。
+
 > 参考资料
 >
 > [1] Oracle: Consolidated JDK 10 Release Notes - [https://www.oracle.com/java/technologies/javase/10all-relnotes.html](https://www.oracle.com/java/technologies/javase/10all-relnotes.html)
