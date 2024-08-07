@@ -98,6 +98,12 @@ Java 10 将原先分散管理的多个 Mercurial JDK 源码仓库合并为了一
 
 此外，这也为社区开发人员提交 Bug、贡献 PR、参与讨论提供了方便。不可否认，这是一个重要的基础设施变更，对于 JDK 的开发者和维护者来说具有重要的影响，也为未来 JDK 的高效发布提供了基础。
 
+## 4 更清晰的垃圾收集器接口
+
+Java 10 以前，虽然每个垃圾收集器的实现都位于 `src/hotspot/share/gc/$NAME` 文件夹下（如：G1 在 `src/hotspot/share/gc/g1` 文件夹下，CMS 在 `src/hotspot/share/gc/cms` 文件夹下等），但垃圾收集器的一些公共部分的实现则散落在 HotSpot 源代码的各个位置。这样，在实现一个新的垃圾收集器时，需要从 HotSpot 代码中找出所有需要修改的位置，而且在构建时，很难排除一个或多个收集器。
+
+Java 10 将这部分进行了梳理，设计了一组更加清晰的垃圾收集器接口，将极大地简化实现新的垃圾收集器的过程（只需要实现一组接口即可），而且在构建时，可以很容易排除一个或多个收集器。
+
 > 参考资料
 >
 > [1] Oracle: Consolidated JDK 10 Release Notes - [https://www.oracle.com/java/technologies/javase/10all-relnotes.html](https://www.oracle.com/java/technologies/javase/10all-relnotes.html)
