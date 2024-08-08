@@ -104,6 +104,14 @@ Java 10 以前，虽然每个垃圾收集器的实现都位于 `src/hotspot/shar
 
 Java 10 将这部分进行了梳理，设计了一组更加清晰的垃圾收集器接口，将极大地简化实现新的垃圾收集器的过程（只需要实现一组接口即可），而且在构建时，可以很容易排除一个或多个收集器。
 
+## 5 G1 Full GC 并行化
+
+Java 9 将 G1 垃圾收集器设置为了默认的垃圾收集器。为了提升垃圾收集器的性能，Java 10 将 G1 垃圾收集器的 Full GC 阶段进行了并行化改造。
+
+我们知道，G1 垃圾收集器是 Java 7 引入的一种垃圾收集器，是传统吞吐量优先垃圾收集器（如并行收集器）的一种替代方案。它的设计目标是在处理大内存堆时相比传统的垃圾收集器具有更好的预测性和更低的停顿时间。
+
+G1 垃圾收集器将堆内存分成多个区域（分年轻代和老年代，年轻代又分为 Eden 区和 Survivor 区），从而可以更加高效地管理内存。虽然 G1 垃圾收集器使用的增量和并发技术减少了多数收集阶段的停顿时间，但对于 Full GC 阶段，仍需要暂停所有应用程序线程，从而造成 Stop-The-World 事件。而 Java 10 将 G1 垃圾收集器的 Full GC 阶段进行并行化改造后，可以有效利用多核处理器的并行处理能力，从而减少停顿时间、提高应用程序的整体性能和响应速度。
+
 > 参考资料
 >
 > [1] Oracle: Consolidated JDK 10 Release Notes - [https://www.oracle.com/java/technologies/javase/10all-relnotes.html](https://www.oracle.com/java/technologies/javase/10all-relnotes.html)
