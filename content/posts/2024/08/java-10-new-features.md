@@ -94,7 +94,7 @@ java -Xshare:on -XX:+UseAppCDS -XX:SharedArchiveFile=myapp.jsa \
     -cp myapp.jar MyApp
 ```
 
-可以看到，如上示例共有三个步骤：第一步负责确定要存档的类，使用 `-XX:DumpLoadedClassList` 参数指定了要生成的共享类列表文件；第二步负责创建共享存档文件，使用 `-XX:SharedClassListFile` 参数指定了前一步生成的共享类列表文件，并使用 `-XX:SharedArchiveFile` 参数指定了要生成的共享存档文件；第三步负责使用存档文件，在应用程序启动时，使用 `-XX:SharedArchiveFile` 参数指定了前一步生成的共享归档文件，这样 JVM 将加载归档文件中预定义的类数据，而不需要重新解析和加载相同的类文件，加速了应用程序的启动过程并减少内存占用。
+可以看到，如上示例共有三个步骤：第一步负责确定要存档的类，使用 `-XX:DumpLoadedClassList` 参数指定了要生成的共享类列表文件；第二步负责创建共享存档文件，使用 `-XX:SharedClassListFile` 参数指定了前一步生成的共享类列表文件，并使用 `-XX:SharedArchiveFile` 参数指定了要生成的共享存档文件；第三步负责使用存档文件，在应用程序启动时，使用 `-XX:SharedArchiveFile` 参数指定了前一步生成的共享存档文件，这样 JVM 将加载存档文件中预定义的类数据，而不需要重新解析和加载相同的类文件，加速了应用程序的启动过程并减少内存占用。
 
 ## 3 JDK 仓库由多个合并为了一个
 
