@@ -198,7 +198,7 @@ public class CollectionsEnhancementsTest {
 }
 ```
 
-如上示例，首先演示了如何根据原 `List`、`Set` 和 `Map`，使用集合的静态 `copyOf` 方法创建一个不可变的 `List`、`Set` 和 `Map`，任何针对不可变集合的修改操作都会抛出 `UnsupportedOperationException` 异常；然后演示了如何将 Stream 转换为一个不可修改的 `List`、`Set` 或 `Map`，针对不可修改集合的任何修改操作都会抛出 `UnsupportedOperationException` 异常。
+如上示例，首先演示了如何基于原 `List`、`Set` 和 `Map`，使用集合的静态 `copyOf` 方法创建一个不可变的 `List`、`Set` 和 `Map`，任何针对不可变集合的修改操作都会抛出 `UnsupportedOperationException` 异常；然后演示了如何将 Stream 转换为一个不可修改的 `List`、`Set` 或 `Map`，针对不可修改集合的任何修改操作都会抛出 `UnsupportedOperationException` 异常。
 
 ## 11 Optional 类添加了 orElseThrow() 方法
 
