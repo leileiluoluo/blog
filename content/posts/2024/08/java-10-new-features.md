@@ -136,6 +136,93 @@ G1 垃圾收集器将堆内存分成多个区域（分年轻代和老年代，�
 
 根证书库（cacerts）中包含了一系列受信任的根证书，用于验证 SSL/TLS 连接和其他安全通信。这些根证书由各种受信任的证书颁发机构（CA，Certificate Authority）签发，包括常见的公共 CA 如 VeriSign、Thawte、DigiCert 等。Java 10 对根证书库进行了更新（位于 JDK 安装目录的 `jre/lib/security/cacerts` 目录下），以反映最新的根证书颁发机构和信任链。我们可以使用 JDK 提供的 `keytool` 工具来执行与根证书库相关的操作，例如查看证书、添加新的根证书、删除根证书等。
 
+## 10 Collections API 增强
+
+Java 10 在 Collections API 添加了新的 `copyOf()` 方法，方便创建不可变集合。`java.util.stream` 包中的 `Collectors` 类添加了新方法 `toUnmodifiableList()`、`toUnmodifiableSet()` 和 `toUnmodifiableMap()`，这些方法允许将 Stream 转换为一个不可修改的集合。
+
+请看一段示例代码：
+
+```java
+// src/main/java/CollectionsEnhancementsTest.java
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class CollectionsEnhancementsTest {
+
+    static class Student {
+        private final String name;
+        private final int age;
+
+        public Student(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+    }
+
+    public static void main(String[] args) {
+        // 根据原 List、Set 和 Map，使用 copyOf 创建一个不可变的 List、Set 和 Map
+        List<String> originalList = new ArrayList<>();
+        List<String> immutableList = List.copyOf(originalList);
+
+        Set<String> originalSet = new HashSet<>();
+        Set<String> immutableSet = Set.copyOf(originalSet);
+
+        Map<String, Integer> originalMap = new HashMap<>();
+        Map<String, Integer> immutableMap = Map.copyOf(originalMap);
+
+        // 转换为不可修改的 List、Set 和 Map
+        List<Integer> unmodifiableList = Stream.of(1, 2, 3)
+                .collect(Collectors.toUnmodifiableList());
+
+        Set<String> unmodifiableSet = Stream.of("Larry", "Jacky", "Alice")
+                .collect(Collectors.toUnmodifiableSet());
+
+        Map<String, Integer> unmodifiableMap = Stream.of(
+                new Student("Larry", 28),
+                new Student("Jacky", 29),
+                new Student("Alice", 19)
+        ).collect(Collectors.toUnmodifiableMap(
+                Student::getName,
+                Student::getAge)
+        );
+    }
+}
+```
+
+如上示例，首先演示了如何根据原 `List`、`Set` 和 `Map`，使用集合的静态 `copyOf` 方法创建一个不可变的 `List`、`Set` 和 `Map`，任何针对不可变集合的修改操作都会抛出 `UnsupportedOperationException` 异常；然后演示了如何将 Stream 转换为一个不可修改的 `List`、`Set` 或 `Map`，针对不可修改集合的任何修改操作都会抛出 `UnsupportedOperationException` 异常。
+
+## 11 Optional 类添加了 orElseThrow() 方法
+
+Java 10 在 `Optional` 类添加了一个新的 `orElseThrow()` 方法，该方法允许我们从 `Optional` 对象中获取值时，如果值不存在，则抛出指定的异常。
+
+请看一段示例代码：
+
+```java
+// src/main/java/OptionalEnhancementsTest.java
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
+public class OptionalEnhancementsTest {
+
+    public static void main(String[] args) {
+        // 使用 orElseThrow() 抛出自定义异常
+        Optional.empty()
+                .orElseThrow(() -> new NoSuchElementException("值不存在"));
+    }
+}
+```
+
+可以看到，`orElseThrow()` 方法为 `Optional` 类增加了一种处理缺失值的方式，使得代码在处理可能为空的情况时更加优雅和安全。
+
 综上，我们速览了 Java 10 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-10-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
