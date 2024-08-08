@@ -132,6 +132,8 @@ G1 垃圾收集器将堆内存分成多个区域（分年轻代和老年代，�
 
 根证书库（cacerts）中包含了一系列受信任的根证书，用于验证 SSL/TLS 连接和其他安全通信。这些根证书由各种受信任的证书颁发机构（CA，Certificate Authority）签发，包括常见的公共 CA 如 VeriSign、Thawte、DigiCert 等。Java 10 对根证书库进行了更新（位于 JDK 安装目录的 `jre/lib/security/cacerts` 目录下），以反映最新的根证书颁发机构和信任链。我们可以使用 JDK 提供的 `keytool` 工具来执行与根证书库相关的操作，例如查看证书、添加新的根证书、删除根证书等。
 
+综上，我们速览了 Java 10 引入的那些主要特性。本文涉及的所有示例代码已提交至 [java-10-new-features-demo](https://github.com/leileiluoluo/java-exercises/tree/main/java-10-new-features-demo/src/main/java)，欢迎关注或 Fork。
+
 > 参考资料
 >
 > [1] Oracle: Consolidated JDK 10 Release Notes - [https://www.oracle.com/java/technologies/javase/10all-relnotes.html](https://www.oracle.com/java/technologies/javase/10all-relnotes.html)
