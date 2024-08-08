@@ -16,6 +16,10 @@ description: 本文重点回顾 Java 10 引入的那些主要特性。
 
 本文重点回顾 Java 10 引入的那些主要特性。
 
+![Java 10 主要新特性脑图](https://leileiluoluo.github.io/static/images/uploads/2024/08/java-10-new-features.svg)
+
+{{% center %}}（Java 10 主要新特性脑图）{{% /center %}}
+
 ## 1 局部变量类型推断
 
 局部变量类型推断是 Java 10 引入的一个重要特性。这个特性使得开发者在声明局部变量时可以使用关键字 `var` 来代替显式地指定变量类型，而局部变量的类型会由编译器自行推断。
