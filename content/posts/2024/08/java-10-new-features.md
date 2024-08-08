@@ -112,6 +112,12 @@ Java 9 将 G1 垃圾收集器设置为了默认的垃圾收集器。为了提升
 
 G1 垃圾收集器将堆内存分成多个区域（分年轻代和老年代，年轻代又分为 Eden 区和 Survivor 区），从而可以更加高效地管理内存。虽然 G1 垃圾收集器使用的增量和并发技术减少了多数收集阶段的停顿时间，但对于 Full GC 阶段，仍需要暂停所有应用程序线程，从而造成 Stop-The-World 事件。而 Java 10 将 G1 垃圾收集器的 Full GC 阶段进行并行化改造后，可以有效利用多核处理器的并行处理能力，从而减少停顿时间、提高应用程序的整体性能。
 
+## 6 线程本地握手
+
+在传统的 Java 虚拟机中，线程之间的协作和通信通常依赖于全局的同步机制（如锁和信号量）。这些机制虽然功能强大，但在某些情况下（尤其是在高并发场景下）会导致性能瓶颈，为了解决这些问题，Java 10 引入了线程本地握手（Thread-Local Handshakes）机制。
+
+线程本地握手允许 Java 虚拟机在线程状态发生变化时，仅对受影响的线程执行局部操作，而无需全局同步。这种操作是通过一种称为「握手」的机制实现的，其基本思想是允许线程在进入或退出关键区域时，通过与 Java 虚拟机发起握手来进行状态变更通知。
+
 > 参考资料
 >
 > [1] Oracle: Consolidated JDK 10 Release Notes - [https://www.oracle.com/java/technologies/javase/10all-relnotes.html](https://www.oracle.com/java/technologies/javase/10all-relnotes.html)
