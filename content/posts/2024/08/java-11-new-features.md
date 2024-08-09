@@ -44,7 +44,7 @@ Java 11 引入了全新的 HTTP 客户端 API（主要有三个类 `HttpClient`�
 
   `HttpURLConnection` 非不可变，也非线程安全。
 
-基于上述几点，Java 11 引入了全新的 HTTP 客户端 API 来替代 `HttpURLConnection`。相比 `HttpURLConnection`，新的 HTTP 客户端 API 具有如下优势：
+基于上述几点，Java 11 引入了全新的 HTTP 客户端 API 来替代 `HttpURLConnection`。相比 `HttpURLConnection`，新的 API 具有如下优势：
 
 - 简洁的 API 设计
 
