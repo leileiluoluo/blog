@@ -273,7 +273,7 @@ public class CollectionEnhancementsTest {
 }
 ```
 
-如上示例，首先使用 Java 1.6 语法，介绍了 `Collection` 既有抽象方法 `Object[] toArray()` 和 `T[] toArray(T[] a)` 的使用；然后使用 Java 11 新语法，介绍了 `Collection` 引入的新方法 `T[] toArray(IntFunction<T[]> generator)` 的使用（传入的 `IntFunction` 参数是一个方法引用 `String[]::new`，其会生成一个与集合大小相同的 `String` 数组。
+如上示例，首先使用 Java 1.6 语法，介绍了 `Collection` 既有抽象方法 `Object[] toArray()` 和 `T[] toArray(T[] a)` 的使用；然后使用 Java 11 新语法，介绍了 `Collection` 引入的新方法 `T[] toArray(IntFunction<T[]> generator)` 的使用（传入的 `IntFunction` 参数是一个方法引用 `String[]::new`，等价于 Lambda 表达式 `(int s) -> new String[s]`，其会生成一个与集合大小相同的 `String` 数组。
 
 综上，我们速览了 Java 11 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-11-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
