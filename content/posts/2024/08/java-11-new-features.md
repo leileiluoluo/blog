@@ -238,7 +238,7 @@ public class LocalVariableSyntax4LambdaParametersTest {
 
 如上示例，首先演示了在 Java 11 Lambda 参数支持局部变量语法之前，分别使用显式参数类型和隐式参数类型编写 Lambda 表达式的写法；然后演示了 Java 11 Lambda 参数支持局部变量语法后，上述两种写法的等价写法；最后演示了 Lambda 表达式局部变量语法与注解结合使用的写法。
 
-## 5 Collection 新增 toArray() 静态方法
+## 5 Collection 新增 toArray() 重载方法
 
 Java 11 在 `Collection` 接口中新增了一个重载版本的 `toArray()` 方法（重载了 `Collection` 接口中既有的 `Object[] toArray()` 和 `T[] toArray(T[] a)` 两个抽象方法），用于将集合转换为数组。其方法签名如下：
 
