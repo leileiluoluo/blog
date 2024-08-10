@@ -202,6 +202,42 @@ public class FilesAPIEnhancementsTest {
 
 如上示例，首先使用 `Files.readString()` 静态方法读取了位于 `resources` 文件夹下 `test.txt` 文件的内容。然后使用 `Files.writeString()` 静态方法将字符串写入了上述文件。
 
+## 4 Lambda 参数的局部变量语法
+
+局部变量类型推断是在 Java 10 引入的特性，使用关键字 `var` 来代替显式地指定变量类型，而变量的类型则由编译器自行推断。但 Java 10 是不支持在 Lambda 参数使用 `var` 的，这在 Java 11 中得到了改进。
+
+关于局部变量类型推断这一特性的详细介绍，请参考本人之前的一篇文章「[Java 10 新特性：局部变量类型推断](https://leileiluoluo.github.io/posts/java-10-new-features.html#1-局部变量类型推断)」。
+
+下面看一个示例：
+
+```java
+// src/main/java/LocalVariableSyntax4LambdaParametersTest.java
+import java.util.function.BiFunction;
+import java.util.function.Function;
+
+public class LocalVariableSyntax4LambdaParametersTest {
+
+    public static @interface NonNull {
+    }
+
+    public static void main(String[] args) {
+        // Java 10：显式类型 Lambda 表达式
+        Function<String, String> toUpperCase = (String s) -> s.toUpperCase();
+
+        // Java 10：隐式类型 Lambda 表达式
+        Function<String, String> toUpperCase2 = s -> s.toUpperCase();
+
+        // Java 11：局部变量语法（var）在隐式类型 Lambda 表达式中的使用
+        Function<String, String> toUpperCase3 = (var s) -> s.toUpperCase();
+
+        // Java 11：局部变量语法与注解结合使用
+        BiFunction<Integer, Integer, Integer> sum = (@NonNull var a, @NonNull var b) -> a + b;
+    }
+}
+```
+
+如上示例，首先演示了在 Java 11 Lambda 参数支持局部变量语法之前，分别使用显式参数类型和隐式参数类型编写 Lambda 表达式的写法；然后演示了 Java 11 Lambda 参数支持局部变量语法后，上述两种写法的等价写法；最后演示了 Lambda 表达式局部变量语法与注解结合使用的写法。
+
 综上，我们速览了 Java 11 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-11-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
