@@ -217,7 +217,7 @@ import java.util.function.Function;
 
 public class LocalVariableSyntax4LambdaParametersTest {
 
-    public static @interface NonNull {
+    public @interface NonNull {
     }
 
     public static void main(String[] args) {
@@ -237,6 +237,43 @@ public class LocalVariableSyntax4LambdaParametersTest {
 ```
 
 如上示例，首先演示了在 Java 11 Lambda 参数支持局部变量语法之前，分别使用显式参数类型和隐式参数类型编写 Lambda 表达式的写法；然后演示了 Java 11 Lambda 参数支持局部变量语法后，上述两种写法的等价写法；最后演示了 Lambda 表达式局部变量语法与注解结合使用的写法。
+
+## 5 Collection 新增 toArray() 静态方法
+
+Java 11 在 `Collection` 接口中新增了一个重载版本的 `toArray()` 方法（重载了 `Collection` 接口中既有的 `Object[] toArray()` 和 `T[] toArray(T[] a)` 两个抽象方法），用于将集合转换为数组。其方法签名如下：
+
+```java
+default <T> T[] toArray(IntFunction<T[]> generator)
+```
+
+其入参 `IntFunction<T[]> generator` 是一个函数接口，用于生成一个具有指定大小的数组。这个函数接受一个整数参数（数组的大小），并返回一个具有指定大小的数组实例。
+
+其返回值 `T[]` 是一个包含集合中所有元素的数组。如果提供的生成器函数返回的数组的大小足够大，那么元素将被放入这个数组中。如果生成器函数返回的数组的大小不足，该方法将创建一个新数组并将元素放入其中。
+
+下面看一个示例：
+
+```java
+// src/main/java/CollectionEnhancementsTest.java
+import java.util.Arrays;
+import java.util.List;
+
+public class CollectionEnhancementsTest {
+
+    public static void main(String[] args) {
+        // Java 1.6：调用 List 的 `Object[] toArray()` 方法
+        Object[] names = Arrays.asList("Larry", "Jacky", "Alice").toArray();
+
+        // Java 1.6：调用 List 的 `T[] toArray(T[] a)` 方法
+        String[] names1 = Arrays.asList("Larry", "Jacky", "Alice").toArray(new String[3]);
+
+        // Java 11：调用 Collection 的 `toArray(IntFunction<T[]> generator)` 方法
+        String[] names2 = List.of("Larry", "Jacky", "Alice")
+                .toArray(String[]::new);
+    }
+}
+```
+
+如上示例，首先使用 Java 1.6 语法，介绍了 `Collection` 既有抽象方法 `Object[] toArray()` 和 `T[] toArray(T[] a)` 的使用；然后使用 Java 11 新语法，介绍了 `Collection` 引入的新版 `toArray()` 方法的使用。
 
 综上，我们速览了 Java 11 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-11-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
