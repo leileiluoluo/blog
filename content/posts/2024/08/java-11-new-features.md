@@ -275,6 +275,31 @@ public class CollectionEnhancementsTest {
 
 如上示例，首先使用 Java 1.6 语法，介绍了 `Collection` 既有抽象方法 `Object[] toArray()` 和 `T[] toArray(T[] a)` 的使用；然后使用 Java 11 新语法，介绍了 `Collection` 引入的新方法 `T[] toArray(IntFunction<T[]> generator)` 的使用（传入的 `IntFunction` 参数是一个方法引用 `String[]::new`，等价于 Lambda 表达式 `(int s) -> new String[s]`，其会生成一个与集合大小相同的 `String` 数组。
 
+## 6 Optional 类增强
+
+`Optional` 类是 Java 8 引入的、用于处理可能为 `null` 对象的包装类，它提供了一种优雅的方法来减少 `NullPointerException` 出现的可能性。关于 `Optional` 类的详细介绍，请参阅本人之前的一篇文章「[Java 8 新特性：Optional 类](https://leileiluoluo.github.io/posts/java-8-new-features.html#3-optional-类)」。
+
+Java 11 对 `Optional` 类进行了增强，在其中新增了一个方法：`isEmpty()`，用于判断 `Optional` 中的对象是否为 `null`，其与 `isPresent()` 方法正好相反。
+
+下面看一个示例：
+
+```java
+// src/main/java/OptionalEnhancementsTest.java
+import java.util.Optional;
+
+public class OptionalEnhancementsTest {
+
+    public static void main(String[] args) {
+        Optional<String> optional = Optional.empty();
+        if (optional.isEmpty()) {
+            System.out.println("Optional is empty");
+        }
+    }
+}
+```
+
+如上示例演示了 `isEmpty()` 方法的使用。
+
 综上，我们速览了 Java 11 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-11-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
