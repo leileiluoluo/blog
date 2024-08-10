@@ -202,6 +202,8 @@ public class FilesAPIEnhancementsTest {
 
 如上示例，首先使用 `Files.readString()` 静态方法读取了位于 `resources` 文件夹下 `test.txt` 文件的内容。然后使用 `Files.writeString()` 静态方法将字符串写入了上述文件。
 
+综上，我们速览了 Java 11 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-11-new-features-demo/src/main/java)，欢迎关注或 Fork。
+
 > 参考资料
 >
 > [1] Oracle: JDK 11 Release Notes, Important Changes, and Information - [https://www.oracle.com/java/technologies/javase/11-relnote-issues.html](https://www.oracle.com/java/technologies/javase/11-relnote-issues.html)
