@@ -109,7 +109,7 @@ public class NewHTTPClientAPITest {
 
 ## 2 String API 增强
 
-Java 11 对 String API 进行了增强，主要新增了以下几个实用方法：
+Java 11 对 String API 进行了增强，主要新增了以下几个实例方法：
 
 - `isBlank()`
 
@@ -161,6 +161,46 @@ public class StringAPIEnhancementsTest {
 ```
 
 可以看到，如上示例分别演示了 `String` 类新实例方法 `isBlank()`、`lines()`、`strip()`、`stripLeading()`、`stripTrailing()`、`repeat()` 的使用。
+
+## 3 Files API 增强
+
+Java 11 对 `Files` API 进行了增强，主要新增了如下几个静态方法：
+
+- `Files.readString()`
+
+  该方法用于读取文本文件的内容，并返回一个 `String`。该方法简化了读取文件内容的操作（以前需要使用 `BufferedReader` 类等方式进行读取，很繁琐），特别是在文件内容较小的情况下。它是 `Files.readAllBytes()` 的一种更高层次的抽象，适用于读取文本文件。
+
+- `writeString()`
+
+  该方法允许直接将字符串写入文件。
+
+下面看一个示例：
+
+```java
+// src/main/java/FilesAPIEnhancementsTest.java
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class FilesAPIEnhancementsTest {
+
+    public static void main(String[] args) throws IOException, URISyntaxException {
+        // readString() 使用
+        URL resource = FilesAPIEnhancementsTest.class.getResource("test.txt");
+        Path path = Paths.get(resource.toURI());
+        System.out.println(Files.readString(path, StandardCharsets.UTF_8)); // Hello, World!
+
+        // writeString() 使用
+        Files.writeString(path, "你好，世界！", StandardCharsets.UTF_8);
+    }
+}
+```
+
+如上示例，首先使用 `Files.readString()` 静态方法读取了位于 `resources` 文件夹下 `test.txt` 文件的内容。然后使用 `Files.writeString()` 静态方法将字符串写入了上述文件。
 
 > 参考资料
 >
