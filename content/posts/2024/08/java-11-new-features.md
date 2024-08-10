@@ -166,7 +166,7 @@ public class StringAPIEnhancementsTest {
 
 Java 11 对 `Files` API 进行了增强，主要新增了如下几个静态方法：
 
-- `Files.readString()`
+- `readString()`
 
   该方法用于读取文本文件的内容，并返回一个 `String`。该方法简化了读取文件内容的操作（以前需要使用 `BufferedReader` 类等方式进行读取，很繁琐），特别是在文件内容较小的情况下。它是 `Files.readAllBytes()` 的一种更高层次的抽象，适用于读取文本文件。
 
