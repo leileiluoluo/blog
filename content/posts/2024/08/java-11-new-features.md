@@ -107,6 +107,61 @@ public class NewHTTPClientAPITest {
 
 如上示例，首先构建了一个 `HttpClient` 对象，指定超时时间为 1 分钟；然后构建了一个 `HttpRequest` 对象，指定了请求的 URI 与请求方法（GET）；然后分别使用同步方式和异步方式发起了请求并打印了响应体。
 
+## 2 String API 增强
+
+Java 11 对 String API 进行了增强，主要新增了以下几个实用方法：
+
+- `isBlank()`
+
+  `isBlank()` 方法用于判断字符串是否是空白字符串，如果是（仅由空格、制表符、换行符等字符组成），则返回 `true`，否则返回 `false`。其比 Java 1.6 引入的 `isEmpty()` 方法更加全面（`isEmpty()` 仅判断字符串长度是否为 0）。
+
+- `lines()`
+
+  `lines()` 方法会将字符串使用行终止符进行分隔，并将结果以 `Stream` 返回。
+
+- `strip()`、`stripLeading()` 和 `stripTrailing()`
+
+  `strip()` 方法会将字符串的首尾空白字符去除，并返回一个新的字符串。与 Java 1.0 引入的 `trim()` 方法仅可以处理 ASCII 空白字符不同的是，`strip()` 方法不仅可以处理 ASCII 空白字符还可以处理 Unicode 空白字符。
+
+  `stripLeading()` 和 `stripTrailing()` 与 `strip()` 相似，不同的是此两者分别用于去除首空白字符和尾空白字符。
+
+- `repeat(int)`
+
+  `repeat(int)` 方法会将字符串重复指定次数，并返回一个新的字符串。
+
+下面看一个示例：
+
+```java
+// src/main/java/StringAPIEnhancementsTest.java
+import java.util.stream.Collectors;
+
+public class StringAPIEnhancementsTest {
+
+    public static void main(String[] args) {
+        // isBlank() 使用：换行符、制表符、半角空格、全角空格等都会被认为是空字符
+        System.out.println(" \n\t ".isBlank());
+
+        // lines() 使用：会将字符串以 \n 或 \r\n 分割为一个 Stream
+        System.out.println("Hello\nWorld!".lines()
+                .collect(Collectors.joining(", "))); // Hello, World!
+
+        // strip() 使用：首尾的换行符、制表符、半角空格、全角空格等都会被处理掉
+        System.out.println("　\n\t\n\r   你好，世界！　".strip()); // "你好世界"
+
+        // stripLeading() 使用：头部的换行符、制表符、半角空格、全角空格等都会被处理掉
+        System.out.println("　\n\t\n\r   你好，世界！　".stripLeading()); // "你好，世界！　"
+
+        // stripTrailing() 使用：尾部的换行符、制表符、半角空格、全角空格等都会被处理掉
+        System.out.println("　\n\t\n\r   你好，世界！　".stripTrailing()); // "　\n\t\n\r   你好，世界！"
+
+        // repeat() 使用：将一个字符串重复两次
+        System.out.println("Hello World!".repeat(2)); // Hello World!Hello World!
+    }
+}
+```
+
+可以看到，如上示例分别演示了 `String` 类新实例方法 `isBlank()`、`lines()`、`strip()`、`stripLeading()`、`stripTrailing()`、`repeat()` 的使用。
+
 > 参考资料
 >
 > [1] Oracle: JDK 11 Release Notes, Important Changes, and Information - [https://www.oracle.com/java/technologies/javase/11-relnote-issues.html](https://www.oracle.com/java/technologies/javase/11-relnote-issues.html)
