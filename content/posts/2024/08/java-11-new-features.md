@@ -479,6 +479,18 @@ Exception in thread "main" java.lang.IllegalAccessException: Class NestBasedAcce
 
 此外，Java 11 还在 `Class` 类新增了几个方法（`getNestHost()`、`getNestMembers()`、`isNestmateOf()`）来获取嵌套关系，对于其使用方式，这里就不再赘述了。
 
+## 8 Epsilon：一个无操作垃圾收集器
+
+Java 11 引入了一个试验性的无操作垃圾收集器 Epsilon。Epsilon 不执行实际的垃圾收集工作，所以它不会回收内存，直至可用 Java 堆耗尽时，即会终止 Java 虚拟机。这个特性使得它非常适用于性能测试、基准测试，以及垃圾收集不是主要关注点的应用场景（如实时应用）。
+
+在启动 Java 应用程序时，添加 `-XX:+UnlockExperimentalVMOptions` 和 `-XX:+UseEpsilonGC` 参数即可解锁实验性选项并启用 Epsilon 垃圾收集器。
+
+```shell
+java -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -jar app.jar
+```
+
+## 9 ZGC：一个可扩展的低延迟垃圾收集器
+
 综上，我们速览了 Java 11 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-11-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
