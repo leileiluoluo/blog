@@ -14,6 +14,12 @@ keywords:
 description: 本文重点回顾 Java 11 引入的那些主要特性。
 ---
 
+本文重点回顾 Java 11 引入的那些主要特性。
+
+![Java 11 主要新特性脑图](https://leileiluoluo.github.io/static/images/uploads/2024/08/java-11-new-features.svg)
+
+{{% center %}}（Java 11 主要新特性脑图）{{% /center %}}
+
 ## 1 全新的 HTTP 客户端 API
 
 Java 11 引入了全新的 HTTP 客户端 API（主要有三个类 `HttpClient`、`HttpRequest` 和 `HttpResponse`），目的是替换现有的 `HttpURLConnection` API。
