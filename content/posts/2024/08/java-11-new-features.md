@@ -535,6 +535,34 @@ java -XX:+FlightRecorder -XX:StartFlightRecording=heap=low -jar app.jar
 
 这样即会在运行时启用低开销的堆分析功能，并将分析数据记录到默认的 JFR 文件中。然后，可以使用 Java Mission Control（JMC）或其它 JFR 分析工具加载和分析生成的 JFR 文件，以获得有关应用程序内存使用的详细信息。
 
+## 12 单文件源码程序的运行
+
+Java 11 引入了一项新功能，称为「运行单文件源代码程序」，允许直接启动单个源代码文件而无需先将其编译为字节码文件。
+
+一个最简单的 Java 源代码文件 `SingleFileSourceCodeProgramsTest.java` 的内容如下：
+
+```java
+// src/main/java/SingleFileSourceCodeProgramsTest.java
+public class SingleFileSourceCodeProgramsTest {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+```
+
+针对该源码文件，在 Java 11 之前，我们需要先使用 `javac` 命令将其编译为 `.class` 文件才能接着使用 `java` 命令来运行：
+
+```shell
+javac SingleFileSourceCodeProgramsTest.java
+java SingleFileSourceCodeProgramsTest
+```
+
+而在 Java 11，直接使用 `java` 命令来运行即可：
+
+```shell
+java SingleFileSourceCodeProgramsTest.java
+```
+
 综上，我们速览了 Java 11 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-11-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
