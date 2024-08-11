@@ -491,6 +491,28 @@ java -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -jar app.jar
 
 ## 9 ZGC：一个可扩展的低延迟垃圾收集器
 
+除了上述 Epsilon 外，Java 11 还引入了另一个试验性的垃圾收集器，称为 ZGC（Z Garbage Collector），是一个 z 只适用于 Linux/x64 平台的可扩展低延迟垃圾收集器。ZGC 特别适用于对延迟敏感的应用程序，如金融服务、高频交易系统、大规模实时数据处理平台等。
+
+ZGC 主要拥有如下特点：
+
+- 低延迟
+
+  ZGC 旨在将垃圾收集的暂停时间控制在 10 毫秒之内。它通过将垃圾收集操作分解为许多小的、可并行的任务来最小化对应用程序的影响，从而实现低延迟。
+
+- 可扩展
+
+  ZGC 的设计考虑了大规模内存的场景。它能够高效地处理包含数百 GB 甚至 TB 级别内存的堆空间。因此，无论堆内存的大小如何，ZGC 都能够保持其性能优势。
+
+- 并行性
+
+  ZGC 使用并行化的处理策略来加速垃圾收集过程。这意味着垃圾收集任务可以在多个处理器核心上并行执行，从而减少总体垃圾收集时间。
+
+在启动 Java 应用程序时，解锁实验性选项并启用 ZGC 的命令如下：
+
+```shell
+java -XX:+UnlockExperimentalVMOptions -XX:+UseZGC -jar app.jar
+```
+
 综上，我们速览了 Java 11 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-11-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
