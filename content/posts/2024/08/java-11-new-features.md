@@ -300,6 +300,144 @@ public class OptionalEnhancementsTest {
 
 如上示例演示了 `isEmpty()` 方法的使用。
 
+## 7 基于嵌套的访问控制
+
+在 Java 中，类和接口可以相互嵌套，这种组合之间可以不受限制的访问彼此，包括访问彼此的构造器函数、字段和方法等（即使设置为 `private` 的，也可以访问）。
+
+在 Java 11 之前，嵌套类会编译为不同的类文件，针对嵌套类中私有成员的访问是编译器通过一种特殊的技术实现的，该技术称为可访问性扩展桥方法。该种技术会在编译时为含有私有成员的目标类生成对应的包私有方法，所以针对私有成员的访问会变成一个个方法调用。而该技术破坏了封装，也增加了 `class` 文件的个数。所以 Java 11 正式对类和接口的嵌套访问控制进行了规范化，允许以更简单、更安全、更透明的方式直接实现访问控制，而无需借助编译器的「特殊操作」。
+
+下面看一段示例代码：
+
+```java
+// src/main/java/NestBasedAccessControlTest.java
+public class NestBasedAccessControlTest {
+    private final int number = 10;
+
+    private void printOuter() {
+        new Inner().printInner();
+    }
+
+    private class Inner {
+        private void printInner() {
+            System.out.println(number);
+        }
+    }
+
+    public static void main(String[] args) {
+        new NestBasedAccessControlTest().printOuter();
+    }
+}
+```
+
+如上代码中，`NestBasedAccessControlTest` 类中的字段 `number` 是私有的，但是可以被 `Inner` 类的方法 `printInner()` 直接访问；`Inner` 类的私有方法 `printInner()` 同样可以被 `NestBasedAccessControlTest` 类的方法 `printOuter()` 直接访问。这种设计是为了更好的实现封装，因为从外部使用者的角度来看，这几个彼此嵌套的类是一体的，所以私有元素也应该是共有的。
+
+下面首先基于 Java 8 对 `NestBasedAccessControlTest.java` 文件进行编译：
+
+```shell
+javac NestBasedAccessControlTest.java
+
+ls -lht
+NestBasedAccessControlTest$1.class
+NestBasedAccessControlTest.class
+NestBasedAccessControlTest$Inner.class
+```
+
+可以看到，基于 Java 8 使用 `javac` 对 `NestBasedAccessControlTest.java` 源文件进行编译后会生成三个单独的 `.class` 文件。
+
+接着，同样基于 Java 8 使用 `javap` 命令对上述步骤生成的 `.class` 文件进行反编译：
+
+```shell
+javap -c NestBasedAccessControlTest.class
+
+Compiled from "NestBasedAccessControlTest.java"
+public class NestBasedAccessControlTest {
+  public NestBasedAccessControlTest();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: bipush        10
+       7: putfield      #2                  // Field number:I
+      10: return
+
+  public static void main(java.lang.String[]);
+    Code:
+       0: new           #6                  // class NestBasedAccessControlTest
+       3: dup
+       4: invokespecial #7                  // Method "<init>":()V
+       7: invokespecial #8                  // Method printOuter:()V
+      10: return
+}
+```
+
+```shell
+javap -c NestBasedAccessControlTest\$Inner.class
+
+Compiled from "NestBasedAccessControlTest.java"
+class NestBasedAccessControlTest$Inner {
+  final NestBasedAccessControlTest this$0;
+
+  NestBasedAccessControlTest$Inner(NestBasedAccessControlTest, NestBasedAccessControlTest$1);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #3                  // Method "<init>":(LNestBasedAccessControlTest;)V
+       5: return
+
+  static void access$100(NestBasedAccessControlTest$Inner);
+    Code:
+       0: aload_0
+       1: invokespecial #2                  // Method printInner:()V
+       4: return
+}
+```
+
+```shell
+javap -c NestBasedAccessControlTest\$1.class
+
+Compiled from "NestBasedAccessControlTest.java"
+class NestBasedAccessControlTest$1 {
+}
+```
+
+可以看到，编辑器为 `NestBasedAccessControlTest` 类私有成员 `number` 创建了一个包私有的「桥」方法 `access$100()` 来供内部类进行访问。
+
+所以，编译器生成的代码类似于下面这样：
+
+```java
+// NestBasedAccessControlTest.java
+public class NestBasedAccessControlTest {
+    private final int number = 10;
+
+    int access$000() {
+        return number;
+    }
+
+    private void printOuter() {
+        new NestBasedAccessControlTest$Inner(this).printInner();
+    }
+
+    public static void main(String[] args) {
+        new NestBasedAccessControlTest().printOuter();
+    }
+}
+
+// NestBasedAccessControlTest$Inner.java
+class NestBasedAccessControlTest$Inner {
+    private final NestBasedAccessControlTest obj;
+
+    NestBasedAccessControlTest$Inner(NestBasedAccessControlTest obj) {
+        this.obj = obj;
+    }
+
+    public void printInner() {
+        System.out.println(obj.access$000());
+    }
+}
+```
+
+而在 Java 11，开始原生支持嵌套类（或接口）的私有成员访问，所以这种特殊的编译器「桥」方法技术也就成为历史了。
+
 综上，我们速览了 Java 11 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-11-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
@@ -310,6 +448,10 @@ public class OptionalEnhancementsTest {
 >
 > [3] OpenJDK: JDK 11 - [https://openjdk.org/projects/jdk/11/](https://openjdk.org/projects/jdk/11/)
 >
-> [4] 掘金：一口气读完 Java 8 ~ Java 21 所有新特性 - [https://juejin.cn/post/7315730050577006592](https://juejin.cn/post/7315730050577006592)
+> [4] Mkyong.com: Java 11 Nest-Based Access Control - [https://mkyong.com/java/java-11-nest-based-access-control/](https://mkyong.com/java/java-11-nest-based-access-control/)
 >
-> [5] 掘金：JDK 8 - JDK 17 新特性总结 - [https://juejin.cn/post/7250734439709048869](https://juejin.cn/post/7250734439709048869)
+> [5] 脚本之家：Java 11 中基于嵌套关系的访问控制优化详解 - [https://www.jb51.net/article/233900.htm](https://www.jb51.net/article/233900.htm)
+>
+> [6] 掘金：一口气读完 Java 8 ~ Java 21 所有新特性 - [https://juejin.cn/post/7315730050577006592](https://juejin.cn/post/7315730050577006592)
+>
+> [7] 掘金：JDK 8 - JDK 17 新特性总结 - [https://juejin.cn/post/7250734439709048869](https://juejin.cn/post/7250734439709048869)
