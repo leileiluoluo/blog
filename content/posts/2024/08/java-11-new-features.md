@@ -438,6 +438,45 @@ class NestBasedAccessControlTest$Inner {
 
 而在 Java 11，开始原生支持嵌套类（或接口）的私有成员访问，所以这种特殊的编译器「桥」方法技术也就成为历史了。
 
+此外，Java 11 从语言特性上直接支持嵌套类（或接口）的私有成员访问后，其语义特性会更加严谨。
+
+比如对最开始的示例代码进行一点改造（将 `printOuter()` 方法对 `Inner` 类私有方法 `printInner()` 的直接调用改为反射调用）：
+
+```java
+// src/main/java/NestBasedAccessControlReflectionTest.java
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+public class NestBasedAccessControlReflectionTest {
+    private final int number = 10;
+
+    private void printOuter() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Inner inner = new Inner();
+        final Method method = Inner.class.getDeclaredMethod("printInner");
+        method.invoke(inner);
+    }
+
+    private class Inner {
+        private void printInner() {
+            System.out.println(number);
+        }
+    }
+
+    public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        new NestBasedAccessControlReflectionTest().printOuter();
+    }
+}
+```
+
+这段代码在 Java 11 之前的环境上跑是会抛异常的：
+
+```text
+Exception in thread "main" java.lang.IllegalAccessException: Class NestBasedAccessControlReflectionTest can not access a member of class NestBasedAccessControlReflectionTest$Inner with modifiers "private"
+...
+```
+
+而在 Java 11，语言层面和编译器层面都是支持嵌套类的私有成员访问的（不管是直接调用还是反射调用），这种奇怪的、语义不一致的行为就不会发生了。
+
 综上，我们速览了 Java 11 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-11-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
