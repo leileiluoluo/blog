@@ -571,6 +571,12 @@ Java 11 引入了一种新的动态类文件常量（Dynamic Class-File Constant
 
 要使用动态常量，编译器和虚拟机需要支持 `invokedynamic` 指令及其相关机制。在类文件中，可以通过`CONSTANT_Dynamic` 条目将动态常量的信息存储到常量池中。
 
+## 14 支持 TLS（传输层安全）1.3
+
+Java 11 引入了对 TLS（Transport Layer Security，传输层安全）1.3 协议的支持。TLS 1.3 旨在取代之前的 TLS 1.2 协议，以提供更高的安全性、更快的连接速度和更简化的协议设计。
+
+TLS 1.3 使用了更强的加密算法，握手过程比 TLS 1.2 更加简化，还拥有更强的隐私保护能力，为 Java 应用程序提供了更强的安全性和更好的性能。
+
 综上，我们速览了 Java 11 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-11-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
