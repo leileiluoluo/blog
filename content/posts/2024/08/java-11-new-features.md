@@ -563,6 +563,14 @@ java SingleFileSourceCodeProgramsTest
 java SingleFileSourceCodeProgramsTest.java
 ```
 
+## 13 动态类文件常量
+
+Java 11 引入了一种新的动态类文件常量（Dynamic Class-File Constants）机制，用于在 Java 类文件中处理动态常量，这可以提高运行时的灵活性和性能。
+
+我们知道，在 Java 虚拟机中，常量池（Constant Pool）是一个用来存储类中常量的表。这些常量包括数字字面量、字符串、类引用等。传统上，Java 的常量池只能包含编译时确定的常量（如：静态字段或常量字符串）。然而，某些情况下，常量的值可能只有在运行时才能确定。Java 11 引入的动态类文件常量机制即是用于处理这些动态常量的。
+
+要使用动态常量，编译器和虚拟机需要支持 `invokedynamic` 指令及其相关机制。在类文件中，可以通过`CONSTANT_Dynamic` 条目将动态常量的信息存储到常量池中。
+
 综上，我们速览了 Java 11 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-11-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
