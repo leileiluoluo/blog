@@ -513,6 +513,16 @@ ZGC 主要拥有如下特点：
 java -XX:+UnlockExperimentalVMOptions -XX:+UseZGC -jar app.jar
 ```
 
+## 10 飞行记录器
+
+Java 11 引入了一个名为「飞行记录器（Java Flight Recorder，JFR）」的功能，它是一个事件记录和分析引擎，用于在运行时收集和分析 Java 应用程序的运行数据。飞行记录器可以捕获各种事件（如：方法调用、垃圾收集、线程活动、I/O 操作等），还可以收集各种度量指标（如：CPU 使用率、内存使用量、线程数量等）。这些事件和度量指标可以用于分析和优化应用程序的性能、诊断问题和进行故障排除等。
+
+在启动 Java 应用程序时，启用飞行记录器功能的命令如下：
+
+```shell
+java -XX:+FlightRecorder -jar app.jar
+```
+
 综上，我们速览了 Java 11 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-11-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
