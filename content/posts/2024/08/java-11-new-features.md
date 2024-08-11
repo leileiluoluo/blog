@@ -477,6 +477,8 @@ Exception in thread "main" java.lang.IllegalAccessException: Class NestBasedAcce
 
 而在 Java 11，语言层面和编译器层面都是支持嵌套类的私有成员访问的（不管是直接调用还是反射调用），这种奇怪的、语义不一致的行为就不会发生了。
 
+此外，Java 11 还在 `Class` 类新增了几个方法（`getNestHost()`、`getNestMembers()`、`isNestmateOf()`）来获取嵌套关系，对于其使用方式，这里就不再赘述了。
+
 综上，我们速览了 Java 11 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-11-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
