@@ -523,6 +523,18 @@ Java 11 引入了一个名为「飞行记录器（Java Flight Recorder，JFR）�
 java -XX:+FlightRecorder -jar app.jar
 ```
 
+## 11 低开销的堆分析
+
+Java 11 引入了一项名为「低开销的堆分析」功能，它允许在应用程序运行时收集堆分析数据，以便更好地理解和调试内存使用情况。传统的堆分析工具通常会对应用程序的内存进行全面的快照，会对应用程序的性能产生较大的开销。而低开销的堆分析功能通过减少采样频率和记录粒度，以及使用一些技术手段来减少开销，从而提供了一种更轻量级的堆分析方法。
+
+要使用低开销的堆分析功能，可以使用如下命令启动 Java 应用程序：
+
+```shell
+java -XX:+FlightRecorder -XX:StartFlightRecording=heap=low -jar app.jar
+```
+
+这样即会在运行时启用低开销的堆分析功能，并将分析数据记录到默认的 JFR 文件中。然后，可以使用 Java Mission Control（JMC）或其它 JFR 分析工具加载和分析生成的 JFR 文件，以获得有关应用程序内存使用的详细信息。
+
 综上，我们速览了 Java 11 引入的那些主要特性。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-11-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
