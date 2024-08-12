@@ -421,7 +421,7 @@ class NestBasedAccessControlTest$1 {
 }
 ```
 
-可以看到，编译器为 `NestBasedAccessControlTest` 类私有成员 `number` 创建了一个包私有的「桥」方法 `access$200()` 和 `access$202()` 来供内部类进行读写。
+可以看到，编译器为 `NestBasedAccessControlTest` 类私有成员 `number` 创建了一个包私有的「桥」方法 `access$200()` 和 `access$202()` 来供内部类进行读写；为 `NestBasedAccessControlTest$Inner` 类私有方法 `printInner()` 创建了另一个「桥」方法 `access$100()` 来供外部包装类访问。
 
 所以，编译器生成的代码类似于下面这样：
 
@@ -440,7 +440,7 @@ public class NestBasedAccessControlTest {
     }
 
     private void printOuter() {
-        new NestBasedAccessControlTest$Inner(this).printInner();
+        NestBasedAccessControlTest$Inner.access$100(new NestBasedAccessControlTest$Inner(this));
     }
 
     public static void main(String[] args) {
@@ -456,7 +456,11 @@ public class NestBasedAccessControlTest$Inner {
         this.obj = obj;
     }
 
-    public void printInner() {
+    static void access$100(NestBasedAccessControlTest$Inner inner) {
+        inner.printInner();
+    }
+
+    private void printInner() {
         NestBasedAccessControlTest.access$202(this.obj, NestBasedAccessControlTest.access$200(this.obj) + 10);
         System.out.println(NestBasedAccessControlTest.access$200(this.obj));
     }
