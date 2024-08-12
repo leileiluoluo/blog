@@ -515,7 +515,7 @@ Exception in thread "main" java.lang.IllegalAccessException: Class NestBasedAcce
 
 Java 11 引入了一个试验性的无操作垃圾收集器 Epsilon。Epsilon 不执行实际的垃圾收集工作，所以它不会回收内存，直至可用 Java 堆耗尽时，即会终止 Java 虚拟机。这个特性使得它非常适用于性能测试、基准测试，以及垃圾收集不是主要关注点的应用场景（如实时应用）。
 
-在启动 Java 应用程序时，添加 `-XX:+UnlockExperimentalVMOptions` 和 `-XX:+UseEpsilonGC` 参数即可解锁实验性选项并启用 Epsilon 垃圾收集器。
+在启动 Java 应用程序时，添加 `-XX:+UnlockExperimentalVMOptions` 和 `-XX:+UseEpsilonGC` 参数即可解锁实验性选项并启用 Epsilon 垃圾收集器：
 
 ```shell
 java -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -jar app.jar
@@ -523,7 +523,7 @@ java -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -jar app.jar
 
 ## 9 ZGC：一个可扩展的低延迟垃圾收集器
 
-除了上述 Epsilon 外，Java 11 还引入了另一个试验性的垃圾收集器，称为 ZGC（Z Garbage Collector），是一个 z 只适用于 Linux/x64 平台的可扩展低延迟垃圾收集器。ZGC 特别适用于对延迟敏感的应用程序，如金融服务、高频交易系统、大规模实时数据处理平台等。
+除了上述 Epsilon 外，Java 11 还引入了另一个试验性的垃圾收集器，称为 ZGC（Z Garbage Collector），是一个只适用于 Linux/x64 平台的可扩展低延迟垃圾收集器。ZGC 特别适用于对延迟敏感的应用程序，如金融服务、高频交易系统、大规模实时数据处理平台等。
 
 ZGC 主要拥有如下特点：
 
