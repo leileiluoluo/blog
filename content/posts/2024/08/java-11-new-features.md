@@ -317,7 +317,7 @@ public class OptionalEnhancementsTest {
 ```java
 // src/main/java/NestBasedAccessControlTest.java
 public class NestBasedAccessControlTest {
-    private final int number = 10;
+    private int number = 10;
 
     private void printOuter() {
         new Inner().printInner();
@@ -325,6 +325,7 @@ public class NestBasedAccessControlTest {
 
     private class Inner {
         private void printInner() {
+            number += 10;
             System.out.println(number);
         }
     }
@@ -360,10 +361,10 @@ public class NestBasedAccessControlTest {
   public NestBasedAccessControlTest();
     Code:
        0: aload_0
-       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       1: invokespecial #2                  // Method java/lang/Object."<init>":()V
        4: aload_0
        5: bipush        10
-       7: putfield      #2                  // Field number:I
+       7: putfield      #1                  // Field number:I
       10: return
 
   public static void main(java.lang.String[]);
@@ -373,6 +374,20 @@ public class NestBasedAccessControlTest {
        4: invokespecial #7                  // Method "<init>":()V
        7: invokespecial #8                  // Method printOuter:()V
       10: return
+
+  static int access$200(NestBasedAccessControlTest);
+    Code:
+       0: aload_0
+       1: getfield      #1                  // Field number:I
+       4: ireturn
+
+  static int access$202(NestBasedAccessControlTest, int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: dup_x1
+       3: putfield      #1                  // Field number:I
+       6: ireturn
 }
 ```
 
@@ -387,13 +402,13 @@ class NestBasedAccessControlTest$Inner {
     Code:
        0: aload_0
        1: aload_1
-       2: invokespecial #3                  // Method "<init>":(LNestBasedAccessControlTest;)V
+       2: invokespecial #2                  // Method "<init>":(LNestBasedAccessControlTest;)V
        5: return
 
   static void access$100(NestBasedAccessControlTest$Inner);
     Code:
        0: aload_0
-       1: invokespecial #2                  // Method printInner:()V
+       1: invokespecial #1                  // Method printInner:()V
        4: return
 }
 ```
@@ -406,17 +421,22 @@ class NestBasedAccessControlTest$1 {
 }
 ```
 
-可以看到，编辑器为 `NestBasedAccessControlTest` 类私有成员 `number` 创建了一个包私有的「桥」方法 `access$100()` 来供内部类进行访问。
+可以看到，编译器为 `NestBasedAccessControlTest` 类私有成员 `number` 创建了一个包私有的「桥」方法 `access$200()` 和 `access$202()` 来供内部类进行读写。
 
 所以，编译器生成的代码类似于下面这样：
 
 ```java
 // NestBasedAccessControlTest.java
 public class NestBasedAccessControlTest {
-    private final int number = 10;
+    private int number = 10;
 
-    int access$000() {
-        return number;
+    static int access$200(NestBasedAccessControlTest obj) {
+        return obj.number;
+    }
+
+    static int access$202(NestBasedAccessControlTest obj, int number) {
+        obj.number = number;
+        return obj.number;
     }
 
     private void printOuter() {
@@ -429,7 +449,7 @@ public class NestBasedAccessControlTest {
 }
 
 // NestBasedAccessControlTest$Inner.java
-class NestBasedAccessControlTest$Inner {
+public class NestBasedAccessControlTest$Inner {
     private final NestBasedAccessControlTest obj;
 
     NestBasedAccessControlTest$Inner(NestBasedAccessControlTest obj) {
@@ -437,7 +457,8 @@ class NestBasedAccessControlTest$Inner {
     }
 
     public void printInner() {
-        System.out.println(obj.access$000());
+        NestBasedAccessControlTest.access$202(this.obj, NestBasedAccessControlTest.access$200(this.obj) + 10);
+        System.out.println(NestBasedAccessControlTest.access$200(this.obj));
     }
 }
 ```
@@ -454,7 +475,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class NestBasedAccessControlReflectionTest {
-    private final int number = 10;
+    private int number = 10;
 
     private void printOuter() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Inner inner = new Inner();
@@ -464,6 +485,7 @@ public class NestBasedAccessControlReflectionTest {
 
     private class Inner {
         private void printInner() {
+            number += 10;
             System.out.println(number);
         }
     }
