@@ -99,6 +99,8 @@ public class SwitchExpressionsTest {
 
 上述代码，想实现一个方法来判断「一周中的一天是工作日还是周末」。针对该需求，分别使用了 Java 7 传统 `switch` 语句、Java 12 `switch` 表达式，以及 Java 12 含块体的 `switch` 表达式来进行实现。可以看到，使用传统 `switch` 语句的实现，一个 `case` 中只能有一个值，实现较繁琐且需要格外注意 `break` 语句的放置；而使用 Java 12 `switch` 表达式的实现，一个 `case` 中可以有多个值，且无需手动添加 `break` 语句，还支持值返回；而最后含块体的 `switch` 表达式说明了 Java 12 `switch` 表达式的箭头符号后还支持编写代码块（需要使用 `yield` 语句来弹出返回值）。
 
+综上，我们速览了 Java 12 引入的主要特性或增强点。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-12-new-features-demo/src/main/java)，欢迎关注或 Fork。
+
 > 参考资料
 >
 > [1] Oracle: JDK 12 Release Notes, Important Changes, and Information - [https://www.oracle.com/java/technologies/javase/12-relnote-issues.html](https://www.oracle.com/java/technologies/javase/12-relnote-issues.html)
