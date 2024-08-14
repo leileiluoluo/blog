@@ -11,7 +11,7 @@ tags:
 keywords:
   - Java 9
   - 新特性
-description: 本文重点回顾 Java 9 引入的那些主要特性。
+description: 本文重点回顾 Java 9 引入的那些主要特性，包括：模块系统、JShell、try-with-resources 特性增强、支持在接口中定义私有方法、集合的实用静态工厂方法、Stream API 增强等。
 ---
 
 本文重点回顾 Java 9 引入的那些新特性。

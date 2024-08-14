@@ -11,7 +11,7 @@ tags:
 keywords:
   - Java 8
   - 新特性
-description: 我们知道 Java 8 是 Java 发布历史上一个里程碑式的版本，哪怕现在 Java 的最新版本已发展到 22，但仍有相当一部分企业在使用 Java 8，可以说 Java 8 是后续 Java 新版本得以快速迭代的基石。本文即重点回顾 Java 8 引入的那些主要特性。
+description: 我们知道 Java 8 是 Java 发布历史上一个里程碑式的版本，哪怕现在 Java 的最新版本已发展到 22，但仍有相当一部分企业在使用 Java 8，可以说 Java 8 是后续 Java 新版本得以快速迭代的基石。本文即重点回顾 Java 8 引入的那些主要特性，包括：Lambda 表达式、新的日期时间 API、Optional 类、支持在接口添加默认方法、Stream API、Base64 工具类等。
 ---
 
 我们知道 Java 8 是 Java 发布历史上一个里程碑式的版本，哪怕现在 Java 的最新版本已发展到 22，但仍有相当一部分企业在使用 Java 8，可以说 Java 8 是后续 Java 新版本得以快速迭代的基石。本文即重点回顾 Java 8 引入的那些主要特性。

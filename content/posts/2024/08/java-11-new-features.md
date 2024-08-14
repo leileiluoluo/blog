@@ -11,7 +11,7 @@ tags:
 keywords:
   - Java 11
   - 新特性
-description: 本文重点回顾 Java 11 引入的那些主要特性。
+description: 本文重点回顾 Java 11 引入的那些主要特性，包括：全新的 HTTP 客户端 API、String API 增强、Files API 增强、Lambda 参数的局部变量语法、Collection 新增 toArray() 重载方法、Optional 类增强、基于嵌套的访问控制等。
 ---
 
 本文重点回顾 Java 11 引入的那些主要特性。
