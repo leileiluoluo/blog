@@ -161,7 +161,7 @@ public class StringAPIEnhancementsTest {
 
 ## 5 Files API 增强
 
-Java 12 对 `Files` API 进行了增强，主要添加了一个静态方法：`long mismatch(Path path, Path path2)`，用于判断两个文件的内容是否不匹配（匹配则返回 -1，不匹配则返回第一个不匹配的字节出现的位置）。
+Java 12 对 `Files` API 进行了增强，主要添加了一个静态方法 `long mismatch(Path path, Path path2)`，用于判断两个文件的内容是否不匹配（匹配则返回 -1，不匹配则返回第一个不匹配的字节出现的位置）。
 
 下面看一段示例代码：
 
@@ -188,6 +188,40 @@ public class FilesAPIEnhancementsTest {
 ```
 
 上述代码，使用 `Files.mismatch(path1, path2)` 方法检查了位于 `resources` 文件夹下的两个文件 `test1.txt` 和 `test2.txt` 的内容是否不一致。
+
+## 6 NumberFormat API 增强
+
+Java 12 对 `NumberFormat` 类进行了增强，主要增加了一个静态方法 `NumberFormat getCompactNumberInstance(Locale locale, NumberFormat.Style formatStyle)`，允许以紧凑的格式（如：1000 紧凑显示为 1K）来显示大数字。
+
+下面看一段示例代码：
+
+```java
+// src/main/java/NumberFormatAPIEnhancementsTest.java
+import java.text.NumberFormat;
+import java.util.Locale;
+
+public class NumberFormatAPIEnhancementsTest {
+
+    public static void main(String[] args) {
+        // 数字紧凑显示（美国，长样式）
+        NumberFormat usCompactFormatLong = NumberFormat.getCompactNumberInstance(Locale.US, NumberFormat.Style.LONG);
+        System.out.println(usCompactFormatLong.format(10000)); // 10 thousand
+        System.out.println(usCompactFormatLong.format(10000000)); // 10 million
+
+        // 数字紧凑显示（美国，短样式）
+        NumberFormat usCompactFormatShort = NumberFormat.getCompactNumberInstance(Locale.US, NumberFormat.Style.SHORT);
+        System.out.println(usCompactFormatShort.format(10000)); // 10K
+        System.out.println(usCompactFormatShort.format(10000000)); // 10M
+
+        // 数字紧凑显示（中国，短样式）
+        NumberFormat cnCompactFormat = NumberFormat.getCompactNumberInstance(Locale.CHINA, NumberFormat.Style.SHORT);
+        System.out.println(cnCompactFormat.format(10000)); // 1万
+        System.out.println(cnCompactFormat.format(10000000)); // 1000万
+    }
+}
+```
+
+上述示例，分别以美国（长样式）、美国（短样式）和中国（短样式）的方式演示了大数字的紧凑格式化显示。
 
 综上，我们速览了 Java 12 引入的主要特性或增强点。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-12-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
