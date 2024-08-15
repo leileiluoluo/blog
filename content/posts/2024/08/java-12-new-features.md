@@ -100,7 +100,7 @@ public class SwitchExpressionsTest {
 
 上述代码，想实现一个方法来判断「一周中的一天是工作日还是周末」。针对该需求，分别使用了 Java 7 传统 `switch` 语句、Java 12 `switch` 表达式，以及 Java 12 含块体的 `switch` 表达式来进行实现。可以看到，使用传统 `switch` 语句的实现，一个 `case` 中只能有一个值，实现较繁琐且需要格外注意 `break` 语句的放置；而使用 Java 12 `switch` 表达式的实现，一个 `case` 中可以有多个值，且无需手动添加 `break` 语句，还支持值返回；而最后含块体的 `switch` 表达式说明了 Java 12 `switch` 表达式的箭头符号后还支持编写代码块（需要使用 `yield` 语句来弹出返回值）。
 
-## 2 Shenandoah：一个短暂停时间的垃圾收集器
+## 2 Shenandoah：一个可以缩短暂停时间的垃圾收集器
 
 传统的垃圾收集器（如 Parallel GC 和 CMS）在处理大规模堆时会经历较长的暂停时间，这对于需要响应快和延迟低的应用程序来说是一个问题。
 
