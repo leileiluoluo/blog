@@ -120,7 +120,7 @@ Java 虚拟机（Java Virtual Machine，JVM）常量池包含了许多常量，�
 
 ## 4 String API 增强
 
-Java 12 对 String API 进行了增强，主要添加了如下 4 个方法：
+Java 12 对 `String` API 进行了增强，主要添加了如下 4 个方法：
 
 - `indent(int n)`
 
@@ -158,6 +158,36 @@ public class StringAPIEnhancementsTest {
     }
 }
 ```
+
+## 5 Files API 增强
+
+Java 12 对 `Files` API 进行了增强，主要添加了一个静态方法：`long mismatch(Path path, Path path2)`，用于判断两个文件的内容是否不匹配（匹配则返回 -1，不匹配则返回第一个不匹配的字节出现的位置）。
+
+下面看一段示例代码：
+
+```java
+// src/main/java/FilesAPIEnhancementsTest.java
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class FilesAPIEnhancementsTest {
+
+    public static void main(String[] args) throws IOException, URISyntaxException {
+        URL resource1 = FilesAPIEnhancementsTest.class.getResource("test1.txt");
+        URL resource2 = FilesAPIEnhancementsTest.class.getResource("test2.txt");
+
+        Path path1 = Paths.get(resource1.toURI());
+        Path path2 = Paths.get(resource2.toURI());
+        System.out.println(Files.mismatch(path1, path2));
+    }
+}
+```
+
+上述代码，使用 `Files.mismatch(path1, path2)` 方法检查了位于 `resources` 文件夹下的两个文件 `test1.txt` 和 `test2.txt` 的内容是否不一致。
 
 综上，我们速览了 Java 12 引入的主要特性或增强点。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-12-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
