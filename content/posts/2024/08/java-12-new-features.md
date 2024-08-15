@@ -112,6 +112,12 @@ Java 12 引入了一个新的试验性的垃圾收集器 Shenandoah，其通过�
 java -XX:+UnlockExperimentalVMOptions -XX:+UseShenandoahGC -jar app.jar
 ```
 
+## 3 JVM 常量 API
+
+Java 虚拟机（Java Virtual Machine，JVM）常量池包含了许多常量，如字符串、类、字段、方法等。传统上，访问这些常量需要依赖底层的字节码操作，这种方式不仅繁琐而且容易出错。Java 12 引入了专门的常量 API（位于 `java.lang.constant` 包下），使得对常量池的访问更加直观且类型安全。
+
+但该 API 主要是给底层 Java 开发者使用的（如：字节码生成或解析工具、反射工具开发者），大多数应用层 Java 开发者在日常工作中用不到这些 API。
+
 综上，我们速览了 Java 12 引入的主要特性或增强点。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-12-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
