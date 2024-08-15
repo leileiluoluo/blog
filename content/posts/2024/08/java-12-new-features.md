@@ -118,6 +118,46 @@ Java 虚拟机（Java Virtual Machine，JVM）常量池包含了许多常量，�
 
 但该 API 主要是给底层 Java 开发者使用的（如：字节码生成或解析工具、反射工具开发者），大多数应用层 Java 开发者在日常工作中用不到这些 API。
 
+## 4 String API 增强
+
+Java 12 对 String API 进行了增强，主要添加了如下 4 个方法：
+
+- `indent(int n)`
+
+  该方法用于调整字符串中每一行的缩进。如果 `n` 是正数，它会在每行前面添加相应数量的空格；如果 `n` 是负数，则减少相应数量的空格（若有空格的话）。
+
+- `transform(Function<? super String, ? extends R> f)`
+
+  该方法接受一个函数作为参数，对字符串进行转换，并返回转换的结果。
+
+- `describeConstable()` 和 `resolveConstantDesc(MethodHandles.Lookup lookup)`
+
+  此两个方法主要用于支持上述「JVM 常量 API」，表示字符串可以作为常量描述。比较底层，日常编码不常用。
+
+下面看一下这几个方法的使用：
+
+```java
+import java.lang.constant.ConstantDesc;
+import java.lang.invoke.MethodHandles;
+
+public class StringAPIEnhancementsTest {
+
+    public static void main(String[] args) {
+        // indent() 方法使用
+        System.out.println("Hello, World!".indent(4)); // "    Hello, World!"
+
+        // transform() 方法使用
+        String after = "Hello, World!".transform(String::toUpperCase)
+                .transform(str -> new StringBuffer(str).reverse().toString());
+        System.out.println(after); // "!DLROW ,OLLEH"
+
+        // resolveConstantDesc() 方法使用
+        ConstantDesc constantDesc = "Hello, World!".resolveConstantDesc(MethodHandles.lookup());
+        System.out.println(constantDesc); // "Hello, World!"
+    }
+}
+```
+
 综上，我们速览了 Java 12 引入的主要特性或增强点。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-12-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
