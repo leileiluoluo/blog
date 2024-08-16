@@ -261,6 +261,10 @@ public class CollectorsAPIEnhancementsTest {
 
 上述代码，首先演示了 Java 12 之前，如何使用 Stream 结合 `Collectors` 来分别计算 `List<Integer>` 中元素的最大值和平均值；然后演示了 Java 12 引入 `Collectors.teeing()` 方法后，如何同时计算 `List<Integer>` 中元素的最大值和平均值。
 
+## 8 默认的类数据共享存档
+
+我们在前文「[Java 10 新特性：应用程序类数据共享](https://leileiluoluo.github.io/posts/java-10-new-features.html#2-应用程序类数据共享)」部分了解到类数据共享技术可以将类数据存储在共享存档文件中，这样在启动程序时可以将该文件直接进行内存映射，从而加速程序的启动过程。但在 Java 12 之前，创建共享存档文件的步骤是需要我们使用 `-Xshare:dump` 命令来手动进行的。而在 Java 12，Java 虚拟机会默认生成包含基础类的数据共享存档，并在启动时自动加载这些存档，从而省去了开发者手动创建存档文件的过程。
+
 综上，我们速览了 Java 12 引入的主要特性或增强点。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-12-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
