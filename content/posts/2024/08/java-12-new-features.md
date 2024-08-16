@@ -223,6 +223,43 @@ public class NumberFormatAPIEnhancementsTest {
 
 上述示例，分别以美国（长样式）、美国（短样式）和中国（短样式）的方式演示了大数字的紧凑格式化显示。
 
+## 7 Collectors API 增强
+
+Java 12 对 `Collectors` 类进行了增强，主要增加了一个静态方法 `Collector<T, ?, R> teeing(Collector<? super T, ?, R1> downstream1, Collector<? super T, ?, R2> downstream2, BiFunction<? super R1, ? super R2, R> merger)`，允许同时对一个流进行两种不同的收集操作，并将这两种操作的结果合并成一个，其中 `downstream1` 和 `downstream2` 表示两个不同的 `Collector` 实例，`merger` 参数是一个 `BiFunction`，用于合并两个 `Collector` 的结果。该方法非常适合于那些需要对同一个数据集进行多重处理的场景。
+
+下面看一段示例代码：
+
+```java
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class CollectorsAPIEnhancementsTest {
+
+    public static void main(String[] args) {
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+
+        // Java 12 之前，分别计算 List<Integer> 中元素的最大值和平均值
+        Integer minNumber = numbers.stream()
+                .max(Integer::compareTo).get();
+        Double averageNumber = numbers.stream()
+                .collect(Collectors.averagingInt(Integer::intValue));
+        System.out.println("min: " + minNumber + ", avg: " + averageNumber); // min: 6, avg: 3.5
+
+        // Java 12，使用 Collectors.teeing() 同时计算 List<Integer> 中元素的最大值和平均值
+        Map<String, Object> result = numbers.stream().collect(
+                Collectors.teeing(
+                        Collectors.maxBy(Integer::compareTo),
+                        Collectors.averagingInt(Integer::intValue),
+                        (r1, r2) -> Map.of("min", r1.get(), "avg", r2))
+        );
+        System.out.println("min: " + result.get("min") + ", avg: " + result.get("avg")); // min: 6, avg: 3.5
+    }
+}
+```
+
+上述代码，首先演示了 Java 12 之前，如何使用 Stream 结合 `Collectors` 来分别计算 `List<Integer>` 中元素的最大值和平均值；然后演示了 Java 12 引入 `Collectors.teeing()` 方法后，如何同时计算 `List<Integer>` 中元素的最大值和平均值。
+
 综上，我们速览了 Java 12 引入的主要特性或增强点。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-12-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
