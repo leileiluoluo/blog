@@ -230,6 +230,7 @@ Java 12 对 `Collectors` 类进行了增强，主要增加了一个静态方法 
 下面看一段示例代码：
 
 ```java
+// src/main/java/CollectorsAPIEnhancementsTest.java
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
