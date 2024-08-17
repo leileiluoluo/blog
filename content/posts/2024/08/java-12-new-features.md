@@ -11,10 +11,14 @@ tags:
 keywords:
   - Java 12
   - 新特性
-description: 本文重点回顾 Java 12 引入的那些主要特性。
+description: 本文重点回顾 Java 12 引入的那些主要特性，包括：Switch 表达式（预览）、JVM 常量 API、String API 增强、Files API 增强、NumberFormat API 增强、Collectors API 增强等。
 ---
 
 本文重点回顾 Java 12 引入的那些主要特性。
+
+![Java 12 主要新特性脑图](https://leileiluoluo.github.io/static/images/uploads/2024/08/java-12-new-features.svg)
+
+{{% center %}}（Java 12 主要新特性脑图）{{% /center %}}
 
 ## 1 Switch 表达式（预览）
 
@@ -278,6 +282,8 @@ G1 垃圾收集器是一种适用于大内存应用程序的低延迟垃圾收�
 未使用的已提交内存指的是已经向操作系统申请和分配但未被实际使用的内存。传统上，G1 垃圾收集器不会立即将未使用的已提交内存返回给操作系统，这可能导致内存浪费，对按使用量付费的容器环境尤为不利。
 
 Java 12 在 G1 垃圾收集器增加了对未使用内存块的检测、跟踪和管理机制，使得 G1 垃圾收集器可以更快地将未使用的已提交内存返回给操作系统，从而提高内存利用率和系统性能。
+
+## 11 微基准测试套件
 
 综上，我们速览了 Java 12 引入的主要特性或增强点。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-12-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
