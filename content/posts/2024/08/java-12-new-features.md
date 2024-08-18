@@ -285,6 +285,10 @@ Java 12 在 G1 垃圾收集器增加了对未使用内存块的检测、跟踪�
 
 ## 11 微基准测试套件
 
+Java 12 引入了一个基于 JMH（Java Microbenchmark Harness）的微基准测试套件。
+
+微基准测试常用于测量程序中小的代码片段的性能，这在性能优化和调优过程中非常重要。然而，编写和运行有效的微基准测试非常复杂，特别是在 Java 虚拟机上，由于 JIT 编译、垃圾回收等因素，测试结果可能不准确。Java 12 引入的微基准测试套件的目的就是解决这些问题，通过创建一个标准化的微基准测试套件来提高测试的准确性和一致性。
+
 综上，我们速览了 Java 12 引入的主要特性或增强点。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-12-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
