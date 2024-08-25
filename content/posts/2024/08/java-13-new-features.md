@@ -44,6 +44,23 @@ public class TextBlocksTest {
 }
 ```
 
+## 2 动态 CDS 存档
+
+我们知道，CDS（Class Data Sharing，类数据共享）技术可以将类数据存储在共享存档文件中，这样在启动程序时可以将该文件直接进行内存映射，从而加速程序的启动过程。而在前文「[Java 12 新特性：默认的类数据共享存档](https://leileiluoluo.github.io/posts/java-12-new-features.html#8-默认的类数据共享存档)」部分了解到 Java 12 会默认生成包含基础类的 CDS 存档，并在启动时自动加载这些存档，从而省去了开发者手动创建存档文件的过程。
+
+本次的 Java 13 中，引入了一项名为动态 CDS 存档（Dynamic CDS Archiving）的新功能。其允许在应用程序运行时收集和记录正在使用的类和库，并将它们添加到已存在的 CDS 存档中，从而实现动态的类共享。这样，在下次启动应用程序时，可以使用包含动态更新的 CDS 归档，进一步加速应用程序的启动。
+
+动态 CDS 存档功能的使用方式如下：
+
+```shell
+# 第一次启动
+java -XX:ArchiveClassesAtExit=app.jsa -cp app.jar Main
+# 后续启动
+java -XX:SharedArchiveFile=app.jsa -cp app.jar Main
+```
+
+即在第一次启动 Java 应用程序时，指定存档文件的位置，那么程序在结束时即会生成指定的 JSA 存档文件；下次启动该程序时，即可指定存档文件的位置，从而加速启动过程。
+
 可以看到，当我们想表示多行字符串时，在 Java 13 之前，需要使用 `\n` 实现换行，使用 `+` 号对各行进行连接，可读性不佳；而在 Java 13 引入了文本块后，只需将一段文本使用 `"""` 围起来即可，无需换行符，无需字符串连接，且保留了原始文本段落的缩进格式。
 
 综上，我们速览了 Java 13 引入的主要特性或增强点。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-13-new-features-demo/src/main/java)，欢迎关注或 Fork。
