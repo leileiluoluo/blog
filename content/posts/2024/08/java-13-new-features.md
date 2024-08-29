@@ -86,7 +86,7 @@ Java 的 Socket API 最初在 1.0 中引入，虽然长期以来为 Java 应用�
   更新了异常处理机制，使得网络操作中的错误处理更加清晰和一致。
 
 - API 方法的更新
-  
+
   对部分 API 方法进行了调整，增加了对现代网络需求的支持，同时简化了接口的使用方式。
 
 综上，我们速览了 Java 13 引入的主要特性或增强点。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-13-new-features-demo/src/main/java)，欢迎关注或 Fork。
