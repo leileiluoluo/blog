@@ -63,6 +63,10 @@ java -XX:SharedArchiveFile=app.jsa -cp app.jar Main
 
 可以看到，当我们想表示多行字符串时，在 Java 13 之前，需要使用 `\n` 实现换行，使用 `+` 号对各行进行连接，可读性不佳；而在 Java 13 引入了文本块后，只需将一段文本使用 `"""` 围起来即可，无需换行符，无需字符串连接，且保留了原始文本段落的缩进格式。
 
+## 3 ZGC：及时归还未使用的内存（试验）
+
+Java 13 针对 ZGC (Garbage Collector) 新增了一个实验性功能，即「解除未使用的内存」 (Uncommit Unused Memory)。这一功能的目的是在 ZGC 中动态地释放那些已经分配但未被使用的内存，从而优化内存使用效率。具体来说，这个功能可以帮助 Java 虚拟机在内存压力较大时，通过解除已经分配但当前不需要的内存区域来减少实际的物理内存使用。这项功能仍处于实验阶段，未来可能会根据实际应用的反馈进行调整。
+
 综上，我们速览了 Java 13 引入的主要特性或增强点。本文涉及的所有示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/java-13-new-features-demo/src/main/java)，欢迎关注或 Fork。
 
 > 参考资料
