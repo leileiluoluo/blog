@@ -11,10 +11,14 @@ tags:
 keywords:
   - Java 13
   - 新特性
-description: 本文重点回顾 Java 13 引入的那些主要特性。
+description: 本文重点回顾 Java 13 引入的那些主要特性，包括：文本块（预览）、动态 CDS 存档、ZGC：及时归还未使用的内存（试验）、重新实现遗留 Socket API。
 ---
 
 本文重点回顾 Java 13 引入的那些主要特性。
+
+![Java 13 主要新特性脑图](https://leileiluoluo.github.io/static/images/uploads/2024/08/java-13-new-features.svg)
+
+{{% center %}}（Java 13 主要新特性脑图）{{% /center %}}
 
 ## 1 文本块（预览）
 
