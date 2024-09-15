@@ -63,9 +63,9 @@ description: 月初，進行了爲期一週的天津濱海之旅。感覺天津�
 
 {{% center %}}（酒店的早餐）{{% /center %}}
 
-[![在天津喫廣東河粉](https://leileiluoluo.github.io/static/images/uploads/2024/09/tianjin-binhai-travel-12.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/tianjin-binhai-travel-12.jpg)
+[![在天津喫廣東腸粉](https://leileiluoluo.github.io/static/images/uploads/2024/09/tianjin-binhai-travel-12.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/tianjin-binhai-travel-12.jpg)
 
-{{% center %}}（在天津喫廣東河粉）{{% /center %}}
+{{% center %}}（在天津喫廣東腸粉）{{% /center %}}
 
 [![海河觀光遊輪](https://leileiluoluo.github.io/static/images/uploads/2024/09/tianjin-binhai-travel-13.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/tianjin-binhai-travel-13.jpg)
 
