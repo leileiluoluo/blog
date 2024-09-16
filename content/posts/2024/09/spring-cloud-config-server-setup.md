@@ -15,10 +15,10 @@ keywords:
   - 配置服务
   - Config Sevice
   - 搭建
-description: Spring Cloud 配置服务可以用于统一管理微服务的配置。针对在各个微服务分别编写独立的配置文件，统一的配置服务可以大大提升维护配置文件的效率。本文将依次搭建一个 Registry Service（Eureka Server）、Config Service（配置中心）、App Service（应用服务）来演示 Config Service 的作用。
+description: Spring Cloud 配置服务可以用于统一管理微服务的配置。相比于在各个微服务分别编写独立的配置文件，统一的配置服务可以大大提升维护配置文件的效率。
 ---
 
-Spring Cloud 配置服务可以用于统一管理微服务的配置。针对在各个微服务分别编写独立的配置文件，统一的配置服务可以大大提升维护配置文件的效率。
+Spring Cloud 配置服务可以用于统一管理微服务的配置。相比于在各个微服务分别编写独立的配置文件，统一的配置服务可以大大提升维护配置文件的效率。
 
 本文将依次搭建一个 Registry Service（Eureka Server）、Config Service（配置中心）、App Service（应用服务）来演示 Config Service 的作用。
 
@@ -27,6 +27,14 @@ spring-cloud-config-demo
 ├─ registry-service
 ├─ config-service
 └─ app-service
+```
+
+示例工程所使用的 JDK、Maven 与 Spring Boot Starter Parent 的版本如下：
+
+```text
+JDK：BellSoft Liberica JDK 17
+Maven：3.9.2
+Spring Boot Starter Parent：3.3.3
 ```
 
 ## 1 搭建 Registry Service（Eureka Server）
