@@ -253,6 +253,10 @@ public class ConfigApplication {
 
 ## 3 搭建 App Service（应用服务）
 
+最后，我们搭建一个普通的微服务 App Service，来演示如何从 Config Service 配置中心获取配置文件。
+
+`app-service` 的目录结构如下：
+
 ```text
 app-service
 ├─ src/main
@@ -263,6 +267,10 @@ app-service
 │       └─ bootstrap.yml
 └─ pom.xml
 ```
+
+可以看到其是一个最简单的 Spring Boot 工程，需要注意的是其 `resources` 文件夹下没有放置传统的 `application.yml` 配置文件，而是使用了一个 `bootstrap.yml` 配置文件，稍后会介绍该文件的作用。
+
+`app-service` 的依赖如下：
 
 ```xml
 <!-- app-service/pom.xml -->
@@ -289,6 +297,10 @@ app-service
 </dependencies>
 ```
 
+可以看到，该服务除了依赖 Eureka Client 外，还依赖一个 Spring Cloud Starter Config 和 Spring Cloud Starter Bootstrap。
+
+`app-service` 的 `bootstrap.yml` 配置文件内容如下：
+
 ```yaml
 # app-service/src/main/resources/bootstrap.yml
 spring:
@@ -297,6 +309,10 @@ spring:
       name: app-service
       profile: dev
 ```
+
+可以看到，该配置文件指明其需要从配置中心读取 `app-service-dev` 相关的配置。
+
+`app-service` 启动类的代码如下：
 
 ```java
 // app-service/src/main/java/com/example/demo/DemoApplication.java
@@ -330,4 +346,24 @@ public class DemoApplication {
 }
 ```
 
-综上，我们速览了 Spring Cloud 统一配置服务的搭建。本文涉及的三个示例工程已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-cloud-config-demo)，欢迎关注或 Fork。
+可以看到，该启动类上使用了 `@EnableDiscoveryClient` 注解，表示其是一个 Euraka Client。此外，还在其中编写了一个测试 API（`/app-version`），该 API 会读取配置文件中的 `app.version` 信息并返回。
+
+该服务启动后，会打印下面一段日志：
+
+```text
+ConfigServicePropertySourceLocator : Fetching config from server at : http://localhost:8888
+ConfigServicePropertySourceLocator : Located environment: name=app-service, profiles=[dev]
+PropertySourceBootstrapConfiguration : Located property source: [BootstrapPropertySource {name='bootstrapProperties-configClient'}, BootstrapPropertySource {name='bootstrapProperties-https://github.com/leileiluoluo/java-exercises.git/spring-cloud-config-demo/config-service/config/app-service-dev.yml'}]
+
+TomcatWebServer  : Tomcat initialized with port 8081 (http)
+```
+
+表示其从 Registry Service（Eureka Server）获取到了 Config Service（配置中心）的访问地址 `http://localhost:8888`，然后读取到了配置文件 `app-service-dev.yml`，并按照配置文件描述，以 `8081` 端口对外提供服务。
+
+访问其测试 API（`/app-version`），发现正确读取到了 Config Service 中指定的配置信息。
+
+![App Service 测试 API 访问](https://leileiluoluo.github.io/static/images/uploads/2024/09/spring-cloud-config-server-setup-app-service-api.png)
+
+{{% center %}}（App Service 测试 API 访问）{{% /center %}}
+
+综上，我们以依次搭建 Registry Service（Eureka Server）、Config Service（配置中心）、App Service（应用服务）的方式演示了 Config Service 作为统一配置中心的使用。本文涉及的三个示例工程已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-cloud-config-demo)，欢迎关注或 Fork。
