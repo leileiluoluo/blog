@@ -358,7 +358,7 @@ PropertySourceBootstrapConfiguration : Located property source: [BootstrapProper
 TomcatWebServer  : Tomcat initialized with port 8081 (http)
 ```
 
-表示其从 Registry Service（Eureka Server）获取到了 Config Service（配置中心）的访问地址 `http://localhost:8888`，然后读取到了配置文件 `app-service-dev.yml`，并按照配置文件描述，以 `8081` 端口对外提供服务。
+表示其从 Registry Service（Eureka Server）获取到了 Config Service（配置中心）的访问地址 `http://localhost:8888`，然后访问 Config Service 来获取配置文件 `app-service-dev.yml`，并按照配置文件描述，以 `8081` 端口对外提供服务。
 
 访问其测试 API（`/app-version`），发现正确读取到了 Config Service 中指定的配置信息。
 
