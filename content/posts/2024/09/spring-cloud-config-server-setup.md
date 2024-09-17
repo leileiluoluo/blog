@@ -116,13 +116,11 @@ public class RegistryApplication {
 
 可以看到该启动类使用了 `@EnableEurekaServer`，表示其是一个 Eureka Server。
 
-该服务启动后，打开 `http://localhost:8761` 发现注册上来的服务实例个数为 0。
+该服务启动后，打开 `http://localhost:8761` 发现注册上来的服务实例个数为 0。接下来我们会搭建和启动 Config Service 和 App Service，届时再次刷新该页面就会看到有服务实例注册上来了。
 
 ![Registry Service 面板](https://leileiluoluo.github.io/static/images/uploads/2024/09/spring-cloud-config-server-setup-registry-service-console.png)
 
 {{% center %}}（Registry Service 面板）{{% /center %}}
-
-接下来我们搭建并启动一下 Config Service 和 App Service，届时再次刷新该页面就会看到有服务实例注册上来了。
 
 ## 2 搭建 Config Service（配置中心）
 
