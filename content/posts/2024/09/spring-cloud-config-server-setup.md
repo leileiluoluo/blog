@@ -43,6 +43,10 @@ Spring Boot Starter Parent：3.3.3
 
 ## 1 搭建 Registry Service（Eureka Server）
 
+Registry Service 是一个 Eureka Server，即服务注册中心。想使用 Spring Cloud 的服务发现功能，需要将每个微服务都注册到该注册中心，这样各个微服务即可根据名称来获取目标微服务的调用地址。
+
+`registry-service` 的目录接口如下：
+
 ```text
 registry-service
 ├─ src/main
@@ -53,6 +57,10 @@ registry-service
 │       └─ application.yml
 └─ pom.xml
 ```
+
+可以看到其是一个使用 Maven 管理的标准的 Spring Boot 微服务。
+
+`registry-service` 的依赖如下：
 
 ```xml
 <!-- registry-service/pom.xml -->
@@ -68,6 +76,25 @@ registry-service
     </dependency>
 </dependencies>
 ```
+
+最主要的是该服务引用了 Eureka Server 相关的依赖。
+
+`registry-service` 的配置如下：
+
+```yaml
+# registry-service/src/main/resources/application.yml
+server:
+  port: 8761
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+```
+
+可以看到，其使用 `8761` 端口对外提供服务。
+
+`registry-service` 的启动类的代码如下：
 
 ```java
 // registry-service/src/main/java/com/example/demo/RegistryApplication.java
@@ -86,6 +113,16 @@ public class RegistryApplication {
     }
 }
 ```
+
+可以看到该启动类使用了 `@EnableEurekaServer`，表示其是一个 Eureka Server。
+
+该服务启动后，打开 `http://localhost:8761` 发现注册上来的服务实例个数为 0。
+
+![Registry Service 面板](https://leileiluoluo.github.io/static/images/uploads/2024/09/sping-cloud-config-server-setup-registry-service-console.png)
+
+{{% center %}}（Registry Service 面板）{{% /center %}}
+
+接下来我们搭建并启动一下 Config Service 和 App Service，就会看到有服务实例注册上来了。
 
 ## 2 搭建 Config Service（配置中心）
 
