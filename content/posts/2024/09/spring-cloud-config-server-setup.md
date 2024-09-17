@@ -118,13 +118,17 @@ public class RegistryApplication {
 
 该服务启动后，打开 `http://localhost:8761` 发现注册上来的服务实例个数为 0。
 
-![Registry Service 面板](https://leileiluoluo.github.io/static/images/uploads/2024/09/sping-cloud-config-server-setup-registry-service-console.png)
+![Registry Service 面板](https://leileiluoluo.github.io/static/images/uploads/2024/09/spring-cloud-config-server-setup-registry-service-console.png)
 
 {{% center %}}（Registry Service 面板）{{% /center %}}
 
 接下来我们搭建并启动一下 Config Service 和 App Service，就会看到有服务实例注册上来了。
 
 ## 2 搭建 Config Service（配置中心）
+
+接下来搭建本文的主角 Config Service，其是一个使用了 Spring Cloud Config Server 的统一配置中心。
+
+`config-service` 的目录结构如下：
 
 ```text
 config-service
@@ -136,6 +140,10 @@ config-service
 │       └─ application.yml
 └─ pom.xml
 ```
+
+其结构也异常简单，只有三个文件：一个 `pom.xml` 文件、一个 `application.yml` 配置文件，还有一个启动类 `ConfigApplication.java`。
+
+`config-service` 用到的依赖如下：
 
 ```xml
 <!-- config-service/pom.xml -->
@@ -161,6 +169,60 @@ config-service
 </dependencies>
 ```
 
+可以看到，其主要依赖了 Spring Cloud Config Server，此外还依赖了 Eureka Client。
+
+`config-service` 的配置如下：
+
+```yaml
+# config-service/src/main/resources/application.yml
+server:
+  port: 8888
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/leileiluoluo/java-exercises.git
+          default-label: main
+          searchPaths: spring-cloud-config-demo/config-service/config
+eureka:
+  client:
+    server-url:
+      defaultZone: http://localhost:8761/eureka/
+```
+
+可以看到，该服务会使用 `8888` 端口对外提供服务。除了 eureka 相关的配置将其注册到 Registry Service 外；最重要的部分即是 `spring.cloud.config.server` 相关的配置，其指向了公共配置文件所在的仓库、分支和路径（因该仓库是一个公开仓库，所以未指定账号、密码；对于私有仓库，指定账号、密码即可）。
+
+![Config Service 公共配置文件所在仓库](https://leileiluoluo.github.io/static/images/uploads/2024/09/spring-cloud-config-server-setup-config-repo.png)
+
+{{% center %}}（Config Service 公共配置文件所在仓库）{{% /center %}}
+
+该仓库的对应路径下只放置了一个配置文件 `app-service-dev.yml`，其内容如下：
+
+```yaml
+# Repo: github.com/leileiluoluo/java-exercises
+# Branch: main
+# Path: spring-cloud-config-demo/config-service/config/app-service-dev.yml
+server:
+  port: 8081
+spring:
+  application:
+    name: app-service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+app:
+  version: 0.0.1
+```
+
+该配置文件会供后面的 App Service 使用。
+
+`config-service` 启动类的代码如下：
+
 ```java
 // config-service/src/main/java/com/example/demo/ConfigApplication.java
 package com.example.demo;
@@ -181,20 +243,13 @@ public class ConfigApplication {
 }
 ```
 
-```yaml
-server:
-  port: 8081
-spring:
-  application:
-    name: app-service
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+该启动类使用了 `@EnableConfigServer` 注解，表示其是一个配置服务器；此外还使用了 `@EnableDiscoveryClient` 注解，表示其是一个 Eureka Client。
 
-app:
-  version: 0.0.1
-```
+`config-service` 启动后，访问 `http://localhost:8888/app-service-dev.yml` 即可获取到配置文件 `app-service-dev.yml` 的内容。
+
+![Config Service 公共配置文件访问](https://leileiluoluo.github.io/static/images/uploads/2024/09/spring-cloud-config-server-setup-config-file-access.png)
+
+{{% center %}}（Config Service 公共配置文件访问）{{% /center %}}
 
 ## 3 搭建 App Service（应用服务）
 
