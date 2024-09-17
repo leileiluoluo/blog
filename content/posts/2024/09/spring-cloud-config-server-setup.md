@@ -122,7 +122,7 @@ public class RegistryApplication {
 
 {{% center %}}（Registry Service 面板）{{% /center %}}
 
-接下来我们搭建并启动一下 Config Service 和 App Service，就会看到有服务实例注册上来了。
+接下来我们搭建并启动一下 Config Service 和 App Service，届时再次刷新该页面就会看到有服务实例注册上来了。
 
 ## 2 搭建 Config Service（配置中心）
 
