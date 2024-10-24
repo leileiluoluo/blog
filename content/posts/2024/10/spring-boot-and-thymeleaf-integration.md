@@ -34,6 +34,46 @@ Spring Boot：3.3.4
 Thymeleaf：3.1.2.RELEASE
 ```
 
+接下来即分析一下该应用程序的项目结构和关键代码。
+
+## 1 项目结构
+
+```text
+spring-boot-thymeleaf-demo
+├─ src/main
+│  ├─ java
+│  │  └─ com.example.demo
+│  │     ├─ controller
+│  │     │  ├─ BlogController.java
+│  │     │  └─ HomeController.java
+│  │     ├─ service
+│  │     │  └─ BlogService.java
+│  │     │  └─ impl
+│  │     │     └─ BlogServiceImpl.java
+│  │     ├─ model
+│  │     │  └─ Blog.java
+│  │     ├─ util
+│  │     │  ├─ DateUtil.java
+│  │     │  └─ IdGenerator.java
+│  └─ resources
+│     ├─ static
+│     │  └─ css
+│     │     └─ styles.css
+│     └─ templates
+|        ├─ blogs
+│        │  ├─ add.html
+│        │  ├─ blog.html
+│        │  └─ blogs.html
+|        ├─ error
+│        │  └─ 404.html
+|        ├─ home
+│        │  └─ index.html
+|        └─ layout.html
+└─ pom.xml
+```
+
+## 2 关键代码
+
 > 参考资料
 >
 > [1] Tutorial: Using Thymeleaf - [https://www.thymeleaf.org/doc/tutorials/3.1/usingthymeleaf.html](https://www.thymeleaf.org/doc/tutorials/3.1/usingthymeleaf.html)
