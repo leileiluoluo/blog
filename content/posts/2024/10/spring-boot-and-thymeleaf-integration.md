@@ -23,6 +23,15 @@ Thymeleaf 是一个流行的 Java 模板引擎，具有处理 HTML、XML、JavaS
 
 本文将在 Spring Boot 中集成 Thymeleaf 来搭建一个简单的 Web 应用程序，以对 Thymeleaf 相关的知识进行梳理和运用。
 
+本文所使用的 JDK、Maven、Spring Boot 与 Thymeleaf 的版本如下：
+
+```text
+JDK：BellSoft Liberica 17.0.7
+Maven：3.9.2
+Spring Boot：3.3.4
+Thymeleaf：3.1.2.RELEASE
+```
+
 > 参考资料
 >
 > [1] Tutorial: Using Thymeleaf - [https://www.thymeleaf.org/doc/tutorials/3.1/usingthymeleaf.html](https://www.thymeleaf.org/doc/tutorials/3.1/usingthymeleaf.html)
