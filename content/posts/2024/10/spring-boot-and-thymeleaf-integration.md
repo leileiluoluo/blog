@@ -102,7 +102,7 @@ spring-boot-thymeleaf-demo
 </dependencies>
 ```
 
-可以看到，如上依赖中，除了 `spring-boot-starter-web` 为编写 Spring Boot Web 应用程序必备的依赖之外，在 Spring Boot 中集成 Thymeleaf 主要需要引入一个 `spring-boot-starter-thymeleaf` 依赖即可；而 `thymeleaf-layout-dialect` 依赖是为了方便重用模板代码，作布局管理的；`lombok` 依赖则是为了在编写 Java Model 类时可以省去 `Setters` 和 `Getters` 的编写。
+可以看到，如上依赖中，除了 `spring-boot-starter-web` 为编写 Spring Boot Web 应用程序必备的依赖之外，在 Spring Boot 中集成 Thymeleaf 主要需要引入一个 `spring-boot-starter-thymeleaf` 依赖；而 `thymeleaf-layout-dialect` 依赖是为了方便重用模板代码，作布局管理的；`lombok` 依赖则是为了在编写 Java Model 类时可以省去 `Setters` 和 `Getters` 的编写。
 
 ## 2 关键代码
 
