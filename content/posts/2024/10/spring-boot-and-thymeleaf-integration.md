@@ -38,6 +38,8 @@ Thymeleaf：3.1.2.RELEASE
 
 ## 1 项目结构
 
+该 Web 项目使用 Maven 管理，其项目结构如下：
+
 ```text
 spring-boot-thymeleaf-demo
 ├─ src/main
@@ -71,6 +73,8 @@ spring-boot-thymeleaf-demo
 |        └─ layout.html
 └─ pom.xml
 ```
+
+可以看到，根目录下的 `pom.xml` 为 Maven 项目描述文件；Java 代码位于 `src/main/java` 文件夹下的 `com.example.demo` 包下；`src/main/resources` 文件夹下的 `templates` 子文件夹用于放置 Thymeleaf 模板文件，`static` 子文件夹用于放置静态资源（本文仅在这里放置了一个 CSS 文件）。
 
 ## 2 关键代码
 
