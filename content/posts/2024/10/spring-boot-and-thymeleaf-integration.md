@@ -76,7 +76,7 @@ spring-boot-thymeleaf-demo
 
 ## 3 小结
 
-综上，本文以使用 Spring Boot 和 Thymeleaf 来搭建一个博客收集 Web 应用程序为目标，演示了 Thymeleaf 与 Spring Boot 的集成，以及 Thymeleaf 的基础功能。
+综上，本文以使用 Spring Boot 和 Thymeleaf 来搭建一个博客收集 Web 应用程序为目标，演示了 Thymeleaf 与 Spring Boot 的集成，以及 Thymeleaf 的基础功能。总的来说，在 Spring Boot 中集成 Thymeleaf 来编写一个前后端一体的 Web 应用程序是非常便捷的，是一个值得考虑的解决方案。
 
 本文完整示例工程已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-boot-thymeleaf-demo)，欢迎关注或 Fork。
 
