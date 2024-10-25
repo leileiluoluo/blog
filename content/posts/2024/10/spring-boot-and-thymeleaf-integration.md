@@ -305,7 +305,7 @@ public class BlogController {
 
 ![提交博客表单](https://leileiluoluo.github.io/static/images/uploads/2024/10/spring-boot-and-thymeleaf-form.png)
 
-这就是使用 Thymeleaf 处理普通页面和表单页面的方法。
+这就是使用 Thymeleaf 处理普通页面和表单页面的方法。由此衍生出多个页面，做一个功能丰富的应用程序是不无可能的。
 
 ## 3 小结
 
