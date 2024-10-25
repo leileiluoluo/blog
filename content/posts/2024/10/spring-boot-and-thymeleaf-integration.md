@@ -170,7 +170,7 @@ spring-boot-thymeleaf-demo
 </html>
 ```
 
-可以看到，博客列表页使用 `layout:decorate="~{layout::layout}"` 表达式引入了前面定义的公共布局；然后在 `<head>` 标签修改了本页的标题；然后对 `<main>` 部分进行了修改，使用 `th:each="blog : ${blogs}"` 表达式遍历了 `blogs`，并对每个 `blog` 显示其名称且将其链接到博客详情页面 `/blogs/{id}`。
+可以看到，博客列表页使用 `layout:decorate="~{layout::layout}"` 表达式引入了前面定义的公共布局；然后在 `<head>` 标签修改了本页的标题；然后对 `<main>` 部分进行了修改，使用 `th:each="blog : ${blogs}"` 表达式遍历了 `blogs`，并对每个 `blog.deleted` 为 `false` 的 `blog` 显示其名称且将其链接到博客详情页面 `/blogs/{id}`。
 
 对应博客列表与博客详情页面的 `Controller` 部分的代码如下：
 
