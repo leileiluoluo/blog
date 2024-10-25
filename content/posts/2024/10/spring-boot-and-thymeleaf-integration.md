@@ -305,6 +305,8 @@ public class BlogController {
 
 ![提交博客表单](https://leileiluoluo.github.io/static/images/uploads/2024/10/spring-boot-and-thymeleaf-form.png)
 
+这就是使用 Thymeleaf 处理普通页面和表单页面的方法。
+
 ## 3 小结
 
 综上，本文以使用 Spring Boot 和 Thymeleaf 来搭建一个博客收集 Web 应用程序为目标，演示了 Thymeleaf 与 Spring Boot 的集成，以及 Thymeleaf 的基础功能。总的来说，在 Spring Boot 中集成 Thymeleaf 来编写一个前后端一体的 Web 应用程序是非常便捷的，是一个值得考虑的解决方案。
