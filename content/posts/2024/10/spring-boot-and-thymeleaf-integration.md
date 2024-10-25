@@ -76,6 +76,34 @@ spring-boot-thymeleaf-demo
 
 可以看到，根目录下的 `pom.xml` 为 Maven 项目描述文件；Java 代码位于 `src/main/java` 文件夹下的 `com.example.demo` 包下；`src/main/resources` 文件夹下的 `templates` 子文件夹用于放置 Thymeleaf 模板文件，`static` 子文件夹用于放置静态资源（本文仅在这里放置了一个 CSS 文件）。
 
+这里仅列出 `pom.xml` 文件里用到的依赖，并对其进行说明。其它一些关键的模板代码和 Java 代码将在下个部分进行说明。
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>nz.net.ultraq.thymeleaf</groupId>
+        <artifactId>thymeleaf-layout-dialect</artifactId>
+        <version>3.3.0</version>
+    </dependency>
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.34</version>
+        <scope>provided</scope>
+    </dependency>
+</dependencies>
+```
+
+可以看到，如上依赖中，除了 `spring-boot-starter-web` 为编写 Spring Boot Web 应用程序必备的依赖之外，在 Spring Boot 中集成 Thymeleaf 主要需要引入一个 `spring-boot-starter-thymeleaf` 依赖即可；而 `thymeleaf-layout-dialect` 依赖是为了方便重用模板代码，作布局管理的；`lombok` 依赖则是为了在编写 Java Model 类时可以省去 `Setters` 和 `Getters` 的编写。
+
 ## 2 关键代码
 
 ## 3 小结
