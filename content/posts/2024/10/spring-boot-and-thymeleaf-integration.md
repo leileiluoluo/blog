@@ -301,7 +301,7 @@ public class BlogController {
 }
 ```
 
-可以看到，`addBlogForm()` 方法用于显示表单页面；`addBlog()` 方法用于接收从表单提交过来的数据，且其可以使用一个 `Errors errors` 参数来将字段校验的错误信息返回给表单，然后用于显示。由此可以看到 Thymeleaf 对于参数校验错误信息的处理非常便捷。
+可以看到，`addBlogForm()` 方法用于显示表单页面；`addBlog()` 方法用于接收从表单提交过来的数据，且其可以使用一个 `Errors errors` 参数来将字段校验错误信息返回给表单，然后用于显示。由此可以看到，Thymeleaf 对于参数校验错误信息的处理非常便捷。
 
 ![提交博客表单](https://leileiluoluo.github.io/static/images/uploads/2024/10/spring-boot-and-thymeleaf-form.png)
 
