@@ -42,20 +42,20 @@ Layer）和帮手层（Helper Layer）则分别包含了一组定时任务和辅
 
 ## 3 部署架构
 
-博友圈服务的部署即是一个 Java 应用程序的部署。为了保持服务的高可用，应用程序顶层使用了 Nginx 来做反向代理，应用程序底层则需要连接 MariaDB 实例。
+在部署博友圈前端服务时会使用 Webpack 工具将 React 原始项目构建为纯静态文件（JS、HTML 和 CSS），然后放到对应的目录下。
 
-博友圈服务部署架构如下图所示：
+后端启动后是一个通用 Java 程序。
 
-![博友圈服务部署](https://leileiluoluo.github.io/static/images/uploads/2024/04/boyouquan-deployment-architecture.svg#center)
+所以，使用 Nginx 将前后端同时进行反向代理即可对外提供服务，其部署架构如下图所示。
 
-{{% center %}}（博友圈服务部署架构）{{% /center %}}
+![博友圈部署架构](https://leileiluoluo.github.io/static/images/uploads/2024/11/boyouquan-deployment-architecture.svg#center)
+
+{{% center %}}（博友圈部署架构）{{% /center %}}
 
 ## 4 程序设置与运行
 
-关于程序如何在本地设置与运行，请参阅博友圈 GitHub 仓库（[github.com/leileiluoluo/boyouquan](https://github.com/leileiluoluo/boyouquan)）使用说明。
-
-此外，博友圈程序源码已开源，有需求的朋友可以拿去完全自由的使用，而仅需在网站的底部注明「本站使用博友圈（www.boyouquan.com）开源程序创建」即可。
+关于前端程序或后端程序如何在本地设置与运行，请参阅各自的 GitHub README 文件。
 
 ## 5 本文小结
 
-综上，本文介绍了博友圈的建站初衷、主要功能和技术架构。欢迎感兴趣的朋友在 GitHub 添加关注，也真诚欢迎博友们的[加入](https://www.boyouquan.com/blog-requests/add)！
+综上，本文介绍了博友圈 v2 版本的前端架构、后端架构和部署架构。一为知识总结，二供使用博友圈开源程序的同学参考。
