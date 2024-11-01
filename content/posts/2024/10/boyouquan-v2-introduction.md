@@ -23,6 +23,10 @@ description: 博友圈 v2 版本将之前的单体项目进行了前后端分离
 
 ## 1 前端架构
 
+![博友圈前端服务架构](https://leileiluoluo.github.io/static/images/uploads/2024/11/boyouquan-frontend-architecture.svg#center)
+
+{{% center %}}（博友圈前端服务架构）{{% /center %}}
+
 ## 2 后端架构
 
 博友圈后端服务为前端提供 REST API，整体使用了 Spring Boot + MyBatis 框架。其中，Spring Boot 是工程所使用的总框架，其 SpringMVC 模块负责请求处理和依赖注入，MyBatis 模块负责数据库访问。使用的数据库为 MySQL。
