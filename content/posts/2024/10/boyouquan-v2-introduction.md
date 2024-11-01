@@ -8,6 +8,10 @@ categories:
   - 计算机
 tags:
   - 架构设计
+  - React
+  - 前端开发
+  - Spring
+  - Java
 keywords:
   - 博友圈
   - 架构设计
@@ -19,11 +23,13 @@ description: 博友圈 v2 版本将之前的单体项目进行了前后端分离
 
 而本次的 v2 版本（前端：[boyouquan-ui](https://github.com/leileiluoluo/boyouquan-ui/releases/tag/v2.0)，后端：[boyouquan-api](https://github.com/leileiluoluo/boyouquan-api/releases/tag/v2.0)）则将博友圈单体项目进行了前后端分离。前端使用了 React 框架；后端依然使用 Spring Boot + MyBatis 框架，但去除了 Thymeleaf 渲染页面的部分，使得后端变为了一个纯净的 REST API 提供者。
 
+本文即重点介绍一下博友圈 v2 版本的前端、后端技术架构，以及部署架构。
+
 <!--more-->
 
 ## 1 前端架构
 
-博友圈前端使用 React 编写，依赖管理及构建工具为 npm，打包工具为 Webpack。项目结构主要分两层，一个是页面层，一个是组件层。对后台发请求使用的是原生的 `fetch()` 方法。
+博友圈前端使用 React 编写，依赖管理及构建工具为 npm，打包工具为 webpack。项目结构主要分两层，一个是页面层，一个是组件层，此外还有一些常量和工具包等对此两层提供支持。对后台发请求使用的是原生的 `fetch()` 方法。
 
 ![博友圈前端服务架构](https://leileiluoluo.github.io/static/images/uploads/2024/11/boyouquan-frontend-architecture.svg#center)
 
@@ -48,7 +54,7 @@ Layer）和帮手层（Helper Layer）则分别包含了一组定时任务和辅
 
 ## 3 部署架构
 
-在部署博友圈前端服务时会使用 Webpack 工具将 React 原始项目构建为纯静态文件（JS、HTML 和 CSS），然后放到对应的目录下。
+在部署博友圈前端服务时会使用 webpack 工具将 React 原始项目构建为纯静态文件（JS、HTML 和 CSS），然后放到对应的目录下。
 
 后端启动后是一个通用 Java 程序。
 
