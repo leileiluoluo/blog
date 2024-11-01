@@ -23,6 +23,8 @@ description: 博友圈 v2 版本将之前的单体项目进行了前后端分离
 
 ## 1 前端架构
 
+博友圈前端使用 React 编写，依赖管理及构建工具为 npm，打包工具为 Webpack。项目结构主要分两层，一个是页面层，一个是组件层。对后台发请求使用的是原生的 `fetch()` 方法。
+
 ![博友圈前端服务架构](https://leileiluoluo.github.io/static/images/uploads/2024/11/boyouquan-frontend-architecture.svg#center)
 
 {{% center %}}（博友圈前端服务架构）{{% /center %}}
