@@ -16,7 +16,7 @@ keywords:
   - 博友圈
   - 架构设计
   - v2
-description: 博友圈 v2 版本将之前的单体项目进行了前后端分离。前端使用了 React 框架；后端依然使用 Spring Boot + MyBatis 框架，但去除了 Thymeleaf 渲染页面的部分，使得后端变为了一个纯净的 REST API 提供者。
+description: 博友圈 v2 版本将之前的单体项目进行了前后端分离。前端使用了 React 框架；后端依然使用 Spring Boot + MyBatis 框架，但去除了 Thymeleaf 渲染页面的部分，使得后端变为了一个纯净的 REST API 提供者。本文重点介绍博友圈 v2 版本的前端架构、后端架构和部署架构。
 ---
 
 [博友圈](https://www.boyouquan.com) v1 版本（源码：[boyouquan](https://github.com/leileiluoluo/boyouquan-api/releases/tag/v1.10)）是一个集前后端为一体的 Java 应用程序，其使用 Maven 管理，使用了 Spring Boot + Thymeleaf + MyBatis 技术，其中 Thymeleaf 负责页面渲染。
