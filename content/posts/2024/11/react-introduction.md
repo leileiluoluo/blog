@@ -16,7 +16,17 @@ keywords:
 description: React 是由 Facebook 开发的一个用于构建用户界面（UI，User Interface）的前端 JavaScript 库，其专注于视图（View）层，使开发者能够更高效地构建单页应用以及复杂的组件化界面。本文为 React 的初探，会介绍 React 的基础概念与基本功能。
 ---
 
-React 是由 Facebook 开发的一个用于构建用户界面（UI，User Interface）的前端 JavaScript 库，其专注于视图（View）层，使开发者能够更高效地构建单页应用以及复杂的组件化界面。本文为 React 的初探，会介绍 React 的基础概念与基本功能。
+React 是由 Facebook 开发的一个用于构建用户界面（UI，User Interface）的前端 JavaScript 库，其专注于视图（View）层，使开发者能够更高效地构建单页应用以及复杂的组件化界面。本文为 React 的初探，首先会介绍 React 的基础概念，然后会以实例的方式介绍其基本功能。
+
+写作本文时，所用到的 Node.js、NPM 和 React 的版本如下：
+
+```text
+node：v20.17.0
+npm：10.8.2
+react：18.3.1
+```
+
+## 1 准备
 
 > 参考资料
 >
