@@ -26,7 +26,43 @@ npm：10.8.2
 react：18.3.1
 ```
 
-## 1 准备
+## 1 基础概念介绍
+
+React 应用程序是由组件组成的。组件是用户界面的一部分，具有自己的逻辑和外观。组件可以小到一个按钮，也可以大到整个页面。
+
+## 2 动手写一个样例页面
+
+### 2.1 模板工程创建
+
+```shell
+npx create-react-app react-start-demo
+```
+
+### 2.2 工程目录结构
+
+```text
+react-start-demo/
+├── public/
+│   ├── index.html
+│   └── favicon.ico
+├── src/
+│   ├── pages/
+│   │   ├── HomePage.js
+│   │   ├── BlogListPage.js
+│   │   ├── BlogAddPage.js
+│   │   ├── BlogDetailPage.js
+│   │   └── NotFoundPage.js
+│   ├── utils/
+│   │   └── BlogStorageUtil.js
+│   ├── App.js
+│   ├── index.js
+│   └── index.css
+└── package.json
+```
+
+## 3 小结
+
+本文完整示例工程已提交至 [GitHub](https://github.com/leileiluoluo/react-exercises/tree/main/react-start-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
