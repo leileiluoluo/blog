@@ -2,17 +2,11 @@
 title: React 初探
 author: leileiluoluo
 type: post
-date: 2024-11-21T09:00:00+08:00
+date: 2024-11-21T01:00:00.000Z
 url: /posts/react-introduction.html
-categories:
-  - 计算机
-tags:
-  - React
-  - JavaScript
-  - 前端开发
-keywords:
-  - React
-  - 初探
+categories: [计算机]
+tags: [React, JavaScript, 前端开发]
+keywords: [React, 初探]
 description: React 是由 Facebook 开发的一个用于构建用户界面（UI，User Interface）的前端 JavaScript 库，其专注于视图（View）层，使开发者能够更高效地构建单页应用以及复杂的组件化界面。本文为 React 的初探，会介绍 React 的基础概念与基本功能。
 ---
 
@@ -91,16 +85,65 @@ react-start-demo/
 
 ### 2.3 主要代码解析
 
+#### index.html
+
+`public` 文件夹下的 `index.html` 是该 React 工程仅有的一个 `html` 文件。其是一个公用模板文件，定义了 `<head>` 以及 `<body>` 中的头部菜单和底部信息，其它所有页面均是使用 React 来动态更改该模板页面的 DOM（`<div class="container" id="root"></div>`）来实现的。
+
+```html
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <title>博客聚合</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/">首页</a>
+      <a href="/blogs/add">提交博客</a>
+      <a href="/blogs">博客列表</a>
+    </nav>
+  </header>
+
+  <div class="container" id="root"></div>
+
+  <footer>
+    <p>© 2024 博客聚合</p>
+  </footer>
+</body>
+</html>
+```
+
+#### index.js
+
+`index.js` 是该 React 工程的总入口。
+
+```js
+// src/index.js
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+```
+
 ## 3 小结
 
 本文完整示例工程已提交至 [GitHub](https://github.com/leileiluoluo/react-exercises/tree/main/react-start-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
-> [1] React: Quick Start - [https://react.dev/learn](https://react.dev/learn)
+> [1] React: Quick Start - <https://react.dev/learn>
 >
-> [2] React: Installation - [https://react.dev/learn/installation](https://react.dev/learn/installation)
+> [2] React: Installation - <https://react.dev/learn/installation>
 >
-> [3] React: Start a New React Project - [https://react.dev/learn/start-a-new-react-project](https://react.dev/learn/start-a-new-react-project)
+> [3] React: Start a New React Project - <https://react.dev/learn/start-a-new-react-project>
 >
-> [4] React: Add React to an Existing Project - [https://react.dev/learn/add-react-to-an-existing-project](https://react.dev/learn/add-react-to-an-existing-project)
+> [4] React: Add React to an Existing Project - <https://react.dev/learn/add-react-to-an-existing-project>
