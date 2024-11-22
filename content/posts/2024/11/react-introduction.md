@@ -36,7 +36,7 @@ React 应用程序是由组件组成的。组件是用户界面的一部分，�
 
 进行编码前，需要使用如下命令创建出一个仅包含骨架的 React 模板工程。
 
-```shell
+```text
 npx create-react-app react-start-demo
 ```
 
@@ -89,7 +89,7 @@ react-start-demo/
 
 `public` 文件夹下的 `index.html` 是该 React 工程仅有的一个 `html` 文件。其是一个公用模板文件，定义了 `<head>` 以及 `<body>` 中的头部菜单、底部信息以及中间待替换部分，其它所有页面均是使用 React 来动态更改该模板页面的待替换部分（`<div class="container" id="root"></div>`）来实现的。
 
-```html
+```text
 <!-- public/index.html -->
 <!DOCTYPE html>
 <html lang="zh">
@@ -119,7 +119,7 @@ react-start-demo/
 
 `index.js` 是该 React 工程的总入口。
 
-```js
+```text
 // src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -140,7 +140,7 @@ root.render(
 
 `App.js` 为该应用程序的主文件，我们在该文件配置了各个页面的路由规则。
 
-```js
+```text
 // src/App.js
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
@@ -168,7 +168,7 @@ export default function App() {
 
 该应用程序为了简单，未对接后端 API，其数据存储使用的是浏览器的 `localStorage`，并使用一个专门的工具类 `BlogStorageUtil.js` 来提供数组的存取。
 
-```js
+```text
 // src/utils/BlogStorageUtil.js
 export function getAllBlogs() {
     const blogsStr = localStorage.getItem('blogs') || '[]';
@@ -199,7 +199,7 @@ export function getBlogById(id) {
 
 这里在修改页面标题时，用到了一个 `useEffect`，其是 React 中的一个 Hook，主要用于处理副作用（Side Effects）。副作用是指那些不直接影响渲染的操作，比如数据获取、订阅事件、手动修改 DOM、定时器等。
 
-```js
+```text
 // src/pages/HomePage.js
 import { useEffect } from 'react';
 
@@ -218,7 +218,7 @@ export default function HomePage() {
 
 `BlogListPage.js` 对应该应用程序的博客列表页，该组件除了会动态修改页面的标题外，还会调用 `BlogStorageUtil` 的 `getAllBlogs()` 方法获取博客列表并进行渲染。
 
-```js
+```text
 // src/pages/BlogListPage.js
 import { useEffect } from 'react';
 import { getAllBlogs } from '../utils/BlogStorageUtil';
@@ -250,7 +250,7 @@ export default function BlogListPage() {
 
 `BlogDetailPage.js` 对应该应用程序的博客详情页，该组件除了会动态修改页面的标题外，还会调用 `BlogStorageUtil` 的 `getBlogById(id)` 方法获取单个博客信息并进行渲染。
 
-```js
+```text
 // src/pages/BlogDetailPage.js
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -281,7 +281,7 @@ export default function BlogDetailPage() {
 
 注意，这里边除了用到 `useEffect` Hook 外，还用到一个 `useState` Hook。`useState` 是 React 中用于在函数组件中添加状态的 Hook。其允许在函数组件内部声明状态变量，并且可以对该状态变量进行更新。
 
-```js
+```text
 // src/pages/BlogAddPage.js
 import { useEffect, useState } from 'react';
 import { addBlog } from '../utils/BlogStorageUtil';
