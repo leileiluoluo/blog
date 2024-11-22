@@ -193,7 +193,7 @@ export function getBlogById(id) {
 
 接下来，我们重点介绍一下 `src/pages` 文件夹下的页面组件。
 
-##### HomePage.js
+**HomePage.js**
 
 `HomePage.js` 对应该应用程序的首页，其逻辑非常简单，仅是更改默认标题，并在模板文件中的核心区域显示一段话。
 
@@ -214,7 +214,7 @@ export default function HomePage() {
 }
 ```
 
-##### BlogListPage.js
+**BlogListPage.js**
 
 `BlogListPage.js` 对应该应用程序的博客列表页，该组件除了会动态修改页面的标题外，还会调用 `BlogStorageUtil` 的 `getAllBlogs()` 方法获取博客列表并进行渲染。
 
@@ -246,7 +246,7 @@ export default function BlogListPage() {
 }
 ```
 
-##### BlogDetailPage.js
+**BlogDetailPage.js**
 
 `BlogDetailPage.js` 对应该应用程序的博客详情页，该组件除了会动态修改页面的标题外，还会调用 `BlogStorageUtil` 的 `getBlogById(id)` 方法获取单个博客信息并进行渲染。
 
@@ -275,7 +275,7 @@ export default function BlogDetailPage() {
 }
 ```
 
-##### BlogAddPage.js
+**BlogAddPage.js**
 
 `BlogAddPage.js` 对应该应用程序的博客新增页，该组件除了会动态修改页面的标题外，其内有一个 `form` 表单，会监听各个字段的修改。并针对 `form` 提交，有对应的处理函数。处理函数 `handleSubmit()` 会对各个字段的长度进行校验，处理成功会跳转到博客列表页。
 
