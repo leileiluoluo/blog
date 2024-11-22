@@ -367,10 +367,10 @@ export default function BlogAddPage() {
 
 > 参考资料
 >
-> [1] React: Quick Start - <https://react.dev/learn>
+> [1] React: Quick Start - [https://react.dev/learn](https://react.dev/learn)
 >
-> [2] React: Installation - <https://react.dev/learn/installation>
+> [2] React: Installation - [https://react.dev/learn/installation](https://react.dev/learn/installation)
 >
-> [3] React: Start a New React Project - <https://react.dev/learn/start-a-new-react-project>
+> [3] React: Start a New React Project - [https://react.dev/learn/start-a-new-react-project](https://react.dev/learn/start-a-new-react-project)
 >
-> [4] React: Add React to an Existing Project - <https://react.dev/learn/add-react-to-an-existing-project>
+> [4] React: Add React to an Existing Project - [https://react.dev/learn/add-react-to-an-existing-project](https://react.dev/learn/add-react-to-an-existing-project)
