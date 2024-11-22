@@ -34,17 +34,40 @@ React 应用程序是由组件组成的。组件是用户界面的一部分，�
 
 接下来，以实现一个简单的博客收集应用程序为例，演示 React 的基本功能使用。
 
-该博客应用程序拥有首页、博客列表、博客详情、博客提交 5 个页面。实现后的效果如下：
+该博客应用程序拥有首页、博客列表、博客详情、博客提交 4 个页面。实现后的效果如下：
 
 ![博客收集应用程序](https://leileiluoluo.github.io/static/images/uploads/2024/10/spring-boot-and-thymeleaf-demo-app.gif)
 
 ### 2.1 模板工程创建
 
+进行编码前，需要使用如下命令创建出一个仅包含骨架的 React 模板工程。
+
 ```shell
 npx create-react-app react-start-demo
 ```
 
+骨架工程的目录结构如下：
+
+```text
+react-start-demo/
+├── public/
+│   ├── index.html
+│   └── favicon.ico
+├── src/
+│   ├── App.js
+│   ├── App.test.js
+│   ├── index.js
+│   └── index.css
+└── package.json
+```
+
+接下来，我们会对骨架工程进行一些修改，并基于其之上进行添砖加瓦。
+
 ### 2.2 工程目录结构
+
+为了实现该博客应用程序，我们去掉了骨架工程中一些暂时用不到的单元测试文件，然后在 `src` 文件夹下新增了两个文件夹：`pages` 和 `utils`，分别用于放置页面组件和工具类。
+
+修改后的工程目录结构如下：
 
 ```text
 react-start-demo/
@@ -65,6 +88,8 @@ react-start-demo/
 │   └── index.css
 └── package.json
 ```
+
+### 2.3 主要代码解析
 
 ## 3 小结
 

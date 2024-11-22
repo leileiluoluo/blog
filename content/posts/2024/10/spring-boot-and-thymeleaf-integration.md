@@ -21,7 +21,7 @@ description: Thymeleaf 是一个流行的 Java 模板引擎，具有处理 HTML�
 
 Thymeleaf 是一个流行的 Java 模板引擎，具有处理 HTML、XML、JavaScript、CSS 和纯文本的能力。Thymeleaf 可以和 Spring Boot 进行无缝集成，且可以非常容易地对 Java Model 类及其字段进行访问，从而对模板内容进行动态渲染。并且，Thymeleaf 还提供了一组简单有力的表达式来支持循环、条件判断、静态工具类及 Spring Bean 访问等能力。此外，Thymeleaf 还对自定义扩展以及表单提供了很好的支持。
 
-本文将在 Spring Boot 中集成 Thymeleaf 来搭建一个简单的 Web 应用程序，以对 Thymeleaf 相关的知识进行梳理和运用。本文搭建的 Web 应用程序为一个简单的博客收集网站，拥有首页、博客列表、博客详情、博客提交 5 个页面。最后的效果如下：
+本文将在 Spring Boot 中集成 Thymeleaf 来搭建一个简单的 Web 应用程序，以对 Thymeleaf 相关的知识进行梳理和运用。本文搭建的 Web 应用程序为一个简单的博客收集网站，拥有首页、博客列表、博客详情、博客提交 4 个页面。最后的效果如下：
 
 ![博客收集应用程序](https://leileiluoluo.github.io/static/images/uploads/2024/10/spring-boot-and-thymeleaf-demo-app.gif)
 
