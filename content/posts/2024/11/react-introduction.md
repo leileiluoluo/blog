@@ -2,11 +2,17 @@
 title: React 初探
 author: leileiluoluo
 type: post
-date: 2024-11-21T01:00:00.000Z
+date: 2024-11-21T14:00:00+08:00
 url: /posts/react-introduction.html
-categories: [计算机]
-tags: [React, JavaScript, 前端开发]
-keywords: [React, 初探]
+categories:
+  - 计算机
+tags:
+  - React
+  - JavaScript
+  - 前端开发
+keywords:
+  - React
+  - 初探
 description: React 是由 Facebook 开发的一个用于构建用户界面（UI，User Interface）的前端 JavaScript 库，其专注于视图（View）层，使开发者能够更高效地构建单页应用以及复杂的组件化界面。本文为 React 的初探，首先会介绍 React 的主要特性，然后会以实例的方式介绍其基础特性的使用。
 ---
 
