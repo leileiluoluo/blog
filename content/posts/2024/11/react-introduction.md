@@ -22,49 +22,48 @@ React 是由 Facebook 开发的一个用于构建用户界面（UI，User Interf
 
 React 的特性如下：
 
-- 组件化：
+- 组件化
 
   React 将 UI 分解为小的、可重用的组件，每个组件都有自己的状态和渲染逻辑。组件可以嵌套、组合，实现页面结构的复用。
-  可以通过函数式组件和类组件来定义组件，函数式组件更为推荐，因为它们更加简洁且支持钩子（hooks）。
+  可以通过函数式组件和类组件来定义组件，函数式组件更为推荐，因为它们更加简洁且支持钩子（Hooks）。
 
-- 虚拟 DOM：
-  React 使用虚拟 DOM 来提高性能。它首先在内存中创建一个虚拟的 DOM 树，当组件状态或数据变化时，React 会计算虚拟 DOM 和实际 DOM 之间的差异（diffing），然后最小化 DOM 更新。这种方法减少了对实际 DOM 的直接操作，提高了渲染效率，特别是在复杂和频繁更新的界面中。
+- 虚拟 DOM
 
-- 单向数据流：
+  React 使用虚拟 DOM 来提高性能。它首先在内存中创建一个虚拟的 DOM 树，当组件状态或数据变化时，React 会计算虚拟 DOM 和实际 DOM 之间的差异，然后进行最小化 DOM 更新。这种方法减少了对实际 DOM 的直接操作，提高了渲染效率，特别是在复杂和频繁更新的界面中尤为重要。
 
-  React 使用单向数据流，即数据从父组件流向子组件。子组件通过 props 接收数据，不能直接修改父组件的状态。
-  组件内部的数据由状态（state）管理，可以通过事件处理函数更新状态，触发界面的重新渲染。
+- 单向数据流
 
-- JSX 语法：
+  React 使用单向数据流，即数据从父组件流向子组件。子组件通过 props 接收数据，不能直接修改父组件的状态。组件内部的数据有状态（state）管理，可以通过事件处理函数更新状态，触发界面的重新渲染。
 
-  React 使用 JSX（JavaScript XML）来描述 UI 结构。JSX 是一种看起来像 HTML 的语法，它实际是 JavaScript 的语法扩展。JSX 让你在 JavaScript 代码中更直观地编写 UI 结构，同时提供了更强的灵活性和可组合性。
+- JSX 语法
 
-- Hooks（钩子）：
+  React 使用 JSX（JavaScript XML）来描述 UI 结构。JSX 是一种看起来像 HTML 的语法，它实际是 JavaScript 的语法扩展。JSX 可以让我们在 JavaScript 代码中更直观地编写 UI 结构，且具有很好的灵活性和可组合性。
 
-  React 16.8 引入了钩子（hooks），它允许函数组件使用 state、生命周期等功能，避免了类组件中的冗长代码。
-  常用的钩子有 useState、useEffect、useContext、useReducer 等，它们帮助管理状态、执行副作用等。
+- Hooks（钩子）
 
-- Context API：
+  React 16.8 引入了钩子（Hooks），它允许函数组件使用 state、生命周期等功能，避免了类组件代码的冗长。常用的钩子有 `useState`、`useEffect`、`useContext`、`useReducer` 等，它们可以用来帮助管理状态、执行副作用等。
 
-  React 提供了 Context API 用于在组件树中共享状态，而不需要通过 props 层层传递。它特别适合全局状态管理，如主题、用户认证等。
+- Context API
 
-- React Router：
+  React 提供了 Context API，其用于在组件树中共享状态，而不需要通过 props 层层传递。它特别适合全局状态管理，如用户认证等。
 
-  React 没有内置的路由功能，但你可以使用 React Router 来处理 SPA 中的页面导航。它允许你在不刷新页面的情况下，进行页面跳转。
+- React Router
 
-- 服务器端渲染（SSR）和静态生成（SSG）：
+  React 没有内置的路由功能，但我们可以使用 React Router 来处理页面导航。其允许在不刷新页面的情况下，进行页面跳转。
 
-  React 可以与服务器端渲染（如 Next.js）结合，提供更好的 SEO 和加载性能。通过 SSR，React 组件在服务器上预渲染成 HTML，客户端接管时只需绑定事件，避免了闪烁和延迟。
+- 服务器端渲染（SSR）和静态生成（SSG）
 
-- 状态管理：
+  React 可以与服务器端渲染（如 `Next.js`）结合，提供更好的 SEO 和加载性能。通过 SSR，React 组件在服务器上预渲染成 HTML，客户端接管时只需绑定事件，避免了页面闪烁和延迟。
 
-  React 的状态管理可以通过组件的 useState 或 useReducer 来完成，复杂应用可以使用外部库如 Redux、MobX 或 Recoil 来更好地管理全局状态。
+- 状态管理
 
-- 开发者工具：
+  React 的状态管理可以通过组件的 `useState` 或 `useReducer` 来完成，复杂应用可以使用外部库如 `Redux`、`MobX` 或 `Recoil` 来更好地管理全局状态。
 
-  React 提供了强大的开发者工具，如 React DevTools，可以让你调试和优化组件的渲染、查看组件的树形结构和状态。
+- 开发者工具
 
-总的来说，React 提供了一个灵活、高效且易于维护的方式来构建现代 web 应用，具有组件化、虚拟 DOM 和强大的生态支持。
+  React 提供了强大的开发者工具，如 React DevTools，可以让我们调试和优化组件的渲染、查看组件的树形结构和状态等。
+
+总的来说，React 提供了一种灵活、高效且易于维护的方式来构建现代 Web 应用，具有组件化、虚拟 DOM 和强大的生态支持。
 
 ## 2 动手写一个样例应用
 
