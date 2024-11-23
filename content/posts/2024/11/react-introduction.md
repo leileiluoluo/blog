@@ -7,22 +7,58 @@ url: /posts/react-introduction.html
 categories: [计算机]
 tags: [React, JavaScript, 前端开发]
 keywords: [React, 初探]
-description: React 是由 Facebook 开发的一个用于构建用户界面（UI，User Interface）的前端 JavaScript 库，其专注于视图（View）层，使开发者能够更高效地构建单页应用以及复杂的组件化界面。本文为 React 的初探，会介绍 React 的基础概念与基本功能。
+description: React 是由 Facebook 开发的一个用于构建用户界面（UI，User Interface）的前端 JavaScript 库，其专注于视图（View）层，使开发者能够更高效地构建单页应用以及复杂的组件化界面。本文为 React 的初探，首先会介绍 React 的主要特性，然后会以实例的方式介绍其基础特性的使用。
 ---
 
-React 是由 Facebook 开发的一个用于构建用户界面（UI，User Interface）的前端 JavaScript 库，其专注于视图（View）层，使开发者能够更高效地构建单页应用以及复杂的组件化界面。本文为 React 的初探，首先会介绍 React 的基础概念，然后会以实例的方式介绍其基本功能。
+React 是由 Facebook 开发的一个用于构建用户界面（UI，User Interface）的前端 JavaScript 库，其专注于视图（View）层，使开发者能够更高效地构建单页应用以及复杂的组件化界面。本文为 React 的初探，首先会介绍 React 的主要特性，然后会以实例的方式介绍其基础特性的使用。
 
-写作本文时，所用到的 Node.js、NPM 和 React 的版本如下：
+## 1 React 有哪些特性？
 
-```text
-node：v20.17.0
-npm：10.8.2
-react：18.3.1
-```
+React 的特性如下：
 
-## 1 基础概念介绍
+- 组件化：
 
-React 应用程序是由组件组成的。组件是用户界面的一部分，具有自己的逻辑和外观。组件可以小到一个按钮，也可以大到整个页面。
+  React 将 UI 分解为小的、可重用的组件，每个组件都有自己的状态和渲染逻辑。组件可以嵌套、组合，实现页面结构的复用。
+  可以通过函数式组件和类组件来定义组件，函数式组件更为推荐，因为它们更加简洁且支持钩子（hooks）。
+
+- 虚拟 DOM：
+  React 使用虚拟 DOM 来提高性能。它首先在内存中创建一个虚拟的 DOM 树，当组件状态或数据变化时，React 会计算虚拟 DOM 和实际 DOM 之间的差异（diffing），然后最小化 DOM 更新。这种方法减少了对实际 DOM 的直接操作，提高了渲染效率，特别是在复杂和频繁更新的界面中。
+
+- 单向数据流：
+
+  React 使用单向数据流，即数据从父组件流向子组件。子组件通过 props 接收数据，不能直接修改父组件的状态。
+  组件内部的数据由状态（state）管理，可以通过事件处理函数更新状态，触发界面的重新渲染。
+
+- JSX 语法：
+
+  React 使用 JSX（JavaScript XML）来描述 UI 结构。JSX 是一种看起来像 HTML 的语法，它实际是 JavaScript 的语法扩展。JSX 让你在 JavaScript 代码中更直观地编写 UI 结构，同时提供了更强的灵活性和可组合性。
+
+- Hooks（钩子）：
+
+  React 16.8 引入了钩子（hooks），它允许函数组件使用 state、生命周期等功能，避免了类组件中的冗长代码。
+  常用的钩子有 useState、useEffect、useContext、useReducer 等，它们帮助管理状态、执行副作用等。
+
+- Context API：
+
+  React 提供了 Context API 用于在组件树中共享状态，而不需要通过 props 层层传递。它特别适合全局状态管理，如主题、用户认证等。
+
+- React Router：
+
+  React 没有内置的路由功能，但你可以使用 React Router 来处理 SPA 中的页面导航。它允许你在不刷新页面的情况下，进行页面跳转。
+
+- 服务器端渲染（SSR）和静态生成（SSG）：
+
+  React 可以与服务器端渲染（如 Next.js）结合，提供更好的 SEO 和加载性能。通过 SSR，React 组件在服务器上预渲染成 HTML，客户端接管时只需绑定事件，避免了闪烁和延迟。
+
+- 状态管理：
+
+  React 的状态管理可以通过组件的 useState 或 useReducer 来完成，复杂应用可以使用外部库如 Redux、MobX 或 Recoil 来更好地管理全局状态。
+
+- 开发者工具：
+
+  React 提供了强大的开发者工具，如 React DevTools，可以让你调试和优化组件的渲染、查看组件的树形结构和状态。
+
+总的来说，React 提供了一个灵活、高效且易于维护的方式来构建现代 web 应用，具有组件化、虚拟 DOM 和强大的生态支持。
 
 ## 2 动手写一个样例应用
 
@@ -31,6 +67,14 @@ React 应用程序是由组件组成的。组件是用户界面的一部分，�
 该博客应用程序拥有首页、博客列表、博客详情、博客提交 4 个页面。实现后的效果如下：
 
 ![博客收集应用程序](https://leileiluoluo.github.io/static/images/uploads/2024/10/spring-boot-and-thymeleaf-demo-app.gif)
+
+该应用程序所用到的 Node.js、NPM 和 React 的版本如下：
+
+```text
+node：v20.17.0
+npm：10.8.2
+react：18.3.1
+```
 
 ### 2.1 模板工程创建
 
