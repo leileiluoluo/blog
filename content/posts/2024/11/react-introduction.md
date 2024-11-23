@@ -67,7 +67,7 @@ React 的特性如下：
 
 ## 2 动手写一个样例应用
 
-接下来，以实现一个简单的博客收集应用程序为例，演示 React 的基本功能使用。
+接下来，我们以实现一个简单的博客收集应用程序为例，演示 React 基础功能的使用。
 
 该博客应用程序拥有首页、博客列表、博客详情、博客提交 4 个页面。实现后的效果如下：
 
@@ -83,7 +83,7 @@ react：18.3.1
 
 ### 2.1 模板工程创建
 
-进行编码前，需要使用如下命令创建出一个仅包含骨架的 React 模板工程。
+进行编码前，需要使用如下命令创建出一个仅包含项目骨架的 React 模板工程。
 
 ```text
 npx create-react-app react-start-demo
@@ -110,7 +110,7 @@ react-start-demo/
 
 为了实现该博客应用程序，我们去掉了骨架工程中一些暂时用不到的单元测试文件，然后在 `src` 文件夹下新增了两个文件夹：`pages` 和 `utils`，分别用于放置页面组件和工具类。
 
-修改后的工程目录结构如下：
+开发完成后的工程目录结构如下：
 
 ```text
 react-start-demo/
@@ -136,7 +136,7 @@ react-start-demo/
 
 #### 2.3.1 index.html
 
-`public` 文件夹下的 `index.html` 是该 React 工程仅有的一个 `html` 文件。其是一个公用模板文件，定义了 `<head>` 以及 `<body>` 中的头部菜单、底部信息以及中间待替换部分，其它所有页面均是使用 React 来动态更改该模板页面的待替换部分（`<div class="container" id="root"></div>`）来实现的。
+`public` 文件夹下的 `index.html` 是该 React 工程仅有的一个 `html` 文件。其是一个公用模板文件，定义了 `<head>` 以及 `<body>` 中的头部菜单、底部信息以及中间待替换部分，该程序的所有页面均是 React 动态更改该模板页面的待替换部分（`<div class="container" id="root"></div>`）来实现的。
 
 ```text
 <!-- public/index.html -->
@@ -187,7 +187,7 @@ root.render(
 
 #### 2.3.3 App.js
 
-`App.js` 为该应用程序的主文件，我们在该文件配置了各个页面的路由规则。
+`App.js` 为该应用程序的主文件，我们在该文件配置了所有页面的路由规则。
 
 ```text
 // src/App.js
@@ -215,7 +215,7 @@ export default function App() {
 
 #### 2.3.4 Util 文件
 
-该应用程序为了简单，未对接后端 API，其数据存储使用的是浏览器的 `localStorage`，并使用一个专门的工具类 `BlogStorageUtil.js` 来提供数组的存取。
+该应用程序为了简单，未对接后端 API，其数据存储使用的是浏览器的 `localStorage`，并使用一个专门的工具类 `BlogStorageUtil.js` 来提供数据的存取。
 
 ```text
 // src/utils/BlogStorageUtil.js
@@ -240,13 +240,13 @@ export function getBlogById(id) {
 
 #### 2.3.5 页面组件
 
-接下来，我们重点介绍一下 `src/pages` 文件夹下的页面组件。
+接下来，我们重点介绍一下 `src/pages` 文件夹下的各个页面组件。
 
 **HomePage.js**
 
 `HomePage.js` 对应该应用程序的首页，其逻辑非常简单，仅是更改默认标题，并在模板文件中的核心区域显示一段话。
 
-这里在修改页面标题时，用到了一个 `useEffect`，其是 React 中的一个 Hook，主要用于处理副作用（Side Effects）。副作用是指那些不直接影响渲染的操作，比如数据获取、订阅事件、手动修改 DOM、定时器等。
+这里在修改页面标题时，用到了 React 中的一个 Hook `useEffect`，主要用于处理副作用（Side Effects）。副作用是指那些不直接影响渲染的操作，比如数据获取、订阅事件、手动修改 DOM、定时器等。
 
 ```text
 // src/pages/HomePage.js
@@ -265,7 +265,7 @@ export default function HomePage() {
 
 **BlogListPage.js**
 
-`BlogListPage.js` 对应该应用程序的博客列表页，该组件除了会动态修改页面的标题外，还会调用 `BlogStorageUtil` 的 `getAllBlogs()` 方法获取博客列表并进行渲染。
+`BlogListPage.js` 对应该应用程序的博客列表页，该组件除了会动态修改页面标题外，还会调用 `BlogStorageUtil` 的 `getAllBlogs()` 方法获取博客列表并进行渲染。
 
 ```text
 // src/pages/BlogListPage.js
@@ -297,7 +297,7 @@ export default function BlogListPage() {
 
 **BlogDetailPage.js**
 
-`BlogDetailPage.js` 对应该应用程序的博客详情页，该组件除了会动态修改页面的标题外，还会调用 `BlogStorageUtil` 的 `getBlogById(id)` 方法获取单个博客信息并进行渲染。
+`BlogDetailPage.js` 对应该应用程序的博客详情页，该组件除了会动态修改页面标题外，还会调用 `BlogStorageUtil` 的 `getBlogById(id)` 方法获取单个博客信息并进行渲染。
 
 ```text
 // src/pages/BlogDetailPage.js
@@ -326,7 +326,7 @@ export default function BlogDetailPage() {
 
 **BlogAddPage.js**
 
-`BlogAddPage.js` 对应该应用程序的博客新增页，该组件除了会动态修改页面的标题外，其内有一个 `form` 表单，会监听各个字段的修改。并针对 `form` 提交，有对应的处理函数。处理函数 `handleSubmit()` 会对各个字段的长度进行校验，处理成功会跳转到博客列表页。
+`BlogAddPage.js` 对应该应用程序的博客新增页，该组件除了会动态修改页面标题外，其内有一个 `form` 表单，会监听各个字段的修改。并针对 `form` 提交，有对应的处理函数。处理函数 `handleSubmit()` 会对各个字段的长度进行校验，处理成功会跳转到博客列表页。
 
 注意，这里边除了用到 `useEffect` Hook 外，还用到一个 `useState` Hook。`useState` 是 React 中用于在函数组件中添加状态的 Hook。其允许在函数组件内部声明状态变量，并且可以对该状态变量进行更新。
 
@@ -412,7 +412,7 @@ export default function BlogAddPage() {
 
 ## 3 小结
 
-综上，我们首页介绍了 React 的基本概念，并以搭建一个博客收集程序为例演示了 React 基本功能的使用。本文完整示例工程已提交至 [GitHub](https://github.com/leileiluoluo/react-exercises/tree/main/react-start-demo)，欢迎关注或 Fork。
+综上，我们首先介绍了 React 的基本概念，然后以搭建一个博客收集程序为例演示了 React 基本功能的使用。本文完整示例工程已提交至 [GitHub](https://github.com/leileiluoluo/react-exercises/tree/main/react-start-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
