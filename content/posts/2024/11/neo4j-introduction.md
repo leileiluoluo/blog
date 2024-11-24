@@ -89,7 +89,7 @@ MATCH (a:Actor)-[r:ACTED_IN]->(m:Movie)
 WHERE m.name = "战狼 Ⅱ"
 
 // 指定返回值
-RETURN a.name, r.role
+RETURN a.name AS actor, r.role AS role
 ```
 
 ### 1.4 向量索引
