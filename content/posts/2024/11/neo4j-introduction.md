@@ -56,6 +56,10 @@ Neo4j 是一种专门为处理图数据而设计的开源数据库管理系统�
 
 ### 1.2 数据建模
 
+黄金法则：
+
+![黄金法则](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-golden-rule.svg)
+
 ### 1.3 Cypher
 
 Cypher 是 Neo4j 专为操作图数据库设计的一种声明式语言，其允许我们使用包含括号、破折号、箭头等符号的语法来表示和操作数据。
@@ -104,7 +108,13 @@ RETURN a.name AS actor, r.role AS role
 
 ### 2.3 数据查询
 
-查询参演了电影《战狼 Ⅱ》的演员所参演的所有电影：
+可以将数据库中的数据模型进行图形化表示：
+
+```text
+CALL db.schema.visualization()
+```
+
+查询参演了电影《战狼 Ⅱ》的演员还参演了哪些电影：
 
 ```text
 MATCH (zl: Movie {title: "战狼 Ⅱ"})<-[:ACTED_IN]-(a:Actor)-[:ACTED_IN]->(m:Movie)
