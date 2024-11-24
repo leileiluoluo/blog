@@ -60,6 +60,8 @@ Neo4j 是一种专门为处理图数据而设计的开源数据库管理系统�
 
 ![黄金法则](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-golden-rule.svg)
 
+节点应使用名词，关系应使用动词。
+
 ### 1.3 Cypher
 
 Cypher 是 Neo4j 专为操作图数据库设计的一种声明式语言，其允许我们使用包含括号、破折号、箭头等符号的语法来表示和操作数据。
