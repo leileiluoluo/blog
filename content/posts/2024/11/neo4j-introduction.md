@@ -92,6 +92,8 @@ WHERE m.name = "战狼 Ⅱ"
 RETURN a.name AS actor, r.role AS role
 ```
 
+对比关系型数据库的 SQL，可以看到 Cypher 的 `MATCH` 相当于 SQL 的 `FROM/JOIN`，`WHERE` 相当于 SQL 的 `WHERE`，`RETURN` 相当于 SQL 的 `SELECT`。
+
 ### 1.4 向量索引
 
 ## 2 Neo4j 初步使用
