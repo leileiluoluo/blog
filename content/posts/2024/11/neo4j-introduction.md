@@ -98,6 +98,19 @@ RETURN a.name AS actor, r.role AS role
 
 ## 2 Neo4j 初步使用
 
+### 2.1 安装
+
+### 2.2 数据插入
+
+### 2.3 数据查询
+
+查询参演了电影《战狼 Ⅱ》的演员所参演的所有电影：
+
+```text
+MATCH (zl: Movie {title: "战狼 Ⅱ"})<-[:ACTED_IN]-(a:Actor)-[:ACTED_IN]->(m:Movie)
+WHERE a.name AS actorName, m.name as movieName
+```
+
 > 参考资料
 >
 > [1] YouTube: Training Series - Introduction to Neo4j - [https://www.youtube.com/watch?v=YDWkPFijKQ4](https://www.youtube.com/watch?v=YDWkPFijKQ4)
