@@ -58,13 +58,33 @@ Neo4j 是一种专门为处理图数据而设计的开源数据库管理系统�
 
 ### 1.3 Cypher
 
-可以使用一下 Cypher 语句建模：
+Cypher 是 Neo4j 专为操作图数据库设计的一种声明式语言，其允许我们使用包含括号、破折号、箭头等符号的语法来表示和操作数据。
+
+针对本节开始处的「吴京参演《战狼 II》实例」，可以使用如下 Cypher 语句进行数据创建：
 
 ```text
 CREATE
   (a:Actor {name: "吴京", nationality: "中国", yearOfBirth: 1974}),
   (m:Movie {name: "战狼 Ⅱ", releasedAt: 2017}),
-  (a)-[:ACTED_IN {role: "冷峰"}]->(m)
+  (a)-[r:ACTED_IN {role: "冷峰"}]->(m)
+```
+
+上述语句相当于下面三条语句，其创建了演员（Actor）和电影（Movie）两个节点，并创建了「演员 - 参演 -> 电影」这个关系：
+
+```text
+CREATE (a:Actor {name: "吴京", nationality: "中国", yearOfBirth: 1974})
+CREATE (m:Movie {name: "战狼 Ⅱ", releasedAt: 2017})
+CREATE (a:Actor)-[r:ACTED_IN {role: "冷峰"}]->(m:Movie)
+```
+
+这里的圆括号（`(...)`）表示节点，圆括号内的花括号表示节点的属性（`{...}`），破折号方括号和箭头表示关系（`-[...]->`），方括号内的花括号表示关系的属性（`{...}`），而`a`、`m` 和 `r` 是指向节点 Actor、Movie 和关系 ACTED_IN 的变量。
+
+```text
+// 从数据库中找出所有「演员 - 参演 -> 电影」的模式
+MATCH (a:Actor)-[r:ACTED_IN]->(m:Movie)
+
+// 然后根据电影名称进行筛选
+WHERE m.name = "战狼 Ⅱ"
 ```
 
 ### 1.4 向量索引
