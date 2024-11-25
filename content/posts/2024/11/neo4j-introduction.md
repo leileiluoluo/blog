@@ -111,7 +111,18 @@ RETURN a.name AS actor, r.role AS role
 ### 2.2 数据插入
 
 ```text
-
+CREATE
+  (a1:Actor {name: "吴京", nationality: "中国", yearOfBirth: 1974}),
+  (a2:Actor {name: "卢靖姗", nationality: "中国", yearOfBirth: 1985}),
+  (m1:Movie {name: "战狼 Ⅱ", releasedAt: 2017}),
+  (m2:Movie {name: "太极宗师", releasedAt: 1998}),
+  (m3:Movie {name: "流浪地球 Ⅱ", releasedAt: 2023}),
+  (m4:Movie {name: "我和我的家乡", releasedAt: 2020}),
+  (a1)-[:ACTED_IN {role: "冷峰"}]->(m1),
+  (a1)-[:ACTED_IN {role: "杨昱乾"}]->(m2),
+  (a1)-[:ACTED_IN {role: "刘培强"}]->(m3),
+  (a2)-[:ACTED_IN {role: "Rachel"}]->(m1),
+  (a2)-[:ACTED_IN {role: "EMMA MEIER"}]->(m4)
 ```
 
 ### 2.3 数据查询
@@ -122,12 +133,33 @@ RETURN a.name AS actor, r.role AS role
 CALL db.schema.visualization()
 ```
 
+![数据模型图形化表示](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-schema-graph.svg)
+
+查询「演员 - 参演 -> 电影」模式的所有演员和电影：
+
+```text
+MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
+RETURN a, m
+```
+
+其图形化返回结果如下：
+
+![查询「演员 - 参演 -> 电影」模式的所有演员和电影](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-actor-movie-graph.svg)
+
 查询参演了电影《战狼 Ⅱ》的演员还参演了哪些电影：
 
 ```text
-MATCH (zl: Movie {title: "战狼 Ⅱ"})<-[:ACTED_IN]-(a:Actor)-[:ACTED_IN]->(m:Movie)
-WHERE a.name AS actorName, m.name as movieName
+MATCH (Movie {name: "战狼 Ⅱ"})<-[:ACTED_IN]-(a:Actor)-[:ACTED_IN]->(m:Movie)
+RETURN a.name AS actorName, m.name as movieName
 ```
+
+其表格返回结果如下：
+
+| actorName | movieName    |
+| --------- | ------------ |
+| 吴京      | 太极宗师     |
+| 吴京      | 流浪地球 Ⅱ   |
+| 卢靖姗    | 我和我的家乡 |
 
 > 参考资料
 >
