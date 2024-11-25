@@ -146,7 +146,7 @@ RETURN a, m
 
 ![查询「演员 - 参演 -> 电影」模式的所有演员和电影](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-actor-movie-graph.svg)
 
-查询参演了电影《战狼 Ⅱ》的演员还参演了哪些电影：
+接下来实现一个稍微复杂点的查询：查询参演了电影《战狼 Ⅱ》的演员还参演了哪些电影：
 
 ```text
 MATCH (Movie {name: "战狼 Ⅱ"})<-[:ACTED_IN]-(a:Actor)-[:ACTED_IN]->(m:Movie)
