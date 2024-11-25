@@ -161,6 +161,10 @@ RETURN a.name AS actorName, m.name as movieName
 | 吴京      | 流浪地球 Ⅱ   |
 | 卢靖姗    | 我和我的家乡 |
 
+## 3 小结
+
+综上，本文首先介绍了 Neo4j 中的概念和基础知识，然后在本地下载安装「Neo4j Desktop」，并插入「演员 - 参演 -> 电影」的实例数据，对 Neo4j 的 Cypher Query 等基本功能进行了使用。
+
 > 参考资料
 >
 > [1] YouTube: Training Series - Introduction to Neo4j - [https://www.youtube.com/watch?v=YDWkPFijKQ4](https://www.youtube.com/watch?v=YDWkPFijKQ4)
