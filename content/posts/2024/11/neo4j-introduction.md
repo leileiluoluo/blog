@@ -58,7 +58,7 @@ Neo4j 是一种专门为处理图数据而设计的开源数据库管理系统�
 
 黄金法则：
 
-![黄金法则](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-golden-rule.svg)
+![黄金法则](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-intro-golden-rule.svg)
 
 节点应使用名词，关系应使用动词。
 
