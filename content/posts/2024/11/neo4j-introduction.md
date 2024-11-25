@@ -106,7 +106,7 @@ RETURN a.name AS actor, r.role AS role
 
 ### 2.1 Neo4j Desktop 安装
 
-想在本地安装和使用 Neo4j，最简单的方式是安装 [Neo4j Desktop](https://neo4j.com/download/)。Neo4j Desktop 内置 Neo4j Server，且提供可视化管理界面，支持连接本地和远程 Neo4j 数据库。此外 Neo4j Desktop 还内置 Neo4j Browser 和 Neo4j Bloom，可以进行 Cypher 查询和可视化数据操作。
+想在本地安装和使用 Neo4j，最简单的方式是安装「[Neo4j Desktop](https://neo4j.com/download/)」。Neo4j Desktop 内置 Neo4j Server，且提供可视化管理界面，支持连接本地和远程 Neo4j 数据库。此外 Neo4j Desktop 还内置 Neo4j Browser 和 Neo4j Bloom，可以进行 Cypher 查询和可视化数据操作。
 
 ### 2.2 数据插入
 
