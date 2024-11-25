@@ -108,6 +108,14 @@ RETURN a.name AS actor, r.role AS role
 
 想在本地安装和使用 Neo4j，最简单的方式是安装「[Neo4j Desktop](https://neo4j.com/download/)」。Neo4j Desktop 内置 Neo4j Server，且提供可视化管理界面，支持连接本地和远程 Neo4j 数据库。此外 Neo4j Desktop 还内置 Neo4j Browser 和 Neo4j Bloom，可以进行 Cypher 查询和可视化数据操作。
 
+Neo4j Desktop 安装完成后，打开它，然后新建一个项目 test，并在该项目下新建一个 Local DBMS：
+
+![Neo4j Desktop 新建项目](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-desktop-database-creating.png)
+
+新建完成后，即可连接，连接成功后即可在顶部输入框执行 Cypher Query：
+
+![Neo4j Desktop 新建项目](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-desktop-console.png)
+
 ### 2.2 数据插入
 
 ```text
