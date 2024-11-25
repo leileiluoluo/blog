@@ -153,7 +153,7 @@ MATCH (Movie {name: "战狼 Ⅱ"})<-[:ACTED_IN]-(a:Actor)-[:ACTED_IN]->(m:Movie)
 RETURN a.name AS actorName, m.name as movieName
 ```
 
-其表格返回结果如下：
+其表格化返回结果如下：
 
 | actorName | movieName    |
 | --------- | ------------ |
