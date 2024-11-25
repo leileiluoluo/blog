@@ -164,3 +164,5 @@ RETURN a.name AS actorName, m.name as movieName
 > 参考资料
 >
 > [1] YouTube: Training Series - Introduction to Neo4j - [https://www.youtube.com/watch?v=YDWkPFijKQ4](https://www.youtube.com/watch?v=YDWkPFijKQ4)
+>
+> [2] Neo4j: Desktop Download - [https://neo4j.com/download/](https://neo4j.com/download/)
