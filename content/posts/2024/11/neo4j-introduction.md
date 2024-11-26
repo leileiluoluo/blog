@@ -208,10 +208,16 @@ RETURN u, m
 
 ```text
 MATCH (u:User)-[r:RATED]->(m:Movie)
-RETURN m.name AS movie, avg(r.rating) AS avgRatings
-ORDER BY avgRatings DESC
+RETURN m.name AS movie, avg(r.rating) AS avgRating
+ORDER BY avgRating DESC
 LIMIT 1
 ```
+
+其表格化返回结果如下：
+
+| movie  | avgRating |
+| ------ | --------- |
+| 战狼 Ⅱ | 8.5       |
 
 ## 3 小结
 
