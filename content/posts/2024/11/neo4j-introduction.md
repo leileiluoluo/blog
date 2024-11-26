@@ -133,7 +133,7 @@ CREATE
   (a2)-[:ACTED_IN {role: "EMMA MEIER"}]->(m4)
 ```
 
-### 2.3 数据查询
+### 2.3 简单数据查询
 
 可以将数据库中的数据模型进行图形化表示：
 
@@ -152,7 +152,7 @@ RETURN a, m
 
 其图形化返回结果如下：
 
-![查询「演员 - 参演 -> 电影」模式的所有演员和电影](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-actor-movie-graph.svg)
+![「演员 - 参演 -> 电影」关系图](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-actor-movie-graph.svg)
 
 接下来实现一个稍微复杂点的查询：查询参演了电影《战狼 Ⅱ》的演员还参演了哪些电影：
 
@@ -168,6 +168,50 @@ RETURN a.name AS actorName, m.name as movieName
 | 吴京      | 太极宗师     |
 | 吴京      | 流浪地球 Ⅱ   |
 | 卢靖姗    | 我和我的家乡 |
+
+### 2.4 复杂数据查询
+
+```text
+user,movie,rating
+夏天,战狼 Ⅱ,9
+珊珊,战狼 Ⅱ,9
+大鹏,战狼 Ⅱ,8
+朵朵,战狼 Ⅱ,8
+乐乐,战狼 Ⅱ,8
+三月,战狼 Ⅱ,9
+夏天,流浪地球 Ⅱ,8
+珊珊,流浪地球 Ⅱ,8
+大鹏,流浪地球 Ⅱ,7
+朵朵,流浪地球 Ⅱ,8
+乐乐,流浪地球 Ⅱ,8
+三月,流浪地球 Ⅱ,6
+```
+
+```text
+LOAD CSV WITH HEADERS FROM 'file:///ratings.csv' AS row
+MERGE (u:User {name: row.user})
+WITH u, row
+MATCH (m:Movie {name: row.movie})
+CREATE (u)-[:RATED {rating: toInteger(row.rating)}]->(m);
+```
+
+```text
+MATCH (u:User)-[:RATED]-(m:Movie)
+RETURN u, m
+```
+
+其图形化返回结果如下：
+
+![「用户 - 评分 - 电影」关系图](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-ratings-graph.svg)
+
+查询平均分最高的电影：
+
+```text
+MATCH (u:User)-[r:RATED]->(m:Movie)
+RETURN m.name AS movie, avg(r.rating) AS avgRatings
+ORDER BY avgRatings DESC
+LIMIT 1
+```
 
 ## 3 小结
 
