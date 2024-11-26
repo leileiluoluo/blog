@@ -228,7 +228,7 @@ MATCH p = shortestPath( (a1)-[*..10]-(a2) )
 RETURN p
 ```
 
-![寻找两个节点之间的最短路径](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-ratings-graph.svg)
+![寻找两个节点之间的最短路径](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-shortest-path-graph.svg)
 
 ## 3 小结
 
