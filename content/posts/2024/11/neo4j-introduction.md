@@ -219,6 +219,17 @@ LIMIT 1
 | ------ | --------- |
 | 战狼 Ⅱ | 8.5       |
 
+寻找两个节点之间的最短路径：
+
+```text
+MATCH (a1:Actor {name: "吴京"})
+MATCH (a2:Actor {name: "卢靖姗"})
+MATCH p = shortestPath( (a1)-[*..10]-(a2) )
+RETURN p
+```
+
+![寻找两个节点之间的最短路径](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-ratings-graph.svg)
+
 ## 3 小结
 
 综上，本文首先介绍了 Neo4j 中的概念和基础知识，然后在本地下载安装「Neo4j Desktop」，并插入「演员 - 参演 -> 电影」的实例数据，对 Neo4j 的 Cypher Query 等基本功能进行了使用。
