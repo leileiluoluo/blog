@@ -115,7 +115,7 @@ Neo4j Desktop 安装完成后，打开它，然后新建一个项目 test，并�
 
 ![Neo4j Desktop 新建项目](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-desktop-database-creating.png)
 
-新建完成后，即可连接这个 Local DBMS，连接成功后即可在顶部输入框执行 Cypher Query 了：
+新建完成后，即可连接这个 Local DBMS，连接成功后即可在顶部矩形框输入并执行 Cypher Query 了：
 
 ![Neo4j Desktop Cypher 执行面板](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-desktop-console.png)
 
@@ -140,7 +140,7 @@ CREATE
 
 ### 2.3 简单数据查询
 
-数据插入完成后，使用如下语句将数据库中的模型进行图形化表示：
+数据插入完成后，使用如下语句将数据库中的模式进行图形化表示：
 
 ```text
 CALL db.schema.visualization()
@@ -198,7 +198,7 @@ user,movie,rating
 三月,流浪地球 Ⅱ,6
 ```
 
-然后使用如下语句读取 csv 文件中的行，然后针对每行数据进行 User 创建、Movie 查找，以及「用户 - 评分 -> 电影（User - RATED -> Movie）」关系的创建。
+将上述文件置于 Neo4j 指定目录后，使用如下语句读取 csv 文件中的行，然后针对每行数据进行 User 创建、Movie 查找，以及「用户 - 评分 -> 电影（User - RATED -> Movie）」关系的创建。
 
 ```text
 LOAD CSV WITH HEADERS FROM 'file:///ratings.csv' AS row
