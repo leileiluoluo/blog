@@ -251,7 +251,7 @@ RETURN p
 >
 > [3] Neo4j: What is Neo4j? - [https://neo4j.com/docs/getting-started/whats-neo4j/](https://neo4j.com/docs/getting-started/whats-neo4j/)
 >
-> [4] What is Cypher - [https://neo4j.com/docs/getting-started/cypher/](https://neo4j.com/docs/getting-started/cypher/)
+> [4] Neo4j: What is Cypher - [https://neo4j.com/docs/getting-started/cypher/](https://neo4j.com/docs/getting-started/cypher/)
 >
 > [5] Neo4j: Desktop Download - [https://neo4j.com/download/](https://neo4j.com/download/)
 >
