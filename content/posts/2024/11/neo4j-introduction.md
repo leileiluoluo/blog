@@ -231,7 +231,7 @@ RETURN p
 ![寻找两个演员之间的最短路径](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-shortest-path-graph.svg)
 
 ```text
-MATCH (u:User {name: "珊珊"})
+MATCH (u:User {name: "大鹏"})
 MATCH (a:Actor {name: "吴京"})
 MATCH p = shortestPath((u)-[*..10]-(a))
 RETURN p
