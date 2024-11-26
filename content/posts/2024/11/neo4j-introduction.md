@@ -228,7 +228,18 @@ MATCH p = shortestPath( (a1)-[*..10]-(a2) )
 RETURN p
 ```
 
-![寻找两个节点之间的最短路径](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-shortest-path-graph.svg)
+![寻找两个演员之间的最短路径](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-shortest-path-graph.svg)
+
+```text
+MATCH (u:User {name: "珊珊"})
+MATCH (a:Actor {name: "吴京"})
+MATCH p = shortestPath((u)-[*..10]-(a))
+RETURN p
+```
+
+寻找投票用户个演员之间的最短路径：
+
+![寻找投票用户个演员之间的最短路径](https://leileiluoluo.github.io/static/images/uploads/2024/11/neo4j-shortest-path-between-user-and-actor-graph.svg)
 
 ## 3 小结
 
