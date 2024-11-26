@@ -247,6 +247,12 @@ RETURN p
 >
 > [1] YouTube: Training Series - Introduction to Neo4j - [https://www.youtube.com/watch?v=YDWkPFijKQ4](https://www.youtube.com/watch?v=YDWkPFijKQ4)
 >
-> [2] Neo4j: Desktop Download - [https://neo4j.com/download/](https://neo4j.com/download/)
+> [2] Neo4j: What is a graph database - [https://neo4j.com/docs/getting-started/graph-database/](https://neo4j.com/docs/getting-started/graph-database/)
 >
-> [3] Neo4j: Importing CSV data into Neo4j - [https://neo4j.com/docs/getting-started/data-import/csv-import/](https://neo4j.com/docs/getting-started/data-import/csv-import/)
+> [3] Neo4j: What is Neo4j? - [https://neo4j.com/docs/getting-started/whats-neo4j/](https://neo4j.com/docs/getting-started/whats-neo4j/)
+>
+> [4] What is Cypher - [https://neo4j.com/docs/getting-started/cypher/](https://neo4j.com/docs/getting-started/cypher/)
+>
+> [5] Neo4j: Desktop Download - [https://neo4j.com/download/](https://neo4j.com/download/)
+>
+> [6] Neo4j: Importing CSV data into Neo4j - [https://neo4j.com/docs/getting-started/data-import/csv-import/](https://neo4j.com/docs/getting-started/data-import/csv-import/)
