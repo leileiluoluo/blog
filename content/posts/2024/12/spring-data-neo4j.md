@@ -32,7 +32,7 @@ Spring Data Neo4j：7.4.0
 该示例工程的目录结构如下：
 
 ```text
-spring-boot-thymeleaf-demo
+spring-data-neo4j-demo
 ├─ src
 │  ├─ main
 │  │  ├─ java
@@ -59,6 +59,8 @@ spring-boot-thymeleaf-demo
 │              └─ ActorMovieServiceTest.java
 └─ pom.xml
 ```
+
+由上述目录结构可以看到，该示例工程是一个标准的 Maven 工程。`src/main` 下放置 Java 代码和配置文件，`src/test` 下放置单元测试类。`src/main/java` 下的 Java 代码拥有统一的包 `com.example.demo`，其中 `DemoApplication.java` 为程序入口，`model` 包用于放置 Model 类，`repository` 包用于放置访问数据库的仓库类，`service` 包用于放置服务类。而 `src/test/java` 下的单元测试类与主代码拥有相同的包结构，`repository` 包下的 `ActorRepositoryTest.java` 用于测试 `ActorRepository.java`，`service` 包下的 `ActorMovieServiceTest.java` 用于测试 `ActorMovieService.java`。
 
 ## 小结
 
