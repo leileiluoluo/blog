@@ -18,7 +18,7 @@ description: 本文关注如何使用 Spring Data Neo4j 访问 Neo4j 数据库�
 
 上文「[Neo4j 初探](https://leileiluoluo.github.io/posts/neo4j-introduction.html)」介绍了 Neo4j 的基本概念，并对 Neo4j 进行了初步使用。本文则关注如何使用 Spring Data Neo4j 访问 Neo4j 数据库？Spring Data Neo4j 是 Spring Data 项目的一部分，它简化了与 Neo4j 图形数据库的交互。Spring Data Neo4j 除了可以通过 Repository 的方式轻松实现常见的 CRUD 操作外，还支持事务管理、Cypher 查询和图数据建模等特性。
 
-接下来即以示例工程的方式演示 Spring Data Neo4j 的使用。
+接下来即以示例工程的方式演示 Spring Data Neo4j 的使用，该示例工程涉及的业务场景是存取「演员（Actor）- 参演（ACTED_IN） -> 电影（Movie）」相关的数据。
 
 本地安装的 Neo4j 的版本为 `5.25.1`，示例工程用到的各项依赖及其版本为：
 
@@ -62,7 +62,37 @@ spring-data-neo4j-demo
 
 由上述目录结构可以看到，该示例工程是一个标准的 Maven 工程。`src/main` 下放置 Java 代码和配置文件，`src/test` 下放置单元测试类。`src/main/java` 下的 Java 代码拥有统一的包 `com.example.demo`，其中 `DemoApplication.java` 为程序入口，`model` 包用于放置 Model 类，`repository` 包用于放置访问数据库的仓库类，`service` 包用于放置服务类。而 `src/test/java` 下的单元测试类与主代码拥有相同的包结构，`repository` 包下的 `ActorRepositoryTest.java` 用于测试 `ActorRepository.java`，`service` 包下的 `ActorMovieServiceTest.java` 用于测试 `ActorMovieService.java`。
 
-介绍完工程结构，下面开始分析该工程中的主要文件或代码。
+介绍完工程结构，下面看一下该工程用到的主要依赖：
+
+```xml
+<!-- pom.xml -->
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-neo4j</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.36</version>
+        <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
+
+可以看到，该项目依赖非常少，主要依赖 `spring-boot-starter-web` 和 `spring-boot-starter-data-neo4j`。而为了省去 Model 类 Setters、Getters 和构造方法的编写，还依赖一个 `lombok`。最后，为了单元测试的编写，还依赖一个 `spring-boot-starter-test`。
+
+介绍完工程结构与相关依赖，接下来开始分析该工程中的主要文件或代码。
 
 ## 1 代码分析
 
