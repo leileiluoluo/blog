@@ -62,7 +62,101 @@ spring-data-neo4j-demo
 
 由上述目录结构可以看到，该示例工程是一个标准的 Maven 工程。`src/main` 下放置 Java 代码和配置文件，`src/test` 下放置单元测试类。`src/main/java` 下的 Java 代码拥有统一的包 `com.example.demo`，其中 `DemoApplication.java` 为程序入口，`model` 包用于放置 Model 类，`repository` 包用于放置访问数据库的仓库类，`service` 包用于放置服务类。而 `src/test/java` 下的单元测试类与主代码拥有相同的包结构，`repository` 包下的 `ActorRepositoryTest.java` 用于测试 `ActorRepository.java`，`service` 包下的 `ActorMovieServiceTest.java` 用于测试 `ActorMovieService.java`。
 
-## 小结
+介绍完工程结构，下面开始分析该工程中的主要文件或代码。
+
+## 1 代码分析
+
+### 1.1 Model 类
+
+```java
+// src/main/java/com/example/demo/model/Actor.java
+package com.example.demo.model;
+
+// ...
+
+@NoArgsConstructor
+@Data
+@Node
+public class Actor {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    private String name;
+    private String nationality;
+    private int yearOfBirth;
+
+    @Relationship(type = "ACTED_IN", direction = Relationship.Direction.OUTGOING)
+    private List<Role> rolesAndMovies;
+
+    public Actor(String name, String nationality, int yearOfBirth, List<Role> rolesAndMovies) {
+        this.name = name;
+        this.nationality = nationality;
+        this.yearOfBirth = yearOfBirth;
+        this.rolesAndMovies = rolesAndMovies;
+    }
+}
+```
+
+```java
+// src/main/java/com/example/demo/model/Movie.java
+package com.example.demo.model;
+
+// ...
+
+@NoArgsConstructor
+@Data
+@Node
+public class Movie {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    private String name;
+    private int releasedAt;
+
+    public Movie(String name, int releasedAt) {
+        this.name = name;
+        this.releasedAt = releasedAt;
+    }
+}
+```
+
+```java
+// src/main/java/com/example/demo/model/Role.java
+package com.example.demo.model;
+
+// ...
+
+@RelationshipProperties
+public class Role {
+
+    @RelationshipId
+    private Long id;
+    private String name;
+
+    @TargetNode
+    private Movie movie;
+
+    public Role(String name, Movie movie) {
+        this.name = name;
+        this.movie = movie;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", movie=" + movie +
+                '}';
+    }
+}
+```
+
+## 2 小结
 
 示例工程代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-data-neo4j-demo)，欢迎关注或 Fork。
 
