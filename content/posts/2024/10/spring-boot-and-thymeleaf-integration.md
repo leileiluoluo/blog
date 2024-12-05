@@ -59,6 +59,7 @@ spring-boot-thymeleaf-demo
 │  │     ├─ util
 │  │     │  ├─ DateUtil.java
 │  │     │  └─ IdGenerator.java
+│  │     └─ DemoApplication.java
 │  └─ resources
 │     ├─ static
 │     │  └─ css

@@ -29,6 +29,37 @@ Spring Boot：3.4.0
 Spring Data Neo4j：7.4.0
 ```
 
+该示例工程的目录结构如下：
+
+```text
+spring-boot-thymeleaf-demo
+├─ src
+│  ├─ main
+│  │  ├─ java
+│  │  │  └─ com.example.demo
+│  │  │     ├─ repository
+│  │  │     │  └─ ActorRepository.java
+│  │  │     ├─ service
+│  │  │     │  ├─ ActorMovieService.java
+│  │  │     │  └─ impl
+│  │  │     │     └─ ActorMovieServiceImpl.java
+│  │  │     ├─ model
+│  │  │     │  ├─ Actor.java
+│  │  │     │  ├─ Movie.java
+│  │  │     │  └─ Role.java
+│  │  │     └─ DemoApplication.java
+│  │  └─ resources
+│  │     └─ application.properties
+│  └─ test
+│     └─ java
+│        └─ com.example.demo
+│           ├─ repository
+│           │  └─ ActorRepositoryTest.java
+│           └─ service
+│              └─ ActorMovieServiceTest.java
+└─ pom.xml
+```
+
 ## 小结
 
 示例工程代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-data-neo4j-demo)，欢迎关注或 Fork。
