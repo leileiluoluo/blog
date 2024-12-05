@@ -9,6 +9,7 @@ categories:
 tags:
   - Spring
   - Java
+  - Neo4j
 keywords:
   - Spring Data
   - Neo4j
