@@ -496,7 +496,7 @@ RETURN a, r, m
 
 ## 3 小结
 
-综上，我们探索了使用 Spring Data Neo4j 来对 Neo4j 数据库进行访问，体会到其与 Spring Boot 框架的集成非常的便捷，只需引入一个 Starter 即可。而在使用方面，Spring Data Neo4j 秉承了 Spring Data 的统一设计思想。我们可以使用注解将 Java Model 与 Neo4j 数据库实体进行映射；我们可以继承 Repository 接口来实现基础的增删改查功能，使用 `@Query` 注解自己编写 Cypher 语句；还可以使用 `Neo4jTemplate` 自主编写查询来操作 Neo4j 数据库。此外，Spring Data Neo4j 还提供 Query by Example、Cypher DSL 额外两种方式来查询 Neo4j 数据库。
+综上，我们探索了使用 Spring Data Neo4j 来对 Neo4j 数据库进行访问，体会到其与 Spring Boot 框架的集成非常的便捷，只需引入一个 Starter 即可。而在使用方面，Spring Data Neo4j 秉承了 Spring Data 的统一设计思想。我们可以使用注解将 Java Model 与 Neo4j 数据库实体进行映射；可以继承 Repository 接口来实现基础的增删改查功能，以及使用 `@Query` 注解自己编写 Cypher 语句；还可以使用 `Neo4jTemplate` 自主编写查询来操作 Neo4j 数据库。此外，Spring Data Neo4j 还提供 Query by Example、Cypher DSL 额外两种方式来查询 Neo4j 数据库。
 
 本文完整示例工程代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-data-neo4j-demo)，欢迎关注或 Fork。
 
