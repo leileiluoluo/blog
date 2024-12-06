@@ -224,7 +224,7 @@ public class Role {
 
 Model 类定义好后，接下来开始定义查询 Neo4j 的 Repository 接口。
 
-我们知道，Spring Data Repository 统一了对不同类型数据库（诸如 MySQL、Oracle 等关系型数据库，MongoDB 等非关系型数据库，Neo4j 等图数据库）的访问方式。我们只要定义一个 Repository 接口，然后继承一个父 Repository 就拥有了最基本的 CRUD 操作。
+我们知道，Spring Data Repository 统一了对不同类型数据库（诸如 MySQL、Oracle 等关系型数据库，MongoDB 等非关系型数据库，Neo4j 等图数据库）的访问方式。我们只要定义一个 Repository 接口，然后继承一个父 Repository 就拥有了最基本的 CRUD 操作。此外，我们还可以按照约定的命令规则自己添加需要的查询方法。
 
 该示例工程有两个 Repository 接口：`ActorRepository` 和 `MovieRepository`，分别用于查询 Actor 和 Movie。
 
@@ -269,6 +269,10 @@ public interface ActorRepository
 }
 ```
 
+可以看到，该接口继承了两个父接口：`Neo4jRepository` 和 `CypherdslConditionExecutor`。`Neo4jRepository` 接口除了自带基本的 CRUD 操作外，还提供对分页查询和排序的支持。而 `CypherDslConditionExecutor` 接口则支持 Cypher DSL 查询，即支持以编程化的方式实现复杂查询。
+
+此外，我们还在 `ActorRepository` 接口使用 `@Query` 注解编写了一组自定义的 Cypher 查询，分别用于实现：根据电影名称查询参演演员名称（`findActorNamesByMovieName()`）、根据电影名称查询参演演员的平均年龄（`findAverageAgeOfActorsByMovieName()`），以及查询两个演员之间的最短路径（`findShortestPathBetweenActors()`）。
+
 `MovieRepository` 接口的内容如下：
 
 ```java
@@ -295,6 +299,8 @@ public interface MovieRepository
     List<String> findMovieNamesByActorName(String name);
 }
 ```
+
+可以看到，该接口同样继承了两个父接口：`Neo4jRepository` 和 `CypherdslConditionExecutor`。此外还添加了一个约定命名方法（`findByName()`）和一个自定义查询方法（`findMovieNamesByActorName()`），分别用于实现：根据名称查询 Movie 和根据演员名称查询其参演的电影名称。
 
 ## 2 小结
 
