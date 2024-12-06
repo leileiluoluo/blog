@@ -100,11 +100,17 @@ spring-data-neo4j-demo
 
 ## 1 代码分析
 
+本文示例工程针对的场景是「演员（Actor）- 参演（ACTED_IN）-> 电影（Movie）」，其模式图如下。
+
 ![「演员（Actor）- 参演（ACTED_IN） -> 电影（Movie）」模式图](https://leileiluoluo.github.io/static/images/uploads/2024/12/neo4j-schema-graph.svg)
 
 {{% center %}}（「演员（Actor）- 参演（ACTED_IN）-> 电影（Movie）」模式图）{{% /center %}}
 
 ### 1.1 Model 类
+
+Java 中的 Model 用于和 Neo4j 中的节点或关系进行一一映射。该示例工程共有三个 Model 类：`Actor.java`、`Movie.java` 和 `Role.java`，分别用于表示演员节点、电影节点和演员参演了电影的某个角色这个关系。
+
+`Actor.java` Model 类的内容如下：
 
 ```java
 // src/main/java/com/example/demo/model/Actor.java
@@ -136,6 +142,8 @@ public class Actor {
     }
 }
 ```
+
+`Movie.java` Model 类的内容如下：
 
 ```java
 // src/main/java/com/example/demo/model/Movie.java
@@ -173,14 +181,20 @@ public class Movie {
 }
 ```
 
+`Role.java` Model 类的内容如下：
+
 ```java
 // src/main/java/com/example/demo/model/Role.java
 package com.example.demo.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.neo4j.core.schema.RelationshipId;
 import org.springframework.data.neo4j.core.schema.RelationshipProperties;
 import org.springframework.data.neo4j.core.schema.TargetNode;
 
+@NoArgsConstructor
+@Data
 @RelationshipProperties
 public class Role {
 
