@@ -38,6 +38,7 @@ spring-data-neo4j-demo
 │  │  ├─ java
 │  │  │  └─ com.example.demo
 │  │  │     ├─ repository
+│  │  │     │  ├─ MovieRepository.java
 │  │  │     │  └─ ActorRepository.java
 │  │  │     ├─ service
 │  │  │     │  ├─ ActorMovieService.java
@@ -54,13 +55,16 @@ spring-data-neo4j-demo
 │     └─ java
 │        └─ com.example.demo
 │           ├─ repository
+│           │  ├─ MovieRepositoryTest.java
 │           │  └─ ActorRepositoryTest.java
 │           └─ service
 │              └─ ActorMovieServiceTest.java
 └─ pom.xml
 ```
 
-由上述目录结构可以看到，该示例工程是一个标准的 Maven 工程。`src/main` 下放置 Java 代码和配置文件，`src/test` 下放置单元测试类。`src/main/java` 下的 Java 代码拥有统一的包 `com.example.demo`，其中 `DemoApplication.java` 为程序入口，`model` 包用于放置 Model 类，`repository` 包用于放置访问数据库的仓库类，`service` 包用于放置服务类。而 `src/test/java` 下的单元测试类与主代码拥有相同的包结构，`repository` 包下的 `ActorRepositoryTest.java` 用于测试 `ActorRepository.java`，`service` 包下的 `ActorMovieServiceTest.java` 用于测试 `ActorMovieService.java`。
+由上述目录结构可以看到，该示例工程是一个标准的 Maven 工程。`src/main` 下放置主干 Java 代码和配置文件，`src/test` 下放置单元测试类。`src/main/java` 下的 Java 代码拥有统一的包 `com.example.demo`，其中 `DemoApplication.java` 为程序入口，`model` 包用于放置 Model 类，`repository` 包用于放置访问数据库的仓库类，`service` 包用于放置服务类。
+
+而 `src/test/java` 下的单元测试类与主干代码拥有相同的包结构，`repository` 包下的 `MovieRepositoryTest.java` 用于测试 `MovieRepository.java`，`ActorRepositoryTest.java` 用于测试 `ActorRepository.java`；`service` 包下的 `ActorMovieServiceTest.java` 用于测试 `ActorMovieService.java`。
 
 介绍完工程结构，下面看一下该工程用到的主要依赖：
 
@@ -102,7 +106,11 @@ spring-data-neo4j-demo
 // src/main/java/com/example/demo/model/Actor.java
 package com.example.demo.model;
 
-// ...
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.neo4j.core.schema.GeneratedValue;
+import org.springframework.data.neo4j.core.schema.Id;
+import org.springframework.data.neo4j.core.schema.Node;
 
 @NoArgsConstructor
 @Data
@@ -117,14 +125,10 @@ public class Actor {
     private String nationality;
     private int yearOfBirth;
 
-    @Relationship(type = "ACTED_IN", direction = Relationship.Direction.OUTGOING)
-    private List<Role> rolesAndMovies;
-
-    public Actor(String name, String nationality, int yearOfBirth, List<Role> rolesAndMovies) {
+    public Actor(String name, String nationality, int yearOfBirth) {
         this.name = name;
         this.nationality = nationality;
         this.yearOfBirth = yearOfBirth;
-        this.rolesAndMovies = rolesAndMovies;
     }
 }
 ```
@@ -133,7 +137,14 @@ public class Actor {
 // src/main/java/com/example/demo/model/Movie.java
 package com.example.demo.model;
 
-// ...
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.neo4j.core.schema.GeneratedValue;
+import org.springframework.data.neo4j.core.schema.Id;
+import org.springframework.data.neo4j.core.schema.Node;
+import org.springframework.data.neo4j.core.schema.Relationship;
+
+import java.util.List;
 
 @NoArgsConstructor
 @Data
@@ -147,9 +158,13 @@ public class Movie {
     private String name;
     private int releasedAt;
 
-    public Movie(String name, int releasedAt) {
+    @Relationship(type = "ACTED_IN", direction = Relationship.Direction.INCOMING)
+    private List<Role> rolesAndActors;
+
+    public Movie(String name, int releasedAt, List<Role> rolesAndActors) {
         this.name = name;
         this.releasedAt = releasedAt;
+        this.rolesAndActors = rolesAndActors;
     }
 }
 ```
@@ -158,7 +173,9 @@ public class Movie {
 // src/main/java/com/example/demo/model/Role.java
 package com.example.demo.model;
 
-// ...
+import org.springframework.data.neo4j.core.schema.RelationshipId;
+import org.springframework.data.neo4j.core.schema.RelationshipProperties;
+import org.springframework.data.neo4j.core.schema.TargetNode;
 
 @RelationshipProperties
 public class Role {
@@ -168,20 +185,11 @@ public class Role {
     private String name;
 
     @TargetNode
-    private Movie movie;
+    private Actor actor;
 
-    public Role(String name, Movie movie) {
+    public Role(String name, Actor actor) {
         this.name = name;
-        this.movie = movie;
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", movie=" + movie +
-                '}';
+        this.actor = actor;
     }
 }
 ```
