@@ -62,9 +62,9 @@ spring-data-neo4j-demo
 └─ pom.xml
 ```
 
-由上述目录结构可以看到，该示例工程是一个标准的 Maven 工程。`src/main` 下放置主干 Java 代码和配置文件，`src/test` 下放置单元测试类。`src/main/java` 下的 Java 代码拥有统一的包 `com.example.demo`，其中 `DemoApplication.java` 为程序入口，`model` 包用于放置 Model 类，`repository` 包用于放置访问数据库的仓库类，`service` 包用于放置服务类。
+由上述目录结构可以看到，该示例工程是一个标准的 Maven 工程。`src/main` 下放置主干 Java 代码和配置文件，`src/test` 下放置单元测试类。`src/main/java` 下的 Java 代码拥有统一的包 `com.example.demo`，其中 `DemoApplication` 为程序入口，`model` 包用于放置 Model 类，`repository` 包用于放置访问数据库的仓库类，`service` 包用于放置服务类。
 
-而 `src/test/java` 下的单元测试类与主干代码拥有相同的包结构，`repository` 包下的 `MovieRepositoryTest.java` 用于测试 `MovieRepository.java`，`ActorRepositoryTest.java` 用于测试 `ActorRepository.java`；`service` 包下的 `ActorMovieServiceTest.java` 用于测试 `ActorMovieService.java`。
+而 `src/test/java` 下的单元测试类与主干代码拥有相同的包结构，`repository` 包下的 `MovieRepositoryTest` 用于测试 `MovieRepository`，`ActorRepositoryTest` 用于测试 `ActorRepository`；`service` 包下的 `ActorMovieServiceTest` 用于测试 `ActorMovieService`。
 
 介绍完工程结构，下面看一下该工程用到的主要依赖：
 
