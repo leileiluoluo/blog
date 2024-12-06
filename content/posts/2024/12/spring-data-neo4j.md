@@ -108,9 +108,9 @@ spring-data-neo4j-demo
 
 ### 1.1 Model 类
 
-Java 中的 Model 类用于和 Neo4j 中的节点或关系进行一一映射。由上面的模式图可以看到，「演员（Actor）- 参演（ACTED_IN）-> 电影（Movie）」中有两个节点：演员和电影，以及一个关系：参演。所以，该示例工程共有三个 Model 类：`Actor.java`、`Movie.java` 和 `Role.java`，分别用于表示演员节点、电影节点和演员参演了电影的某个角色这个关系。
+Java 中的 Model 类用于和 Neo4j 中的节点或关系进行一一映射。由上面的模式图可以看到，「演员（Actor）- 参演（ACTED_IN）-> 电影（Movie）」中有两个节点：演员和电影，以及一个关系：参演。所以，该示例工程共有三个 Model 类：`Actor`、`Movie` 和 `Role`，分别用于表示演员节点、电影节点和演员参演了电影的某个角色这个关系。
 
-`Actor.java` Model 类的内容如下：
+`Actor` Model 类的内容如下：
 
 ```java
 // src/main/java/com/example/demo/model/Actor.java
@@ -145,7 +145,7 @@ public class Actor {
 
 可以看到，该类使用 `@Node` 注解修饰，表示其对应 Neo4j 中的节点 Actor。而为了区分 Actor 中的个体，建议每个 Actor 实例都拥有一个主键，所以这里使用 `@Id` 修饰的 id 字段即是 Actor 的主键，而 `@GeneratedValue` 注解则表示该值为自动生成。除此之外，该 Actor 节点还拥有 `name`、`nationality` 和 `yearOfBirth` 三个属性。
 
-`Movie.java` Model 类的内容如下：
+`Movie` Model 类的内容如下：
 
 ```java
 // src/main/java/com/example/demo/model/Movie.java
@@ -185,7 +185,7 @@ public class Movie {
 
 可以看到，该类对应 Neo4j 中的节点 Movie，除了同样拥有一个主键字段外，还拥有 `name` 和 `releasedAt` 两个属性。关键的地方在于其还拥有一个使用 `@Relationship` 注解修饰的字段 `rolesAndActors`，表示其是一个关系属性，非普通属性。该关系的类型是 `ACTED_IN`（参演），方向为 `INCOMING`，表示进入（即箭头指向 Movie）。一部电影可以由多个演员参演，所以 `rolesAndActors` 的类型是一个 `List<Role>`。
 
-`Role.java` Model 类的内容如下：
+`Role` Model 类的内容如下：
 
 ```java
 // src/main/java/com/example/demo/model/Role.java
@@ -219,6 +219,82 @@ public class Role {
 可以看到，该类使用 `@RelationshipProperties` 注解修饰，表示其是一个关系属性类。该类同样需要一个主键，所以拥有一个使用 `@RelationshipId` 修饰的 `id` 字段。此外还有一个 `name` 属性，表示演员参演该电影的角色名。此外有一个使用 `@TargetNode` 注解修饰的 `actor` 字段。表示该关系的箭头另一端是一个 Actor。
 
 这三个 Model 都建好后，「演员（Actor）- 参演（ACTED_IN）-> 电影（Movie）」这个模式也就出来了。
+
+### 1.2 Repository 接口
+
+Model 类定义好后，接下来开始定义查询 Neo4j 的 Repository 接口。
+
+我们知道，Spring Data Repository 统一了对不同类型数据库（诸如 MySQL、Oracle 等关系型数据库，MongoDB 等非关系型数据库，Neo4j 等图数据库）的访问方式。我们只要定义一个 Repository 接口，然后继承一个父 Repository 就拥有了最基本的 CRUD 操作。
+
+该示例工程有两个 Repository 接口：`ActorRepository` 和 `MovieRepository`，分别用于查询 Actor 和 Movie。
+
+`ActorRepository` 接口的内容如下：
+
+```java
+// src/main/java/com/example/demo/repository/ActorRepository.java
+package com.example.demo.repository;
+
+import com.example.demo.model.Actor;
+import org.neo4j.driver.types.Path;
+import org.springframework.data.neo4j.repository.Neo4jRepository;
+import org.springframework.data.neo4j.repository.query.Query;
+import org.springframework.data.neo4j.repository.support.CypherdslConditionExecutor;
+
+import java.util.List;
+
+public interface ActorRepository
+        extends Neo4jRepository<Actor, Long>, CypherdslConditionExecutor<Actor> {
+
+    @Query("""
+            MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
+            WHERE m.name = $name
+            RETURN a.name
+            """)
+    List<String> findActorNamesByMovieName(String name);
+
+    @Query("""
+            MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
+            WHERE m.name = $name
+            RETURN COALESCE(AVG(datetime().year - a.yearOfBirth), 0)
+            """)
+    double findAverageAgeOfActorsByMovieName(String name);
+
+    @Query("""
+            MATCH (a1:Actor {name: $actor1})
+            MATCH (a2:Actor {name: $actor2})
+            MATCH p = shortestPath((a1)-[*..10]-(a2))
+            RETURN p
+            """)
+    List<Path> findShortestPathBetweenActors(String actor1, String actor2);
+}
+```
+
+`MovieRepository` 接口的内容如下：
+
+```java
+// src/main/java/com/example/demo/repository/ActorRepository.java
+package com.example.demo.repository;
+
+import com.example.demo.model.Movie;
+import org.springframework.data.neo4j.repository.Neo4jRepository;
+import org.springframework.data.neo4j.repository.query.Query;
+import org.springframework.data.neo4j.repository.support.CypherdslConditionExecutor;
+
+import java.util.List;
+
+public interface MovieRepository
+        extends Neo4jRepository<Movie, Long>, CypherdslConditionExecutor<Movie> {
+
+    List<Movie> findByName(String name);
+
+    @Query("""
+            MATCH (m:Movie)<-[:ACTED_IN]-(a:Actor)
+            WHERE a.name = $name
+            RETURN m.name
+            """)
+    List<String> findMovieNamesByActorName(String name);
+}
+```
 
 ## 2 小结
 
