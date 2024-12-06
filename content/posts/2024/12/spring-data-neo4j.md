@@ -395,7 +395,7 @@ public class ActorMovieServiceImpl implements ActorMovieService {
 }
 ```
 
-可以看到，`findMoviesByActorName()` 方法是使用自己编写 Cypher 语句、设置参数以及调用 `Neo4jTemplate` 来实现的；`findActorsByNamePrefix()` 方法以 Cypher DSL 的方式实现了对应的查询和排序；`findActorsByNamePrefixWithQueryByExample()` 方法与 `findActorsByNamePrefix()` 的功能一样，但使用了 Query by Example 来实现；最后一个方法 `updateMovie()` 根据 ID 来更新 Movie，使用了 `@Transactional` 注解，其支持事务。
+可以看到，`findMoviesByActorName()` 方法是使用自己编写 Cypher 语句、设置参数以及调用 `Neo4jTemplate` 来实现的；`findActorsByNamePrefix()` 方法是以 Cypher DSL 的方式实现了对应的查询和排序；`findActorsByNamePrefixWithQueryByExample()` 方法与 `findActorsByNamePrefix()` 的功能一样，但使用了 Query by Example 方式来实现；最后一个方法 `updateMovie()` 是根据 ID 来更新 Movie，使用了 `@Transactional` 注解，其支持事务（更新时若抛异常会回滚）。
 
 ## 2 单元测试
 
@@ -479,7 +479,7 @@ CREATE
   (a3)-[:ACTED_IN {role: "张北京"}]->(m4);
 ```
 
-使用如下 Cypher 语句查询完整关系图：
+上述存储方法执行后，使用如下 Cypher 语句查询「演员 - 参演 -> 电影」的完整关系图：
 
 ```text
 MATCH (a:Actor)-[r:ACTED_IN]->(m:Movie)
