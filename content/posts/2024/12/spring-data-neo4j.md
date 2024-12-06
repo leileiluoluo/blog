@@ -114,11 +114,7 @@ Java 中的 Model 类用于和 Neo4j 中的节点或关系进行一一映射。�
 // src/main/java/com/example/demo/model/Actor.java
 package com.example.demo.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
-import org.springframework.data.neo4j.core.schema.Id;
-import org.springframework.data.neo4j.core.schema.Node;
+// ...
 
 @NoArgsConstructor
 @Data
@@ -149,14 +145,7 @@ public class Actor {
 // src/main/java/com/example/demo/model/Movie.java
 package com.example.demo.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
-import org.springframework.data.neo4j.core.schema.Id;
-import org.springframework.data.neo4j.core.schema.Node;
-import org.springframework.data.neo4j.core.schema.Relationship;
-
-import java.util.List;
+// ...
 
 @NoArgsConstructor
 @Data
@@ -189,11 +178,7 @@ public class Movie {
 // src/main/java/com/example/demo/model/Role.java
 package com.example.demo.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.neo4j.core.schema.RelationshipId;
-import org.springframework.data.neo4j.core.schema.RelationshipProperties;
-import org.springframework.data.neo4j.core.schema.TargetNode;
+// ...
 
 @NoArgsConstructor
 @Data
@@ -232,13 +217,7 @@ Model 类定义好后，接下来开始定义查询 Neo4j 的 Repository 接口�
 // src/main/java/com/example/demo/repository/ActorRepository.java
 package com.example.demo.repository;
 
-import com.example.demo.model.Actor;
-import org.neo4j.driver.types.Path;
-import org.springframework.data.neo4j.repository.Neo4jRepository;
-import org.springframework.data.neo4j.repository.query.Query;
-import org.springframework.data.neo4j.repository.support.CypherdslConditionExecutor;
-
-import java.util.List;
+// ...
 
 public interface ActorRepository
         extends Neo4jRepository<Actor, Long>, CypherdslConditionExecutor<Actor> {
@@ -264,12 +243,19 @@ public interface ActorRepository
             RETURN p
             """)
     List<Path> findShortestPathBetweenActors(String actor1, String actor2);
+
+    @Query("""
+            MATCH (a:Actor)
+            WHERE a.name = $name
+            SET a.yearOfBirth = $yearOfBirth
+            """)
+    void updateYearOfBirthByName(String name, int yearOfBirth);
 }
 ```
 
 可以看到，该接口继承了两个父接口：`Neo4jRepository` 和 `CypherdslConditionExecutor`。`Neo4jRepository` 接口除了自带基本的 CRUD 操作外，还提供对分页查询和排序的支持。而 `CypherDslConditionExecutor` 接口则支持 Cypher DSL 查询，即支持以编程化的方式实现复杂查询。
 
-此外，我们还在 `ActorRepository` 接口使用 `@Query` 注解编写了一组自定义的 Cypher 查询，分别用于实现：根据电影名称查询参演演员名称（`findActorNamesByMovieName()`）、根据电影名称查询参演演员的平均年龄（`findAverageAgeOfActorsByMovieName()`），以及查询两个演员之间的最短路径（`findShortestPathBetweenActors()`）。
+此外，我们还在 `ActorRepository` 接口使用 `@Query` 注解编写了一组自定义的 Cypher 查询方法（和更新方法），分别用于实现：根据电影名称查询参演演员名称（`findActorNamesByMovieName()`）、根据电影名称查询参演演员的平均年龄（`findAverageAgeOfActorsByMovieName()`）、查询两个演员之间的最短路径（`findShortestPathBetweenActors()`），以及根据演员姓名更新年龄（`updateYearOfBirthByName()`）。
 
 `MovieRepository` 接口的内容如下：
 
@@ -277,10 +263,7 @@ public interface ActorRepository
 // src/main/java/com/example/demo/repository/ActorRepository.java
 package com.example.demo.repository;
 
-import com.example.demo.model.Movie;
-import org.springframework.data.neo4j.repository.Neo4jRepository;
-import org.springframework.data.neo4j.repository.query.Query;
-import org.springframework.data.neo4j.repository.support.CypherdslConditionExecutor;
+// ...
 
 import java.util.List;
 
@@ -299,6 +282,102 @@ public interface MovieRepository
 ```
 
 可以看到，该接口同样继承了两个父接口：`Neo4jRepository` 和 `CypherdslConditionExecutor`。此外还添加了一个约定命名方法（`findByName()`）和一个自定义查询方法（`findMovieNamesByActorName()`），分别用于实现：根据名称查询 Movie 和根据演员名称查询其参演的电影名称。
+
+介绍完这两个 `Repository` 后，下面我们在 `service` 包下新建一个 `ActorMovieService` 接口，以及其实现 `ActorMovieServiceImpl`，用来探索 Spring Data Neo4j 提供的其它特性。
+
+### 1.3 ActorMovieService 接口与实现
+
+`ActorMovieService` 接口的内容如下：
+
+```java
+// src/main/java/com/example/demo/service/ActorMovieService.java
+package com.example.demo.service;
+
+// ...
+
+public interface ActorMovieService {
+
+    List<Movie> findMoviesByActorName(String name);
+
+    List<Actor> findActorsByNamePrefix(String prefix);
+
+    List<Actor> findActorsByNamePrefixWithQueryByExample(String prefix);
+
+    void updateMovie(Movie movie);
+}
+```
+
+`ActorMovieService` 接口的实现 `ActorMovieServiceImpl` 的内容如下：
+
+```java
+package com.example.demo.service.impl;
+
+// ...
+
+@Service
+public class ActorMovieServiceImpl implements ActorMovieService {
+
+    @Autowired
+    private ActorRepository actorRepository;
+    @Autowired
+    private MovieRepository movieRepository;
+
+    @Autowired
+    private Neo4jTemplate neo4jTemplate;
+
+    @Override
+    public List<Movie> findMoviesByActorName(String name) {
+        String cypher = """
+                MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
+                WHERE a.name = $name
+                RETURN m
+                """;
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("name", name);
+
+        return neo4jTemplate.findAll(cypher, params, Movie.class);
+    }
+
+    @Override
+    public List<Actor> findActorsByNamePrefix(String prefix) {
+        Node actor = Cypher.node("Actor").named("actor");
+        Property name = actor.property("name");
+        Property yearOfBirth = actor.property("yearOfBirth");
+
+        Condition condition = name.startsWith(Cypher.anonParameter(prefix));
+
+        return actorRepository.findAll(condition, yearOfBirth.descending())
+                .stream().toList();
+    }
+
+    @Override
+    public List<Actor> findActorsByNamePrefixWithQueryByExample(String prefix) {
+        Actor exampleActor = new Actor();
+        exampleActor.setName(prefix);
+
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnorePaths("yearOfBirth")
+                .withStringMatcher(ExampleMatcher.StringMatcher.STARTING);
+
+        return actorRepository.findAll(Example.of(exampleActor, matcher), Sort.by("yearOfBirth").descending());
+    }
+
+    @Transactional
+    @Override
+    public void updateMovie(Movie movie) {
+        movieRepository.findById(movie.getId())
+                .map(m -> {
+                    m.setName(movie.getName());
+                    if (movie.getReleasedAt() > 0) {
+                        m.setReleasedAt(movie.getReleasedAt());
+                    }
+                    return movieRepository.save(m);
+                })
+                .orElseThrow(() -> new RuntimeException("Movie not found"));
+    }
+}
+```
 
 ## 2 小结
 
