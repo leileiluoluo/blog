@@ -104,8 +104,6 @@ spring-data-neo4j-demo
 
 ![「演员（Actor）- 参演（ACTED_IN） -> 电影（Movie）」模式图](https://leileiluoluo.github.io/static/images/uploads/2024/12/neo4j-schema-graph.svg)
 
-{{% center %}}（「演员（Actor）- 参演（ACTED_IN）-> 电影（Movie）」模式图）{{% /center %}}
-
 ### 1.1 Model 类
 
 Java 中的 Model 类用于和 Neo4j 中的节点或关系进行一一映射。由上面的模式图可以看到，「演员（Actor）- 参演（ACTED_IN）-> 电影（Movie）」中有两个节点：演员和电影，以及一个关系：参演。所以，该示例工程共有三个 Model 类：`Actor`、`Movie` 和 `Role`，分别用于表示演员节点、电影节点和演员参演了电影的某个角色这个关系。
