@@ -108,7 +108,7 @@ spring-data-neo4j-demo
 
 工程配置文件 `application.properties` 的内容如下：
 
-```text
+```properties
 # src/main/resources/application.properties
 spring.neo4j.uri=bolt://localhost:7687/neo4j
 spring.neo4j.authentication.username=neo4j
