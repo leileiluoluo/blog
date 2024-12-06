@@ -108,7 +108,7 @@ spring-data-neo4j-demo
 
 ### 1.1 Model 类
 
-Java 中的 Model 用于和 Neo4j 中的节点或关系进行一一映射。该示例工程共有三个 Model 类：`Actor.java`、`Movie.java` 和 `Role.java`，分别用于表示演员节点、电影节点和演员参演了电影的某个角色这个关系。
+Java 中的 Model 类用于和 Neo4j 中的节点或关系进行一一映射。该示例工程共有三个 Model 类：`Actor.java`、`Movie.java` 和 `Role.java`，分别用于表示演员节点、电影节点和演员参演了电影的某个角色这个关系。
 
 `Actor.java` Model 类的内容如下：
 
@@ -142,6 +142,8 @@ public class Actor {
     }
 }
 ```
+
+可以看到，该类使用 `@Node` 注解修饰，表示其对应 Neo4j 中的节点 Actor。而为了区分 Actor 中的个体，建议每个 Actor 实例都拥有一个主键，所以这里使用 `@Id` 修饰的 id 字段即是 Actor 的主键，而 `@GeneratedValue` 注解则表示该值为自动生成。
 
 `Movie.java` Model 类的内容如下：
 
