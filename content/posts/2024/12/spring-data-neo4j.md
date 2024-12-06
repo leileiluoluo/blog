@@ -466,6 +466,17 @@ CREATE
   (a3)-[:ACTED_IN {role: "张北京"}]->(m4);
 ```
 
+使用如下 Cypher 语句查询完整关系图：
+
+```text
+MATCH (a:Actor)-[r:ACTED_IN]->(m:Movie)
+RETURN a, r, m
+```
+
+得到的结果如下：
+
+![「演员 - 参演 -> 电影」关系图](https://leileiluoluo.github.io/static/images/uploads/2024/12/actor-movie-data-graph.svg)
+
 其它两个方法则分别调用了 `movieRepository.findByName()` 和 `movieRepository.findMovieNamesByActorName()`，其输出结果与预期一致。
 
 其它针对 `ActorRepository` 的单元测试类 `ActorRepositoryTest`，以及针对 `ActorMovieService` 的单元测试类 `ActorMovieServiceTest` 的代码就不在这里展开说明了。
