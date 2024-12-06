@@ -94,7 +94,7 @@ spring-data-neo4j-demo
 </dependencies>
 ```
 
-可以看到，该项目依赖非常少，主要依赖 `spring-boot-starter-web` 和 `spring-boot-starter-data-neo4j`。而为了省去 Model 类 Setters、Getters 和构造方法的编写，还依赖一个 `lombok`。最后，为了单元测试的编写，还依赖一个 `spring-boot-starter-test`。
+可以看到，该工程的依赖非常少，主要依赖 `spring-boot-starter-web` 和 `spring-boot-starter-data-neo4j`。而为了省去 Model 类 Setters、Getters 和构造方法的编写，还依赖一个 `lombok`。最后，为了单元测试的编写，还依赖一个 `spring-boot-starter-test`。
 
 介绍完工程结构与相关依赖，接下来开始分析该工程中的主要文件或代码。
 
@@ -104,7 +104,20 @@ spring-data-neo4j-demo
 
 ![「演员（Actor）- 参演（ACTED_IN） -> 电影（Movie）」模式图](https://leileiluoluo.github.io/static/images/uploads/2024/12/neo4j-schema-graph.svg)
 
-### 1.1 Model 类
+### 1.1 配置文件
+
+工程配置文件 `application.properties` 的内容如下：
+
+```text
+# src/main/resources/application.properties
+spring.neo4j.uri=bolt://localhost:7687/neo4j
+spring.neo4j.authentication.username=neo4j
+spring.neo4j.authentication.password=neo4j
+```
+
+可以看到，我们在配置文件配置了 Neo4j 的访问地址、用户名和密码。
+
+### 1.2 Model 类
 
 Java 中的 Model 类用于和 Neo4j 中的节点或关系进行一一映射。由上面的模式图可以看到，「演员（Actor）- 参演（ACTED_IN）-> 电影（Movie）」中有两个节点：演员和电影，以及一个关系：参演。所以，该示例工程共有三个 Model 类：`Actor`、`Movie` 和 `Role`，分别用于表示演员节点、电影节点和演员参演了电影的某个角色这个关系。
 
@@ -203,7 +216,7 @@ public class Role {
 
 这三个 Model 都建好后，「演员（Actor）- 参演（ACTED_IN）-> 电影（Movie）」这个模式也就出来了。
 
-### 1.2 Repository 接口
+### 1.3 Repository 接口
 
 Model 类定义好后，接下来开始定义查询 Neo4j 的 Repository 接口。
 
@@ -285,7 +298,7 @@ public interface MovieRepository
 
 介绍完这两个 `Repository` 后，下面我们在 `service` 包下新建一个 `ActorMovieService` 接口，然后在 `ActorMovieServiceImpl` 对接口进行实现，以用来探索 Spring Data Neo4j 提供的其它特性。
 
-### 1.3 ActorMovieService 接口与实现
+### 1.4 ActorMovieService 接口与实现
 
 `ActorMovieService` 接口的内容如下：
 
