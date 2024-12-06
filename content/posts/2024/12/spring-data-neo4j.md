@@ -283,7 +283,7 @@ public interface MovieRepository
 
 可以看到，该接口同样继承了两个父接口：`Neo4jRepository` 和 `CypherdslConditionExecutor`。此外还添加了一个约定命名方法（`findByName()`）和一个自定义查询方法（`findMovieNamesByActorName()`），分别用于实现：根据名称查询 Movie 和根据演员名称查询其参演的电影名称。
 
-介绍完这两个 `Repository` 后，下面我们在 `service` 包下新建一个 `ActorMovieService` 接口，以及其实现 `ActorMovieServiceImpl`，用来探索 Spring Data Neo4j 提供的其它特性。
+介绍完这两个 `Repository` 后，下面我们在 `service` 包下新建一个 `ActorMovieService` 接口，然后在 `ActorMovieServiceImpl` 对接口进行实现，以用来探索 Spring Data Neo4j 提供的其它特性。
 
 ### 1.3 ActorMovieService 接口与实现
 
@@ -306,6 +306,8 @@ public interface ActorMovieService {
     void updateMovie(Movie movie);
 }
 ```
+
+可以看到，该接口内定义了 4 个方法，分别用于：根据演员名字查询参演的电影（`findMoviesByActorName()`）、根据姓氏查询演员（`findActorsByNamePrefix()`）、同样是根据姓氏查询演员但以 Query by Example 的方式实现（`findActorsByNamePrefixWithQueryByExample()`），以及更新 Movie（`updateMovie()`）。
 
 `ActorMovieService` 接口的实现 `ActorMovieServiceImpl` 的内容如下：
 
@@ -380,7 +382,13 @@ public class ActorMovieServiceImpl implements ActorMovieService {
 }
 ```
 
+可以看到，`findMoviesByActorName()` 方法是使用自己编写 Cypher 语句、设置参数以及调用 `Neo4jTemplate` 来实现的；`findActorsByNamePrefix()` 方法以 Cypher DSL 的方式实现了对应的查询和排序；`findActorsByNamePrefixWithQueryByExample()` 方法与 `findActorsByNamePrefix()` 的功能一样，但使用了 Query by Example 来实现；最后一个方法 `updateMovie()` 根据 ID 来更新 Movie，使用了 `@Transactional` 注解，其支持事务。
+
 ## 2 单元测试
+
+接下来即编写单元测试类来对上面的 Repository 和 Service 进行测试。
+
+对 `MovieRepository` 进行测试的 `MovieRepositoryTest` 单元测试类的内容如下：
 
 ```java
 // src/test/java/com/example/demo/repository/MovieRepositoryTest.java
@@ -439,11 +447,34 @@ public class MovieRepositoryTest {
 }
 ```
 
-其它针对 `ActorRepository` 的单元测试类 `ActorRepositoryTest`，以及针对 `ActorMovieService` 的单元测试类 `ActorMovieServiceTest` 的代码细节不再赘述。
+可以看到，`testSaveAll()` 方法调用 `movieRepository.saveAll()` 存储了一组带关系信息的 Movie。其相当于下面的 Cypher 语句：
+
+```text
+CREATE
+  (a1:Actor {name: "吴京", nationality: "中国", yearOfBirth: 1974}),
+  (a2:Actor {name: "卢靖姗", nationality: "中国", yearOfBirth: 1985}),
+  (a3:Actor {name: "葛优", nationality: "中国", yearOfBirth: 1957}),
+  (m1:Movie {name: "战狼 Ⅱ", releasedAt: 2017}),
+  (m2:Movie {name: "太极宗师", releasedAt: 1998}),
+  (m3:Movie {name: "流浪地球 Ⅱ", releasedAt: 2023}),
+  (m4:Movie {name: "我和我的家乡", releasedAt: 2020}),
+  (a1)-[:ACTED_IN {role: "冷峰"}]->(m1),
+  (a1)-[:ACTED_IN {role: "杨昱乾"}]->(m2),
+  (a1)-[:ACTED_IN {role: "刘培强"}]->(m3),
+  (a2)-[:ACTED_IN {role: "Rachel"}]->(m1),
+  (a2)-[:ACTED_IN {role: "EMMA MEIER"}]->(m4),
+  (a3)-[:ACTED_IN {role: "张北京"}]->(m4);
+```
+
+其它两个方法则分别调用了 `movieRepository.findByName()` 和 `movieRepository.findMovieNamesByActorName()`，其输出结果与预期一致。
+
+其它针对 `ActorRepository` 的单元测试类 `ActorRepositoryTest`，以及针对 `ActorMovieService` 的单元测试类 `ActorMovieServiceTest` 的代码就不在这里展开说明了。
 
 ## 3 小结
 
-示例工程代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-data-neo4j-demo)，欢迎关注或 Fork。
+综上，我们探索了使用 Spring Data Neo4j 来对 Neo4j 数据库进行访问，体会到其与 Spring Boot 框架的集成非常的便捷，只需引入一个 Starter 即可。而在使用方面，Spring Data Neo4j 秉承了 Spring Data 的统一设计思想。我们可以使用注解将 Java Model 与 Neo4j 数据库实体进行映射；我们可以继承 Repository 接口来实现基础的增删改查功能，使用 `@Query` 注解自己编写 Cypher 语句；还可以使用 `Neo4jTemplate` 自主编写查询来操作 Neo4j 数据库。此外，Spring Data Neo4j 还提供 Query by Example、Cypher DSL 额外两种方式来查询 Neo4j 数据库。
+
+本文完整示例工程代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-data-neo4j-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
