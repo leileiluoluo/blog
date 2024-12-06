@@ -108,7 +108,7 @@ spring-data-neo4j-demo
 
 ### 1.1 Model 类
 
-Java 中的 Model 类用于和 Neo4j 中的节点或关系进行一一映射。该示例工程共有三个 Model 类：`Actor.java`、`Movie.java` 和 `Role.java`，分别用于表示演员节点、电影节点和演员参演了电影的某个角色这个关系。
+Java 中的 Model 类用于和 Neo4j 中的节点或关系进行一一映射。由上面的模式图可以看到，「演员（Actor）- 参演（ACTED_IN）-> 电影（Movie）」中有两个节点：演员和电影，以及一个关系：参演。所以，该示例工程共有三个 Model 类：`Actor.java`、`Movie.java` 和 `Role.java`，分别用于表示演员节点、电影节点和演员参演了电影的某个角色这个关系。
 
 `Actor.java` Model 类的内容如下：
 
@@ -143,7 +143,7 @@ public class Actor {
 }
 ```
 
-可以看到，该类使用 `@Node` 注解修饰，表示其对应 Neo4j 中的节点 Actor。而为了区分 Actor 中的个体，建议每个 Actor 实例都拥有一个主键，所以这里使用 `@Id` 修饰的 id 字段即是 Actor 的主键，而 `@GeneratedValue` 注解则表示该值为自动生成。
+可以看到，该类使用 `@Node` 注解修饰，表示其对应 Neo4j 中的节点 Actor。而为了区分 Actor 中的个体，建议每个 Actor 实例都拥有一个主键，所以这里使用 `@Id` 修饰的 id 字段即是 Actor 的主键，而 `@GeneratedValue` 注解则表示该值为自动生成。除此之外，该 Actor 节点还拥有 `name`、`nationality` 和 `yearOfBirth` 三个属性。
 
 `Movie.java` Model 类的内容如下：
 
@@ -183,6 +183,8 @@ public class Movie {
 }
 ```
 
+可以看到，该类对应 Neo4j 中的节点 Movie，除了同样拥有一个主键字段外，还拥有 `name` 和 `releasedAt` 两个属性。关键的地方在于其还拥有一个使用 `@Relationship` 注解修饰的字段 `rolesAndActors`，表示其是一个关系属性，非普通属性。该关系的类型是 `ACTED_IN`（参演），方向为 `INCOMING`，表示进入（即箭头指向 Movie）。一部电影可以由多个演员参演，所以 `rolesAndActors` 的类型是一个 `List<Role>`。
+
 `Role.java` Model 类的内容如下：
 
 ```java
@@ -213,6 +215,10 @@ public class Role {
     }
 }
 ```
+
+可以看到，该类使用 `@RelationshipProperties` 注解修饰，表示其是一个关系属性类。该类同样需要一个主键，所以拥有一个使用 `@RelationshipId` 修饰的 `id` 字段。此外还有一个 `name` 属性，表示演员参演该电影的角色名。此外有一个使用 `@TargetNode` 注解修饰的 `actor` 字段。表示该关系的箭头另一端是一个 Actor。
+
+这三个 Model 都建好后，「演员（Actor）- 参演（ACTED_IN）-> 电影（Movie）」这个模式也就出来了。
 
 ## 2 小结
 
