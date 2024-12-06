@@ -18,7 +18,7 @@ description: 本文关注如何使用 Spring Data Neo4j 访问 Neo4j 数据库�
 
 上文「[Neo4j 初探](https://leileiluoluo.github.io/posts/neo4j-introduction.html)」介绍了 Neo4j 的基本概念，并对 Neo4j 进行了初步使用。本文则关注如何使用 Spring Data Neo4j 访问 Neo4j 数据库？Spring Data Neo4j 是 Spring Data 项目的一部分，它简化了与 Neo4j 图形数据库的交互。Spring Data Neo4j 除了可以通过 Repository 的方式轻松实现常见的 CRUD 操作外，还支持事务管理、Cypher 查询和图数据建模等特性。
 
-接下来即以示例工程的方式演示 Spring Data Neo4j 的使用，该示例工程涉及的业务场景是存取「演员（Actor）- 参演（ACTED_IN） -> 电影（Movie）」相关的数据。
+接下来即以示例工程的方式演示 Spring Data Neo4j 的使用，该示例工程涉及的业务场景是存取「演员（Actor）- 参演（ACTED_IN）-> 电影（Movie）」相关的数据。
 
 本地安装的 Neo4j 的版本为 `5.25.1`，示例工程用到的各项依赖及其版本为：
 
@@ -99,6 +99,10 @@ spring-data-neo4j-demo
 介绍完工程结构与相关依赖，接下来开始分析该工程中的主要文件或代码。
 
 ## 1 代码分析
+
+![「演员（Actor）- 参演（ACTED_IN） -> 电影（Movie）」模式图](https://leileiluoluo.github.io/static/images/uploads/2024/12/neo4j-schema-graph.svg)
+
+{{% center %}}（「演员（Actor）- 参演（ACTED_IN）-> 电影（Movie）」模式图）{{% /center %}}
 
 ### 1.1 Model 类
 
