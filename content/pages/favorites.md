@@ -145,3 +145,4 @@ wip_template:
 
 - [在线 GIF 图片制作](https://ezgif.com/make/)
 - [在线 JPG 图片压缩](https://www.imgdiet.com/zh-CN/jpg-compress)
+- [在线图表制作](https://www.zxgj.cn/m/bangong)
