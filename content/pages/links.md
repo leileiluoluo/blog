@@ -32,6 +32,10 @@ Golang 中文社区，活跃度极高的 Go 语言问答社区。
 
 全栈工程师、技术管理者。拥有广泛的兴趣爱好与自律的生活方式。
 
+**[Wslll Blog](https://www.wslll.cn/)**
+
+技术分享者，数码爱好者。
+
 **[Java 突击队](http://www.susan.net.cn/)**
 
 快速提升 Java 技术的神奇网站，涵盖 Java 技术栈的方方面面。
