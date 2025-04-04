@@ -36,13 +36,9 @@ Golang 中文社区，活跃度极高的 Go 语言问答社区。
 
 技术分享者，数码爱好者。
 
-**[Java 突击队](http://www.susan.net.cn/)**
+**[空屿](http://pinaland.cn/)**
 
-快速提升 Java 技术的神奇网站，涵盖 Java 技术栈的方方面面。
-
-**[死磕 Java](https://www.skjava.com/)**
-
-大明哥精心打造的 Java 进阶类系列教程，希望大家少走弯路。
+嵌入式开发从业者。一颗树，一座灯塔，一座岛。
 
 ---
 
