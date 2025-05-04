@@ -21,7 +21,7 @@ description: 本文将以实例的方式探索「如何使用 Spring Data 同时
 
 本文将以实例的方式探索「如何使用 Spring Data 同时访问 MySQL 和 Neo4j 数据库？」，涉及 Spring Boot 中多个数据源的配置、多个事务的配置，以及多组 Repository 的使用。
 
-为了使演示工程更接近于实际，我们特为该工程设定一个场景：即使用该工程实现 MySQL 到 Neo4j 的数据迁移。技术上会涉及使用两组 Repository 进行读写；业务上会涉及关系型数据库的表到 Neo4j Node 和 Relationship 的转换。
+为了使演示工程更接近于实际，我们特为该工程设定一个场景：即使用该工程实现 MySQL 到 Neo4j 的数据迁移。技术上会涉及使用两组 Repository 进行读写，以及关系型数据库的表到 Neo4j 的 Node 和 Relationship 的转换。
 
 > 参考资料
 >
