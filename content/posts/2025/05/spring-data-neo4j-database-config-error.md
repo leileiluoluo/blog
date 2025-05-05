@@ -14,10 +14,12 @@ keywords:
   - Spring Boot
   - Spring Data
   - Neo4j
-description: 本人在对 Spring Data Neo4j 的实际使用中，发现一个问题，即：配置自定义 TransactionManager 后，指定 spring.data.neo4j.database 会报错。本文特对该问题进行记录、复现和解决，给面临相同问题的朋友作参考。
+description: 本人在对 Spring Data Neo4j 的实际使用中，发现一个问题，即：配置自定义 TransactionManager 后，指定 spring.data.neo4j.database 会报错。本文特对该问题进行记录、分析和解决，以给面临相同问题的朋友作参考。
 ---
 
-本人在对 Spring Data Neo4j 的实际使用中，发现一个问题，即：配置自定义 `TransactionManager` 后，指定 `spring.data.neo4j.database` 会报错。本文特对该问题进行记录、复现和解决，给面临相同问题的朋友作参考。
+本人在对 Spring Data Neo4j 的实际使用中，发现一个问题，即：配置自定义 `TransactionManager` 后，指定 `spring.data.neo4j.database` 会报错。本文特对该问题进行记录、分析和解决，以给面临相同问题的朋友作参考。
+
+<!--more-->
 
 ## 1 问题描述
 
