@@ -316,7 +316,7 @@ public class GraphActor {
 }
 ```
 
-`relational` 或 `graph` 包下其它的 Model 类与此两者类似，为了控制篇幅，其代码就不再这里一一列出了。
+`relational` 或 `graph` 包下其它的 Model 类与此两者类似，为了控制篇幅，其代码就不在这里一一列出了。
 
 ### 2.5 Repository 接口
 
@@ -351,7 +351,7 @@ public interface GraphActorRepository extends Neo4jRepository<GraphActor, Long> 
 }
 ```
 
-也不再这里一一列出了。
+`relational` 或 `graph` 包下其它的 Repository 与此两者类似，这里也不一一列出了。
 
 ### 2.6 Service 类
 
