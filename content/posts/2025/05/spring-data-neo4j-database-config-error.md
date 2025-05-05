@@ -1,5 +1,5 @@
 ---
-title: Spring Data Neo4j 配置自定义 TransactionManager 后，指定 spring.data.neo4j.database 会报错
+title: Spring Data Neo4j 指定 spring.data.neo4j.database 时报错该如何解决？
 author: leileiluoluo
 type: post
 date: 2025-05-05T19:30:00+08:00
