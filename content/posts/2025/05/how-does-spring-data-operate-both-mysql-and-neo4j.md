@@ -251,7 +251,7 @@ public class MySQLConfig {
 
 ```java
 package com.example.demo.config;
-//...
+// ...
 
 @Configuration
 @EnableTransactionManagement
@@ -273,7 +273,85 @@ public class Neo4jConfig {
 
 ### 2.4 Model 类
 
+Model 类用于对应 MySQL 数据库的表或对应 Neo4j 数据库的 Node。
+
+下面是 `Actor.java` 的源码，其对应 MySQL 的 `actor` 表。
+
+```java
+package com.example.demo.model.relational;
+// ...
+
+@Data
+@Entity(name = "actor")
+public class Actor {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long actorId;
+    private String name;
+    private String nationality;
+    private Integer yearOfBirth;
+}
+```
+
+下面是 `GraphActor.java` 的源码，其对应 Neo4j 的 `Actor` Node。
+
+```java
+package com.example.demo.model.graph;
+// ...
+
+@Data
+@Node("Actor")
+public class GraphActor {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    private Long actorId;
+    private String name;
+    private String nationality;
+    private Integer yearOfBirth;
+}
+```
+
+`relational` 或 `graph` 包下其它的 Model 类与此两者类似，为了控制篇幅，其代码就不再这里一一列出了。
+
 ### 2.5 Repository 接口
+
+Repository 用于真正与数据库交互。
+
+下面是 `ActorRepository.java` 的源码，其用于对 MySQL 的 `actor` 表进行增删改查。
+
+```java
+package com.example.demo.repository.relational;
+// ...
+
+public interface ActorRepository extends JpaRepository<Actor, Long> {
+}
+```
+
+下面是 `GraphActorRepository.java` 的源码，其用于对 Neo4j 的 `Actor` Node 进行增删改查。可以看到，与普通 JPA Repository 类似，Neo4j 的 Repository 上同样支持编写自定义查询。
+
+```java
+package com.example.demo.repository.graph;
+// ...
+
+public interface GraphActorRepository extends Neo4jRepository<GraphActor, Long> {
+
+    @Transactional("neo4jTransactionManager")
+    @Query("""
+            UNWIND $actors AS actor
+            MERGE (a:Actor {actorId: actor.actorId})
+            ON CREATE SET a = actor
+            ON MATCH SET a += actor
+            """)
+    void batchInsertOrUpdate(List<Map<String, Object>> actors);
+}
+```
+
+也不再这里一一列出了。
 
 ### 2.6 Service 类
 
