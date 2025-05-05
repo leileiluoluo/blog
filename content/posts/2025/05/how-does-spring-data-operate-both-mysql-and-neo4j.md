@@ -132,7 +132,7 @@ spring-data-jpa-and-neo4j-demo
 └─ pom.xml
 ```
 
-可以看到，其是一个标准的 Maven 工程，`DemoApplication.java` 为启动类，`application.yaml` 为配置文件。`config` 包下用于放置配置类，`MySQLConfig.java` 和 `Neo4jConfig.java` 分别用于配置 MySQL 和 Neo4j 的配置读取和事务管理。`repository` 包下用于放置访问数据库的 Repository 接口，其中 `relational` 子目录下放置的是访问 MySQL 的 Repository，`graph` 子目录下放置的是访问 Neo4j 的 Repository。`model` 包下放置 Model 类，`relational` 子目录下放置的是对应 MySQL 表的 Model 类，`relational` 下放置的是对应 Neo4j Node 的 Model 类。此外 `service` 包下用于放置服务类，我们编写的 `MigrationService.java` 及其实现即是做 MySQL 到 Neo4j 数据迁移的。
+可以看到，其是一个标准的 Maven 工程，`DemoApplication.java` 为启动类，`application.yaml` 为配置文件。`config` 包下用于放置配置类，`MySQLConfig.java` 和 `Neo4jConfig.java` 分别用于配置 MySQL 和 Neo4j 的连接信息读取和事务管理。`repository` 包下用于放置访问数据库的 Repository 接口，其中 `relational` 子目录下放置的是访问 MySQL 的 Repository，`graph` 子目录下放置的是访问 Neo4j 的 Repository。`model` 包下放置 Model 类，`relational` 子目录下放置的是对应 MySQL 表的 Model 类，`graph` 子目录下放置的是对应 Neo4j Node 的 Model 类。此外 `service` 包下用于放置服务类，我们编写的 `MigrationService.java` 及其实现即是做 MySQL 到 Neo4j 数据迁移的。
 
 该示例工程用到的依赖如下：
 
@@ -199,6 +199,85 @@ logging:
 ```
 
 可以看到，我们配置了两个数据源：`spring.datasource` 配置的是 MySQL 的连接信息，`spring.neo4j` 配置的是 Neo4j 的连接信息。此外，我们还开启了 SQL 和 Neo4j Cypher 语句的打印。
+
+介绍完工程结构、依赖和配置后，下面介绍关键的代码块。
+
+### 2.3 Config 类
+
+要支持在 Spring Boot 中同时操作 MySQL 和 Neo4j，配置类是关键。
+
+下面是 `MySQLConfig.java` 的源码：
+
+```java
+package com.example.demo.config;
+// ...
+
+@Configuration
+@EnableTransactionManagement
+@EnableJpaRepositories(
+        basePackages = "com.example.demo.repository.relational",
+        entityManagerFactoryRef = "mysqlEntityManagerFactory",
+        transactionManagerRef = "mysqlTransactionManager"
+)
+public class MySQLConfig {
+
+    @Bean(name = "mysqlDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource")
+    public DataSource mysqlDataSource() {
+        return DataSourceBuilder.create().build();
+    }
+
+    @Bean(name = "mysqlEntityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean mysqlEntityManagerFactory(
+            EntityManagerFactoryBuilder builder,
+            @Qualifier("mysqlDataSource") DataSource dataSource) {
+        return builder.dataSource(dataSource)
+                .packages("com.example.demo.model.relational")
+                .persistenceUnit("mysql")
+                .build();
+    }
+
+    @Bean(name = "mysqlTransactionManager")
+    public PlatformTransactionManager mysqlTransactionManager(
+            @Qualifier("mysqlEntityManagerFactory") EntityManagerFactory factory) {
+        return new JpaTransactionManager(factory);
+    }
+}
+```
+
+可以看到，我们在该类中指定了 MySQL Repository 的位置、数据库连接信息在配置文件中的位置，并配置了 MySQL 的实体管理器和事务管理器。
+
+下面是 `Neo4jConfig.java` 的源码：
+
+```java
+package com.example.demo.config;
+//...
+
+@Configuration
+@EnableTransactionManagement
+@EnableNeo4jRepositories(
+        basePackages = "com.example.demo.repository.graph",
+        transactionManagerRef = "neo4jTransactionManager"
+)
+public class Neo4jConfig {
+
+    @Bean(name = "neo4jTransactionManager")
+    public PlatformTransactionManager transactionManager(Driver driver) {
+        return Neo4jTransactionManager.with(driver)
+                .build();
+    }
+}
+```
+
+可以看到，我们在该配置类中指定了 Neo4j 的 Repository 位置并配置了 Neo4j 的事务管理器。
+
+### 2.4 Model 类
+
+### 2.5 Repository 接口
+
+### 2.6 Service 类
+
+## 3 单元测试
 
 > 参考资料
 >
