@@ -2,8 +2,8 @@
 title: 五一蛤蜊島之旅
 author: leileiluoluo
 type: post
-date: 2025-05-05T13:00:00+08:00
-url: /posts/2025-may-day.html
+date: 2025-05-05T12:50:00+08:00
+url: /posts/ge-li-dao.html
 categories:
   - 随笔
 tags:
