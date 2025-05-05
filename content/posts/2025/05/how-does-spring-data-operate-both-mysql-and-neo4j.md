@@ -355,7 +355,107 @@ public interface GraphActorRepository extends Neo4jRepository<GraphActor, Long> 
 
 ### 2.6 Service 类
 
-## 3 单元测试
+`MigrationService` 实现类的代码如下，其对前面的 Model 和 Repository 进行了使用，实现了 MySQL 到 Neo4j 的数据迁移。
+
+```java
+package com.example.demo.service.impl;
+// ...
+
+@Service
+public class MigrationServiceImpl implements MigrationService {
+
+    @Autowired
+    private ActorRepository actorRepository;
+    @Autowired
+    private MovieRepository movieRepository;
+    @Autowired
+    private ActorMovieRepository actorMovieRepository;
+    @Autowired
+    private GraphActorRepository graphActorRepository;
+    @Autowired
+    private GraphMovieRepository graphMovieRepository;
+
+    @Override
+    public void migrateActorsAndMovies() {
+        // migrate all actors
+        migrateAllActors();
+
+        // migrate all movies
+        migrateAllMovies();
+
+        // delete all ACTED_IN relations
+        graphMovieRepository.deleteAllActedInRelations();
+
+        // rebuild ACTED_IN relations
+        List<Map<String, Object>> actedInRelations = getAllActedInRelations();
+        graphMovieRepository.batchInsertOrUpdateActedInRelations(actedInRelations);
+    }
+
+    private void migrateAllActors() {
+        List<Actor> actors = actorRepository.findAll();
+
+        List<Map<String, Object>> graphActors = actors.stream()
+                .map(this::assembleActor)
+                .toList();
+
+        graphActorRepository.batchInsertOrUpdate(graphActors);
+    }
+
+    private void migrateAllMovies() {
+        List<Movie> movies = movieRepository.findAll();
+
+        List<Map<String, Object>> graphMovies = movies.stream()
+                .map(this::assembleMovie)
+                .toList();
+
+        graphMovieRepository.batchInsertOrUpdate(graphMovies);
+    }
+
+    private List<Map<String, Object>> getAllActedInRelations() {
+        List<ActorMovie> actorMovies = actorMovieRepository.findAll();
+
+        return actorMovies.stream()
+                .map(this::assembleActedIn)
+                .toList();
+    }
+
+    private Map<String, Object> assembleActor(Actor actor) {
+        GraphActor graphActor = new GraphActor();
+        BeanUtils.copyProperties(actor, graphActor);
+        graphActor.setId(null);
+
+        return ObjectToMapUtil.toMap(graphActor);
+    }
+
+    private Map<String, Object> assembleMovie(Movie movie) {
+        GraphMovie graphMovie = new GraphMovie();
+        BeanUtils.copyProperties(movie, graphMovie);
+        graphMovie.setId(null);
+
+        return ObjectToMapUtil.toMap(graphMovie);
+    }
+
+    private Map<String, Object> assembleActedIn(ActorMovie actorMovie) {
+        return Map.of(
+                "actorId", actorMovie.getId().getActorId(),
+                "movieId", actorMovie.getId().getMovieId(),
+                "role", actorMovie.getRole()
+        );
+    }
+}
+```
+
+可以看到，该实现类对 MySQL 读取，对 Neo4j 进行写入，实现了两个数据库的模式转换和数据迁移。
+
+需要注意的是，我们使用了一个 Java 对象到 Map 类型转换的工具类 `ObjectToMapUtil.java`，这是因为 Neo4j 的 Repository 目前还不支持直接传入一个 Java 对象。
+
+最后，在单元测试类中调用该实现类后，即可出现文章开头展示的效果。
+
+## 3 小结
+
+综上，我们以实现 MySQL 到 Neo4j 数据迁移为目的演示了如何使用 Spring Data 同时访问 MySQL 和 Neo4j 数据库。
+
+本文完整示例工程代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-data-jpa-and-neo4j-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
