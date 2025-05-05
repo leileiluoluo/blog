@@ -21,6 +21,15 @@ description: 本人在对 Spring Data Neo4j 的实际使用中，发现一个问
 
 <!--more-->
 
+描述问题前，列出本文使用的 Java、Spring Data Neo4j 及其它依赖的版本：
+
+```text
+Java: Liberica JDK 17.0.7
+Spring Boot: 3.4.5
+Spring Data Neo4j: 7.4.5
+Maven: 3.9.2
+```
+
 ## 1 问题描述
 
 为了描述该问题，本人特搭建一个简单的 Maven 工程，其目录结构如下：
