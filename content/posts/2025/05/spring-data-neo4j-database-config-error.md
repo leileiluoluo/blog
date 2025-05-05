@@ -195,8 +195,9 @@ public class Neo4jConfig {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(Driver driver) {
+    public PlatformTransactionManager transactionManager(Driver driver, DatabaseSelectionProvider provider) {
         return Neo4jTransactionManager.with(driver)
+                .withDatabaseSelectionProvider(provider)
                 .build();
     }
 }
