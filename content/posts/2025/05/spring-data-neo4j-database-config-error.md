@@ -73,7 +73,7 @@ spring:
       password: neo4j
 ```
 
-可以看到，除了指定了 Neo4j 的连接信息，还使用 `spring.data.neo4j.database` 指定了要连接的 Neo4j 数据库。
+可以看到，该配置除了指定了 Neo4j 的连接信息，还使用 `spring.data.neo4j.database` 指定了要连接的 Neo4j 数据库名。
 
 介绍完配置文件，下面看一下 `Neo4jConfig.java` 的代码：
 
@@ -103,7 +103,7 @@ public class Neo4jConfig {
 
 可以看到，我们在该类配置了 Neo4j 的 `TransactionManager` Bean。
 
-一切准备好后，我们发现使用 `ActorRepositoryTest.java` 单元测试类测试 `ActorRepository` 的增删改查方法时会报如下错误：
+一切准备好后，使用 `ActorRepositoryTest.java` 单元测试类测试 `ActorRepository` 的增删改查方法时会报如下错误：
 
 ```text
 [ERROR] com.example.demo.repository.ActorRepositoryTest.testSave -- Time elapsed: 1.526 s <<< ERROR!
@@ -143,16 +143,77 @@ java.lang.IllegalStateException: There is already an ongoing Spring transaction 
 	at com.example.demo.repository.ActorRepositoryTest.testSave(ActorRepositoryTest.java:21)
 ```
 
-这是为什么呢？
+可以看到，抛错的位置在 Spring Data Neo4j `Neo4jTransactionManager.java` 类的 244 行，报错关键信息是「There is already an ongoing Spring transaction for the default user of the default database, but you requested the default user of 'test'」。
 
 ## 2 原因分析
 
+翻看 Spring Data Neo4j `Neo4jTransactionManager.java` 类的源码并结合报错信息，得到的线索是「`getDatabaseSelection()` 的值与 `getUserSelection()` 的值不匹配」。
+
+![Neo4jTransactionManager 源码](https://leileiluoluo.github.io/static/images/uploads/2025/05/spring-data-neo4j-source-code.png)
+
+即虽然我们已在 `application.yaml` 配置文件指定了要连接的数据库，但 `TransactionManager` 获取到值却仍然是默认数据库。问题可能出在了我们的自定义 Neo4j 配置类 `Neo4jConfig.java` 上。
+
 ## 3 解决办法
 
+有了可能的原因，下面尝试查阅文档，在 `Neo4jConfig.java` 配置 `TransactionManager` 时同时指定要连接的数据库，这样问题可能就解决了。
+
+修改后的 `Neo4jConfig.java` 代码如下：
+
+```java
+package com.example.demo.config;
+
+import org.neo4j.driver.Driver;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.neo4j.core.DatabaseSelection;
+import org.springframework.data.neo4j.core.DatabaseSelectionProvider;
+import org.springframework.data.neo4j.core.Neo4jClient;
+import org.springframework.data.neo4j.core.transaction.Neo4jTransactionManager;
+import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+@Configuration
+@EnableTransactionManagement
+@EnableNeo4jRepositories(basePackages = "com.example.demo.repository")
+public class Neo4jConfig {
+
+    @Value("${spring.data.neo4j.database}")
+    private String database;
+
+    @Bean
+    public DatabaseSelectionProvider databaseSelectionProvider() {
+        return () -> DatabaseSelection.byName(database);
+    }
+
+    @Bean
+    public Neo4jClient neo4jClient(Driver driver, DatabaseSelectionProvider provider) {
+        return Neo4jClient.with(driver)
+                .withDatabaseSelectionProvider(provider)
+                .build();
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(Driver driver) {
+        return Neo4jTransactionManager.with(driver)
+                .build();
+    }
+}
+```
+
+可以看到，我们在 `Neo4jConfig.java` 中读取了 `spring.data.neo4j.database` 的值，并基于此自定义了 `DatabaseSelectionProvider` Bean。然后在配置 `Neo4jClient` Bean 和 `TransactionManager` Bean 时使用了该自定义 Provider。
+
+修改后，再次使用 `ActorRepositoryTest.java` 单元测试类测试 `ActorRepository` 的增删改查方法，发现不报错了。
+
 ## 4 小结
+
+本文针对 Spring Data Neo4j 配置自定义 TransactionManager 后，指定 spring.data.neo4j.database 会报错的问题进行了描述、分析和解决。
 
 本文完整示例工程代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-data-neo4j-database-config-demo)，欢迎关注或 Fork。
 
 > 参考资料
 >
 > [1] Spring: Spring Data JPA FAQ - Configure the database name - [https://docs.spring.io/spring-data/neo4j/reference/faq.html#faq.multidatabase.statically](https://docs.spring.io/spring-data/neo4j/reference/faq.html#faq.multidatabase.statically)
+>
+> [2] GitHub: Spring Data Neo4j - Neo4jTransactionManager.java - [https://github.com/spring-projects/spring-data-neo4j/blob/7.4.x/src/main/java/org/springframework/data/neo4j/core/transaction/Neo4jTransactionManager.java](https://github.com/spring-projects/spring-data-neo4j/blob/7.4.x/src/main/java/org/springframework/data/neo4j/core/transaction/Neo4jTransactionManager.java)
