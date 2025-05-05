@@ -76,6 +76,130 @@ INSERT INTO actor_movie(actor_id, movie_id, role) VALUES
 
 ![Neo4j Graph](https://leileiluoluo.github.io/static/images/uploads/2025/05/neo4j-graph.svg)
 
+功能展示完成后，下面介绍该示例工程的结构以及关键代码块。
+
+## 2 工程结构及关键代码分析
+
+该示例工程是一个使用 Maven 管理的 Spring Boot 工程，其各依赖项及其版本如下：
+
+```text
+Java: Liberica JDK 17.0.7
+Maven: 3.9.2
+Spring Boot: 3.4.5
+```
+
+### 2.1 工程结构及依赖
+
+该示例工程的结构如下：
+
+```text
+spring-data-jpa-and-neo4j-demo
+├─ src
+│  ├─ main
+│  │  ├─ java
+│  │  │  └─ com.example.demo
+│  │  │     ├─ config
+│  │  │     │  ├─ MySQLConfig.java
+│  │  │     │  └─ Neo4jConfig.java
+│  │  │     ├─ repository
+│  │  │     │  ├─ graph
+│  │  │     │  │  ├─ GraphActorRepository.java
+│  │  │     │  │  └─ GraphMovieRepository.java
+│  │  │     │  └─ relational
+│  │  │     │  │  ├─ ActorRepository.java
+│  │  │     │  │  ├─ MovieRepository.java
+│  │  │     │  │  └─ ActorMovieRepository.java
+│  │  │     ├─ service
+│  │  │     │  ├─ MigrationService.java
+│  │  │     │  └─ impl
+│  │  │     │     └─ MigrationServiceImpl.java
+│  │  │     ├─ model
+│  │  │     │  ├─ graph
+│  │  │     │  │  ├─ GraphActor.java
+│  │  │     │  │  └─ GraphMovie.java
+│  │  │     │  └─ relational
+│  │  │     │  │  ├─ Actor.java
+│  │  │     │  │  ├─ Movie.java
+│  │  │     │  │  └─ ActorMovie.java
+│  │  │     └─ DemoApplication.java
+│  │  └─ resources
+│  │     └─ application.yaml
+│  └─ test
+│     └─ java
+│        └─ com.example.demo
+│           └─ service
+│              └─ MigrationServiceTest.java
+└─ pom.xml
+```
+
+可以看到，其是一个标准的 Maven 工程，`DemoApplication.java` 为启动类，`application.yaml` 为配置文件。`config` 包下用于放置配置类，`MySQLConfig.java` 和 `Neo4jConfig.java` 分别用于配置 MySQL 和 Neo4j 的配置读取和事务管理。`repository` 包下用于放置访问数据库的 Repository 接口，其中 `relational` 子目录下放置的是访问 MySQL 的 Repository，`graph` 子目录下放置的是访问 Neo4j 的 Repository。`model` 包下放置 Model 类，`relational` 子目录下放置的是对应 MySQL 表的 Model 类，`relational` 下放置的是对应 Neo4j Node 的 Model 类。此外 `service` 包下用于放置服务类，我们编写的 `MigrationService.java` 及其实现即是做 MySQL 到 Neo4j 数据迁移的。
+
+该示例工程用到的依赖如下：
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-neo4j</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <optional>true</optional>
+    </dependency>
+
+    <!-- driver -->
+    <dependency>
+        <groupId>com.mysql</groupId>
+        <artifactId>mysql-connector-j</artifactId>
+        <version>9.2.0</version>
+    </dependency>
+
+    <!-- test -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
+
+可以看到，该工程主要有两项依赖 `spring-boot-starter-data-jpa` 和 `spring-boot-starter-data-neo4j`，前者用于访问 MySQL，后者用于访问 Neo4j。此外，使用 `lombok` 方便 Getters 和 Setters 的编写，`mysql-connector-j` 为访问 MySQL 的驱动，`spring-boot-starter-test` 为单元测试依赖。
+
+### 2.2 工程配置
+
+该工程的配置文件 `application.yaml` 的内容如下
+
+```yaml
+spring:
+  datasource:
+    jdbc-url: jdbc:mysql://localhost:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+  neo4j:
+    uri: bolt://localhost:7687/neo4j
+    authentication:
+      username: neo4j
+      password: neo4j
+
+logging:
+  level:
+    org.neo4j.ogm: DEBUG
+    org.springframework.data.neo4j: DEBUG
+```
+
+可以看到，我们配置了两个数据源：`spring.datasource` 配置的是 MySQL 的连接信息，`spring.neo4j` 配置的是 Neo4j 的连接信息。此外，我们还开启了 SQL 和 Neo4j Cypher 语句的打印。
+
 > 参考资料
 >
 > [1] Spring: Spring Data JPA - [https://docs.spring.io/spring-data/jpa/reference/jpa.html](https://docs.spring.io/spring-data/jpa/reference/jpa.html)
