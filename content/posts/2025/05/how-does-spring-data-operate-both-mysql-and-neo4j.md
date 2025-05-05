@@ -206,7 +206,7 @@ logging:
 
 要支持在 Spring Boot 中同时操作 MySQL 和 Neo4j，配置类是关键。
 
-下面是 `MySQLConfig.java` 的源码：
+下面是 `MySQLConfig.java` 的代码：
 
 ```java
 package com.example.demo.config;
@@ -247,7 +247,7 @@ public class MySQLConfig {
 
 可以看到，我们在该类中指定了 MySQL Repository 的位置、数据库连接信息在配置文件中的位置，并配置了 MySQL 的实体管理器和事务管理器。
 
-下面是 `Neo4jConfig.java` 的源码：
+下面是 `Neo4jConfig.java` 的代码：
 
 ```java
 package com.example.demo.config;
@@ -269,13 +269,13 @@ public class Neo4jConfig {
 }
 ```
 
-可以看到，我们在该配置类中指定了 Neo4j 的 Repository 位置并配置了 Neo4j 的事务管理器。
+可以看到，我们在该配置类中指定了 Neo4j Repository 的位置并配置了 Neo4j 的事务管理器。
 
 ### 2.4 Model 类
 
 Model 类用于对应 MySQL 数据库的表或对应 Neo4j 数据库的 Node。
 
-下面是 `Actor.java` 的源码，其对应 MySQL 的 `actor` 表。
+下面是 `Actor.java` 的代码，其对应 MySQL 的 `actor` 表。
 
 ```java
 package com.example.demo.model.relational;
@@ -295,7 +295,7 @@ public class Actor {
 }
 ```
 
-下面是 `GraphActor.java` 的源码，其对应 Neo4j 的 `Actor` Node。
+下面是 `GraphActor.java` 的代码，其对应 Neo4j 的 `Actor` Node。
 
 ```java
 package com.example.demo.model.graph;
@@ -322,7 +322,7 @@ public class GraphActor {
 
 Repository 用于真正与数据库交互。
 
-下面是 `ActorRepository.java` 的源码，其用于对 MySQL 的 `actor` 表进行增删改查。
+下面是 `ActorRepository.java` 的代码，其用于对 MySQL 的 `actor` 表进行增删改查。
 
 ```java
 package com.example.demo.repository.relational;
@@ -332,7 +332,7 @@ public interface ActorRepository extends JpaRepository<Actor, Long> {
 }
 ```
 
-下面是 `GraphActorRepository.java` 的源码，其用于对 Neo4j 的 `Actor` Node 进行增删改查。可以看到，与普通 JPA Repository 类似，Neo4j 的 Repository 上同样支持编写自定义查询。
+下面是 `GraphActorRepository.java` 的代码，其用于对 Neo4j 的 `Actor` Node 进行增删改查。
 
 ```java
 package com.example.demo.repository.graph;
@@ -350,6 +350,8 @@ public interface GraphActorRepository extends Neo4jRepository<GraphActor, Long> 
     void batchInsertOrUpdate(List<Map<String, Object>> actors);
 }
 ```
+
+可以看到，与普通 JPA Repository 类似，Neo4j 的 Repository 上同样支持编写自定义查询。之所以编写该方法，是因为使用该自定义 Cypher 方式编写的 Actor 批量插入或更新方法比原生方式效率更高。
 
 `relational` 或 `graph` 包下其它的 Repository 与此两者类似，这里也不一一列出了。
 
@@ -445,9 +447,9 @@ public class MigrationServiceImpl implements MigrationService {
 }
 ```
 
-可以看到，该实现类对 MySQL 读取，对 Neo4j 进行写入，实现了两个数据库的模式转换和数据迁移。
+可以看到，该实现类对 MySQL 进行读取，对 Neo4j 进行写入，实现了两个数据库的模式转换和数据迁移。
 
-需要注意的是，我们使用了一个 Java 对象到 Map 类型转换的工具类 `ObjectToMapUtil.java`，这是因为 Neo4j 的 Repository 目前还不支持直接传入一个 Java 对象。
+需要注意的是，我们使用了一个 Java 对象到 Map 类型转换的工具类 `ObjectToMapUtil.java`，这是因为 Neo4j 的 Repository 目前还不能很好的支持直接传入一个 `List<Actor>` 对象。
 
 最后，在单元测试类中调用该实现类后，即可出现文章开头展示的效果。
 
