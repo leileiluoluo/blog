@@ -134,11 +134,11 @@ java.lang.IllegalStateException: There is already an ongoing Spring transaction 
 
 这是为什么呢？
 
-## 2 解决办法
+## 2 原因分析
 
-## 3 小结
+## 3 解决办法
 
-综上，我们以实现 MySQL 到 Neo4j 数据迁移为目的演示了如何使用 Spring Data 同时访问 MySQL 和 Neo4j 数据库。
+## 4 小结
 
 本文完整示例工程代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-data-neo4j-database-config-demo)，欢迎关注或 Fork。
 
