@@ -151,7 +151,7 @@ java.lang.IllegalStateException: There is already an ongoing Spring transaction 
 
 ![Neo4jTransactionManager 源码](https://leileiluoluo.github.io/static/images/uploads/2025/05/spring-data-neo4j-source-code.png)
 
-即虽然我们已在 `application.yaml` 配置文件指定了要连接的数据库，但 `TransactionManager` 获取到值却仍然是默认数据库。问题可能出在了我们的自定义 Neo4j 配置类 `Neo4jConfig.java` 上。
+即虽然我们已在 `application.yaml` 配置文件指定了要连接的数据库，但 `TransactionManager` 获取到值却仍然是默认数据库。问题可能出在了自定义配置类 `Neo4jConfig.java` 上。
 
 ## 3 解决办法
 
@@ -209,7 +209,7 @@ public class Neo4jConfig {
 
 ## 4 小结
 
-本文针对 Spring Data Neo4j 配置自定义 TransactionManager 后，指定 spring.data.neo4j.database 会报错的问题进行了描述、分析和解决。
+本文针对 Spring Data Neo4j 配置自定义 `TransactionManager` 后，指定 `spring.data.neo4j.database` 会报错的问题进行了描述、分析和解决。
 
 本文完整示例工程代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-data-neo4j-database-config-demo)，欢迎关注或 Fork。
 
