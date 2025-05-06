@@ -109,13 +109,73 @@ CREATE TABLE actor_movie (
 
 ```shell
 cd /usr/local
-wget https://datax-opensource.oss-cn-hangzhou.aliyuncs.com/202308/datax.tar.gz
-tar -zxvf datax.tar.gz
+sudo wget https://datax-opensource.oss-cn-hangzhou.aliyuncs.com/202308/datax.tar.gz
+sudo tar -zxvf datax.tar.gz
 ```
 
 ## 3 使用 DataX
 
 ### 3.1 单表数据迁移
+
+```json
+{
+  "job": {
+    "setting": {
+      "speed": {
+        "channel": 3
+      },
+      "errorLimit": {
+        "record": 0,
+        "percentage": 0.02
+      }
+    },
+    "content": [
+      {
+        "reader": {
+          "name": "mysqlreader",
+          "parameter": {
+            "username": "root",
+            "password": "root",
+            "column": ["*"],
+            "connection": [
+              {
+                "table": ["actor"],
+                "jdbcUrl": ["jdbc:mysql://127.0.0.1:3306/test"]
+              }
+            ]
+          }
+        },
+        "writer": {
+          "name": "postgresqlwriter",
+          "parameter": {
+            "username": "root",
+            "password": "root",
+            "column": ["*"],
+            "preSql": ["DELETE FROM actor"],
+            "connection": [
+              {
+                "jdbcUrl": "jdbc:postgresql://127.0.0.1:3002/test",
+                "table": ["actor"]
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+```text
+2025-05-06 18:39:37.122 [job-0] INFO  JobContainer -
+任务启动时刻                    : 2025-05-06 18:39:26
+任务结束时刻                    : 2025-05-06 18:39:37
+任务总计耗时                    :                 11s
+任务平均流量                    :                1B/s
+记录写入速度                    :              0rec/s
+读出记录总数                    :                   2
+读写失败总数                    :                   0
+```
 
 ### 3.2 多表批量数据迁移
 
