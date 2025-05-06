@@ -113,8 +113,6 @@ wget https://datax-opensource.oss-cn-hangzhou.aliyuncs.com/202308/datax.tar.gz
 tar -zxvf datax.tar.gz
 ```
 
-## 2 配置 DataX
-
 ## 3 使用 DataX
 
 ## 4 小结
