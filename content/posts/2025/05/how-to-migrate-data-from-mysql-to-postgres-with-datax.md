@@ -140,7 +140,7 @@ sudo tar -zxvf datax.tar.gz
             "connection": [
               {
                 "table": ["actor"],
-                "jdbcUrl": ["jdbc:mysql://127.0.0.1:3306/test"]
+                "jdbcUrl": ["jdbc:mysql://localhost:3306/test"]
               }
             ]
           }
@@ -154,7 +154,7 @@ sudo tar -zxvf datax.tar.gz
             "preSql": ["DELETE FROM actor"],
             "connection": [
               {
-                "jdbcUrl": "jdbc:postgresql://127.0.0.1:3002/test",
+                "jdbcUrl": "jdbc:postgresql://localhost:5432/test",
                 "table": ["actor"]
               }
             ]
@@ -164,6 +164,10 @@ sudo tar -zxvf datax.tar.gz
     ]
   }
 }
+```
+
+```shell
+sudo /usr/local/datax/bin/datax.py actor.json
 ```
 
 ```text
@@ -179,50 +183,119 @@ sudo tar -zxvf datax.tar.gz
 
 ### 3.2 多表批量数据迁移
 
+`table_template.json`
+
+```json
+{
+  "job": {
+    "setting": {
+      "speed": {
+        "channel": 3
+      },
+      "errorLimit": {
+        "record": 0,
+        "percentage": 0.02
+      }
+    },
+    "content": [
+      {
+        "reader": {
+          "name": "mysqlreader",
+          "parameter": {
+            "username": "SOURCE_USERNAME",
+            "password": "SOURCE_PASSWORD",
+            "column": ["*"],
+            "connection": [
+              {
+                "table": ["TABLE_NAME"],
+                "jdbcUrl": ["SOURCE_URL"]
+              }
+            ]
+          }
+        },
+        "writer": {
+          "name": "postgresqlwriter",
+          "parameter": {
+            "username": "TARGET_USERNAME",
+            "password": "TARGET_PASSWORD",
+            "column": ["*"],
+            "preSql": ["DELETE FROM TABLE_NAME"],
+            "connection": [
+              {
+                "jdbcUrl": "TARGET_URL",
+                "table": ["TABLE_NAME"]
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+`tables.txt`
+
+```text
+actor
+movie
+actor_movie
+```
+
+`start.sh`
+
 ```shell
 #!/bin/bash
 export DATAX_HOME=/usr/local/datax
+
+# read params
+SOURCE_URL="$1"
+SOURCE_USERNAME="$2"
+SOURCE_PASSWORD="$3"
+TARGET_URL="$4"
+TARGET_USERNAME="$5"
+TARGET_PASSWORD="$6"
+
+# json files folder
+mkdir json
 
 # start migration
 for table in `cat tables.txt`
 do
   echo "migrate table: ${table}"
 
+  # json file
   json_file=json/${table}.json
   cp table_template.json ${json_file}
 
   # replace placeholders
-  sed -i "s/TABLE_NAME/${table}/g" ${json_file}
+  sed -i "s#TABLE_NAME#${table}#g" ${json_file}
 
-  sed -i "s/SOURCE_HOST/${SOURCE_HOST}/g" ${json_file}
-  sed -i "s/SOURCE_DATABASE/${SOURCE_DATABASE}/g" ${json_file}
-  sed -i "s/SOURCE_USERNAME/${SOURCE_USERNAME}/g" ${json_file}
-  sed -i "s/SOURCE_PASSWORD/${SOURCE_PASSWORD}/g" ${json_file}
+  sed -i "s#SOURCE_URL#${SOURCE_URL}#g" ${json_file}
+  sed -i "s#SOURCE_USERNAME#${SOURCE_USERNAME}#g" ${json_file}
+  sed -i "s#SOURCE_PASSWORD#${SOURCE_PASSWORD}#g" ${json_file}
 
-  sed -i "s/TARGET_HOST/${TARGET_HOST}/g" ${json_file}
-  sed -i "s/TARGET_DATABASE/${TARGET_DATABASE}/g" ${json_file}
-  sed -i "s/TARGET_USERNAME/${TARGET_USERNAME}/g" ${json_file}
-  sed -i "s/TARGET_PASSWORD/${TARGET_PASSWORD}/g" ${json_file}
+  sed -i "s#TARGET_URL#${TARGET_URL}#g" ${json_file}
+  sed -i "s#TARGET_USERNAME#${TARGET_USERNAME}#g" ${json_file}
+  sed -i "s#TARGET_PASSWORD#${TARGET_PASSWORD}#g" ${json_file}
 
   python ${DATAX_HOME}/bin/datax.py ${json_file}
 done
 ```
 
 ```shell
-export SOURCE_HOST=
-export SOURCE_DATABASE=
-export SOURCE_USERNAME=
-export SOURCE_PASSWORD=
-
-export TARGET_HOST=
-export TARGET_DATABASE=
-export TARGET_USERNAME=
-export TARGET_PASSWORD=
-
-nohup sh start.sh &
+sudo sh start.sh \
+  "jdbc:mysql://localhost:3306/test" \
+  root \
+  root \
+  "jdbc:postgresql://localhost:5432/test" \
+  root \
+  root
 ```
 
 ## 4 小结
+
+本文完整示例工程代码已提交至 [GitHub](https://github.com/leileiluoluo/daily-exercises/tree/main/datax)，欢迎关注或 Fork。
 
 > 参考资料
 >
