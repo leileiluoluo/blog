@@ -15,14 +15,14 @@ keywords:
   - PostgreSQL
   - DataX
   - 数据迁移
-description: DataX 是阿里开源的一款基于 Java 编写的非常实用的数据迁移工具，其不仅支持关系型数据库间的数据迁移，还支持关系型数据库与非关系型数据库间的数据迁移。其使用也非常的简单，只需安装 JDK、使用 JSON 配置，清晰明了，无须关注实现细节。本文即以 MySQL 到 PostgreSQL 数据迁移为例，介绍 DataX 的使用。
+description: DataX 是阿里开源的一款基于 Java 编写的非常实用的数据迁移工具，其不仅支持关系型数据库间的数据迁移，还支持关系型数据库与非关系型数据库间的数据迁移。其使用也非常的简单，只需安装 JDK、配置 JSON 即可，无须关注太多实现细节。其性能也非常了得，能满足生产环境的数据迁移要求。
 ---
 
-DataX 是阿里开源的一款基于 Java 编写的非常实用的数据迁移工具，其不仅支持关系型数据库间的数据迁移，还支持关系型数据库与非关系型数据库的数据迁移。其使用也非常的简单，只需安装 JDK、使用 JSON 配置，清晰明了，性能了得，且无须关注实现细节。
+DataX 是阿里开源的一款基于 Java 编写的非常实用的数据迁移工具，其不仅支持关系型数据库间的数据迁移，还支持关系型数据库与非关系型数据库间的数据迁移。其使用也非常的简单，只需安装 JDK、配置 JSON 即可，无须关注太多实现细节。其性能也非常了得，能满足生产环境的数据迁移要求。
 
 本文即以 MySQL 到 PostgreSQL 数据迁移为例，介绍 DataX 的使用。
 
-开始前，列出本文依赖的环境：
+开始前，列出本文所使用的环境：
 
 ```text
 操作系统：CentOS 7
@@ -77,7 +77,7 @@ INSERT INTO actor_movie(actor_id, movie_id, role) VALUES
 
 可以看到，我们在 MySQL 建了三张表：actor、movie、actor_movie，前两张为演员、电影实体表，最后一张为演员电影关系表。最后在三张表插入了数条测试数据，这样源库就准备好了。
 
-PostgreSQL 为目的库，对应上述三张表的 PostgreSQL 的建表语句如下：
+PostgreSQL 为目的库，对应上述三张表的 PostgreSQL 建表语句如下：
 
 ```sql
 CREATE TABLE actor (
@@ -101,7 +101,7 @@ CREATE TABLE actor_movie (
 );
 ```
 
-在 PostgreSQL 对应 Database 执行后，目的库也准备好了。
+将建表语句在 PostgreSQL 对应 Database 执行后，目的库也准备好了。
 
 ## 2 安装 DataX
 
@@ -115,7 +115,11 @@ sudo tar -zxvf datax.tar.gz
 
 ## 3 使用 DataX
 
+DataX 安装好后即可开始使用了，下面先测试一下单表迁移，然后再考虑多表批量迁移的场景。
+
 ### 3.1 单表数据迁移
+
+DataX 使用 JSON 格式的文件作配置，查阅「[DataX](https://github.com/alibaba/datax)」使用文档，找到读 MySQL 写 PostgreSQL 的对应 reader 和 writer 配置，然后尝试做一个只迁移 actor 表的配置文件 `actor.json`。
 
 ```json
 {
@@ -166,9 +170,15 @@ sudo tar -zxvf datax.tar.gz
 }
 ```
 
+可以看到，我们在 `actor.json` 配置文件指定了迁移所使用的 channel 数、错误百分比（错误数达到指定的百分比即会停止迁移），以及 reader（从哪读）和 writer（写到哪）部分。实际使用中，为了更好的控制迁移速度和错误率可以查询 DataX 文档来进行参数调整。
+
+配置文件准备好后，使用如下 Shell 调用 DataX 即可对 actor 表进行迁移：
+
 ```shell
 sudo /usr/local/datax/bin/datax.py actor.json
 ```
+
+迁移完成后，会打印如下统计信息：
 
 ```text
 2025-05-06 18:39:37.122 [job-0] INFO  JobContainer -
@@ -183,7 +193,20 @@ sudo /usr/local/datax/bin/datax.py actor.json
 
 ### 3.2 多表批量数据迁移
 
-`table_template.json`
+单表迁移一般只用于测试，生产环境的数据迁移一般需要考虑如何实现多表批量数据迁移。
+
+下面即编写一个 Shell 脚本，包装一下 DataX 以支持多表迁移，其目录结构如下：
+
+```text
+data-migration
+├─ table_template.json
+├─ tables.txt
+└─ start.sh
+```
+
+可以看到，我们将如上 `actor.json` 配置文件中的变量进行抽取，设计了一个针对单表迁移的通用模板文件 `table_template.json`；设计了一个 `tables.txt` 文件来放置所有待迁移的表名；最后，编写了一个 Shell 文件 `start.sh` 来供使用者启动迁移任务。
+
+模板文件 `table_template.json` 的内容如下：
 
 ```json
 {
@@ -234,7 +257,7 @@ sudo /usr/local/datax/bin/datax.py actor.json
 }
 ```
 
-`tables.txt`
+表名文件 `tables.txt` 的内容如下：
 
 ```text
 actor
@@ -242,7 +265,7 @@ movie
 actor_movie
 ```
 
-`start.sh`
+启动文件 `start.sh` 的内容如下：
 
 ```shell
 #!/bin/bash
@@ -283,6 +306,8 @@ do
 done
 ```
 
+这样，即可像如下这样直接调用 `start.sh` 指定连接信息来进行多表数据迁移了：
+
 ```shell
 sudo sh start.sh \
   "jdbc:mysql://localhost:3306/test" \
@@ -295,7 +320,7 @@ sudo sh start.sh \
 
 ## 4 小结
 
-本文完整示例工程代码已提交至 [GitHub](https://github.com/leileiluoluo/daily-exercises/tree/main/datax)，欢迎关注或 Fork。
+本文以实例的方式介绍了如何使用 DataX 进行 MySQL 到 PostgreSQL 的数据迁移，本文完整示例代码已提交至 [GitHub](https://github.com/leileiluoluo/daily-exercises/tree/main/datax)，欢迎关注或 Fork。
 
 > 参考资料
 >
