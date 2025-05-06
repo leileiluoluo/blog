@@ -115,6 +115,49 @@ tar -zxvf datax.tar.gz
 
 ## 3 使用 DataX
 
+```shell
+#!/bin/bash
+export DATAX_HOME=/usr/local/datax
+
+# start migration
+for table in `cat tables.txt`
+do
+  echo "migrate table: ${table}"
+
+  json_file=json/${table}.json
+  cp table_template.json ${json_file}
+
+  # replace placeholders
+  sed -i "s/TABLE_NAME/${table}/g" ${json_file}
+
+  sed -i "s/SOURCE_HOST/${SOURCE_HOST}/g" ${json_file}
+  sed -i "s/SOURCE_DATABASE/${SOURCE_DATABASE}/g" ${json_file}
+  sed -i "s/SOURCE_USERNAME/${SOURCE_USERNAME}/g" ${json_file}
+  sed -i "s/SOURCE_PASSWORD/${SOURCE_PASSWORD}/g" ${json_file}
+
+  sed -i "s/TARGET_HOST/${TARGET_HOST}/g" ${json_file}
+  sed -i "s/TARGET_DATABASE/${TARGET_DATABASE}/g" ${json_file}
+  sed -i "s/TARGET_USERNAME/${TARGET_USERNAME}/g" ${json_file}
+  sed -i "s/TARGET_PASSWORD/${TARGET_PASSWORD}/g" ${json_file}
+
+  python ${DATAX_HOME}/bin/datax.py ${json_file}
+done
+```
+
+```shell
+export SOURCE_HOST=
+export SOURCE_DATABASE=
+export SOURCE_USERNAME=
+export SOURCE_PASSWORD=
+
+export TARGET_HOST=
+export TARGET_DATABASE=
+export TARGET_USERNAME=
+export TARGET_PASSWORD=
+
+nohup sh start.sh &
+```
+
 ## 4 小结
 
 > 参考资料
