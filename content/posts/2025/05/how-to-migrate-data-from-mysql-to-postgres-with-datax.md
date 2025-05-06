@@ -115,6 +115,10 @@ tar -zxvf datax.tar.gz
 
 ## 3 使用 DataX
 
+### 3.1 单表数据迁移
+
+### 3.2 多表批量数据迁移
+
 ```shell
 #!/bin/bash
 export DATAX_HOME=/usr/local/datax
