@@ -204,7 +204,7 @@ data-migration
 └─ start.sh
 ```
 
-可以看到，我们将如上 `actor.json` 配置文件中的变量进行抽取，设计了一个针对单表迁移的通用模板文件 `table_template.json`；设计了一个 `tables.txt` 文件来放置所有待迁移的表名；最后，编写了一个 Shell 文件 `start.sh` 来读取表名文件、拷贝模板文件并替换里边的值，然后供使用者调用。
+可以看到，我们将如上 `actor.json` 配置文件中的变量进行抽取，设计了一个针对单表迁移的通用模板文件 `table_template.json`；设计了一个 `tables.txt` 文件来放置所有待迁移的表名；最后，编写了一个 Shell 文件 `start.sh` 来读取表名文件、拷贝模板文件并替换里边的值，然后逐个表迁移，这样使用者直接调用它即可开始多表迁移了。
 
 模板文件 `table_template.json` 的内容如下：
 
