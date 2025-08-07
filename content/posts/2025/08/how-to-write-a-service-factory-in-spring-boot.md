@@ -78,7 +78,7 @@ public class UnionPaymentServiceImpl implements PaymentService {
 }
 ```
 
-为了方便调用，我们需要编写一个工厂类，其能够提供一个方法：可以根据不同的支付类型（`PaymentType`）获取到 `PaymentService` 的具体实现。
+为了方便调用，我们需要编写一个工厂类 `PaymentFactory`，其能够提供一个方法：可以根据不同的支付类型（`PaymentType`）获取到 `PaymentService` 的具体实现。
 
 ```java
 public class PaymentFactory {
@@ -92,13 +92,15 @@ public class PaymentFactory {
 这样调用者需要使用某种方式进行支付时，只需要指定支付类型，通过工厂类拿到 `PaymentService`，然后调用 `pay()` 方法就可以了。
 
 ```java
-PaymentService paymentService = PaymentFactory.getService(PaymentType.WECHAT);
+PaymentService paymentService = paymentFactory.getService(PaymentType.WECHAT);
 PaymentResult paymentResult = paymentService.pay(new Order());
 
 System.out.println(paymentResult);
 ```
 
 ## 2 PaymentFactory 基础实现
+
+那么如何编写这个 `PaymentFactory` 呢？一种最基础的写法就是在 `PaymentFactory` 中将 `PaymentService` 所有的实现类都以属性的方式注入进来，然后在 `getService()` 方法中使用 `if-else` 或 `switch` 语句根据 `PaymentType` 的类型来返回不同的实现类。
 
 ```java
 @Component
@@ -127,7 +129,13 @@ public class PaymentFactory {
 }
 ```
 
+这个写法能用，但代码行数有点多且有点笨拙，有没有更高级一点的写法呢？
+
 ## 3 PaymentFactory 高级实现
+
+`PaymentFactory` 稍微高级一点的写法是不用将实现类一一声明为属性，且不使用上述诸如 `if-else` 或 `switch` 等条件判断语句来根据不同参数返回不同的实现。
+
+而是声明一个存放 `PaymentType` 和实现类的 `Map`，然后在构造方法中将实现类注入为方法参数，然后建立该 `Map`，这样在 `getService()` 方法中只需根据 `PaymentType` 从 `Map` 中直接拿实现类即可。
 
 ```java
 @Component
@@ -154,6 +162,10 @@ public class PaymentFactory {
 }
 ```
 
+上面的实现比较优雅，但代码行数仍有点多，有没有更简便的写法呢？
+
+因为 `PaymentService` 的实现类命名是有规则的，所以更简便的写法即是借助 `BeanFactory` 直接根据 `Bean` 名称获取对应的实现。
+
 ```java
 @Component
 public class PaymentFactory {
@@ -171,6 +183,16 @@ public class PaymentFactory {
 }
 ```
 
+上述代码的确简洁了不少，但其与前面的写法均有一个同样的问题，即类上均含有 `@Component` 注解，即均需要交给 Spring 实例化。在静态方法或由 Java 反射实例化的类中无法直接使用。
+
+下面就尝试编写一个纯静态的 `PaymentFactory`，使得调用者可以直接像下面这样通过 `PaymentFactory.getService()` 的方式获取 `PaymentService` 的实现类。
+
+```java
+PaymentService paymentService = PaymentFactory.getService(PaymentType.WECHAT);
+```
+
+这样就需要依赖一个保存 Spring 上下文的工具类了：
+
 ```java
 @Component
 public class SpringContextHolder implements ApplicationContextAware {
@@ -186,7 +208,13 @@ public class SpringContextHolder implements ApplicationContextAware {
         return context.getBean(beanName, clazz);
     }
 }
+```
 
+`SpringContextHolder` 工具类可以在 Spring 加载完成后自动持有 Spring 的 `ApplicationContext`。然后在后期有需要时，调用者可以使用一个纯静态方法来获取任意 Spring 管理的 Bean。
+
+这样有了 `SpringContextHolder` 工具类后，我们的静态 `PaymentFactory` 就可以像下面这样实现了。
+
+```java
 public class PaymentFactory {
 
     public static PaymentService getService(PaymentType paymentType) {
@@ -195,5 +223,9 @@ public class PaymentFactory {
     }
 }
 ```
+
+## 4 小结
+
+综上，本文提出了如何在 Spring Boot 中编写一个服务工厂的问题。然后针对该问题，举了一个支付业务的例子，然后探索了 `PaymentFactory` 的基本写法和更高级的写法。以备有需要的同学在实际开发中做参考。
 
 本文完整示例代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-service-factory-demo)，欢迎关注或 Fork。
