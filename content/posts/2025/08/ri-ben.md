@@ -2,7 +2,7 @@
 title: 對日本的幾點看法
 author: leileiluoluo
 type: post
-date: 2025-08-15T17:00:00+08:00
+date: 2025-08-15T18:20:00+08:00
 url: /posts/ri-ben.html
 categories:
   - 随笔
