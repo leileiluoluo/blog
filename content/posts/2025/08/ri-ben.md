@@ -1,5 +1,5 @@
 ---
-title: 對日本的幾點看法
+title: 對日本侵華的幾點看法
 author: leileiluoluo
 type: post
 date: 2025-08-15T18:20:00+08:00
