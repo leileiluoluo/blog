@@ -32,6 +32,12 @@ description: 在 Spring Boot 工程中，若选用的持久化层框架是 JPA�
 
 本文即是探索该针对该问题的几种实现方式。
 
+## 1 准备工作
+
+实现表操作监控模块前，我们有一些准备工作需要做：即植入测试数据、新建 Model 类，以及为 Model 类编写对应的 JPA Repository。
+
+### 1.1 准备测试数据
+
 假设我们使用的数据库是 MySQL，开始前我们先将需要的表建出来（`user` 表为需要捕获的实体表，`operation_log` 表为需要将捕获的信息写入的目的表）：
 
 ```sql
@@ -54,6 +60,8 @@ CREATE TABLE operation_log (
     operated_at TIMESTAMP NOT NULL DEFAULT '2025-01-01 00:00:00'
 );
 ```
+
+### 1.2 编写 Model 类
 
 对应 `user` 表和 `operation_log` 表的 Model 类 `User` 和 `OperationLog` 的代码如下：
 
@@ -92,6 +100,8 @@ public class OperationLog {
 }
 ```
 
+### 1.3 编写 JPA Repository
+
 操作 `User` 和 `OperationLog` 实体的 JPA Repository 也都建好了，代码如下：
 
 ```java
@@ -108,7 +118,7 @@ public interface OperationLogRepository extends CrudRepository<OperationLog, Lon
 }
 ```
 
-## 1 通过编写 Entity Listener
+## 2 方案一：通过编写 Entity Listener 实现
 
 ```java
 package com.example.demo.model;
@@ -172,7 +182,7 @@ public class SpringContextHolder implements ApplicationContextAware {
 }
 ```
 
-## 2 通过编写 Hibernate Integrator
+## 3 方案二：通过编写 Hibernate Integrator 实现
 
 ```yaml
 spring:
@@ -258,7 +268,7 @@ public class HibernateListener implements PostInsertEventListener, PostUpdateEve
 }
 ```
 
-## 3 通过编写 DB Trigger
+## 4 方案三：通过编写 DB Trigger 实现
 
 ```sql
 DELIMITER //
@@ -286,3 +296,5 @@ END//
 
 DELIMITER ;
 ```
+
+## 5 小结
