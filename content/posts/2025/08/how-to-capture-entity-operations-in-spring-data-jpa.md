@@ -2,7 +2,7 @@
 title: 使用 Spring Data JPA 时如何捕捉实体的增删改操作？
 author: leileiluoluo
 type: post
-date: 2025-08-18T17:50:00+08:00
+date: 2025-08-18T20:00:00+08:00
 url: /posts/how-to-capture-entity-operations-in-spring-data-jpa.html
 categories:
   - 计算机
@@ -21,16 +21,18 @@ description: 在 Spring Boot 工程中，若选用的持久化层框架是 JPA�
 
 在 Spring Boot 工程中，若选用的持久化层框架是 JPA，那么要想捕捉所有实体的增删改操作，该怎么实现呢？
 
-下面给一个具体点的需求，然后我们来探讨如何实现：「假设我们要实现一个表操作监控模块，即捕获 Spring Boot 应用程序中所有表的变更（包括增、删、改）操作，然后将这些操作记录到一张表中。」
+下面给一个具体点的需求，然后我们来探讨如何实现：「假设我们要实现一个实体（表）操作监控模块，即捕获 Spring Boot 应用程序中所有实体的变更（包括增、删、改）操作，然后将这些操作记录到一张表中。」
+
+<!--more-->
 
 具体需要记录的字段如下：
 
-- 实体名（Entity）
-- 实体 ID（EntityId）
-- 操作名（Operation）
-- 操作时间（OperatedAt）
+- 实体名（entity）
+- 实体 ID（entity_id）
+- 操作名（operation）
+- 操作时间（operated_at）
 
-本文即是探索该针对该问题的几种实现方式。
+本文即是探索实现该需求的几种方式。
 
 ## 1 准备工作
 
@@ -38,7 +40,7 @@ description: 在 Spring Boot 工程中，若选用的持久化层框架是 JPA�
 
 ### 1.1 准备测试数据
 
-假设我们使用的数据库是 MySQL，开始前我们先将需要的表建出来（`user` 表为需要捕获的实体表，`operation_log` 表为需要将捕获的信息写入的目的表）：
+假设我们使用的数据库是 MySQL，开始前我们先将需要的表建出来（假设 `user` 表为需要捕获的实体表，`operation_log` 表为需要将捕获的操作信息写入的目的表）：
 
 ```sql
 DROP TABLE IF EXISTS user;
@@ -118,7 +120,13 @@ public interface OperationLogRepository extends CrudRepository<OperationLog, Lon
 }
 ```
 
+测试数据和基础 Java 代码准备好后，下面即探索在 Spring Data JPA 中如何监听实体的操作。经过调研，目前比较主流的解决方案有三种，下面一一道来。
+
 ## 2 方案一：通过编写 Entity Listener 实现
+
+第一种方案是 JPA 推荐的方式，即通过编写 Entity Listener 实现，使用的均为 `jakarta.persistence` 包下的类。
+
+首先，我们需要在需要监听的实体类 `User` 上增加一个 `@EntityListeners` 注解，然后指定我们自己编写的监听类 `OperationListener.class`。
 
 ```java
 package com.example.demo.model;
@@ -130,6 +138,12 @@ public class User {
     // ...
 }
 ```
+
+接下来即是 `OperationListener` 类的实现。可以看到，我们在该类中分别新增了三个方法 `postSave()`、`postUpdate()`、`postDelete()` ，并在方法上分别加了 JPA 的 `@PostPersist`、`@PostUpdate`、`@PostRemove` 注解，以用来监听实体的新增、更新和删除操作。最后，调用 `saveOperationLog()` 方法来将操作信息写入 `operation_log` 表。
+
+需要注意的是：`OperationListener` 类没有使用 `@Autowired` 方式将 `OperationLogRepository` 注入为一个属性然后在 `saveOperationLog()` 方法调用。这是因为，`OperationListener` 类是通过反射实例化的，其并未交给 Spring 框架所管理，所以 `@Autowired` 方式是无法将依赖进行注入的。
+
+所以，这里要获取 `OperationLogRepository` 实例，必须要通过一种特殊的机制，即通过一个保管 Spring 应用上下文的 `SpringContextHolder` 工具类来实现。
 
 ```java
 package com.example.demo.listener;
@@ -163,6 +177,8 @@ public class OperationListener {
 }
 ```
 
+`SpringContextHolder` 工具类的代码如下：
+
 ```java
 package com.example.demo.util;
 
@@ -181,6 +197,8 @@ public class SpringContextHolder implements ApplicationContextAware {
     }
 }
 ```
+
+可以看到，该类拥有一个静态的属性 `context`，并且该类实现了 `ApplicationContextAware` 接口。所以在 Spring 初始化完成后会调用 `setApplicationContext()` 方法给 `context` 赋值，而在使用时直接调用静态方法 `getBean()` 然后通过持有的 `context` 属性即可拿到所需要的 Bean。
 
 ## 3 方案二：通过编写 Hibernate Integrator 实现
 
