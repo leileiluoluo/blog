@@ -148,7 +148,7 @@ public class User {
 }
 ```
 
-接下来即是 `OperationListener` 类的实现。可以看到，我们在该类中分别新增了三个方法 `postSave()`、`postUpdate()`、`postDelete()` ，并在方法上分别加了 JPA 的 `@PostPersist`、`@PostUpdate`、`@PostRemove` 注解，以用来监听实体的新增、更新和删除操作。最后，调用 `saveOperationLog()` 方法来将捕获的字段写入 `operation_log` 表。
+接下来即是 `OperationListener` 类的实现。可以看到，我们在该类中分别新增了三个方法 `postSave()`、`postUpdate()`、`postDelete()` ，并在方法上分别加了 JPA 的 `@PostPersist`、`@PostUpdate`、`@PostRemove` 注解，以用来监听实体的新增后、更新后和删除后操作。最后，调用 `saveOperationLog()` 方法来将捕获的字段写入 `operation_log` 表。
 
 ```java
 package com.example.demo.listener;
@@ -207,7 +207,7 @@ public class SpringContextHolder implements ApplicationContextAware {
 }
 ```
 
-可以看到，该类拥有一个静态属性 `context`，并且该类实现了 `ApplicationContextAware` 接口。所以在 Spring 初始化完成后会调用 `setApplicationContext()` 方法给 `context` 赋值，而在使用时直接调用静态方法 `getBean()` 然后通过持有的 `context` 属性即可拿到所需要的 Bean。
+可以看到，该类拥有一个静态属性 `context`，并且该类实现了 `ApplicationContextAware` 接口。所以在 Spring 初始化完成后会调用 `setApplicationContext()` 方法给 `context` 赋值，而在使用时直接调用静态方法 `getBean()`，然后通过持有的 `context` 属性即可拿到所需要的 Bean。
 
 针对该方案的完整 Spring Boot 示例工程代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-jpa-entity-listener-demo)，欢迎查阅。
 
@@ -257,7 +257,7 @@ public class HibernateIntegratorProvider implements IntegratorProvider {
 }
 ```
 
-最后，在 `HibernateListener` 类中即可以编写我们的操作捕获和记录的逻辑了：
+最后，在 `HibernateListener` 类中即可以编写我们的捕获和记录的逻辑了：
 
 ```java
 package com.example.demo.listener;
@@ -305,15 +305,17 @@ public class HibernateListener implements PostInsertEventListener, PostUpdateEve
 }
 ```
 
-可以看到，上述 `HibernateListener` 实现了插入后、更新后、删除后三个 Event Listener 接口，然后在实体插入后、更新后、删除后调用 `saveOperationLog()` 方法将需要记录的字段保存到了 `operation_log` 表。
+可以看到，上述 `HibernateListener` 类实现了插入后、更新后、删除后三个 Event Listener 接口，然后在实体插入后、更新后、删除后调用 `saveOperationLog()` 方法将需要记录的字段保存到 `operation_log` 表。
 
-需要注意的是：这里获取 `OperationLogRepository` 时，依然需要使用 `SpringContextHolder` 工具类的 `getBean()` 静态方法。这是因为，该方案与上一种方案类似，`HibernateIntegratorProvider` 是通过反射实例化的，`HibernateListener` 是直接 `new` 出来的，无法直接使用 `@Autowired` 进行依赖注入。
+需要注意的是：这里获取 `OperationLogRepository` 时，依然需要使用 `SpringContextHolder` 工具类的 `getBean()` 静态方法。这是因为，该方案与上一种方案类似，`HibernateIntegratorProvider` 是通过反射实例化的，`HibernateListener` 是直接 `new` 出来的，无法在其中直接使用 `@Autowired` 注入所需要的 Spring Bean。
 
 针对该解决方案的完整 Spring Boot 示例工程代码也已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-hibernate-integrator-demo)，欢迎查看。
 
 ## 4 方案三：通过编写 DB Trigger 实现
 
-上述两种方案都是在应用层实现的，好处是不用修改数据库，坏处是有代码侵入。最后一种方案即是以直接在数据库创建 Trigger 的方式实现表操作的捕获。
+上述两种方案都是在应用层实现的，好处是不用修改数据库，坏处是有代码侵入。
+
+最后一种方案即是以直接在数据库创建 Trigger 的方式实现表操作的捕获。这种方案简单直接，好处是可以捕获到越过应用层而直接操作数据库的表操作，坏处是给数据库带来一定的性能开销。
 
 如下即是对应 MySQL 数据库的示例 `TRIGGER` 语句：
 
@@ -344,9 +346,9 @@ END//
 DELIMITER ;
 ```
 
-可以看到，我们使用上述 SQL 语句为 `user` 表创建了一个插入后 `TRIGGER`。这样，`user` 表在数据插入后，即会触发该 `TRIGGER` 的执行，进而将需要捕获的字段写入 `operation_log` 表。因 MySQL 不支持使用一个 `TRIGGER` 监听多个操作，所以再补充两条更新后、删除后 `TRIGGER` 语句后，其可以实现与上述两种方案同样的功能。
+可以看到，我们使用上述 SQL 语句为 `user` 表创建了一个插入后 `TRIGGER`。这样，`user` 表在数据插入后，即会触发该 `TRIGGER` 的执行，进而将需要捕获的字段写入 `operation_log` 表。因 MySQL 不支持使用一个 `TRIGGER` 监听多个操作，所以再补充两条更新后、删除后 `TRIGGER` 语句，即可以实现与上述两种方案同样的功能。
 
-针对该方案的完整 SQL 语句也以提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/blob/main/spring-jpa-entity-listener-demo/sql/trigger.sql)，欢迎参阅。
+针对该方案的完整 SQL 语句也已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/blob/main/spring-jpa-entity-listener-demo/sql/trigger.sql)，欢迎参阅。
 
 ## 5 小结
 
