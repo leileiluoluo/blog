@@ -16,7 +16,7 @@ keywords:
   - Entity Listener
   - Hibernate Integrator
   - DB Trigger
-description: 在 Spring Boot 工程中，若选用的持久化层框架是 JPA，那么要想捕捉所有实体的增删改操作，该怎么实现呢？下面给一个具体点的需求，然后我们来探讨如何实现：「假设我们要实现一个表操作监控模块，即捕获 Spring Boot 应用程序中所有表的变更（包括增、删、改）操作，然后将这些操作记录到一张表中。」
+description: 在 Spring Boot 工程中，若选用的持久化层框架是 JPA，那么要想捕捉所有实体的增删改操作，该怎么实现呢？下面给一个具体点的需求，然后我们来探讨如何实现：「假设我们要实现一个实体（表）操作监控模块，即捕获 Spring Boot 应用程序中所有实体的变更（包括增、删、改）操作，然后将这些操作记录到一张表中。」
 ---
 
 在 Spring Boot 工程中，若选用的持久化层框架是 JPA，那么要想捕捉所有实体的增删改操作，该怎么实现呢？
@@ -34,13 +34,22 @@ description: 在 Spring Boot 工程中，若选用的持久化层框架是 JPA�
 
 本文即是探索实现该需求的几种方式。
 
+写作本文时，用到的 Java、Spring Boot、JPA 和 Hibernate 的版本如下：
+
+```text
+Java：17
+Spring Boot：3.5.4
+Spring Data JPA：3.5.2
+Hibernate: 6.6.22.Final
+```
+
 ## 1 准备工作
 
-实现表操作监控模块前，我们有一些准备工作需要做：即植入测试数据、新建 Model 类，以及为 Model 类编写对应的 JPA Repository。
+实现表操作监控模块前，我们有一些准备工作需要做，即：植入测试数据、新建 Model 类，以及为 Model 类编写对应的 JPA Repository。
 
 ### 1.1 准备测试数据
 
-假设我们使用的数据库是 MySQL，开始前我们先将需要的表建出来（假设 `user` 表为需要捕获的实体表，`operation_log` 表为需要将捕获的操作信息写入的目的表）：
+假设我们使用的数据库是 MySQL，开始前我们先将需要的表建出来（假设 `user` 表为需要捕获的实体表，`operation_log` 表为将捕获的操作信息写入的目的表）：
 
 ```sql
 DROP TABLE IF EXISTS user;
@@ -104,7 +113,7 @@ public class OperationLog {
 
 ### 1.3 编写 JPA Repository
 
-操作 `User` 和 `OperationLog` 实体的 JPA Repository 也都建好了，代码如下：
+操作 `User` 和 `OperationLog` 实体的 JPA Repository 代码如下：
 
 ```java
 package com.example.demo.repository;
@@ -139,11 +148,7 @@ public class User {
 }
 ```
 
-接下来即是 `OperationListener` 类的实现。可以看到，我们在该类中分别新增了三个方法 `postSave()`、`postUpdate()`、`postDelete()` ，并在方法上分别加了 JPA 的 `@PostPersist`、`@PostUpdate`、`@PostRemove` 注解，以用来监听实体的新增、更新和删除操作。最后，调用 `saveOperationLog()` 方法来将操作信息写入 `operation_log` 表。
-
-需要注意的是：`OperationListener` 类没有使用 `@Autowired` 方式将 `OperationLogRepository` 注入为一个属性然后在 `saveOperationLog()` 方法调用。这是因为，`OperationListener` 类是通过反射实例化的，其并未交给 Spring 框架所管理，所以 `@Autowired` 方式是无法将依赖进行注入的。
-
-所以，这里要获取 `OperationLogRepository` 实例，必须要通过一种特殊的机制，即通过一个保管 Spring 应用上下文的 `SpringContextHolder` 工具类来实现。
+接下来即是 `OperationListener` 类的实现。可以看到，我们在该类中分别新增了三个方法 `postSave()`、`postUpdate()`、`postDelete()` ，并在方法上分别加了 JPA 的 `@PostPersist`、`@PostUpdate`、`@PostRemove` 注解，以用来监听实体的新增、更新和删除操作。最后，调用 `saveOperationLog()` 方法来将捕获的字段写入 `operation_log` 表。
 
 ```java
 package com.example.demo.listener;
@@ -177,6 +182,10 @@ public class OperationListener {
 }
 ```
 
+需要注意的是：`OperationListener` 类没有使用 `@Autowired` 方式将 `OperationLogRepository` 注入为一个属性然后在 `saveOperationLog()` 方法中调用。这是因为，`OperationListener` 类是通过反射实例化的，其并未交给 Spring 容器所管理，所以 `@Autowired` 方式是无法将依赖进行注入的。
+
+所以，这里要获取 `OperationLogRepository` 实例，必须要通过一种特殊的机制，即通过一个保管 Spring 应用上下文的 `SpringContextHolder` 工具类来实现。
+
 `SpringContextHolder` 工具类的代码如下：
 
 ```java
@@ -198,9 +207,15 @@ public class SpringContextHolder implements ApplicationContextAware {
 }
 ```
 
-可以看到，该类拥有一个静态的属性 `context`，并且该类实现了 `ApplicationContextAware` 接口。所以在 Spring 初始化完成后会调用 `setApplicationContext()` 方法给 `context` 赋值，而在使用时直接调用静态方法 `getBean()` 然后通过持有的 `context` 属性即可拿到所需要的 Bean。
+可以看到，该类拥有一个静态属性 `context`，并且该类实现了 `ApplicationContextAware` 接口。所以在 Spring 初始化完成后会调用 `setApplicationContext()` 方法给 `context` 赋值，而在使用时直接调用静态方法 `getBean()` 然后通过持有的 `context` 属性即可拿到所需要的 Bean。
+
+针对该方案的完整 Spring Boot 示例工程代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-jpa-entity-listener-demo)，欢迎查阅。
 
 ## 3 方案二：通过编写 Hibernate Integrator 实现
+
+另一种解决方案是基于 Hibernate Integrator 来实现的。因为 JPA 是基于 Hibernate 实现的，所以在 Hibernate 层做拦截也能达到想要的效果。
+
+首先，我们需要在 Spring Boot 工程的 `application.yaml` 配置文件中指定一个自定义的 Hibernate Integrator Provider。
 
 ```yaml
 spring:
@@ -209,6 +224,8 @@ spring:
       hibernate:
         integrator_provider: com.example.demo.integrator.HibernateIntegratorProvider
 ```
+
+然后在 `HibernateIntegratorProvider` 中编写一个 `HibernateIntegrator`，并实现 `Integrator` 接口的 `integrate()` 方法。可以看到，我们在 `integrate()` 方法中添加了自定义的监听器 `HibernateListener`，以监听实体的插入后、更新后、删除后动作。
 
 ```java
 package com.example.demo.integrator;
@@ -239,6 +256,8 @@ public class HibernateIntegratorProvider implements IntegratorProvider {
     }
 }
 ```
+
+最后，在 `HibernateListener` 类中即可以编写我们的操作捕获和记录的逻辑了：
 
 ```java
 package com.example.demo.listener;
@@ -286,7 +305,17 @@ public class HibernateListener implements PostInsertEventListener, PostUpdateEve
 }
 ```
 
+可以看到，上述 `HibernateListener` 实现了插入后、更新后、删除后三个 Event Listener 接口，然后在实体插入后、更新后、删除后调用 `saveOperationLog()` 方法将需要记录的字段保存到了 `operation_log` 表。
+
+需要注意的是：这里获取 `OperationLogRepository` 时，依然需要使用 `SpringContextHolder` 工具类的 `getBean()` 静态方法。这是因为，该方案与上一种方案类似，`HibernateIntegratorProvider` 是通过反射实例化的，`HibernateListener` 是直接 `new` 出来的，无法直接使用 `@Autowired` 进行依赖注入。
+
+针对该解决方案的完整 Spring Boot 示例工程代码也已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-hibernate-integrator-demo)，欢迎查看。
+
 ## 4 方案三：通过编写 DB Trigger 实现
+
+上述两种方案都是在应用层实现的，好处是不用修改数据库，坏处是有代码侵入。最后一种方案即是以直接在数据库创建 Trigger 的方式实现表操作的捕获。
+
+如下即是对应 MySQL 数据库的示例 `TRIGGER` 语句：
 
 ```sql
 DELIMITER //
@@ -315,4 +344,10 @@ END//
 DELIMITER ;
 ```
 
+可以看到，我们使用上述 SQL 语句为 `user` 表创建了一个插入后 `TRIGGER`。这样，`user` 表在数据插入后，即会触发该 `TRIGGER` 的执行，进而将需要捕获的字段写入 `operation_log` 表。因 MySQL 不支持使用一个 `TRIGGER` 监听多个操作，所以再补充两条更新后、删除后 `TRIGGER` 语句后，其可以实现与上述两种方案同样的功能。
+
+针对该方案的完整 SQL 语句也以提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/blob/main/spring-jpa-entity-listener-demo/sql/trigger.sql)，欢迎参阅。
+
 ## 5 小结
+
+综上，本文针对使用 JPA 的 Spring Boot 工程，提出如何捕获实体的增删改操作的问题，进而列出了三种可用的解决方案。在实际项目开发中，若有遇到相似问题却不知如何解决的朋友，可以参考本文提供的思路来实现自己的具体需求。
