@@ -36,7 +36,13 @@ Spring Framework: 6.2.10
 
 ## 1 Spring Event 如何使用？
 
+如何使用 Spring Event 呢？只有三个步骤：定义事件、发布事件、监听事件。
+
 ### 1.1 定义事件（Event）
+
+自 Spring 4.2 后，定义事件时，无需再继承 `ApplicationEvent`。任何一个普通的 Java POJO 都可以充当事件实体类。
+
+下面即是我们定义的用户注册后事件：
 
 ```java
 package com.example.demo.model;
@@ -51,6 +57,8 @@ public class UserRegisteredEvent {
 ```
 
 ### 1.2 发布事件（Event Publisher）
+
+下面即是事件发布者 `UserServiceImpl` 在保存 User 后，调用 `ApplicationEventPublisher` 发布 `UserRegisteredEvent` 的代码：
 
 ```java
 package com.example.demo.service.impl;
@@ -79,7 +87,13 @@ public class UserServiceImpl implements UserService {
 }
 ```
 
+注意：上述代码在发布事件后打印了一段日志。
+
 ### 1.3 监听事件 (Event Listener)
+
+自 Spring 4.2 后，订阅者要想监听事件，无需再实现 `ApplicationListener` 接口，而只需添加一个接收 Event 对象的方法，并在方法上加上 `@EventListener` 注解即可。
+
+一个事件可以被多个订阅者监听，下面的邮件服务、优惠券服务监听了 `UserRegisteredEvent`：
 
 ```java
 package com.example.demo.service.impl;
@@ -108,6 +122,8 @@ public class CouponServiceImpl implements CouponService {
     }
 }
 ```
+
+上述两个 Service 实现类在处理事件后也都分别打印了一段日志。
 
 ### 1.4 测试（Testing）
 
