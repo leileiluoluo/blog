@@ -24,7 +24,7 @@ Spring Event 是 Spring 框架提供的一项核心组件，其允许服务内�
 
 Spring Event 的使用非常的广泛，包含但不限于：用户注册成功后的后续操作（如发送欢迎邮件、发放新用户优惠券、初始化积分等）；订单状态的变更通知（订单支付成功后通知库存系统减库存、通知物流系统准备发货等）；系统日志记录（重要数据被修改后通知日志系统记录变更字段、通知管理员进行安全检查和审计等）。
 
-本文将以「用户注册成功后发送邮件、发送优惠券等」为场景，创建一个 Spring Boot 示例程序，来演示 Spring Event 的使用。
+本文将以「用户注册成功后发送邮件、发送优惠券」为场景，创建一个 Spring Boot 示例程序，来演示 Spring Event 的使用。
 
 下面列出写作本文时用到的 Java、Spring Boot 以及 Spring 框架的版本：
 
@@ -123,9 +123,11 @@ public class CouponServiceImpl implements CouponService {
 }
 ```
 
-上述两个 Service 实现类在处理事件后也都分别打印了一段日志。
+可以看到，上述两个 Service 实现类在接收到 `UserRegisteredEvent` 后，分别打印了一段日志来模拟邮件发送和优惠券发放。
 
 ### 1.4 测试（Testing）
+
+下面为 `UserService` 编写一个单元测试类 `UserServiceTest` 来测试事件的发布和订阅：
 
 ```java
 package com.example.demo;
@@ -146,13 +148,23 @@ public class UserServiceTest {
 }
 ```
 
+运行 `UserServiceTest` 测试类，可以看到，`UserService` 的 `save()` 方法被调用后，控制台打印了如下日志：
+
 ```text
 CouponServiceImpl  : coupon successfully issued to: larry@larry.com
 EmailServiceImpl   : email successfully sent to: larry@larry.com
 UserServiceImpl    : user registered event successfully published
 ```
 
+说明我们编写的 `UserRegisteredEvent` 被成功发布、订阅和处理。
+
+但需要注意上面日志的打印顺序：事件被处理的日志打印后才打印了事件发布的日志，这说明 Spring Event 默认是同步执行的，即 `ApplicationEventPublisher` 的 `publishEvent()` 方法是阻塞式的，会等待所有监听器将事件处理完毕才算调用结束。
+
+这样，若订阅者的处理逻辑很耗时的话会影响到发布者的性能。所以，是否有方法让监听器的处理变成异步的呢？有的，下面请看 Spring Event 的进阶用法。
+
 ## 2 Spring Event 进阶用法
+
+若想让监听器的执行变成异步的，可以在程序启动类上加上 `@EnableAsync` 注解：
 
 ```java
 package com.example.demo;
@@ -162,6 +174,8 @@ package com.example.demo;
 public class DemoApplication {
 }
 ```
+
+然后在事件处理方法上 `@Async` 注解，即能使事件处理方法变成异步执行。
 
 ```java
 package com.example.demo.service.impl;
@@ -178,4 +192,16 @@ public class EmailServiceImpl implements EmailService {
 }
 ```
 
+再次运行 `UserServiceTest` 测试类，发现发布者与订阅者的日志打印顺序变成了：
+
+```text
+UserServiceImpl    : user registered event successfully published
+CouponServiceImpl  : coupon successfully issued to: larry@larry.com
+EmailServiceImpl   : email successfully sent to: larry@larry.com
+```
+
+即说明事件发布者在主线程调用 `publishEvent()` 方法后立即返回，而监听器的逻辑处理会在新启动的线程中执行，不会再阻塞主线程。
+
 ## 3 小结
+
+本文首先介绍了 Spring Event 的功能，然后以「用户注册成功后发送邮件、发送优惠券」为场景，用 Spring Boot 示例程序的方式演示了 Spring Event 的使用。本文完整示例工程代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-event-demo)，欢迎有需要的同学参考。
