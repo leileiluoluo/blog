@@ -17,20 +17,20 @@ keywords:
   - Listener
   - 发布
   - 订阅
-description: Spring Event 是 Spring 框架提供的一个核心组件，其允许服务内部不同模块之间通过观察着模式（发布-订阅模式）进行通信，从而实现模块间的解耦。即 Spring Event 是一种事件驱动的编程模型，一个模块在做完一件事后，无需直接调用其它模块处理后续逻辑，而是发布一个事件出来，由其它对该事件感兴趣的模块订阅并处理这个事件，事件发布者无需关注订阅着者是谁，从而实现模块间的轻松解耦。本文将以「用户注册成功后发送邮件、发送优惠券」为例，创建一个 Spring Boot 示例程序，来演示 Spring Event 的使用。
+description: Spring Event 是 Spring 框架提供的一个核心组件，其允许服务内部不同模块之间通过观察着模式（发布-订阅模式）进行通信，从而实现模块间的解耦。即 Spring Event 是一种事件驱动的编程模型，一个模块在做完一件事后，无需直接调用其它模块处理后续逻辑，而是发布一个事件出来，由其它对该事件感兴趣的模块订阅并处理这个事件，事件发布者无需关注订阅者是谁，从而实现模块间的轻松解耦。本文将以「用户注册成功后发送邮件、发送优惠券」为例，创建一个 Spring Boot 示例程序，来演示 Spring Event 的使用。
 ---
 
 Spring Event 是 Spring 框架提供的一个核心组件，其允许服务内部不同模块之间通过观察着模式（发布-订阅模式）进行通信，从而实现模块间的解耦。
 
-即 Spring Event 是一种事件驱动的编程模型，一个模块在做完一件事后，无需直接调用其它模块处理后续逻辑，而是发布一个事件出来，由其它对该事件感兴趣的模块订阅并处理这个事件，事件发布者无需关注订阅着者是谁，从而实现模块间的轻松解耦。
+即 Spring Event 是一种事件驱动的编程模型，一个模块在做完一件事后，无需直接调用其它模块处理后续逻辑，而是发布一个事件出来，由其它对该事件感兴趣的模块订阅并处理这个事件，事件发布者无需关注订阅者是谁，从而实现模块间的轻松解耦。
 
 <!--more-->
 
 Spring Event 的使用非常的广泛，包含但不限于：用户注册成功后的后续操作（如发送欢迎邮件、发放新用户优惠券、初始化积分等）；订单状态的变更通知（订单支付成功后通知库存系统减库存、通知物流系统准备发货等）；系统日志记录（重要数据被修改后通知日志系统记录变更字段、通知管理员进行安全检查和审计等）。
 
-除了上述业务场景外，Spring Event 有时还能很巧妙的解决一些技术问题：比如解决 Spring 父子模块的通信。假设一个 Spring Boot 工程依赖一个 SharedModule 父模块，这个 SharedModule 父模块里拥有一些公共的 POJO 类、数据库 Entity 类、Util 类等，如果想在父模块调用子模块的方法来实现一些逻辑在技术上是有一定难度的。但通过借助 Spring Event，父模块只需增加一个事件，然后发布即可，在子模块监听并处理就好了。
+除了上述业务场景外，Spring Event 有时还能很巧妙的解决一些技术问题：比如解决 Spring 父子模块的通信。实际项目中，Spring Boot 工程通常会依赖一个 SharedModule 父模块，这个 SharedModule 父模块里拥有一些公共的 POJO 类、数据库 Entity 类、Util 类等，如果想在父模块里调用子模块的方法来实现一些逻辑，在技术上是有一点难度的。但通过借助 Spring Event，父模块只需增加一个事件，然后发布即可，在子模块中监听并处理就好了。
 
-介绍了 Spring Event 是什么以及其适用的场景外。本文将以「用户注册成功后发送邮件、发送优惠券」为例，创建一个 Spring Boot 示例程序，来演示 Spring Event 的使用。
+介绍了 Spring Event 是什么以及其适用的场景外。本文将以「用户注册成功后发送邮件、发放优惠券」为例，创建一个 Spring Boot 示例程序，来演示 Spring Event 的使用。
 
 下面列出写作本文时用到的 Java、Spring Boot 以及 Spring 框架的版本：
 
@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
 }
 ```
 
-注意：上述代码在发布事件后打印了一段日志。
+可以看到，上述代码在 `save` User 后，发布了一个 `UserRegisteredEvent`，并打印了一段事件成功发布的日志。
 
 ### 1.3 监听事件 (Event Listener)
 
@@ -129,7 +129,7 @@ public class CouponServiceImpl implements CouponService {
 }
 ```
 
-可以看到，上述两个 Service 实现类在接收到 `UserRegisteredEvent` 后，分别打印了一段日志来模拟邮件发送和优惠券发放。
+可以看到，上述两个 Service 实现类在接收到 `UserRegisteredEvent` 后，分别打印了一段日志来模拟邮件成功发送和优惠券成功发放。
 
 ### 1.4 测试（Testing）
 
@@ -154,7 +154,7 @@ public class UserServiceTest {
 }
 ```
 
-运行 `UserServiceTest` 测试类，可以看到，`UserService` 的 `save()` 方法被调用后，控制台打印了如下日志：
+运行 `UserServiceTest` 测试类，可以看到，`UserService` 的 `save()` 方法被调用后，控制台打印了如下三行日志：
 
 ```text
 CouponServiceImpl  : coupon successfully issued to: larry@larry.com
@@ -162,11 +162,11 @@ EmailServiceImpl   : email successfully sent to: larry@larry.com
 UserServiceImpl    : user registered event successfully published
 ```
 
-说明我们编写的 `UserRegisteredEvent` 被成功发布、订阅和处理。
+说明我们编写的 `UserRegisteredEvent` 被成功发布、订阅和处理了。
 
 但需要注意上面日志的打印顺序：事件被处理的日志打印后才打印了事件发布的日志，这说明 Spring Event 默认是同步执行的，即 `ApplicationEventPublisher` 的 `publishEvent()` 方法是阻塞式的，会等待所有监听器将事件处理完毕才算调用结束。
 
-这样，若订阅者的处理逻辑很耗时的话会影响到发布者的性能。所以，是否有方法让监听器的处理变成异步的呢？有的，下面请看 Spring Event 的进阶用法。
+这样，若订阅者的处理逻辑很耗时的话会影响到发布者的性能。所以，是否有方法让监听器的处理变成异步的呢？下面请看 Spring Event 的进阶用法。
 
 ## 2 Spring Event 进阶用法
 
@@ -181,7 +181,7 @@ public class DemoApplication {
 }
 ```
 
-然后在事件处理方法上 `@Async` 注解，即能使事件处理方法变成异步执行。
+然后在事件处理方法上加上 `@Async` 注解，即能使事件处理方法变成异步执行。
 
 ```java
 package com.example.demo.service.impl;
@@ -210,6 +210,6 @@ EmailServiceImpl   : email successfully sent to: larry@larry.com
 
 ## 3 小结
 
-本文首先介绍了 Spring Event 的功能，然后以「用户注册成功后发送邮件、发送优惠券」为场景，用 Spring Boot 示例程序的方式演示了 Spring Event 的使用。本文完整示例工程代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-event-demo)，欢迎有需要的同学参考。
+综上，本文首先介绍了 Spring Event 的功能，然后以「用户注册成功后发送邮件、发放优惠券」为例，用 Spring Boot 示例程序的方式演示了 Spring Event 的使用。本文完整示例工程代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/tree/main/spring-event-demo)，欢迎有需要的同学参考。
 
 经过本文的实践，说明借助 Spring Event 的确可以很轻松的实现服务内部模块间的解耦。但若是服务间的通信和解耦，以及需要更高的并发和可靠性，则还是需要引入其它第三方消息队列等工具来实现。
