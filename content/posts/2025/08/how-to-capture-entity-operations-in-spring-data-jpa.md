@@ -40,7 +40,7 @@ description: 在 Spring Boot 工程中，若选用的持久化层框架是 JPA�
 Java：17
 Spring Boot：3.5.4
 Spring Data JPA：3.5.2
-Hibernate: 6.6.22.Final
+Hibernate：6.6.22.Final
 ```
 
 ## 1 准备工作
