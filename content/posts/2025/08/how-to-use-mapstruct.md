@@ -2,7 +2,7 @@
 title: 如何使用 MapStruct 进行对象映射？
 author: leileiluoluo
 type: post
-date: 2025-08-28T09:00:00+08:00
+date: 2025-08-28T08:00:00+08:00
 url: /posts/how-to-use-mapstruct.html
 categories:
   - 计算机
