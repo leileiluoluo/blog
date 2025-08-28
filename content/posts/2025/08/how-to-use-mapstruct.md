@@ -17,7 +17,7 @@ description: MapStruct 是一款基于注解的、用于 Java 对象映射的代
 
 MapStruct 是一款基于注解的、用于 Java 对象映射的代码生成器。借助 MapStruct，我们做对象转换时，只需按照约定指定映射关系，真正的逐字段映射交给 MapStruct 去做即可，可以省去大量手工代码的编写。而且，MapStruct 是在编译期生成映射代码，若有字段类型不一致的映射，会提前报错，其生成的代码更加安全可靠。再者，MapStruct 生成的代码的执行性能与我们手工编写的代码无异，远优于市面上流行的几款基于反射的映射框架（如 BeanUtils、ModelMapper 等）。
 
-本文即以普通的基于 Maven 管理的 Java 项目为基础，以实际项目中的 VO（值对象）到 DTO（数据传输对象）的转换为例来演示 MapStruct 的常用功能和使用方式。
+本文即以常见的基于 Maven 管理的 Java 项目为基础，以实际项目中的 VO（值对象）到 DTO（数据传输对象）的转换为例来演示 MapStruct 的常用功能和使用方式。
 
 写作本文时，用到的 Java、MapStruct、Lombok 的版本如下：
 
@@ -29,9 +29,9 @@ Lombok: 1.18.38
 
 ## 1 引入 Maven 依赖
 
-开始前，需要在 `pom.xml` 引入相应的依赖。本示例工程为了省去编写 POJO 类冗长的 Setters 和 Getters 方法，使用了 Lombok。
+开始前，需要在 `pom.xml` 引入相应的依赖。本示例工程为了省去编写 POJO 类冗长的 Setters 和 Getters，使用了 Lombok。
 
-我们知道，Lombok 是在编译期生成代码的，而 MapStruct 也是在编译期生成代码的。所以两者应该有个先后顺序，Lombok 的代码生成要在 MapStruct 的代码生成之前执行，否则 MapStruct 会在设置字段时因找不到对应的 Setters 或 Getters 而报错。因此，我们在 `maven-compiler-plugin` 的 `annotationProcessorPaths` 部分指定了两者的处理顺序。
+我们知道，Lombok 是在编译期生成代码的，而 MapStruct 也是在编译期生成代码的。所以两者应该有个先后顺序，Lombok 的代码生成要在 MapStruct 的代码生成之前执行，否则 MapStruct 会在设置字段时因找不到对应的 Setters 或 Getters 而报错。因此，除了引入 Lombok 和 MapStruct 依赖外，我们还在 `maven-compiler-plugin` 的 `annotationProcessorPaths` 部分指定了两者的处理顺序。
 
 ```xml
 <properties>
@@ -144,7 +144,7 @@ public class UserDto {
 
 - `id` 和 `email` 字段在两个 POJO 中完全相同，无需配置，MapStruct 会自动帮我们做映射。
 
-- `name` 到 `username` 的映射，因名称发生了变化，需要使用 `@Mapping(source = "name", target = "username")` 来指定源字段和目的字段的对应关系。
+- `name` 到 `username` 的映射，因名称发生了变化，需要使用 `@Mapping` 注解来指定源字段和目的字段的对应关系。
 
 - `yearOfBirth` 到 `age` 的映射，因字段意义发生变化，需要进行计算。可通过在 `UserMapper` 接口定义一个默认方法 `calculateAge`，然后在 `@Mapping` 映射中使用 `qualifiedByName` 指定该实现方法来达成。
 
@@ -152,7 +152,7 @@ public class UserDto {
 
 - `newCenturyUser` 是目标对象的一个新字段，其需基于源对象的 `yearOfBirth` 字段进行计算，可以通过指定一个表达式（expression）来达成。
 
-- 源字段的 `createdAt` 是 `Date` 类型，目的字段的 `createdDate` 是 `LocalDateTime` 类型，可以通过引入一个两者转换的 Util 类或其它 Mapper 来达成（这里引入了 `DateTimeUtil` 工具类，且在 `@Mapping` 映射中未指定任何方法，这是因为 MapStruct 会自动帮我们检测并调用）。
+- 源字段的 `createdAt` 是 `Date` 类型，目的字段的 `createdDate` 是 `LocalDateTime` 类型，可以通过引入一个两者转换的 Util 类或其它 Mapper 来达成（这里引入了 `DateTimeUtil` 工具类，且在 `@Mapping` 映射中未指定任何方法，因为 MapStruct 会自动帮我们检测适用的方法并调用）。
 
 ```java
 package com.example.demo.mapper;
@@ -195,13 +195,13 @@ public class DateTimeUtil {
 }
 ```
 
-可以看到，MapStruct 的使用还是比较简单的：名称与类型完全相同的字段无需任何额外配置；类型相同但名称不同的字段则只需指定 source 和 target 即可；需要额外计算的字段，可以通过编写表达式或引入其它 Mapper 或工具类来达成。
+可以看到，MapStruct 的使用还是比较简单的：名称与类型完全相同的字段无需任何额外配置；类型相同但名称不同的字段则只需指定 source 和 target 即可；需要额外计算的字段，可以通过编写表达式或引入其它 Mapper 或工具类来实现。
 
 使用 `mvn clean package` 命令将工程编译后会发现 MapStruct 在 `target/classes` 目录对应位置根据我们的要求自动生成了 `UserMapper` 的实现类 `UserMapperImpl`。
 
 ![MapStruct 自动生成的实现类](https://leileiluoluo.github.io/static/images/uploads/2025/08/mapstruct-generated-impl.png)
 
-最后，我们使用编写单元测试类的方式对上述 Mapper 进行一下测试。
+最后，我们编写一个单元测试类来对上述 Mapper 进行一下测试。
 
 ```java
 package com.example.demo.mapper;
@@ -224,7 +224,7 @@ public class UserMapperTest {
 }
 ```
 
-执行 `mvn clean test` 命令运行如上单元测试后发现打印的目标对象 `UserDto` 的字段内容与预期一致。
+执行 `mvn clean test` 命令运行如上单元测试后发现打印的目标对象 `UserDto` 的字段值与预期一致。
 
 ```text
 UserDto(id=1, email=larry@larry.com, username=Larry, age=25, newCenturyUser=true, role=NORMAL, createdDate=2025-08-28T08:30:10.568)
