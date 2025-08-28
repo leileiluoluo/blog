@@ -1,5 +1,5 @@
 ---
-title: 如何使用 MapStruct 进行对象映射？
+title: Java 中如何使用 MapStruct 进行对象映射？
 author: leileiluoluo
 type: post
 date: 2025-08-28T08:00:00+08:00
