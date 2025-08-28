@@ -232,9 +232,132 @@ UserDto(id=1, email=larry@larry.com, username=Larry, age=25, newCenturyUser=true
 
 ## 3 进阶用法
 
+### 3.1 多个源对象到一个目的对象的映射
+
+若想将多个源对象映射到一个目的对象，`@Mapping` 配置也很直观。
+
+```java
+package com.example.demo.mapper;
+
+@Mapper
+public interface CustomerMapper {
+
+    @Mapping(source = "customer.name", target = "name")
+    @Mapping(source = "customer.yearOfBirth", target = "yearOfBirth")
+    @Mapping(source = "address.province", target = "province")
+    @Mapping(source = "address.city", target = "city")
+    @Mapping(source = "address.street", target = "street")
+    CustomerDto toCustomerDto(Customer customer, Address address);
+}
+```
+
+### 3.2 嵌套对象和集合对象映射
+
+如果对象之间有嵌套，或者是集合对象，MapStruct 也能很好的胜任对应的转换。
+
+```java
+package com.example.demo.vo;
+
+@Data
+public class School {
+
+    private String name;
+    private List<Student> students;
+}
+```
+
+```java
+package com.example.demo.dto;
+
+@Data
+public class SchoolDto {
+
+    private String name;
+    private List<StudentDto> students;
+}
+```
+
+```java
+package com.example.demo.mapper;
+
+@Mapper
+public interface SchoolMapper {
+
+    SchoolDto toSchoolDto(School school);
+
+    List<SchoolDto> toSchoolDtos(List<School> schools);
+}
+```
+
+### 3.3 逆向映射
+
+若已定义过 `User` 到 `UserDto` 的映射，现在想做 `UserDto` 到 `User` 的转换怎么办？使用 `@InheritInverseConfiguration` 注解可以自动生成反向映射规则，避免重复定义。
+
+```java
+package com.example.demo.mapper;
+
+@Mapper
+public interface UserMapper {
+
+    // @Mapping(xxx)
+    UserDto toUserDto(User user);
+
+    @InheritInverseConfiguration
+    User toUser(UserDto userDto);
+}
+```
+
+### 3.4 默认值和常量
+
+还可以为映射提供默认值或常量。下面的示例中：当 `User` 的 `name` 字段为 `null` 时，机会为目标字段赋上默认值 `Unknown`；此外，还可以为目标对象 `String` 类型的 `level` 字段赋上常量值 `PRIMARY`。
+
+```java
+package com.example.demo.mapper;
+
+@Mapper
+public interface UserMapper {
+
+    @Mapping(source = "name", target = "username", defaultValue = "Unknown")
+    @Mapping(target = "level", constant = "PRIMARY")
+    UserDto toUserDto(User user);
+}
+```
+
 ## 4 如何与 Spring 框架集成？
 
+欲将 MapStruct 与 Spring 集成的话，只需在 Mapper 的 `@Mapper` 注解上加上 `componentModel = "spring"` 即可。
+
+```java
+package com.example.demo.mapper;
+
+@Mapper(componentModel = "spring")
+public interface UserMapper {
+}
+```
+
+这样，即可取代上面的 `UserMapper.INSTANCE` 的方式，而直接使用 `@Autowired` 注解将 `UserMapper` 进行注入并使用了。
+
+```java
+package com.example.demo.mapper;
+
+public class UserMapperTest {
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Test
+    public void testToUserDto() {
+        // ...
+        UserDto userDto = userMapper.toUserDto(user);
+    }
+}
+```
+
 ## 5 小结
+
+综上，本文首先对 MapStruct 工具进行了介绍，然后创建了一个 Maven 示例工程，并将 MapStruct 和 Lombok 依赖引入。然后以实际项目中的 VO 到 DTO 转换为例，介绍了 MapStruct 的基础功能和高级功能。总体上感觉 MapStruct 还是比较易用且高效的。
+
+本文涉及的所有示例代码均已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/blob/main/mapstruct-usage-demo) 示例工程，供有需要的同学参考。
 
 > 参考资料
 >
