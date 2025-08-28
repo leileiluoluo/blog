@@ -199,7 +199,7 @@ public class DateTimeUtil {
 
 ## 4 如何与 Spring 框架集成？
 
-## 4 小结
+## 5 小结
 
 > 参考资料
 >
