@@ -88,6 +88,12 @@ Lombok: 1.18.38
 
 ## 2 基础用法
 
+依赖引入好后，下面就可以开始对 MapStruct 进行使用了。本小节先看一下 MapStruct 的基础用法，下个小节再探索其高级功能。
+
+我们实现的场景是 VO 到 DTO 的转换。
+
+下面就是 `User` VO 的源码，其拥有 `id`、`email`、`name`、`yearOfBirth`、`role` 和 `createdAt` 六个属性。除了 `role` 为枚举类型外，其它均为基础类型。
+
 ```java
 package com.example.demo.vo;
 
@@ -112,6 +118,8 @@ public enum Role {
 }
 ```
 
+下面是 `User` VO 的目标对象 `UserDto` 的源码。`UserDto` 除了和 `User` 拥有完全相同的字段 `id` 和 `email` 外，其它字段要么是名字相同但类型不同（如 `role`、`createdDate`）、要么是类型相同但名字不同（如 `username`）、要么是全新的字段（如 `age`、`newCenturyUser`）。
+
 ```java
 package com.example.demo.dto;
 
@@ -127,6 +135,18 @@ public class UserDto {
     private LocalDateTime createdDate;
 }
 ```
+
+下面即使用 MapStruct 来为 `User` 到 `UserDto` 的转换做映射。
+
+可以看到，我们需要定义一个专门做转换的接口 `UserMapper`，并在其上配置 `@Mapper` 注解，然后在接口中定义一个 `User` 到 `UserDto` 的转换方法 `toUserDto()`。
+
+接下来就是字段级的映射配置了：
+
+- `id` 和 `email` 字段在两个 POJO 中完全相同，无需配置，MapStruct 会自动帮我们做映射。
+- `name` 到 `username` 的映射，因名称发生了变化，需要使用 `@Mapping(source = "name", target = "username")` 来指定源字段和目的字段的对应关系。
+- `yearOfBirth` 到 `age` 的映射，因字段意义发生变化，需要进行计算。可通过在 `UserMapper` 接口定义一个默认方法 `calculateAge`，然后在 `@Mapping` 映射中使用 `qualifiedByName` 指定该实现方法来达成。
+- `newCenturyUser` 是目标对象的一个新字段，其需基于源对象的 `yearOfBirth` 字段进行计算，可以通过指定一个表达式（expression）来达成。
+- 源字段的 `createdAt` 是 `Date` 类型，目的字段的 `createdDate` 是 `LocalDateTime` 类型，可以通过引入一个两者转换的 Util 类或其它 Mapper 来达成（这里引入了 `DateTimeUtil` 工具类，且在 `@Mapping` 映射中未指定任何方法，这是因为 MapStruct 会自动帮我们检测并调用）。
 
 ```java
 package com.example.demo.mapper;
@@ -150,6 +170,8 @@ public interface UserMapper {
 }
 ```
 
+下面即是 `DateTimeUtil` 工具类的源码：
+
 ```java
 package com.example.demo.util;
 
@@ -166,6 +188,12 @@ public class DateTimeUtil {
     }
 }
 ```
+
+可以看到，MapStruct 的使用还是比较简单的：名称与类型完全相同的字段无需任何额外配置；类型相同但名称不同的字段则只需指定 source 和 target 即可；需要额外计算的字段，可以通过编写表达式或引入其它 Mapper 或工具类来达成。
+
+使用 `mvn clean package` 命令将工程编译后会发现 MapStruct 在 `target/classes` 目录对应位置根据我们的要求自动生成了 `UserMapper` 的实现类 `UserMapperImpl`。
+
+![MapStruct 自动生成的实现类](https://leileiluoluo.github.io/static/images/uploads/2025/08/mapstruct-generated-impl.png)
 
 ## 3 进阶用法
 
