@@ -309,7 +309,7 @@ public interface UserMapper {
 
 ### 3.4 默认值和常量
 
-还可以为映射提供默认值或常量。下面的示例中：当 `User` 的 `name` 字段为 `null` 时，机会为目标字段赋上默认值 `Unknown`；此外，还可以为目标对象 `String` 类型的 `level` 字段赋上常量值 `PRIMARY`。
+还可以为映射提供默认值或常量。下面的示例中：当 `User` 的 `name` 字段为 `null` 时，MapStruct 即会为目标字段赋上默认值 `Unknown`；此外，还可以为目标对象中 `String` 类型的 `level` 字段赋上常量值 `PRIMARY`。
 
 ```java
 package com.example.demo.mapper;
@@ -355,7 +355,7 @@ public class UserMapperTest {
 
 ## 5 小结
 
-综上，本文首先对 MapStruct 工具进行了介绍，然后创建了一个 Maven 示例工程，并将 MapStruct 和 Lombok 依赖引入。然后以实际项目中的 VO 到 DTO 转换为例，介绍了 MapStruct 的基础功能和高级功能。总体上感觉 MapStruct 还是比较易用且高效的。
+综上，本文首先对 MapStruct 工具进行了介绍，然后创建了一个 Maven 示例工程，并将 MapStruct 和 Lombok 依赖引入；然后以实际项目中的 VO 到 DTO 转换为例，介绍了 MapStruct 的基础功能和高级功能；最后还介绍了 MapStruct 与 Spring 框架的集成。总体上感觉 MapStruct 还是比较易用且高效的。
 
 本文涉及的所有示例代码均已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/blob/main/mapstruct-usage-demo) 示例工程，供有需要的同学参考。
 
