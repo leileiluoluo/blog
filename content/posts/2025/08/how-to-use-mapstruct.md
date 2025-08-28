@@ -145,6 +145,7 @@ public class UserDto {
 - `id` 和 `email` 字段在两个 POJO 中完全相同，无需配置，MapStruct 会自动帮我们做映射。
 - `name` 到 `username` 的映射，因名称发生了变化，需要使用 `@Mapping(source = "name", target = "username")` 来指定源字段和目的字段的对应关系。
 - `yearOfBirth` 到 `age` 的映射，因字段意义发生变化，需要进行计算。可通过在 `UserMapper` 接口定义一个默认方法 `calculateAge`，然后在 `@Mapping` 映射中使用 `qualifiedByName` 指定该实现方法来达成。
+- `role` 字段在源对象中是枚举类型，而在目的对象中是 `String` 类型，我们无需做处理，MapStruct 会自动帮我们将枚举的 `name()` 值设置到目标字段。
 - `newCenturyUser` 是目标对象的一个新字段，其需基于源对象的 `yearOfBirth` 字段进行计算，可以通过指定一个表达式（expression）来达成。
 - 源字段的 `createdAt` 是 `Date` 类型，目的字段的 `createdDate` 是 `LocalDateTime` 类型，可以通过引入一个两者转换的 Util 类或其它 Mapper 来达成（这里引入了 `DateTimeUtil` 工具类，且在 `@Mapping` 映射中未指定任何方法，这是因为 MapStruct 会自动帮我们检测并调用）。
 
@@ -194,6 +195,35 @@ public class DateTimeUtil {
 使用 `mvn clean package` 命令将工程编译后会发现 MapStruct 在 `target/classes` 目录对应位置根据我们的要求自动生成了 `UserMapper` 的实现类 `UserMapperImpl`。
 
 ![MapStruct 自动生成的实现类](https://leileiluoluo.github.io/static/images/uploads/2025/08/mapstruct-generated-impl.png)
+
+最后，我们使用编写单元测试类的方式对上述 Mapper 进行一下测试。
+
+```java
+package com.example.demo.mapper;
+
+public class UserMapperTest {
+
+    @Test
+    public void testToUserDto() {
+        User user = new User();
+        user.setId(1L);
+        user.setEmail("larry@larry.com");
+        user.setName("Larry");
+        user.setYearOfBirth(2000);
+        user.setRole(Role.NORMAL);
+        user.setCreatedAt(new Date());
+
+        UserDto userDto = UserMapper.INSTANCE.toUserDto(user);
+        System.out.println(userDto);
+    }
+}
+```
+
+执行 `mvn clean test` 命令运行如上单元测试后发现打印的目标对象 `UserDto` 的字段内容与预期一致。
+
+```text
+UserDto(id=1, email=larry@larry.com, username=Larry, age=25, newCenturyUser=true, role=NORMAL, createdDate=2025-08-28T08:30:10.568)
+```
 
 ## 3 进阶用法
 
