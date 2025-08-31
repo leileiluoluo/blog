@@ -83,7 +83,7 @@ P6Spy: 3.9.1
 
 ### 2.2 建表、建 Entity、建 Repository
 
-本示例工程使用的数据库为 MySQL，我们希望 P6Spy 帮助捕获 User 的增删改查，所以需要建一个 `user` 表：
+本示例工程使用的数据库为 MySQL，我们希望 P6Spy 帮助捕获 User 的增删改查操作，所以需要建一个 `user` 表：
 
 ```sql
 DROP TABLE IF EXISTS user;
@@ -120,7 +120,7 @@ public class User {
 
 我们使用的 ORM 框架为 JPA，为了支撑 User 的增删改查操作，需要编写一个 `UserRepository`。
 
-可以看到，我们在如下 Repository 编写了四个方法，前两个为查询，后两个为更新和删除（分别使用 HQL 和原生 SQL）。
+可以看到，我们在如下 `UserRepository` 编写了四个方法，前两个为查询，后两个为更新和删除（分别使用 HQL 和原生 SQL）。
 
 ```java
 package com.example.demo.repository;
@@ -191,7 +191,7 @@ public class UserRepositoryTest {
 }
 ```
 
-调用后，我们发现应用程序日志里多了如下一行输出。可以看到，P6Spy 起作用了，其捕获了最终的 SQL 语句，并打印了该语句执行所花费的时间。
+调用后，发现应用程序日志里多了如下一行输出。可以看到，P6Spy 起作用了，其捕获了最终的 SQL 语句，并打印了该语句执行所花费的时间。
 
 ```text
 #1756628295717 | took 29ms | statement | connection 2| url jdbc:mysql://localhost:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
@@ -274,7 +274,7 @@ public class CustomP6SpyMessageFormatter implements MessageFormattingStrategy {
 
 P6Spy 默认使用的 Log Appender 是 `com.p6spy.engine.spy.appender.Slf4JLogger`。所以，P6Spy 的日志默认是输出到我们应用程序的总日志中的。
 
-实际项目中，使用 P6Spy 时为了更高的观察 SQL 的运行情况，通常需要将 P6Spy 的日志单独打印到一个文件，并进行单独管理。
+实际项目中，使用 P6Spy 时为了更好的观察 SQL 的运行情况，通常需要将 P6Spy 的日志单独打印到一个文件，并进行单独管理。
 
 下面即尝试修改我们示例工程的日志管理文件 `logback.xml`，将 P6Spy 的日志单独输出到一个文件 `p6spy.log`，并进行存档和定期清理。
 
@@ -314,7 +314,7 @@ p6spy.2025-08-30.0.log.gz
 
 ## 3 小结
 
-综上，我们首先介绍了 P6Spy 的功能和使用场景，然后在 Spring Boot 示例工程中引入 P6Spy Starter，并对其基础功能和进阶功能进行了使用。示例工程完整代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/blob/main/spring-boot-p6spy-demo)，供有需要的同学参考。
+综上，我们首先介绍了 P6Spy 的功能、使用场景和工作原理，然后在 Spring Boot 示例工程中引入了 P6Spy Starter，对 P6Spy 基础功能和进阶功能的使用进行了演示。示例工程完整代码已提交至 [GitHub](https://github.com/leileiluoluo/java-exercises/blob/main/spring-boot-p6spy-demo)，供有需要的同学参考。
 
 > 参考资料
 >
