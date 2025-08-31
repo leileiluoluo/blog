@@ -42,7 +42,7 @@ Spring Boot: 3.5.5
 P6Spy: 3.9.1
 ```
 
-### 2.1 Maven 依赖
+### 2.1 引入 Maven 依赖
 
 在 Spring Boot 中使用 P6Spy 非常的简单，只需引入一个 `p6spy-spring-boot-starter` 依赖即可。下面即是我们的示例工程用到的主要依赖，有 JPA、Lombok、MySQL Connector 和 P6Spy Starter。
 
@@ -79,6 +79,207 @@ P6Spy: 3.9.1
         <version>1.12.0</version>
     </dependency>
 </dependencies>
+```
+
+### 2.2 建表、建 Entity、建 Repository
+
+```sql
+DROP TABLE IF EXISTS user;
+CREATE TABLE user (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20) NOT NULL,
+    email VARCHAR(20) NOT NULL,
+    year_of_birth INT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT '2025-01-01 00:00:00',
+    updated_at TIMESTAMP NOT NULL DEFAULT '2025-01-01 00:00:00'
+);
+```
+
+```java
+package com.example.demo.model;
+
+@Data
+@Entity
+@Table(name = "user")
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private String email;
+    private Integer yearOfBirth;
+    private Date createdAt;
+    private Date updatedAt;
+}
+```
+
+```java
+package com.example.demo.repository;
+
+public interface UserRepository extends CrudRepository<User, Long> {
+
+    boolean existsByNameAndEmail(String name, String email);
+
+    List<User> findByNameIgnoreCase(String name);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE User u SET u.name = :name WHERE u.email = :email")
+    void updateNameByEmail(@Param("name") String name, @Param("email") String email);
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM user WHERE email = :email", nativeQuery = true)
+    void deleteByEmail(@Param("email") String email);
+}
+```
+
+### 2.3 添加配置
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: false
+```
+
+### 2.4 P6Spy 初步使用
+
+```java
+package com.example.demo.repository;
+
+@SpringBootTest
+public class UserRepositoryTest {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Test
+    @Order(1)
+    public void testSave() {
+        User user = new User();
+        user.setName("Larry");
+        user.setEmail("larry@larry.com");
+        user.setYearOfBirth(2000);
+        user.setCreatedAt(new Date());
+        user.setUpdatedAt(new Date());
+
+        userRepository.save(user);
+    }
+
+    @Test
+    @Order(2)
+    public void testExistsByNameAndEmail() {
+        userRepository.existsByNameAndEmail("Larry", "larry@larry.com");
+    }
+
+    @Test
+    @Order(3)
+    public void testFindByNameIgnoreCase() {
+        userRepository.findByNameIgnoreCase("larry");
+    }
+
+    @Test
+    @Order(4)
+    public void testUpdateNameByEmail() {
+        userRepository.updateNameByEmail("larry 2", "larry@larry.com");
+    }
+
+    @Test
+    @Order(5)
+    public void testDeleteByEmail() {
+        userRepository.deleteByEmail("larry@larry.com");
+    }
+}
+```
+
+```text
+#1756628295717 | took 29ms | statement | connection 2| url jdbc:mysql://localhost:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+insert into user (created_at,email,name,updated_at,year_of_birth) values (?,?,?,?,?)
+insert into user (created_at,email,name,updated_at,year_of_birth) values ('2025-08-31T16:18:15.557+0800','larry@larry.com','Larry','2025-08-31T16:18:15.557+0800',2000);
+```
+
+### 2.5 P6Spy 进阶使用
+
+```properties
+# spy.properties
+logMessageFormat=com.p6spy.engine.spy.appender.CustomLineFormat
+customLogMessageFormat=%(currentTime)|%(executionTime)ms|%(category)|%(sqlSingleLine)
+```
+
+```text
+1756628485593|31ms|statement|insert into user (created_at,email,name,updated_at,year_of_birth) values ('2025-08-31T16:21:25.354+0800','larry@larry.com','Larry','2025-08-31T16:21:25.354+0800',2000)
+```
+
+```properties
+# spy.properties
+logMessageFormat=com.example.demo.formatter.CustomP6SpyMessageFormatter
+```
+
+```java
+package com.example.demo.formatter;
+
+public class CustomP6SpyMessageFormatter implements MessageFormattingStrategy {
+
+    @Override
+    public String formatMessage(int connId, String now, long elapsed, String category, String prepared, String sql, String url) {
+        if (StringUtils.isBlank(sql)) {
+            return "";
+        }
+
+        String caller = Arrays.stream(Thread.currentThread().getStackTrace())
+                .filter(e -> e.getClassName().startsWith("com.example.demo"))
+                .filter(e -> !e.getClassName().equals(CustomP6SpyMessageFormatter.class.getName()))
+                .findFirst()
+                .map(e -> String.format("%s#%s:%d", e.getClassName(), e.getMethodName(), e.getLineNumber()))
+                .orElse("Unknown");
+
+        String nowFormatted = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
+                .format(new Date(Long.parseLong(now)));
+
+        return String.format("%s - [Time elapsed: %d ms] [Caller: %s] [SQL: %s]", nowFormatted, elapsed, caller, sql.trim());
+    }
+}
+```
+
+```text
+2025-08-31 16:25:09.685 - [Time elapsed: 31 ms] [Caller: com.example.demo.repository.UserRepositoryTest#testSave:27] [SQL: insert into user (created_at,email,name,updated_at,year_of_birth) values ('2025-08-31T16:25:09.483+0800','larry@larry.com','Larry','2025-08-31T16:25:09.483+0800',2000)]
+```
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    ...
+    <appender name="P6SPY_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/p6spy.log</file>
+        <encoder>
+            <pattern>%msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/p6spy.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>2GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="p6spy" level="INFO" additivity="false">
+        <appender-ref ref="P6SPY_FILE"/>
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    ...
+</configuration>
+```
+
+```text
+p6spy.log
+p6spy.2025-08-30.0.log.gz
 ```
 
 ## 3 小结
