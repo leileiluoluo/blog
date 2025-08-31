@@ -32,6 +32,55 @@ P6Spy 是一个用于拦截和记录应用程序和数据库之间的所有 JDBC
 
 ## 2 在 Spring Boot 中使用 P6Spy
 
+下面，尝试在 Spring Boot 中使用 P6Spy，本文示例工程使用的 ORM 框架是 JPA，使用的数据库为 MySQL。
+
+写作本文时，使用的 Java、Spring Boot、P6Spy 的版本为：
+
+```text
+Java: 17
+Spring Boot: 3.5.5
+P6Spy: 3.9.1
+```
+
+### 2.1 Maven 依赖
+
+在 Spring Boot 中使用 P6Spy 非常的简单，只需引入一个 `p6spy-spring-boot-starter` 依赖即可。下面即是我们的示例工程用到的主要依赖，有 JPA、Lombok、MySQL Connector 和 P6Spy Starter。
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.38</version>
+        <scope>provided</scope>
+    </dependency>
+
+    <!-- driver -->
+    <dependency>
+        <groupId>com.mysql</groupId>
+        <artifactId>mysql-connector-j</artifactId>
+        <version>9.4.0</version>
+        <scope>runtime</scope>
+    </dependency>
+
+    <!-- p6spy -->
+    <dependency>
+        <groupId>com.github.gavlyukovskiy</groupId>
+        <artifactId>p6spy-spring-boot-starter</artifactId>
+        <version>1.12.0</version>
+    </dependency>
+</dependencies>
+```
+
 ## 3 小结
 
 > 参考资料
