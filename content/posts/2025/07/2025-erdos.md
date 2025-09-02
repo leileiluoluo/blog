@@ -67,4 +67,4 @@ description: 2025 鄂爾多斯探親之旅，看望了很多人，收穫很多�
 
 最後要感謝我租的小車，開着很順手，陪伴我們辦了很多事情，帶給了我們諸多便利。
 
-[![租的小車](https://leileiluoluo.github.io/static/images/uploads/2025/07/erdos-zuche.jpg)](https://raw.githubusercontent.com/leileiluoluo/blog-images/main/2025/erdos-zuche.jpg)
+![租的小車](https://leileiluoluo.github.io/static/images/uploads/2025/07/erdos-zuche.jpg)
