@@ -48,10 +48,6 @@ description: 這週六沒放假，補五一的調休。今天週末，早上就�
 
 回到家後，來不及喫早飯。推上推車，拿上鍬，帶一桶水，拿上剛買的蔥苗直奔後山。
 
-[![通往後山的小道](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-6.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-6.jpg)
-
-{{% center %}}（通往後山的小道）{{% /center %}}
-
 到地裏，花了好一陣才挖出幾條栽蔥的小坑。將蔥苗按一定間隔擺好，蓋土、澆水，活幹的差不多了，滿頭大汗。看着那種好的幾排小蔥，心裏很是欣喜。
 
 [![後山開墾的一塊小地](https://leileiluoluo.github.io/static/images/uploads/2024/05/zhou-mo-7.jpg)](https://github.com/leileiluoluo/blog-images/blob/main/2024/zhou-mo-7.jpg)
