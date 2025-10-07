@@ -47,8 +47,6 @@ description: 今年國慶假期去了兩個景點，幹了兩天農活。十一�
 
 [![掰玉米](https://leileiluoluo.github.io/static/images/uploads/2025/10/bai-yu-mi-2.jpg)](https://raw.githubusercontent.com/leileiluoluo/blog-images/main/2025/bai-yu-mi-2.jpg)
 
-[![掰玉米](https://leileiluoluo.github.io/static/images/uploads/2025/10/bai-yu-mi-3.jpg)](https://raw.githubusercontent.com/leileiluoluo/blog-images/main/2025/bai-yu-mi-3.jpg)
-
 假期快結束時，我們一家人去了今年年初已去過的景點「蛤蜊島」。這次沒有花太多的時間去登山觀景，而是趕了小半天的海，因長時間忘我的沉浸其中抓螃蟹，忘了漲潮，最後竟讓老丈人揹我上岸。
 
 [![蛤蜊島](https://leileiluoluo.github.io/static/images/uploads/2025/10/ge-li-dao-1.jpg)](https://raw.githubusercontent.com/leileiluoluo/blog-images/main/2025/ge-li-dao-1.jpg)
