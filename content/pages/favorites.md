@@ -35,9 +35,7 @@ wip_template:
 
 **趣站收藏**
 
-- [个站商店](https://storeweb.cn/)
-- [趣站志](http://jetli.com.cn/)
-- [十年之约](https://www.foreverblog.cn/)
+- [Radio Garden](https://radio.garden/)
 
 **技术博客**
 
