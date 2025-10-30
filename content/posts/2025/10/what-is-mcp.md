@@ -2,7 +2,7 @@
 title: MCP 是什么？它是如何工作的？
 author: leileiluoluo
 type: post
-date: 2025-10-29T18:40:00+08:00
+date: 2025-10-30T08:40:00+08:00
 url: /posts/what-is-mcp.html
 categories:
   - 计算机
@@ -38,17 +38,19 @@ MCP 提出的意义究竟在哪里呢？我们知道，要让大语言模型访�
 
 介绍了什么是 MCP 之后，下面看一下 MCP 的架构。
 
-## 2 MCP 与 RAG 的区别
+## 2 MCP 的架构
 
-## 3 MCP 的架构
+MCP 使用的是经典的 C/S（Client/Server，客户端/服务器）架构，包含 Host、Client 和 Server 三个部分。
+
+可以看到，除了 C/S 架构中必须的 Client 和 Server 之外，MCP 多了一个 Host 的概念。这个 Host 就是 ChatGPT、Claude Desktop、Cursor 等大模型应用程序，用于管理和协调多个 MCP Client。
+
+MCP Client 和 MCP Server 是一对一的关系。一个 MCP Client 维持和一个 MCP Server 的连接，然后从 MCP Server 获取上下文，并供 MCP Host 使用。
+
+MCP Server 可以是一个本地程序或是一个远程服务，提供上下文或工具来供 MCP Client 调用。
 
 ![MCP 架构](https://leileiluoluo.github.io/static/images/uploads/2025/10/model-context-protocol-architecture.png)
 
 {{% center %}}（MCP 架构，图片引自「[IBM Think](https://www.ibm.com/think/topics/model-context-protocol)」）{{% /center %}}
-
-## 4 MCP 是如何工作的？
-
-## 5 MCP 的安全控制
 
 > 参考资料
 >
