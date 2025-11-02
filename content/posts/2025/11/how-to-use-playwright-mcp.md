@@ -80,11 +80,70 @@ v24.11.0
 
 ![Playwright MCP 执行结果](https://leileiluoluo.github.io/static/images/uploads/2025/11/playwright-execution-result.png)
 
-可以看到，大语言模型准确的完成了我指派的任务，在未显式提供选择器的情况下，自动找到了关于和友情链接页面的 DOM 元素并抓取了我要的内容。
+可以看到，大语言模型准确的完成了我指派的任务，在未显式提供选择器的情况下，自动找到了关于和友情链接页面的 DOM 元素并进入页面抓取到了我要的内容。
 
 ## 3 尝试用自然语言编写自动化测试用例
 
+![Selenium Web Form 示例页面](https://leileiluoluo.github.io/static/images/uploads/2023/04/selenium-web-form.jpeg)
+
+```python
+from unittest import TestCase
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.select import Select
+
+
+class TestSeleniumForm(TestCase):
+    def setUp(self) -> None:
+        # 无痕模式的 Chrome
+        options = webdriver.ChromeOptions()
+        options.add_argument('--incognito')
+
+        self.browser = webdriver.Chrome(options=options)
+        self.addCleanup(self.browser.quit)
+
+    def test_web_form(self) -> None:
+        # 打开表单页面
+        self.browser.get('https://www.selenium.dev/selenium/web/web-form.html')
+        self.assertEqual(self.browser.title, 'Web form')
+
+        # Text 输入
+        text_input = self.browser.find_element(By.ID, 'my-text-id')
+        text_input.send_keys('Selenium')
+
+        # Password 输入
+        password = self.browser.find_element(By.NAME, 'my-password')
+        password.send_keys('Selenium')
+
+        # Dropdown 选择 Two
+        dropdown = Select(self.browser.find_element(By.NAME, 'my-select'))
+        dropdown.select_by_value('2')
+
+        # 选择文件
+        file_input = self.browser.find_element(By.CSS_SELECTOR, 'input[name="my-file"]')
+        file_input.send_keys('/tmp/file.txt')
+
+        # 日期选择
+        date_input = self.browser.find_element(By.XPATH, '//input[@name="my-date"]')
+        date_input.send_keys('04/21/2023')
+
+        # 点击 Submit 按钮
+        submit_button = self.browser.find_element(By.XPATH, '//button[@type="submit"]')
+        submit_button.click()
+
+        # 等待进入已提交页面
+        WebDriverWait(self.browser, 10).until(EC.title_is('Web form - target page'))
+
+        # 断言
+        message = self.browser.find_element(By.ID, 'message').text
+        self.assertEqual(message, 'Received!')
+```
+
 ## 4 小结
+
+本文首先介绍了 Playwright MCP 是什么，然后以 VS Code 为大语言模型客户端，演示如何以自然语言的方式使用 Playwright MCP 进行简单的浏览器自动化操作，以及尝试用自然语言的方式编写自动化测试用例。
 
 > 参考资料
 >
