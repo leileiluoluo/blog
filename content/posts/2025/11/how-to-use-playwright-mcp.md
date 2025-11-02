@@ -58,7 +58,29 @@ v24.11.0
 
 ![启动 Playwright MCP Server](https://leileiluoluo.github.io/static/images/uploads/2025/11/vscode-playwright-mcp-server.png)
 
+接下来即可在 Copilot Chat 使用该 MCP Server 了。
+
 ## 2 尝试用自然语言执行简单的任务
+
+下面尝试在 Copilot Chat 输入提示词，然后将模式由默认的 Ask 切换为 Agent，选择一个大语言模型（本文选择的是 Claude Sonnet 3.5），最后点击发送即可触发任务的执行。
+
+![Playwright MCP 提示词](https://leileiluoluo.github.io/static/images/uploads/2025/11/playwright-execution-prompt.png)
+
+本文使用的提示词如下，尝试让大语言模型调用 Playwright MCP Server 用浏览器打开我的博客，然后翻阅主要页面，最后总结博客的功能，并找出我的联系方式和友链网站。
+
+```text
+请使用 Playwright MCP 在浏览器打开网址 leileiluoluo.com，然后像真实用户一样翻阅该站点各个主要的页面，然后简述一下该网站的功能，并尝试找出站长的联系方式以及其友情链接的站点名字和网址。完成后，请关闭浏览器。
+```
+
+然后，可以看到，Copilot Chat 根据我的指令，用我本地的 Chrome 浏览器打开了我的博客，在查看了主页、关于和友情链接三个页面后关闭了浏览器。
+
+![Playwright MCP 执行步骤](https://leileiluoluo.github.io/static/images/uploads/2025/11/playwright-execution-steps.png.png)
+
+最后输出给我的结果如下：
+
+![Playwright MCP 执行结果](https://leileiluoluo.github.io/static/images/uploads/2025/11/playwright-execution-result.png)
+
+可以看到，大语言模型准确的完成了我指派的任务，在未显式提供选择器的情况下，自动找到了关于和友情链接页面的 DOM 元素并抓取了我要的内容。
 
 ## 3 尝试用自然语言编写自动化测试用例
 
