@@ -33,7 +33,7 @@ Playwright 是微软开源的一款类似 Selenium 的浏览器自动化测试�
 
 ## 1 环境准备
 
-在本地 VS Code 安装 Copilot Chat 扩展，这样我们就拥有了一个 AI 对话框。然后，因为 Playwright MCP 是一个 TypeScript 应用，需要在本地以 npx 命令的方式运行，所以需要在本地安装 NodeJS，然后使用如下命令确认 NodeJS 是否安装成功。
+在本地 VS Code 安装 Copilot Chat 扩展，这样我们就拥有了一个 AI 对话框。然后，因为 Playwright MCP 是一个 TypeScript 应用，需要在本地以 npx 命令的方式运行，所以需要在本地安装 Node.js，然后使用如下命令确认 Node.js 是否安装成功。
 
 ```shell
 node -v
