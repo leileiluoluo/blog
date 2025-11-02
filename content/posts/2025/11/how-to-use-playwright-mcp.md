@@ -74,7 +74,7 @@ v24.11.0
 
 然后，可以看到，Copilot Chat 根据我的指令，用我本地的 Chrome 浏览器打开了我的博客，在查看了主页、关于和友情链接三个页面后关闭了浏览器。
 
-![Playwright MCP 执行步骤](https://leileiluoluo.github.io/static/images/uploads/2025/11/playwright-execution-steps.png.png)
+![Playwright MCP 执行步骤](https://leileiluoluo.github.io/static/images/uploads/2025/11/playwright-execution-steps.png)
 
 最后输出给我的结果如下：
 
