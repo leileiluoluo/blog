@@ -25,13 +25,38 @@ Playwright 是微软开源的一款类似 Selenium 的浏览器自动化测试�
 
 大语言模型爆发之后，特别是智能体的概念提出之后，浏览器不再仅是一个 Web 网站的入口，而变成了一个智能化调度任务的平台。随之而来的，诸如 Playwright 等浏览器自动化框架也得到更广泛的流行。
 
-在大语言模型爆发之前，虽然 Playwright 框架早已出现，也很好用，而且也有 CodeGen（代码自动生成）等特性，但终究需要有编程经验的人才能驾驭得了「这艘快船」。而在当下，乘着大语言模型爆发的春风，Playwright MCP 将 Playwright 的浏览器自动化能力封装成了一个 MCP Server，能够让 AI 助手（诸如 Claude Code、Cursur 和 VS Code 等）通过 MCP 协议直接控制浏览器。
+在大语言模型爆发之前，虽然 Playwright 框架早已出现，也很好用，而且也有 CodeGen（代码自动生成）等特性，但终究需要有编程经验的人才能驾驭得了「这艘快船」。而在当下，乘着大语言模型爆发的春风，Playwright MCP 将 Playwright 的浏览器自动化能力封装成了一个 MCP Server，能够让大语言模型客户端（诸如 Claude Code、Cursur 和 VS Code 等）通过 MCP 协议直接控制浏览器。
 
 让没有任何编程经验的人来用自然语言指挥浏览器做一些复杂的自动化任务成为了可能。在可预见的未来，诸如 Playwright MCP 的浏览器自动化方案会赋能智能体实现更多的智能场景，也会改写自动化测试的实践方式。
 
 本文以 VS Code 为大语言模型客户端，演示如何以自然语言的方式使用 Playwright MCP 进行简单的浏览器自动化操作，以及尝试用自然语言的方式编写自动化测试用例。
 
 ## 1 环境准备
+
+在本地 VS Code 安装 Copilot Chat 扩展，这样我们就拥有了一个 AI 对话框。然后，因为 Playwright MCP 是一个 TypeScript 应用，需要在本地以 npx 命令的方式运行，所以需要在本地安装 NodeJS，然后使用如下命令确认 NodeJS 是否安装成功。
+
+```shell
+node -v
+
+v24.11.0
+```
+
+上述步骤完成后，打开 VS Code，创建一个临时文件夹 `playwright-mcp-demo`；然后在该文件夹下创建一个 `.vscode` 目录；最后在 `.vscode` 目录下创建一个 MCP Server 的配置文件 `mcp.json`，并填入如下内容。
+
+```json
+{
+  "servers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    }
+  }
+}
+```
+
+这样，Playwright MCP Server 就在 VS Code 配置好了，点击 `mcp.json` 中 `playwright` 上方的 Start 按钮即可启动 Playwright MCP Server。
+
+![启动 Playwright MCP Server](https://leileiluoluo.github.io/static/images/uploads/2025/11/vscode-playwright-mcp-server.png)
 
 ## 2 尝试用自然语言执行简单的任务
 
