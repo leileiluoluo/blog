@@ -171,6 +171,8 @@ https://www.selenium.dev/selenium/web/web-form.html
 您需要在当前文件夹下生成一个测试报告，文件名为 `webform-test-result.md`，格式为 Markdown。需要详细记录每个步骤的测试结果，展示对应步骤成功还是失败，失败的话，要给出失败的原因。若每个测试步骤均执行成功，请将最后一步「Form submitted」返回后的页面进行截屏并附加到测试报告中。
 ```
 
+![浏览器自动化测试效果](https://leileiluoluo.github.io/static/images/uploads/2025/11/playwright-test-automation.gif)
+
 ![自动生成的测试报告](https://leileiluoluo.github.io/static/images/uploads/2025/11/playwright-webform-test-result.png)
 
 ## 4 小结
