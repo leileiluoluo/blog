@@ -56,9 +56,11 @@ boyouquan-ui/
 └── .env                       # 环境变量文件
 ```
 
-介绍完项目的目录结构后，接着看一下项目的整体架构。
+结合项目的目录结构，接着看一下项目的整体架构。
 
 ![boyouquan-ui 的整体架构](https://leileiluoluo.github.io/static/images/uploads/2025/11/getting-started-with-cursor-boyouquan-ui.svg)
+
+抛去入口 `index.js` 和路由 `App.js` 外，项目其实仅分两层：Page 层和可服用组件层。Page 层包含各个页面，其会调用组件层的可服用组件以及各种 Utils 来实现对应页面的功能。
 
 ## 2 用 Cursor 将 boyouquan-ui 转换为 TypeScript 实现
 
