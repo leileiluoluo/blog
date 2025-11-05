@@ -2,7 +2,7 @@
 title: Cursor 初体验：将 React 项目从 JavaScript 升级到 TypeScript
 author: leileiluoluo
 type: post
-date: 2025-11-06T08:30:00+08:00
+date: 2025-11-06T06:58:00+08:00
 url: /posts/getting-started-with-cursor.html
 categories:
   - 计算机
