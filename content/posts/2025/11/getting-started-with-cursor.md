@@ -24,6 +24,12 @@ description: 博友圈前端 boyouquan-ui 是一个使用 JavaScript 编写的 R
 
 ## 1 boyouquan-ui 的整体架构
 
+boyouquan-ui 是一个轻量的 React 项目，构建工具使用的是 Webpack。项目根目录下主要有环境变量文件 `.env` 、依赖配置文件 `package.json`、Webpack 配置文件 `webpack.config.js`、静态资源目录 `public` 和源代码目录 `src` 。
+
+源代码目录 `src` 下有应用入口文件 `index.js`、路由配置文件 `App.js`、页面级组件目录 `pages`、通用可服用组件目录 `components`、常量目录 `const` 和 JSON 文件目录 `json`。
+
+项目使用纯 JavaScript 编写，未包含 Redux 状态管理等高级特性。
+
 ```text
 boyouquan-ui/
 ├── public/                    # 静态资源目录
@@ -31,8 +37,10 @@ boyouquan-ui/
 │   └── assets/                # 静态文件目录
 ├── src/                       # 源代码主目录
 │   ├── const/                 # 常量目录
-│   ├── components/            # 可复用组件
-│   │   └── common/            # 公共组件
+│   ├── components/            # 可复用组件目录
+│   │   ├── ...                # 其它组件
+│   │   └── blog/              # 博客详情页组件目录
+│   │       └── BlogCharts.js  # 博客详情页图表组件
 │   ├── json/                  # 静态 JSON 配置
 │   ├── pages/                 # 页面级组件
 │   │   ├── HomePage.js        # Home 页面
@@ -44,8 +52,11 @@ boyouquan-ui/
 ├── .gitignore                 # Git 忽略规则
 ├── package.json               # 项目信息与依赖配置
 ├── README.md                  # 项目说明文档
+├── webpack.config.js          # Webpack 配置文件
 └── .env                       # 环境变量文件
 ```
+
+介绍完项目的目录结构后，接着看一下项目的整体架构。
 
 ![boyouquan-ui 的整体架构](https://leileiluoluo.github.io/static/images/uploads/2025/11/getting-started-with-cursor-boyouquan-ui.svg)
 
