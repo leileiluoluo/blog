@@ -100,7 +100,7 @@ React (TSX) + Babel + Webpack + .ts
 
 ![用 Cursor 将项目升级为 TypeScript 实现](https://leileiluoluo.github.io/static/images/uploads/2025/11/getting-started-with-cursor-prompt.png)
 
-### 3.1 Cursor 具体使用的步骤
+### 3.1 Cursor 罗列的步骤
 
 指令发送后，Cursor 即开始干活了。
 
@@ -127,9 +127,35 @@ React (TSX) + Babel + Webpack + .ts
 
 ### 3.2 Cursor 具体使用的方法
 
+看过 Cursor 整理的步骤后，下面看看各个主要的步骤里，Cursor 具体使用了哪些方法来完成任务？
+
+Cursor 在修改 `js` 文件后缀为 `tsx/ts` 时，没有将项目中所有文件一股脑的进行修改，而是按照上述 TODO List 中的模块依次而来，而且在修改前会使用 Shell 命令统计待修改文件数目。
+
+修改时，若对应的模块中的文件只需要换一下后缀，就编写一个 Shell 脚本（`convert_xxx.sh`），然后调用脚本来进行批量修改。
+
+![Cursor 使用 Shell 来进行批量修改](https://leileiluoluo.github.io/static/images/uploads/2025/11/getting-started-with-cursor-execution-shell.png)
+
+若对应的模块中的文件除了更改后缀后，还需要添加 TypeScript 类型定义等代码时，就编写一个 Python 脚本（`convert_to_ts.py`）来实现。
+
+![Cursor 使用 Python 来进行批量修改](https://leileiluoluo.github.io/static/images/uploads/2025/11/getting-started-with-cursor-execution-python.png)
+
+可以看到，Cursor 还是「很会做事」的。
+
 ## 4 Cursor 做的和人工做的有什么差别？
 
+约 10 余分钟后，任务完成，虽有一些小的错误，但稍作修正后即能运行，Cursor 的整个升级结果还是靠谱的。
+
+对比人工梳理的步骤和 Cursor 使用的步骤，整体差别不大。但若使用人工的方式做的话，可能会在编辑器中手动一个文件一个文件修改，而 Cursor 有分析和批量修改的思维，并且需要 Shell 脚本或 Python 脚本时能信手拈来，这个算它的一个强项。
+
 ## 5 小结
+
+综上，本文首先介绍了使用纯 JavaScript 编写的 boyouquan-ui React 工程的整体架构，然后抛出了想实现的任务 —— 将 JavaScript 升级为 TypeScript。
+
+接着，梳理了一下如果使用人工的方式将其转换为 TypeScript 实现的话有哪些修改点？
+
+接着，体验一下 Cursor，尝试使用它来将该 JavaScript 工程自动转换为 TypeScript 实现。
+
+最后，对比了 Cursor 的修改点和人工梳理的差别，以及 Cursor 优于人的地方。最后的结论是诸如 Cursor 的 AI 工具在完成一个上下文明确的简单任务时还是很得心应手的。
 
 > 参考资料
 >
