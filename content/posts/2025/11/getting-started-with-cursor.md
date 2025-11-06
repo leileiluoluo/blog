@@ -71,28 +71,61 @@ boyouquan-ui/
 
 ```text
 React (JS) + Babel + Webpack + .js
-
 =>
-
 React (TSX) + Babel + Webpack + .ts
 ```
 
 修改的步骤大概如下：
 
-1. 修改 `package.json`，安装 TypeScript 及类型定义包，如 `typescript`、`@types/react` 等；
-2. 添加 TypeScript 配置文件 `tsconfig.json`；
-3. 修改 Babel 和 Webpack 配置文件以支持 `.ts` 和 `.tsx`，如启用 `@babel/preset-typescript`；
-4. 修改源码文件后缀 `.js` → `.ts` 和 `.jsx` → `.tsx`，改名后适配类型声明；
-5. 修复类型错误、补全类型定义；
-6. 可选：引入 ESLint 和 TypeScript 插件。
+- a）修改 `package.json`，安装 TypeScript 及类型定义包，如 `typescript`、`@types/react` 等；
+- b）添加 TypeScript 配置文件 `tsconfig.json`；
+- c）修改 Babel 和 Webpack 配置文件以支持 `.ts` 和 `.tsx`，如启用 `@babel/preset-typescript`；
+- d）修改源码文件后缀 `.js` → `.ts` 和 `.jsx` → `.tsx`，改名后适配类型声明；
+- e）修复类型错误、补全类型定义；
+- f）可选：引入 ESLint 和 TypeScript 插件。
+
+这个步骤梳理好后，放在这，等最后和 Cursor 实际使用的步骤做对比。
 
 ## 3 用 Cursor 将项目升级为 TypeScript 实现
+
+现在，我们就使用 Cursor 打开 boyouquan-ui 项目，然后指派其帮我们自动将项目升级为 TypeScript 实现。
+
+使用的提示词如下：
 
 ```text
 当前工程 boyouquan-ui 是一个使用 JavaScript 编写的标准 React 工程，请认真分析工程的代码结构，然后在不改动原先业务逻辑的情况下参考业界最佳实践在技术层面将该工程改用 TypeScript 编写。改造完成后，在根目录生成一个 summary.md，详细描述你的改造点。
 ```
 
+考虑到这个升级的规则比较简单，也不涉及项目的专有知识，大语言模型拥有的公开知识应当能胜任。所以我使用的提示词非常简单，就一句话，没有给步骤、没有给参考样例、没有指定具体的修改规则，怎么做就交由 Cursor 去思考吧。
+
 ![用 Cursor 将项目升级为 TypeScript 实现](https://leileiluoluo.github.io/static/images/uploads/2025/11/getting-started-with-cursor-prompt.png)
+
+### 3.1 Cursor 具体使用的步骤
+
+指令发送后，Cursor 即开始干活了。
+
+- a）首先，Cursor 遍历了项目的各个目录和主要文件，了解了项目的整体结构和代码风格；
+
+- b）接着，Cursor 生成了 TODO List；
+
+  ```text
+  安装 TypeScript 相关依赖包
+  创建 tsconfig.json 配置文件
+  更新 webpack.config.js 以支持 TypeScript
+  更新 babel.config.js 以支持 TypeScript
+  更新 package.json 入口和脚本
+  转换核心文件 (index.js, App.js) 为 TypeScript
+  转换所有页面组件 (pages/) 为 TypeScript
+  转换所有业务组件 (components/) 为 TypeScript
+  转换工具函数 (utils/) 为 TypeScript
+  转换常量文件 (const/) 为 TypeScript
+  创建类型定义文件 (types/)
+  生成 summary.md 文档
+  ```
+
+- c）最后，Cursor 按照 TODO List 中的步骤一步一步完成了任务。
+
+### 3.2 Cursor 具体使用的方法
 
 ## 4 Cursor 做的和人工做的有什么差别？
 
