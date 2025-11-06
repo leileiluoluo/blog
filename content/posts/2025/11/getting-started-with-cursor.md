@@ -151,7 +151,7 @@ Cursor 在修改 `js` 文件后缀为 `tsx/ts` 时，没有将项目中所有文
 
 如下是 Cursor 按照要求生成的报告 `summary.md`。可以看到它详尽的列出了各个修改点，并且还给了后续优化建议。核对这个清单，我们能明确知道它做了什么。
 
-![Cursor 生成的报告](https://leileiluoluo.github.io/static/images/uploads/2025/11/getting-started-with-cursor-execution-summary.svg)
+![Cursor 生成的报告](https://leileiluoluo.github.io/static/images/uploads/2025/11/getting-started-with-cursor-execution-summary.png)
 
 至此，Cursor 完整的帮我将 boyouquan-ui 由 JavaScript 升级为了 TypeScript，完整 PR - [github.com/leileiluoluo/boyouquan-ui/pull/415](https://github.com/leileiluoluo/boyouquan-ui/pull/415)。
 
