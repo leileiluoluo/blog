@@ -139,7 +139,7 @@ Cursor 在修改 `js` 文件后缀为 `tsx/ts` 时，没有将项目中所有文
 
 ![Cursor 使用 Python 来进行批量修改](https://leileiluoluo.github.io/static/images/uploads/2025/11/getting-started-with-cursor-execution-python.png)
 
-可以看到，Cursor 还是「很会做事」的。
+可以看到，Cursor 还是「很会做事」的。Cursor 完整的帮我将 boyouquan-ui 由 JavaScript 升级为了 TypeScript，完整 PR - [github.com/leileiluoluo/boyouquan-ui/pull/415](https://github.com/leileiluoluo/boyouquan-ui/pull/415)。
 
 ## 4 Cursor 做的和人工做的有什么差别？
 
