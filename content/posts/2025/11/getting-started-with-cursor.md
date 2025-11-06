@@ -88,6 +88,12 @@ React (TSX) + Babel + Webpack + .ts
 
 ## 3 用 Cursor 将项目升级为 TypeScript 实现
 
+```text
+当前工程 boyouquan-ui 是一个使用 JavaScript 编写的标准 React 工程，请认真分析工程的代码结构，然后在不改动原先业务逻辑的情况下参考业界最佳实践在技术层面将该工程改用 TypeScript 编写。改造完成后，在根目录生成一个 summary.md，详细描述你的改造点。
+```
+
+![用 Cursor 将项目升级为 TypeScript 实现](https://leileiluoluo.github.io/static/images/uploads/2025/11/getting-started-with-cursor-prompt.png)
+
 ## 4 Cursor 做的和人工做的有什么差别？
 
 ## 5 小结
