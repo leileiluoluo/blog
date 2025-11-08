@@ -158,7 +158,7 @@ if __name__ == "__main__":
 
 下面，我们尝试在 AI 助手 Windsurf 中使用一下上面编写好的 MCP Server。
 
-### 2.1 配置 MCP Server
+### 2.1 使用本地启动的 MCP Server
 
 在 Windsurf 中使用 MCP Server 与在 VS Code、Cursor 中类似，首先需要编写一个 mcp json 配置文件，Windsurf 的 `mcp_config.json` 配置文件需要放在 `~/.codeium/windsurf/` 目录下。
 
@@ -185,8 +185,6 @@ if __name__ == "__main__":
 ```
 
 我们指定了 MCP Server 的名字为 `mysql-mcp-server`；启动命令为 `python3`；启动参数为上述源码文件 `mysql_mcp_server.py` 的位置；环境变量值为 MYSQL 的具体连接信息。
-
-### 2.2 使用本地启动的 MCP Server
 
 MCP Server 配置好后，即可以在 Windsurf 编辑器的对话框中使用了。
 
