@@ -9,6 +9,7 @@ categories:
 tags:
   - AI
   - Python
+  - MySQL
 keywords:
   - Python
   - FastMCP
