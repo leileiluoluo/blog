@@ -222,7 +222,7 @@ MCP Server 配置好后，即可以在 Windsurf 编辑器的对话框中使用�
 
 ![调用 MCP Server 查询执行计划](https://leileiluoluo.github.io/static/images/uploads/2025/11/using-mysql-mcp-server-in-windsurf-explain-sql.png)
 
-### 2.3 使用远程启动的 MCP Server
+### 2.2 使用远程启动的 MCP Server
 
 上面的 MCP Server 需要在本地启动，传输模式为 Stdio；如果我们想将 MCP Server 部署在服务器，该如何适配呢？
 
