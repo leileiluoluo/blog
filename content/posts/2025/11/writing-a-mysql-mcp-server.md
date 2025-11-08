@@ -253,7 +253,7 @@ if __name__ == "__main__":
 
 综上，本文首先针对 SQL 编写和 SQL 优化的场景，提出不提供上下文的情况下 AI 助手给出的参考结果准确性和质量受限；然后提出编写一个 MCP Server 给大语言模型补充上下文的想法；接着使用 Python 语言编写一个 MySQL MCP Server 并在 AI 助手 Windsurf 中进行了配置和使用。
 
-本文完整示例工程 `mysql-mcp-sever-demo` 已提交至 [GitHub](https://github.com/leileiluoluo/python-exercises/tree/main/mysql-mcp-sever-demo)，供有需要的同学参考。
+本文完整示例工程 `mysql-mcp-sever-demo` 已提交至 [GitHub](https://github.com/leileiluoluo/python-exercises/tree/main/mysql-mcp-server-demo)，供有需要的同学参考。
 
 > 参考资料
 >
