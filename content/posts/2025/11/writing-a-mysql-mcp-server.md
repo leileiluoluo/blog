@@ -194,7 +194,7 @@ MCP Server 配置好后，即可以在 Windsurf 编辑器的对话框中使用�
 使用 mysql-mcp-server 查询我的数据库里有哪些表？
 ```
 
-可以看到，Windsurf 识别出了我们的意图，然后主动调用 `mysql-mcp-server` 的 `list_tables` 工具返回了结果。
+可以看到，Windsurf 识别出了我的意图，然后主动调用 `mysql-mcp-server` 的 `list_tables` 工具返回了结果。
 
 ![查询所有的表](https://leileiluoluo.github.io/static/images/uploads/2025/11/using-mysql-mcp-server-in-windsurf-list-tables.png)
 
@@ -221,6 +221,8 @@ MCP Server 配置好后，即可以在 Windsurf 编辑器的对话框中使用�
 ![尝试对慢 SQL 进行调优](https://leileiluoluo.github.io/static/images/uploads/2025/11/using-mysql-mcp-server-in-windsurf-sql-optimizing.png)
 
 ![调用 MCP Server 查询执行计划](https://leileiluoluo.github.io/static/images/uploads/2025/11/using-mysql-mcp-server-in-windsurf-explain-sql.png)
+
+经过验证，使用 MCP 方式给 AI 助手补充了上下文后，其给出的指导意见质量更高。
 
 ### 2.2 使用远程启动的 MCP Server
 
