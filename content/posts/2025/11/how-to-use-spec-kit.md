@@ -2,7 +2,7 @@
 title: 如何使用 Spec Kit 工具进行规范驱动开发？
 author: leileiluoluo
 type: post
-date: 2025-11-16T19:00:00+08:00
+date: 2025-11-16T17:00:00+08:00
 url: /posts/how-to-use-spec-kit.html
 categories:
   - 计算机
