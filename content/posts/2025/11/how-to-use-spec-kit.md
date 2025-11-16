@@ -15,7 +15,7 @@ keywords:
   - Spec-Driven Development
   - Spec Kit
   - Windsurf
-description:
+description: 在传统软件开发流程中，规范只是编码前的临时脚手架，开发者一旦进入编码阶段，便将规范束之高阁。而进入 AI 时代，「规范驱动开发」想彻底改变这一现状，即让规范贯穿整个软件开发生命周期、让规范变得可执行、让规范成为代码。本文即介绍一个「规范驱动开发」工具的使用，它叫 Spec Kit，由 GitHub 推出，与市面上流行的 AI 助手（如 Cursor、VS Code、Claude、Windsurf 等）均有很好的集成。
 ---
 
 由上文「[Markdown 将成为 AI 时代的通用编程语言？](https://leileiluoluo.github.io/posts/the-universal-programming-language-of-the-ai-era.html)」可以知道，规范驱动开发可能成为 AI 时代的编程新范式。
