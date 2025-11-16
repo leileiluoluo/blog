@@ -27,6 +27,24 @@ description: 在传统软件开发流程中，规范只是编码前的临时脚�
 
 本文即介绍一个「规范驱动开发」工具的使用，它叫 Spec Kit，由 GitHub 推出，与市面上流行的 AI 助手（如 Cursor、VS Code、Claude、Windsurf 等）均有很好的集成。
 
+## 1 安装 Spec Kit 和初始化一个项目
+
+```shell
+uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
+```
+
+```shell
+specify init spec-kit-demo
+```
+
+![Spec Kit 初始化项目时选择 AI 助手](https://leileiluoluo.github.io/static/images/uploads/2025/11/spec-kit-project-init-ai-assistant.png)
+
+![Spec Kit 初始化项目时选择脚本类型](https://leileiluoluo.github.io/static/images/uploads/2025/11/spec-kit-project-init-script-type.png)
+
+![Spec Kit 项目初始化后生成的文件](https://leileiluoluo.github.io/static/images/uploads/2025/11/spec-kit-files-generated.png)
+
+## 2 在 Winsurf 中使用斜杠命令来制定规范
+
 ```text
 /speckit.constitution 整个项目需要按照测试驱动开发的方式进行实现，每个源码文件要有对应的测试文件。该项目为一个纯前端的演示项目，暂不涉及后端服务，若有请求 API 获取数据的场景，一概使用本地 JSON 模拟。
 ```
