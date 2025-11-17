@@ -137,11 +137,24 @@ Constitution 阶段用于指定整个项目生命周期都不可违背的根本�
 
 ![Spec Kit Specs](https://leileiluoluo.github.io/static/images/uploads/2025/11/spec-kit-move-specs-to-specify.png)
 
+### 2.5 Implement
+
 ```text
 /speckit.implement
 ```
 
+![Spec Kit 生成的代码](https://leileiluoluo.github.io/static/images/uploads/2025/11/spec-kit-code-structure.png)
+
+## 3 运行和测试
+
+```shell
+npm install
+npm run dev
+```
+
 ![Spec Kit Blog Demo](https://leileiluoluo.github.io/static/images/uploads/2025/11/spec-kit-blog-demo.png)
+
+## 4 小结
 
 > 参考资料
 >
