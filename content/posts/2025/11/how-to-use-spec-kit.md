@@ -73,7 +73,7 @@ specify init spec-kit-demo
 
   生成规范文件时的参考模板。
 
-## 2 在 VS Code Copilot 中使用斜杠命令来生成规范
+## 2 在 Copilot 中使用斜杠命令来生成规范
 
 Spec Kit 的工作流包含四个阶段：Constitution、Specify、Plan、Tasks，分别用于指定宪章（根本原则）、需求（不包含技术栈）、技术栈与架构、具体任务。
 
