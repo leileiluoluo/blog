@@ -176,7 +176,7 @@ npm run dev
 
 总体感觉，使用 Spec Kit 开发一个新项目（0 到 1）比 Vibe Coding 要靠谱一些，但 Spec Kit 这种「规范驱动开发」的模式能否胜任真实的项目演进（1 到 N），还有待进一步的探索。
 
-本文完整样例工程已提交至[GitHub](https://github.com/leileiluoluo/react-exercises/tree/main/spec-kit-demo)，欢迎有需要的同学参考。
+本文完整样例工程已提交至 [GitHub](https://github.com/leileiluoluo/react-exercises/tree/main/spec-kit-demo)，欢迎有需要的同学参考。
 
 > 参考资料
 >
